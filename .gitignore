@@ -1,0 +1,42 @@
+# === Secretos ===
+.env
+
+# === Entorno virtual (4.9 GB) ===
+.venv/
+venv/
+
+# === Checkpoints pesados ===
+# Modelo reranker fine-tuneado (1.08 GB) — se regenera con: python main.py --pipeline rag2 --mode train
+checkpoints/reranker/
+# Embeddings BGE-M3 (72 MB cada uno) — se regeneran con: python main.py --pipeline ragX --mode ingest
+checkpoints/*.npy
+# Chunks cacheados — se regeneran con ingest
+checkpoints/*.json
+
+# === Dataset PeerQA — se descarga automáticamente via peerqa_loader.py ===
+data/
+
+# === Logs ===
+logs/
+
+# === Python cache ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# === IDEs ===
+.vscode/
+.idea/
+
+# === Claude Code settings (locales) ===
+.claude/
+.cld/
+
+# NOTA: results/ se incluye intencionalmente.
+# Los JSONs de evaluación de RAG1 y RAG2 son necesarios en el PC remoto
+# para generar la comparación final (results/final_comparison_rag1_rag2_rag3.png).

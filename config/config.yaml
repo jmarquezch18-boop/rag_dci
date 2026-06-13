@@ -1,0 +1,128 @@
+project:
+  name: "SAIL-RAG Comparative Study"
+  version: "1.0"
+
+data:
+  peerqa_dataset_id: "mteb/PeerQA"
+  peerqa_local_path: "./data/peerqa"
+  subset_size: null   # null = dataset completo; entero para pruebas rápidas (e.g. 100)
+
+retrieval:
+  k_candidates: 20
+  top_n_final: 5
+
+embedding:
+  model_id: "BAAI/bge-m3"
+  max_seq_length: 512
+  normalize: true
+
+chunking:
+  chunk_size_tokens: 384
+  chunk_overlap_tokens: 64
+
+generation:
+  model_id: "llama-3.3-70b-versatile"
+  max_tokens: 512
+  temperature: 0.0
+
+evaluation:
+  recall_k_values: [1, 3, 5, 10, 20]
+  faithfulness_threshold: 0.75
+  judge_subset_size: 50        # null = todas
+  judge_subset_seed: 42
+  metrics_subset_size: 200     # null = todas
+  metrics_subset_seed: 42
+
+hardware:
+  device: "cuda"
+  gpu_name: "RTX 3050 Laptop"
+  vram_gb: 4
+  batch_size_embed: 8
+  batch_size_rerank: 4
+  fp16: true
+  max_seq_length: 512
+
+paths:
+  results: "./results"
+  checkpoints: "./checkpoints"
+  logs: "./logs"
+
+rag2:
+  # ── Retrieval ─────────────────────────────────────────────────────────────
+  k_candidates: 20            # ANN search; mismo que RAG 1
+  reranker_top_n: 7           # chunks que pasan al oráculo
+  section_filter: null        # null = sin filtro; e.g. "Results" para filtrar
+
+  # ── Reranker ──────────────────────────────────────────────────────────────
+  reranker_model_id: "BAAI/bge-reranker-v2-m3"
+
+  # ── Oráculo de curación ───────────────────────────────────────────────────
+  oracle_similarity_threshold: 0.75   # umbral Jaccard para match de evidencia
+
+  # ── Faithfulness coseno (Punto C) ────────────────────────────────────────
+  faithfulness_cosine_threshold: 0.75  # umbral cos_sim para trazar oración→chunk
+
+  # ── Fallback de generación ───────────────────────────────────────────────
+  min_approved_for_generation: 1      # si oráculo aprueba 0, usa top-N rerankeados
+  fallback_top_n: 3                   # cuántos rerankeados usar como fallback
+
+  # ── Aprendizaje activo ────────────────────────────────────────────────────
+  active_learning:
+    accumulation_threshold: 50        # tripletas acumuladas antes de fine-tuning
+    learning_rate: 2.0e-5
+    num_epochs: 3
+    batch_size: 8
+    margin: 0.5                       # margen de pérdida contrastiva
+    checkpoint_dir: "./checkpoints/reranker"
+    feedback_store: "./checkpoints/reranker/feedback_store.json"
+    curve_file: "./checkpoints/reranker/active_learning_curve.json"
+
+  # ── Subsets de evaluación (mismo patrón que RAG 1) ───────────────────────
+  metrics_subset_size: 200
+  metrics_subset_seed: 42
+  judge_subset_size: 50
+  judge_subset_seed: 42
+
+  # ── Chunking con secciones ────────────────────────────────────────────────
+  section_chunk_size_tokens: 384
+  section_chunk_overlap_tokens: 64
+
+  # ── Colección Qdrant separada ─────────────────────────────────────────────
+  qdrant_collection: "peerqa_chunks_rag2"
+
+  # ── Secciones que Docling puede detectar ─────────────────────────────────
+  known_sections:
+    - "Abstract"
+    - "Introduction"
+    - "Related Work"
+    - "Methodology"
+    - "Results"
+    - "Discussion"
+    - "Conclusion"
+    - "Limitations"
+    - "References"
+    - "Unknown"
+
+rag3:
+  # ── Retrieval (sin reranker) ──────────────────────────────────────────────
+  k_candidates: 20          # candidatos ANN; mismo que RAG 1 y RAG 2
+  oracle_top_n: 7           # top-N por score vectorial presentados al oráculo
+                            # (igual que reranker_top_n de RAG 2 para comparación justa)
+  section_filter: null
+
+  # ── Oráculo de curación (mismos parámetros que RAG 2) ────────────────────
+  oracle_similarity_threshold: 0.75
+
+  # ── Faithfulness coseno ───────────────────────────────────────────────────
+  faithfulness_cosine_threshold: 0.75
+
+  # ── Fallback ──────────────────────────────────────────────────────────────
+  min_approved_for_generation: 1
+  fallback_top_n: 3
+
+  # ── Subsets (misma semilla que RAG 1 y RAG 2 para comparabilidad) ─────────
+  metrics_subset_size: 200
+  metrics_subset_seed: 42
+
+  # ── Colección Qdrant (reutiliza la de RAG 2 — mismos chunks) ─────────────
+  qdrant_collection: "peerqa_chunks_rag2"

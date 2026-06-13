@@ -1,0 +1,22 @@
+[
+  {
+    "round": 1,
+    "final_loss": 0.016642001668612162,
+    "num_triples": 50
+  },
+  {
+    "round": 2,
+    "final_loss": 0.0028867446459256685,
+    "num_triples": 52
+  },
+  {
+    "round": 3,
+    "final_loss": 0.0014773297309875488,
+    "num_triples": 50
+  },
+  {
+    "round": 4,
+    "final_loss": 0.0020568681259950003,
+    "num_triples": 32
+  }
+]

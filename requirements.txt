@@ -1,0 +1,39 @@
+# Core ML — torch 2.5+ requerido para Python 3.13
+torch>=2.5.0
+sentence-transformers>=3.3.0
+transformers>=4.47.0
+huggingface-hub>=0.26.0
+accelerate>=1.2.0
+sentencepiece>=0.2.0
+safetensors>=0.4.5
+einops>=0.8.0
+
+# Vector DB
+qdrant-client>=1.12.0
+
+# LLM
+groq>=0.13.0
+
+# Dataset
+datasets>=3.2.0
+
+# Evaluación
+rouge-score>=0.1.2
+evaluate>=0.4.3
+bert-score>=0.3.13
+
+# Config y logging
+PyYAML>=6.0.2
+python-dotenv>=1.0.1
+loguru>=0.7.2
+
+# Visualización
+matplotlib>=3.9.0
+numpy>=2.0.0
+scipy>=1.14.0
+
+# Utils
+tqdm>=4.67.0
+
+# RAG 2 — parsing estructurado de PDFs
+docling>=2.0.0

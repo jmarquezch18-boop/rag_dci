@@ -1,0 +1,415 @@
+{
+  "summary": {
+    "n_queries": 50,
+    "n_rag1_scored": 50,
+    "n_rag2_scored": 49,
+    "n_rag3_scored": 49,
+    "metric": "RAGAS Faithfulness (LLM judge)",
+    "rag1_avg": 0.3188,
+    "rag2_avg": 0.6701,
+    "rag3_avg": 0.75,
+    "note": "All 50 queries averaged (nulls\u21920). RAG3 nulls: 1."
+  },
+  "per_query": [
+    {
+      "query_id": "e18d2d1a4f63c7f6364e6f075f377f505d382046",
+      "query": "How many words are in the corpus in total?",
+      "rag1_faithfulness_ragas": 0.7272727272727273,
+      "rag2_faithfulness_ragas": 0.6,
+      "rag2_faithfulness_cosine": 0.25,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "465b94530bc99598bbefb742da70cf99236b86d9",
+      "query": "Why were classification-based models not used for the zero shot experiments in Tables 6 and 7?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": null
+    },
+    {
+      "query_id": "6ceebb857d2674bd38452e8bc30a3d280f2ce647",
+      "query": "What is the reason for the lower performance on Vikidia-FR compared to Newsela-ES?",
+      "rag1_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_ragas": 0.8571428571428571,
+      "rag2_faithfulness_cosine": 1.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "8d8302ac5cae236232617fac58ffa1d1cc46167b",
+      "query": "What is the definition of a plot?",
+      "rag1_faithfulness_ragas": 0.5,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "33a60f4e10ce751410c46eb1e86fd26d0eb3f7c0",
+      "query": "How does the definition of a plot affect the definition of a character?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "e76615760f7625a5b984cb961f5d948ab2407178",
+      "query": "Do you mean that a node in the UCCA scheme can be either a terminal or a non-terminal, but not both?",
+      "rag1_faithfulness_ragas": 0.8333333333333334,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 0.0
+    },
+    {
+      "query_id": "0081780bb3b2f8ca303dd426ce4ddfd89c13e80d",
+      "query": "What is the purpose of the average duration reported in Table 1?",
+      "rag1_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "ee956c6a1b9b9808fc77d7d1f8f82237123f5000",
+      "query": "What is meant by \"edit boundaries might be unusual\"?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 0.0
+    },
+    {
+      "query_id": "075a4946ae8c4a278c6e278ec00533e10c900100",
+      "query": "What is the main motivation of the paper?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "962be5303d07e7707c9750241730986cfeb7d754",
+      "query": "What data was used to perform the significance test?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "9057496eedd951deb982f5b2b2dc93c4f425bae8",
+      "query": "Why was a sensitivity study conducted without considering the remineralization of biomass at the ocean floor?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "fa4aed332eb5fea0288b6dfbfdbd4ab473df241a",
+      "query": "What criteria were used to determine the steady state of soil parameters?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "30a9852ea31b01d3d12aaa8769ad0acd7c0b8162",
+      "query": "Can a zero-shot transfer be performed from RXR to R2R?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 1.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "a81ef48de406906c5a847928da2bc47079136f55",
+      "query": "What is the number of distinct phrases used for phrase addition in the adversarial attack generation?",
+      "rag1_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "ea4e2096f3a9ef7b21a3493d39e4869a823162e3",
+      "query": "Do the vocabulary items of the templates used in the paper have adequate representation in the training data?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "1a42a5af41f66bb6428c643d96fd05eba81ce635",
+      "query": "Do the proposed feature and experiments account for named entities that are not listed on Wikipedia?",
+      "rag1_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "70418ac3cb9f40b039a74031b89324e2b891ccf5",
+      "query": "What method is used to initialize the word embeddings?",
+      "rag1_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 0.0
+    },
+    {
+      "query_id": "721388955b97db097e963c4b221fe9af9e2da4ae",
+      "query": "What does it mean when the absolute accuracy numbers are higher than the F1 scores?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "8d69a05246c31778897996bc35b60061f15554f3",
+      "query": "Are the results presented in the paper task- and dataset-specific, or can they be generalized to other tasks and datasets?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "52e2f447dc9bcf3dc208f99a89d4b59da4004923",
+      "query": "Are position embeddings randomly initialized?",
+      "rag1_faithfulness_ragas": 0.4444444444444444,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 0.0
+    },
+    {
+      "query_id": "2e474adb8f0c5bd3285e43db4bfb774e7cd5b7a5",
+      "query": "Would the proposed knowledge prompting method still be effective when using a smaller language model as the knowledge source?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "691280cb66aae7b9fee2d8ac0937e5f970437b43",
+      "query": "Do you have any human evaluation results for the text generation task?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "8e2cb1c95dffd133cc91ab3123074a0853c829fb",
+      "query": "What motivated the authors to experiment with their model on CNN/DM?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "3611098cfd2590d775531ef564d87617713fe8bf",
+      "query": "What is the rationale for using ese methods on user-generated text?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "5e1848003c61e22bf4eebdf7db76bd3e4429b05c",
+      "query": "Why is the beam search algorithm incorrect?",
+      "rag1_faithfulness_ragas": 0.8333333333333334,
+      "rag2_faithfulness_ragas": 0.75,
+      "rag2_faithfulness_cosine": 1.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "243ba726cb4daf8fbda6f6d48d26e88dca0c43e4",
+      "query": "How was the decision made to classify a scientific paper as correlational or causal when the conclusion contains multiple sentences classified under different taxonomical classes, such as direct causal and correlational?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 0.0
+    },
+    {
+      "query_id": "c0f788c455af0bee35fb5b9cc36af6a5ec6aaf3f",
+      "query": "Why was additional fine-tuning on Clip not included in the experiments?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 0.0
+    },
+    {
+      "query_id": "4d731fb4c24a75b5ee1cebcea2ba3c48604b70d4",
+      "query": "Are all participants in the trial pregnant women who are less than 36 weeks gestation?",
+      "rag1_faithfulness_ragas": 0.5,
+      "rag2_faithfulness_ragas": 0.5,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 0.5
+    },
+    {
+      "query_id": "7fc5d5331df7a49becd6f0436973f6e3948db2d0",
+      "query": "What were the reasons for excluding additional participants from the analysis?",
+      "rag1_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "9c94c1db5e17d67bbbfba1c1b4118bfafc313610",
+      "query": "What is the difference between those who received personalised and non-personalised texts?",
+      "rag1_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 0.0
+    },
+    {
+      "query_id": "41338acb67bcf333b2817c15b8b74290fb3d9327",
+      "query": "What other downstream tasks, such as natural language inference, question answering, and semantic role labeling, have been tested using an encoder that has been transferred from language 1 to language 2 without any parameter updates?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "70ee52925bfa4ed21c8798964ec74fcdd0f9845f",
+      "query": "Is the subaerial erosion rate equivalent to the maximum weathering rate?",
+      "rag1_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 0.0
+    },
+    {
+      "query_id": "a8d6ed01ff1866040e47a7082ff97ea95a6edd03",
+      "query": "Is there a scientific reason for the Greenland Ice Sheet (GRIS) to start melting before the Antarctic Ice Sheet (AIS), beyond the convenience of creating two distinct peaks in a model or analysis?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "f456517fc41bfab6dfd062990edf1364e78eb104",
+      "query": "What is orthology assignment?",
+      "rag1_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 0.0
+    },
+    {
+      "query_id": "6c9381de277251ad2ce40cd39b94a872cbc4126e",
+      "query": "Is the authors' conclusion about the accuracy of the CMIP6 climate models in simulating the processes based on the agreement between the observed data and the models' predictions in terms of the residual variability?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 0.0
+    },
+    {
+      "query_id": "6610ad96e462f49d6d8f20fee0cdc6dd8a70175a",
+      "query": "What is the impact on detection or signal-to-noise ratio (SNR) if RR-based fingerprint construction is not applied?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "d07dca8f8e126c43dacdaf145ec4103ef25400f5",
+      "query": "What would be the impact of not having access to pre-trained embeddings on the performance of this method?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "39b0b51062706eb6424a4115088dcee05de45183",
+      "query": "Is the forcing data for the two sites downloaded and downscaled separately, resulting in two distinct series of data?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "d756c534f9d6dbb409a3d2f47dbebc8ef83b291c",
+      "query": "What is the time resolution of the forcing data used in the study, specifically, is it daily?",
+      "rag1_faithfulness_ragas": 0.5,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "14a1430828aadefa84e1b1ce027c45adc66ed369",
+      "query": "What is the source of the hydraulic conductivity (kh) values used in the study?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "d8a50cdb65ed8748d21f38c329ba009a97073bb4",
+      "query": "How sensitive are the study's results to variations in hydraulic conductivity?",
+      "rag1_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "83530bafc1c5be644377cb397e6cd677c2461435",
+      "query": "What are the comparative performance results of the proposed augmentation method compared to other baselines with more training data?",
+      "rag1_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "27642536b6affc6438fc0e5a5b2ce6b2d5208309",
+      "query": "Does this study apply to nearshore, offshore, or both environments, considering the parameters given appear to be mostly relevant for surfzone dynamics?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "130985a6f0c94e81204c5a5014faa6017dc2a328",
+      "query": "Is the problem under investigation genuinely nonlinear, or does it pertain more accurately to a weakly nonlinear context?",
+      "rag1_faithfulness_ragas": 0.6,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "119de3a4efede0edf897a3283fcc2548feeab094",
+      "query": "How will the relative contribution of the transport sector to the atmospheric black carbon (BC) burden change when the total atmospheric BC load varies significantly during heavy forest fire conditions?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": null,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "62c4850291b8bbec583b5c791f8ac5f978915eb1",
+      "query": "Which specific fleet is being referred to in the context of the reduction measures discussed?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "b4885c9ebb178f8daa578cef0c857a1de41d8d54",
+      "query": "What is the relationship between the location of conferences and diversity of participation in NLP research?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 0.8,
+      "rag2_faithfulness_cosine": 1.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "6de0c620431f72ce5a6331d7dde1b8df91e24936",
+      "query": "What criteria do you use to determine which knowledge dimensions to annotate for each frame?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 0.0
+    },
+    {
+      "query_id": "92b04f60c27edb89dcdc8dcd575bcb9872f0e307",
+      "query": "Are the incorrectly-classified actions/objects ambiguous for humans?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    },
+    {
+      "query_id": "3dcb179b38dc273c0db3cf0b4513c5aa409210b2",
+      "query": "Do separate objectives need to be used to govern the encoder and decoder modules of the NMT model?",
+      "rag1_faithfulness_ragas": 0.0,
+      "rag2_faithfulness_ragas": 1.0,
+      "rag2_faithfulness_cosine": 0.0,
+      "rag3_faithfulness_ragas": 1.0
+    }
+  ]
+}
