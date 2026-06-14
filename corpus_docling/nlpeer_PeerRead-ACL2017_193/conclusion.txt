@@ -1,0 +1,17 @@
+We present TUPA, the first parser for UCCA.
+
+Evaluated in in-domain and out-of-domain settings, we show that coupled with a NN classifier and BiLSTM feature extractor, it accurately predicts UCCA graphs from text, outperforming a variety of strong baselines by a margin.
+
+Despite the recent diversity of semantic pars-ing work, the effectiveness of different approaches for structurally and semantically different schemes is not well-understood (Kuhlmann and Oepen, 2016).
+
+Our contribution to this literature is a general parser that supports multiple parents, discontinuous units and non-terminal nodes.
+
+Future work will evaluate TUPA in a multilingual setting, assessing UCCA's cross-linguistic applicability.
+
+We will also apply the TUPA transition scheme to different target representations, including AMR and SDP, exploring the limits of its generality.
+
+In addition, we will explore different conversion procedures (Kong et al., 2015) to compare different representations, suggesting ways for a data-driven design of semantic annotation.
+
+A parser for UCCA will enable using the framework for new tasks, in addition to existing applications such as machine translation evaluation (Birch et al., 2016).
+
+We believe UCCA's merits in providing a cross-linguistically applicable, broadcoverage annotation will support ongoing efforts to incorporate deeper semantic structures into various applications, such as sentence simplification (Narayan and Gardent, 2014) and summarization (Liu et al., 2015).

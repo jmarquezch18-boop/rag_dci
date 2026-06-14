@@ -1,0 +1,135 @@
+{
+  "query_id": "6de0c620431f72ce5a6331d7dde1b8df91e24936",
+  "query": "What criteria do you use to determine which knowledge dimensions to annotate for each frame?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "knowledge dimensions annotate"
+      },
+      "result_preview": "No matches found for 'knowledge dimensions annotate'",
+      "elapsed_s": 4.41
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "knowledge dimensions"
+      },
+      "result_preview": "Search results for 'knowledge dimensions' (2 matches):\n[paper_id=nlpeer_PeerRead-ACL2017_818 | section=methodology | line=3] As shown in Figure 3, the graph consists of multiple substrates (page-wide boxes) corresponding to different knowledge dimensions (shown only three of them -strength, size, we",
+      "elapsed_s": 5.08
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_818",
+        "section": "methodology",
+        "start": 1,
+        "end": 10
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_818 / methodology — líneas 1-9 de 9]\nWe model knowledge acquisition as probabilistic inference over a factor graph of knowledge.\n\nAs shown in Figure 3, the graph consists of multiple substrates (page-wide boxes) corresponding to different knowledge dimensions (shown only thr",
+      "elapsed_s": 7.06
+    },
+    {
+      "iteration": 3,
+      "tool": "list_sections",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_818"
+      },
+      "result_preview": "Secciones de 'nlpeer_PeerRead-ACL2017_818':\nabstract\ndiscussion\nintroduction\nmethodology\nresults",
+      "elapsed_s": 8.07
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_818",
+        "section": "methodology",
+        "start": 1,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_818 / methodology — líneas 1-9 de 9]\nWe model knowledge acquisition as probabilistic inference over a factor graph of knowledge.\n\nAs shown in Figure 3, the graph consists of multiple substrates (page-wide boxes) corresponding to different knowledge dimensions (shown only thr",
+      "elapsed_s": 15.4
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "We model knowledge acquisition as probabilistic inference over a factor graph of knowledge.\n\nAs shown in Figure 3, the graph consists of multiple substrates (page-wide boxes) corresponding to different knowledge dimensions (shown only three of them -strength, size, weight-for brevity).\n\nEach substrate consists of two types of sub-graphs: verb subgraphs and object subgraphs, which are connected through factors that quantify action-object compatibilities.\n\nConnecting across substrates are factors that model inter-dependencies across different knowledge dimensions.\n\nIn what follows, we describe each graph component.",
+      "section": "methodology",
+      "paper_id": "nlpeer_PeerRead-ACL2017_818",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_818_methodology_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_818",
+      "score": 1.0
+    },
+    {
+      "text": "We model knowledge acquisition as probabilistic inference over a factor graph of knowledge.\n\nAs shown in Figure 3, the graph consists of multiple substrates (page-wide boxes) corresponding to different knowledge dimensions (shown only three of them -strength, size, weight-for brevity).\n\nEach substrate consists of two types of sub-graphs: verb subgraphs and object subgraphs, which are connected through factors that quantify action-object compatibilities.\n\nConnecting across substrates are factors that model inter-dependencies across different knowledge dimensions.\n\nIn what follows, we describe each graph component.",
+      "section": "methodology",
+      "paper_id": "nlpeer_PeerRead-ACL2017_818",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_818_methodology_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_818",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/PeerRead-ACL2017/818_95"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_PeerRead-ACL2017_818_methodology_0000",
+      "dci_nlpeer_PeerRead-ACL2017_818_methodology_0001"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_818_methodology_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_818_methodology_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.03508771929824561,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

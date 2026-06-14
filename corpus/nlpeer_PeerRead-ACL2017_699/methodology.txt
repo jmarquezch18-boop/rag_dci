@@ -1,0 +1,51 @@
+The RNN Encoder-Decoder model (which is also referred as sequence-to-sequence Learning) is an end-to-end approach.
+
+It was first introduced by Cho et al. (2014) and Sutskever et al. (2014) to solve translation problems.
+
+As it provides a powerful tool for modeling variable-length sequences in an end-to-end fashion, it fits many natural language processing tasks and can rapidly achieve great successes (Rush et al., 2015;Vinyals et al., 2015;Serban et al., 2016).
+
+Different strategies have been explored to improve the performance of the Encoder-Decoder model.
+
+The attention mechanism (Bahdanau et al., 2014) is a soft alignment approach that allows the model to automatically locate the relevant input components.
+
+In order to make use of the important information in the source text, some studies sought ways to copy certain parts of content from the source text and paste them into the target text (Allamanis et al., 2016;Gu et al., 2016;Zeng et al., 2016).
+
+A discrepancy exists between the optimizing objective during training and the metrics during evaluation.
+
+A few studies attempted to eliminate this discrepancy by incorporating new training algorithms (Marc 'Aurelio Ranzato et al., 2016) or by modifying the optimizing objectives (Shen et al., 2016).
+
+This section will introduce our proposed deep keyphrase generation method in detail.
+
+First, the task of keyphrase generation is defined, followed by an overview of how we apply the RNN Encoder-Decoder model.
+
+Details of the framework as well as the copying mechanism will be introduced in Sections 3.3 and 3.4.
+
+The basic idea of our keyphrase generation model is to compress the content of source text into a hidden representation with an encoder and to generate corresponding keyphrases with the decoder, based on the representation .
+
+Both the encoder and decoder are implemented with recurrent neural networks (RNN).
+
+The encoder RNN converts the variable-length input sequence x = (x 1 , x 2 , ..., x T ) into a set of hidden representation h = (h 1 , h 2 , . . . , h T ), by iterating the following equations along time t:
+
+h t = f (x t , h t-1 ) (1)
+
+where f is a non-linear function.
+
+We get the context vector c acting as the representation of the whole input x through a non-linear function q.
+
+c = q(h 1 , h 2 , ..., h T ) (2)
+
+The decoder is another RNN; it decompresses the context vector and generates a variable-length sequence y = (y 1 , y 2 , ..., y T ) word by word, through a conditional language model:
+
+s t = f (y t-1 , s t-1 , c) p(y t |y 1,...,t-1 , x) = g(y t-1 , s t , c) (3)
+
+where s t is the hidden state of the decoder RNN at time t. The non-linear function g is a softmax classifier, which outputs the probabilities of all the words in the vocabulary.
+
+y t is the predicted word at time t, by taking the word with largest probability after g(•).
+
+The encoder and decoder networks are trained jointly to maximize the conditional probability of the target sequence, given a source sequence.
+
+After training, we use the beam search to generate phrases and a max heap is maintained to get the predicted word sequences with the highest probabilities.
+
+Four unsupervised algorithms (Tf-Idf, Tex-tRank (Mihalcea and Tarau, 2004), SingleRank (Wan and Xiao, 2008), and ExpandRank (Wan and Xiao, 2008)) and two supervised algorithms (KEA (Witten et al., 1999) and Maui (Medelyan et al., 2009a)) are adopted as baselines.
+
+We set up the four unsupervised methods following the optimal settings in (Hasan and Ng, 2010), and the two supervised methods following the default setting as specified in their papers.

@@ -1,0 +1,138 @@
+{
+  "query_id": "736606d36d72227a7f9c8fc8dd277f578873590c",
+  "query": "What factors contribute to the model's mistakes?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "model limitations"
+      },
+      "result_preview": "No matches found for 'model limitations'",
+      "elapsed_s": 5.08
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "model errors"
+      },
+      "result_preview": "Search results for 'model errors' (1 matches):\n[paper_id=egu_esurf_11-849-2023 | section=methodology | line=35] We treat this time series as precipitation data, without attempting to quantify model errors.",
+      "elapsed_s": 4.82
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "model performance"
+      },
+      "result_preview": "Search results for 'model performance' (14 matches):\n[paper_id=nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d | section=results | line=15] Current standard evaluation cannot reflect model performance in h",
+      "elapsed_s": 3.86
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d",
+        "section": "results",
+        "start": 15,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d / results — líneas 10-25 de 121]\n\nNevertheless, we can compare relative rankings between different models.\n\nFigure 2 shows different trends between human ev",
+      "elapsed_s": 10.88
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d",
+        "section": "results",
+        "start": 10,
+        "end": 25
+      },
+      "result_preview": "[nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d / results — líneas 5-30 de 121]\n(2) the absolute numbers of human evaluation are much higher than those of automatic evaluations.\n\nFor example, for the BERT",
+      "elapsed_s": 7.59
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Nevertheless, we can compare relative rankings between different models.\n\nFigure 2 shows different trends between human evaluation and gold-history evaluation (Auto-Gold).\n\nCurrent standard evaluation cannot reflect model performance in human-machine conversations: (1) Human evaluation and Auto-Gold rank BERT and GraphFlow differently; especially, GraphFlow performs much better in automatic evaluation, but worse in human evaluation.\n\n(2) The gap between HAM and ExCorD is significant (F1 of 65.4% vs 67.7%) in the automatic evaluation but the two models perform similarly in human evaluation (accuracy of 87.8% vs 87.9%).\n\nThe inconsistency between human evaluation and gold-history evaluation suggests that we need better ways to evaluate and develop our conversational QA models.\n\nWhen being deployed in realistic scenarios, the models would never have access to the ground truth (gold answers) in previous turns and are only exposed to the conversational history and the passage.\n\nIntuitively, we can simply replace gold answers by the predicted answers of models and we name this as predicted-history evaluation (Auto-Pred).\n\nFormally, the model makes predictions based on the questions and its own answers:",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d",
+      "chunk_id": "dci_nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d_results_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d",
+      "score": 1.0
+    },
+    {
+      "text": "(2) the absolute numbers of human evaluation are much higher than those of automatic evaluations.\n\nFor example, for the BERT model, the human evaluation accuracy is 82.6% while the automatic evaluation F1 is only 63.2%.\n\nThe reason is that, in automatic evaluations, the gold answers cannot capture all possible correct answers to open-ended questions or questions with multiple answers; however, the human annotators can evaluate the correctness of answers easily.\n\nNevertheless, we can compare relative rankings between different models.\n\nFigure 2 shows different trends between human evaluation and gold-history evaluation (Auto-Gold).\n\nCurrent standard evaluation cannot reflect model performance in human-machine conversations: (1) Human evaluation and Auto-Gold rank BERT and GraphFlow differently; especially, GraphFlow performs much better in automatic evaluation, but worse in human evaluation.\n\n(2) The gap between HAM and ExCorD is significant (F1 of 65.4% vs 67.7%) in the automatic evaluation but the two models perform similarly in human evaluation (accuracy of 87.8% vs 87.9%).\n\nThe inconsistency between human evaluation and gold-history evaluation suggests that we need better ways to evaluate and develop our conversational QA models.\n\nWhen being deployed in realistic scenarios, the models would never have access to the ground truth (gold answers) in previous turns and are only exposed to the conversational history and the passage.\n\nIntuitively, we can simply replace gold answers by the predicted answers of models and we name this as predicted-history evaluation (Auto-Pred).\n\nFormally, the model makes predictions based on the questions and its own answers:\n\nA i ∼ M(P, Q * 1 , A 1 , ..., Q * i-1 , A i-1 , Q * i ). (4)\n\nThis evaluation has been suggested by several recent works (Mandya et al., 2020;Siblini et al., 2021), which reported a significant performance drop using predicted history.",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d",
+      "chunk_id": "dci_nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d_results_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/PeerRead-ACL2017/818_216",
+    "nlpeer/PeerRead-ACL2017/818_183",
+    "nlpeer/PeerRead-ACL2017/818_185",
+    "nlpeer/PeerRead-ACL2017/818_187"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 0.25,
+    "recall_at_3": 0.5,
+    "recall_at_5": 0.5,
+    "recall_at_10": 0.5,
+    "recall_at_20": 0.5,
+    "precision_at_5": 1.0,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d_results_0000",
+      "dci_nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d_results_0001"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d_results_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d_results_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.05405405405405405,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

@@ -1,0 +1,19 @@
+Recent years have witnessed a blooming of research aimed at applying language technologies (LTs) to "under-resourced languages".1 Such studies have been mostly motivated on three main grounds (not necessarily mutually exclusive): (a) to develop tools that could speed up the work of field linguists collecting and annotating recordings for these languages; (b) to provide linguistic communities with LTs that are necessary in an increasingly digitalised world, e.g. to interact with smartphones or computers in their own language and communicate with speakers of other languages; (c) to challenge existing machine-learning techniques in very low resource settings, where hardly any resource (dictionary, corpus, grammar) is available.
+
+Those objectives are thoroughly discussed in a recent position paper (Bird, 2020) who notices, among other things, that objective (c) (training language processing tools with zero resource) is questionable in the context of language documentation works which can often rely on some pre-existing knowledge, such as a word list, or information from related languages.
+
+Accordingly, this paper explores ways to make the best of prior resources and improve the effectiveness of unsupervised language analysis techniques for the purpose of linguistic documentation.
+
+Our main objective is to develop tools that will effectively assist field linguists in their documentary tasks (objective (a)).
+
+We focus on segmentation tasks, which aim to automatically identify meaningful units in an unsegmented phonetic or orthographic string (Johnson, 2008;Doyle and Levy, 2013;Eskander et al., 2016;Godard et al., 2018b;Eskander et al., 2019).
+
+Following these authors, we experiment with Bayesian non-parametric segmentation models, derived in our case from Goldwater et al. (2009) and subsequent work, which we recap in Section 2.
+
+Our first contribution is in Section 3 which studies multiple semi-supervised learning regimes aimed to take advantage of pre-existing linguistic material such as incomplete segmentations and word lists.
+
+In Sections 4 and 5, we experimentally assess the pros and cons of these weakly supervised approaches in batch and online learning, for two extremely low-resource languages currently in the process of being documented: Mboshi, a Bantu language used in former studies (Godard et al., 2018a); and Japhug, a language from the Sino-Tibetan family spoken in the Western part of China thoroughly documented by Jacques (2021).
+
+These two languages were selected because they illustrate actual documentation processes, for which high-quality linguistic resources have been derived from fieldwork, at the end of a long and difficult procedure (Aiton, 2021).
+
+A complementary analysis follows, where we use the Japhug corpus to take a closer look at the units identified automatically, contrasting morpheme-based and word-based supervision.

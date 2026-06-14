@@ -1,0 +1,155 @@
+{
+  "query_id": "83530bafc1c5be644377cb397e6cd677c2461435",
+  "query": "What are the comparative performance results of the proposed augmentation method compared to other baselines with more training data?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "performance comparison"
+      },
+      "result_preview": "No matches found for 'performance comparison'",
+      "elapsed_s": 5.53
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "evaluation results"
+      },
+      "result_preview": "Search results for 'evaluation results' (4 matches):\n[paper_id=nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea | section=results | line=27] To make the evaluation results comparable to the SOTA extractive ",
+      "elapsed_s": 3.68
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+        "section": "results",
+        "start": 25,
+        "end": 30
+      },
+      "result_preview": "[nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea / results — líneas 20-35 de 163]\n\nDespite its simplicity, the LEAD-3 baseline already achieves relatively competitive performance.\n\nThe three TransformerETS",
+      "elapsed_s": 10.05
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+        "section": "results",
+        "start": 15,
+        "end": 40
+      },
+      "result_preview": "[nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea / results — líneas 10-45 de 163]\n\nROUGE results on CNN/DailyMail are summarized in Table 1.\n\nThe first three blocks highlight the results reported by the co",
+      "elapsed_s": 9.49
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+        "section": "results",
+        "start": 10,
+        "end": 45
+      },
+      "result_preview": "[nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea / results — líneas 5-50 de 163]\nOn all three datasets, ablation studies are systematically conducted to investigate the contributions of different experimen",
+      "elapsed_s": 7.42
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Despite its simplicity, the LEAD-3 baseline already achieves relatively competitive performance.\n\nThe three TransformerETS models are the corresponding comparison baselines that use the same model architecture and experimental settings as our models but without injected HiStruct information.\n\nThe following block presents the results of our HiStruct+ models based on different TLMs with various input lengths.\n\nTo make the evaluation results comparable to the SOTA extractive model BERTSUMEXT, we follow their approach and report the averaged results of three best checkpoints.\n\nRegardless the base TLM and input length, our HiStruct+ models collectively outperform the corre- sponding TransformerETS baselines by merely injecting the hierarchical position information of sentences.\n\nHowever, the performance improvements gained by our models on CNN/DailyMail are small.\n\nOne of the reasons might be that we merely inject the hierarchical position information of sentences, section titles are not available.\n\nFurthermore, as discussed in Section 4, the hierarchical structure of the CNN/DailyMail documents is not so obvious as those in PubMed and arXiv.",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "score": 1.0
+    },
+    {
+      "text": "ROUGE results on CNN/DailyMail are summarized in Table 1.\n\nThe first three blocks highlight the results reported by the corresponding papers of abstractive, extractive, and hybrid summarization systems.\n\nThe best results regarding the respective type of the summarization system are underlined.\n\nIn the baselines block, the first two lines highlight the ORACLE results that build the upper bounds for extractive systems taking the same number of input tokens.\n\nThe LEAD-n baselines simply select the first n sentences in a document as its extractive summary.\n\nDespite its simplicity, the LEAD-3 baseline already achieves relatively competitive performance.\n\nThe three TransformerETS models are the corresponding comparison baselines that use the same model architecture and experimental settings as our models but without injected HiStruct information.\n\nThe following block presents the results of our HiStruct+ models based on different TLMs with various input lengths.\n\nTo make the evaluation results comparable to the SOTA extractive model BERTSUMEXT, we follow their approach and report the averaged results of three best checkpoints.\n\nRegardless the base TLM and input length, our HiStruct+ models collectively outperform the corre- sponding TransformerETS baselines by merely injecting the hierarchical position information of sentences.\n\nHowever, the performance improvements gained by our models on CNN/DailyMail are small.\n\nOne of the reasons might be that we merely inject the hierarchical position information of sentences, section titles are not available.\n\nFurthermore, as discussed in Section 4, the hierarchical structure of the CNN/DailyMail documents is not so obvious as those in PubMed and arXiv.\n\nCompared to the SOTA extractive model, our best HiStruct+ model produces competitive results.\n\nThe R2 and RL scores are improved slightly.\n\nThe model can be reused in many hybrid approaches.\n\nWhen we apply MatchSum based on our best 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24  0 Ablation studies on CNN/DailyMail (see the results and detailed discussions in Appendix A.5) suggest that the setting la-sum works best for hierarchical position encoding.\n\nTwo stacked Transformer layers in the summarization model perform better than one or three Transformer layers.",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "score": 1.0
+    },
+    {
+      "text": "On all three datasets, ablation studies are systematically conducted to investigate the contributions of different experimental settings.\n\nTo analyze the output summaries from an overall perspective, we plot the distribution of the extracted sentences on each dataset and compare it to the ORACLE summaries and those outputted by the comparison baseline (see Figure 2).\n\nAppendix A.6 demonstrates human evaluation of extracted summaries for a more intuitive understanding about the superiority of the proposed system.\n\nROUGE results on CNN/DailyMail are summarized in Table 1.\n\nThe first three blocks highlight the results reported by the corresponding papers of abstractive, extractive, and hybrid summarization systems.\n\nThe best results regarding the respective type of the summarization system are underlined.\n\nIn the baselines block, the first two lines highlight the ORACLE results that build the upper bounds for extractive systems taking the same number of input tokens.\n\nThe LEAD-n baselines simply select the first n sentences in a document as its extractive summary.\n\nDespite its simplicity, the LEAD-3 baseline already achieves relatively competitive performance.\n\nThe three TransformerETS models are the corresponding comparison baselines that use the same model architecture and experimental settings as our models but without injected HiStruct information.\n\nThe following block presents the results of our HiStruct+ models based on different TLMs with various input lengths.\n\nTo make the evaluation results comparable to the SOTA extractive model BERTSUMEXT, we follow their approach and report the averaged results of three best checkpoints.\n\nRegardless the base TLM and input length, our HiStruct+ models collectively outperform the corre- sponding TransformerETS baselines by merely injecting the hierarchical position information of sentences.\n\nHowever, the performance improvements gained by our models on CNN/DailyMail are small.\n\nOne of the reasons might be that we merely inject the hierarchical position information of sentences, section titles are not available.\n\nFurthermore, as discussed in Section 4, the hierarchical structure of the CNN/DailyMail documents is not so obvious as those in PubMed and arXiv.\n\nCompared to the SOTA extractive model, our best HiStruct+ model produces competitive results.\n\nThe R2 and RL scores are improved slightly.\n\nThe model can be reused in many hybrid approaches.\n\nWhen we apply MatchSum based on our best 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24  0 Ablation studies on CNN/DailyMail (see the results and detailed discussions in Appendix A.5) suggest that the setting la-sum works best for hierarchical position encoding.\n\nTwo stacked Transformer layers in the summarization model perform better than one or three Transformer layers.\n\nWhen taking longer inputs than the length limit of the TLM, substantial improvements are achieved by using the copied token position embeddings for initialization instead of random initialization.\n\nThe extracted summaries are analyzed in more detail by plotting the proportions of the extracted sentences at each linear position within the whole document as shown in Figure 2a.",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731_41",
+    "nlpeer/ARR-22/026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731_88",
+    "nlpeer/ARR-22/026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731_89"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.5,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.6666666666666666,
+    "recall_at_5": 0.6666666666666666,
+    "recall_at_10": 0.6666666666666666,
+    "recall_at_20": 0.6666666666666666,
+    "precision_at_5": 0.6666666666666666,
+    "ndcg_at_5": 0.6934264036172708,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0000",
+      "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0001",
+      "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0002"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.041666666666666664,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

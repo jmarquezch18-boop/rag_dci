@@ -1,0 +1,45 @@
+The advance of deep learning (Vaswani et al., 2017;Goodfellow et al., 2014) has enabled great improvements in the field of Text-to-Speech (TTS).
+
+(Towards-)end-to-end models, such as Tacotron 2 (Wang et al., 2017;Shen et al., 2018), Trans-formerTTS (Li et al., 2019b), FastSpeech 2 (Ren et al., 2019(Ren et al., , 2020)), FastPitch (Łańcucki, 2021) and many more famous instances (e.g. Arık et al. (2017) and Prenger et al. (2019)) allow for speech synthesis with unprecedented quality and controllability.
+
+The models mentioned here rely on vocoders, such as WaveNet (van den Oord et al., 2016), MelGAN (Kumar et al., 2019), Parallel Wave-GAN (Yamamoto et al., 2020) or HiFi-GAN (Kong et al., 2020) to turn the parametric representations that they produce into waveforms.
+
+Recently proposed models even include some with the ability to go directly to the waveform from a grapheme or phoneme input sequence, such as EATS (Donahue et al., 2020) or VITS (Kim et al., 2021).
+
+While these methods all perform remarkably well if given enough data, cross-lingual use of data remains a key challenge in TTS.
+
+Most modern methods are limited to languages and domains that are rich in resources, which over 6,000 lan-guages are not.
+
+Attempts at reducing the required resources in a target language by making use of transfer learning from multilingual data have been made by Azizah et al. (2020); Xu et al. (2020); Chen et al. (2019).
+
+The mismatch of input spaces however requires complex architectural changes, which limits their ability to be used in conjunction with other modern TTS architectures.
+
+Attempts at fixing the issue of having to transfer knowledge from a source to a target by just jointly training on a mixed set of more and less resource rich languages have been made by He et al. (2021); de Korte et al. (2020); Yang and He (2020), which requires complex training procedures.
+
+In this work, we will also attempt to transfer knowledge from a set of high resource languages to a low resource language.
+
+We fix previous shortcomings by 1) using a linguistically motivated representation of the inputs to such a system (articulatory and phonological features of phonemes) that enables cross-lingual knowledge sharing and 2) applying the model agnostic meta learning (MAML) framework (Finn et al., 2017) to the field of low-resource TTS for the first time.
+
+Using articulatory features as inputs for neural TTS has been attempted recently by Staib et al. (2020) and Wells et al. (2021), following the classical approach of Jakobson et al. (1961).
+
+Both achieved good results when applying this idea to the codeswitching problem, since unseen phonemes in the input space no longer map to nonsensical positions, as it would be the case for the standard embedding-lookup.
+
+It has to be noted however, that this only works across languages with similar types of phonemes.
+
+Also Gutkin (2017) have applied phonological features to low-resource TTS with fair success.
+
+They did however rely on supplementary features, such as dependency parsers and morphological analyzers.
+
+Furthermore all of their data and models are proprietary and can therefore not be used to compare results to.
+
+In this work, we extend the use of articulatory inputs with the MAML framework to enable very simple yet well working low-resource TTS that can be applied to almost all modern TTS architectures.
+
+We encounter severe instabilities when using MAML on TTS, which make the standard formulation of MAML infeasible to use.
+
+Thus we also propose a modification to MAML, which reduces the procedure's complexity.
+
+This allows us to create a set of parameters of a model that can be used to fine-tune to a well working single-language singlespeaker TTS model with as little as 30 minutes of paired training data available and even enables zeroshot adaptation to unseen languages.
+
+We evaluate the success of our approach with both automatic measures and human evaluation.
+
+Our contributions are as follows: 1) We show that it is beneficial to train a TTS model on articulatory features rather than on phoneme-identities, even in the standard single-language high-resource case; 2) We introduce a training procedure that is closely related to MAML which allows training a set of parameters for a TTS model that can be fine-tuned in a low resource scenario; 3) We provide insights on how much data and training time are required to fine-tune a model across different languages and speakers simultaneously using said meta-parameters; 4) We show that the metaparameters can generalize to unseen phonemes and rapidly improve their ability to properly pronounce them when fine-tuning.1 2 Background and Related Work

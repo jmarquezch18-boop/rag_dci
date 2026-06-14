@@ -1,0 +1,49 @@
+Several approaches to zero-shot cross-lingual transfer exist and can broadly be divided into: a) Databased Transfer, which focuses on training data transformation and b) Model-based Transfer that centres around modifying models' training routine.
+
+Data-based Transfer Translating utterances for the intent classification task is relatively straightforward so previous works focused on projecting and/or aligning the entity labels between translated utterances.
+
+This is followed by standard supervised training with those pseudo-labels and is commonly known as the translate-train method.
+
+One of the earliest works still being used for this purpose is fastalign (Dyer et al., 2013).
+
+It's an unsupervised word aligner trained on a parallel corpus to map each word (thus its entity label) in the source utterance to the word(s) in the target user utterance.
+
+Projecting the entity labels can also be done with word-by-word translation and source label copying (Yi and Cheng, 2021).
+
+A teacher model then weakly labels the target data, which is used to train the final student model.
+
+Sometimes, this type of label projection is complemented with an additional entity alignment step (Li et al., 2021a).
+
+Better performance can be achieved by using machine translation with entity matching and distributional statistics (Jain et al., 2019) though this can be a costly process for each language.
+
+A category of 'word substitution' methods such as code-switching (Qin et al., 2020;Kuwanto et al., 2021) or dictionaryenhanced pretraining (Chaudhary et al., 2020) have also been shown to improve cross-lingual transfer.
+
+Model-based Transfer Prior to the adoption of multilingual transformers (Lample and Conneau, 2019), task-oriented XNLU methods employed a BiLSTM encoder combined with different multilingual embeddings (Schuster et al., 2019).
+
+Newer approaches usually involve a pretrained XLM and the addition of some new training component(s) with the inference routine remaining mostly unchanged.
+
+Xu et al. (2020) learn to jointly align and predict entity labels by fusing the source and target language embeddings with attention and using the resulting cross-lingual representation for entity prediction.
+
+Qi and Du (2020) include an adversarial language detector in training whose loss encourages the model to generate language-agnostic sentence representations for improved zero-shot transfer.
+
+Pan et al. (2020) and Chi et al. (2020) added a contrastive loss to pretraining that treats translated sentences as positive examples and unrelated sentences as negative samples.
+
+This training step helps the XLM produce similar embeddings in different languages.
+
+However, these methods require large annotated datasets and expensive model pretraining (Chi et al., 2020).
+
+Our proposed methods only use the English task data (which is relatively limited) and its translations for each language.
+
+The most related prior works are Arivazhagan et al. (2019) for machine translation and Gritta and Iacobacci (2021) for task-oriented XNLU.
+
+Both of these are cross-lingual alignment methods that use translated training data to zero-shot transfer the source language model to the target language.
+
+We focus on the latter work, called XeroAlign, which reported the most recent SOTA scores on our evaluation datasets.
+
+XeroAlign works by generating a sentence embedding of the user utterance for each language, e.g. English (source) and Thai (target) using the CLS token of the XLM.
+
+A Mean Squared Error loss function minimises the difference between the multilingual sentence embeddings and is backpropagated along with the main task loss.
+
+XeroAlign aims to bring sentence embeddings in different languages closer together with a bias towards intent classification due to the CLS embedding, which is the standard input to the intent classifier.
+
+We reproduce this method for analysis and comparisons but add a small post-processing step that distinctly improves the reported scores.

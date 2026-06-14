@@ -1,0 +1,136 @@
+{
+  "query_id": "c7611189317c1c95e4b29e2523cfef275bc0444f",
+  "query": "What are the rules for assigning error categories?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "error categories"
+      },
+      "result_preview": "No matches found for 'error categories'",
+      "elapsed_s": 4.34
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "error classification"
+      },
+      "result_preview": "No matches found for 'error classification'",
+      "elapsed_s": 4.06
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "error types"
+      },
+      "result_preview": "Search results for 'error types' (12 matches):\n[paper_id=nlpeer_COLING2020_1570 | section=discussion | line=41] Also note the expected correspondence between the error types and the SAMEOBJECT judgments: when SAMEOBJECT = 0, most pairs are deemed to be referential errors.\n[paper_id=nlpeer_PeerRead-A",
+      "elapsed_s": 9.37
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_169",
+        "section": "methodology",
+        "start": 1,
+        "end": 5
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_169 / methodology — líneas 1-10 de 15]\nTo solve this problem, we took inspiration from Swanson and Yamangil's (2012) observation that most error types are based on part-of-speech (POS) categories, and wrote a rule to classify an edit based only on its automatic POS tags.\n\nWe",
+      "elapsed_s": 8.02
+    },
+    {
+      "iteration": 4,
+      "tool": "read_file",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_169",
+        "section": "methodology"
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_169 / methodology]\nTo solve this problem, we took inspiration from Swanson and Yamangil's (2012) observation that most error types are based on part-of-speech (POS) categories, and wrote a rule to classify an edit based only on its automatic POS tags.\n\nWe then added another ",
+      "elapsed_s": 5.15
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "To solve this problem, we took inspiration from Swanson and Yamangil's (2012) observation that most error types are based on part-of-speech (POS) categories, and wrote a rule to classify an edit based only on its automatic POS tags.\n\nWe then added another rule to similarly differentiate between Missing, Unnecessary and Replace-ment errors depending on whether tokens were inserted, deleted or substituted.\n\nFinally, we extended our approach to classify errors that are not well-characterised by POS, such as Spelling or Word Order, and ultimately assigned all error types based solely on automatically-obtained, objective properties of the data.\n\nIn total, we wrote roughly 50 rules.\n\nWhile many of them are very straightforward, significant attention was paid to discriminating between different kinds of verb errors.",
+      "section": "methodology",
+      "paper_id": "nlpeer_PeerRead-ACL2017_169",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_methodology_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_169",
+      "score": 1.0
+    },
+    {
+      "text": "To solve this problem, we took inspiration from Swanson and Yamangil's (2012) observation that most error types are based on part-of-speech (POS) categories, and wrote a rule to classify an edit based only on its automatic POS tags.\n\nWe then added another rule to similarly differentiate between Missing, Unnecessary and Replace-ment errors depending on whether tokens were inserted, deleted or substituted.\n\nFinally, we extended our approach to classify errors that are not well-characterised by POS, such as Spelling or Word Order, and ultimately assigned all error types based solely on automatically-obtained, objective properties of the data.\n\nIn total, we wrote roughly 50 rules.\n\nWhile many of them are very straightforward, significant attention was paid to discriminating between different kinds of verb errors.\n\nFor example, despite all having the same correction, the following sentences contain different types of common learner errors: While the final three rules could certainly be reordered, we informally found the above sequence performed best during development.\n\nIt is also worth mentioning that this is a somewhat simplified example and that there are additional rules to discriminate between auxiliary verbs, main verbs and multi verb expressions.\n\nNevertheless, the above case exemplifies our approach, and a more complete description of all rules is provided with the software.",
+      "section": "methodology",
+      "paper_id": "nlpeer_PeerRead-ACL2017_169",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_methodology_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_169",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/PeerRead-ACL2017/169_38",
+    "nlpeer/PeerRead-ACL2017/169_39",
+    "nlpeer/PeerRead-ACL2017/169_40",
+    "nlpeer/PeerRead-ACL2017/169_41"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 0.25,
+    "recall_at_3": 0.5,
+    "recall_at_5": 0.5,
+    "recall_at_10": 0.5,
+    "recall_at_20": 0.5,
+    "precision_at_5": 1.0,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The excerpts mention the following rules for assigning error categories: \n\n1. A rule to classify an edit based only on its automatic POS tags.\n2. A rule to differentiate between Missing, Unnecessary, and Replacement errors depending on whether tokens were inserted, deleted, or substituted.\n3. Additional rules to classify errors that are not well-characterised by POS, such as Spelling or Word Order.\n4. Rules to discriminate between different kinds of verb errors.\n5. Rules to discriminate between auxiliary verbs, main verbs, and multi-verb expressions.\n\nIt is also mentioned that roughly 50 rules were written in total, but a complete description of all rules is provided with the software.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_PeerRead-ACL2017_169_methodology_0000",
+      "dci_nlpeer_PeerRead-ACL2017_169_methodology_0001"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_methodology_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_methodology_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.4840182648401826,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

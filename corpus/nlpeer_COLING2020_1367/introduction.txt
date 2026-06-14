@@ -1,0 +1,31 @@
+This paper describes the Indigenous Languages Technology (ILT) project at the National Research Council of Canada (NRC).
+
+Phase I of this project received funding of $6 million over three years in the March 2017 budget of the Government of Canada; phase II is ongoing.
+
+The project's goal is to produce software that will enhance the efforts of Indigenous communities in Canada to preserve and revitalize their languages.
+
+Littell et al. (2018) surveys many different efforts by a variety of organizations that have the same goal.
+
+This paper depicts a tiny corner of a big canvas; for space reasons, it does not even cover all aspects of our project.
+
+For a detailed technical report on the entire ILT project, see Kuhn et al. (2020).
+
+Different communities have very different linguistic needs, so the ILT project was made up of a diverse set of subprojects.
+
+Because there is relatively little textual or speech data for Indigenous languages in Canada (with the partial exception of Inuktut), most of the technologies developed within the project described here have been rule-based, rather than relying on data-driven machine learning.
+
+Different approaches have been taken to linguistic research involving Indigenous languages (Cameron et al., 1992;Czaykowska-Higgins, 2009).
+
+Most of the work carried out within this project aims to fit into the "empowerment" approach, in which research is carried out collaboratively, with equal emphasis on the agenda of the linguist and of the community.
+
+The most ambitious subproject described here was suggested to the NRC team by an Indigenous educator: the creation of a verb conjugator for Kanyen'kéha (Mohawk) (which inspired the creation of a software framework for building verb conjugators for other languages).
+
+Similarly, the "readalong" subproject for automating word-speech alignment for audio books was in response to strong interest from several communities.
+
+The project was guided by an Advisory Committee made up of Indigenous language revitalization experts.
+
+Their counsel has been invaluable; they are listed at the end of the project web page1 and in the Acknowledgements.
+
+At no stage did the NRC claim ownership of Indigenous language data collected with the project's funding.
+
+We were determined to break with the long, painful history of extractive research practices, in which non-Indigenous researchers have collected language data from Indigenous communities for their own purposes, sometimes even resulting in communities losing access to their language data (see Pool (2016), Keegan (2019), Brinklow et al. (forthcoming), and Lewis et al. (2020)).

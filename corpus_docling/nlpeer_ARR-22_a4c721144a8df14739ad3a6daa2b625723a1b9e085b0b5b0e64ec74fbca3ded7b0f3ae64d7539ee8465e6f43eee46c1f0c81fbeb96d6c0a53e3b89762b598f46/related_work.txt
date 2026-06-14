@@ -1,0 +1,21 @@
+The standard practice of using BERT is fine-tuning, i.e. the entirety of the model parameters is adjusted on the training corpus of the downstream task, so that the model is adapted to that specific task (Devlin et al., 2019).
+
+There is also an alternative feature-based approach, used by ELMo (Peters et al., 2018).
+
+In the latter approach, the pre-trained model is regarded as a feature extractor with frozen parameters.
+
+During the learning of a downstream task, one feeds a fixed or learnable combination of the model's intermediate representations as input to the task-specific module, and only the parameters of the latter will be updated.
+
+It has been shown that the fine-tuning approach is generally superior to the feature-based approach for BERT in terms of task performance (Devlin et al., 2019;Peters et al., 2019).
+
+A natural middle ground between these two approaches is partial fine-tuning, i.e. only fine-tuning some topmost layers of BERT while keeping the remaining bottom layers frozen.
+
+This approach has been studied in (Houlsby et al., 2019;Merchant et al., 2020), where the authors observed that finetuning only the top layers can almost achieve the performance of full fine-tuning on several GLUE tasks.
+
+The approach of partial fine-tuning essentially regards the bottom layers of BERT as a feature extractor.
+
+Freezing weights from bottom layers is a sensible idea as previous studies show that the mid layer representations produced by BERT are most transferrable, whereas the top layers representations are more task-oriented (Wang et al., 2019a;Tenney et al., 2019b,a;Liu et al., 2019a;Merchant et al., 2020).
+
+Notably, Merchant et al. (2020) showed that fine-tuning primarily affects weights from the top layers while weights from bottom layers do not alter much.
+
+Liu et al. (2019a) showed that it is possible to achieve state-of-the-art results on a number of probing tasks with linear models trained on frozen mid layer representations of BERT.

@@ -1,0 +1,9 @@
+Our analysis of these systems, and especially of their common errors, points toward directions for researchers developing NLG systems, especially for AMR, to improve their output.
+
+We recommend attempting to find solutions to the common issues that led to low scores even from state-of-the-art systems, such as anonymization of infrequent concepts, unnecessary repetition of words, and hallucination.
+
+While this study found that popular automatic metrics were mostly successful in ranking these systems in the same order human annotators did, we also found that the human evaluation was able to identify strengths and weaknesses of systems with more nuance than a single number can convey.
+
+We also acknowledge that, given prior work pointing to the inadequacy of metrics such as BLEU for NLG and AMR generation, more research is needed to determine the reliability of these metrics for comparing systems.
+
+We suggest that researchers in AMR generation and other NLG tasks continue to supplement automatic metrics with human evaluation as much as possible.

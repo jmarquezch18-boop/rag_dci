@@ -1,0 +1,49 @@
+To elucidate the characteristics of our LM augmented sequence tagger, we ran a number of additional experiments on the CoNLL 2003 NER task.
+
+ferent locations in the baseline sequence tagger.
+
+In particular, we used the LM embeddings h LM k to:
+
+• augment the input of the first RNN layer; i.e.,
+
+x k = [c k ; w k ; h LM k ],
+
+• augment the output of the first RNN layer; i.e.,
+
+h k,1 = [ - → h k,1 ; ← - h k,1 ; h LM k ], 3 and • augment the output of the second RNN layer; i.e., h k,2 = [ - → h k,2 ; ← - h k,2 ; h LM k ].
+
+Table 5 shows that the second alternative performs best.
+
+We speculate that the second RNN layer in the sequence tagging model is able to capture interactions between task specific context as expressed in the first RNN layer and general context as expressed in the LM embeddings in a way that improves overall system performance.
+
+These results are consistent with Søgaard and Goldberg (2016) who found that chunking performance was sensitive to the level at which additional POS supervision was added.
+
+In this experiment, we compare six different configurations of the forward and backward language models (including the baseline model which does not use any language models).
+
+The results are reported in Table 6.
+
+We find that adding backward LM embeddings consistently outperforms forward-only LM embeddings, with F 1 improvements between 0.22 and 0.27%, even with the relatively small backward LSTM-2048-512 LM.
+
+LM size is important, and replacing the forward LSTM-2048-512 with CNN-BIG-LSTM (test perplexities of 47.7 to 30.0 on 1B Word Benchmark) improves F 1 by 0.26 -0.31%, about as much as adding backward LM.
+
+Accordingly, we hypothesize (but have not tested) that replacing the backward LSTM-2048-512 with a backward LM analogous to the CNN-BIG-LSTM would further improve performance.
+
+To highlight the importance of including language models trained on a large scale data, we also experimented with training a language model on just the set, we decreased the model size to 512 hidden units with a 256 dimension projection and normalized tokens in the same manner as input to the sequence tagging model (lower-cased, with all digits replaced with 0).
+
+The test set perplexities for the forward and backward models (measured on the CoNLL 2003 test data) were 106.9 and 104.2, respectively.
+
+Including embeddings from these language models decreased performance slightly compared to the baseline system without any LM.
+
+This result supports the hypothesis that adding language models help because they learn composition functions (i.e., the RNN parameters in the language model) from much larger data compared to the composition functions in the baseline tagger, which are only learned from labeled data.
+
+Importance of task specific RNN.
+
+To understand the importance of including a task specific sequence RNN we ran an experiment that removed the task specific sequence RNN and used only the LM embeddings with a dense layer and CRF to predict output tags.
+
+In this setup, performance was very low, 88.17 F 1 , well below our baseline.
+
+This result confirms that the RNNs in the baseline tagger encode essential information which is not encoded in the LM embeddings.
+
+Ammar et al., 2017).
+
+We conclude that LM embeddings can improve the performance of a sequence tagger even when the data comes from a different domain.

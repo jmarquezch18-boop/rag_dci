@@ -1,0 +1,15 @@
+Our proposed model for the task of event linking achieves state-of-the-art results without relying on external feature sources.
+
+We have thus shown that low linking performance, coming from a lack of semantic knowledge about a domain, is evitable.
+
+In addition, our experiments give further empirical evidence for the usefulness of neural models for generating latent-feature representations for sentences.
+
+There are several areas for potential future work.
+
+As next steps, we plan to test the model on more datasets and task variations, i.e., in a crossdocument setting or for joint trigger identification and coreference resolution.
+
+On the other hand, separating anaphoricity detection from antecedent scoring, as is often done for the task of entity coreference resolution (e.g., by Wiseman et al. (2015)), might result in performance gains; also the generation of sentential features from recurrent neural networks seems promising.
+
+Regarding our mediumterm research agenda, we would like to investigate if the model can benefit from more fine-grained information about the discourse structure underlying a text.
+
+This could guide the model when encountering the problematic case of pronoun resolution, described in the error analysis.

@@ -1,0 +1,183 @@
+Task.
+
+We study sentence-level causal (left-to-right) language modeling (CLM), where the model needs to predict the next word given the previous context in the sentence.
+
+Note that, Papadimitriou and Jurafsky (2020) experiment with language modeling across sentences, but we adopt sentence-level modeling because we would like to focus on the learning of sentence structures here.
+
+As we will see in §4.2, we observe the same tendency in regard to the effect of artificial pretraining where we share the setups.
+
+The task performance is measured by the average perplexity scores for each token.
+
+Model.
+
+We study two encoder architectures: LSTM (Hochreiter and Schmidhuber, 1997) and Transformer (Vaswani et al., 2017).
+
+These architectures are known to exhibit different abilities in capturing the underlying hierarchical structure of sequential data (Tran et al., 2018).
+
+The size of word embeddings is set to 300.
+
+For both LSTM and Transformer encoders, the number of layers is set to 3, and the number of parameters is configured to be the same (6.9M parameters) to enable a fair comparison between architectures (for further details, see Appendix B).
+
+Pretraining Data.
+
+We generate artificial corpora with three unstructured languages, which randomly arrange the tokens sampled from Uniform, Zipf, and Log-linear languages, and four structured languages which combine the Zipf sampling strategy with the structures of Flat Parenthesis, Nesting Parenthesis, Flat Dependency, and Nesting Dependency.
+
+We also experiment with natural language corpora.
+
+We create training corpora from Wikipedia dumps of English, Japanese, and Spanish.
+
+The sentences are tokenized with the Moses tokenizer1 for English and Spanish and MeCab2 for Japanese.
+
+The sentence lengths of artificial data were sampled from the empirical distribution of the English Wikipedia corpus.
+
+The size of the vocabulary |V | is set to 32,000 for both artificial and natural corpora, and out-of-vocabulary words in natural language are replaced with the OOV token.
+
+For each corpus, we sample 12.8 M sentences and train the model with one iteration over the corpus.
+
+Evaluation Data.
+
+We evaluate the pretrained encoders on the Penn Treebank (PTB) corpus (Marcus et al., 1993) with preprocessing from Mikolov et al. (2010).
+
+Note that, when we train language models with the pretrained encoders, the parameters of the encoder are not updated and only the English word embeddings are learned from scratch (optimization details in Appendix B.2).
+
+We provide two baseline models trained on the L2 training corpus from scratch and trained with frozen random weights in the encoder to compare with pretrained encoders.
+
+For each configuration, we pretrain three encoders with different random seeds, and for each encoder fine-tuned three models, which results in nine models in total.
+
+We summarize the average scores and standard deviations in Figure 2.
+
+The Transformer encoder is more flexible than LSTM.
+
+We start by discussing overall trends.
+
+We observe that the Transformer encoders give lower perplexity scores compared to LSTM regardless of pretraining language.
+
+This tendency is in line with the observations on the surprisingly good transferability or pretrained Transformer encoders to other languages (Conneau et al., 2020a), or even other modalities (Lu et al., 2021;Reid et al., 2022).
+
+We think that this is because Transformer encoders are better at aggregating and preserving the context information at each time step, as we will see in §6, presumably because the Transformer architecture has self-attention and residual connections.
+
+Natural languages are better than the artificial languages.
+
+As expected, pretraining with natural languages (English, Spanish and Japanese) provides better encoders for language modeling than the artificial languages both with LSTM and Transformer.
+
+However, the performance differences between natural languages seem to be negligible, indicating that there is not much difference in the way the encoders process these different languages, conforming with the observation of cross-lingual transferability of pretrained encoders (Artetxe et al., 2020).
+
+The Uniform and Zipf languages degrade the encoders.
+
+Looking at the difference among unstructured languages (Figure 2a), Uniform and Zipf languages give higher perplexities than the Random weights baseline particularly with LSTM.
+
+In hindsight, it is natural that encoders would be degraded even from random weights when trained with sequences where tokens are drawn independently from each other because the encoders are not incentivized to use contextual information and will even learn to discard the input information.
+
+We will demonstrate this with a follow-up probing experiment in §6.
+
+The Log-linear language provides a useful inductive bias to language modeling.
+
+On the contrary, the Log-linear language gives reasonably lower perplexities compared to Random weights (Figure 2a).
+
+This indicates that knowing the existence of statistical dependency within a sentence, or learning to predict tokens from the cooccurrence information, is a useful inductive bias even though the cooccurrence statistics is not necessarily in line with L2.
+
+We do not observe the importance of the nested structure in the Parenthesis languages.
+
+Papadimitriou and Jurafsky (2020) showed that LSTM encoders trained on the Flat Parenthesis and Nesting Parenthesis structures do not provide a significant difference in perplexity, and concluded that simple non-hierarchical head-dependent-type relations are important in LSTM language processing.
+
+A similar observation can be made in Figure 2b: although the Nesting Parenthesis exhibits the lower average score, there is no significant difference between Flat Parenthesis and Nesting Parenthesis (232.9 ± 30.0 vs. 203.8 ± 7.7, p > 0.01 in Welch's t-test) with the unstable results of Flat Parenthesis.
+
+Also, the trend of the average scores is reversed in Transformer: the Nesting Parenthesis exhibits the higher average score (212.4 ± 8.8) than Flat Parenthesis (191.9 ± 11.8), which makes it difficult to draw a consistent conclusion from here.
+
+However, the Dependency languages suggest that the nested structure is actually important in language modeling.
+
+While the Parenthesis language represents dependency relations with two identical tokens (e.g., "4543" and "4543"), our Dependency language represents relations with two different tokens (e.g., "<4543" and "4543>").
+
+We expect that expressing dependency relations with two different tokens is closer to natural language and thus provides more viable insights into natural language.
+
+When we compare the scores of the Dependency languages, Nesting Dependency provides the lower and more stable perplexity than Flat Dependency with LSTM (175.7 ± 4.3 vs. 187.2±10.7) and the significantly lower score with Transformer (160.6±1.6 vs. 175.7±4.3, p > 0.01 in Welch's t-test).
+
+Overall, Nesting Dependency performs best among other artificial languages, indicating our Dependency language is closer to natural language and the nested structure is useful for language modeling.
+
+Pretraining.
+
+To allow for fast experimentation, we train small Transformer encoders.
+
+The size of word embeddings is set to 300 and the encoders have three layers (further details in Appendix C).
+
+The pretraining datasets are the same as in §4.1.
+
+Downstream Task.
+
+We evaluate the pretrained encoders with dependency parsing to see if the structural knowledge learned with artificial language is beneficial to predict the structure of natural language.
+
+We use the English EWT dataset from Universal Dependencies (UD) v2.8 (Nivre et al., 2020) 3 .
+
+Model.
+
+We adopt the biaffine graph-based parser (Dozat and Manning, 2017) with the Transformer encoder.
+
+The input word representations are the concatenation of word embeddings and character features computed by a character-level bidirectional LSTM encoder (Ling et al., 2015).
+
+For 3 https://universaldependencies.org/ the details on fine-tuning these models, please refer to Appendix C.
+
+We provide two baseline models trained from scratch and trained with random encoder weights.
+
+For each pretraining language, we again train three encoders and fine-tune three models for each, and take the mean and standard deviation of the nine models.
+
+Figure 3 shows the results.
+
+The unstructured languages do not provide useful transferable knowledge for dependency parsing.
+
+The Uniform, Zipf, and Log-linear encoders perform comparably to or worse than the Random weights baseline.
+
+This is in contrast with the causal language modeling task, where the Loglinear language at least outperforms the Random weights baseline ( §4.2).
+
+On the other hand, learning from structured languages seems to be important in dependency parsing.
+
+The Dependency encoders outperform the Random weights baseline, and also we can observe that learning from the nesting structure is more effective than the flat structure, and Dependency languages outperform Parenthesis languages, as observed in the CLM in §4.
+
+6 How much contextual information do the pretrained encoders capture?
+
+In the previous sections, we have seen that the encoders pretrained with different artificial languages exhibit various degrees of transferability to natural language.
+
+In this section, we try to explain why pretraining with some artificial languages is better or worse for the transfer to natural language from the perspective of the amount of contextual information in the encoder outputs.
+
+The intuition is, for example, if a pretrained encoder has learned to discard the input information, we cannot expect the encoder to perform well when transferred to any tasks.
+
+Also, existing studies show that neural language models assign more importance to local context when they make predictions (Khandelwal et al., 2018;Lai et al., 2020). Can we observe that encoders pretrained with artificial languages exhibit similar patterns to natural languages regarding how they encode the contextual information?
+
+We investigate how much contextual information can be extracted from the outputs of the pretrained encoders by setting up a simple probing task.
+
+In this task, the encoder is asked to recover the identity of the contextual words given the contextualized vector of a target word.
+
+Specifically, we first randomly generate 100K sequences of integers with the length of 15 ∼ 25 (close to most frequent sequence lengths in the pretrained corpus) with the vocabulary size 100 and split them into training (90K sequences), validation (5K) and test (5K) sets.
+
+Then we simultaneously train several linear classifiers, each of which predicts the ID of the context word at a fixed relative position to the target word in the sequence, on top of a frozen pretrained encoder.
+
+For the encoders pretrained with CLM in §4, the target word is the last word in sequences and the classifiers predict the words at the positions of [-9, -4, -3, -2, -1, 0]; for the encoders pretrained with MLM in §5, the target word is the middle word and the classifiers predict the words at [-6, -3, -2, -1, 0, 1, 2, 3, 6].
+
+After training, we measure the accuracy of predicting the words at each position on the test set and interpret this as how much information on each contextual word the encoder preserves.
+
+Figure 4 summarizes the results of the encoders trained in §4 and §5.
+
+The amount of the encoded contextual information can explain the transfer performance in some obvious cases.
+
+In the experiment of CLM (Figure 2a), we observed that the Uniform and Zipf encoders tend to perform worse even than Random weights.
+
+Figure 4a and 4d demonstrate that their poor performance is because the encoders are trained to discard the input information.
+
+The Uniform and Zipf encoders tend to preserve less contextual information even than Random weights because capturing the contextual information does not lead to solving the pretraining task in these languages.
+
+On the other hand, if words are predictable from the context, encoders are encouraged to learn to preserve the contextual information.
+
+The Loglinear encoders trained with CLM encode a decent amount of the contextual information (Figure 4a and4d) and also performed best among the unstructured artificial languages in CLM (Figure 2a).
+
+Moreover, encoders trained with natural languages (Figure 4c, 4f and 4i) capture not only the local context well (at distance 0 ∼ 2) but also a modest amount of the farther context (at distance 3 ∼), which is consistent with the existing observation that LSTM encoders trained with natural language are better at memorizing the inputs than ones trained with randomly sampled data (Liu et al., 2018).
+
+In these cases, the downstream performance and the amount of the encoded contextual information seem to be correlated.
+
+However, this trend is not as clear when comparing the structured artificial languages.
+
+For example, the Nesting Dependency encoders perform the best for the downstream tasks among the structured artificial languages but do not necessarily in the probing task (Figure 4b and4e).
+
+The nesting structure seems to facilitate encoders to remember the local context with MLM.
+
+The difference between the Nesting and Flat languages is striking in Figure 4f.
+
+The Nesting encoders are consistently better at capturing the local contextual information (at positions -2 ∼ 2) than their flat counterparts, which may explain the better performance of the Nesting encoders in dependency parsing (Figure 3), given that the local contextual information is particularly important to predict the syntactic characteristics of words (Levy and Goldberg, 2014;Ri and Tsuruoka, 2020).

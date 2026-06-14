@@ -1,0 +1,149 @@
+Leveraging Wordnet Paths For Neural Hypernym Prediction
+
+Abstract
+
+Introduction
+
+Hypernym Prediction
+
+Several tasks related to hypernymy have been proposed under different names: extracting is-a relations from text (hypernym discovery) (Hearst, 1992;Snow et al., 2005;Camacho-Collados et al., 2018), binary classification of whether two given words are in a hypernym relation (hypernym detection) (Weeds et al., 2014;Shwartz et al., 2016;Roller et al., 2018), and constructing or extending a taxonomy (taxonomy induction) (Snow et al., 2006;Jurgens and Pilehvar, 2016).
+
+Another recently introduced task is hierarchical path completion (Alsuhaibani et al., 2019), where, given a hypernym path of length 4 from WordNet, the task is to predict the correct hyponym(s).
+
+While hypernymy has long been studied in computational lexical semantics, another thread of recent research on hypernymy comes from the literature on knowledge base completion (Bordes et al., 2013;Nickel and Kiela, 2017;Pinter and Eisenstein, 2018;Dettmers et al., 2018).
+
+Here, hypernymy is considered as one of multiple different semantic relations between two nodes in a graph.
+
+Extending from this line of research, we also consider the relation prediction task in a semantic graph, but only focus on one relation of interest, hypernymy.
+
+Like previous work in knowledge base completion (Bordes et al., 2013;Nickel and Kiela, 2017;Pinter and Eisenstein, 2018;Balažević et al., 2019), we take WordNet as our experimental space, so we learn hypernymy between synsets rather than raw lemmas.
+
+A synset is a basic lexical unit in WordNet, defined as a set of lemmas that are synonymous to each other.
+
+A synset thus also functions as one of the senses for each of the lemmas in the set.
+
+For example, the synset mark.n.01 (a number or letter indicating quality) consists of the three lemmas mark, grade, and score.
+
+Given a new synset, which we call the source node, our task is to predict its direct hypernym or target node from among the synsets in WordNet.
+
+For example, for the source node woolly daisy.n.01, the model should identify wildflower.n.01 as the target node in the graph.
+
+While some previous approaches have predicted indirect hypernyms using the transitive closure of WordNet (Vendrov et al., 2016;Li et al., 2019), we focus on predicting direct hypernyms.
+
+Datasets for indirect hypernymy often include hypernyms that are too generic and not informative enough, where some semantically distant concepts are trivially mapped to the root node (entity.n.01) or a high-level hypernym near the root.
+
+We also restrict ourselves to modeling hypernym relations specifically, unlike much work on WN18RR which learns hypernymy as one of 11 lexical relations (Bordes et al., 2013;Pinter and Eisenstein, 2018;Balažević et al., 2019).
+
+As we discuss in Section 5, we observe that hypernymy is more effectively learned when trained on its own.
+
+Models
+
+Path Generators: Hypo2Path And Hypo2Hyper
+
+In our first model, we treat hypernym prediction as a sequence generation task: given a hyponym, the goal is to generate the entire path in the WordNet taxonomy starting from the root node (entity.n.01 for nouns) and ending with the direct hypernym.
+
+For example, flock.n.02 should be mapped to its hypernym path by generating entity.n.01 abstraction.n.06 group.n.01 biological group.n.01 animal group.n.01.
+
+So the model is tasked to translate source synsets to target synset sequences.
+
+We denote this model as hypo2path.
+
+Our intuition behind this model is that training with a more difficult objective (i.e., entire hypernym path prediction rather than direct hypernym prediction) may result in a stronger model.
+
+We use a standard LSTM-based sequence-to-sequence model (Sutskever et al., 2014) with Luong-style attention (Luong et al., 2015).
+
+This encodes a synset embedding of a hyponym into a hidden state, which is taken as the initial state of the LSTM decoder.
+
+The decoder generates synsets sequentially, conditioned on previously generated synsets.
+
+While the attention mechanism assigns weights to the source tokens, here we only have a single source token (i.e., a query hyponym).
+
+In our task, the attention mechanism serves as a way to avoid "forgetting" the source hyponym while decoding long paths2 .
+
+Reversing the order of the source or target sequences can the improve performance of encoder-decoder models, since the encoded hidden state is closer to the first target token (Sutskever et al., 2014;Gillick et al., 2016).
+
+Motivated by this, we experiment with a model variant called hypo2path rev in which we reverse the target path to generate a sequence of hypernyms starting from the direct hypernym of the source.
+
+This frames every generation step as direct hypernym prediction, which the decoder may more easily learn.
+
+Examples of generated reversed paths are shown in Table 1.
+
+In order to determine whether generating an entire hypernym path as an auxiliary task helps to accurately predict a synset's direct hypernym, or whether generating only the direct hypernym is enough, we also perform experiments with hypo2hyper, a variant of hypo2path.
+
+Here the encoder-decoder model is trained to only generate a direct hypernym (i.e., both the source and target sequences are of length 1).3
+
+Path Encoder
+
+We also examine the reverse approach: training an LSTM encoder that learns vector representations of hypernym paths.
+
+Given a query hyponym, we construct an embedding of a hypernym path (from the root node down), and the model is tasked to distinguish the gold path (which ends at its direct hypernym) from distractor paths.
+
+We construct path embeddings using a bidirectional LSTM followed by a fullyconnected layer.
+
+The output corresponding to the last hidden state is the encoded path vector.
+
+We denote this model as Path Encoder.
+
+Given the training set S consisting of pairs (x, p) of a hyponym and a path,4 we train the model by minimizing the Euclidean distance of encoded path vectors V p and the embedding vectors of the hyponym V x .
+
+In addition, the model is trained to maximize the distance of V p and V x from the negative examples {(p, x )|( * , x ) ∈ S} which are generated by randomly pairing a hyponym with a random path.
+
+The model is optimized with the following ranking loss function:
+
+L = max{0, V p -V x 2 -V p -V x 2 + γ}
+
+where γ is a positive margin hyperparameter.
+
+During prediction, the model first encodes all hypernym paths {p|(p, * ) ∈ S}. Then for each query hyponym x the path that minimizes V p -V x 2 is returned as the predicted hypernym path.
+
+From this path, we take the predicted direct hypernym of x for evaluation, just as we do for hypo2path.5
+
+Benchmark Models
+
+Other Path Encoding Approaches
+
+Evaluation Metrics
+
+Synset Embeddings
+
+Averaged Lemma Vectors Following Pinter and Eisenstein (2018)9 , we computed an embedding for each synset by averaging the pretrained fastText embeddings (Bojanowski et al., 2017) 10 of its synonyms (lemmas).
+
+If a synset contained any multi-word lemma, the words within the lemma were averaged.
+
+We used these synset embeddings for all our reported experiments.11
+
+Model Details
+
+Results And Discussion
+
+Error Analysis
+
+Conclusion And Future Work
+
+punishment.n.01 social control.n.01 . . .
+
+entity.n.01 self-discipline.n.01 compulsive.n.01 *sick person.n.01 unfortunate.n.01 person.n.01 . . .
+
+entity.n.01 person.n.01
+
+sum, we use three different types of hypernym relation sets (noun, instance noun, verb) in our experiments.
+
+The number of examples in WN18RR-hp is shown in Table 2.
+
+Data statistics of hyponym-hypernym pairs in WN18RR-hp.
+
+Scores for nouns.
+
+Scores for instance nouns.
+
+Scores for verbs.
+
+Aggregated scores across all three groups.
+
+Four typical error patterns and examples observed from hypo2path rev evaluated on nouns (validation set).
+
+Altogether, they account for 50.8% of the total errors.
+
+Words within square brackets after a synset are the set of lemmas of the synset.
+
+The boldfaced are the shared lemmas/words.

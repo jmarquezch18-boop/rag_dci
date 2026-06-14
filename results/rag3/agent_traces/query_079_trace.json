@@ -1,0 +1,178 @@
+{
+  "query_id": "8397ceb9d91201c9f2eb30de3c87e1e8243a827d",
+  "query": "What is the conceptual model presented in Figure 2?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "Figure 2"
+      },
+      "result_preview": "Search results for 'Figure 2' (21 matches):\n[paper_id=nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea | section=results | line=7] To analyze the output summaries from an overall perspective, we plot the di",
+      "elapsed_s": 4.15
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9",
+        "section": "methodology",
+        "start": 1,
+        "end": 10
+      },
+      "result_preview": "[nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9 / methodology — líneas 1-15 de 35]\nThe architecture of our MTL model for an essay of M traits is shown in Figure 2.\n\nHere, the word embedding layer is share",
+      "elapsed_s": 19.86
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731",
+        "section": "introduction",
+        "start": 41,
+        "end": 53
+      },
+      "result_preview": "[nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731 / introduction — líneas 36-58 de 63]\n\nThis is harmful for downstream tasks such as fine-grained sentiment classification.\n\nFor example, given \"The quality o",
+      "elapsed_s": 9.88
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731",
+        "section": "introduction",
+        "start": 36,
+        "end": 58
+      },
+      "result_preview": "[nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731 / introduction — líneas 31-63 de 63]\nTo get the smoothed representation of all the tokens of the entire sentence with only one forward process in MLM, we do",
+      "elapsed_s": 9.88
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_7e701552b7cfaad6239d3d5dfcd9da1852a03a66907c789fe65d368f1c2845e723adcecd7f7008849eef13c7ca467be73de53747c3376a6bb46d1911ed1b6409",
+        "section": "methodology",
+        "start": 1,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_ARR-22_7e701552b7cfaad6239d3d5dfcd9da1852a03a66907c789fe65d368f1c2845e723adcecd7f7008849eef13c7ca467be73de53747c3376a6bb46d1911ed1b6409 / methodology — líneas 1-25 de 31]\nWe define open cloze generation as the task of predicting a set of tokens that should be gapped in the text.\n\nUnlike prev",
+      "elapsed_s": 9.25
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "The architecture of our MTL model for an essay of M traits is shown in Figure 2.\n\nHere, the word embedding layer is shared across all the tasks.\n\nIn the multi-task learning framework, each stack is used to learn an essay representation for each essay trait.\n\nIn a similar manner, the essay representation for the overall score is learnt and it is concatenated with the predicted trait scores before being sent to a Dense layer with a sigmoid activation function to score the essay holistically.\n\nFor calculating each score -both overall and trait scores -we use the mean squared error loss function.\n\nWe experimented with multiple weights for the loss function for the essay trait scoring task, but settled on uniform weights for all the traits and the overall scoring task.\n\nThis is done because we want to get accurate predictions of the traits scores which are used for predicting the overall score.\n\nWe evaluate our experiments using five-fold cross validation.",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9",
+      "chunk_id": "dci_nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9_methodology_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9",
+      "score": 1.0
+    },
+    {
+      "text": "This is harmful for downstream tasks such as fine-grained sentiment classification.\n\nFor example, given \"The quality of this shirt is average .\", the \"average\" token is most relevant to the label.\n\nThe smoothed representation through the MLM at the position of \"average\" is shown in Figure 2.\n\nAlthough the probability of \"average\" is the highest, more probabilities are concentrated on tokens conflict with the task label, such as \"high\", \"good\" or \"poor\".\n\nSuch a smoothed representation is hardly a good augmented input for the task.\n\nTo solve this problem, (Wu et al., 2019a) proposed to train label embedding to constraint MLM predict label compatible tokens.\n\nHowever, under the condition of low resources, it is not easy to have enough label data to provide supervision.\n\nInspired by the practical data augmentation method mixup (Zhang et al., 2017) in the computer vision field, we interpolate the smoothed representation with the original onehot representation.\n\nThrough interpolation, we can enlarge the probability of the original token, and the probabilities are still mostly distributed on the context-compatible words, as shown in the figure 2.\n\nWe combine the two stages as text smoothing: obtaining a smooth representation through MLM and interpolating to constrain the representation more controllable.\n\nTo evaluate the effect of text smoothing, we perform experiments with low-resource settings on three classification benchmarks.",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731",
+      "chunk_id": "dci_nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731_introduction_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731",
+      "score": 1.0
+    },
+    {
+      "text": "To get the smoothed representation of all the tokens of the entire sentence with only one forward process in MLM, we do not explicitly mask the input.\n\nInstead, we turn on the dropout of MLM and dynamically randomly discard a portion of the weight and hidden state at each layer.\n\nAn unneglectable situation is that some tokens appear more frequently than others in similar contexts during pre-training, which will cause the model to have a preference for these tokens.\n\nThis is harmful for downstream tasks such as fine-grained sentiment classification.\n\nFor example, given \"The quality of this shirt is average .\", the \"average\" token is most relevant to the label.\n\nThe smoothed representation through the MLM at the position of \"average\" is shown in Figure 2.\n\nAlthough the probability of \"average\" is the highest, more probabilities are concentrated on tokens conflict with the task label, such as \"high\", \"good\" or \"poor\".\n\nSuch a smoothed representation is hardly a good augmented input for the task.\n\nTo solve this problem, (Wu et al., 2019a) proposed to train label embedding to constraint MLM predict label compatible tokens.\n\nHowever, under the condition of low resources, it is not easy to have enough label data to provide supervision.\n\nInspired by the practical data augmentation method mixup (Zhang et al., 2017) in the computer vision field, we interpolate the smoothed representation with the original onehot representation.\n\nThrough interpolation, we can enlarge the probability of the original token, and the probabilities are still mostly distributed on the context-compatible words, as shown in the figure 2.\n\nWe combine the two stages as text smoothing: obtaining a smooth representation through MLM and interpolating to constrain the representation more controllable.\n\nTo evaluate the effect of text smoothing, we perform experiments with low-resource settings on three classification benchmarks.\n\nIn all experiments, text smoothing achieves better performance than other data augmentation methods.\n\nFurther, we are pleased to find that text smoothing can be combined with other data augmentation methods to improve the tasks further.\n\nTo the best of our knowledge, this is the first method to improve a variety of mainstream data augmentation methods.",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731",
+      "chunk_id": "dci_nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731_introduction_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731",
+      "score": 1.0
+    },
+    {
+      "text": "We define open cloze generation as the task of predicting a set of tokens that should be gapped in the text.\n\nUnlike previous approaches that work at the sentence level, our models work at the paragraph level (i.e. take the full text as input), since we believe the interactions between gaps can only be optimally captured when the text is processed as a whole rather than sentence by sentence.\n\nGiven a text passage, we aim to predict the words that should be gapped in order to create a cloze test that would reliably assess student ability.\n\nThe task is modelled as a supervised sequence tagging problem where each token is classified as being a good potential gap or not.\n\nWe employ ELECTRA (Clark et al., 2020), one of the state-of-the-art pre-trained transformer-based language representation models (Wolf et al., 2020).\n\nELECTRA is an extension of BERT (Devlin et al., 2019) with a different pretraining task which is a discriminator (rather than a generator) and aims to detect replaced tokens (rather than generating words for the masks).\n\nWe believe that this discrimination objective makes it more suitable for our token classification task.\n\nMoreover, we also exploit ELECTRA's generation capabilities as a language model for estimating the answers to the proposed gaps as an auxiliary task.\n\nHence, to make the most of this pre-trained model, we fine-tune it using two training objectives, as depicted in Figure 2: 1 A token classification objective which aims to minimise the error of classifying each token as a potential gap or not. 2 A language modelling objective that aims to minimise the negative log-likelihood of regenerating the words that have been gapped.\n\nThe first objective is typical of any standard token classification model and constitutes our key task.\n\nIn particular, we use ELECTRA's discriminator head with softmax to tag each word in the input sequence as a 'good' gap or not.\n\nAll the gaps in our training data are replaced with the first intended target answer and labelled positive, while the remaining tokens are labelled negative ( A ).\n\nThe second and auxiliary objective attempts to model our preference for gaps with a restricted number of answers while also ensuring that the original word can be guessed from the context.",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_7e701552b7cfaad6239d3d5dfcd9da1852a03a66907c789fe65d368f1c2845e723adcecd7f7008849eef13c7ca467be73de53747c3376a6bb46d1911ed1b6409",
+      "chunk_id": "dci_nlpeer_ARR-22_7e701552b7cfaad6239d3d5dfcd9da1852a03a66907c789fe65d368f1c2845e723adcecd7f7008849eef13c7ca467be73de53747c3376a6bb46d1911ed1b6409_methodology_0003",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_7e701552b7cfaad6239d3d5dfcd9da1852a03a66907c789fe65d368f1c2845e723adcecd7f7008849eef13c7ca467be73de53747c3376a6bb46d1911ed1b6409",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/F1000-22/10-890_165",
+    "nlpeer/F1000-22/10-890_169",
+    "nlpeer/F1000-22/10-890_170",
+    "nlpeer/F1000-22/10-890_171",
+    "nlpeer/F1000-22/10-890_172",
+    "nlpeer/F1000-22/10-890_173",
+    "nlpeer/F1000-22/10-890_174",
+    "nlpeer/F1000-22/10-890_175"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.3333333333333333,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.125,
+    "recall_at_5": 0.25,
+    "recall_at_10": 0.25,
+    "recall_at_20": 0.25,
+    "precision_at_5": 0.5,
+    "ndcg_at_5": 0.5706417189553201,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9_methodology_0000",
+      "dci_nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731_introduction_0001",
+      "dci_nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731_introduction_0002",
+      "dci_nlpeer_ARR-22_7e701552b7cfaad6239d3d5dfcd9da1852a03a66907c789fe65d368f1c2845e723adcecd7f7008849eef13c7ca467be73de53747c3376a6bb46d1911ed1b6409_methodology_0003"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9_methodology_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731_introduction_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731_introduction_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_7e701552b7cfaad6239d3d5dfcd9da1852a03a66907c789fe65d368f1c2845e723adcecd7f7008849eef13c7ca467be73de53747c3376a6bb46d1911ed1b6409_methodology_0003",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.03333333333333333,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

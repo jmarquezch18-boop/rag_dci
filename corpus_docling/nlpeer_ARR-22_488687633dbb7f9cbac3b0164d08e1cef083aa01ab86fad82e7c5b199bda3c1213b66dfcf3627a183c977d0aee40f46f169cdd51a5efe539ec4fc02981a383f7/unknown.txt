@@ -1,0 +1,365 @@
+Low-Resource Entity Set Expansion: A Comprehensive Study On User-Generated Text
+
+Abstract
+
+Introduction
+
+Background And Related Work
+
+Problem Definition
+
+Given a textual corpus and a user-defined seed set of entities (e.g., 'coffee', 'table ') of concepts (e.g., room features), the task of ESE is to output a ranked list of entities (e.g., 'clock', 'tv') that belong to the same concept.
+
+Following previous work, we focus on the low-resource setting where the seed set is small (3-10 entities per concept).
+
+Entity Set Expansion Paradigms
+
+To expand the seed set, ESE methods rank candidate entities extracted from a textual corpus (Shang et al., 2018).
+
+We limit our scope to low-resource setting and exclude methods (Mao et al., 2020;Takeoka et al., 2021) that require large training examples sub-concepts hierarchy or external knowledge from ontologies and knowledge bases.
+
+We organize ESE methods into the following categories.
+
+Corpus-based Methods.
+
+These methods (Huang et al., 2020b;Shen et al., 2017Shen et al., , 2018;;Yu et al., 2019a) obtain contextual features and distributed representations of entity candidates from the corpus and use them to estimate similarity of candidates to entities in the seed set.
+
+This is either done in a single step (Mamou et al., 2018;Yu et  2019a) or iteratively (Shen et al., 2018;Huang et al., 2020b;Yan et al., 2021).
+
+Language Model-based Methods.
+
+Studies have shown that pre-trained language models (LMs) can be used as knowledge bases when queried with prompts (Petroni et al., 2019;Liu et al., 2021).
+
+Following this, ESE methods (Zhang et al., 2020a;Takeoka et al., 2021) probe an LM to rank entity candidates.
+
+These methods rely on knowledge stored in LMs instead of using them to obtain contextualized representations of entities in the corpus.
+
+Ensemble Methods. CaSE (Yu et al., 2019b) combines context feature selection with pre-trained word embeddings to compute similarities between entities.
+
+A similar mechanism, mean reciprocal ranking (MRR) ensemble, has been shown to be effective in combining rankings from different features, views or subsets of seeds (Shen et al., 2017;Zhang et al., 2020b;Huang et al., 2020b).
+
+Benchmark And Evaluation Metrics
+
+Case Study
+
+Existing work suggest that user-generated text differs from well-curated text in writing style (Bražinskas et al., 2020;Huang et al., 2020d) and cleanliness (Van der Wees et al., 2015;Dey et al., 2016).
+
+In this section, we discuss one of the use cases of ESE for a downstream NLP application and highlight new characteristics in user-generated text that are particularly relevant to the ESE task.
+
+Motivating Example
+
+Let us consider a scenario where Tajin, a data scientist at an online travel company (similar to TripAdvisor), has to develop a semantic search feature that helps users explore relevant reviews corresponding to their queries.
+
+For example, when a user searches for 'amenities' at a hotel, the feature should display reviews with mentions of different amenities highlighted.
+
+Since the reviews are unlabeled, Tajin first consults an expert to compile a list of frequently queried concepts and corresponding example entities that may appear in the reviews (similar to Figuure 1).
+
+To discover more entities for each concept, she formulates it as an ESE task, where the goal is to achieve a high coverage of entities in the reviews.
+
+Given a review corpus and seed, Tajin employs a state-of-the-art ESE method that has been evaluated on well-curated text.
+
+She finds that it does not perform well in achieving a high coverage of entities in the hotel domain and wonders why.
+
+To explain her findings, we explore the characteristics of the TripAdvisor (Miao et al., 2020) and Wiki datasets next and discuss the potential factors that may impact the performance of the SOTA method.
+
+1345
+
+Observations
+
+Multifaceted entities.
+
+Unlike in Wiki benchmark where concepts are well-defined, concepts in Tripadvisor are domain-specific and can have overlapping semantics (see Figure 1).
+
+As a result, an entity can belong to multiple concepts.
+
+For example, in Table 1, the entity 'fisherman's wharf' can be both location of and nearby attraction to a hotel.
+
+We refer to such entities as multifaceted entities (Rong et al., 2016).
+
+The overlapping semantics of entities can pose challenges to ESE methods that expand multiple concepts simultaneously.
+
+Vague entities.
+
+Concept definitions in Wiki benchmark are strict (e.g., countries, states) and ground truth about concept-entity pairs can be obtained by referring to external resources or commonsense.
+
+However, some concepts in Tripadvisor are openended and subjective, leading to vagueness in interpretation.
+
+For example, in Table 1, the terms "nearby" and "attraction" in the concept nearby attractions are subjective.
+
+An entity 'civic center' may be neither an attraction nor a nearby one depending on the context in the review.
+
+As a result, human annotators independently labeling the entity may disagree on the ground truth label.
+
+We refer to entities with subjective disagreements between annotators as vague entities.
+
+Intuitively, ESE methods may find it difficult to learn to disambiguate the context of vague entities.
+
+Non-named entities.
+
+Non-named entities (e.g., 'coffee' and 'tv unit') are typically noun phrases that are not proper names (Paris and Suchanek, 2021).
+
+Recent studies (Mbouopda and Melatagia Yonta, 2020; Bamman et al., 2019) have identified that non-named entities are prevalent even in well-curated domains and yet are ignored in existing benchmarks.
+
+Non-named entities are even more prevalent in user-generated text.
+
+As shown in Table 1, Tripadvisor benchmark contains almost 2× non-named entities than Wiki.
+
+Since nonnamed entities are not canonicalized and can have broader semantics, they can make the ESE task more challenging.
+
+Evaluation Metric.
+
+Existing evaluation metrics only consider top 10-50 entities for each target concept (Shen et al., 2017;Zhang et al., 2020a).
+
+There are multiple limitations of these metrics.
+
+First, there may not be sufficient representation of multi-faceted, vague, and non-named entities in a small set (<50 entities).
+
+Second, the actual number of correct entities per concept (referred to as concept size) may be much larger or smaller than 50.
+
+For example, both Tripadvisor and Wiki have larger and varying concept sizes with the median size being 121 and 205, respectively (check Table 2 for more detailed statistics).
+
+As a result, focusing only on precision of a small, fixed set of predictions may not reflect the recall of correct entities with respect to concept size.
+
+Discussion
+
+Experimental Set-Up
+
+Methods
+
+Datasets
+
+We use widely adopted well-curated benchmarks: Wiki and APR (Zhang et al., 2020b;Shen et al., 2017).
+
+In addition, we create 3 new benchmarks based on user-generated text from Yelp (Huang et al., 2020c), Tripadvisor (Miao et al., 2020) and a proprietary Jobs dataset.
+
+All the datasets are in English.
+
+We first select concepts for the seed by referring to the features on the corresponding web-sites, to ensure their relevance for immediate downstream tasks.
+
+For example, we select concepts from various facets such as room type, amenities, and distance from attractions that help visitors search hotels on the Tripadvisor website4 .
+
+Table 2 shows selected concepts in the benchmarks.
+
+Data Collection and Annotation.
+
+In order to collect ground-truth to construct benchmarks for new domains, we collect top 200 predictions for each concept from each of the ESE methods described in Section 4.1.
+
+The first three authors of the paper labeled the predictions, 1 if a concept-entity pair is correct and 0 otherwise.
+
+We consider the majority vote as the final label for a concept-entity pair.
+
+For entities with rank > 200, we label the corresponding concept-entity pairs to be all negatives based on our preliminary observations that most of them are incorrect.
+
+We release the new benchmarks except for the Jobs dataset.
+
+Metrics
+
+In order to profile the benchmarks, we compute multifacetedness (m) as the fraction of entities in a benchmark that have been assigned to more than one concept.
+
+We compute non-named rate (r) as the fraction of non-named entities in the benchmark.
+
+We use Spacy5 to identify named entities in the benchmarks.
+
+To avoid bias in estimating vagueness, we hire two additional in-house annotators who are unfamiliar with the concept definitions and entities.
+
+They label the ground truth concept-entity pairs -1 if correct and 0 otherwise6 .
+
+We compute vagueness (κ) in a benchmark using Fleiss' Kappa (Falotico and Quatto, 2015) which measures agreement among the annotators.
+
+Since the benchmarks we constructed are intended to be comprehensive, we propose to estimate mean average precision (MAP) at gold-k (k g ) which equals the concept size, i.e., number of entities in the concept.
+
+In comparison to smaller and fixed k, evaluation at k g has several advantages: (a) it can adapt to different concept sizes and (b) it gives an estimate of recall7 which is crucial to estimate effectiveness in real-world settings with commonly large concept sizes.
+
+Intuitively, using
+
+Findings
+
+We next share our findings from analyzing the ESE methods.
+
+Note that all the results are obtained from single run of each experiment.
+
+Appropriateness Of Existing Benchmark And Metrics
+
+Q1. Do we need new benchmarks based on usergenerated text?
+
+Table 2 compares the characteristics of the various benchmarks using measures described in Section 4.3.
+
+As can be seen, user-generated text benchmarks exhibit a higher degree of multifacetedness (m) and non-named rate (r) compared to wellcurated Wiki and APR benchmarks.
+
+Moreover, poor agreement between annotators (κ < 0) indicates the presence of vagueness or subjectivity in user-generated text which does not exist in wellcurated benchmarks.
+
+While all benchmarks exhibit diversity in concept sizes, the diversity is higher in user-generated text than well-curated benchmarks.
+
+Takeaway 1 User-generated text benchmarks exhibit more multifaceted entities, non-named entities, and vagueness than well-curated benchmarks.
+
+Table 3 shows the % drop in MAP of different ESE methods when k is increased from 20 to k g .
+
+The performance drop is consistent across both well-curated and user-generated text benchmarks with the largest being 62% for CGExpan on the Jobs benchmark.
+
+This indicates that existing metrics overestimate the real-world performance of all ESE methods.
+
+However, simpler baselines, Emb-Base and LM-Base, tend to show lower performance drop than more sophisticated counterparts on user-generated text.
+
+This indicates that existing well-curated benchmarks do not reliably capture progress in this field.
+
+We further observed that, across all the benchmarks, the performance drops are higher for concepts with large entity sets.
+
+We show two such cases in Figure 2 -one with user-generated text (Figure 2a) and another with well-curated text (Figure 2b) -which illustrate precision curves at different values of k for concepts with large k g in various benchmarks.
+
+As shown, two ESE methods that may show similar performance at k=20 (widely adopted metric) have much larger performance margins at k g .
+
+Thus, evaluation results on only top 20 predictions may be an incomplete depiction of method robustness, especially for concepts with large entity sets.
+
+Takeaway 2 Existing evaluation metrics tend to overestimate the real-world performance of ESE methods and may be unreliable for evaluating concepts with large entity sets.
+
+Performance On New Benchmarks
+
+Q3.
+
+How effective SOTA methods are for entity set expansion on user-generated text benchmarks?  Given new benchmarks and evaluation metrics, we now compare the performances of various ESE methods.
+
+Figure 3 shows that SOTA method CG-Expan outperforms other methods on existing wellcurated benchmarks which aligns with the reported success of the method.
+
+Surprisingly, simpler baseline methods (Emb-Base and LM-Base) that were not optimal on well-curated benchmarks, significantly outperform their SOTA counterparts (SetExpan and CGExpan, respectively) on user-generated text benchmarks, with LM-Base obtaining the best performance.
+
+We also observe that ensemble-based methods tend to perform better than or at least similar to the ESE methods they combine.
+
+Takeaway 3 Performance of SOTA methods do not generalize to user-generated text benchmarks.
+
+Ensemble-based methods may improve over the corresponding standalone methods.
+
+We now examine why SOTA approaches may underperform on user-generated text.
+
+Given the success of LM-based contextual representations, it is expected that Emb-Base may outperform lexical feature-based SetExpan.
+
+Furthermore, as Se-tExpan eliminates noisy features of a candidate entity before ranking candidates, it may disregard some context features of multifaceted and vague entities that are mentioned in diverse contexts in user-generated text, leading to sub-optimal ranking of entities.
+
+Similarly, CGExpan, which scores each candidate entity by selecting one positive concept and multiple negative concepts, may penalize entities belonging to multiple concepts (multifaceted entities) or mentioned in different contexts (vague entities).
+
+Therefore, many of the carefully designed approaches useful on well-curated domains may not generalize to user-generated text.
+
+Takeaway 4 SOTA methods implement techniques that avoid selecting ambiguous context of an entity.
+
+Such a design choice potentially penalizes multifaceted and vague entities when ranking entity candidates for concepts.
+
+We now discuss how different characteristics of user-generated text impact the behavior of ESE methods.
+
+To understand this, we compare the recall of entities that exhibit one of the target characteristics (multifaceted/non-named/vague) with recall of entities that do not exhibit any of the characteristics.
+
+This enables us to analyze the influence of a target characteristic independent of other characteristics.
+
+To compute recall, we consider an entity as retrieved if it is ranked in the top-k g predictions.
+
+Figure 4 compares the recall of entities across different characteristics.
+
+For ease of visualization, we combine entities across the 3 benchmarks.
+
+As shown, almost all methods show lower recall of entities that exhibit challenging characteristics than entities without these characteristics, and SOTA methods suffer larger drops than simple methods.
+
+This supports our hypothesis that characteristics of user-generated text negatively affect performances, 7 especially for SOTA methods which tend to penalize entities with diverse contexts.
+
+Future work may investigate how to overcome these challenges.
+
+To provide a qualitative comparison between the behaviors of SOTA methods (e.g., CGExpan) and our proposed baselines (e.g., LM-Base), we show their predictions on two representative concepts in Figure 5.
+
+CGExpan and LM-Base have comparable performance on well-formed concepts (e.g., company) in Jobs.
+
+However, LM-Base outperforms CGExpan for concepts (e.g., seating arrangement) with entities having characteristics of user-generated text.
+
+CGExpan retrieves entities that co-occur frequently with seating arrangement.
+
+Takeaway 5 Due to the presence of challenging characteristics in user-generated text, performance of all ESE methods are negatively impacted with SOTA methods exhibiting larger drops.
+
+Improvement Opportunities
+
+We analyze ensemble methods further since they tend to outperform other ESE methods (Figure 3).
+
+It is trivial that ensemble methods perform well when both combined methods are strong.
+
+We are more interested in other factors that may impact performance.
+
+Specifically, we investigate what influences the effectiveness of a MRR method that combines two ESE methods.
+
+An MRR combination is more effective when it outperforms both candidate methods by a larger margin.
+
+We define effectiveness of combining methods as:
+
+Ef f (m 1 , m 2 ) = S(m 1 + m 2 ) max(S(m 1 ), S(m 2 )) -1 (1)
+
+where S(m) means the performance (MAP@k g in our study) of method m, and m 1 + m 2 means the MRR combination of method m 1 , m 2 .
+
+As discussed in Section 5.2, multifaceted and vague entities may appear in diverse contexts which SOTA approaches fail to capture, leading to lower recall.
+
+Intuitively, it is advantageous to combine methods that capture differing contexts and in the process predict collections of correct entities with minimal overlap.
+
+In other words, in order for a MRR method to achieve higher recall, the ESE methods must be compatible.
+
+We measure compatibility of two ESE methods as:
+
+Comp(m 1 , m 2 ) = P (m 1 ) ∪ P (m 2 ) max( P (m 1 ) , P (m 2 ) )
+
+-1
+
+(2) where P (m) is the set of correct entity predictions of method m, i.e. positive benchmark entities ranked among top-k g by m.
+
+denotes the size of a set.
+
+When one of the correct prediction set of m 1 , m 2 is a subset of the other, their compatibility is 0.
+
+When the two methods find two disjoint sets of correct entities, their compatibility is 1.
+
+We illustrate the correlation between compatibility of method pairs and effectiveness of their MRR combination in Figure 6  SOTA, MRR-Base, MRR-Corpus, and MRR-LMprobe) on all three user-generated text datasets.
+
+We observe that LM-based methods are least compatible due to their similarity in design.
+
+The resulting ensemble, MRR-LM-probe, has poor effectiveness (highighted by the dashed ellipse in Figure 6).
+
+Other method pairs have less homogeneity in their design and the resulting ensembles often show higher effectiveness.
+
+The corresponding compatibility and effectiveness values have a strong positive correlation (Pearson correlation, R = 0.69).
+
+Therefore, compatibility can be a useful metric for deciding whether combining two methods method may improve performance or not.
+
+Takeaway 6 Two effective ESE methods on usergenerated text with high compatibility (diversity in correct predictions) may achieve higher performance when combined using rank-based ensemble.
+
+Discussion
+
+Conclusion
+
+Figure1: Example concepts and entities from Wiki vs. Tripadvisor.
+
+We highlight example multifaceted entities in blue, non-named entities in green and vague entities in magenta.
+
+Figure 2: Precision@k of LM-Base and CGExpan for example concepts.
+
+Dashed line indicates k=20 and dotted line indicates k g .
+
+Performance margins at k=20 and k g vary significantly.
+
+(a) user-generated text.(b) well-curated datasets.
+
+Figure 3: Overall MAP@k g performance of each method on (a) user-generated text and (b) wellcurated benchmarks.
+
+SOTA methods (CGExpan, SetExpan) are outperformed by simple baselines and ensemble methods on user-generated text.
+
+Figure 4: Recall@k g of an ESE method typically drops with the presence of (a) vague, (b) multifaceted, and (c) non-named entities in user-generated text (show by red bars) compared to the case when none of these entities are present (shown by green bars).
+
+Figure 6: Scatter plot showing the positive correlation between compatibility of methods and effectiveness of their MRR combination on three user-generated text benchmarks.
+
+The least compatible and effective combination results (in dashed circle) are from MRR-LM-Probe.
+
+al., Exploring different characteristics of well-curated and user-generated text domains.
+
+Statistics of datasets: no. of documents, example concepts in the seed, avg.
+
+no. of entities in the seed, no. of entity candidates and concept size {min, median, max} across different concepts.
+
+Statistics of benchmarks: multifacetedness (m), non-named rate (r) and vagueness (κ).
+
+†: for well-curated datasets, there is no subjective disagreement since the concept-entity pairs are factually verifiable.k g would include more instances of multifaceted, vague and non-named entities that would otherwise be ignored in small k. Notice that in certain realworld scenarios, e.g., developing ESE methods for a new domain, estimating k g may be difficult, thus previous metrics with smaller and fixed k can be useful.
+
+However, for other scenarios, especially for evaluation on benchmarks where the goal is to stress test methods, evaluation at k g is more appropriate.
+
+Drop in performance of different ESE methods from MAP@20 to MAP@k g .
+
+Largest drops in each dataset are highlighted in bold.

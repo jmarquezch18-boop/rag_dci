@@ -1,0 +1,13 @@
+ML based NLP techniques have been recently applied to anthology to discover historical documents such as authorship attribution (Ouamour and Sayoud, 2012;Sayoud and Ouamour, 2017;Reisi and Mahboob Farimani, 2020;Hossain et al., 2020), NER (Won et al., 2018;Palladino et al., 2020), and manuscript age detection (Adam et al., 2018).
+
+Assael et al. (2022) proposed Ithaca to restore ancient Greek inscriptions and perform geographical attribution and chronological attribution of them.
+
+Along with these works, several works provide language models suited for historical texts in ancient languages and evaluate those models on existing NLU tasks, which aims to support understanding those documents considering that the target languages are mostly extinct.
+
+Bamman and Burns (2020) propose Latin BERT for part-of-speech tagging in ancient Latin script.
+
+Tian et al. (2021) suggest AnchiBERT and evaluate their model on some NLP tasks including poem topic classification.
+
+However, there has been no research attempting to propose language models in Hanja, which is a dead language in Korea but absolutely necessary to explore Korean history.
+
+Most of the studies with Hanja only shed lights on translating historical Hanja documents and use AJD as their corpus (Park et al., 2020;Jin et al., 2020;Kang et al., 2021).

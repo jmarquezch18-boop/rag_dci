@@ -1,0 +1,53 @@
+Research on task-oriented dialogue (ToD) systems (Levin and Pieraccini, 1995;Young et al., 2002) has become a key aspect in industry: e.g., ToD is used to automate telephone customer service tasks ranging from hospitality over healthcare to banking (Raux et al., 2003;Young, 2010;El Asri et al., 2017).
+
+Typical ToD systems still rely on a modular design: (i) the natural language understanding Yes, I need this card to arrive before 3pm on Jan 14 (NLU) module maps user utterances into a domainspecific set of intent labels and values (Rastogi et al., 2019;Heck et al., 2020;Dai et al., 2021), followed by (ii) the policy module, which makes decisions based on the information extracted by the NLU (Gašić et al., 2012;Casanueva et al., 2017;Lubis et al., 2020;Wang et al., 2020a) The NLU module is a critical part of any ToD system, as it must extract the relevant information from the user's utterances.
+
+The information relevance is denoted by the structured dialogue domain ontology, which enables the policy module to make decisions about next system actions.
+
+The domain ontology covers the information on 1) intents and 2) slots, see Figure 1.
+
+The former is aimed at extracting general conversational ideas (i.e., the user's intents) and corresponds to the standard NLU task of intent detection (ID); the latter extracts specific slot values and corresponds to the NLU task of slot labeling (SL) (Gupta et al., 2019).
+
+1In order to make the policy operational and tractable, NLU should extract only the minimal information required by the policy.
+
+Therefore, the ontologies differ for each domain of ToD application and are typically built from scratch for each domain.
+
+Consequently, this makes domain-relevant NLU data extremely expensive to collect and annotate, and prevents its reusability (Budzianowski et al., 2018).
+
+Due to this, NLU research in recent years has heavily focused on very data-efficient models that can effectively operate in low-data regimes.
+
+Current state-of-the-art (SotA) NLU models leverage large pretrained language models (PLMs) (Devlin et al., 2019;Liu et al., 2019c;Henderson et al., 2020) and fine-tune them with small task-specific datasets (Larson et al., 2019b;Casanueva et al., 2020;Coucke et al., 2018) At the same time, the progress in creation of NLU datasets has not kept up with the impressive pace of NLU methodology development.
+
+However, designing domain ontologies and NLU datasets is also critical for steering further progress in NLU, both from methodology and application perspective.
+
+Put simply, current publicly available NLU datasets do not keep up to date with current industry/application requirements for many reasons.
+
+1) They are usually crowdsourced by untrained annotators (thus typically optimised for quantity rather than quality), yielding examples with low lexical diversity and prone to annotation errors.
+
+2) They typically assume one intent per example, and thus enable only much simpler single-label ID experiments; such setups are not realistic in more complex industry settings (see Figure 1 again) and lead to unnecessarily large intent sets.
+
+3) Their ontologies are tied to specific domains, making it difficult to reuse already available annotated data in other domains.
+
+4) The complexity of the defined tasks and ontologies is limited; the undesired artefact is that current NLU datasets might overestimate the NLU models' abilities, and are not able to separate models any more performance-wise.
+
+2 2 For instance, for some standard and commonly used NLU datasets such as ATIS (Hemphill et al., 1990;Xu et al., 2020) and SNIPS (Coucke et al., 2018), the results of SotA models are all in the region of 97-98 F1, with new models getting statistically insignificant gains which might be due to overfitting to the test set or even some remaining annotation errors.
+
+In order to address all these gaps, we introduce NLU++, a novel NLU dataset which provides highquality NLU data annotated by dialogue experts.
+
+NLU++ provides multi-intent, slot-rich and semantically varied NLU data, and is inspired by a number of NLU challenges which ToD systems typically face in production environments.
+
+Unlike previous ID datasets, examples are annotated with multiple labels, named intent modules3 (see Table 1), with some examples naturally obtaining even up to 6-7 labels.
+
+These labels can be seen as sub-intent annotations, where their combinations yield full intents equivalent to "traditional" intents (Table 1).
+
+In addition, NLU++ defines a rich set of slots which are combined with the multi-intent sentences.
+
+NLU++ is divided into two domains (BANKING and HOTELS) where the two domain ontologies blend a set of domain-specific intents and slots with a set of generic (i.e., domain-universal) intents and slots.
+
+This design makes a crucial step towards generalisation and data reusability in NLU.
+
+Finally, we run a series of experiments on NLU++ with current SotA ID and SL models, demonstrating the challenging nature of NLU++ and ample room for future improvement, especially in low-data setups.
+
+Our benchmark comparisons also demonstrate strong performance and shed new light on the (ability of) recently emerging QA-based NLU models (Namazifar et al., 2021;Fuisz et al., 2022), and warrant further research on ToD NLU.
+
+The NLU++ dataset is available at: github.com/PolyAI-LDN/ task-specific-datasets.

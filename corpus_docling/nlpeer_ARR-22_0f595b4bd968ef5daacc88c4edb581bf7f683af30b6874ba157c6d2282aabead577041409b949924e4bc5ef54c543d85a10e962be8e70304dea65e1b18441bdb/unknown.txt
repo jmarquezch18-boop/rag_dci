@@ -1,0 +1,253 @@
+Achieving Reliable Human Assessment Of Open-Domain Dialogue Systems
+
+Abstract
+
+Introduction
+
+Problems In Past Evaluations
+
+Crowd-Sourcing Reliable Human
+
+Assessment of Open-Domain Dialogue
+
+Crowd-sourcing with highly accurate quality control provides a potential mechanism to ensure the three most important criteria that makes an eval-uation meaningful while still remaining feasible: validity, reliability and scalability.
+
+Subsequently, we ask crowd-workers to carry out live text-based chat with models prior to that same worker also rating the quality of the immediately preceding conversation.
+
+Human Ratings Of Dialogue Quality
+
+A continuous (0-100) rating scale is employed with three main motivation points (Graham et al., 2013;Novikova et al., 2018;Li et al., 2019;Santhanam and Shaikh, 2019;Santhanam et al., 2020;Mille et al., 2020;Barrault et al., 2020;Howcroft et al., 2020).
+
+Firstly, continuous scales reduce potential bias when comparing the performance of competing models by enabling score standardization.
+
+The score distribution of each human assessor is standardized according to overall mean and standard deviation of all ratings provided by that assessor, thus removing any adverse effects of those employing overly harsh (or indeed lenient) scoring strategies.
+
+Secondly, the 0-100 rating scale allows standard significance tests to score distributions of models to help determine which models significantly outperform others.
+
+Thirdly, and possibly most importantly, a continuous rating scale facilitates highly accurate quality control of crowd-sourced workers so that the evaluation can scale while still maintaining validity at a low cost.
+
+Each human assessor is firstly asked to carry out a live conversation with a randomly selected model, comprised of a minimum of 10 conversational inputs, before rating the quality of the conversation that just took place under a number of criteria shown in Figure 1.
+
+Note that the measurement criteria we employed are not immutable and we encourage to extend or adjust the criteria for future studies as necessary.
+
+A continuous rating scale is advantageous for several reasons but employment of such a scale raises the question of how it should be labeled.
+
+In evaluation of language tasks, adjectival scale labels, such as poor, low, medium, high, perfect/ okay, good, excellent, and so on, are often employed despite their likely contribution to annotator inconsistency (Loukina et al., 2020;Sorodoc et al., 2017).
+
+This is despite evidence of adjectival scale labels being problematic in terms of bias resulting from positively and negatively worded items not being true opposites of one another, and items intended to have neutral intensity in fact proving to have Robotic: It was obvious that I was talking to a chatbot as opposed to another human user.
+
+Interesting: The conversation with the chatbot was interesting.
+
+Fun: The conversation with the chatbot was fun/enjoyable.
+
+Consistent: The chatbot was consistent throughout the conversation.
+
+Fluent: The chatbot's English was fluent and natural throughout the conversation.
+
+Repetitive: I felt that the chatbot kept being repetitive during the conversation.
+
+Topic: The chatbot stays on topic.
+
+specific conceptual meanings.
+
+Alexandrov (2010) provides a summary of issues associated with adjectival labels.
+
+To avoid any such causes of inconsistency, we structure each rating as a simple Likert declarative statement and ask human assessors to rate the degree to which they agree with each of these statement, making it possible to keep the rating scale constant while only changing the statement for each measurement criteria.
+
+We ask judges to rate each conversation under the seven aforementioned measurement criteria (Figure 1) along with a continuous rating scale labeled only at each extreme with strongly disagree (left); strongly agree (right).
+
+Quality Controlling The Crowd For
+
+Open-Domain Dialogue
+
+We structure Human Intelligence Tasks (HITs) so that a sufficiently rich score distribution is collected from each individual worker who participated, asking each to hold six conversations, comprised of a shuffled arrangement of five dialogue models and a single quality control model.
+
+Many approaches to quality controlling the crowd employ gold-standard items as quality checks (Liu et al., 2013;Lasecki et al., 2014).
+
+This approach is however highly likely to allow low quality data to pollute the resulting evaluation, since any worker willing to assign high scores to all items will undeservedly pass this check.
+
+3 The approach also runs in contrast to our aim of the same individual who took part in a live conversation to also assess its quality, as it relies on the use of pre-created gold standard conversations.
+
+Our quality control approach overcomes these challenges by deploying models in live conversations that have known distinct performance levels instead of asking workers to assess the quality of pre-existing known high quality conversations.
+
+Within a HIT, the five models m can produce some quality level of conversation and the model l produces known lower quality dialogues (lower than the five models).
+
+For a single worker who takes part in conversations with m and l, we then check how consistently the worker rated the conversations of l lower than m. This results in a quality control mechanism that does not ask workers to be consistent with other workers or to correctly rate gold standard dialogues but only assesses worker consistency by how consistently they distinguish between known distinct performance models and only with respect to their own conversation ratings.
+
+From a practical standpoint, creating a low performance model, l, is additionally far less challenging and costly than pre-creating a known set of high quality dialogues, and degraded models operate fully automatically.
+
+Low quality models produce outputs via generation of random responses with meaning distortion also applied.
+
+For random response degradation: Low quality responses are generated by random sampling responses from training set dialogues with the intention of disregarding any previous input from the user, so responses from the model are likely to be perceived as low quality since they have low relevance.
+
+To reduce the quality of conversations further, we apply meaning distortion: each response, r, is altered to distort its meaning by randomly selecting a sequence of words within that response and replacing it with a sequence of words sampled from a distinct training set dialogue, with the length of the replaced word sequence being determined by the number of words in r. The specific details are provided in Appendix A.1, and Figure 4 in Appendix A.4 gives a typical example.
+
+Hits subsequently consist of a total of six dialogues comprised of five genuine models and a single quality control model that generates meaning distorted and random responses.
+
+Crowd-sourced workers converse with each model before rating conversation quality (model order is shuffled and blind).
+
+Statistical significance tests are then applied to score distributions of workers for the ratings they attributed to ordinary models, m, relative to the low quality model, l. The resulting p-value is then em-ployed as a means of rating worker consistency, and any worker with p >= 0.05 shows no significant difference between low and ordinary model quality and is filtered out.
+
+Calculating System-Level Scores
+
+Scores are collected from workers who rate models on a 0-100 rating scale, and we refer to these scores as raw scores.
+
+Scores for negative attributes, i.e. robotic and repetitive, are then reversed for ease of further comparison, 100the original rating.
+
+A distribution of scores is extracted for each worker and raw scores are standardized according to each worker's mean and standard deviation, in order to iron out any differences in worker scoring strategy.
+
+Average standardized scores for each criteria are calculated, and an overall score is calculated as the average of all measurement criteria.
+
+Meta-Evaluation
+
+Human Assessor Consistency
+
+Although the overall aim of our evaluation is to produce reliable results at the system level, which we test later in Section 4.2, we firstly examine ratings of workers at the level of individual dialogue ratings.
+
+Technically speaking, the most meaningful reliability measures for continuous ratings scales test consistency of aggregate (system-level) results because although a high level of random error is expected in individual continuous rating scale scores, when aggregates are calculated for large samples of ratings, positive and negative error that is truly random effectively cancels itself out, and does not negatively impact consistency.
+
+In other words, the rating scale we employ does not rely on consistency on the level of individual ratings.
+
+We nonetheless examine individual rater consistency, since it is the standard approach, but keep in mind that results in this part of our meta-evaluation are not crucial when testing reliability for an evaluation carried out via a continuous rating scale where consistency in overall system-level results are more important.
+
+The distribution of Pearson correlation coefficients for pairs of workers who assessed the same hit is depicted in Figure 2.
+
+As can be seen from Figure 2, the likelihood   of agreement between pairs of workers who failed quality control is close to random as the distribution is approaching uniformity across almost the range of possible coefficients.
+
+In contrast, for pairs of workers who pass quality control, the peak of agreement is between an r of 0.6 and 0.7, showing high agreement in general between such annotator pairs.
+
+Some of the observed disagreement is likely to be the result of legitimate differences between scores of two workers who chose distinct topics to discuss with the same model however, an unavoidable source of inconsistency when testing models with respect to the open domain.
+
+Interestingly, in 5% of dialogues, worker pairs assigned the same hit happened to both freely choose an identical topic to discuss with the same model.
+
+Furthermore, remaining disagreement at the level of individual ratings might not be problematic at the level of overall scores in relation to aggregation of ratings collected on a continuous rating scale.
+
+System-Level Consistency
+
+Table 3 shows results of the system-level evaluation resulting from the initial data collection run on Mechanical Turk (Free run 1), where competing models are ordered by overall highest average zscore.
+
+6Table 3   4: Average standardized scores for models in human evaluation where workers were prescribed an ice-breaker topic of conversation sampled from the persona of the model; the correlation (r) between these scores and Free run 1 in Table 3; models are consistent with Table 3; n is number of ratings; models without p did not have a persona (ice-breaker statement was subsequently unknown to these models). , where a colored cell indicates that the system in that row significantly outperformed the system in that column.
+
+Models are consistent with Table 3.
+
+A B A p C C p B p D D p E p E A B A p C C p B p D D p E p E 0.00 0.05 0.10
+
+the board, consistency is very high, exceeding a correlation of 0.94 in almost all cases with the exception of robotic which nonetheless achieved a correlation of over 0.7.
+
+Besides individual criteria, of crucial importance is the consistency of overall results, as this is the means by which models would ordinarily be ranked in terms of overall performance.
+
+As can be observed from Table 3, the correlation reached in terms of overall scores for systems is 0.969, which is very close to a perfect correlation, showing extremely high levels of reliability for the evaluation, evidence that the approach overcomes substantial challenges with respect to annotator consistency and expected difficulties with respect to evaluating models in the open domain, where assessors are legitimately free to choose distinct topics of conversation.
+
+In any empirical evaluation, statistical significance tests should be applied to take into account the fact that small differences in scores between systems can occur simply by chance.
+
+We provide pairwise significance test results in Figure 3, where we apply standard significance test, Wilcoxon ranksum to rating distributions for each pair of competing models for each data collection run, and corresponding results for run 2 in Figure 6 in Appendix A.4.
+
+Results showed a very high proportion of identical conclusions, 84%, drawn from pairwise significance tests applied to data from the two data collection runs at p < 0.1.
+
+Results for p < 0.05, additionally showed high correspondence between pairwise significance test conclusions, only marginally lower with 82% of the same conclusions being drawn for pairs of models in the two data collection runs.
+
+We additionally provide correlations between measurement criteria and overall scores in Table 8 of Appendix A.4.
+
+Persona Contribution To System Performance
+
+Since we have verified the reliability of the human evaluation, we take a closer look at the results and investigate dialogue quality when models employ a persona.
+
+Results in Table 3 reveal that perhaps unexpectedly in general are either rated more favorably by human assessors when they carry out dialogues without a persona or a tie occurs between models with and without a persona.
+
+Evaluating With Prescribed Topics
+
+In contrast to the initial experiment in which workers were permitted to choose the topic of conversation, we further investigate the performance of models in a slightly easier setting where the topic under discussion is known to the model, by selecting a statement from its persona, which we refer to as an ice-breaker topic statement.
+
+An ice-breaker topic statement is then provided to human assessors at the beginning of each conversation, and the assessor is instructed to talk about this topic with the model.
+
+We therefore provide the topic of conversation to workers in the form of an ice-breaker topic statement, corresponding to a randomly selected persona statement belonging to the agent.
+
+Again, we run this experiment on MTurk, this time contrasting results for our initial data collection run where workers freely chose a topic with one in which workers were instructed to talk about the ice-breaker statement with models.
+
+Numbers of workers who participated in the Icebreaker run are provided in Table 1, while a breakdown of results for each model and overall average scores are shown in Table 4 as well as the correlation between scores for systems when a topic is freely chosen.
+
+Interestingly, in terms of absolute differences in raw scores, the best performing model achieves higher fluency, consistency and is deemed less repetitive when evaluated in icebreaker conversations compared those with freely chosen topics.
+
+Raw average scores for models in the Ice-breaker run are additionally provided in Table 11 in Appendix A.4.
+
+Relatively speaking, in terms of system rankings, no meaningful difference in relative performance is observed when models are tested in a scenario where the worker chooses a topic and when one is prescribed with an ice-breaker statement, as can be seen from the strong correlation between scores for models in Free run 1 and Ice-breaker evaluation as shown in Table 4.
+
+Additionally, significance test results for the Ice-breaker evaluation are provided in Figure 7 in Appendix A.4.
+
+Comparison With Automatic Evaluation Metrics 7.1 Word-Overlap-Based Metrics
+
+Reference-Free Metrics
+
+The following introduces two reference-free automatic metrics we employed: FED and USR.
+
+Their  scores are computed using the conversations collected in our experiment.
+
+FED FED (Fine-grained Evaluation of Dialog) is a pre-trained-model based metric to evaluate a textual conversation history (Mehri and Eskenazi, 2020a).
+
+Given a conversation c, a pre-trained model m, two predefined responses r p and r n (p = positive and n = negative), the FED score is L m (r p |c) -L m (r n |c) where L m (r|c) computes the likelihood that the model m will generate a response r to a conversation c. We employed medium and large DialoGPT (Zhang et al., 2020) as FED scorers, where the full list of predefined positive and negative responses are available in Table 7 in Appendix.
+
+USR USR (an UnSupervised Reference-free metric) uses the pre-trained model RoBERTa (Liu et al., 2019) to assess the quality of a conversation (Mehri and Eskenazi, 2020b).
+
+It consists of three sub-metrics: USR-MLM is to evaluate the understandability and naturalness, USR-DR(c) and USR-DR(f) are to evaluate the interestingness and consistency.
+
+The sub-metric scores then produce an overall score through a regression model.
+
+Correlation Between Automatic Metrics And Human Evaluation
+
+Conclusion
+
+Figure 1: Criteria employed to assess models in our human evaluation in the form of Likert statements; corresponding evaluation labels (left) not shown to human assessors.
+
+Figure 2: Agreement between pairs of human assessors as measured by the Pearson correlation (r) of ratings provided by workers who passed (blue) and failed quality control (orange).
+
+Figure 3: Pairwise significance test results for systems concluded from Free Run 1, where a colored cell indicates that the system in that row significantly outperformed the system in that column.
+
+Models are consistent with Table3.
+
+Figure 5: Instructions shown to Mechanical Turk workers before starting the open-domain dialogue human evaluation.
+
+Figure 6: Pairwise significance test results for systems concluded from Free Run 2, where a colored cell indicates that the system in that row significantly outperformed the system in that column.
+
+Models are consistent with Table3.
+
+Figure 8: Characters per conversation from workers who (a) passed quality control; (b) failed quality control in our human evaluation; (c) ConvAI2 live evaluation.
+
+Figure 9: Words per conversation from workers who (a) passed quality control; (b) failed quality control in our human evaluation; (c) ConvAI2 live evaluation.
+
+Figure 10: Characters per input from workers who (a) passed quality control; (b) failed quality control in our human evaluation; (c) ConvAI2 live evaluation.
+
+Figure 13: The popup window for user to type a topic before the conversation starts.
+
+Figure 14: The popup window if the Topic button is clicked.
+
+Figure16: The interface shown to a worker to evaluate the conversation with a chatbot after clicking the Next Chatbot button in Figure12.
+
+Once the evaluation of current conversation is done, worker should click the NEXT button to move to the next chatbot.
+
+If all conversations are completed, the worker will be redirect to end the entire HIT and leave the feedback, as shown in Figure17.
+
+Figure 17: The interface shown to workers when a HIT is completed.
+
+Workers are welcome to leave their feedback in this page.
+
+Figure 18: Screenshot of example live chat between a Mechanical Turk worker who chose books as the conversation topic in the human evaluation.
+
+Proportions (%) of topics that are reported as liked, ambivalent about or disliked by workers who passed and failed quality control.
+
+Average standardized scores for models in initial data collection run; workers were free to choose the topic of conversation (Free run 1); the correlation (r) between systems in this and a second data collection run distinct data collection runs; where A=Bi-Encoder Transformer, B=Poly-Encoder Transformer, C=Key-Value Memory Network, D=Sequence to Sequence, and E=LSTM-based Model; models with p models with a the persona; score for robotic and repetitive have been reversed; n is number of ratings; models ordered by overall average score.
+
+Pearson correlation (r) of word-overlap metric scores and human evaluation.
+
+Pearson correlation (r) of reference free metric scores and human evaluation, where FED m and FED l respectively use medium and large DialoGPT, USR is the overall USR score computed according to three submetrics: USR-MLM, USR-DR(c) and USR-DR(f).
+
+Correlation of assessed criteria with others when the human dialogue participant is allowed to freely choose a topic (run 1); correlations in the upper right half correspond to Pearson's r while lower left are Spearman Correlation Coefficients.
+
+Average standardized scores for models in secondary data collection run; workers were free to choose the topic of conversation (Free Run 2); the correlation (r) between systems in this and a second data collection run distinct data collection runs; where A=Bi-Encoder Transformer, B=Poly-Encoder Transformer, C=Key-Value Memory Network, D=Sequence to Sequence, and E=Language Model; models with p models with a the persona; n denotes total number of ratings; score for robotic and repetitive have been reversed; models ordered by overall average score.
+
+Average raw Direct Assessment scores for each assessed dimension of a range of dialogue systems in two distinct data collection runs where workers are free to choose the topic (Free run 1; Free run 2); as well as the correlations of different aspects, where A=Bi-Encoder Transformer, B=Poly-Encoder Transformer, C=Key-Value Memory Network, D=Sequence to Sequence, and E=LSTM-based; models with p with persona, while those without
+
+Average raw Direct Assessment scores when the topic via an Ice-breaker statement is selected from the persona assigned to the model; as well as the correlation between ice-breaker and freely chosen topic (Free run 1) scores, where A=Bi-Encoder Transformer, B=Poly-Encoder Transformer, C=Key-Value Memory Network, D=Sequence to Sequence, and E=LSTM-based; Systems with subscript p correspond to the performance of the corresponding model when the persona is available to the dialogue system; n denotes total number of ratings; score for robotic and repetitive have been reversed; n is the sample size of ratings combined to produce each score; models ordered by overall average score.
+
+A B A p C C p B p D D p E p E
+
+Median numbers of words and characters in conversations and inputs provided by workers who passed quality control; failed quality control in our human evaluation; ConvAI2 live evaluation.

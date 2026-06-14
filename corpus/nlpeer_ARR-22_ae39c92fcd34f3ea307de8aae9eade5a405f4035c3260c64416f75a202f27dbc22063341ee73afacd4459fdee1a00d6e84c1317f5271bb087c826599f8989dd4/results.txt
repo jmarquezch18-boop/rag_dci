@@ -1,0 +1,131 @@
+In hope to establish NLU++ as a more challenging production-oriented testbed for dialogue NLU, especially in low-data scenarios, we evaluate a series of current cutting-edge models for both NLU tasks: intent detection ( §4.1) and slot labeling ( §4.2).
+
+Our aim is to assess and analyse their performance across different setups, and provide solid baseline reference points for future evaluations on NLU++.
+
+Data Setups.
+
+Unless noted otherwise, for both tasks we adopt the standard K-fold cross-validation   (Hemphill et al., 1990), SNIPS (Coucke et al., 2018), OOS (Larson et al., 2019b) and BANKING77 (Casanueva et al., 2020) .
+
+as done e.g. by Liu et al. (2019b).
+
+Through such folding evaluation, (i) we avoid overfitting to any particular test set and (ii) we ensure more stable results with smaller training and test data (i.e., when simulating low-data regimes typically met in production) through averaging over different folds.
+
+13  The experiments are run with K = 20 (20-Fold) and K = 10 (10-Fold), where we train on 1 fold and evalute on the remaining K -1 folds.
+
+These setups simulate different degrees of data scarcity: e.g., the average training fold comprises ≈ 100 examples for BANKING and ≈ 50 for HOTELS for 20-Fold experiments, and twice as much for 10-Fold experiments.
+
+Besides these low-data training setups, we also run experiments in a Large-data setup, where we train the models on merged 9 folds, and evaluate on the single held-out fold.
+
+14 The key questions we aim to answer with these data setups are: Which NLU models are better adapted to low-data scenarios? How much does NLU performance improve with the increase of annotated NLU data?
+
+How challenging is NLU++ in low-data versus large-data scenarios? Domain Setups.
+
+Further, experiments are run in the following domain setups: (i) single-domain experiments where we only use the BANKING or 13 Due to folding, variations in results with different random seeds were negligible, even in lowest-data setups.
+
+14 Effectively, Large-data experiments can be seen as 10-Fold experiments with swapped training and test data.
+
+the HOTELS portion of the entire dataset; (ii) bothdomain experiments (termed ALL) where we use the entire dataset and combine the two domain ontologies (see Table 2); (iii) cross-domain experiments where we train on the examples associated with one domain and test on the examples from the other domain, keeping only shared intents and slots for evaluation.
+
+The key questions we aim to answer are: Are there major performance differences between the two domains and can they be merged into a single (and more complex) domain? Is it possible to use examples labeled with generic intents from one domain to boost another domain, effectively increasing reusability of data annotations and reducing data scarcity?
+
+F 1 (micro) is the main evaluation measure in all ID and SL experiments.
+
+We evaluate two groups of SotA intent detection models: (i) MLP-Based, and (ii) QA-Based ones.
+
+MLP-Based ID Baselines.
+
+Casanueva et al. (2020) and Gerz et al. (2021) have recently shown that, for the ID task, full and expensive fine-tuning of large pretrained models such as BERT (Devlin et al., 2019) or RoBERTa (Liu et al., 2019a) is not needed to reach strong ID performance.
+
+As an alternative, they propose a much more efficient MLP-based approach to intent detection which works on par or even outperforms full fine-tuning on the ID task.
+
+15In a nutshell, the idea is to use fixed/frozen "offthe-shelf" universal sentence encoders such as Con-veRT (Henderson et al., 2020) or Sentence-BERT (Reimers and Gurevych, 2019) models to encode input sentences.
+
+A standard multi-layer perceptron (MLP) classifier is then learnt on top of the sentence encodings.
+
+Two core differences to the previous work stem from the fact that we now deal with the multi-label ID task: 1) to this end, we replace the output softmax layer with the sigmoid layer; and 2) we define a threshold θ which determines the final classification: only intents with probability scores ≥ θ are taken as positives.
+
+This way, the hyper-parameter θ effectively controls the trade-off between precision and recall of the multi-label classifier.
+
+We comparatively evaluate several widely used state-of-the-art (SotA) sentence encoders, but remind the reader that this decoupling of the MLP classification layers from the fixed encoder allows for a much wider empirical comparison of sentence encoders in future work.
+
+The evalauted sentence encoders are: 1) CONVERT (Henderson et al., 2020), which produces 1,024-dimensional sentence encodings; 2) LABSE (Feng et al., 2020) (768-dim); 3) ROBL-1B (1,024-dim) and 4) LM12-1B (384dim) (Reimers and Gurevych, 2019;Thakur et al., 2021).
+
+For completeness, we provide brief descriptions of each encoder in our evaluation, along with their public URLs, in Appendix B, and refer the reader to the original work for more details about each sentence encoder.
+
+QA-Based ID Baselines.
+
+Another group of SotA ID baselines reformulates the ID task into the (extractive) question-answering (QA) problem (Namazifar et al., 2021;Fuisz et al., 2022).
+
+This QAoriented reformatting then allows for additional specialised QA-tuning of large PLMs.
+
+In a nutshell, the idea is to (i) fine-tune the original PLM such as BERT/RoBERTa on readily available large generalpurpose QA data such as SQuAD (Rajpurkar et al., 2016), and then (ii) further fine-tune this general QA model with in-domain ID data.
+
+This strategy has recently shown very strong performance on single-label ATIS data (Namazifar et al., 2021).
+
+The main 'trick' is to reformat the input ID examples into the following format: "yes.
+
+no. [SEN-TENCE]" and pose a question such as: "is the intent to ask about [INTENT]?" (see Appendix A for the actual questions associated with each intent, also shared with the dataset).
+
+Here, [SENTENCE] is the placeholder for the actual input sentence, and [INTENT] is the placeholder for a short manually defined text (akin to language modeling prompts (Liu et al., 2021), see again Appendix A) which briefly describes the intent.
+
+The QA formulation lends itself naturally to the multi-label ID setup as each 'intent-related' question is posed separately.
+
+In other words, for each input example and for each of the L intents in the ontology the QA model must extract yes or no as the answer, where correct intent labels are the ones for which the answer is yes. 16 We note that our work is the first to apply and evaluate the QA approach on multi-label ID.
+
+We experiment with two pretrained language models, both fine-tuned on the SQuAD2.0 dataset (Rajpurkar et al., 2018) before additional QAtuning on NLU++ examples converted to the aforementioned QA format: ROBB-QA uses RoBERTa-Base as the underlying LM, while ALB-QA relies on the more compact ALBERT (Lan et al., 2020).
+
+ID: Training and Evaluation.
+
+All MLP-based baselines rely on the same training protocol and hyper-parameters in all data and domain setups.
+
+The MLP classifier consists of 1 hidden layer of size 512, and is trained via binary cross-entropy loss for 500 epochs with the batch size of 32 and the dropout rate is 0.6.
+
+We use the standard AdamW optimizer (Loshchilov and Hutter, 2018) with the learning rate of 0.003 and linear decay; weight decay is 0.02.
+
+The threshold θ is set to 0.4.17
+
+For QA models, we largely follow Namazifar et al. (2021) and fine-tune all models for 5 epochs, using AdamW; the learning rate of 2e-5 with linear decay; weight decay is 0; batch size is 32.
+
+For slot labeling, we benchmark two current SotA models: (i) ConvEx (Henderson and Vulić, 2021), as a SotA span-extraction SL model and (ii) the QA-based SL model (Namazifar et al., 2021) based on ROBB-QA, which operates similarly to QAbased ID baselines discussed in §4.1, and relies on the same fine-tuning regime as our QA-based ID baselines.
+
+Again, we refer the reader to the original work for further details, and provide brief descriptions in Appendix D.
+
+Main results with all the evaluated baselines are summarised in Table 6 (for ID) and Table 7 (SL).
+
+ID: MLP versus QA Models.
+
+First, the comparisons among only MLP-based models reveal that 1) all sentence encoders offer ID performance in similar, reasonably narrow score intervals (e.g., the variations in F 1 scores between all sentence encoders are typically below 4-6 F 1 points in all setups), and 2) that CONVERT is the best-performing sentence encoder on average, which corroborates findings from prior work on other ID datasets (Casanueva et al., 2020;Wu and Xiong, 2020).
+
+One very apparent and important indication in the reported results is the superiority of QA-based ID models over their MLP-based competitors.
+
+QAbased models largely outperform MLP-Based baselines in all domain setups, as well as in all data setups.
+
+The gains are visible even in Large-data setups, but the benefits of QA-based ID are immense in the lowest-data 20-Fold setups: e.g., 12 F 1 points over the strongest MLP ID model on HOTELS and 20 F 1 points on BANKING.
+
+Moreover, the use of larger underlying LMs might push the scores with QA even further: using SQuAD-tuned Roberta-Large (ROBL-QA) instead of Base (ROBB) yields further gains -e.g., F 1 rises from 85.6 to 87.8 on 10-Fold BANKING, and similar trends are observed in other low-data setups.
+
+Slot Labeling. In the SL task, the QA-based model also demonstrates its superiority, again with huge gains in low-data 20-Fold and 10-Fold setups, confirming that such QA-based or prompt-based methods (Liu et al., 2021;Gao et al., 2021) are especially well suited for low-data setups.
+
+The use of manually defined questions/prompts, which are typically easy to write by humans, combined with the expressive power of QA-based task formatting yields immense gains on low-resource dialogue NLU.
+
+Given these very promising ID and SL results on NLU++, our work also calls for further and more intensive future research on QA-based models for dialogue NLU.
+
+However, we note that QA-based ID and SL methods do come with efficiency detriments, especially with larger intent and slot sets: the model must copy the input utterance and run a separate answer extraction for each intent/slot from the set, which is by several order of magnitudes more costly at both training and inference than MLP-based models.
+
+A promising future research avenue is thus to investigate combined approaches that could combine and trade off the performance benefits of QA-based models and the efficiency advantages of, e.g., MLP-based ID.
+
+Low-Data vs. Large-Data.
+
+We also note that scores on both tasks, as reported in Tables 67, leave ample room for improvement in NLU methodology in future work, especially on SL (even in Large-data setups), and in low-data setups.
+
+Cross-Domain Experiments.
+
+We also verify potential reusability of annotated data across domains with a simple ID experiment, where we train ID models on BANKING and evaluate on HOTELS, and vice versa.
+
+The results are summarised in Table 8.
+
+Besides (again) indicating that QA-based models outscore MLP-based ID, the results also suggest that for some generic intents it is possible to meet high ID performance without any in-domain annotations.
+
+For instance, we observe particularly high scores for highly generic and reusable intent modules such as change, how, how_much, thank, when, and affirm, all with per-intent F 1 scores of ≥ 90.
+
+We hope that these preliminary results might inspire similar ontology (re)designs in future work.

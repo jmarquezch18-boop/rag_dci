@@ -1,0 +1,3 @@
+We survey previously used data augmentation methods for sentence-level and sentence-pair NLP tasks and adapt them to NER, a token-level task.
+
+Through experiments on two domain-specific data sets, we show that simple data augmentation can improve performance even over strong baselines.

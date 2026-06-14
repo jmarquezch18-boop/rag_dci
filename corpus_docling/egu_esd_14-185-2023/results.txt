@@ -1,0 +1,31 @@
+The UVic ESCM is spun up for > 10 000 years to an equilibrium state under pre-industrial (year 1765) atmospheric and astronomical boundary conditions and is then integrated for another 250 years without prescribing atmospheric CO 2 concentrations to allow the carbon cycle to equilibrate.
+
+Afterwards, the model is run from 1765 until 2005 and forced with historical fossil fuel emissions and land-use changes (crop and pastureland; Keller et al., 2014).
+
+From year 2005 to 2100, simulations are forced with CO 2 emissions represented as a direct adjustment to radiative forcing, land-use change by agriculture, volcanic radiative forcing and sulfate aerosols which are prescribed according to the Representative Concentration Pathway 4.5 (RCP 4.5;Meinshausen et al., 2011;Thomas, 2014;Keller et al., 2014;Partanen et al., 2016).
+
+Solar insolation at the top of the atmosphere, wind stress and wind fields are varied seasonally.
+
+After the year 2300, CO 2 emissions are assumed to decrease linearly until the end of year 3000 with other forcing held constant to zero.
+
+The full list of simulations is given in Table 3.
+
+To test the maximum potential, as well as the global carbon cycle and biogeochemical responses, we simulate MOS for 1000 years, beginning in year 2020 (MOS_Conti).
+
+Additionally, termination experiments (MOS_Stop) are performed to analyze the response of the ocean and climate to an abrupt termination of MOS at year 2100.
+
+To evaluate if the simulated MOS systems have plausible macroalgae growth characteristics, we evaluate the seasonal dynamics of the simulated MOS system for a 30 d averaged time slice from 2020 to 2024 under the RCP 4.5 emission scenario and without artificial upwelling.
+
+As expected, AU increases the area occupied by MOS from 69.6 × 10 6 km 2 in the run without AU to 129.6 × 10 6 km 2 in the run with AU (Fig. 2).
+
+Obvious expansions of areas with suitable growing conditions are found in the eastern tropical Pacific and the North Atlantic.
+
+AU also expands S_MOS to the Indian Ocean, which was almost abandoned in regular MOS simulations.
+
+In Areas I, II and III, both NPP rate and biomass yield are enhanced due to the upwelled nutrients (belt column, Table 4 and Fig. 3).
+
+A closer look into the belt N, M and S areas shows that both the NPP rate and biomass yield per square meter of the deployment area decrease in simulation MOS_AU when compared to the standard MOS simulation (belt column, Table 4).
+
+This is related to a "dilution effect": in the new adequate areas made accessible for MOS by AU, the available nutrients are limited, thus the MOS NPP is relatively low compared to the original nutrient-rich NPP areas.
+
+Despite of this, the expanded MOS area in MOS_AU increases the total CO 2 captured by about ∼ 30 % (Table 4).

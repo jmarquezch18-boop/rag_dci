@@ -1,0 +1,41 @@
+Large-scale historical records in Korea were mostly produced during the Joseon dynasty (1392-1897), and the Institute for the Translation of Korean Classics (ITKC) keeps a comprehensive database of Korean classics at a scale of approximately 9 billion characters.
+
+This digital archive is a great resource for Korean historians, but the documents remain in the original Hanja language 2 .
+
+Hanja is an extinct 1 All codes, models, and dataset are available at https: //github.com/haneul-yoo/HUE.git 2 Hanja is a set of characters (script) used in ancient Korean, while Hanmun is a writing style (language) in the same era.
+
+However, we will refer to Hanja as a language following the conventions of the previous works.
+
+Sentence
+
+Hanja 上 御 經筵 。 Modern Korean ᄋ ᅵ ᆷᄀ ᅳ ᆷ ᄋ ᅵ ᄀ ᅧ ᆼᄋ ᅧ ᆫ ᄋ ᅦ ᄂ ᅡᄋ ᅡᄀ ᅡ ᆻᄃ ᅡ . Simplified Chinese 国王 参加 了 皇家讲座 。 Traditional Chinese 國王 參加 了 皇家講座 。
+
+The King attended the Royal Lecture . language, and as Table 1 illustrates with a simple sentence, Hanja is lexically and syntactically different from modern Korean, as well as simplified and traditional Chinese.
+
+Understanding the documents in the digital archive is thus difficult and would benefit greatly from a Hanja language model which can also be used to accelerate the expert translation (Vale de Gato, 2015).
+
+There are two corpora we can use to train the language model, the Annals of Joseon Dynasty (AJD), first introduced to the NLP community in (Bak and Oh, 2015), and the Diaries of the Royal Secretariats (DRS) (Kang et al., 2021).
+
+In this paper, we provide the HUE (Hanja Understanding Evaluation) dataset consisting of chronological attribution, topic classification, named entity recognition and summary retrieval, a suite of tasks to help build and evaluate the Hanja language model.
+
+In addition to AJD and DRS, we also work with the Daily Records of the Royal Court and Important Officials (DRRI).
+
+Unlike AJD and DRS that have been analyzed by historians and contain their annotations, DRRI lacks such systematic analysis, and we use it for zero-shot learning and introduce it to the NLP community.
+
+We also provide pretrained language models (PLMs) for Hanja trained on AJD and DRS, fine-tuned for each task in HUE.
+
+Our pretrained models on the corpora from that era outperform the existing language models built for ancient Chinese, confirming the need for specially-trained Hanja language models.
+
+We also run additional experiments based on the analyses of entity-and word-level changes on AJD by controlling input conditions by masking named entity and giving the time period as input.
+
+Finally, we demonstrate the effectiveness of our Hanja language model for analyzing unseen documents, running zero-shot experiments for chronological attribution and named entity recognition tasks on DRRI.
+
+Our main contributions are as follows:
+
+• We release the HUE dataset and Hanja PLMs to support historians to understand and analyze a large volume of historical documents written in Hanja.
+
+To the best of our knowledge, this is the first work proposing Hanja language models and releasing a NLP benchmark dataset for ancient Hanja documents.
+
+• We demonstrate that providing key information such as named entity and document age as input improves the performance of Hanja language model on the HUE tasks.
+
+• We run zero-shot experiments on several HUE tasks from DRRI which have not been discussed in the NLP community, and demonstrate the performance of our Hanja language models on unseen historical documents.

@@ -1,0 +1,135 @@
+{
+  "query_id": "19343c15d0d4bdef5acd6ca32253152d6d5d3e3b",
+  "query": "Did the annotators agree on which events were important to the plot before the annotation process began?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "annotation process"
+      },
+      "result_preview": "Search results for 'annotation process' (1 matches):\n[paper_id=nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed | section=introduction | line=31] • we present details about the dataset and the annotation pr",
+      "elapsed_s": 4.23
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed",
+        "section": "introduction",
+        "start": 28,
+        "end": 34
+      },
+      "result_preview": "[nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed / introduction — líneas 23-39 de 41]\nWhile previous work has focused on factually-verifiable check-worthy (Barrón-Cedeno et al., 2020;Alam et al., 2020) or ",
+      "elapsed_s": 8.2
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "inter-coder agreement"
+      },
+      "result_preview": "Search results for 'inter-coder agreement' (1 matches):\n[paper_id=nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed | section=introduction | line=31] • we present details about the dataset and the annotation",
+      "elapsed_s": 4.94
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed",
+        "section": "introduction",
+        "start": 25,
+        "end": 40
+      },
+      "result_preview": "[nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed / introduction — líneas 20-41 de 41]\n\nIn this paper, we extend the definitions of claims and check-worthiness from previous work (Barrón-Cedeno et al., 2020",
+      "elapsed_s": 7.43
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "pre-annotation agreement"
+      },
+      "result_preview": "No matches found for 'pre-annotation agreement'",
+      "elapsed_s": 5.87
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "While previous work has focused on factually-verifiable check-worthy (Barrón-Cedeno et al., 2020;Alam et al., 2020) or general claims (i.e., not necessarily factually-verifiable, e.g., (Gupta et al., 2021)) on a single topic, we focus on three different topics, namely COVID-19, Climate Change and Technology.\n\nAs shown in Figure 1, MM-Claims aims to differentiate between tweets without claims (Figure 1a) as well as tweets with claims of different types: claim but not check-worthy (Figure 1b), check-worthy claim (Figure 1c), and check-worthy visually relevant claim (Figure 1d).\n\nOur contributions can be summarized as follows:\n\n• a novel dataset for multimodal claim detection in social media with more than 3000 manually annotated and roughly 82 000 unlabeled image-text tweets is introduced;\n\n• we present details about the dataset and the annotation process, class definitions, dataset characteristics, and inter-coder agreement;\n\n• we provide a detailed experimental evaluation of strong unimodal and multimodal models highlighting the difficulty of the task as well as the role of image and text content.\n\nThe remainder of the paper is structured as follows.\n\nSection 2 describes the related work on unimodal and multimodal approaches for claim detection.\n\nThe proposed dataset and the annotation guidelines are presented in Section 3.",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed",
+      "chunk_id": "dci_nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed",
+      "score": 1.0
+    },
+    {
+      "text": "In this paper, we extend the definitions of claims and check-worthiness from previous work (Barrón-Cedeno et al., 2020;Nakov et al., 2021) to multimodal claim detection and introduce a novel dataset called Multimodal Claims (MM-Claims) curated from Twitter to tackle this critical problem.\n\nWhile previous work has focused on factually-verifiable check-worthy (Barrón-Cedeno et al., 2020;Alam et al., 2020) or general claims (i.e., not necessarily factually-verifiable, e.g., (Gupta et al., 2021)) on a single topic, we focus on three different topics, namely COVID-19, Climate Change and Technology.\n\nAs shown in Figure 1, MM-Claims aims to differentiate between tweets without claims (Figure 1a) as well as tweets with claims of different types: claim but not check-worthy (Figure 1b), check-worthy claim (Figure 1c), and check-worthy visually relevant claim (Figure 1d).\n\nOur contributions can be summarized as follows:\n\n• a novel dataset for multimodal claim detection in social media with more than 3000 manually annotated and roughly 82 000 unlabeled image-text tweets is introduced;\n\n• we present details about the dataset and the annotation process, class definitions, dataset characteristics, and inter-coder agreement;\n\n• we provide a detailed experimental evaluation of strong unimodal and multimodal models highlighting the difficulty of the task as well as the role of image and text content.\n\nThe remainder of the paper is structured as follows.\n\nSection 2 describes the related work on unimodal and multimodal approaches for claim detection.\n\nThe proposed dataset and the annotation guidelines are presented in Section 3.\n\nWe discuss the experimental results of the compared models in Section 4, while Section 5 concludes the paper and outlines areas of future work.",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed",
+      "chunk_id": "dci_nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed_introduction_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/COLING2020/660_100"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed_introduction_0000",
+      "dci_nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed_introduction_0001"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_212dff6380418cd7c050ec757b31e6b5b65bbe922aa30ffbd5950fe7a04ca737b7c7b3d706f1cd1502d7932b61d2b7c079924793e45e437526230c1e9c0626ed_introduction_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.06666666666666667,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

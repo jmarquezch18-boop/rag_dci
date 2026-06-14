@@ -1,0 +1,96 @@
+{
+  "query_id": "31314c6ad7630579c350af928493caac9c563dbb",
+  "query": "What are the minimum and maximum threshold (t_min, t_max) values?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "minimum threshold"
+      },
+      "result_preview": "No matches found for 'minimum threshold'",
+      "elapsed_s": 4.48
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "threshold values"
+      },
+      "result_preview": "No matches found for 'threshold values'",
+      "elapsed_s": 4.88
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "lower bound threshold"
+      },
+      "result_preview": "No matches found for 'lower bound threshold'",
+      "elapsed_s": 4.14
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "threshold range"
+      },
+      "result_preview": "No matches found for 'threshold range'",
+      "elapsed_s": 12.58
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "threshold span"
+      },
+      "result_preview": "No matches found for 'threshold span'",
+      "elapsed_s": 12.26
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/0f8bc751a0472564732a976cd152643d92d5393c2e77c8234f386a801883d09ff9540378b3dab5834544a246c22f292d5b1c4d370219943c9a19a1626a8f8781_137"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [],
+    "approved_by_oracle": [],
+    "oracle_decisions": []
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.06666666666666667,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

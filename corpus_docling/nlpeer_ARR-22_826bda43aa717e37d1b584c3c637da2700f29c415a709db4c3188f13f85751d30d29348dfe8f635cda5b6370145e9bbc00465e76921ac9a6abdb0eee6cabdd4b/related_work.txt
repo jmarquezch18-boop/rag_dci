@@ -1,0 +1,37 @@
+Vision-and-language navigation.
+
+Vision-and-Language Navigation (VLN) requires an agent to find the routes to the desired target based on instructions (Jain et al., 2019;Thomason et al., 2020;Nguyen and Daumé III, 2019;Qi et al., 2020b;Chen et al., 2019;Krantz et al., 2020).
+
+Specifically, there are two key challenges in VLN: grounding the natural language instruction to visual environments and generalizing to unseen environments.
+
+To address the first challenge, one line of research in VLN utilizes carefully designed cross-modal attention modules (Wang et al., 2018(Wang et al., , 2019a;;Tan et al., 2019;Landi et al., 2021;Xia et al., 2020;Wang et al., 2020b,a;Zhu et al., 2020;Li et al., 2021;Zhu et al., 2021;An et al., 2021;Kim et al., 2021), progress monitor modules (Ma et al., 2019b,a;Ke et al., 2019), and object-action aware modules (Qi et al., 2020a).
+
+Another line of research improves vision and language co-grounding by improving vision and language representations with pre-training techniques (Li et al., 2019;Huang et al., 2019b;Hao et al., 2020;Majumdar et al., 2020;Hong et al., 2021).
+
+Li et al. (2019) directly adopts pre-trained BERT for encoding instructions, Hao et al. (2020) and Hong et al. (2021) learn from a large amount of image-text-action triplets, Majumdar et al. (2020) learns from large amount of text-image pairs from the web, and Huang et al. (2019b) transfers language and visual representation to in-domain representation with auxiliary tasks.
+
+Different from them, we utilize the visually-aligned multilingual instructions to learn a cross-lingual language representation that inherently captures visual semantics underlying the instruction.
+
+Multiple methods have been proposed to encourage generalization to unseen environments during training (Zhang et al., 2020;Tan et al., 2019;Wang et al., 2020c;Fu et al., 2020;Li et al., 2022).
+
+Zhang et al. (2020) demonstrates that it is the low-level appearance information that causes the large performance gap between seen and unseen environments.
+
+Tan et al. (2019) proposes to use environ-ment dropout on visual features to create new environments and Fu et al. (2020) utilizes adversarial path sampling to encourage generalization.
+
+However, both of these methods rely on a speaker module to generate synthetic training data and can be considered as data augmentation methods, which are complementary to our proposed environmentagnostic visual representation.
+
+The closest work to ours is Wang et al. (2020c), where they proposes to pair an environment classifier with gradient reversal layer to learn an environment-agnostic representation.
+
+However, they only consider one single environment when learning the visual representation for a given path (i.e., given one path and predict its environment).
+
+In our environmentagnostic representation learning, we explore the connections between multiple environments (i.e., maximize the similarity between paths from different environments).
+
+Vision-and-language with multilinguality.
+
+There has been growing interest in combining vision and language for tasks such as visual-guided machine translation (Sigurdsson et al., 2020;Surís et al., 2022;Huang et al., 2020), multi-lingual visual question answering (Gao et al., 2015;Gupta et al., 2020;Shimizu et al., 2018), multi-lingual image captioning (Gu et al., 2018;Lan et al., 2017), multilingual video captioning (Wang et al., 2019b), and multi-lingual image-sentence retrieval (Kim et al., 2020;Burns et al., 2020).
+
+In this paper, we work on multi-lingual vision-and-language navigation.
+
+We use vision (i.e., navigation path) as a bridge between multi-lingual instructions and learn a crosslingual representation that captures visual concepts.
+
+Moreover, our method also use language as a bridge between different visual environments to learn an environment-agnostic visual representation.

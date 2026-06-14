@@ -1,0 +1,43 @@
+Better performance with more knowledge.
+
+We analyze the impact of the number of generated knowledge statements, M , and show the results in Figure 2.
+
+Generally, the performance increases with the quantity of knowledge statements.
+
+It saturates at M = 20 and begins to decline when more knowledge statements are introduced, which may be because more noisy knowledge is generated.
+
+The knowledge integration method.
+
+In addition to the knowledge integration method described in §2.2, we experiment with two alternatives: Mixture-of-Experts (MoE) and Product-of-Experts (PoE) (Hinton, 2002).
+
+These make the following modifications to Equation 1, respectively:
+
+MoE: p I (a|q, K q ) ∝ 0≤m≤M p I (a|q m ),(2)
+
+PoE: p I (a|q, K q ) ∝ 0≤m≤M p I (a|q m ).
+
+(3)  The results in Table 4 indicate that our knowledge integration method -i.e. adaptively choosing the best knowledge to rely on -is best among the three.
+
+Lightweight inference models and amplification.
+
+We found that the size of inference model affects the magnitude of improvement.
+
+Figure 3 shows the NumerSense performance gain on top of different sizes of inference model.
+
+As we use smaller inference models, the performance gain increases drastically.
+
+In particular, with our method the smallest T5 model is as powerful as the T5-3b baseline, and T5-large outperforms the GPT-3 baseline.
+
+This indicates that model-generated knowledge can enable high performing, yet lightweight, inference models.
+
+Furthermore, the improvement does not diminish as the inference model becomes as big as the knowledge generation model, as the inference by GPT-3 can benefit by 9.0% from the knowledge elicited from itself.
+
+This indicates that our method can somewhat amplify the useful knowledge already possessed by the model, leading to better predictions.
+
+The size of knowledge generation model.
+
+a 5.0% improvement, narrower than the 10.5% improvement given by the 175B knowledge model.
+
+The 1.3B and 0.4B knowledge models do not give a significant improvement.
+
+Therefore, we do not necessarily need the largest version of GPT-3 as the knowledge source, though we do need the model to be relatively large in order to generate useful and reliable knowledge.

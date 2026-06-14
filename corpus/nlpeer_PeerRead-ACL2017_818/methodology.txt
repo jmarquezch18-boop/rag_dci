@@ -1,0 +1,9 @@
+We model knowledge acquisition as probabilistic inference over a factor graph of knowledge.
+
+As shown in Figure 3, the graph consists of multiple substrates (page-wide boxes) corresponding to different knowledge dimensions (shown only three of them -strength, size, weight-for brevity).
+
+Each substrate consists of two types of sub-graphs: verb subgraphs and object subgraphs, which are connected through factors that quantify action-object compatibilities.
+
+Connecting across substrates are factors that model inter-dependencies across different knowledge dimensions.
+
+In what follows, we describe each graph component.

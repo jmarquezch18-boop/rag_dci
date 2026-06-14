@@ -25,55 +25,74 @@ from loguru import logger
 
 
 def _jaccard_similarity(text_a: str, text_b: str) -> float:
-    """
-    Similitud de Jaccard sobre conjuntos de palabras en minúsculas.
-
-    Args:
-        text_a: Primer texto.
-        text_b: Segundo texto.
-    Returns:
-        Jaccard score entre 0.0 y 1.0.
-    """
+    """Similitud de Jaccard sobre conjuntos de palabras en minúsculas."""
     words_a = set(text_a.lower().split())
     words_b = set(text_b.lower().split())
     if not words_a or not words_b:
         return 0.0
     intersection = words_a & words_b
-    union = words_a | words_b
-    return len(intersection) / len(union)
+    return len(intersection) / len(words_a | words_b)
+
+
+def _containment_recall(gt_text: str, chunk_text: str) -> float:
+    """
+    Containment recall: qué fracción de palabras del GT aparece en el chunk.
+
+    A diferencia de Jaccard (simétrico), esta métrica es asimétrica y
+    correcta cuando el chunk es mucho más grande que el GT (caso DCI).
+    Para chunks de tamaño similar al GT, containment ≈ Jaccard.
+
+        containment(GT, chunk) = |words(GT) ∩ words(chunk)| / |words(GT)|
+
+    Args:
+        gt_text: Texto del fragmento ground truth (pequeño, ~50 palabras).
+        chunk_text: Texto del chunk recuperado (puede ser grande, ~300 palabras).
+    Returns:
+        Score entre 0.0 y 1.0. 1.0 = todas las palabras del GT están en el chunk.
+    """
+    words_gt = set(gt_text.lower().split())
+    words_chunk = set(chunk_text.lower().split())
+    if not words_gt:
+        return 0.0
+    return len(words_gt & words_chunk) / len(words_gt)
 
 
 def _chunk_matches_evidence(
     chunk: dict,
     ground_truth_ids: list[str],
     ground_truth_texts: list[str],
-    jaccard_threshold: float,
+    threshold: float,
+    metric: str = "jaccard",
 ) -> bool:
     """
     Determina si un chunk contiene evidencia del ground truth.
 
-    Primero intenta match exacto por chunk_id (rápido, O(1) con set).
-    Si falla, intenta Jaccard >= jaccard_threshold sobre el texto del chunk
-    contra cada texto de evidencia (cubre reformulaciones).
+    Primero intenta match exacto por chunk_id (O(1)).
+    Si falla, aplica la métrica de texto configurada:
+      - "jaccard"     : Jaccard >= threshold (correcto para chunks de tamaño similar)
+      - "containment" : containment(GT→chunk) >= threshold (correcto para DCI chunks grandes)
 
     Args:
         chunk: Dict con chunk_id y text.
         ground_truth_ids: Lista de corpus IDs relevantes de PeerQA-qrels.
-        ground_truth_texts: Lista de textos de los IDs relevantes.
-        jaccard_threshold: Umbral mínimo para Jaccard match.
+        ground_truth_texts: Textos de evidencia ground truth.
+        threshold: Umbral de similitud (recomendado: 0.75 Jaccard / 0.5 containment).
+        metric: "jaccard" (default) o "containment".
     Returns:
         True si el chunk contiene evidencia ground truth.
     """
     chunk_id = chunk.get("chunk_id", "")
     chunk_text = chunk.get("text", "")
 
-    # Match exacto por ID
     if chunk_id in set(ground_truth_ids):
         return True
 
-    # Match fuzzy por texto (para chunks de Docling que no tienen el mismo ID)
     for gt_text in ground_truth_texts:
-        if _jaccard_similarity(chunk_text, gt_text) >= jaccard_threshold:
+        if metric == "containment":
+            score = _containment_recall(gt_text, chunk_text)
+        else:
+            score = _jaccard_similarity(chunk_text, gt_text)
+        if score >= threshold:
             return True
 
     return False
@@ -89,12 +108,16 @@ class CurationOracle:
     activo en feedback_loop.py.
     """
 
-    def __init__(self, config: dict):
+    def __init__(self, config: dict, metric: str | None = None):
         rag2_cfg = config.get("rag2", {})
-        self.jaccard_threshold: float = rag2_cfg.get("oracle_similarity_threshold", 0.75)
+        self.threshold: float = rag2_cfg.get("oracle_similarity_threshold", 0.75)
+        # metric puede venir del config o forzarse (e.g. "containment" para DCI chunks)
+        self.metric: str = metric or rag2_cfg.get("oracle_metric", "jaccard")
+        if self.metric == "containment":
+            self.threshold = rag2_cfg.get("oracle_containment_threshold", 0.5)
         logger.info(
-            "CurationOracle inicializado | jaccard_threshold={}",
-            self.jaccard_threshold,
+            "CurationOracle inicializado | metric={} | threshold={}",
+            self.metric, self.threshold,
         )
 
     def curate(
@@ -134,13 +157,13 @@ class CurationOracle:
 
         for chunk in reranked_chunks:
             is_approved = _chunk_matches_evidence(
-                chunk, ground_truth_ids, gt_texts, self.jaccard_threshold
+                chunk, ground_truth_ids, gt_texts, self.threshold, self.metric
             )
 
             chunk_id = chunk.get("chunk_id", "")
             if is_approved:
                 approved.append(chunk)
-                match_type = "exact_id" if chunk_id in gt_id_set else "jaccard"
+                match_type = "exact_id" if chunk_id in gt_id_set else self.metric
             else:
                 rejected.append(chunk)
                 match_type = "none"

@@ -1,0 +1,45 @@
+Here we examine the predictions of the best performing model, hypo2path rev, on the validation set for nouns in WN18RR-hp (647 synsets).
+
+Path Validity Regardless of whether the predicted direct hypernym was correct or not, we observe that every generated path, from each predicted hypernym to the root, is actually a valid path in WordNet.
+
+This is not surprising, since all such paths appear in the training data.
+
+While the model always correctly generated valid paths in the graph, they did not necessarily start at the correct node (i.e., failing to predict the gold direct hypernym).
+
+Nearby Nodes For noun hypernymy, 14.4% of the errors are due to predicting an indirect hypernym (Table 7).
+
+The remaining incorrect predictions are not on the path from the hyponym to the root: these include co-hyponyms ("siblings", or nodes that share the same parent), and "cousins" (nodes that share the same non-parent ancestor).
+
+3.6% of incorrect predictions are co-hyponyms (also in Table 7).
+
+About half of all predicted cousins had a common ancestor with the query hyponym that was within four steps.
+
+Similar Synset Embeddings Some synsets were similar enough to mislead the model: polysemous lemmas were shared across different synsets (17.4% of the total errors) and some multi-word lemmas had shared words (15.4%) (Table 7).
+
+In these cases, the model incorrectly returned a hypernym of a "confounding hyponym" that has a similar representation to the query.
+
+This type of error is attributable to the way synset embeddings are computed (i.e., averaging lemma vectors) which we adopted from Pinter & Eisenstein (2018).
+
+Lemma Overlap and Polysemy Although none of the queries (synsets) are shared between the training and evaluation (validation/test) sets, some lemma-level overlaps exist (5.4% of training set overlaps with the validation set).
+
+We checked whether our model is taking advantage of any lemma overlap by computing the correlation between prediction correctness and lemma overlap rate (i.e., how many lemmas of a query hyponym synset are already seen anywhere in the training set) of each predicted pair in the validation set.
+
+If the correlation is positive, this indicates that the the model did get some hints from lemmas seen from training set.
+
+However, we observed a significant negative correlation (-0.228; p-value<0.001).
+
+This is related to the point on polysemy discussed above.
+
+In nearly half of the validation instances where a query had a lemma overlap with the training set, the model incorrectly predicted the hypernym of a confounding hypernym.
+
+Rare Synsets Is hypernym prediction more difficult for infrequent synsets (i.e., synsets whose lemmas rarely appear in the corpus from which the word vectors were derived)?
+
+We define a synset's frequency as the average of the frequencies of its lemmas.
+
+18We find that the 164 synsets with frequency under 2,000 have an H@1 score of 15.2 (an 8.4 point drop).
+
+To further quantify the effect of synset frequency on performance, we ranked and binned every prediction by synset frequency (Figure 1).
+
+There is a clear upward trend, suggesting that methods designed to learn better embeddings with sparse data (Herbelot and Baroni, 2017) could improve performance substantially.
+
+Figure 1: H@1 for hyponyms of different frequency within equal-sized bins of size 108.

@@ -1,0 +1,59 @@
+Environmental drivers like temperature and [CO 2 ] as well as agricultural management practices like applying nitrogen fertilizers and irrigation influence spring wheat growth and are likely to influence carbon fluxes.
+
+We conducted four additional experimental simulations to quantitatively estimate these forcings' effects.
+
+The details of the experiments are given in Table 1.
+
+In the control run (S CON ), the model was driven by inputs based on observations that vary over time.
+
+In the experimental simulations, the value of an input driver was kept constant during the study period, while others were allowed to vary, as in the S CON simulation.
+
+For example, in S Temp , the input data for [CO 2 ], nitrogen, and irrigation were identical to those in S CON , except for temperature, for which we used the de-trended 1900-1930 climatology.
+
+In the S N_Fert case, the [CO 2 ], temperature, and irrigation were identical to those in S CON , and nitrogen fertilization was absent.
+
+The S Water case is like S CON , the only difference being that precipitation climatology was used, and no additional water was provided to the soil through irrigation.
+
+We calculated the effect of the individual driver as the difference between the S CON run and the numerical experiments.
+
+Site-scale ISAM dyn_wheat simulations are validated against observations for the 2013-2014 growing season.
+
+Our results show that the spring wheat module ISAM dyn_wheat simulates the magnitude and seasonality of carbon fluxes in spring wheat croplands better than ISAM C 3 _crop .
+
+Figure 1 and Table 2 compare ISAM dyn_wheat and ISAM C 3 _crop against site observations for monthly average fluxes for the 2013-2014 growing season.
+
+Figure 1 shows that the observed carbon fluxes increased from leaf emergence in mid-December 2013.
+
+The fluxes increased until they reached their peaks in March, after which they declined until the harvest in April.
+
+The simulated fluxes follow the observed pattern.
+
+ISAM dyn_wheat was in better agreement with site observations than the ISAM C 3 _crop model.
+
+ISAM dyn_wheat captured the seasonality and accumulated GPP, TER, and NEP for the growing season better than the ISAM C 3 _crop model (Table 2).
+
+The ISAM dyn_wheat peak coincided with the observations, whereas the fluxes simulated by the ISAM C 3 _crop model peaked about a month earlier.
+
+The ISAM dyn_wheat model in ISAM compares better with site measurements for plant biomass at harvest and maximum LAI than the ISAM C 3 _crop model (Table 2).
+
+Table 3 shows the Willmott index and RMSE for the two ISAM runs against the site observations.
+
+The Willmott index is a more sophisticated tool for evaluating land surface models' efficiency than the usual statistical data comparison indices (Song et al., 2013;Willmott et al., 2012).
+
+The Willmott index (Eq. 1) ranges from -1 to 1, where -1 indicates no agreement, while +1 indicates perfect agreement.
+
+The Willmott index values for GPP, TER, and NEP for the ISAM dyn_wheat model are 0.85, 0.73, and 0.83, respectively.
+
+The corresponding values for the ISAM C 3 _crop model are much lower at 0.47, 0.46, and 0.47, respectively.
+
+The higher index value for the dynamic crop suggested better agreement of ISAM dyn_wheat over ISAM C 3 _crop with the site-scale ob- servations.
+
+=                    1 - n i=1 |Model i -Obs i | c• n i=1 Obs i -Obs , if n i=1 |Model i -Obs i | ≤ c • n i=1 Obs i -Obs c• n i=1 Obs i -Obs n i=1 |Model i -Obs i | -1, if n i=1 |Model i -Obs i | > c • n i=1 Obs i -Obs (1) RMSE = n i=1 (Model i -Obs i ) 2 n (2)
+
+Here, c = 2, n is the number of observations, Model i represents the ISAM-simulated carbon fluxes, and Obs i represents the site-scale observations.
+
+Therefore, the ISAM dyn_wheat module appropriately represents spring wheat crop dynamics in ISAM.
+
+The dynamic phenology, dynamic carbon allotment, and dynamic vegetation structure growth improve crop simulation in a land surface model.
+
+However, one should use caution in calibrating and validating the model with sufficient data.

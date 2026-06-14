@@ -1,0 +1,397 @@
+Clear: Improving Vision-Language Navigation With Cross-Lingual, Environment-Agnostic Representations
+
+Abstract
+
+Introduction
+
+Related Work
+
+Method
+
+Language Representation Learning
+
+The goal of our language representation learning approach is to learn a cross-lingual language representation that can mitigate the natural ambiguity and variance in multilingual instructions and improve the path-instruction alignment by capturing the shared and salient visual concepts underlying the instructions.
+
+We define visually-aligned instruction pairs as instructions that correspond to the same navigation path.
+
+Since these instruction pairs refer to the same navigation path, the visual concepts underlying these instructions (e.g., visual objects mentioned in the instruction) are shared.
+
+Thus, we could train the language representation to emphasize these visual concepts by learning the connection between these visually-aligned instruction pairs.
+
+For each navigation path, the Room-Across-Room (RxR) dataset (Ku et al., 2020) provides 9 corresponding language instructions in 3 languages (English, Hindi, and Telugu).
+
+During training, for each navigation path, we randomly sample two instructions out of the nine corresponding instructions as the visually-aligned instruction pairs.
+
+The two instructions can be in different languages, which helps the agent learn a cross-lingual language representation.
+
+Exclusively learning connections between instructions in the same language will lose crucial information across languages, and we quantitatively illustrate this result in Sec. 6.1.
+
+Given the instruction {w i } m i=0 with m words, we use feature of the [CLS] token (i.e., w 0 ) in the pre-trained multilingual BERT (Devlin et al., 2019) outputs as the sentence representation w:
+
+{ w i } m i=0 = m-BERT({w i } m i=0 ) (1) w = w 0(2)
+
+In a batch of size N , we have N positive pairs of instructions with representations ( w j , u j ) N j=1 from Eqn. 2.
+
+Each positive pair is matched with 2(N -1) negatives in the batch (i.e., { w k } k̸ =i and { u k } k̸ =j ).
+
+Our goal is to learn a representation that maps instructions for the same path closer to each other in the representation space, regardless of the language and the natural variance in human-generated instructions.
+
+We learn the representation by optimizing a contrastive loss:
+
+L lang = - N i=1 log exp(α i,i /τ ) 2N k=1 1 k̸ =i exp(α i,k /τ )(3)
+
+α i,j = w T i u j ∥ w i ∥∥ u j ∥ (4)
+
+where α i,j is the similarity between the instruction w i and u j , and τ is the temperature hyperparameter.
+
+Visual Representation Learning
+
+Our goal in visual representation learning is to learn an environment-agnostic visual representation that can mitigate the environment bias caused by objects' low-level appearance, such that it could generalize better to unseen environments.
+
+Intuitively, the agent would learn the general concept of objects instead of the low-level appearance if the agent can identify the same objects in two images in different environment.
+
+Thus, we train the agent to learn the connected visual semantics between the semantically-aligned navigation paths (i.e., paths that mention the same objects or mention similar actions in different environments).
+
+Identifying semantically-aligned path pairs: Although the appearance of the path varies a lot in different environments, the instructions that describe the similar paths are more consistent across environments.
+
+Based on this intuition, we use language as the bridge between paths in multiple visual environments.
+
+Specifically, we propose to use instruction similarity as a direct measurement of how semantically similar two paths are.
+
+For each instruction-path pairs (I, P ) given in the Room-Across-Room (RxR) dataset, we first represent each instruction I as in Eqn.
+
+2. Then, we compute the cosine similarity between the representation of instruction I and all the other instructions in the training set.
+
+We pick the instruction I that is most similar to I and also constraints that I's corresponding path P has the same path length as P .
+
+Thus, we group P and P as the semantically-similar path pair.
+
+Constraint on object-matching: In a batch of size N, we have N positive semantically-aligned path pairs (P k , Q k ) N k=1 .
+
+We represent the positive path pair (P k , Q k ) as sequences of panoramic views
+
+({p k,t } L k t=1 , {q k,t } L k t=1
+
+)
+
+with length L k
+
+. Since paths might not be fully aligned (i.e., correspondence between image pairs {p k,t } and {q k,t } might not hold), we use object-matching to filter out image pairs that don't contain the same objects.
+
+Specifically, we use Mask-RCNN (He et al., 2017) model trained on LVIS dataset (Gupta et al., 2019) in de-tectron2 (Wu et al., 2019) to detect objects in the 36 discretized views of the panoramic view.
+
+We filter out object classes that appear less than 1% of the time in all panoramic views.
+
+27 object classes left, including objects like 'cabinet', 'chair', and 'sofa'.
+
+All object classes can be found in Appendix.
+
+During training, we randomly sample 10 out of 27 object classes in each iteration and filter out image pairs that don't contain same objects of the sampled 10 object classes.
+
+Our object-matching constraint ensures that the corresponding image pairs {p k,t } and {q k,t } also have a high semantic similarity.
+
+Visual encoder: The panoramic view of time step t is discretized into 36 single views {o t,i } 36 i=1 .
+
+We encode the visual representation for each view as:
+
+o t,i = pre-trained model(o t,i ) (5) v t,i = W v1 ReLU(W v2 o t,i ) (6) v t,i = LayerNorm(v t,i + o t,i )(7)
+
+We first encode images with pre-trained vision models.
+
+Then the encoded view features are passed through two fully-connected layers with ReLU as activation function.
+
+Layer normalization and residual connection are applied on top of the fullyconnected layer.
+
+Learning visual representation: Given the N positive semantically-aligned path pairs (P k , Q k ) N k=1 , at each time step t, we have N p panoramic views (computed as the average of 36 single views as in Eqn.
+
+10) that have a positive pair (i.e., the paired view contain at least one same object).
+
+For each view p k,t that has a positive pair, the visual encoder is trained to predict which of the N possible panoramic views {q k,t } N k=1 contain similar semantic information.
+
+Specifically, we train the visual encoder to maximize the cosine similarity of the N p positive image pairs in the batch while minimizing the cosine similarity of the N * N p -N p negative image pairs (i.e. each view has N -1 negatives).
+
+We optimize the contrastive loss as:
+
+L visual = - Np k=1 L k t=1 log(Softmax k (β k,t /τ )) (8) β k,t = p T k,t q k,t ∥p k,t ∥∥q k,t ∥(9)
+
+where β k,t is the similarity between positive panoramic view pair p k,t and q k,t , and τ is the temperature hyperparameter.
+
+We compute the panoramic view representation as the average of 36 single views:
+
+p k,t = 1 36 36 i=1 v p,k,t,i(10)
+
+where v p,k,t,i is the output representation from the visual encoder.
+
+q k,t is computed similarly.
+
+Learning
+
+Our CLEAR agent has two stages of learning: representation learning and navigation learning.
+
+In the representation learning stage, we train the multilingual encoder and visual encoder by optimizing the contrastive loss L lang in Eqn.
+
+L visual in Eqn.
+
+8 respectively.
+
+The representation learning process transfers the language representation to domain-specific language representation and adapts the visual representation to learn the correlation underlying the navigation environments.
+
+In the navigation learning stage, we use a mixture of imitation learning and reinforcement learning to train the agent on the navigation task as in Tan et al. (2019).
+
+Details can be found in Appendix.
+
+Experimental Setup
+
+Dataset
+
+We evaluate our agent on the Room-Across-Room (RxR) dataset (Ku et al., 2020).
+
+The dataset is split into training set, seen and unseen validation set, and test set.
+
+In the unseen validation set and test set, the environments are not appeared in training set.
+
+Thus the performance on these two sets show the model's generalizability to new environments.
+
+More details can be found in Appendix.
+
+Evaluation Metrics
+
+Implementation Details
+
+In our experiments, we learn the shared crosslingual representation based on cased multilingual BERT BASE .
+
+For the pre-trained vision model, we compare performance between image features extracted from ImageNet-pre-trained (Russakovsky et al., 2015) ResNet-152 (He et al., 2016) and CLIPpre-trained (Radford et al., 2021) vision transformer (ViT-B/32) (Dosovitskiy et al., 2021) (abbreviated as 'CLIP feature' later).
+
+More details about representation learning and navigation training can be found in Appendix.
+
+Results
+
+Test Set Results
+
+Ablation Results
+
+Analysis
+
+Effectiveness Of Cross-Lingual Representations
+
+In this section, we show the effectiveness of our language representation learning method described in Sec. 3.1.
+
+We first show the effectiveness of using paired multilingual instructions instead of monolingual instructions in the language representation learning stage.
+
+Then, we show that our learned cross-lingual language representation captures the visual concepts behind the instruction better than the original multilingual BERT representation.
+
+Multilingual vs. monolingual.
+
+To show that the multilingual instruction pairs are crucial for our cross-lingual language representation learning, we experiment with fine-tuning multilingual BERT with instruction pairs in same language only ('Mono' in Table 3).
+
+We observe that compared with the agent with cross-lingual representation ('Multi'), the success rate decreases by 3.1% and sDTW score decreases by 2.5%.
+
+Furthermore, compared with the baseline model that uses the original multilingual-BERT ('m-BERT'), the success rate drops 2.2% and the sDTW score drops 2.1%.
+
+This result indicates that instruction representations in one language cannot benefit from learning representation in other languages if the multi-lingual representation is only supervised by contrastive loss between mono-lingual instruction pairs.
+
+Capturing visual concepts.
+
+Our cross-lingual language representation can ground to the visual environment more easily by capturing the visual concepts in the instruction.
+
+We demonstrate that shared visual concepts in different paths are captured by our language representation.
+
+We first encode the instruction as in Eqn.
+
+2 with cross-lingual representation and original multilingual BERT separately.
+
+For every instruction, we retrieve another instruction with the highest cosine similarity under the constraints that two instructions don't correspond to the same path and equal path length.
+
+As shown in Figure 3, the second row is the query instruction and the first row is its corresponding path.
+
+The following four rows correspond to the instruction-path picked with cross-lingual representation and multilingual-BERT representation.
+
+First, we observe in Figure 3 that our cross-lingual representation retrieves a Hindi instruction while the multilingual-BERT picks an English instruction.
+
+This indicates that our cross-lingual representation learns to encode instructions with similar semantics in different languages closer to each other.
+
+Besides, we observe that in all three paths, the agent passes tables and chairs, but only in the query path and the cross-lingual paired path, the agent stops at places similar to "bar stools".
+
+This demonstrates that the visual objects in the cross-lingual picked path are Instruction:
+
+Path:
+
+Cross-Lingual paired instruction:
+
+Cross-Lingual paired path:
+
+Multilingual-BERT paired instruction:
+
+Multilingual-BERT paired path:  more similar to the objects in the query path.
+
+Effectiveness Of Optimizing Similarity Between Three Languages
+
+In this section, we further show that only optimizing the similarity between a subset of languages (i.e., two out of three languages) will hurt the performance.
+
+Specifically, we train the language representation that optimizes similarity between only English and Hindi ('en+hi'), only English and Telugu ('en+te'), only Hindi and Telugu ('hi+te'), and only single language ('mono').
+
+Given paired language instructions in English and Hindi in unseen set, the average distance is 0.61 for our language representation (i.e., optimizes similarity between all three languages), 0.43 for en+te, 1.67 for hi+te, and 1.55 for same language only, indicating that explicitly optimizing the similarity between en+hi helps reduce the distance between en+hi most.
+
+Adding te in optimization will make en+hi farther from each other, but still much better than only optimizing hi+te, and could also make the distance between all three languages to be closer to each other.
+
+We further show the performance of training the navigation agent with these language representations in Table 4.
+
+We observe that both the success rate and the nDTW score drop significantly when only training on a subset of languages.
+
+This result shows that it's crucial to train the language representation with instruction pairs in all three languages.
+
+Decreasing Gap Between Seen And Unseen Environments
+
+Most previous navigation models (Wang et al., 2019a;Ma et al., 2019a;Majumdar et al., 2020) suffer from a large performance drop when moving from seen validation to unseen validation because the visual encoder overfits the low-level appearance features (Zhang et al., 2020).
+
+Our environment agnostic visual representation can decrease the performance gap between validation seen and unseen environments.
+
+As shown in Table 5, the nDTW gap is decreased from 1.6 to 1.0 compared with baseline model.
+
+It is also lower than the gap of multi-lingual agent in Ku et al. (2020).
+
+Comparison With Other Contrastive Learning Approaches
+
+Generalization To Other Vln Tasks
+
+We further evaluate our CLEAR approach's generalizability on Room-to-Room (R2R) dataset (Anderson et al., 2018b) and Cooperative Vision-and-Dialog Navigation (CVDN) dataset (Thomason et al., 2019), in which we directly transfer our CLEAR approach and train on the navigation task on R2R and CVDN.
+
+R2R and CVDN follows the same training, validation seen, and validation unseen split of environments as Room-Across-Room dataset.
+
+The main difference is that the language instructions in R2R and CVDN is monolingual (i.e., English).
+
+Besides, instructions in CVDN are multiround dialogues between navigator and the oracle.
+
+Our baseline model uses multilingual BERT to encode instructions and the ResNet pretrained on Im-ageNet to extract image features.
+
+The cross-lingual language representation and environment-agnostic visual representation is trained on RxR dataset (as in Sec. 3.1 and Sec. 3.2).
+
+We then train the navigation agent on R2R dataset and CVDN dataset with the language and visual encoder initialized from our CLEAR representation.
+
+As shown in Table 6, on R2R dataset, our learned representation outperforms the baseline by 1.4% in success rate and 1.8% in nDTW.
+
+Furthermore, we show that the zero-shot performance of our approach improves the baseline by 4.5% in success rate and 2.2% in SPL on R2R dataset.
+
+On CVDN dataset, our learned representation outperforms the baseline by 0.74 in Goal Progress (4.05 vs. 3.31) after training on CVDN dataset, and outperforms the baseline by 0.42 in Goal Progress (0.92 vs. 0.50) in the zero-shot setting.
+
+Goal Progress measures the progress made towards the target location and is the main evaluation metric in CVDN.
+
+This result demonstrates that our learned cross-lingual and environment agnostic representation could generalize to other tasks.
+
+Generalization To Other Vln Agents
+
+We further evaluate our CLEAR approach's generalizability to other VLN agent.
+
+Specifically, we adapt CLEAR to SotA VLN agent HAMT (Chen et al., 2021).
+
+With the pre-trained weights released in HAMT, we further learn the text representation and visual representation with our approach.
+
+Adapting CLEAR to HAMT achieves 57.2% in success rate and 65.6% in nDTW score, which is 0.7% higher than HAMT in success rate and 2.5% higher than HAMT in nDTW score on RxR validation unseen set, demonstrating the effectiveness of our proposed approach over SotA VLN models.
+
+Conclusion
+
+Figure 1: Motivation for cross-lingual and environmentagnostic visual representations: The English instruction, Telugu instruction, Hindi instruction on the left all correspond to the same path -Path A. The words in red correspond to the same visual object "wash basin".
+
+Path A and Path B are similar paths (i.e., the instruction for these two paths are semantically similar) in different environments.
+
+Figure2: Left: the agent learns a cross-lingual language representation and an environment-agnostic visual representation via maximizing the similarity between positive pairs (connected with blue line) and minimizing the similarity between negative pairs (connected with red dashed line).
+
+For simplicity, we use 3 as batch size when illustrating the positive pairs and negative pairs.
+
+Right: then the agent is trained on the vision-and-language navigation task based on these learned representations.
+
+Right now you're standing at a point where on the right side you can see a couch and on the left you can see a dining table.
+
+Turn left and move forward and exit the room through the sliding door.
+
+Now slightly turn left and move forward till you reach a round white table in front of you.
+
+Now slightly turn left, move forward there are four bar stools in front of you.
+
+Move forward and stand behind the bar stools and that is the end point.
+
+ఇపు్పుడు మీరు నీళ్ల తొట ్టి పక్కన ఉనా్నరు.
+
+ఎడమవ ౖ పు తిరి గి తె రి చి ఉన్న గాజు తలుపు లోపలికి నడవండి .
+
+మీ ఎదురుగా తలుపు రంగు కుర ్చీలు ఉనా్నయి.
+
+కుడి వ ౖ పు తిరి గి ముందుకి నడవండి .
+
+మీ ఎడమవ ౖ పున బల్ల మరి యు సో ఫాలు ఉనా్నయి.
+
+అవి దాటుతూ మీ ముందు ఉన్న దారి లో నడవండి .
+
+కాస్త కుడి వ ౖ పు తిరి గి తె లుపు రంగు కుర ్చీ ముందుకు వ ళ్ళండి .
+
+ఇక్కడ మీ కుడి వ ౖ పున తె లుపు రంగు సో ఫాలు మరి యు బల్ల ఉనా్నయి.
+
+ఇక్కడి నుండి ఎడమవ ౖ పు తిరి గి మీ కుడి వ ౖ పు ఉన్న బల్ల ను దాటుతూ ముందుకి నడవండి .
+
+ఇపు్పుడు మీ ఎదురుగా అల ్మారా ఉంది .
+
+కుడి వ ౖ పున సి ంకు ఉంది .
+
+ఇక్కడే ఆగండి . (Now you are next to the water tank.
+
+Walk inside the glass door that opens back to the left.
+
+There are door colored chairs in front of you.
+
+Walk back to the right.
+
+To your left are the table and sofas.
+
+Cross them and walk on the path in front of you.
+
+Go straight back to the white chair slightly to the right.
+
+Here are the white sofas and table to your right. From here turn left and walk forward, crossing the table to your right.
+
+Now there is a cupboard in front of you.
+
+To the right is the sink.
+
+Stay right here.) Right now you're facing towards a chair.
+
+Turn behind and exit the room.
+
+Now slightly turn left and move forward by passing through a large black table on the right side and a large portrait on the left side.
+
+Right now you can see a white teapoy and a sofa set in front of you.
+
+Move towards that teapoy.
+
+Now there is a couch on the right side.
+
+Move forward and stand in between the couch and the window and that is the end point.
+
+Figure 3: Comparison of the most similar instruction picked with cross-lingual representation and multilingual-BERT.
+
+Our cross-lingual picked instruction mentions more visual object as in the query instruction.
+
+Besides, the path corresponding to the cross-lingual picked instruction contains more accurate visual objects as in the query path.
+
+Figure 4: The attention weights for the grounded instruction for our CLEAR model, ResNet based baseline model, and ground truth from RxR dataset.
+
+You will start by standing in front of a glass door and on your right is a doorway….
+
+Test leaderboard results under single run setup.
+
+RxR is the mono-lingual baseline in
+
+ResNet 35.1 35.4 36.4 33.4 31.6 31.6 33.0 30.4 51.1 50.7 52.3 50.3 30.1 30.1 31.4 28.7  +text  36.0 36.1 37.6 34.3 31.7 31.7  33.2 30.3 52.0 52.3 53.4 50.2 30.5 30.5 32.0 29.1 +visual 35.6 35.8 36.9 33.9 32.5 32.6 33.9 31.0 53.7 53.6 55.1 52.5 30.5 30.5 31.7 29.1 Ablation study of our model with ResNet features and CLIP features on validation unseen sets. 'avg' is the agent's average performance on English, Hindi, and Telugu instructions.
+
+Comparison between language representation trained with mono-lingual instruction pairs ('Mono') and multi-lingual instruction pairs ('Multi') on validation unseen sets. 'm-BERT' is the method that uses original multilingual BERT as language representation.
+
+The results of adding our learned visual representation on validation seen environments and validation unseen environments.
+
+|∆| indicates absolute performance difference between seen and unseen environments.
+
+Results on R2R validation unseen environments. "CLEAR" (based on ResNet) transfers the language and visual representation from RxR dataset, and "ResNet" is the baseline model that uses multilingual BERT and pre-trained ResNet. "ResNet-zero" and "CLEAR-zero" are zero-shot performance of baseline and our approach on R2R dataset.
+
+. It contains 126,069 human-annotated instructions with an average instruction length of 78.
+
+Table9, we check the top-5 close words to 'kitchen', and 'fire' from a vocabu-The results of our CLEAR method and ResNet baseline on different environments in validation unseen set.
+
+# Data means the number of instruction-path pairs for each environment.

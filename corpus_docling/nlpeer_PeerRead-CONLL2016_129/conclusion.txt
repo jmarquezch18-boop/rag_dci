@@ -1,0 +1,9 @@
+Domain adaptation with only a tiny amount of indomain data is a hard problem.
+
+In this paper, we proposed to use a semi-supervised CNN to train the domain classification model, then use the CNN to select the data which is most similar to the test domain.
+
+Experiments on large data condition SMT tasks showed that this outperforms state-ofthe-art language-model-based data selection methods significantly.
+
+Particularly when the size of the in-domain data is small, semi-supervised CNN classifier can still select in-domain bilingual sentences to train an adapted SMT system.
+
+In future work, we plan to 1) apply this approach to select the data from large size target language corpus for language model training; 2) use the source sentences of the test set to select the data for online dynamic adaptation.

@@ -1,0 +1,21 @@
+In Table 4 we present examples of words dotted incorrectly, or correctly, only by NAKDIMON, compared with Morfix and Dicta.
+
+The largest category for NAKDIMON-only errors (∼18% of 90 sampled) are ones where a fused preposition+determiner character is dotted to only include the preposition, perhaps due to its inability to detect the explicit determiner clitic ‫ה‬ in neighboring words, on which the complex systems apply morphological segmentation.
+
+In other cases (∼15%), NAKDIMON creates 11 These are: the sin/shin dot, vowel distinctions across the a/e/i/o/u/null sets, and dagesh in the ‫/ב‬ ‫/כ‬ ‫פ‬ characters.
+
+We do not distinguish between kamatz gadol/kamatz katan, and schwa is assumed to always be null. unreadable vocalization sequences, as it has no lexical component and is decoded greedily.
+
+These types of errors are more friendly to the typical use cases of a dotting system, as they are likely to stand out to a reader.
+
+In contrast, a large portion of cases where only NAKDIMON was correct (∼13% of 152) are foreign names and terms.
+
+This may be the result of such words not yet appearing in dictionaries, or not being easily separable from an adjoining clitic, while character-level information can capture pronunciation patterns from similar words (e.g. ‫ֶפוֹ‬ ‫ֶל‬ ‫ט‬ 'telephone', for the example ‫.)האייפו‬ OOVs To further quantify the strengths of NAKDIMON's architecture and training abilities, we evaluate the systems' results pertaining only to those words in the test set which do not appear in our training sets.
+
+We follow common practice by calling them OOVs ("out of vocabulary"), but emphasize that NAKDIMON does not consult an explicit vocabulary, and the other systems are not evaluated against their own vocabularies (which are unknown to us).
+
+We find that NAKDIMON's performance on this subset is substantially worse compared with the other systems than on the full set: 15 percentage points below Dicta and seven below Morfix on the VOC metric (see full results in Appendix C).
+
+These results might be counter-intuitive considering the proven utility of character-level models in OOV contexts (e.g., Plank et al., 2016), and so we offer several possible explanations: First, many "OOVs" consist in fact of known words coupled with an unseen combination of prefix clitics and/or suffix possessive markers, which other systems explicitly remove using morphological analyzers before dotting.
+
+Second, mirroring the last finding from the overall analysis, some "OOVs" are proper names which appear in dictionaries but are absent from the training set, due to corpus effects such as time and domain, or simply chance.

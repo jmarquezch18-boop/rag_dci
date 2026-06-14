@@ -1,0 +1,117 @@
+We report precision (P), recall (R) and F 1 scores based on a strict matching between the gaps predicted by our models and those in the gold standard.
+
+While this evaluation strategy might seem strict, it has the advantage of being fully automatic, thus avoiding the subjectivity and time required by human evaluation, so we adopt it during development.
+
+In addition to letting the models decide the optimal number of gaps, we also evaluate system performance when we fix the number of predicted gaps for each task to the number of gaps they have in the gold standard.
+
+The n-best predicted gaps are chosen based on their confidence scores.
+
+In this scenario, P, R and F 1 become the same.
+
+We also report human evaluation by three test experts from CUP&A who volunteered for the task.
+
+The experts were asked to label each proposed gap in each task of our test set (a total of 360 gaps) as either good or bad and provide a reason and optional comments for their choice.
+
+The list of labels available to our annotators is shown in
+
+We carry out automatic evaluation by computing P, R and F 1 on our development set.
+
+Table 3 reports the results of our multi-objective ELECTRA model (enhanced with dependency information) as well as the random baseline, Exercise Maker, BERT, and the standard single-task ELECTRA.
+
+This is our base model, which does not include any loss manipulation or post-processing.
+
+In this setting, the number of predicted gaps was decided by each model based on the confidence scores (> 0.5 for the positive class).
+
+Overall, we observe that performance increases with more sophisticated models.
+
+Exercise Maker relies on previously seen gaps and so outperforms the random baseline by a large margin.
+
+However, it can only create gaps for the 139 words in its predefined FCE word list, missing gaps that are not on that list.
+
+Neural transformer-based models are the best, with improvements over Exercise Maker of at least 25 F 1 on our development set.
+
+Although the improvement of our multi-objective ELECTRA model over BERT does not seem to be very significant based simply on P, R and F 1 , a closer look at the results reveals that BERT produces a much higher number of repeated gaps (25 compared to 9 by multi-objective ELECTRA) as well as more cases of gaps in close proximity, as shown in Figure 3.
+
+We also perform an ablation study in Table 3 where we compare our multi-objective ELECTRA model to a standard one that does not include our auxiliary language model objective.
+
+Results show that the former outperforms the latter on all metrics, confirming that the addition of the LM objective is clearly beneficial.
+
+Table 4 shows the performance of our multiobjective ELECTRA model as we increase the nbest list of gaps according to their confidence score.
+
+The first row indicates the results of the system when it is forced to predict the exact same number of gaps per task as in the gold standard.
+
+This causes P and R to be the same.
+
+As we expect, the results show that the number of gaps in the gold data is actually the optimal number to achieve the best F 1 score.
+
+Although our multi-objective model shows good performance based on automatic evaluation, a closer look at the output reveals that the structure of the cloze tests is far from ideal as they often contain repetitions and gaps that are too close to each other, aspects that are carefully controlled in the gold standard.
+
+Table 5 shows that system performance effectively improves as we add the extensions proposed in Section 4, indicating that global aspects of the task are not properly captured by our initial model and require further manipulation.
+
+In order to make the structure of our output as similar as possible to our target tasks, we fix the number of predicted gaps for each task to the number of gaps they have in the gold standard.
+
+Note that P and R are the same in this setting so we only report F 1 .
+
+The effect of this decision is shown is Table 6.
+
+We can see that adding loss manipulation to our model decreases the number of adjacent gaps from 40 to 23, but increases the number of repeated gapped words from 18 to 33.
+
+The decline in the restricted F 1 based on automatic evaluation is not favourable, but we make this sacrifice at the price of achieving a better-structured final test.
+
+After adding post-processing for repeated gaps, we observe that, although overall F 1 performance drops slightly, the number of repeated gapped words decreases favourably from 33 to 9 (Table 6).
+
+It also creates a better spread of gaps, as shown by a lower KL-divergence between the average PoS distribution of the output and that of the gold standard (0.55 with post-processing as opposed to 0.59 without it).
+
+Post-processing also removes two cases in the development set where the gaps do not meet the minimum 4-word distance.
+
+It is worth recalling that these extensions are highly effective when we do not restrict the number of predicted gaps.
+
+Table 5 shows that they significantly improve R, which results in higher overall F 1 .
+
+As a result of these experiments, we stick with our post-processing approach for the rest of our experiments and use it to produce the output submitted for human annotation.
+
+Following our intuition that test experts could find more value in our system than initially shown by our automatic evaluation, we asked a panel of three test experts to judge the quality of the gaps produced by our extended model on the test set.
+
+Inter-annotator agreement on gap classification (good/bad) was found to be moderate (percent agreement is 75.93%, Randolph's free-marginal kappa is 0.52 (Randolph, 2005)).
+
+Unlike in automatic evaluation, we only report accuracy for our human experiment.
+
+System performance using automatic and human evaluation is compared in Table 7 (reported individually for each annotator).
+
+These results show that performance increases dramatically when the output is judged by human experts, confirming our suspicion that performance is underestimated by automatic evaluation and that there are many other words in the texts that could constitute equally useful apart from those in the gold standard.
+
+With system accuracy ranging between 75% -82% for human judgements, we can conclude that at least 7 out of 10 gaps proposed by our system are considered good by our experts.
+
+We observed that differences between annotators' judgements and the gold-standard can occur for many reasons, e.g.:
+
+• non-gaps in the gold standard are not necessarily bad gaps, • gold standard gaps are derived from pilot testing while annotators' gaps are derived from their expertise, • previous judgements by the annotators can affect the judgement of new gaps (e.g. choosing the best of two close gaps), etc.
+
+Annotator accuracy against the gold standard ranges between 50% -60%.
+
+Following our classification in Table 2, we analysed the reasons why some gaps were not considered good by the annotators.
+
+Figure 4 shows the average frequency of the different reasons given by the annotators for rejecting a gap proposed by our system.
+
+Examples are included in Appendix C.
+
+The most frequent reason is the violation of the minimum required distance between two gaps (42.43%).
+
+Although our loss-manipulation ap-  proach was successful in reducing these cases, we did not attempt to eradicate them completely since there are many factors at play when choosing more appropriate gaps than just distance.
+
+In many cases, gaps in close proximity test different words in the same phrase (e.g. take part in, in addition to, etc.) so we preferred to keep these cases and encourage annotators to comment on their preferences.
+
+Repetitions, on the contrary, are much better handled, accounting for only 0.87% of all bad gaps.
+
+The second most frequent reason is 'unacceptable outlier' (32.47%), which normally accounts for cases where the difficulty of the gap is considered inappropriate for the target proficiency level (B2 in this case).
+
+This is an interesting phenomenon, since the fact that the text as a whole pertains to a given CEFR level does not guarantee that the gaps created will always be appropriate for the level.
+
+The remaining reasons are substantially less frequent than the first two and mostly related to aspects that were not explicitly controlled in our models, except for the third topmost reason ('Too many gaps of this type') which we did control by comparing PoS distributions.
+
+These results show that our system is able to capture many aspects of the task that were not explicitly modelled.
+
+Finally, we compared system accuracy per task computed from annotators' judgements vs. the gold standard.
+
+Average correlation across all annotators was found to be very weak (Pearson's r = 0.0558, Spearman's ρ = 0.1474).
+
+This suggests that automatic scores are not a good proxy for human perception, with experts being much more positive about our model's output (as shown in Table 7).

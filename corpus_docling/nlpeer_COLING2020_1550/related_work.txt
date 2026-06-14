@@ -1,0 +1,23 @@
+In general, FND can be interpreted as a binary classification task where a text document is classified as either Fake News or No Fake News or as a multi-class problem often with ordinal labels.
+
+One major distinction in different classification algorithms can be drawn in the consideration of auxiliary information.
+
+Most contributions take a purely feature-oriented approach, while others try to incorporate information revolving around spreading Fake News and the respective dissemination process.
+
+The feature-based approach focuses on extracting relevant linguistic peculiarities associated with Fake News.
+
+Typical examples are characters n-grams, words or a measure of the readability and syntax of an article body (Pérez-Rosas et al., 2018, p.5).
+
+Other authors included the average word length, counts of exclamation marks or the sentiment of an article (Khan et al., 2019, p.6).
+
+After finding appropriate features, traditional machine learning algorithms as well as (deep) neural networks are proposed to classify the text instance given the extracted features.
+
+Other feature-based approaches directly rely on deep learning, using neural networks for learning good representations of the text input by a stack of hidden layers which is then fed in a last classification layer.
+
+This approach is used by Yang et al. (2018) who simultaneously train a CNN on text and image data to classify fake entities and by Dong et al. (2019) who implement a two-step approach of using supervised and unsupervised learning with a CNN as well. But despite the fact that feature-based approaches are fairly popular within the FND research, Shu et al. (2017) argue that they are not sufficient.
+
+Approaches that use auxiliary information e.g. revolve around modeling the dissemination process of Fake News by incorporating spatio-temporal information about users who like, share or publish (potential) Fake News (Ruchansky et al., 2017;Ren and Zhang, 2020).
+
+The FNC-1 organizers use a feature-based approach by proposing a baseline model that extracts various features from the headlines and article bodies.
+
+The approach of specifically modeling the relationship between a headline and a respective article body was also exploited by Yoon et al. (2019) in the context of clickbait detection while the FNC-1 takes this approach as a pre-step to FND.

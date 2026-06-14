@@ -1,0 +1,163 @@
+We evaluate the performance of our summarization models automatically using ROUGE metrics (Lin, 2004) including F1 ROUGE-1 (R1), ROUGE-2 (R2) and ROUGE-L (RL).
+
+Tables 1, 2 and 3 summarize the performance of our models in comparison to the baselines and the previously reported SOTA results on CNN/DailyMail, PubMed and arXiv respectively.
+
+On all three datasets, ablation studies are systematically conducted to investigate the contributions of different experimental settings.
+
+To analyze the output summaries from an overall perspective, we plot the distribution of the extracted sentences on each dataset and compare it to the ORACLE summaries and those outputted by the comparison baseline (see Figure 2).
+
+Appendix A.6 demonstrates human evaluation of extracted summaries for a more intuitive understanding about the superiority of the proposed system.
+
+ROUGE results on CNN/DailyMail are summarized in Table 1.
+
+The first three blocks highlight the results reported by the corresponding papers of abstractive, extractive, and hybrid summarization systems.
+
+The best results regarding the respective type of the summarization system are underlined.
+
+In the baselines block, the first two lines highlight the ORACLE results that build the upper bounds for extractive systems taking the same number of input tokens.
+
+The LEAD-n baselines simply select the first n sentences in a document as its extractive summary.
+
+Despite its simplicity, the LEAD-3 baseline already achieves relatively competitive performance.
+
+The three TransformerETS models are the corresponding comparison baselines that use the same model architecture and experimental settings as our models but without injected HiStruct information.
+
+The following block presents the results of our HiStruct+ models based on different TLMs with various input lengths.
+
+To make the evaluation results comparable to the SOTA extractive model BERTSUMEXT, we follow their approach and report the averaged results of three best checkpoints.
+
+Regardless the base TLM and input length, our HiStruct+ models collectively outperform the corre- sponding TransformerETS baselines by merely injecting the hierarchical position information of sentences.
+
+However, the performance improvements gained by our models on CNN/DailyMail are small.
+
+One of the reasons might be that we merely inject the hierarchical position information of sentences, section titles are not available.
+
+Furthermore, as discussed in Section 4, the hierarchical structure of the CNN/DailyMail documents is not so obvious as those in PubMed and arXiv.
+
+Compared to the SOTA extractive model, our best HiStruct+ model produces competitive results.
+
+The R2 and RL scores are improved slightly.
+
+The model can be reused in many hybrid approaches.
+
+When we apply MatchSum based on our best 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24  0 Ablation studies on CNN/DailyMail (see the results and detailed discussions in Appendix A.5) suggest that the setting la-sum works best for hierarchical position encoding.
+
+Two stacked Transformer layers in the summarization model perform better than one or three Transformer layers.
+
+When taking longer inputs than the length limit of the TLM, substantial improvements are achieved by using the copied token position embeddings for initialization instead of random initialization.
+
+The extracted summaries are analyzed in more detail by plotting the proportions of the extracted sentences at each linear position within the whole document as shown in Figure 2a.
+
+The model in green is our best-performed HiStruct+ model on CNN/DailyMail.
+
+The model in orange is the corresponding comparison baseline without injected HiStruct information.
+
+The model in blue is the OR-ACLE system, which produces the gold extractive summaries.
+
+We can observe that the ORACLE sum-mary sentences are distributed across documents more smoothly, while our HiStruct+ model and the baseline model tend to select the first sentences and fail to select sentences that appear at later positions within the documents.
+
+Compared to the baseline, the HiStruct+ model leads to more similar proportions as the ORACLE summaries at the most sentence indices.
+
+ROUGE results on PubMed are summarized in Table 2.
+
+As shown in the baselines block, the ORACLE upper bounds for extractive summarization are increased significantly by increasing the input length, which makes it possible to exploit potential gains from modeling longer input.
+
+The LEAD-n baselines do not produce competitive results on PubMed.
+
+It indicates that the first sentences in PubMed are not so informative as those in CNN/DailyMail.
+
+The last two TransformerETS models in the block are the comparison baselines that are unaware of HiStruct.
+
+The last block in Table 2 presents the results of two groups of HiStruct+ models, grouped by the base TLM used in the summarization model.
+
+In PubMed, we can choose to inject the sentence hierarchical position embeddings (sHEs) with or without the section title embeddings (STEs).
+
+STEs can be replaced by classified STEs.
+
+This can result in three different injection settings for a model group, namely sHE, sHE+STE, and sHE+STE(classified).
+
+For each model setting, we report the results of the best-performed checkpoint.
+
+Our best HiStruct+ model on PubMed is a model based on Longformer-base taking 15,000 input tokens, which injects the sHEs and the classified STEs into the extractive model.
+
+It achieves ROUGE results of 46.59/20.39/42.11, which beat the SOTA extractive model ExtSum-LG+MMR-Select+ collectively on all three ROUGE metrics with improvements of 1.2/0.02/1.12.
+
+Taking the SOTA abstractive and hybrid approaches into account, our results are still very competitive.
+
+All HiStruct+ models produce the competitive results that are better than or very close to the former SOTA results for extractive summarization.
+
+They also collectively outperform the TransformerETS baselines by a large margin on all evaluation metrics.
+
+The overperformance is much more substantial than that on CNN/DailyMail, even if only the hierarchical position information is injected.
+
+This supports our hypothesis that the proposed model works better on datasets with more conspicuous hierarchical structures.
+
+Ablation studies on PubMed suggest that the largest improvement of our models against the baseline is contributed by the hierarchical position information of sentences.
+
+This is observed when we compare the three models in the first group of HiStruct+ models with the first TransformerETS baseline.
+
+Injecting merely sHE, the results are already increased by 4.07/3.88/3.86.
+
+When the section title embedding (STE) is included additionally, the results are further increased by 0.73/0.65/0.68.
+
+When using classified STE instead, the ROUGEs are increased by a small margin of 0.1/0.1/0.09.
+
+Comparing the second group of HiStruct+ models to the second TransformerETS baseline, it is also observed that injecting the sHE leads to the largest performance gain.
+
+The extracted summaries analysis on PubMed test set is demonstrated in Figure 2b.
+
+The model in green is our best-performed HiStruct+ model on PubMed, the model in orange is the corresponding TransformerETS baseline, the model in blue is the ORACLE system.
+
+The ORACLE summaries are distributed across documents evenly.
+
+The Trans-formerETS baseline favors the first 5 sentences and ignores the sentences appearing at later positions.
+
+In contrast, our HiStruct+ model overcomes the problem of focusing merely on the first sentences.
+
+The outputs of the HiStruct+ model are close to the ORACLE summaries.
+
+It indicates that by injecting HiStruct information explicitly using our method, the model successfully learns the deeper internal hierarchical structure of the PubMed documents and relies less on the linear sentence positions.
+
+ROUGE results on arXiv are summarized in Table 3.
+
+The results of the HiStruct+ models are presented in two groups.
+
+The first group takes 15k input tokens, while the second group increases the input length to 28k.
+
+In the groups, different injection settings are compared.
+
+Our best-performed HiStruct+ model on arXiv is an extractive model based on Longformer-base with 28k input tokens, injecting the sHEs with the original STEs.
+
+This model beats the results achieved by ExtSum-LG+RLoss and sets the new SOTA ROUGEs for extractive summarization on arXiv to 45.22/17.67/40.16.
+
+All HiStruct+ models collectively outperform the corresponding TransformerETS baselines (i. e., the last two models in the baselines block) by a large margin on all ROUGE scores.
+
+On this dataset, the HiStruct+ improvement is much more significant than those on both CNN/DailyMail and PubMed.
+
+The arXiv dataset has the largest hi-width among the three datasets and the hierarchical structure is most conspicuous, which might be the reason why the HiStruct+ models yield the largest performance improvements on arXiv.
+
+Ablation studies in the first HiStruct+ group also suggest that the largest improvement of our HiStruct+ model against the TransformerETS baseline is contributed by injecting the sentence hierarchical position information, which is encoded as  sHEs.
+
+The effect of using the classified STE on arXiv is opposite to that on PubMed.
+
+The summarization performance declines slightly when we replace the STE with the classified STE.
+
+This outcome occurs in the second group of HiStruct+ models as well.
+
+We notice the fact that there are 500k unique section titles in arXiv, while PubMed contains 164k unique section titles.
+
+Accordingly, it becomes much more difficult to group a large number of section titles correctly into several section classes.
+
+Furthermore, the PubMed dataset contains papers mostly in the bio-medical domain.
+
+The structure of those papers tends to follow specific writing conventions in the bio-medical sciences.
+
+The arXiv dataset, in contrast, contains scientific papers that are not limited to a specific domain.
+
+As consequence, the document structure and the writing styles are more diverse.
+
+The extracted summaries analysis on arXiv is demonstrated in Figure 2c.
+
+The baseline (in orange) tends to select the first sentence and the sentences indexed between 10 and 20, while it excludes sentences at later positions.
+
+It is clearly observed that the summary sentences extracted by the HiStruct+ model are evenly distributed, the informative sentences appearing at later positions are not ignored.

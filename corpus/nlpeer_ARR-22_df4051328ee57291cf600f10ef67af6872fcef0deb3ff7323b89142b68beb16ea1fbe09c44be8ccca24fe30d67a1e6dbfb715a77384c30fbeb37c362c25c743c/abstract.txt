@@ -1,0 +1,5 @@
+We demonstrate that it is feasible to accurately diacritize Hebrew script without any human-curated resources other than plain diacritized text.
+
+We present NAKDIMON, a two-layer character-level LSTM, that performs on par with much more complicated curationdependent systems, across a diverse array of modern Hebrew sources.
+
+The model is accompanied by a training set and a test set, collected from diverse sources.

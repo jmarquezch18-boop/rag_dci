@@ -1,0 +1,87 @@
+Croplands are highly productive ecosystems that exchange energy, carbon, and water with the atmosphere (Lokupitiya et al., 2016).
+
+Croplands absorb a significant amount of carbon from the atmosphere during their short growing season, contributing to seasonal variations in atmospheric carbon loading.
+
+The rise in carbon levels in the atmosphere has complicated effects on agricultural productivity (Yoshimoto et al., 2005;Saha et al., 2020).
+
+Temperature, nitrogen fertilizers, and irrigation are all factors that influence crop development and, as a result, alter carbon fluxes from croplands (Lin et al., 2021).
+
+For example, increasing temperature can offset the beneficial effects of increased atmospheric carbon (Sonkar et al., 2019).
+
+Better-fertilized soil can respond better to higher carbon levels (Lin et al., 2021).
+
+Lands with limited water availability have lower carbon fluxes (Hatfield and Prueger, 2015;Green et al., 2019).
+
+Understanding the variability and drivers of carbon fluxes from agroecosystems can thus contribute to a better understanding of the interactions between the biosphere and the atmosphere.
+
+Wheat is one of the world's most widely farmed cereal crops and a staple food for approximately 2.5 billion people (Ramadas et al., 2020).
+
+Winter wheat and spring wheat are the two cultural types of wheat grown worldwide.
+
+Spring wheat is grown in India.
+
+Spring wheat is typically planted in October-November and harvested between March and April in India (Ramadas et al., 2020).
+
+With approximately 107 Mt in 2020, India ranks second only to China in wheat production, accounting for 13.5 % of the global wheat supply (FAO-Published by Copernicus Publications on behalf of the European Geosciences Union.
+
+STAT, 2019).
+
+Wheat production in India has increased by 25 % since 2008.
+
+The harvested area increased from 28 Mha in 2008 to 29 Mha in 2019 (FAOSTAT, 2019).
+
+However, research into carbon in spring wheat croplands is limited.
+
+The current study is the first to evaluate the carbon dynamics and the impact of their drivers in the Indian agroecosystem.
+
+Baldocchi et al. (2018) extensively reviewed the variability of carbon fluxes from terrestrial ecosystems across the globe, but there are no studies from the Indian subcontinent.
+
+A few studies examined carbon fluxes at the site scale in northern Indian spring wheat agroecosystems.
+
+Patel et al. (2011) for the 2008-2009 growing season, Patel et al. (2021) for the 2014-2015 growing season, and Kumar et al. (2021) for the 2013-2014 growing season are examples of these studies.
+
+All studies found the typical U-shaped curve in the net ecosystem production (NEP) at diurnal and seasonal scales.
+
+The average NEP during the growing season was 5-6 gC m -2 d -1 .
+
+Only the intra-annual variation of carbon fluxes can be discussed in site-scale studies.
+
+Studying interannual variability in carbon fluxes is difficult because flux towers are only operational for 1 or 2 years.
+
+Furthermore, there are only a few flux towers in the agroecosystems of India, and they are all installed in the northern region.
+
+Site-scale carbon studies cannot be extended to understand carbon fluxes at a regional scale over India because the climate and growing conditions vary considerably across wheat-growing regions of India.
+
+Process-based models are commonly used to study carbon dynamics (Sándor et al., 2020).
+
+These models explicitly characterize known or hypothesized cause-and-effect relationships between physiological processes and environmental driving forces (Chuine and Régnière, 2017).
+
+Process-based crop models can simulate crop production, phenology, carbon, energy fluxes, and the interannual variability in crop carbon budgets using atmospheric and management data as inputs (Revill et al., 2019).
+
+This study used the Integrated Science Assessment Model (ISAM), a process-based land surface model with bio-geochemical and bio-geophysical components.
+
+ISAM was developed to assess the effect of variations in CO 2 concentration on agroecosystems (Jain and Yang, 2005;Song et al., 2013;Yang et al., 2009).
+
+The main benefit of using process-based models is that they can quantify the direct effect of input parameters and external drivers on crop growth and fluxes (Jones et al., 2017).
+
+There are a few studies on carbon fluxes in Indian terrestrial ecosystems (Banger et al., 2015;Gahlot et al., 2017), but none on agroecosystems.
+
+A significant bottleneck in modeling agroecosystems in India is the lack of observation data on crop phenology.
+
+We are trying to bridge the gap between the on-field research extensively carried out across India at agricultural institutions and modeling studies through our efforts to digitize the research into a machine-readable format.
+
+As a result, we assembled comprehensive crop phenology data for spring wheat for the first time.
+
+These efforts will be extended to a variety of crops grown across India.
+
+To our knowledge, no long-term regional-scale studies of carbon dynamics over Indian agroecosystems have been conducted.
+
+Crop management practices can significantly impact crop growth and interaction with the land and atmosphere via water, energy, nutrients, and carbon exchanges.
+
+There has been no research on the impact of these management practices on carbon fluxes in Indian agroecosystems.
+
+The current study is the first to address these issues, significantly contributing to our understanding of terrestrial carbon dynamics using a land surface model.
+
+The overarching goal of this study is to investigate carbon dynamics over spring wheat croplands in India and quantify the role of various natural and anthropogenic drivers that govern carbon fluxes.
+
+The specific goals of this paper are (i) to validate the ISAM simulation of Indian spring wheat, (ii) to investigate the spatiotemporal variation in carbon fluxes over spring wheat croplands in India, and (iii) to quantify the effect of external drivers such as changing temperature and [CO 2 ] as well as agricultural management practices.

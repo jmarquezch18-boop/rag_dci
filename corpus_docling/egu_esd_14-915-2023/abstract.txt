@@ -1,0 +1,29 @@
+Carbon fluxes from agroecosystems contribute to the variability of the carbon cycle and atmospheric [CO 2  ].
+
+This study is a follow-up to Gahlot et al. (2020), which used the Integrated Science Assessment Model (ISAM) to examine spring wheat production and its drivers.
+
+In this study, we look at the carbon fluxes and their drivers.
+
+ISAM was calibrated and validated against the crop phenology at the IARI wheat experimental site in Gahlot et al. (2020).
+
+We extended the validation of the model on a regional scale by comparing modeled leaf area index (LAI) and yield against site-scale observations and regional datasets.
+
+Later, ISAM-simulated carbon fluxes were validated against an experimental spring wheat site at IARI for the growing season of 2013-2014.
+
+Additionally, we compared with the published carbon flux data and found that ISAM captures the seasonality well.
+
+Following that, regional-scale runs were performed.
+
+The results revealed that fluxes vary significantly across regions, primarily owing to differences in planting dates.
+
+During the study period, all fluxes showed statistically significant increasing trends (p<0.1).
+
+Gross primary production (GPP), net primary production (NPP), autotrophic respiration (R a ), and heterotrophic respiration (R h ) increased at 1.272, 0.945, 0.579, 0.328, and 0.366 TgC yr -2 , respectively.
+
+Numerical experiments were conducted to investigate how natural forcings such as changing temperature and [CO 2 ] levels as well as agricultural management practices such as nitrogen fertilization and water availability could contribute to the rising trends.
+
+The experiments revealed that increasing [CO 2 ], nitrogen fertilization, and irrigation water contributed to increased carbon fluxes, with nitrogen fertilization having the most significant effect.
+
+period 2000-2020 are available on request.
+
+These data will be part of a larger dataset covering more sites over the 1970-2020 period that we are currently preparing and will be made available in the public domain later this year.

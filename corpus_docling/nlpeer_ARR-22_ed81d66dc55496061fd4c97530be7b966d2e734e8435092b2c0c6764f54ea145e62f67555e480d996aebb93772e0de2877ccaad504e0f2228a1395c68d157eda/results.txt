@@ -1,0 +1,35 @@
+Datasets.
+
+For paraphrasing, we use four datasets: QQP (Iyer et al., 2017), MRPC (Dolan and Brockett, 2005), PAWS-Wiki, and PAWS-QQP (Zhang et al., 2019).
+
+The PAWS datasets were designed to be challenging for bag-of-words models, and thus test whether our representations are truly contextual or mostly lexical.
+
+For QQP and MRPC, we use the few-shot splits from Gao et al. (2021) that include 16 examples per class; for the PAWS datasets, we create new few-shot splits in the same manner.
+
+We report results on the development sets of QQP and MRPC (as test labels were not available), the test set of PAWS-Wiki, and the "dev-and-test" set of PAWS-QQP.
+
+For NER, we use two datasets: CoNLL 2003 (Tjong Kim Sang and De Meulder, 2003) and WNUT-17 (Derczynski et al., 2017).
+
+We use the few-shot splits from Huang et al. (2020) that include 5 examples per entity type.
+
+All few-shot experiments report an average over five random splits and seeds, following both Gao et al. (2021) and Huang et al. (2020).
+
+For sentiment analysis, we use two movie review datasets, SST-2 (Socher et al., 2013) and Movie Reviews (MR; Pang and Lee, 2005), as well as the Customer Reviews (CR) dataset (Hu and Liu, 2004).
+
+We evaluate on the SST-2 development set and the MR and CR test sets made by Gao et al. (2021).
+
+Hyperparameter and prompt selection.
+
+Due to the nature of zero-shot and few-shot experiments, we minimize the extent to which we tune hyperparameters, relying on existing defaults and pre-viously published hyperparameters.
+
+For few-shot paraphrase classification, NER, and sentiment analysis, we developed our final method only using QQP, CoNLL, and SST-2, respectively, and directly applied it to the other datasets with no further tuning.
+
+We did measure zero-shot paraphrase ranking accuracy on all datasets during development of QUIP.
+
+For more details, see Appendix A.3.
+
+For NER, we used the first question prompts we wrote for both CoNLL and WNUT, which all follow the same format, "Who/What is a/an [entity type] ?" (see Appendix A.7 for all prompts).
+
+For sentiment analysis, we wrote six prompts (shown in Appendix A.9) and report mean accuracy over these prompts, to avoid pitfalls associated with prompt tuning (Perez et al., 2021).
+
+We use the same prompts for SST-2 and MR; for CR, the only change we make is replacing occurrences of the word "movie" with "product" to reflect the change in domain between these datasets.

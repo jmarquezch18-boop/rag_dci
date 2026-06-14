@@ -1,0 +1,57 @@
+The goal of the exploration step is to evaluate the general performance and gain insights as to how useful the given recommendations for hyperparameter choices are.
+
+Therefore, the main hyperparameters of interest, namely the sequence length, batch size, learning rate and learning rate schedule are kept fixed to determine how well the models perform with respect to different freezing techniques.
+
+The drawn conclusions are then considered for the grid search.
+
+The exploration step takes the full maximum sequence length that is available for each model which consists of 512 tokens.
+
+The common assumption for batch sizes is that a higher batch size yields a more accurate estimate of the gradients (Goodfellow et al., 2016, p.276).
+
+For the given hardware resources this results in a batch size of 8 which is the best possible value for the given sequence length and memory capacity of the hardware.
+
+The learning rate is set to 3e-5 with a linear schedule.
+
+The number of epochs is 2 since it is not the goal of the experimental step to receive the best possible performance but rather to gain first insights into the general adaptability of transfer learning for the stance detection of Fake News.
+
+Concerning freezing, different degrees can be considered: It is obviously possible to finetune all layers, that is to use the pretrained weights as starting point and then update all parameter weights during finetuning.
+
+The other extreme would be to only train the additional task-specific layers that are placed on top of the general model structure.
+
+For the setup of the initial experiments, three different versions are considered: The first one we call Freeze, meaning that all layers except for the last projection as well as the final classification layer are frozen.
+
+Second, No Freeze uses no freezing at all which means that all parameters are updated during finetuning, while the last approach Freeze Embed is done with frozen embedding layers only.
+
+For every freezing technique finetuning was performed three times.
+
+The results are given in Tab.
+
+1 and reported with respect to the mean macro-averaged F 1 -m metric which is known to handle imbalanced class distributions more effectively compared to the accuracy.
+
+FNC-1 ARC The results indicate the importance of not freezing too many layers.
+
+All models have problems to accurately learn when the main layers (id est the encoder layers for the BERT-based and the relativeattention with feed-forward layers for XLNet) are frozen.
+
+Most models still predict every instance as Unrelated after two epochs.
+
+ALBERT performs best in this setting.
+
+This is not surprising since all encoder layers in ALBERT share weights and the model thus learns less information in general.
+
+Freezing the encoder layers therefore leads to less information loss for ALBERT.
+
+XLNet performs slightly better compared to BERT, RoBERTa and DistilBERT.
+
+For both No Freeze and Freeze Embed all models are able to accurately learn to classify the given data sets.
+
+For the FNC-1 data set, the performances of XLNet and RoBERTa are very close.
+
+Overall, there is a slight tendency for models to perform better when only the embedding layers are frozen.
+
+The main takeaway is that only finetuning the task-specific layers is not sufficient.
+
+Between not freezing any layers and freezing the embedding related layers, the difference in performance with respect to the F 1 -m metric is often neglectable.
+
+For the grid search, all models are finetuned with frozen embedding layers since this bears the advantage of speeding up training.
+
+Furthermore, models are trained for 3 instead of 2 epochs for the grid search.

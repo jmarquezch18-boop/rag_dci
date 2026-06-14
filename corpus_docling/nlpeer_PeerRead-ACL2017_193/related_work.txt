@@ -1,0 +1,65 @@
+While earlier work on anchored12 semantic parsing has mostly concentrated on shallow semantic analysis, focusing on semantic role labeling of verbal argument structures, the focus has recently shifted to parsing of more elaborate representations that account for a wider range of phenomena (Abend and Rappoport, 2017).
+
+Grammar-Based Parsing. Linguistically expressive grammars such as HPSG (Pollard and Sag, 1994), CCG (Steedman, 2000) and TAG (Joshi and Schabes, 1997) provide a theory of the syntax-semantics interface, and have been used as a basis for semantic parsers by defining com-positional semantics on top of them (Flickinger, 2000;Bos, 2005, among others).
+
+Depending on the grammar and the implementation, such semantic parsers can support some or all of the structural properties UCCA exhibits.
+
+Nevertheless, this line of work differs from our approach in two important ways.
+
+First, the representations are different.
+
+UCCA does not attempt to model the syntaxsemantics interface and is thus less coupled with syntax.
+
+Second, while grammar-based parsers explicitly model syntax, our approach directly models the relation between tokens and semantic structures, without explicit composition rules.
+
+Broad-Coverage Semantic Parsing.
+
+Most closely related to this work is Broad-Coverage Semantic Dependency Parsing (SDP), addressed in two SemEval tasks (Oepen et al., 2014(Oepen et al., , 2015)).
+
+Like UCCA parsing, SDP addresses a wide range of semantic phenomena, and supports discontinuous units and reentrancy.
+
+In SDP, however, bilexical dependencies are used, and a head must be selected for every relation-even in constructions that have no clear head, such as coordination (Ivanova et al., 2012).
+
+The use of non-terminal nodes is a simple way to avoid this liability.
+
+SDP also differs from UCCA in the type of distinctions it makes, which are more coupled with syntactic considerations, where UCCA aims to capture purely semantic cross-linguistically applicable notions.
+
+For instance, the "poss" label in the DM target representation is used to annotate syntactic possessive constructions, regardless of whether they correspond to semantic ownership (e.g., "John's dog") or other semantic relations, such as marking an argument of a nominal predicate (e.g., "John's kick").
+
+UCCA reflects the difference between these constructions.
+
+Recent interest in SDP has yielded numerous works on graph parsing (Ribeyre et al., 2014;Thomson et al., 2014;Almeida and Martins, 2015;Du et al., 2015), including tree approximation (Agić and Koller, 2014;Schluter et al., 2014) and joint syntactic/semantic parsing (Henderson et al., 2013;Swayamdipta et al., 2016).
+
+Abstract Meaning Representation.
+
+Another line of work addresses parsing into AMRs (Flanigan et al., 2014;Vanderwende et al., 2015;Pust et al., 2015;Artzi et al., 2015), which, like UCCA, abstract away from syntactic distinctions and represent meaning directly, using OntoNotes predi-cates (Weischedel et al., 2013).
+
+Events in AMR may also be evoked by non-verbal predicates, including possessive constructions.
+
+Unlike in UCCA, the alignment between AMR concepts and the text is not explicitly marked.
+
+While sharing much of this work's motivation, not anchoring the representation in the text complicates the parsing task, as it requires the alignment to be automatically (and imprecisely) detected.
+
+Indeed, despite considerable technical effort (Flanigan et al., 2014;Pourdamghani et al., 2014;Werling et al., 2015), concept identification is only about 80%-90% accurate.
+
+Furthermore, anchoring allows breaking down sentences into semantically meaningful sub-spans, which is useful for many applications (Fernández-González and Martins, 2015;Birch et al., 2016).
+
+Several transition-based AMR parsers have been proposed: CAMR assumes syntactically parsed input, processing dependency trees into AMR (Wang et al., 2015a(Wang et al., ,b, 2016;;Goodman et al., 2016).
+
+In contrast, the parsers of Damonte et al. (2017) and Zhou et al. (2016) do not require syntactic pre-processing.
+
+Damonte et al. (2017) perform concept identification using a simple heuristic selecting the most frequent graph for each token, and Zhou et al. (2016) perform concept identification and parsing jointly.
+
+UCCA parsing does not require separately aligning the input tokens to the graph.
+
+TUPA creates non-terminal units as part of the parsing process.
+
+Furthermore, existing transition-based AMR parsers are not general DAG parsers.
+
+They are only able to predict a subset of reentrancies and discontinuities, as they may remove nodes before their parents have been predicted (Damonte et al., 2017).
+
+They are thus limited to a sub-class of AMRs in particular, and specifically cannot produce arbitrary DAG parses.
+
+TUPA's transition set, on the other hand, allows general DAG parsing.
+
+13

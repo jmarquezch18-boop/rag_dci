@@ -1,0 +1,139 @@
+Nlu++: A Multi-Label, Slot-Rich, Generalisable Dataset For Natural Language Understanding In Task-Oriented Dialogue
+
+Abstract
+
+Introduction
+
+Background And Motivation
+
+Nlu++ Dataset
+
+The NLU++ dataset has been designed with the aim of addressing some of the major shortcomings of the current NLU datasets.
+
+In what follows, we describe the main improvements and new evaluation opportunities offered by NLU++.
+
+Ontology
+
+NLU++ comprises two domains: BANKING and HOTELS.
+
+The former represents a banking services task (e.g., making transfers, depositing cheques, reporting lost cards, requesting mortgage information) and the latter is a hotel 'bell desk' reception task (e.g., booking rooms, asking about pools or gyms, requesting room service).
+
+Both domains combine a large set of intents with a rich set of slots, with the ontologies inspired by requirements in production.
+
+A large number of intents and slots is shared between the two domains, in an attempt to increase data reusability/transferability.
+
+Table 2 provides the main statistics of the NLU++ dataset, while the full ontology is presented in Appendix A.
+
+Multi-Intent Examples
+
+One of the main contributions of this work is the novel design of the intent space, defined in a highly modular manner that natively supports intent re-combinations and multi-intent annotations7 .
+
+For instance, Table 3 shows several multi-intent examples based on the intent sets (termed intent modules) from Table 9 in Appendix A.
+
+This design brings several benefits.
+
+1) The modular nature of the ontology allows for expressing a much more complex set of ideas through different combinations of intent modules (see Table 3), while reducing the overall size of the intent set compared to previous ID datasets8 (see Table 1 andTable 5).
+
+2) It allows for the definition of partial intents (e.g., "The savings one").
+
+This is crucial in multi-turn interactions, where the user often has to answer disambiguation questions (e.g., "Which account would you like to close?").
+
+3) The modular approach allows the models to generalise to unseen combinations of intent modules.
+
+For instance, if (i) examples with the intents change and booking, and (ii) examples with the intents cancel and account exist in the training data, (iii) an unseen example with the intents cancel and booking could be properly predicted, as all the single intents/modules have already been seen by the ID model9 .
+
+4) The design also allows us to distinguish between domain-specific versus generic intent modules.
+
+For example, the module overdraft is clearly related to BANKING, but the module change is much more generic, likely to occur in several different domains.
+
+Finally, the modular design also allows us to study semantic variation of intent modules.
+
+Some intents (e.g., especially the domain-specific ones) can only be expressed in a few ways (e.g. overdraft, direct_debit, swimming_pool), while others can have much more varied surface semantic realisations, (e.g. make, not_working).
+
+Table 9 in Appendix A provides an estimation of the semantic variability of each intent (module).
+
+Slots
+
+NLU++ further includes a rich set of 17 slots, defined in Table 10 in Appendix A. Following the design of previous standard SL datasets (Hemphill et al., 1990;Coucke et al., 2018;Coope et al., 2020), we provide span annotations for slots.
+
+On top of of this, to also support training and evaluation of SL models which are not span-based, we also provide value annotations (or canonical values as named by Rastogi et al. (2019)) for times, dates, and numeric values.
+
+Similarly to intent modules, slots can also be divided into the generic ones (e.g. time, date) and the domain-specific ones (e.g company_name, rooms, kids), see Table 10.
+
+Again, this distinction allows for the cross-domain reusability of annotated data.
+
+Data Collection And Annotation
+
+Previous NLU datasets have usually relied on crowdworkers, aiming to collect a large number of examples, and typically optimising for quantity over quality.
+
+However, even with much simpler ontologies, workers are prone to make annotation mistakes, leading to very noisy datasets (Eric et al., 2019).
+
+In addition, when workers are asked to rephrase a sentence, they often change its semantic meaning or tend to provide rephrasings with extremely low lexical variability (Kang et al., 2018).
+
+NLU++ reflects true production requirements and focuses on data quality.
+
+Instead of relying on crowdworkers, 4 highly skilled annotators with dialogue and NLP expertise, also familiar with production environments, collected, annotated, and corrected the data.
+
+The process started by defining the ontology for BANKING and HOTELS.
+
+Then, real user examples were fully anonymised and reannotated following the defined ontology.
+
+Finally, new examples were created in order to cover less frequent intents and slots, aiming at creating realistic and semantically varied sentences with new combinations of intents and slots.
+
+Comparison With Other Nlu Datasets
+
+Aiming to reflect the differences between NLU++ and the most popular ToD NLU datasets, Table 5 compares their general statistics.
+
+Since the focus of NLU++ is on curated high-quality data, NLU++ covers a fewer number of examples than the other datasets, but it is evident that NLU++ is the only real multi-intent dataset: it averages 2.01 intents per example with a high standard deviation.
+
+In addition, NLU++ is the only dataset that combines a large set of intents with a large set of slots.
+
+In order to asses the quality and diversity of the NLU data, we include two additional metrics: 1) Type-Token Ratio (TTR) (Jurafsky and Martin, 2000) which measures lexical diversity) and semantic diversity.
+
+Both metrics are computed for the set of examples sharing an intent, weighted by the frequency of that intent10 and finally averaged over intents.
+
+The semantic diversity per intent is computed as follows: (i) sentence encodings, obtained by the ConveRT sentence encoder (Henderson et al., 2020),11 are computed for the set of sentences sharing the same intent; (ii) the centroid of these encodings is then computed; (iii) finally, the average cosine distance from each encoding to the centroid is computed.
+
+The overall scores clearly indicate that NLU++ offers a much higher lexical and semantic diversity than previous datasets, which should also render it more challenging for current SotA NLU models.
+
+12
+
+Experiments And Results
+
+Intent Detection: Experimental Setup
+
+Slot Labeling: Experimental Setup
+
+Results And Discussion
+
+Conclusion
+
+Figure 1: Multi-intent examples from the two domains of the NLU++ dataset: BANKING (top) and HOTELS (middle, bottom), illustrating the two core NLU subtasks of intent detection (ID) and slot labeling (SL) in ToD systems.
+
+The extracted information is structured into intents and slots, the latter having associated values.
+
+Comparison of "traditional" intent annotations vs intent module-based multi-label annotations.
+
+Key statistics of the NLU++ dataset.
+
+NLU++ examples showing the combinatorial expressiveness of intent modules in the multi-intent setting.
+
+Table 4 displays several NLU++ examples where complex combinations of intents and slots occur, showcasing how NLU++ might provide a much more challenging environment for the evaluation of joint ID and SL models in future research.
+
+NLU++ examples combining several intents and slots.
+
+Comparison of NLU++ with other popular NLU datasets; ATIS
+
+F 1 scores (×100%) of benchmarked state-of-the-art intent detection models on NLU++ in three data setups (see §4.1).
+
+We also refer to §4 for the brief descriptions of each sentence encoder (for MLP-based baselines) and the two QA-pretrained models.
+
+*All models were retrieved from the HuggingFace model repository
+
+F 1 scores (×100%) on the NLU++ SL task for CONVEX
+
+F 1 scores of cross-domain intent detection experiments, evaluating performance on the set of 26 intents shared by the two domains.
+
+Large-data setup.
+
+Intents ontology

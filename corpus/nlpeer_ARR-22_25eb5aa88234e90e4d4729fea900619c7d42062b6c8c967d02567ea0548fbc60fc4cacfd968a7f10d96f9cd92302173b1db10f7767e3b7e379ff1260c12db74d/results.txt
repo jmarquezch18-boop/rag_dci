@@ -1,0 +1,121 @@
+We now compare the results from our human evaluation and gold-history (automatic) evaluation.
+
+Note that the two sets of numbers are not directly comparable: (1) the human evaluation reports accuracy, while the automatic evaluation reports F1 scores;
+
+(2) the absolute numbers of human evaluation are much higher than those of automatic evaluations.
+
+For example, for the BERT model, the human evaluation accuracy is 82.6% while the automatic evaluation F1 is only 63.2%.
+
+The reason is that, in automatic evaluations, the gold answers cannot capture all possible correct answers to open-ended questions or questions with multiple answers; however, the human annotators can evaluate the correctness of answers easily.
+
+Nevertheless, we can compare relative rankings between different models.
+
+Figure 2 shows different trends between human evaluation and gold-history evaluation (Auto-Gold).
+
+Current standard evaluation cannot reflect model performance in human-machine conversations: (1) Human evaluation and Auto-Gold rank BERT and GraphFlow differently; especially, GraphFlow performs much better in automatic evaluation, but worse in human evaluation.
+
+(2) The gap between HAM and ExCorD is significant (F1 of 65.4% vs 67.7%) in the automatic evaluation but the two models perform similarly in human evaluation (accuracy of 87.8% vs 87.9%).
+
+The inconsistency between human evaluation and gold-history evaluation suggests that we need better ways to evaluate and develop our conversational QA models.
+
+When being deployed in realistic scenarios, the models would never have access to the ground truth (gold answers) in previous turns and are only exposed to the conversational history and the passage.
+
+Intuitively, we can simply replace gold answers by the predicted answers of models and we name this as predicted-history evaluation (Auto-Pred).
+
+Formally, the model makes predictions based on the questions and its own answers:
+
+A i ∼ M(P, Q * 1 , A 1 , ..., Q * i-1 , A i-1 , Q * i ). (4)
+
+This evaluation has been suggested by several recent works (Mandya et al., 2020;Siblini et al., 2021), which reported a significant performance drop using predicted history.
+
+We observe the same performance degradation, shown in
+
+(Q * 1 , A 1 , ..., Q * i-1 , A i-1 ).
+
+Among all the invalid question categories, "unresolved coreference" questions are the most critical ones.
+
+They lead to incorrect interpretations of questions and hence wrong answers.
+
+We propose to improve our evaluation by first detecting these questions using a state-of-the-art coreference resolution system (Lee et al., 2018) 6 , and then substituting them with either rewriting the questions inplace and replacing the questions with their contextindependent counterparts.
+
+Detecting invalid questions.
+
+We make the assumption that if the coreference model resolves mentions in Q * i differently between using gold history
+
+(Q * 1 , A * 1 , ..., A * i-1 , Q * i ) and predicted history (Q * 1 , A 1 , ..., A i-1 , Q * i ), then Q * i is identified as hav- ing an unresolved coreference issue.
+
+The inputs to the coreference model for Q * i are the following: assuming e * j and e j have a shared mention in Q * i .
+
+We determine whether e * j = e j by checking if F1(s * j , s j ) > 0, where s * j and s j are the first mention of e * j and e j respectively, and F1 is the wordlevel F1 score, i.e., e * j = e j as long as their first mentions have word overlap.
+
+The reason we take the F1 instead of exact match to check whether the entities are the same is stated in Appendix A.
+
+S * i = [BG; Q * i-k ; A * i-k ; Q * i-k+1 ; A * i-k+1 ; ...; Q * i ] S i = [BG; Q * i-k ; A i-k ; Q * i-k+1 ; A i-k+1 ; ...; Q * i ],
+
+Our first strategy is to substitute the entity names in Q * i with entities in E * , if Q * i is invalid.
+
+The rewritten question, instead of the original one, will be used in the conversation history and fed into the model.
+
+We denote this evaluation method as rewritten-question evaluation (Auto-Rewrite), and Figure 4 illustrates a concrete example.
+
+To analyze how well Auto-Rewrite does in detecting and rewriting questions, we manually check 100 conversations of ExCorD from the QuAC development set.
+
+We find that Auto-Rewrite can detect invalid questions with a precision of 72% and a recall of 72% (more detailed analysis in Appendix B).
+
+An example of correctly detected and rewritten question is presented in Figure 4.
+
+Question replacement using CANARD.
+
+Another strategy is to replace the invalid questions with context-independent questions.
+
+The CANARD 7 We are only interested in the entities mentioned in the current question Q * i and we filter out named entities (e.g., the National Football League) because they can be understood without coreference resolution.
+
+dataset (Elgohary et al., 2019) provides such a resource, which contains human-rewritten contextindependent version of QuAC's questions.
+
+Recent works (Anantha et al., 2021;Elgohary et al., 2019) have proposed training sequence-to-sequence models on such dataset to rewrite questions; however, since the performance of the question-rewriting models is upper bounded by the human-rewritten version, we simply use CANARD for question replacement.
+
+We denote this strategy as replacedquestion evaluation (Auto-Replace).
+
+Because collecting context-independent questions is expensive, Auto-Replace is limited to evaluating models on QuAC; it is also possible to be extended to other datasets by training a question rewriting model, as demonstrated in existing work.
+
+In this section, we compare human evaluation with all the automatic evaluations we have introduced: gold-history (Auto-Gold), predicted-history (Auto-Pred), and our proposed Auto-Rewrite and Auto-Replace evaluations.
+
+We first explain the metrics we use in the comparison ( §6.1) and then discuss the findings ( §6.2 and §6.3).
+
+We found that automatic evaluations have a significant distribution shift from human evaluation.
+
+We draw this conclusion from the following points.
+
+• Human evaluation shows a much higher model performance than all automatic evaluations, as shown in Table 2.
+
+Two reasons may cause this large discrepancy: (a) Many conversational QA questions have multiple possible answers, and it is hard for the static dataset in automatic evaluations to capture all the answers.
+
+It is not an issue in human evaluation because all answers are judged by human evaluators.
+
+(b) There are more unanswerable questions and open questions in human evaluation (reason discussed in the next paragraph), which are easier-for example, models are almost always correct when answering questions like "What else is interesting?".
+
+• Human evaluation has a much higher unanswerable question rate, as shown in Table 3.
+
+The reason is that in human-human data collection, the answers are usually correct and the questioners can ask followup questions upon the highquality conversation; in human-machine interactions, since the models can make mistakes, the conversation flow is less fluent and it is harder to have followup questions.
+
+Thus, questioners chatting with models tend to ask more open or unanswerable questions.
+
+• All automatic evaluation methods have a pairwise agreement lower than 70% with human evaluation, as shown in Figure 2.
+
+This suggests that all automatic evaluations cannot faithfully reflect the model performance of human evaluation.
+
+First, we can clearly see that among all automatic evaluations, Auto-Gold deviates the most from the human evaluation.
+
+From Table 2, only Auto-Gold shows different rankings from human evaluation, while Auto-Pred, Auto-Rewrite, and Auto-Replace show consistent rankings to human judgments.
+
+In Figure 2, we see that Auto-Gold has the lowest agreement with human evaluation; among others, Auto-Rewrite better agrees with human evaluation for most model pairs.
+
+Surprisingly, Auto-Rewrite is even better than Auto-Replace-which uses human-written context independent questions-in most cases.
+
+After checking the Auto-Replace conversations, we found that human-written context independent questions are usually much longer than QuAC questions and introduce extra information into the context, which leads to out-of-domain challenges for conversational QA models (example in Appendix C).
+
+It shows that our rewriting strategy can better reflect real-world performance of conversational QA systems.
+
+However, Auto-Rewrite is not perfect-we see that when comparing G/E or G/H, Auto-Pred is better than Auto-Rewrite; in all model pairs, the agreement between human evaluation and Auto-Rewrite is still lower than 70%.
+
+This calls for further effort in designing better automatic evaluation in the future.

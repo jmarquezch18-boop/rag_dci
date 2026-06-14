@@ -1,0 +1,93 @@
+Universal Conceptual Cognitive Annotation (UCCA, Abend and Rappoport, 2013) is a crosslinguistically applicable semantic representation scheme, building on the established Basic Linguistic Theory typological framework (Dixon, 2010a(Dixon, ,b, 2012)), and Cognitive Linguistics literature (Croft and Cruse, 2004).
+
+It has demonstrated applicability to multiple languages, including English, French, German and Czech, support for rapid annotation by non-experts (assisted by an accessible annotation interface (Abend et al., 2017)), and stability under translation (Sulem et al., 2015).
+
+It has also proven useful for machine translation evaluation (Birch et al., 2016).
+
+UCCA differs from syntactic schemes in terms of content and formal structure.
+
+It exhibits reentrancy, discontinuous nodes and non-terminals, which no single existing parser supports.
+
+Lacking a parser, UCCA's applicability has been so far limited, a gap this work addresses.
+
+We present the first UCCA parser, TUPA (Transition-based UCCA Parser), building on recent advances in discontinuous constituency and dependency graph parsing, and further introducing novel transitions and features for UCCA.
+
+Transition-based techniques are a natural starting point for UCCA parsing, given the conceptual similarity of UCCA's distinctions, centered around predicate-argument structures, to distinctions expressed by dependency schemes, and the achievements of transition-based methods in dependency parsing (Dyer et al., 2015;Andor et al., 2016;Kiperwasser and Goldberg, 2016).
+
+We are further motivated by the strength of transition-based methods in related tasks, including dependency graph parsing (Sagae and Tsujii, 2008;Ribeyre et al., 2014;Tokgöz and Eryigit, 2015), constituency parsing (Sagae and Lavie, 2005;Zhang and Clark, 2009;Zhu et al., 2013;Maier, 2015;Maier and Lichte, 2016), AMR parsing (Wang et al., 2015a(Wang et al., ,b, 2016;;Misra and Artzi, 2016;Goodman et al., 2016;Zhou et al., 2016;Damonte et al., 2017) and CCG parsing (Zhang and Clark, 2011;Ambati et al., 2015Ambati et al., , 2016)).
+
+We evaluate TUPA on the English UCCA corpora, including in-domain and out-of-domain settings.
+
+To assess the ability of existing parsers to tackle the task, we develop a conversion procedure from UCCA to bilexical graphs and trees.
+
+Results show superior performance for TUPA, demonstrating the effectiveness of the presented approach.
+
+1The rest of the paper is structured as follows:
+
+Section 2 describes UCCA in more detail.
+
+Section 3 introduces TUPA.
+
+Section 4 discusses the data and experimental setup.
+
+Section 5 presents the experimental results.
+
+Section 6 summarizes related work, and Section 7 concludes the paper.
+
+2 The UCCA Scheme UCCA graphs are labeled, directed acyclic graphs (DAGs), whose leaves correspond to the tokens of the text.
+
+A node (or unit) corresponds to a terminal or to several terminals (not necessarily contiguous) viewed as a single entity according to semantic or cognitive considerations.
+
+Edges bear a category, indicating the role of the sub-unit in the parent relation.
+
+Figure 1 presents a few examples.
+
+UCCA is a multi-layered representation, where each layer corresponds to a "module" of semantic distinctions.
+
+UCCA's foundational layer, targeted in this paper, covers the predicate-argument structure evoked by predicates of all grammatical categories (verbal, nominal, adjectival and others), the inter-relations between them, and other major linguistic phenomena such as coordination and multi-word expressions.
+
+The layer's basic notion is the scene, describing a state, action, movement or some other relation that evolves in time.
+
+Each scene contains one main relation (marked as either a Process or a State), as well as one or more Participants.
+
+For example, the sentence "After graduation, John moved to Paris" (Figure 1a) contains two scenes, whose main relations are "graduation" and "moved". "John" is a Participant in both scenes, while "Paris" only in the latter.
+
+Further categories account for inter-scene relations and the internal structure of complex arguments and relations (e.g. coordination, multi-word expressions and modification).
+
+One incoming edge for each non-root node is marked as primary, and the rest (mostly used for implicit relations and arguments) as remote edges, a distinction made by the annotator.
+
+The primary edges thus form a tree structure, whereas the remote edges enable reentrancy, forming a DAG.
+
+While parsing technology in general, and transition-based parsing in particular, is wellestablished for syntactic parsing, UCCA has several distinct properties that distinguish it from syntactic representations, mostly UCCA's tendency to abstract away from syntactic detail that do not affect argument structure.
+
+For instance, consider the following examples where the concept of a scene has a different rationale from the syntactic concept of a clause.
+
+First, non-verbal predicates in UCCA are represented like verbal ones, such as when they appear in copula clauses or noun phrases.
+
+Indeed, in Figure 1a, "graduation" and "moved" are considered separate events, despite appearing in the same clause.
+
+Second, in the same example, "John" is marked as a (remote) Participant in the graduation scene, despite not being overtly marked.
+
+Third, consider the possessive construction in Fig- ure 1c.
+
+While in UCCA "trip" evokes a scene in which "John and Mary" is a Participant, a syntactic scheme would analyze this phrase similarly to "John and Mary's shoes".
+
+These examples demonstrate that a UCCA parser, and more generally semantic parsers, face an additional level of ambiguity compared to their syntactic counterparts (e.g., "after graduation" is formally very similar to "after 2pm", which does not evoke a scene).
+
+Section 6 discusses UCCA in the context of other semantic schemes, such as AMR (Banarescu et al., 2013).
+
+Alongside recent progress in dependency parsing into projective trees, there is increasing interest in parsing into representations with more general structural properties (see Section 6).
+
+One such property is reentrancy, namely the sharing of semantic units between predicates.
+
+For instance, in Figure 1a, "John" is an argument of both "gradu-ation" and "moved", yielding a DAG rather than a tree.
+
+A second property is discontinuity, as in Figure 1b, where "gave up" forms a discontinuous semantic unit.
+
+Discontinuities are pervasive, e.g., with multi-word expressions (Schneider et al., 2014).
+
+Finally, unlike most dependency schemes, UCCA uses non-terminal nodes to represent units comprising more than one word.
+
+The use of non-terminal nodes is motivated by constructions with no clear head, including coordination structures (e.g., "John and Mary" in Figure 1c), some multi-word expressions (e.g., "The Haves and the Have Nots"), and prepositional phrases (either the preposition or the head noun can serve as the constituent's head).
+
+To our knowledge, no existing parser supports all structural properties required for UCCA parsing.

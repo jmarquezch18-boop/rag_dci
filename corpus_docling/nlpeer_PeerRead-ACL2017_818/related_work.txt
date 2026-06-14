@@ -1,0 +1,33 @@
+Several works straddle the gap between IE, knowledge base completion, and learning commonsense knowledge from text.
+
+Earlier works in these areas use large amounts of text to try to extract general statements like "A THING CAN BE READABLE" (Gordon et al., 2010) and frequencies of events (Gordon and Schubert, 2012).
+
+Our work focuses on specific domains of knowledge rather than general statements or occurrence statistics, and develops a frame-centric approach to circumvent reporting bias.
+
+Other work uses a knowledge base and scores unseen tuples based on similarity to existing ones (Angeli and Manning, 2013;Li et al., 2016).
+
+Relatedly, previous work uses natural language inference to infer new facts from a dataset of commonsense facts that can be extracted from unstructured text (Angeli and Manning, 2014).
+
+In contrast, we focus on a small number of specific types of knowledge without access to an existing database of knowledge.
+
+A number of recent works combine multimodal input to learn visual attributes (Bruni et al., 2012;Silberer et al., 2013), extract commonsense knowledge from web images (Tandon et al., 2016), and overcome reporting bias (Misra et al., 2016).
+
+In contrast, we focus on natural language evidence to reason about attributes that are both in (size) and out (weight, rigidness, etc.) of the scope of computer vision.
+
+Yet other works mine numerical attributes of objects (Narisawa et al., 2013;Takamura and Tsujii, 2015;Davidov and Rappoport, 2010) and comparative knowledge from the web (Tandon et al., 2014).
+
+Our work uniquely learns verb-centric lexical entailment knowledge.
+
+A handful of works have attempted to learn the types of knowledge we address in this work.
+
+One recent work tried to directly predict several binary attributes (such "is large" and "is yellow") from on off-the-shelf word embeddings, noting that accuracy was very low (Rubinstein et al., 2015).
+
+Another line of work addressed grounding verbs in the context of robotic tasks.
+
+One paper in this line acquires verb meanings by observing state changes in the environment (She and Chai, 2016).
+
+Another work in this line does a deep investigation of eleven verbs, modeling their physical effect via annotated images along eighteen attributes (Gao et al., 2016).
+
+These works are encouraging investigations into multimodal groundings of a small set of verbs.
+
+Our work instead grounds into a fixed set of attributes but leverages language on a broader scale to learn about more verbs in more diverse set of frames.

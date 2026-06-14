@@ -1,0 +1,21 @@
+Metaphorical Language: While our frame patterns are intended to capture action verbs, our templates also match senses of those verbs that can be used with abstract or metaphorical arguments, rather than directly physical ones.
+
+One example from the development set is "x contained y." While x and y can be real objects, more abstract senses of "contained" could involve y as a "forest fire" or even a "revolution." In these instances, x > size y is plausible as an abstract notion: if some entity can contain a revolution, we might think that entity as "larger" or "stronger" than the revolution.
+
+Error analysis: Examples 6-10 in Figure 4 highlight failure cases for the model.
+
+Example 6 shows a case where the comparison is nonsensical because "for" would naturally be followed by a purpose ("He drove the car for work.") or a duration ("She drove the car for hours.") rather than a concrete object whose size is measurable.
+
+Example 7 highlights an underspecified frame.
+
+One crowd worker provided the example, "PERSON stopped the fly with {the jar / a swat-ter}," where fly < weight {jar, swatter}. However, two crowd workers provided examples like "PERSON stopped their car with the brake," where clearly car > weight brake.
+
+This example illustrates complex underlying physics we do not model: a brake-the pedal itself-is used to stop a car, but it does so by applying significant force through a separate system.
+
+The next two examples are cases where the model nearly predicts correctly (8, e.g., "She lived at the office.") and is just clearly wrong (9, e.g., "He snipped off a locket of hair").
+
+Example 10 demonstrates a case of polysemy where the model picks the wrong side.
+
+In the phrase, "She caught the runner in first,", it is correct that she > speed runner.
+
+However, the sense chosen by the crowd workers is that of, "She caught the baseball," where indeed she < speed baseball.

@@ -1,0 +1,15 @@
+In this paper, we propose a method which uses semi-supervised convolutional neural networks (CNNs) to select in-domain training data for statistical machine translation.
+
+This approach is particularly effective when only tiny amounts of in-domain data are available.
+
+The in-domain data and randomly sampled general-domain data are used to train a data selection model with semi-supervised CNN, then this model computes domain relevance scores for all the sentences in the generaldomain data set.
+
+The sentence pairs with top scores are selected to train the system.
+
+We carry out experiments on 4 language directions with three test domains.
+
+Compared with strong baseline systems trained with large amount of data, this method can improve the performance up to 3.1 BLEU.
+
+Its performances are significant better than three state-of-the-art language model based data selection methods.
+
+We also show that the in-domain data used to train the selection model could be as few as 100 sentences, which makes finegrained topic-dependent translation adaptation possible.

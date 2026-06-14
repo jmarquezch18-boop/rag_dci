@@ -1,0 +1,158 @@
+{
+  "query_id": "1a42a5af41f66bb6428c643d96fd05eba81ce635",
+  "query": "Do the proposed feature and experiments account for named entities that are not listed on Wikipedia?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "named entities"
+      },
+      "result_preview": "Search results for 'named entities' (14 matches):\n[paper_id=nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d | section=results | line=71] The CANARD 7 We are only interested in the entities mentioned in the",
+      "elapsed_s": 5.2
+    },
+    {
+      "iteration": 1,
+      "tool": "read_file",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+        "section": "abstract"
+      },
+      "result_preview": "[nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7 / abstract]\nEntity set expansion (ESE) aims at obtaining a more complete set of entities given a textual corpus and a seed set of entities of a concept.\n\nAl",
+      "elapsed_s": 9.48
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+        "section": "abstract",
+        "start": 10,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7 / abstract — líneas 5-17 de 17]\nFurthermore, only a small number of predictions are evaluated compared to the actual size of an entity set.\n\nA rigorous asse",
+      "elapsed_s": 10.73
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+        "section": "methodology",
+        "start": 15,
+        "end": 30
+      },
+      "result_preview": "[nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7 / methodology — líneas 10-35 de 51]\n\nIt incorporates other context features such as POS tags and syntactic head tokens in ranking.\n\nEmbedding baseline (Emb-",
+      "elapsed_s": 11.68
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "non-Wikipedia named entities"
+      },
+      "result_preview": "No matches found for 'non-Wikipedia named entities'",
+      "elapsed_s": 7.51
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Entity set expansion (ESE) aims at obtaining a more complete set of entities given a textual corpus and a seed set of entities of a concept.\n\nAlthough it is a critical task in many NLP applications, existing benchmarks are limited to well-formed text (e.g., Wikipedia) and welldefined concepts (e.g., countries and diseases).\n\nFurthermore, only a small number of predictions are evaluated compared to the actual size of an entity set.\n\nA rigorous assessment of ESE methods warrants more comprehensive benchmarks and evaluation.\n\nIn this paper, we consider user-generated text to understand the generalizability of ESE methods.\n\nWe develop new benchmarks and propose more rigorous evaluation metrics for assessing performance of ESE methods.\n\nAdditionally, we identify phenomena such as non-named entities, multifaceted entities, vague concepts that are more prevalent in user-generated text than well-formed text, and use them to profile ESE methods.\n\nWe observe that the strong performance of state-of-the-art ESE methods does not generalize well to user-generated text.\n\nWe conduct comprehensive empirical analysis and draw insights from the findings.",
+      "section": "abstract",
+      "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_abstract_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "score": 1.0
+    },
+    {
+      "text": "Furthermore, only a small number of predictions are evaluated compared to the actual size of an entity set.\n\nA rigorous assessment of ESE methods warrants more comprehensive benchmarks and evaluation.\n\nIn this paper, we consider user-generated text to understand the generalizability of ESE methods.\n\nWe develop new benchmarks and propose more rigorous evaluation metrics for assessing performance of ESE methods.\n\nAdditionally, we identify phenomena such as non-named entities, multifaceted entities, vague concepts that are more prevalent in user-generated text than well-formed text, and use them to profile ESE methods.\n\nWe observe that the strong performance of state-of-the-art ESE methods does not generalize well to user-generated text.\n\nWe conduct comprehensive empirical analysis and draw insights from the findings.",
+      "section": "abstract",
+      "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_abstract_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "score": 1.0
+    },
+    {
+      "text": "It incorporates other context features such as POS tags and syntactic head tokens in ranking.\n\nEmbedding baseline (Emb-Base).\n\nIn order to make use for more robust context embeddings, we develop a simple baseline that uses a pre-trained language model (LM) to derive context embeddings of entity candidates.\n\nTo derive an entity embedding, we average context embedding of the sentences that mention the entity using BERT (Devlin et al., 2018).\n\nWe compute concept embeddings by averaging embeddings of its seed entities, and rank entity candidates based on the cosine similarity of concept and entity embeddings.\n\nCGExpan.\n\nCGExpan (Zhang et al., 2020b) is a SOTA LM-based method that iteratively uses Hearst patterns (Hearst, 1992) as prompts to obtain scores for ranking candidates.\n\nIn addition, it considers how a candidate in turn ranks the target concept name to improve the quality of rankings.\n\nLM Probing Baseline (LM-Base).\n\nWe develop a simpler baseline that also uses Hearst patterns to prompt LMs and obtain scores for entity candidates.\n\nHowever, it does not include any other mechanisms such as concept name guidance and iterative expansion like CGExpan.\n\nEnsemble Methods.\n\nWe use mean reciprocal rank (MRR) as the representative for ensemble methods since it does not require any additional training data.",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_methodology_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/PeerRead-CONLL2016/166_32",
+    "nlpeer/PeerRead-CONLL2016/166_33",
+    "nlpeer/PeerRead-CONLL2016/166_34",
+    "nlpeer/PeerRead-CONLL2016/166_35",
+    "nlpeer/PeerRead-CONLL2016/166_36",
+    "nlpeer/PeerRead-CONLL2016/166_112",
+    "nlpeer/PeerRead-CONLL2016/166_113",
+    "nlpeer/PeerRead-CONLL2016/166_114"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 0.125,
+    "recall_at_3": 0.375,
+    "recall_at_5": 0.375,
+    "recall_at_10": 0.375,
+    "recall_at_20": 0.375,
+    "precision_at_5": 1.0,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_abstract_0000",
+      "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_abstract_0001",
+      "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_methodology_0002"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_abstract_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_abstract_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_methodology_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.0574712643678161,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

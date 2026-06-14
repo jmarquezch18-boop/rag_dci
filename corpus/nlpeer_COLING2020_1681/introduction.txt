@@ -1,0 +1,61 @@
+Machine translation is a complex task which requires diverse linguistic knowledge.
+
+The seemingly straightforward translation of the English pronoun it into German requires knowledge at the syntactic, discourse and world knowledge levels for proper pronoun coreference resolution (cr).
+
+The German third person pronoun can have three genders, determined by its antecedent: masculine (er), feminine (sie) and neuter (es).
+
+Previous work (Hardmeier and Federico, 2010;Miculicich Werlen and Popescu-Belis, 2017;Müller et al., 2018) proposed evaluation methods for pronoun translation.
+
+This has been of special interest in context-aware nmt models that are capable of using discourse-level information.
+
+Despite promising results (Bawden et al., 2018;Müller et al., 2018;Lopes et al., 2020), the question remains: Are transformers (Vaswani et al., 2017) truly learning this task, or are they exploiting simple heuristics to make a coreference prediction?
+
+To empirically answer this question, we extend ContraPro (Müller et al., 2018)-a contrastive challenge set for automatic English→German pronoun translation evaluation-by making small adversarial changes in the contextual sentences.
+
+Our adversarial attacks on ContraPro show that context-aware transformer nmt models can easily be misled by simple and unimportant changes to the input.
+
+However, interpreting the results obtained from adversarial attacks can be difficult.
+
+The results indicate that nmt uses brittle heuristics to solve cr, but it is not clear what those heuristics are.
+
+In general, it is challenging to design attacks based on modifying ContraPro that can test specific phenomena that may be of interest.
+
+The cat and the actor were hungry.
+
+It (?) was hungrier.
+
+Step 1: Markable Detection
+
+The cat and the actor were hungry.
+
+It (?) was hungrier.
+
+Step 2: Coreference Resolution
+
+The cat and the actor were hungry.
+
+It ( ) was hungrier.
+
+Step 3: Language Translation Der Schauspieler und die Katze waren hungrig.
+
+Er / Sie ( ) / Es war hungriger.
+
+Table 1: A hypothetical cr pipeline that sequentially resolves and translates a pronoun.
+
+For this reason, we propose an independent set of templates for coreferential pronoun translation evaluation to systematically investigate which heuristics are being used.
+
+Inspired by previous work on cr (Raghunathan et al., 2010;Lee et al., 2011), we create a number of templates tailored to evaluating the specific steps of an idealized cr pipeline.
+
+We call this collection Contracat ( ), Contrastive Coreference Analytical Templates.
+
+The templates are constructed in a completely controlled manner, enabling us to easily create large number of coherent test examples and provide strong conclusions about the cr capabilities of nmt.
+
+The procedure we used in creating the templates can be adapted to many language pairs with little effort.
+
+Our results suggest that transformer models do not learn each step of a hypothetical cr pipeline.
+
+We also present a simple data augmentation approach specifically tailored to pronoun translation.
+
+The experimental results show that this approach improves scores and robustness on some of our metrics, but it does not fundamentally change the way cr is being handled by nmt.
+
+We publicly release Contracat and the adversarial modifications to ContraPro1 .

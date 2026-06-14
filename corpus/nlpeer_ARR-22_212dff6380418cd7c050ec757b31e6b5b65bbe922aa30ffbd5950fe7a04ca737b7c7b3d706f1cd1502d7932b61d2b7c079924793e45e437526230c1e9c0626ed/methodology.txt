@@ -1,0 +1,93 @@
+Before research on claim detection targeted social media, pioneering work by Rosenthal and McKeown (2012) focused on claims in Wikipedia discussion forums.
+
+They used lexical and syntactic features in addition to sentiment and other statistical features over text.
+
+Since then, researchers have proposed context-dependent (Levy et al., 2014), context-independent (Lippi and Torroni, 2015), cross-domain (Daxenberger et al., 2017), and in-domain approaches for claim detection.
+
+Recently, transformer-based models (Chakrabarty et al., 2019) have replaced structure-based claim detection approaches due to their success in several Natural Language Processing (NLP) downstream tasks.
+
+A series of workshops (Barrón-Cedeno et al., 2020;Nakov et al., 2021) focused on claim detection and verification on Twitter and organized challenges with several sub-tasks on text-based claim detection around the topic of COVID-19 in multiple languages.
+
+Gupta et al. (2021) addressed the limitations of current methods in cross-domain claim detection by proposing a new dataset of about ∼10 000 claims on COVID-19.
+
+They also proposed a model that combines transformer features with learnable syntactic feature embeddings.
+
+Another dataset introduced by Iskender et al. (2021) includes tweets in German about climate change for claim and evidence detection.
+
+Wührl and Klinger (2021) created a dataset for biomedical Twitter claims related to COVID-19, measles, cystic fibrosis and depression.
+
+One common theme and challenge among all the datasets is the variety of claims where some types of claims (like implicit) are harder to detect than explicit ones where a typical claim structure is present.
+
+Table 1 shows a comparison of existing social media based claim datasets, with number of samples, modalities, data sources, language, topic, and type of tasks.
+
+From the multimodal perspective, very few works have analyzed the role of images in the context of claims.
+
+Zlatkova et al. (2019) introduced a dataset that consists of claims and is created from the idea of investigating questionable or outright false images which supplement fake news or claims.
+
+The authors used reverse image search and several image metadata features such as tags from Google Vision API, URL domains and categories, relia-  -19).
+
+In terms of multimodal models for image-text data, most previous work is in the related area of multimodal fake news, where several benchmark datasets and models exist for fake news detection (Nakamura et al., 2020;Boididou et al., 2016;Jindal et al., 2020) .
+
+In an early work, Jin et al. (2017) explored rumor detection on Twitter using text, social context (emoticons, URLs, hashtags), and the image by learning a joint representation in a deep recurrent neural network.
+
+Since then, several improvements have been proposed, such as multi-task learning with an event discriminator (Wang et al., 2018), multimodal variational autoencoder (Khattar et al., 2019) and multimodal transfer learning using transformers for text and image (Giachanou et al., 2020;Singhal et al., 2019).
+
+To incorporate OCR text embeddings into our models, we experiment with two strategies for embedding generation and one strategy to fine-tune models.
+
+To obtain an embedding for SVM models, we experimented with concatenating the OCR embedding to image and tweet text embeddings as well as adding the OCR embedding directly to tweet text embedding.
+
+To fine-tune the models, we concate-nate the OCR text to tweet text and limit the OCR text to 128 tokens.
+
+For image-based models, CLIP I performs (70.0, 69.8) considerably better than 62.6) features in terms of both accuracy and F1 metrics (Table 3, block 2).
+
+This result is compliant to previous work (Kirk et al., 2021) where the task has a variety of information and text in images.
+
+It is further exaggerated and clearly observable in Table 4 where fraction of visuallyrelevant claims retrieved using CLIP I (70.3) is higher and comparable to fine-tuned ALBEF ⊕ OCR (71.2).
+
+For text-based models, fine-tuning (FT) BERT gives the best performance, better than any other unimodal model.
+
+This result indicates that the problem is inherently a text-dominant task.
+
+The model also retrieves the most visually-irrelevant claims when trained on T C .
+
+It should be noted that textual models can still identify visually-relevant claims since they can have a claim or certain cues in the tweet text that refer to the image.
+
+Finally, the CLIP T features perform considerably worse than BERT features, possibly because CLIP is limited to short text (75 tokens) and is not trained like vanilla BERT on a large text corpus.
+
+For multimodal models, the combination of BERT and ResNet-152 features performs slightly better (0.5 -1%) on two metrics in Table 3 on full dataset in binary task and with T split training in case of tertiary.
+
+Although this gain is not impressive, the benefit of combining two modalities is more obvious in identifying visually-relevant claims (> 10%) in Table 4, which comes at the cost of a lower fraction of visually-irrelevant claims.
+
+Similarly with CLIP, the combination of image and text features (CLIP I⊕T ) improves the overall accuracy from CLIP I or CLIP T .
+
+However, we do not see the same result for identifying visually-relevant claims (< 4 -5%).
+
+We also experiment with the combination of BERT features with CLIP's image features, which improves the overall accuracy further but indicates that the model relies strongly on text (65.8 vs. 57.7 visual retrieval %) rather than the combination.
+
+The stronger reliance on text is possibly not a trait of the model alone, but could be also caused by an incompatibility of BERT and CLIP I features.
+
+Finally, we achieve the best performance (by 1 -4%) on binary and tertiary (when trained on T ) claim detection by fine-tuning the ALBEF with and without OCR, respectively (Table 3, block 3, last row).
+
+While the benefit of using OCR text in SVM models is not optimal and not considerably helpful, OCR addition to ALBEF retrieves the maximum number of visually-relevant claims (71.2%) without losing much on visually-irrelevant claims (79.3%) when trained on T (Table 4, block 2, last row).
+
+These results point towards a major challenge of combining multiple modalities and retaining intra-modal information (and influence) for the task at hand.
+
+As noted in section 4.3.1, an interesting result is that ALBEF in particular is less robust to resolved conflicts (split T C ) in the data when compared to just using BERT.
+
+On closer inspection, these conflicts are mostly caused by the image relevance to the text.
+
+The gap is further exaggerated in Table 6, where ALBEF performs much better than BERT, when conflict examples are removed from both training and evaluation.
+
+Figure 2 shows a few examples where our best multimodal model correctly classifies, whereas unimodal models based on either image or text do not.
+
+All the samples in the figure have images that have some connection to the tweet text.
+
+The image in Figure 2b has a connection to one of the words or phrases (e.g., washing your hands) in the tweet text but is not relevant for the claim itself.
+
+Figure 2a includes an image with the claim itself and a very generic scene in the background.
+
+Both image and text in Figure 2c and Figure 2d are relevant, and the image acts as evidence and additional information.
+
+In all these examples, a rich set of information extraction and complex cross-modal learning is required to identify claims in multimodal tweets.
+
+When comparing results of recent state-of-the-art architectures for fake news detection, SpotFake (Singhal et al., 2019) does considerably better than MVAE (Khattar et al., 2019) but worse than any of our baseline models.

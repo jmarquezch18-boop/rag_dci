@@ -1,0 +1,69 @@
+In recent years, contrastive learning (CL) has been widely applied to self-supervised representation learning and led to major advances across computer vision (CV) (He et al., 2019;Chen et al., 2020b), speech (Saeed et al., 2021;Chen et al., 2021), and natural language processing (NLP) (Fang and Xie, 2020;Gao et al., 2021;Yan et al., 2021).
+
+The basic idea behind these works is to pull together an anchor and a "positive" sample in the embedding space, and to push apart the anchor from many "negative" samples.
+
+Since no labels are available, a positive pair often consists of data augmentations of the sample (a.k.a "views"), and negative pairs are formed by the anchor and randomly chosen samples from the mini-batch.
+
+In visual representations, an effective solution to generate data augmentations is to take two random transformations of the same image (e.g., cropping, flipping, distortion and rotation) (Chen et al., 2020b;Grill et al., 2020;Chen et al., 2020c).
+
+For natural language, similar approaches are adopted such as word deletion, reordering, substitution, and back-translation etc.
+
+(Fang and Xie, 2020;Wang et al., 2021) However, data augmentation in NLP is inherently difficult because of its discrete nature.
+
+Therefore, some previous works (Gao et al., 2021;Yan et al., 2021) also use dropout technique (Srivastava et al., 2014) to obtain sentence augmentations.
+
+Unlike self-supervised setting, some researchers propose supervised contrastive learning (SCL) (Khosla et al., 2020;Gunel et al., 2021;Suresh and Ong, 2021) which can construct positive pairs by leveraging label information.
+
+Examples from the same class are pulled closer than the examples from different classes, leveraging the semantics of labels to construct negatives and positives rather than shallow lexical information via data augmentation.
+
+Despite the aforementioned advantages brought by SCL, we argue that CL under supervised learning is not fully explored because the label information can be better utilized.
+
+On the one hand, labels are usually not merely categorical indices in the label vocabulary, but also contain specific semantic meanings, especially in the language understanding tasks.
+
+Thus labels can be used as positive/negative samples or anchors when calculating contrastive loss.
+
+On the other hand, label embedding enjoys a built-in ability to leverage alternative sources of information related to labels, such as class hierarchies or textual descriptions.
+
+Once we obtain representative label embeddings, they can be utilized to enhance the image/text representations, and finally facilitate the classification task.
+
+Previous la-bel embedding based classification models (Wang et al., 2018;Xiao et al., 2019) have demonstrated the effectiveness of leveraging label information.
+
+Motivated by above analysis, we propose a novel label anchored supervised contrastive learning approach (denoted as LaCon), which combines the advantages of both contrastive learning and label embedding techniques.
+
+Specifically, we have the following three novel designs: 1) Instance-centered contrastive loss (ICL), which uses the InfoNCE (van den Oord et al., 2018) to encourage each text representation and its corresponding label representation to be closer while pushing far away mismatched instance-label pairs.
+
+We further apply a multi-head mechanism to catch different aspects of text semantics.
+
+2) Label-centered contrastive loss (LCL), which takes label as anchor, and encourages the label representation to be more similar to the corresponding instances belonging to the same class in a mini-batch than the instances with different labels.
+
+3) Label embedding regularizer (LER), which keeps the inter-label similarity as low as possible thus the feature space of each class is more dispersed to prevent representation degeneration.
+
+By combining above three losses, LaCon can learn good semantic representations within the same space for both input instances and labels.
+
+It's also well aligned with the two key properties related to CL: alignment and uniformity (Wang and Isola, 2020), where alignment favors encoders that assign similar features to similar samples.
+
+Uniformity prefers a feature distribution that preserves maximal information, i.e., the uniform distribution on the unit hypersphere.
+
+To validate the effectiveness of LaCon, we perform extensive experiments on eight language understanding tasks.
+
+We take the popular pre-trained language model BERT-base (Devlin et al., 2019) as text encoder without loss of generality.
+
+For simplicity, we predict the classification label by matching the instance representation with label embeddings directly.
+
+Since our approach does not require any specialized network architecture or any extra data augmentation, LaCon can be easily plugged into other pre-trained language models.
+
+Additionally, we also explore the capability of LaCon under more difficult task settings, including few-shot learning and data imbalance situations.
+
+To summarize, our contributions are as follows:
+
+• We propose a novel label anchored contrastive learning approach for language understanding, which is equipped with a multi-head instancecentered contrastive loss, a label-centered contrastive loss, and a label embedding regularizer.
+
+All three contrastive objectives help the model learn the joint semantic representations for both input instances and labels.
+
+• We conduct extensive experiments on eight public language understanding tasks from GLUE (Wang et al., 2019) and CLUE (Xu et al., 2020) benchmarks, and experimental results show the competitiveness of LaCon.
+
+Additionally, we also experiment on more difficult settings including few-shot learning and data imbalance situations.
+
+LaCon experimentally obtains up to 9.4% improvement over BERT-base on FewGLUE (Schick and Schütze, 2021) and FewCLUE (Xu et al., 2021) benchmark tasks.
+
+• We analyze the contribution of each ingredient of LaCon, and also visualize the learned instance and label representations, showing the necessity of each loss component and the advantage of LaCon on representation learning over BERT fine-tuned with cross entropy.

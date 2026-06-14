@@ -1,0 +1,47 @@
+Pretrained language models (Devlin et al., 2019;Yang et al., 2019;Raffel et al., 2020) have demonstrated strong empirical performance not only within a language but also across languages.
+
+Language models pretrained with a mix of monolingual corpora, such as multilingual BERT, exhibit a decent zero-shot cross-lingual transfer capability, i.e., a model fine-tuned in a single source language (L1) can solve the task in another language (L2) (Conneau et al., 2020a;Xue et al., 2021).
+
+Surprisingly, the transfer happens without lexical overlaps between L1 and L2 (Karthikeyan K and Roth, 2020;Conneau et al., 2020b) or even without joint pretraining (Artetxe et al., 2020): an encoder only pretrained on L1 can be transferred to L2 without any parameter updates.
+
+These results suggest that, whether the encoder is trained on single or multiple languages, it learns some transferable knowledge about language.
+
+Figure 1: Transfer from artificial language to natural language.
+
+The artificial language encodes some structural properties (e.g., token distributions, dependency structures) and we study how the learning of such properties can be transferred to natural language.
+
+However, the characteristics of such transferable knowledge are still underexplored.
+
+Recent studies with the probing methodology (Hupkes and Zuidema, 2018;Conneau et al., 2018) have revealed that multilingual BERT captures languageindependent linguistic structures such as universal dependency relations (Chi et al., 2020) and subjecthood (Papadimitriou et al., 2021), but it remains unknown whether learning such linguistic properties actually contributes to the performance, and whether there exists more abstract knowledge transferred across languages.
+
+In this study, we try to shed light on these questions with the framework of the Test for Inductive Bias via Language Model Transfer (Papadimitriou and Jurafsky, 2020), focusing on designing artificial languages with natural-language-like structural properties (Figure 1).
+
+We pretrain encoders with artificial languages and transfer the encoders to natural language tasks with their parameters frozen.
+
+This enables us to see how learning the specific structural properties of the artificial language affects the downstream performance.
+
+Specifically, we explore whether it is beneficial for the encoder to know the following two characteristics of natural language: word distributions and latent dependency structures.
+
+We design artificial languages that represent such characteristics and perform an extensive study with different encoder architectures (LSTM and Transformer) pretraining objectives (causal and masked language modelings).
+
+The contribution is summarized as follows:
+
+• We first start by complementing the study in Papadimitriou and Jurafsky (2020).
+
+We train LSTM and Transformer encoders with the sentence-level causal language modeling task and evaluate the encoders in English.
+
+We show that an artificial language that models simple statistical dependency within a sentence provides decent transferable knowledge on natural language modeling.
+
+Furthermore, we find that the inductive bias of a nesting head-to-tail dependency structure is more useful than a flat one.
+
+• We then proceed to investigate transfer learning in masked language modeling (Devlin et al., 2019), one of the current dominant pretraining paradigms.
+
+We evaluate pretrained Transformer encoders with dependency parsing and confirm that the nesting dependency structure is important to learn the structure of natural language.
+
+• We hypothesize that the transfer performance of pretrained encoders is related to the way the encoder preserves the input contextual information in the output vectors.
+
+We perform a probing experiment and find that the artificial language with the nesting dependency structure trains encoders to encode the information on adjacent tokens into the output vector of each token.
+
+We conclude this paper with the hypothesis that a part of transferable knowledge in language models could be explained by the knowledge of position-aware context dependence of language.
+
+2 Related Work

@@ -1,0 +1,5 @@
+The evaluation of temperature evolution of an oscillating water body is analysed in a numerical wave flume environment.
+
+This approach provides a basis for the straightforward verification of the major outcome of the modelling procedures, which are presented in the previous section, against measurements in the real laboratory.
+
+On the other hand, the numerical model may be modified to cover pseudo-random ocean waves in a large periodic domain (see e.g. Paprota, 2019) to analyse the wave-induced vertical mixing processes in offshore conditions.

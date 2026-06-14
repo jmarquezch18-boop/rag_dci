@@ -1,0 +1,357 @@
+Evaluating Unsupervised Representation Learning For Detecting Stances Of Fake News
+
+Abstract
+
+Introduction
+
+Related Work
+
+Material And Methods
+
+Model Architectures
+
+Data
+
+The FNC-1 data set was created from the Emergent data set (Ferreira and Vlachos, 2016) which was developed for an online journalism project about rumour debunking.
+
+The project is still running and a website with manually checked claims is available (Silverman, 2019).
+
+Rumours were extracted from websites such as snopes.com and twitter accounts such as @Hoaxalizer.
+
+Journalists then first identified the respective claim and searched for articles mentioning this claim.
+
+As a next step the journalists labeled the article as For, Against or Observing and then summarized the article into a headline.
+
+As an additional step the veracity level of the claim was labeled as True, False or Unverified.
+
+In total, 300 rumoured claims and 2,595 associated news with an average ratio of 8.65 (sd = 7.31) articles per claim were considered.
+
+The data set thus contains real world data which was manually labeled by journalists with regard to their stance and veracity level.
+
+For the FNC-1, organizers matched every article body with its respective headline and additionally created the fourth class Unrelated by randomly matching headlines and article bodies that belonged to different topics.
+
+Furthermore, 266 instances were created in addition to prevent participation teams from deriving labels for the test set since the Emergent data set is publicly available.
+
+The class distribution over the four classes in the FNC-1 data set is heavily skewed towards the Unrelated class.
+
+The 49,972 instances each consist of a headline (i.e. the claim to be looked at), the respective article body and label.
+
+In total, there are 1,669 unique article bodies and 1,648 unique headlines.
+
+The 300 topics are divided into 200 topics for training and 100 topics for testing.
+
+Not every claim is associated with all four labels.
+
+Hanselowski et al. (2018) introduce the extended data set FNC-1 ARC as follows: ARC consists of 188 manually selected debate topics of popular questions from the user debate section of the New York Times.
+
+For each of these debate topics those user posts were selected that were highly ranked by other users.
+
+These highly ranked user posts were processed by producing two opposing claims for them.
+
+Afterwards, crowd workers decided on the stance of the user posts with regard to the two opposing claims and labeled the post as either Agree, Disagree or Discuss.
+
+The Unrelated label was created by randomly matching user posts to different topics.
+
+As this data set is built on user posts as opposed to the online news articles of the original FNC-1 data set, it consists of shorter documents that tend to express one viewpoint only and are less balanced in their opinion as news articles.
+
+Using this additional data set, the robustness of the provided models can thus be tested.
+
+The extended FNC-1 ARC data set combines the FNC-1 with the ARC data set.
+
+It comprises 64,205 instances, 14,233 more than the FNC-1 data set.
+
+The label distribution is overall similar to the original data but the Disagree category has a bigger proportion.
+
+Pre-Processing
+
+As a first step, headlines and article bodies are concatenated into one long sequence with headline coming first and the respective article body following.
+
+In doing so, the models can be evaluated with respect to their capabilities of learning the semantic structures of one instance as a whole.
+
+All model architectures can be used with their own respective tokenizer.
+
+Since every tokenizer provides the possibility to process cased text, it was decided to not perform lower-casing.
+
+All tokenizers can detect and ignore control characters.
+
+It was thus not necessary to explicitly remove them.
+
+The removal of seemingly uninformative words, so called stop words, was kept as low as possible and consisted of a manually selected list containing the words The, the, A, a, An, an.
+
+In order to remove stop words, it was necessary to first tokenize the instances to be able to filter out the mentioned stop words.
+
+After tokenizing each instance, the remaining tokens were padded.
+
+Instances that have a longer sequence length than 512 were truncated.
+
+As a final result, all tokens have a sequence length of T = 512 including all necessary special tokens.
+
+In addition, the model is fed with an identifier of which token is padded and which is not.
+
+This is necessary to only place the attention over the span of "true" tokens that is of non-padded tokens.
+
+Results
+
+Initial Experiments
+
+Detailed Grid Search
+
+Since traditional research on hyperparameter optimization focuses on training a model from scratch, some of the generated insights and algorithms might not be appropriate for the setting of transfer learning and finetuning (Li et al., 2020).
+
+There is little research on the effectiveness and necessity of hyperparameter optimization when finetuning, especially for NLP tasks.
+
+The biggest difference between pretraining and finetuning lies in the initialization of the weights.
+
+In the case of finetuning this initialization relies on the pretrained model which hopefully captures some intrinsic knowledge, whilst the pretraining phase usually works with random initialization.
+
+The goal of this experimental setup is thus to gain more insights on the effectiveness and necessity of hyperparameter tuning for finetuning in an NLP context.
+
+Therefore, a grid search for the hyperparameters batch size, maximal sequence length and type of learning rate schedule and learning rate is conducted as indicated in Tab.
+
+2.
+
+The learning rate is the most common hyperparameter that is tuned.
+
+It is so important that Goodfellow et al. (2016) state to only tune the learning rate, if one has only time/budget to address one hyperparameter.
+
+For the finetuning setting, it is usually assumed that a drastically smaller learning rate should be used in comparison to pretraining (Li et al., 2020, p.1).
+
+During pretraining the model already learns fairly good representations which are valuable for any downstream task.
+
+These should therefore not be destroyed by using a too big learning rate that strides away too fast from the already gained knowledge.
+
+Thus, learning rate values of 1e-5, 2e-5, 3e-5 and 4e-5 are considered.
+
+In addition, the schedule that is used along with the learning rate itself plays an important role.
+
+In this context, three different schedule types are considered, namely a constant, linear and a cosine schedule.
+
+All three types of schedules use the same warmup strategy for which a lower learning rate is used at the start of training to overcome optimization difficulties.
+
+After a warmup period the targeted learning rate is reached.
+
+The schedules now differ in the successive handling of the learning rate.
+
+The constant schedule keeps it at the targeted value, while the linear and cosine schedule decay it accordingly.
+
+For the sequence length the naive assumption is that using as much context as possible is beneficial for the performance.
+
+A longer sequence length that does not truncate input sequences might therefore perform better.
+
+On the other hand it is imaginable that news articles might not need to be fed fully to the model since they might contain redundant discussion parts.
+
+Often, the main arguments are already shared at the beginning of the article with the full article further elaborating on the initially made statements.
+
+It might be sufficient to look at the beginning of articles which translates to a shorter sequence length.
+
+For the grid search, sequence lengths of T 1 = 256 and T 2 = 512 are examined.
+
+Lastly, a shorter sequence length bears the possibility to increase the batch size which was found to be rather low in the exploration step due to limited memory capacities.
+
+A larger batch size is usually affiliated with a more accurate estimate of the gradient (Goodfellow et al., 2016, p.276).
+
+On the contrary, smaller batch sizes often have a regularizing effect which might be due to the additional noise they add to the learning process.
+
+The values for the batch sizes are chosen such that a constant tokens per batch ratio is reached.
+
+Given the memory constraints, the highest possible batch sizes are 32 and 8 for a a sequence length of T 1 = 256 and T 2 = 512 respectively.
+
+Given the defined search space in Tab. 2, 48 combinations are evaluated for each model and data set.
+
+The combinations are examined per learning rate and presented in Tab. 3.
+
+When it comes to the sequence length, a value of 256 is preferred by most models for the FNC-1 data set, while for the FNC-1 ARC data set there is no preferred choice.
+
+This means that even though, the FNC-1 data set contains longer sequences on average, a shorter sequence length is often preferred.
+
+This can be interpreted as an indication that the similarity of instances is more important than the average sequence length.
+
+Apart from the fact that the FNC-1 ARC data set contains more instances compared to the FNC-1 data set, the biggest distinction is that the additional instances were generated from a different context.
+
+Hanselowski et al. (2018) specifically introduced the extended data set to test a proposed model's robustness by using the more heterogeneous FNC-1 ARC data set.
+
+The general performance on the different data sets is elaborated at a later point when discussing the indications of Tab.
+
+4.
+
+For a sequence length of T 2 = 512 a batch size of 8 leads to the best performance more often.
+
+The only exceptions are found for a smaller learning rate of 1e-5 or 2e-5.
+
+This is not surprising since a smaller batch size introduces more uncertainty in estimating the gradient.
+
+This uncertainty is then compensated by a smaller learning rate.
+
+For a sequence length of T 1 = 256 the affiliated preferred batch size is more evenly distributed.
+
+For the FNC-1 data set a sequence length of 256 is chosen 14 times in total with eight configurations preferring a batch size of 16 and six configurations one of 32.
+
+Hence, for the FNC-1 data set a smaller batch size is preferred for a sequence length of 256.
+
+For the FNC-1 ARC and the same sequence length a similar even distribution can be reported, with the batch size 16 being chosen four and the batch size 32 being chosen five times.
+
+There is thus an indication that the batch size seems to be especially important for longer sequence lengths where a higher batch size is preferred unless the models are trained on a very small learning rate.
+
+For both data sets a higher batch size of 32 tends to occur along with a higher learning rate of 4e-5.
+
+Evaluating the learning rate schedule, the most surprising finding is that the linear schedule is chosen most frequently with being the preferred choice in 25 of all 40 reported winning configurations.
+
+The constant and the cosine schedule are very much on par with being chosen seven and nine times respectively.
+
+For the FNC-1 data set the distribution of the schedulers is more equal with nine configurations choosing the linear, five the constant and six the cosine schedule.
+
+For the FNC-1 ARC data set a clear preference towards the linear scheduler can be observed.
+
+It seems that a linear decay is sufficient but important for both data sets.
+
+There are no peculiarities when it comes to ALBERT which uses a different optimizer during pretraining.
+
+BERT RoBERTa DistilBERT ALBERT XLNet LR Winner F 1 -m Winner F 1 -m Winner F 1 -m Winner F 1 -m Winner F 1 -m FNC-1 1e-
+
+When it comes to the learning rate, most models perform best for a smaller value of either 1e-5 or 2e-5.
+
+There is a difference in the two data sets however.
+
+For FNC-1 ARC the overall winning configuration is always either one of the two smaller learning rates for all models.
+
+Looking at the FNC-1 data set, DistilBERT and ALBERT yield an overall winning configuration with a learning of 4e-5 and 3e-5 respectively.
+
+For DistilBERT this can be explained by the fact that it only uses half the layers compared to its teacher RoBERTa which might require the model to stride away more from its pretrained version in comparison to the other models in order to adequately capture the given downstream task.
+
+For FNC-1 ARC this might not be observable since the heterogeneous data set requires a smaller learning rate in general.
+
+Both DistilBERT and ALBERT perform relatively bad for a learning rate of 1e-5 on the FNC-1 data set.
+
+Given the data set of the finetuning task is relatively homogeneous in its instances, lighter BERT-based frameworks require a larger learning rate than 1e-5 in order to achieve a better performance.
+
+The general best performing learning rates are 1e-5 and 2e-5.
+
+It seems that a more cautious updating of the pretrained parameters is important which is a strong indication of how well the large pretrained models already perform.
+
+Li et al. (2020) note that "it is believed that adhering to the original hyperparameters for finetuning with small learning rate prevents destroying the originally learned knowledge or features." (Li et al., 2020, p.1).
+
+A small learning rate is seemingly the most important factor for correctly using large pretrained NLP models for downstream tasks.
+
+BERT and RoBERTa prefer a learning rate of 2e-5 and 1e-5 respectively and show the same tendencies in performance with respect to the learning rate for both data sets.
+
+Thus this recommendation is relatively stable.
+
+DistilBERT and ALBERT prefer a larger learning rate for the more homogeneous FNC-1 data set and a smaller learning rate for the more heterogeneous FNC-1 ARC data set.
+
+Later, it will become evident that ALBERT's better performance for the FNC-1 ARC data set can be explained largely by the improved prediction strength on the sparse category of Disagree instances.
+
+The more evenly distributed class labels of FNC-1 ARC have the biggest impact on BERT and ALBERT.
+
+Looking at the overall performance, ALBERT performs the worst and even worse than BERT.
+
+This confirms the statements of Lan et al. (2019) who have reported that ALBERT can only outperform BERT for the xlarge and xxlarge variant.
+
+Surprisingly, DistilBERT can outperform BERT on the FNC-1 ARC data set and partly on the FNC-1 data set.
+
+When comparing the two different approaches of DAE versus AR, the best BERT-based model (RoBERTa) performs better than XLNet.
+
+XLNet still outperforms BERT, DistilBERT and ALBERT on both data sets and is thus the second-best overall model.
+
+However, XLNet bears the additional disadvantage of a much longer training time than any BERT-based model.
+
+While RoBERTa trains for around 59 minutes for one configuration, XLNet takes around 140 minutes which is more than twice the finetuning time of RoBERTa.
+
+All other BERT-based model train faster than RoBERTa.
+
+The reason why XLNet does not beat RoBERTa might originate from the specific advantage that XLNet introduces.
+
+Yang et al. (2019) criticize BERT for making the assumption that all masked tokens in a sequence are independent.
+
+By using the PLM objective, XLNet can avoid making such an assumption and is furthermore able to capture dependencies between tokens better than BERT-based architectures.
+
+The given task of stance detection is not a token-level but a segment-level task.
+
+The advantage of XLNet of better capturing the dependencies between tokens might thus be not of much use in this context.
+
+The overall winning model is RoBERTa with a batch size of 4, a sequence length of 512 and a learning rate of 1e-5 with a linear schedule for both data sets.
+
+The evaluation done so far focused on the F 1 -m metric.
+
+Since both data sets consist of unevenly distributed and heavily skewed class labels, the class-wise F 1 is now considered in order to gain further insights: In general, the performance improves for the extended data set FNC-1 ARC for all models.
+
+All models except for RoBERTa can drastically improve their prediction strength for the Disagree class which has the fewest training instances, precisely 1.7% (FNC-1) and 3.5% (FNC-1 ARC).
+
+RoBERTa can not push the performance on the extended data set as much on this category as other models.
+
+This could be interpreted as some sort of saturation effect, since using more evenly distributed data only helps to a certain degree.
+
+The FNC-1 ARC data set is still heavily skewed and in addition more heterogeneous than the FNC-1 data set.
+
+If the overall model architecture is already very powerful, as is the case for RoBERTa, the heterogeneity in the training instances might outweigh the positive factor of having more evenly distributed data.
+
+XLNet can boost its performance for the extended data set more, in relative comparison to RoBERTa.
+
+This can be largely attributed to the boosted performance on the Disagree class.
+
+All models perform relatively well on the Discuss and extraordinarily well on the Unrelated class.
+
+The worst F 1 -UNR values occur for ALBERT with 96.65 for the FNC-1 and 96.83 for the FNC-1 ARC data set.
+
+RoBERTa is the strongest model since it also outperforms XLNet.
+
+This better performance is not attributable to one specific class, since RoBERTa performs stronger on all classes.
+
+When considering F 1 -m, all models improve their performance when finetuned on more data, especially on the hardest to predict class Disagree.
+
+In summary, the grid search showed a very strong performance of RoBERTa which also outperforms XLNet.
+
+This might be due to the specific FND task that is on a segment-rather than a token-level.
+
+In
+
+Conclusion
+
+Mean F 1 -m metric over three runs for the exploration step.
+
+For Freeze only the last projection and classification layers are updated.
+
+For No Freeze all layers are updated, while for Freeze Embed all embedding-specific layers are excluded from updating.
+
+Results are on the dev set of a train/dev split of the actual training set.
+
+An overview on the runtimes can be found in Tab.
+
+5 in Appendix A.
+
+Search space over chosen hyperparameters.
+
+The sequence length and batch size depend on one another due to memory capacity reasons.
+
+For the longer sequence length only smaller batch sizes could be considered.
+
+All learning rate schedules use a warmup period of 6% of the total optimization steps.
+
+Overview over the results of the grid search with respect to the learning rate (LR) in the left.
+
+Winner denotes the winning configuration (chosen with respect to F 1 -m on the evaluation set) out of the 12 possible configurations per LR.
+
+The values in the Winner column indicate batch size, sequence length and LR schedule (abbreviated by cst for constant, lin for linear and cos for cosine) in this order.
+
+The F 1 -m of the winning configuration per model is indicated in bold, values in teal indicate the overall winning configuration per data set.
+
+The overall winning configuration over both data sets (RoBERTa; F 1 -m = 78.19) is additionally marked by a box.
+
+All reported values are obtained on the official test set.
+
+Model performances with respect to class-wise F 1 as well as F 1 -m in comparison for FNC-1 and FNC-1 ARC.
+
+For better readability we indicate the columns for FNC-1 ARC just with "+ ARC".
+
+addition to performing better, RoBERTa also trains much faster than XLNet.
+
+The learning rate is the most important hyperparameter which is in line with current research.
+
+For BERT and RoBERTa a clear recommendation for the learning rate can be drawn, while DistilBERT, ALBERT and XLNet exhibit their best performances for different values of the learning rate.
+
+The sequence length is not as important and dominated by the similarity of training instances within a data set.
+
+If the instances are more similar, the models manage finetuning well with shorter sequences.
+
+A more heterogeneous data set requires the model to consider more context and thus a longer sequences.
+
+As a learning rate schedule, a linear choice is sufficient and a cosine schedule is not necessary per se.

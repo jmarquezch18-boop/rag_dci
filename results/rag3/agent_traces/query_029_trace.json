@@ -1,0 +1,118 @@
+{
+  "query_id": "c5b7931f3e58dd10d67e388fcd5680c37e267022",
+  "query": "What is the reasoning behind the selection of the threshold values?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "threshold values"
+      },
+      "result_preview": "No matches found for 'threshold values'",
+      "elapsed_s": 5.27
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "criteria for threshold selection"
+      },
+      "result_preview": "No matches found for 'criteria for threshold selection'",
+      "elapsed_s": 4.07
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "optimal thresholds"
+      },
+      "result_preview": "No matches found for 'optimal thresholds'",
+      "elapsed_s": 5.39
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "criteria"
+      },
+      "result_preview": "Search results for 'criteria' (11 matches):\n[paper_id=nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34 | section=discussion | line=71] In ZIP, we will merge node 3 and node 6. If we take a closer look at th",
+      "elapsed_s": 5.81
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-CONLL2016_129",
+        "section": "introduction",
+        "start": 15,
+        "end": 15
+      },
+      "result_preview": "[nlpeer_PeerRead-CONLL2016_129 / introduction — líneas 10-20 de 105]\n\nHowever, manually creating training data to match the test domain is not a preferred solution, because 1) sometimes the test domain is not known when training the model, and it could change from sentence to sentence; 2) even if th",
+      "elapsed_s": 7.53
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "However, manually creating training data to match the test domain is not a preferred solution, because 1) sometimes the test domain is not known when training the model, and it could change from sentence to sentence; 2) even if the test domain is pre-determined, the resources required and slow turnaround in data collection process will still delay the system development process.\n\nTherefore, training data selection is widely used for domain adaptation in statistical machine translation (Zhao et al., 2004;Lü et al., 2007;Yasuda et al., 2008;Moore and Lewis, 2010;Axelrod et al., 2011;Duh et al., 2013;Axelrod et al., 2015).\n\nData selection techniques select monolingual or bilingual data that are similar to the indomain seed data based on some criteria, which are incorporated into the training data.\n\nThe most successful data selection approaches (Moore and Lewis, 2010;Axelrod et al., 2011) train n-gram language models on in-domain text to select similar sentences from the large general-domain corpora according to the cross entropy.\n\nFurthermore, (Duh et al., 2013) obtained some gains by extending these approaches from n-gram models to recurrent neural network language models (Mikolov et al., 2010).",
+      "section": "introduction",
+      "paper_id": "nlpeer_PeerRead-CONLL2016_129",
+      "chunk_id": "dci_nlpeer_PeerRead-CONLL2016_129_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-CONLL2016_129",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/0f8bc751a0472564732a976cd152643d92d5393c2e77c8234f386a801883d09ff9540378b3dab5834544a246c22f292d5b1c4d370219943c9a19a1626a8f8781_135",
+    "nlpeer/ARR-22/0f8bc751a0472564732a976cd152643d92d5393c2e77c8234f386a801883d09ff9540378b3dab5834544a246c22f292d5b1c4d370219943c9a19a1626a8f8781_136"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_PeerRead-CONLL2016_129_introduction_0000"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-CONLL2016_129_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.05128205128205128,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

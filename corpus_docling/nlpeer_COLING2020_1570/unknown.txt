@@ -1,0 +1,117 @@
+Humans Meet Models On Object Naming: A New Dataset And Analysis
+
+Abstract
+
+Introduction
+
+Related Work
+
+Obtaining Consistent Response Sets From Manynames V1
+
+Silberer et al. ( 2020) created the dataset of object names, ManyNames, by collecting on Amazon Mechanical Turk (AMT) approximately 36 names each for 25k target objects o. Each object o j was presented visually by a picture containing a single bounding box b j to delineate the target object, see Figure 1 for examples.
+
+The ManyNames annotations are structured as follows: for a box b i that delineates an object o i in image i ∈ I, we have a response set R i := {(n 1 , p 1 ), ..., (n k , p k )} of k name-frequency pairs.
+
+Unless otherwise stated, by name-object pairs we refer to name types given an individual object (i.e., there are k names).
+
+For each object, there are M name tokens, with M := k l=1 count(n l ).
+
+For each name n j in the response set, p j is the relative frequency of that name in the response set:
+
+p j := count(n j ) M
+
+. This means that p can be interpreted as the estimated probability distribution over names n j for box b i . Let n top denote the preferred or top name, i.e., the most frequent name the AMT workers gave for b i . Let n alt denote the remaining, less preferred or alternative names.
+
+2Due to visual and referential uncertainty in the images (see Section 1), or plain annotation errors, ManyNames 19 provides no guarantee that a name in a response set is in fact an adequate name for the target object, or that two names which occur in the same response set were even intended for the same object.
+
+For instance, annotators might have entered an inadequate name, such as dog for the bear in Figure 1c; or named different objects in the box, such as the bear or the ball in the same image.
+
+Our goal is to obtain consistent response sets R i which only contain adequate names n j ∈ R i for the same object o i that is delineated by b i .
+
+Hence, we must identify errors in ManyNames along two dimensions: (i) the adequacy which verifies each individual name-box pair (n j , b i ) and (ii) same-object/other-object which verifies each name-name-box triple (n l , n j , b i ) with respect to object identity, i.e., whether the annotators who provided n l and n j for the box b i likely intended to name the same object.
+
+Fig. 1d shows that, because of referential uncertainty of boxes, adequacy alone is not enough to identify consistent response sets: food was judged fully adequate given the box, but also as naming a different object from the (likewise adequate) top name table.
+
+Given both adequacy and same-object annotations, we will be able to compute a consistent response set for each box as follows: given its top name n top , exclude an alternative name n alt from the response set if it does not refer to the same object, or if it has low adequacy.
+
+Collection Of The Verification Annotations: Adequacy, Inadequacytype, Sameobject
+
+We recruited annotators via crowdsourcing using Amazon Mechanical Turk (AMT)3 .
+
+Workers were asked to conduct exactly the two types of annotations mentioned above: adequacy and same-object.
+
+4 For adequacy, workers could choose between "perfectly adequate" (which we encoded with score 1 for the analysis below), "there may be a (slight) inadequacy" (score 0.5) and "totally inadequate" (score 0).
+
+In addition, if a worker selected a slight or total inadequacy they had to specify the type of inadequacy from a pre-defined list (based on our prior data inspection): referential (paraphrased as "named object not tightly in bounding box"; e.g., bear-ball in Fig. 1c), visual recognition ("named object mistaken for something it's not"; as in bear-dog), linguistic (such as dear for deer), and "something else" (other).
+
+5In this way we collected verification annotations for the entire ManyNames data, except for objects where all annotators gave the same name, which we assumed were reliable, and names with a count of 1, which we assumed were unreliable.
+
+The remaining 19, 427 images had on average around 4 names per object, totalling 69, 356 name-object pairs to be verified.
+
+Each image, with the target object marked by a box, was presented to 3 workers, along with its ManyNames response set (minus names that were given only once).
+
+In total, 255 participants contributed annotations.
+
+Given the annotations, we compute for each name n j its mean adequacy score among its 3 collected annotations, which we denote by ADEQUACY(n j ).
+
+Let INADEQUACYTYPE(t|n j ) denote the score of name n j for each inadequacy type t, computed as the proportion of annotators who judged n j to have inadequacy type t (representing t as 'none' when the annotator selected 'perfectly adequate').
+
+Likewise, let SAMEOBJECT(n j |n l ) denote the proportion of annotators who judged n j to be intended to name the same object as n l .
+
+Analysis: Errors, Their Causes, And Effects
+
+Defining Manynames V2
+
+For the analyses that follow, here and in Section 4, we define a new version of ManyNames containing only consistent response sets (see Sect.
+
+3.1).
+
+Names in a consistent response set must name the same object as the top name in the set, which we define in terms of SAMEOBJECT > 0, and must be sufficiently adequate, which we define as ADEQUACY > 0.4.
+
+Thus, consistent response sets are obtained by removing from the original ManyNames (henceforth ManyNames v1) all names that do not meet these two criteria.
+
+The set of excluded names corresponds to row 3 of Table 1, and row 4 shows the dataset obtained by excluding them, which we refer to (and publicly release) as ManyNames v2.
+
+Accordant with the fact that most issues are referential, there is a large overlap between the two criteria: only 10% of the removed names are discarded by the addition of the adequacy threshold.
+
+We chose the thresholds of our two criteria based on the foregoing analysis, and with the aim of excluding clear errors while leaving room for borderline cases or genuine disagreements between annotators.
+
+One of our research interests being naming variation, we did not want to exclude a potential variant just because, e.g., a single annotator considered it inadequate.
+
+However, for different tasks it may make sense to choose these thresholds differently, and to facilitate this we will publicly release the raw verification annotations in addition to the consistent response sets as we computed them.
+
+Our analysis below (Sect. 3.5) will focus on the consistent response sets as defined, i.e., ManyNames v2.
+
+For model analysis in Section 4 we will also rely on the different inadequacy types.
+
+Analysis Of Naming Variation Per Domain: Manynames V1 Vs. V2
+
+Diagnosing Model Effectiveness In Human-Like Object Naming
+
+Experimental Setup
+
+Results
+
+Conclusions
+
+Figure 1: Example instances of ManyNames: target objects, marked by the red boxes, together with their response sets (names and their counts, i.e., the number of MN annotators giving the name; no counts are shown for singletons (where count= 1), which are separated by ;).
+
+Sets are separated into (C)orrect (adequate) and (I)ncorrect names, and (E)rror types of incorrect names.
+
+Names of different objects are separated by |.
+
+The gray-shaded row contains predictions of Anderson et al.'s (2018) model (n).
+
+(a) Distribution of ADEQUACY scores for name-object pairs, divided into 7 bins, each bin further subdivided into top names (orange) and alternative names (green) for each object.
+
+(b) Distribution of SAMEOBJECT scores for pairs of top names and their alternative names (weighed by the name counts in the original ManyNames response set), divided into 4 (uneven) bins, each bin further subdivided by inadequacy type (colors).
+
+Figure 2: Distribution of ADEQUACY and SAMEOBJECT scores in ManyNames.
+
+Naming variation in ManyNames v1 vs. v2, with mean number of distinct names per object (columns N) and mean percentage of n top responses (%n top ).
+
+Results of the human upper bound vs. Bottom-Up: numbers represent the proportion (in %) of predicted names that fall under each category (see text for details on the splits).
+
+Results per domain, again as % of predicted names that fall under each category.
+
+Column 'total #' gives the number of test instances per domain.

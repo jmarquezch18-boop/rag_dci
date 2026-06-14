@@ -1,0 +1,3 @@
+In §2.1 we discuss previous work on evaluation of AMR generation and related NLG tasks, both with automatic metrics and human evaluation.
+
+In §2.2 we survey recent work in AMR generation, including describing the systems which we evaluate.

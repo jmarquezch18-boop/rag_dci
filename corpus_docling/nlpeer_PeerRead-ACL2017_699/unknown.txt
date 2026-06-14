@@ -1,0 +1,305 @@
+Deep Keyphrase Generation
+
+Abstract
+
+Introduction
+
+Related Work
+
+Automatic Keyphrase Extraction
+
+A keyphrase provides a succinct and accurate way of describing a subject or a subtopic in a document.
+
+A number of extraction algorithms have been proposed, and the process of extracting keyphrases can typically be broken down into two steps.
+
+The first step is to generate a list of phrase can-didates with heuristic methods.
+
+As these candidates are prepared for further filtering, a considerable number of candidates are produced in this step to increase the possibility that most of the correct keyphrases are kept.
+
+The primary ways of extracting candidates include retaining word sequences that match certain part-of-speech tag patterns (e.g., nouns, adjectives) (Liu et al., 2011;Wang et al., 2016;Le et al., 2016), and extracting important n-grams or noun phrases (Hulth, 2003;Medelyan et al., 2008).
+
+The second step is to score each candidate phrase for its likelihood of being a keyphrase in the given document.
+
+The top-ranked candidates are returned as keyphrases.
+
+Both supervised and unsupervised machine learning methods are widely employed here.
+
+For supervised methods, this task is solved as a binary classification problem, and various types of learning methods and features have been explored (Frank et al., 1999;Witten et al., 1999;Hulth, 2003;Medelyan et al., 2009b;Lopez and Romary, 2010;Gollapalli and Caragea, 2014).
+
+As for unsupervised approaches, primary ideas include finding the central nodes in text graph (Mihalcea and Tarau, 2004;Grineva et al., 2009), detecting representative phrases from topical clusters (Liu et al., 2009(Liu et al., , 2010)), and so on.
+
+Aside from the commonly adopted two-step process, another two previous studies realized the keyphrase extraction in entirely different ways.
+
+Tomokiyo and Hurst (2003) applied two language models to measure the phraseness and informativeness of phrases.
+
+Liu et al. (2011) share the most similar ideas to our work.
+
+They used a word alignment model, which learns a translation from the documents to the keyphrases.
+
+This approach alleviates the problem of vocabulary gaps between source and target to a certain degree.
+
+However, this translation model is unable to handle semantic meaning.
+
+Additionally, this model was trained with the target of title/summary to enlarge the number of training samples, which may diverge from the real objective of generating keyphrases.
+
+Zhang et al. (2016) proposed a joint-layer recurrent neural network model to extract keyphrases from tweets, which is another application of deep neural networks in the context of keyphrase extraction.
+
+However, their work focused on sequence labeling, and is therefore not able to predict absent keyphrases.
+
+Encoder-Decoder Model
+
+Methodology
+
+Problem Definition
+
+Given a keyphrase dataset that consists of N data samples, the i-th data sample (x (i) , p (i) ) contains one source text x (i) , and M i target keyphrases p (i) = (p (i,1) , p (i,2) , . . . , p (i,M i ) ).
+
+Both the source text x (i) and keyphrase p (i,j) are sequences of words:
+
+x (i) = x (i) 1 , x (i) 2 , . . . , x (i) L x i p (i,j) = y (i,j) 1 , y (i,j) 2 , . . . , y (i,j) L p (i,j)
+
+L x (i) and L p (i,j) denotes the length of word sequence of x (i) and p (i,j) respectively.
+
+Each data sample contains one source text sequence and multiple target phrase sequences.
+
+To apply the RNN Encoder-Decoder model, the data need to be converted into text-keyphrase pairs that contain only one source sequence and one target sequence.
+
+We adopt a simple way, which splits the data sample (x (i) , p (i) ) into M i pairs: (x (i) , p (i,1) ), (x (i) , p (i,2) ), . . . , (x (i) , p (i,M i ) ).
+
+Then the Encoder-Decoder model is ready to be applied to learn the mapping from the source sequence to target sequence.
+
+For the purpose of simplicity, (x, y) is used to denote each data pair in the rest of this section, where x is the word sequence of a source text and y is the word sequence of its keyphrase.
+
+Encoder-Decoder Model
+
+Details Of The Encoder And Decoder
+
+A bidirectional gated recurrent unit (GRU) is applied as our encoder to replace the simple recurrent neural network.
+
+Previous studies (Bahdanau et al., 2014;Cho et al., 2014) indicate that it can generally provide better performance of language modeling than a simple RNN and a simpler structure than other Long Short-Term Memory networks (Hochreiter and Schmidhuber, 1997).
+
+As a result, the above non-linear function f is replaced by the GRU function (see in (Cho et al., 2014)).
+
+Another forward GRU is used as the decoder.
+
+In addition, an attention mechanism is adopted to improve performance.
+
+The attention mechanism was firstly introduced by Bahdanau et al. (2014) to make the model dynamically focus on the important parts in input.
+
+The context vector c is computed as a weighted sum of hidden representation h = (h 1 , . . . , h T ):
+
+c i = T j=1 α ij h j α ij = exp(a(s i-1 , h j )) T k=1 exp(a(s i-1 , h k ))(4)
+
+where a(s i-1 , h j ) is a soft alignment function that measures the similarity between s i-1 and h j ; namely, to which degree the inputs around position j and the output at position i match.
+
+Copying Mechanism
+
+To ensure the quality of learned representation and reduce the size of the vocabulary, typically the RNN model considers a certain number of frequent words (e.g. 30,000 words in (Cho et al., 2014)), but a large amount of long-tail words are simply ignored.
+
+Therefore, the RNN is not able to recall any keyphrase that contains out-ofvocabulary words.
+
+Actually, important phrases can also be identified by positional and syntactic information in their contexts, even though their exact meanings are not known.
+
+The copying mechanism (Gu et al., 2016) is one feasible solution that enables RNN to predict out-of-vocabulary words by selecting appropriate words from the source text.
+
+By incorporating the copying mechanism, the probability of predicting each new word y t consists of two parts.
+
+The first term is the probability of generating the term (see Equation 3) and the second one is the probability of copying it from the source text: p(y t |y 1,...,t-1 , x) = p g (y t |y 1,...,t-1 , x) + p c (y t |y 1,...,t-1 , x)
+
+(5)
+
+Similar to attention mechanism, the copying mechanism weights the importance of each word in source text with a measure of positional attention. But unlike the generative RNN which predicts the next word from all the words in vocabulary, the copying part p c (y t |y 1,...,t-1 , x) only considers the words in source text.
+
+Consequently, on the one hand, the RNN with copying mechanism is able to predict the words that are out of vocabulary but in the source text; on the other hand, the model would potentially give preference to the appearing words, which caters to the fact that most keyphrases tend to appear in the source text.
+
+p c (y t |y 1,...,t-1 , x) = 1 Z j:x j =yt exp(ψ c (x j )), y ∈ χ ψ c (x j ) = σ(h T j W c )s t (6
+
+) where χ is the set of all of the unique words in the source text x, σ is a non-linear function and W c ∈ R is a learned parameter matrix.
+
+Z is the sum of all the scores and is used for normalization.
+
+Please see (Gu et al., 2016) for more details.
+
+Experiment Settings
+
+Training Dataset
+
+There are several publicly-available datasets for evaluating keyphrase generation.
+
+The largest one came from Krapivin et al. (2008), which contains 2,304 scientific publications.
+
+However, this amount of data is unable to train a robust recurrent neural network model.
+
+In fact, there are millions of scientific papers available online, each of which contains the keyphrases that were assigned by their authors.
+
+Therefore, we collected a large amount of high-quality scientific metadata in the computer science domain from various online digital libraries, including ACM Digital Library, Sci-enceDirect, Wiley, and Web of Science etc. (Han et al., 2013;Rui et al., 2016).
+
+In total, we obtained a dataset of 567,830 articles, after removing duplicates and overlaps with testing datasets, which is 200 times larger than the one of Krapivin et al. (2008).
+
+Note that our model is only trained on 527,830 articles, since 40,000 publications are randomly held out, among which 20,000 articles were used for building a new test dataset KP20k.
+
+Another 20,000 articles served as the validation dataset to check the convergence of our model, as well as the training dataset for supervised baselines.
+
+Testing Datasets
+
+For evaluating the proposed model more comprehensively, four widely-adopted scientific publication datasets were used.
+
+In addition, since these datasets only contain a few hundred or a few thousand publications, we contribute a new testing dataset KP20k with a much larger number of scientific articles.
+
+We take the title and abstract as the source text.
+
+Each dataset is described in detail below.
+
+-Inspec (Hulth, 2003): This dataset provides 2,000 paper abstracts.
+
+We adopt the 500 testing papers and their corresponding uncontrolled keyphrases for evaluation, and the remaining 1,500 papers are used for training the supervised baseline models.
+
+-Krapivin (Krapivin et al., 2008): This dataset provides 2,304 papers with full-text and author-assigned keyphrases.
+
+However, the author did not mention how to split testing data, so we selected the first 400 papers in alphabetical order as the testing data, and the remaining papers are used to train the supervised baselines.
+
+-NUS (Nguyen and Kan, 2007): We use the author-assigned keyphrases and treat all 211 papers as the testing data.
+
+Since the NUS dataset did not specifically mention the ways of splitting training and testing data, the results of the supervised baseline models are obtained through a five-fold cross-validation.
+
+- SemEval-2010(Kim et al., 2010): 288 articles were collected from the ACM Digital Library.
+
+100 articles were used for testing and the rest were used for training supervised baselines.
+
+-KP20k: We built a new testing dataset that contains the titles, abstracts, and keyphrases of 20,000 scientific articles in computer science.
+
+They were randomly selected from our obtained 567,830 articles.
+
+Due to the memory limits of implementation, we were not able to train the supervised baselines on the whole training set.
+
+Thus we take the 20,000 articles in the validation set to train the supervised baselines.
+
+It is worth noting that we also examined their performance by enlarging the training dataset to 50,000 articles, but no significant improvement was observed.
+
+Implementation Details
+
+In total, there are 2,780,316 text, keyphrase pairs for training, in which text refers to the concatenation of the title and abstract of a publication, and keyphrase indicates an author-assigned keyword.
+
+The text pre-processing steps including tokenization, lowercasing and replacing all digits with symbol digit are applied.
+
+Two encoderdecoder models are trained, one with only attention mechanism (RNN) and one with both attention and copying mechanism enabled (Copy-RNN).
+
+For both models, we choose the top 50,000 frequently-occurred words as our vocabulary, the dimension of embedding is set to 150, the dimension of hidden layers is set to 300, and the word embeddings are randomly initialized with uniform distribution in [-0.1,0.1].
+
+Models are optimized using Adam (Kingma and Ba, 2014) with initial learning rate = 10 -4 , gradient clipping = 0.1 and dropout rate = 0.5.
+
+The max depth of beam search is set to 6, and the beam size is set to 200.
+
+The training is stopped once convergence is determined on the validation dataset (namely earlystopping, the cross-entropy loss stops dropping for several iterations).
+
+In the generation of keyphrases, we find that the model tends to assign higher probabilities for shorter keyphrases, whereas most keyphrases contain more than two words.
+
+To resolve this problem, we apply a simple heuristic by preserving only the first single-word phrase (with the highest generating probability) and removing the rest.
+
+Baseline Models
+
+Evaluation Metric
+
+Results And Analysis
+
+Predicting Present Keyphrases
+
+This is the same as the keyphrase extraction task in prior studies, in which we analyze how well our proposed model performs on a commonly-defined task.
+
+To make a fair comparison, we only consider the present keyphrases for evaluation in this task.
+
+Table 2 provides the performances of the six baseline models, as well as our proposed models (i.e., RNN and CopyRNN).
+
+For each method, the table lists its F-measure at top 5 and top 10 predictions on the five datasets.
+
+The best scores are highlighted in bold and the underlines indicate the second best performances.
+
+The results show that the four unsupervised models (Tf-idf, TextTank, SingleRank and Ex-pandRank) have a robust performance across different datasets.
+
+The ExpandRank fails to return any result on the KP20k dataset, due to its high time complexity.
+
+The measures on NUS and Se-mEval here are higher than the ones reported in (Hasan and Ng, 2010) and (Kim et al., 2010), probably because we utilized the paper abstract instead of the full text for training, which may
+
+Krapivin NUS SemEval KP20k F 1 @5 F 1 @10 F 1 @5 F 1 @10 F 1 @5 F 1 @10 F 1 @5 F 1 @10 F 1 @5 F 1 @10 Table 2: The performance of predicting present keyphrases of various models on five benchmark datasets filter out some noisy information.
+
+The performance of the two supervised models (i.e., Maui and KEA) were unstable on some datasets, but Maui achieved the best performances on three datasets among all the baseline models.
+
+As for our proposed keyphrase prediction approaches, the RNN model with the attention mechanism did not perform as well as we expected.
+
+It might be because the RNN model is only concerned with finding the hidden semantics behind the text, which may tend to generate keyphrases or words that are too general and may not necessarily refer to the source text.
+
+In addition, we observe that 2.5% (70,891/2,780,316) of keyphrases in our dataset contain out-of-vocabulary words, which the RNN model is not able to recall, since the RNN model can only generate results with the 50,000 words in vocabulary.
+
+This indicates that a pure generative model may not fit the extraction task, and we need to further link back to the language usage within the source text.
+
+The CopyRNN model, by considering more contextual information, significantly outperforms not only the RNN model but also all baselines, exceeding the best baselines by more than 20% on average.
+
+This result demonstrates the importance of source text to the extraction task.
+
+Besides, nearly 2% of all correct predictions contained outof-vocabulary words.
+
+The example in Figure 1(a) shows the result of predicted present keyphrases by RNN and Copy-RNN for an article about video search.
+
+We see that both models can generate phrases that relate to the topic of information retrieval and video.
+
+However most of RNN predictions are high-level terminologies, which are too general to be selected as keyphrases.
+
+CopyRNN, on the other hand, predicts more detailed phrases like "video metadata" and "integrated ranking".
+
+An interesting bad case, "rich content" coordinates with a keyphrase "video metadata", and the CopyRNN mistakenly puts it into prediction.
+
+Predicting Absent Keyphrases
+
+As stated, one important motivation for this work is that we are interested in the proposed model's capability for predicting absent keyphrases based on the "understanding" of content.
+
+It is worth noting that such prediction is a very challenging task, and, to the best of our knowledge, no existing methods can handle this task.
+
+Therefore, we only provide the RNN and CopyRNN performances in the discussion of the results of this task.
+
+Here, we evaluate the performance within the recall of the top 10 and top 50 results, to see how many absent keyphrases can be correctly predicted.
+
+We use the absent keyphrases in the testing datasets for evaluation.
+
+50) predictions.
+
+This indicates that, to some extent, both models can capture the hidden semantics behind the textual content and make reasonable predictions.
+
+In addition, with the advantage of features from the source text, the CopyRNN model also outperforms the RNN model in this condition, though it does not show as much improvement as the present keyphrase extraction task.
+
+An example is shown in Figure 1(b), in which we see that two absent keyphrases, "video retrieval" and "video indexing", are correctly recalled by both models.
+
+Note that the term "indexing" does not appear in the text, but the models may detect the information "index videos" in the first sentence and paraphrase it to the target phrase.
+
+And the CopyRNN successfully predicts another two keyphrases by capturing the detailed information from the text (highlighted text segments).
+
+(Wan and Xiao, 2008) for analysis.
+
+The dataset consists of 308 news articles and 2,488 manually annotated keyphrases.
+
+The result of this analysis is shown in Table 4, from which we could see that the CopyRNN can extract a portion of correct keyphrases from a unfamiliar text.
+
+Compared to the results reported in (Hasan and Ng, 2010), the performance of CopyRNN is better than Tex-tRank (Mihalcea and Tarau, 2004) and KeyCluster (Liu et al., 2009), but lags behind the other three baselines.
+
+Dataset RNN CopyRNN R@10 R@50 R@10 R@
+
+As it is transferred to a corpus in a completely different type and domain, the model encounters more unknown words and has to rely more on the positional and syntactic features within the text.
+
+In this experiment, the CopyRNN recalls 766 keyphrases.
+
+14.3% of them contain out-ofvocabulary words, and many names of persons and places are correctly predicted.
+
+Discussion
+
+Conclusions And Future Work
+
+Figure 1: An example of predicted keyphrase by RNN and CopyRNN.
+
+Phrases shown in bold are correct predictions.
+
+Proportion of the present keyphrases and absent keyphrases in four public datasets
+
+Absent keyphrases prediction performance of RNN and CopyRNN on five datasets Table 3 presents the recall results of the top 10/50 predicted keyphrases for our RNN and CopyRNN models, in which we observe that the CopyRNN can, on average, recall around 8% (15%) of keyphrases at top 10 (
+
+Keyphrase prediction performance of CopyRNN on DUC-2001.
+
+The model is trained on scientific publication and evaluated on news.

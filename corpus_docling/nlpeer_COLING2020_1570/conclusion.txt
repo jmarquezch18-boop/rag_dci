@@ -1,0 +1,37 @@
+Modeling how humans use language in the visual world is at the core of L&V research.
+
+We have focused on object naming, the choice of a noun (or compound noun) to refer to an object which is marked with a bounding box in a real-world image.
+
+This setup is typical of Computer Vision and L&V for tasks such as object classification, referring expression interpretation/generation or visual dialogue.
+
+Our findings underline the importance of modeling naming as a phenomenon of its own: A woman, for example, can be named skier, person, or woman, in different images or by different people.
+
+At the same time, there are clear preferences about how to name a particular object: overall naming agreement in humans is around 80%.
+
+To boost research on object naming, we provide a high-quality naming resource, ManyNames v2, which is a verified version of a previous dataset with 36 names for objects in 25K images.
+
+For dataset collection, our analysis of the verification data strongly supports a collection methodology that elicits names from many speakers, in order to capture the variation in possible naming choices, and to reliably estimate the preferred name of an object.
+
+It furthermore suggests that referential issues, the main cause of noise introduced through the collection setup, can be greatly reduced by a simple verification step that assumes that the object named by the most frequent response is the target object, and asks subjects to select the alternative names for this object.
+
+For model development and evaluation, both naming variation and its domain dependence need to be taken into account.
+
+We have shown that ManyNames provides a very different picture of the performance of a state-of-the-art naming model, compared to a resource that only provides one single gold name per object (Visual Genome).
+
+Our analysis also shows that the model's naming behavior differs from that of humans particularly in the people, clothing and food domains, that is, in domains that are very familiar and relevant in human daily life, and in which we have found that humans exhibit the highest language variation.
+
+This is based on a model that provides a single answer per object; future work should seek to do even more justice to language variation, by predicting the whole probability distribution of names for objects (Peterson et al., 2019).
+
+We hope that our work will spur further research on object naming and, more generally, how humans use language to talk about the world.
+
+The Visual Genome dataset (Krishna et al., 2016, VG), upon which ManyNames (MN) is built, used a different name collection methodology, which in principle should prevent referential uncertainty, because, essentially, VG's AMT workers grounded names in the image by drawing a box, such that they explicitly chose the referent for the name.
+
+However, a comparison of MN and VG shows that incorrect name annotations can also be found in VG, despite its collection setup.
+
+First, for 27% of the MN objects, the VG name n vg does not match the top MN name n top ; i.e., n vg is not the name that most people would use for the object.
+
+For instance, in Figure 2f, 13 subjects chose cake, and only 3 the name given in VG, pie.
+
+Moreover, a quarter of the non-matching names do not even refer to the same object as n top , and half of them are inadequate.
+
+We refer to Hata et al. (2017) for a thorough analysis of worker quality.

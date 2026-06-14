@@ -1,0 +1,122 @@
+{
+  "query_id": "8fc13b01107e614b030a2c7dbc65aa19d0363778",
+  "query": "Did the authors run their experiments multiple times with different random initializations to confirm the results?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "random initialization"
+      },
+      "result_preview": "Search results for 'random initialization' (1 matches):\n[paper_id=nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea | section=results | line=47] When taking longer inputs than the length limit of the TLM, su",
+      "elapsed_s": 6.42
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+        "section": "results",
+        "start": 40,
+        "end": 50
+      },
+      "result_preview": "[nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea / results — líneas 35-55 de 163]\nFurthermore, as discussed in Section 4, the hierarchical structure of the CNN/DailyMail documents is not so obvious as thos",
+      "elapsed_s": 5.79
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "multiple runs"
+      },
+      "result_preview": "Search results for 'multiple runs' (1 matches):\n[paper_id=nlpeer_ARR-22_0f8bc751a0472564732a976cd152643d92d5393c2e77c8234f386a801883d09ff9540378b3dab5834544a246c22f292d5b1c4d370219943c9a19a1626a8f8781 | section=introduction | line=45] Our final model achieves 63.1 sentence F 1 averaged over multiple",
+      "elapsed_s": 4.69
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+        "section": "results",
+        "start": 40,
+        "end": 50
+      },
+      "result_preview": "[nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea / results — líneas 35-55 de 163]\nFurthermore, as discussed in Section 4, the hierarchical structure of the CNN/DailyMail documents is not so obvious as thos",
+      "elapsed_s": 18.38
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "reproducibility"
+      },
+      "result_preview": "Search results for 'reproducibility' (1 matches):\n[paper_id=nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9 | section=introduction | line=33] We also share our code and the data for reproducibility and fur",
+      "elapsed_s": 5.92
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Furthermore, as discussed in Section 4, the hierarchical structure of the CNN/DailyMail documents is not so obvious as those in PubMed and arXiv.\n\nCompared to the SOTA extractive model, our best HiStruct+ model produces competitive results.\n\nThe R2 and RL scores are improved slightly.\n\nThe model can be reused in many hybrid approaches.\n\nWhen we apply MatchSum based on our best 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24  0 Ablation studies on CNN/DailyMail (see the results and detailed discussions in Appendix A.5) suggest that the setting la-sum works best for hierarchical position encoding.\n\nTwo stacked Transformer layers in the summarization model perform better than one or three Transformer layers.\n\nWhen taking longer inputs than the length limit of the TLM, substantial improvements are achieved by using the copied token position embeddings for initialization instead of random initialization.\n\nThe extracted summaries are analyzed in more detail by plotting the proportions of the extracted sentences at each linear position within the whole document as shown in Figure 2a.\n\nThe model in green is our best-performed HiStruct+ model on CNN/DailyMail.\n\nThe model in orange is the corresponding comparison baseline without injected HiStruct information.\n\nThe model in blue is the OR-ACLE system, which produces the gold extractive summaries.",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_123",
+    "nlpeer/ARR-22/21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_124",
+    "nlpeer/ARR-22/21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_125"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0000"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.028571428571428574,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

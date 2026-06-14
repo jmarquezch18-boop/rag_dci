@@ -1,0 +1,19 @@
+Although the prediction model achieved strong performance, there were challenges in distinguishing the "not claim" sentences from others.
+
+An examination of the misclassified sentences shows that many such sentences actually talk about research background instead of research findings.
+
+We defined these sentences as belonging to the "not claim" category.
+
+However, sometimes these sentences used causal language, which may confuse the prediction model.
+
+For example, "choking is a leading cause of injury among children".
+
+There was also some confusion between the "direct causal" and the "correlational" categories.
+
+This type of error was mainly due to the causal markers in the subordinate clauses instead of the main clauses.
+
+For example, the sentence "many children are at increased risk for sleep breathing disorders that can impair their mental and physical development" describes a correlational claim but was misclassified as "direct causal" due to the cue "can impair".
+
+In our taxonomy, "can + causal cue" belongs to the category of "direct causal".
+
+The prediction model also had some difficulty in recognizing less commonly used relation markers, especially when nouns were used to describe correlational findings in headlines, such as the phrase "coupled with" in the headline "Kidney disease coupled with heart disease common problem in elderly".

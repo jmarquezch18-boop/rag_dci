@@ -1,0 +1,19 @@
+In this section, we compare the performance and efficiency of our model with various baselines on eight GLUE tasks (Wang et al., 2019b).
+
+More details on these tasks can be found in Appendix A.
+
+The results are summarized in Table 2.
+
+From the table it can be seen that the proposed method Ours (mixed) outperforms all KD methods while being more efficient.
+
+Compared to the single-task full fine-tuning baseline, our method reduces up to around two thirds of the total overhead while achieves 99.6% of its performance.
+
+We observe that MT-DNN (full) achieves the best average performance with the lowest overhead.
+
+However, its performance superiority primarily comes from one big boost on a single task (RTE) rather than consistent improvements on all tasks.
+
+In fact, we see that MT-DNN (full) suffers performance degradation on QQP and STS-B due to task interference, a known problem for MTL (Caruana, 1997;Bingel and Sogaard, 2017;Alonso and Plank, 2017;Wu et al., 2020).
+
+From our perspective, the biggest disadvantage of MT-DNN is that it assumes full knowledge of all target tasks in advance.
+
+From the results of MT-DNN (LOO), we observe that MT-DNN has difficulty in han-dling new tasks if the model is not allowed to be retrained.

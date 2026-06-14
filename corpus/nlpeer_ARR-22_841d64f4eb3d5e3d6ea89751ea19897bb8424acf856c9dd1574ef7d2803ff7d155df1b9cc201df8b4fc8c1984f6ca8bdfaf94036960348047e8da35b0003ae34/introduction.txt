@@ -1,0 +1,47 @@
+Although pre-trained text generation models (Lewis et al., 2020;Raffel et al., 2020) have achieved impressive results across a range of tasks, these models do not always deliver what system developers want.
+
+Machine generated text may be non-factual (Kryscinski et al., 2020;Maynez et al., 2020;Goyal and Durrett, 2021) or toxic (Gehman et al., 2020).
+
+We might patch these problems by applying discriminators over the output (Holtzman et al., 2018;Yang and Klein, 2021) to enforce these properties post-hoc; we could, for instance, apply a secondary model as a reranker over a small collection of outputs.
+
+However, if the generator returns a homogeneous set of candidates, we may fail to find any usable generation output. What if generation models could return massive numbers of candidates rather than a few outputs with optimal score? 1 Code, implementation guideline, and visualization are available at https://github.com/jiacheng-xu/ lattice-generation.
+
+With a large set of candidates, our secondary model could more easily find an acceptable one without having to take more extreme steps like re-training the initial generation model.
+
+Output diversity has separately been established as a useful goal for for applications such as dialogue and story generation (Li et al., 2016;Fan et al., 2019).
+
+Standard approaches including beam search (BS) and sampling methods fall short of our goal.
+
+Beam search uses significant computational resources to explore similar hypotheses, and much of the computation in the search process is invested into paths that could be acceptable generation outputs, but are ultimately pruned.
+
+Sampling approaches like nucleus sampling (Holtzman et al., 2020), although achieving better diversity than beam search, often re-discover seen hypotheses and can be harder to control for quality.
+
+A central problem with both methods is that they do not handle very similar hypotheses efficiently.
+
+In this paper, we present a decoding framework with two key components.
+
+First, we argue that a modified best-first search (BFS) is the right way to explore the search space.
+
+We augment standard best-first search with a depth-first path completion strategy: we eagerly expand each node until we reach an EOS token, thereby guaranteeing that each node is part of some completed path returned to the user.
+
+This generation strategy avoids exploring large numbers of states which end up being pruned.
+
+BFS is also more flexible than static beam search and can prioritize exploration in more uncertain parts of the generation.
+
+Second, our algorithm returns a massive number of generation options encoded in a lattice, with different hypotheses recombined in an approximate fashion.
+
+Beam search preserves similar outputs such as "A Cardiff recycling company has gone into" and "A Cardiff waste management company has gone into" as different states.
+
+However, these prefixes actually have very similar distributions of following words under the model; if we identify states like this, we can recombine them (Figure 2) and treat them as the same from the perspective of future continuations.
+
+In Figure 1, we show an illustration of the lattice structure this recombination can form for document summarization.
+
+We broaden a recombination method used previously in beam search for machine translation (Och et al., 2001;Zhang et al., 2018), enabling us to compactly encode large number of generation candidates and achieve dense lattices.
+
+We show results for both document summarization and machine translation in three language pairs.
+
+For each setting, we show that our lattice encodes a large number of high-quality candidates, including good matches with annotated reference generations.
+
+We further show that a variant of our method can still achieve strong results with a lower number of nodes expanded than the baselines, suggesting that this can be a path towards saving computational resources.
+
+We believe that computing thousands of high-quality generation candidates within a single compact data structure can provide a powerful starting point for various downstream purposes: diversity, factuality, customizability, and more.

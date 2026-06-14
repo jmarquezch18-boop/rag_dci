@@ -1,0 +1,98 @@
+{
+  "query_id": "9c94c1db5e17d67bbbfba1c1b4118bfafc313610",
+  "query": "What is the difference between those who received personalised and non-personalised texts?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "effectiveness of personalised texts"
+      },
+      "result_preview": "No matches found for 'effectiveness of personalised texts'",
+      "elapsed_s": 4.46
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "impact of personalised texts"
+      },
+      "result_preview": "No matches found for 'impact of personalised texts'",
+      "elapsed_s": 3.57
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "tailored texts"
+      },
+      "result_preview": "No matches found for 'tailored texts'",
+      "elapsed_s": 5.2
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "personalized messages"
+      },
+      "result_preview": "No matches found for 'personalized messages'",
+      "elapsed_s": 4.79
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "targeted texts"
+      },
+      "result_preview": "No matches found for 'targeted texts'",
+      "elapsed_s": 4.05
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/F1000-22/10-637_88",
+    "nlpeer/F1000-22/10-637_97",
+    "nlpeer/F1000-22/10-637_98"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [],
+    "approved_by_oracle": [],
+    "oracle_decisions": []
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.0437956204379562,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

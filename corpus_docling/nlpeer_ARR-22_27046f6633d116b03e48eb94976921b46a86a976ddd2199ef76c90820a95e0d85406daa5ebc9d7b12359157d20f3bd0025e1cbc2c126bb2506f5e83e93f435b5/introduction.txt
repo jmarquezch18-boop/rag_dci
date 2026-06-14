@@ -1,0 +1,63 @@
+Accompanying the revolution of pre-trained models in many NLP applications, such as sentiment analysis (Xu et al., 2019a), question answering (Yang et al., 2019b), information retrieval (Yang et al., 2019c), and text generation (Raffel et al., 2020), many related technologies have been deployed on the cloud to process user data from personal customers, small businesses, and large enterprises by industrial service providers.
+
+However, the convenience of the on-cloud pretraining technology also comes with a series of Contribution during internship at MSRA.
+
+u The corresponding author is Jianxin Li <lijx@buaa.edu.cn>. privacy challenges due to the sensitive nature of user data.
+
+For example, the input text or even text vector representations in user requests can leak private information, which may cause the specific user to be identified (Schwartz and Solove, 2011;Zhu and Han, 2020).
+
+This lack of privacy guarantees may impede privacy-conscious users from releasing their data to service providers.
+
+Thus, service providers may suffer from the deficiency of evolving models with user data.
+
+Besides, unintended data disclosure and other privacy breaches may result in litigation, fines, and reputation damages for service providers.
+
+These concerns spark our proposal of THE-X, to enable privacy-preserving inference of transformer.
+
+Specifically, we identify two challenges for the privacy-preserving inference of pre-trained models.
+
+The first challenge is how to protect users' plain text data from access by third-party service providers. (e.g., the clinic record or shopping history).
+
+Prior work has applied Differential Privacy (DP) (Dwork et al., 2006) and its variants to address similar privatization issues -originally for statistical databases and more recently for DL (Abadi et al., 2016) and NLP (Qu et al., 2021;Basu et al., 2021b;Fernandes et al., 2019;Lyu et al., 2020;Basu et al., 2021a).
+
+However, this solution may suffer from eavesdropping attackers.
+
+A handful of research (Zhu and Han, 2020;Zhao et al., 2020) demonstrated it possible to recover raw data from gradient leakage.
+
+Also, privacy protection could never be theory-guaranteed.
+
+The second challenge is the performance concern, recent works like Tex-tHide (Huang et al., 2020) andFedNLP (Lin et al., 2021) leverages the federated learning (Yang et al., 2019a) to train model on encrypted data, at cost of considerable performance dropping.
+
+Focusing on the privacy of training data, they have not fully explored privacy-preserving inference.
+
+To solve the concerns above, we depict one practice of privacy-preserving inference in Figure 1, where a fine-tuned language model could be converted into the cloud service mode with THE-X, and process users' data with its eyes blind.
+
+During inference, the content of the user query is anonymous to the transformer model.
+
+The results of computation are also ciphertext, which only can be decrypted by the user's private key.
+
+In addition, we need a theory-guaranteed encryption solution like the homomorphic encryption (HE) (Gentry, 2009) to convince both service providers and users of the privacy security in production scenarios.
+
+The semantic security of HE is guaranteed by lattice-based cryptography, and the HE computation results on ciphertext could be decrypted to the same results in plaintext, preventing performance reduction cost.
+
+The basic idea of homomorphic encryption is to perform computations on encrypted data without first decrypting it, which could fully ensure privacy in cloud-serving scenarios.
+
+It allows user data to be encrypted and out-sourced to commercial cloud environments for processing.
+
+However, due to the complex operations (e.g., GELU activation) in transformer-based models, the popular partially homomorphic encryption solution, which only supports addition or multiplication, can not easily be adapted into scenarios of pre-trained models.
+
+Based on HE transformer backend (Boemer et al., 2019b(Boemer et al., ,a, 2020)), we designed a series of approximation components to fulfill the whole inference pipeline of the mainstream transformer backbone.
+
+We evaluate THE-X for BERTtiny on the GLUE benchmark (Wang et al., 2019) and the CONLL2003 task (Tjong Kim Sang and De Meulder, 2003).
+
+Our results show that THE-X can achieve the privacy-preserving inference with the averaged performance reduction of only 1.49%.
+
+Our contributions include:
+
+• We are the first work to explore the privacy-preserving transformer inference with HE.
+
+• We design a practical and effective approximation workflow for converting transformerbased models into a function that consists of fully HE operations.
+
+• A thorough set of experiments confirms the negligible performance reduction with our proposed THE-X approximation.
+
+2 Background

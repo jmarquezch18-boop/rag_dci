@@ -1,0 +1,47 @@
+Recently, neural network-based approaches have shown promising results on inducing parse trees directly from words.
+
+Our weakly-supervised parser is comparable in behavior to a fully unsupervised parser as it does not rely on syntactic annotations.
+
+We highlight some themes most relevant to our method.
+
+Learning from distant supervision.
+
+A related work to ours (Shi et al., 2021) uses answer fragments and webpage hyperlinks to mine syntactic constituents for parsing.
+
+Many previous studies depend on punctuation as a strong signal to detect constituent boundaries (Spitkovsky et al., 2013;Parikh et al., 2014).
+
+Incorporating bootstrapping techniques.
+
+Cotraining (Yarowsky, 1995;Blum and Mitchell, 1998;Abney, 2007) and self-training (Steedman et al., 2003;McClosky et al., 2006;Cohen and Smith, 2010) are bootstrapping methods that attempt to convert a fully unsupervised learning problem to a semi-supervised learning form.
+
+More recently, Mohananey et al. (2020); Shi et al. (2020); Steedman et al. (2003) have shown the benefits of using self-training as a standard post-hoc processing step for unsupervised parsing models.
+
+Using inside-outside representations constructed with a latent tree chart parser.
+
+Drawing inspiration from the inside-outside algorithm (Baker, 1979), DIORA (Drozdov et al., 2019) optimizes an autoencoder objective and computes a vector representation for each node in a tree by combining child representations recursively.
+
+To recover from errors and make DIORA more robust to local errors when computing the best parse in the bottom-up chart parsing, an improved variant of DIORA, S-DIORA (Drozdov et al., 2020) achieves it.
+
+Inducing tree structure by introducing an inductive bias to RNNs.
+
+PRPN (Shen et al., 2018) introduces a neural parsing network that has the ability to make differentiable parsing decisions using structured attention mechanism to regulate skip connections in an RNN.
+
+ON-LSTM (Shen et al., 2019) enables hidden neurons to learn information by a combination of gating mechanism as well as activation function.
+
+In URNNG, Kim et al. (2019b) employs parameterized function over latent trees to handle intractable marginalization and inject strong inductive biases for the unsupervised learning of the recurrent neural network grammar (RNNG; Dyer et al. 2016).
+
+Peng et al. (2019) introduces PaLM that acts as an attention component on top of RNN.
+
+Compound PCFG (Kim et al., 2019a) which consists of a Variational Autoencoder (VAE) with a PCFG decoder, found the original PCFG is fully capable of inducing trees if it uses a neural parameterization.
+
+Jin et al. (2019) show that the flow-based PCFG induction model is capable of using morphological and semantic information in context embeddings for grammar induction.
+
+Zhu et al. (2020) proposes neural L-PCFGs to simultaneously induce both constituents and dependencies.
+
+Concerning PLMs.
+
+Tree Transformer (Wang et al., 2019) adds locality constraints to the Transformer encoder's self-attention such that the attention heads resemble a tree structure.
+
+Kim et al. (2020) extract trees from pre-trained transformers.
+
+Refining based on constituency tests. With the help of transformations and RoBERTa model to make grammaticality decisions, (Cao et al., 2020) were able to achieve strong performance for unsupervised parsing.

@@ -1,0 +1,96 @@
+{
+  "query_id": "243ba726cb4daf8fbda6f6d48d26e88dca0c43e4",
+  "query": "How was the decision made to classify a scientific paper as correlational or causal when the conclusion contains multiple sentences classified under different taxonomical classes, such as direct causal and correlational?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "correlational vs causal classification"
+      },
+      "result_preview": "No matches found for 'correlational vs causal classification'",
+      "elapsed_s": 7.69
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "distinguishing correlational from causal"
+      },
+      "result_preview": "No matches found for 'distinguishing correlational from causal'",
+      "elapsed_s": 4.8
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "causal inference methods"
+      },
+      "result_preview": "No matches found for 'causal inference methods'",
+      "elapsed_s": 5.65
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "causal inference criteria"
+      },
+      "result_preview": "No matches found for 'causal inference criteria'",
+      "elapsed_s": 6.97
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "criteria for causal vs correlational conclusions"
+      },
+      "result_preview": "No matches found for 'criteria for causal vs correlational conclusions'",
+      "elapsed_s": 8.16
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/COLING2020/1315_194"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [],
+    "approved_by_oracle": [],
+    "oracle_decisions": []
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.04761904761904761,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

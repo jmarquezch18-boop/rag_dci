@@ -1,0 +1,157 @@
+{
+  "query_id": "01f41162d1304c75c896de7d5abfbb94ba16051a",
+  "query": "What is the relationship between plurality and referential form in the current investigation?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "plurality"
+      },
+      "result_preview": "Search results for 'plurality' (1 matches):\n[paper_id=nlpeer_PeerRead-CONLL2016_13 | section=results | line=51] • The 1860 Presidential Election. [...] Lincoln won a plurality with about 40% of the vote.",
+      "elapsed_s": 3.98
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-CONLL2016_13",
+        "section": "results",
+        "start": 48,
+        "end": 54
+      },
+      "result_preview": "[nlpeer_PeerRead-CONLL2016_13 / results — líneas 43-59 de 63]\n[...] Nobody questions whether this is right or not.\n\nIn both examples, the event mentions (trigger words in bold font) are gold-annotated as coreferential, but our model failed to recognize this.\n\nAnother observation is that for 17 false",
+      "elapsed_s": 6.53
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-CONLL2016_13",
+        "section": "results",
+        "start": 43,
+        "end": 60
+      },
+      "result_preview": "[nlpeer_PeerRead-CONLL2016_13 / results — líneas 38-63 de 63]\n\nIt sickens me.\"\n\n• \"Some of the slogans sought to rebut war supporters' arguments that the protests are unpatriotic.\n\n[...] Nobody questions whether this is right or not.\n\nIn both examples, the event mentions (trigger words in bold font)",
+      "elapsed_s": 7.83
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "referential"
+      },
+      "result_preview": "Search results for 'referential' (21 matches):\n[paper_id=nlpeer_COLING2020_1570 | section=discussion | line=13] As we will show next, most inadequacies correspond to referential issues.\n[paper_id=nlpeer_COLING2020_1570 | section=discussion | line=15] Mostly Referential Errors We will next show that ",
+      "elapsed_s": 6.18
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_COLING2020_1570",
+        "section": "discussion",
+        "start": 41,
+        "end": 43
+      },
+      "result_preview": "[nlpeer_COLING2020_1570 / discussion — líneas 36-48 de 95]\n\nNote the strong agreement in the same-object judgments: 91% of all name tokens were judged to name the same object as n top by all our annotators (SAMEOBJECT = 1), and 6% to not (SAMEOBJECT = 0).\n\nOnly in 3% of cases (the middle two bins) d",
+      "elapsed_s": 14.9
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "[...] Nobody questions whether this is right or not.\n\nIn both examples, the event mentions (trigger words in bold font) are gold-annotated as coreferential, but our model failed to recognize this.\n\nAnother observation is that for 17 false negatives, we found analogous cases among the sampled false positives where annotators made a different annotation decision.\n\nConsider these examples:\n\n• The 1860 Presidential Election. [...] Lincoln won a plurality with about 40% of the vote.\n\n• She lost her seat in the 1997 election.\n\nEach bullet point has two event mentions (in bold font) taken from the same document and referring to the same event type, i.e., Personnel.E\n\nElect.\n\nWhile in the first example, the annotators identified the mentions as coreferential, the second pair of mentions is not annotated as such.",
+      "section": "results",
+      "paper_id": "nlpeer_PeerRead-CONLL2016_13",
+      "chunk_id": "dci_nlpeer_PeerRead-CONLL2016_13_results_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-CONLL2016_13",
+      "score": 1.0
+    },
+    {
+      "text": "It sickens me.\"\n\n• \"Some of the slogans sought to rebut war supporters' arguments that the protests are unpatriotic.\n\n[...] Nobody questions whether this is right or not.\n\nIn both examples, the event mentions (trigger words in bold font) are gold-annotated as coreferential, but our model failed to recognize this.\n\nAnother observation is that for 17 false negatives, we found analogous cases among the sampled false positives where annotators made a different annotation decision.\n\nConsider these examples:\n\n• The 1860 Presidential Election. [...] Lincoln won a plurality with about 40% of the vote.\n\n• She lost her seat in the 1997 election.\n\nEach bullet point has two event mentions (in bold font) taken from the same document and referring to the same event type, i.e., Personnel.E\n\nElect.\n\nWhile in the first example, the annotators identified the mentions as coreferential, the second pair of mentions is not annotated as such.\n\nAnalogously, 22 out of the 100 analyzed false positives were cases where the misclassification of the system was plausible to a human rater.\n\nThis exemplifies that this task has many boundary cases were a positive/negative decision is hard to make even for expert annotators, thus putting the overall performance of all models in Table 3 in perspective.",
+      "section": "results",
+      "paper_id": "nlpeer_PeerRead-CONLL2016_13",
+      "chunk_id": "dci_nlpeer_PeerRead-CONLL2016_13_results_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-CONLL2016_13",
+      "score": 1.0
+    },
+    {
+      "text": "Note the strong agreement in the same-object judgments: 91% of all name tokens were judged to name the same object as n top by all our annotators (SAMEOBJECT = 1), and 6% to not (SAMEOBJECT = 0).\n\nOnly in 3% of cases (the middle two bins) did our annotators disagree on whether a given token and n top are co-referring.\n\nAlso note the expected correspondence between the error types and the SAMEOBJECT judgments: when SAMEOBJECT = 0, most pairs are deemed to be referential errors.\n\nThis shows that the task of deciding whether two ManyNames annotators, who entered different names, were likely intending to name the same object elicits robust judgments.\n\nDiscussion of Causes We have shown that there is a non-negligible number of cases in which subjects named an object different from the target.\n\nPart of the reason may be annotators not doing their task faithfully; recall that the initial data collection was a generation task in which it is difficult to put quality control mechanisms.",
+      "section": "discussion",
+      "paper_id": "nlpeer_COLING2020_1570",
+      "chunk_id": "dci_nlpeer_COLING2020_1570_discussion_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_COLING2020_1570",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/COLING2020/1775_167",
+    "nlpeer/COLING2020/1775_168",
+    "nlpeer/COLING2020/1775_169",
+    "nlpeer/COLING2020/1775_170",
+    "nlpeer/COLING2020/1775_171"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 0.2,
+    "recall_at_3": 0.6,
+    "recall_at_5": 0.6,
+    "recall_at_10": 0.6,
+    "recall_at_20": 0.6,
+    "precision_at_5": 1.0,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_PeerRead-CONLL2016_13_results_0000",
+      "dci_nlpeer_PeerRead-CONLL2016_13_results_0001",
+      "dci_nlpeer_COLING2020_1570_discussion_0002"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-CONLL2016_13_results_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-CONLL2016_13_results_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_COLING2020_1570_discussion_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.041379310344827586,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

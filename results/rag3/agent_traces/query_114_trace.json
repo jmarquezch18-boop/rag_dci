@@ -1,0 +1,106 @@
+{
+  "query_id": "5c790742a803e76547d117cf4a77434d1737b5b1",
+  "query": "What factors, besides temperature and precipitation, could influence the distribution of glaciers in a given area?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "glacier distribution"
+      },
+      "result_preview": "No matches found for 'glacier distribution'",
+      "elapsed_s": 4.11
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "glacial dynamics"
+      },
+      "result_preview": "No matches found for 'glacial dynamics'",
+      "elapsed_s": 8.18
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "topographic controls"
+      },
+      "result_preview": "No matches found for 'topographic controls'",
+      "elapsed_s": 6.98
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "slope effects"
+      },
+      "result_preview": "No matches found for 'slope effects'",
+      "elapsed_s": 3.63
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "glacier geomorphology"
+      },
+      "result_preview": "No matches found for 'glacier geomorphology'",
+      "elapsed_s": 5.13
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "egu/esurf/11-849-2023_283",
+    "egu/esurf/11-849-2023_284",
+    "egu/esurf/11-849-2023_287",
+    "egu/esurf/11-849-2023_288",
+    "egu/esurf/11-849-2023_292",
+    "egu/esurf/11-849-2023_302",
+    "egu/esurf/11-849-2023_303",
+    "egu/esurf/11-849-2023_304",
+    "egu/esurf/11-849-2023_305",
+    "egu/esurf/11-849-2023_312",
+    "egu/esurf/11-849-2023_313"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [],
+    "approved_by_oracle": [],
+    "oracle_decisions": []
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.024,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

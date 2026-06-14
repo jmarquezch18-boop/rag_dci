@@ -1,0 +1,43 @@
+Characters are some of the most central elements of narratives, and the concept of character plays an important role in most definitions of narrative.
+
+As an example, Monika Fludernik defines a narrative as "a representation of a possible world . . . at whose centre there are one or several protagonists of an anthropomorphic nature . . . who (mostly) perform goal-directed actions . . . " (Fludernik, 2009, p.6;emphasis ours).
+
+This definition clearly states that characters are central to stories per se.
+
+Therefore, it is natural to assume that character identification is an important step in automatic approaches to story understanding.
+
+A number of approaches have been proposed for automatically identifying characters.
+
+Some approaches, for example, have sought to solve the character identification task using domain-specific ontologies (Declerck et al., 2012) or reasoning by reference to an existing case base (Valls-Vargas et al., 2014).
+
+Others have taken supervised machine learning approaches (Calix et al., 2013;Barros et al., 2019), where a classifier is trained over data annotated by people.
+
+Some approaches, e.g., examining characters' social networks (Sack, 2013), take character identification for granted, implementing heuristic-driven approaches over named entities or coreference chains that are not examined for their efficacy.
+
+Regardless of approach, all prior work of which we are aware has, unfortunately, had a relatively impoverished concept of character, at least from a narratological point of view.
+
+In particular, a key aspect of any character is that it contributes to the plot-characters are not just any animate entity in the narrative-and all prior work essentially ignores this point.
+
+Here we build on a prior proposal of ours 1 Code and data may be downloaded from https://doi.org/10.34703/gzx1-9v95/RB6ZH0.
+
+This work is licensed under a Creative Commons Attribution 4.0 International License.
+
+License details: http:// creativecommons.org/licenses/by/4.0/. (Jahan and Finlayson, 2019) to incorporate this narratologically grounded definition of character into automatic character identification.
+
+We first define and operationalize our concept of character, and use that concept to generate annotated data (170 narrative texts drawn from 3 different corpora) with high inter-annotator agreement.
+
+Then we demonstrate a straightforward supervised machine learning model using seven features that performs quite well on these data.
+
+Our error analysis reveals several choke points in the performance of the system, most importantly the quality of the co-reference chains.
+
+The paper proceeds as follows.
+
+First, we discuss the definition of the character as presented by narratologists, contrasting this concept with those used in prior computational work, and describe an operationalized concept of character that can be annotated with high inter-annotator agreement ( §2).
+
+We next describe the data to which we applied this concept ( §3), following which we discuss the experimental setup, including the features and classification model ( §4).
+
+We present the results ( §5) and analyze the error patterns of the system, discussing various aspects, which leads us to a discussion of future work ( §6).
+
+Although we have discussed prior work briefly in the introduction, we summarize work related to this study ( §7) before we conclude by enumerating our contributions ( §8).
+
+2 An Operationalized Concept of Character

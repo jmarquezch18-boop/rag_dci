@@ -1,0 +1,51 @@
+Various studies have raised the question of which factors play a role in the choice of referring expressions.
+
+One of the main ideas in this tradition (henceforth, the linguistic tradition) is that there is a direct relationship between the "prominence" (in a broad sense) of a referent at a given point in the discourse, and the form used to refer to it.
+
+If a referent is prominent, a short anaphoric form (e.g. a pronoun) suffices; if it is less prominent, longer forms with more semantic content are used.
+
+Prominence has been argued to be influenced by various factors such as recency and frequency of mention (Ariel, 1990), grammatical function (Brennan, 1995), distance (McCoy and Strube, 1999), animacy (Fukumura and van Gompel, 2011), and competition between the referents (Arnold and Griffin, 2007).
+
+Reference production is also one of the most-studied topics in Natural Language Generation (Gatt and Krahmer, 2018), where it is known as Referring Expression Generation [REG]  (Krahmer and van Deemter, 2019).
+
+A key part of the REG problem is deciding which form (e.g., proper name, definite description or pronoun) to employ to refer to a referent at a given point in the discourse.
+
+Henceforth, we call this task Selection of Referential Form (SRF).
+
+SRF models come in many shapes and forms, with feature-based Machine Learning (ML) models playing a dominant role.
+
+However, the feature sets employed by these models can differ considerably from one model to the next, and although features akin to the ones employed in the linguistic tradition are often used, other types of features, which are harder to interpret linguistically, are frequent as well.
+
+Our aim in this paper is to examine feature-based SRF models from a linguistic perspective.
+
+We will conduct a systematic evaluation of these models, asking what features make them work best.
+
+Having done this, we propose a "consensus" feature set.
+
+Finally, we compare the features in our consensus feature set against the factors considered to be important in the linguistic tradition.
+
+An important question in any systematic evaluation is how the objects of study (in our case, SRF feature sets) are selected.
+
+We have proceeded as follows:
+
+• We selected all SRF algorithms submitted to GREC (Belz et al., 2010) and extracted the feature sets used by these algorithms.
+
+GREC was a Shared Task Evaluation task that still forms a natural starting point, because it attracted all the main SRF algorithms that existed at the time.
+
+• We additionally selected two other feature sets from the papers archived in the ACL anthology.
+
+The selection method will be detailed in subsection 3.1.
+
+• We re-implemented the features that were obtained, following the method detailed in subsection 3.2.
+
+Note that our systematic evaluation does not include Deep Learning methods (e.g., Castro Ferreira et al. (2018); Cao and Cheung (2019)) since, at the current state of the art, these do not yet offer much opportunity for linguistic interpretation.
+
+Our focus is on interpretable linguistic features.
+
+To perform our evaluation, two further choices need to be explained and motivated: Since the SRF task as such can be defined in different ways, we had to define an exact task, and we had to specify a corpus.
+
+These two choices will be further explained in section 3.
+
+Section 4 details the feature selection experiments and propose a consensus feature set.
+
+The paper concludes with a discussion of the extent to which the features are linguistically interpretable.

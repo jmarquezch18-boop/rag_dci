@@ -1,0 +1,69 @@
+In this section, we provide the formal description of our proposed approach.
+
+We focus on the task of producing a natural language description Y for a set of n RDF triples X " tx 1 , . . . , x n u. Each triple x i " ts i , p i , o i u consists of subject s i , predicate p i , and object o i .
+
+Our pipeline proceeds as follows.
+
+Given a set of triples X on the input, we:
+
+(1) transform the triples into facts, which are sentences in natural language, (2) sort the facts using an ordering module, (3) insert sentence delimiters between the sorted facts using an aggregation module, (4) input the ordered sequence of facts with delimiters into a paragraph compression module, which generates the final description Y .
+
+The individual steps are described in the following sections: transforming individual triples to text ( §3.1), ordering ( §3.2), aggregation ( §3.3), and paragraph compression ( §3.4).
+
+For our ordering model ( §3.2), we use the Simple Pointer model from Calizzano et al. (2021).
+
+The model is based on a pretrained BART-base extended with a pointer network from Wang and Wan (2019).
+
+We provide a short description of the model here; for details please refer to Calizzano et al. (2021).
+
+In the encoding phase, facts F are concatenated and tokenized.
+
+Each fact is surrounded by special tokens denoting the beginning (<s>) and the end (</s>) of the fact.
+
+The sequence is processed by the BART encoder, generating a sequence of encoder states E for each end token </s> representing the preceding fact.
+
+The decoding proceeds autoregressively.
+
+To bootstrap the decoding process, the pair of tokens <s></s> is fed into the decoder, producing the decoder state d 1 .
+
+The pointer network (attending to d 1 and E), selects the first ordered fact f o 1 , which is fed into the decoder in the next step (d 2 "<s>f o 1 </s>).
+
+The process is repeated until the all the facts are decoded in a particular order.
+
+The pointer network computes the probability of a fact to be on the j-th position, using the encoder output E and the decoder output state d j .
+
+The network is based on the scaled dot product attention, where d j is the query and encoder outputs E i are the keys:
+
+Q " d j W Q K " EW K P j " softmax ˆQK T ? b ˙.
+
+A dam is a barrier obstructing flowing water.
+
+A dam is a barrier.
+
+A dam obstructs flowing water.
+
+Here W Q and W K P R bˆb , b is the dimension of BART hidden states, and P j P R n`1 is the probability distribution for the j-th position (i.e., P ji is the probability that fact f i is on the j-th position).
+
+We train the model using the synthesized simple sentences in the WIKIFLUENT corpus, randomly shuffling the order of the sentences and training the model to restore their original order.
+
+We base our aggregation model ( §3.3) on RoBERTa-large (Liu et al., 2019) with a token classification head.
+
+6 Similarly to the ordering model ( §5.2), we input the sequence of (now ordered) facts F o into the model, separating each pair of facts f o i with a special token </s> (used by the model as a separator).
+
+Subsequently, the token classification layer classifies each separator </s> i position into two classes t0, 1u corresponding to the delimiter δ i .
+
+We ignore the outputs for the nonseparator tokens while computing cross-entropy loss.
+
+We create the training examples using the synthesized sentences in the WIKIFLUENT corpus, in which we set δ i " 0 for the sentences i, i`1 which were originally aggregated (i.e., are the result of splitting a single sentence) and δ i " 1 otherwise.
+
+We adopt BART-base for our paragraph compression model.
+
+We finetune the model on the WIK-IFLUENT corpus, concatenating the synthesized sentences on the input.
+
+We add delimiters between the sentences i and i `1 where δ i " 1 using a special token <sep>, which we add to the model vocabulary.
+
+As shown in Keskar et al. (2019), including control codes for training the model can steer the model towards producing certain outputs.
+
+Here we expect that the model will learn to fuse the sentences between which there are no delimiters 6 https://huggingface.co/transformers/model_ doc/roberta.html#robertafortokenclassification on the input.
+
+We evaluate how the model learns to respect the order and aggregation markers in §7.3.

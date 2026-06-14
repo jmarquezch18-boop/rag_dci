@@ -1,0 +1,45 @@
+As far as we know, there have been no pretrained language models for the Hanja language.
+
+One can use related LMs, the pretrained models for ancient Chinese as well as multilingual BERT (Devlin et al., 2019) which includes traditional Chinese in its training corpus.
+
+AnchiBERT (Tian et al., 2021) is pretrained in ancient Chinese with the Chinese anthologies written around 1000BC to 200BC.
+
+There is some vocabulary overlap between the Hanja documents and traditional Chinese corpora, we can adopt multilingual BERT and AnchiBERT to learn the representations of the Hanja texts.
+
+We propose the pretrained language models suitable for Hanja documents by continuing pretraining those two models on both AJD and DRS.
+
+Table 3 shows the ratio of unknown tokens in the test set of AJD by each model.
+
+It implies that existing AnchiBERT and multilingual BERT can also be exploited as language models for Hanja documents written in the Joseon dynasty, but the second phase of pretraining on the corpora of that era remarkably decreases the ratio of unknown tokens.
+
+AnchiBERT mBERT (Tian et al., 2021)  (Devlin et al., 2019) original 0.88% 0.76% +AJD/DRS 0.04% 0.04%
+
+We investigate whether providing additional information as input can improve the performances of language models.
+
+For CA, we mask all named entities in the input and fine-tuned the language model on masked data to examine the impact of entity information.
+
+For TC and NER, we concatenate document age information to the input text and run comparative experiments to verify the importance of time period on historical texts.
+
+BERT not pretrained 75.07 (∆ 20.81) mBERT (Devlin et al., 2019) 83.44 (∆ 8.15) AnchiBERT (Tian et al., 2021)   Entity-Masked Chronological Attribution Table 5 shows the difference on experimental results in CA when the named entities in the given input texts are masked.
+
+Compared to the default settings which does not mask named entities, all models show significant improvements.
+
+This is probably because models can truly focus on the content and changes in writing style without any disturbance of location entities consistently used for the whole era.
+
+Fine-tuned models with entity masked inputs also achieve nearly the same level of performance in the inference with plain inputs including named entities.
+
+It suggest to fine-tune models masking named entity in CA, considering the real scenario whose inference texts lack time period information.
+
+Topic Classifciation and Named Entity Recognition with the Age of Document It is for granted to regard that historical texts written over several eras reveal the time changes with respect to lexical choices and contents.
+
+Section 6.2 confirms the hypothesis above in terms of n-grams changes over time.
+
+entities.
+
+There was a big gap on difference with non-pretrained BERT in TC, which is probably due to the poor performance of itself in the original setting.
+
+All models show similar trends on both tasks with improved performances compared to the original settings without document age as input.
+
+It is an obvious result considering that the first step for ancient manuscript is assuming the written era.
+
+It implies the significance of chronological attribution task in HUE, conveying that chronological attribution task might improve the performance of other HUE tasks.

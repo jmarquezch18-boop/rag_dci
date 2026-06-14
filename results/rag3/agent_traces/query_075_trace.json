@@ -1,0 +1,137 @@
+{
+  "query_id": "5ac9e91c8d313af9a0771c5e3e46e95d2a7c2315",
+  "query": "What is the new evaluation metric proposed in the paper?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "evaluation metric"
+      },
+      "result_preview": "Search results for 'evaluation metric' (18 matches):\n[paper_id=nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea | section=results | line=89] They also collectively outperform the TransformerETS baselines by",
+      "elapsed_s": 4.07
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+        "section": "discussion",
+        "start": 23,
+        "end": 23
+      },
+      "result_preview": "[nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7 / discussion — líneas 18-28 de 41]\n\nTherefore, these KBs would remain incomplete without capturing the different types of entities identified in our benchma",
+      "elapsed_s": 11.4
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+        "section": "discussion",
+        "start": 18,
+        "end": 28
+      },
+      "result_preview": "[nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7 / discussion — líneas 13-33 de 41]\nTo this end, our proposed benchmark highlights the importance of capturing multifaceted, vague, and non-named entities pr",
+      "elapsed_s": 12.29
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "new evaluation metric"
+      },
+      "result_preview": "Search results for 'new evaluation metric' (1 matches):\n[paper_id=nlpeer_PeerRead-CONLL2016_142 | section=introduction | line=27] Another reason why we focus on probabilistic models is because this lets us employ the ideas proposed by Quiñonero-Candela et al. (2006), which defined new evaluation met",
+      "elapsed_s": 10.86
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "probabilistic evaluation metric"
+      },
+      "result_preview": "No matches found for 'probabilistic evaluation metric'",
+      "elapsed_s": 7.01
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Therefore, these KBs would remain incomplete without capturing the different types of entities identified in our benchmark.\n\nPractical usage.\n\nThe goal of our evaluation metrics (evaluation at k g ) is to characterize the performance of ESE methods in the presence of entity types that are typically present in user-generated text.\n\nNote that we do not recommend replacing the existing metric MAP@K = 20.\n\nOur proposed MAP@K g metric is complementary and is designed to stress test ESE methods in scenarios where coverage is an important criteria (e.g., KB population.)",
+      "section": "discussion",
+      "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_discussion_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "score": 1.0
+    },
+    {
+      "text": "To this end, our proposed benchmark highlights the importance of capturing multifaceted, vague, and non-named entities present in user-generated text.\n\nFor example, domain-specific KBs such as the Amazon Product Knowledge Graph (Karamanolakis et al., 2020) rely on user-generated text to collect entities for concepts of interest.\n\nThese KBs power many downstream tasks such as semantic search, question answering, and conversational AI.\n\nTherefore, these KBs would remain incomplete without capturing the different types of entities identified in our benchmark.\n\nPractical usage.\n\nThe goal of our evaluation metrics (evaluation at k g ) is to characterize the performance of ESE methods in the presence of entity types that are typically present in user-generated text.\n\nNote that we do not recommend replacing the existing metric MAP@K = 20.\n\nOur proposed MAP@K g metric is complementary and is designed to stress test ESE methods in scenarios where coverage is an important criteria (e.g., KB population.)\n\n) Top-20 predictions do not have enough representation of non-named, multifaceted, and vague entities.\n\nTherefore, when evaluating ESE methods designed for user-generated text on our benchmark, the proposed evaluation at k g metric may help practitioners measure the suitability of a method.\n\nTowards domain-specific ESE.",
+      "section": "discussion",
+      "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_discussion_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/e4742f934fad6dc1f3389981d0d0fc6b8b48638f4c5c0a74b9dc11bdd026489bb2d3e78a6a395e82124e87c7409ff370cdff0edf375958bcf909372da1859815_176",
+    "nlpeer/ARR-22/e4742f934fad6dc1f3389981d0d0fc6b8b48638f4c5c0a74b9dc11bdd026489bb2d3e78a6a395e82124e87c7409ff370cdff0edf375958bcf909372da1859815_177",
+    "nlpeer/ARR-22/e4742f934fad6dc1f3389981d0d0fc6b8b48638f4c5c0a74b9dc11bdd026489bb2d3e78a6a395e82124e87c7409ff370cdff0edf375958bcf909372da1859815_178"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The new evaluation metric proposed in the paper is MAP@K g. It is designed to be complementary to the existing metric MAP@K = 20 and is intended to stress test ESE methods in scenarios where coverage is an important criteria.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_discussion_0000",
+      "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_discussion_0001"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_discussion_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_discussion_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.0851063829787234,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

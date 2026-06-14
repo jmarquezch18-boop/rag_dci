@@ -1,0 +1,77 @@
+Semi-Supervised Sequence Tagging With Bidirectional Language Models
+
+Abstract
+
+Introduction
+
+Overview
+
+The main components in our language-modelaugmented sequence tagger (TagLM) are illustrated in Fig. 1.
+
+After pre-training word embeddings and a neural LM on large, unlabeled corpora (Step 1), we extract the word and LM embeddings for every token in a given input sequence (Step 2) and use them in the supervised sequence tagging model (Step 3).
+
+Baseline Sequence Tagging Model
+
+Bidirectional Lm
+
+A language model computes the probability of a token sequence (t 1 , t 2 , . . . , t N )
+
+p(t 1 , t 2 , . . . , t N ) = N k=1 p(t k | t 1 , t 2 , . . . , t k-1 ).
+
+Recent state of the art neural language models (Józefowicz et al., 2016) use a similar architecture to our baseline sequence tagger where they pass a token representation (either from a CNN over characters or as token embeddings) through multiple layers of LSTMs to embed the history (t 1 , t 2 , . . . , t k ) into a fixed dimensional vector -→ h LM k .
+
+This is the forward LM embedding of the token at position k and is the output of the top LSTM layer in the language model.
+
+Finally, the language model predicts the probability of token t k+1 using a softmax layer over words in the vocabulary.
+
+The need to capture future context in the LM embeddings suggests it is beneficial to also consider a backward LM in additional to the traditional forward LM.
+
+A backward LM predicts the previous token given the future context.
+
+Given a sentence with N tokens, it computes
+
+p(t 1 , t 2 , . . . , t N ) = N k=1 p(t k | t k+1 , t k+2 , . . . , t N ).
+
+A backward LM can be implemented in an analogous way to a forward LM and produces the backward LM embedding ←h LM k , for the sequence (t k , t k+1 , . . . , t N ), the output embeddings of the top layer LSTM.
+
+In our final system, after pre-training the forward and backward LMs separately, we remove the top layer softmax and concatenate the forward and backward LM embeddings to form bidirectional LM embeddings, i.e., h
+
+LM k = [ - → h LM k ; ← - h LM k ].
+
+Note that in our formulation, the forward and backward LMs are independent, without any shared parameters.
+
+Combining Lm With Sequence Model
+
+Experiments
+
+Overall System Results
+
+Analysis
+
+Related Work
+
+Conclusion
+
+CoNLL 2000 chunking.
+
+The CoNLL 2000 chunking task uses sections 15-18 from the Wall Street Journal corpus for training and section 20 for testing.
+
+It defines 11 syntactic chunk types (e.g., NP, VP, ADJP) in addition to other.
+
+We randomly sampled 1000 sentences from the training set as a held-out development set.
+
+using the forward-backward algorithm at training time, and using the Viterbi algorithm to find the most likely tag sequence at test time, similar to
+
+Test set F 1 comparison on CoNLL 2000 Chunking task using only CoNLL 2000 data and unlabeled text.
+
+In this experiment, we concatenate the LM embeddings at dif-Improvements in test set F 1 in CoNLL 2003 NER when including additional labeled data or task specific gazetteers (except the case of TagLM where we do not use additional labeled resources).
+
+Improvements in test set F 1 in CoNLL 2000 Chunking when including additional labeled data (except the case of TagLM where we do not use additional labeled data).
+
+Comparison of CoNLL-2003 test set F 1 when the LM embeddings are included at different layers in the baseline tagger.
+
+CoNLL 2003 training and development data.
+
+Due to the much smaller size of this data Forward language model Backward language model LM perplexity F 1 ± std Comparison of CoNLL-2003 test set F 1 for different language model combinations.
+
+All language models were trained and evaluated on the 1B Word Benchmark, except LSTM-512-256 * which was trained and evaluated on the standard splits of the NER CoNLL 2003 dataset.

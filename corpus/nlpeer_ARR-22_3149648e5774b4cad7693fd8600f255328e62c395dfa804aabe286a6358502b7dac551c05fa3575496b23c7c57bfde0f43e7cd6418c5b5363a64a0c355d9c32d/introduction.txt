@@ -1,0 +1,37 @@
+Aspect-based sentiment analysis (ABSA) is an important research area of natural language processing (NLP), which aims to mine fine-grained opinions and sentiments based on a specific aspect.
+
+In recent years, it has attracted extensive attention of researchers (Hu and Liu, 2004).
+
+ABSA includes three basic subtasks: aspect term extraction (Yin et al., 2016;Li et al., 2018;Ma et al., 2019), opinion term extraction (Liu et al., 2015;Wu et al., 2021), and aspect level sentiment classification (Wang et al., 2016;Chen et al., 2017;Jiang et al., 2019;Zhang and Qian, 2020).
+
+Substantial progress has been achieved in recent studies, integrating multiple subtasks into a *Corresponding Author 1 We make our code publicly available at https:// github.com/ITKaven/RoBMRC more complex task (Chen and Qian, 2020;He et al., 2019;Luo et al., 2019;Zhao et al., 2020).
+
+Among them, aspect sentiment triplet extraction (ASTE) (Peng et al., 2020) becomes a subject of great interest, which is also the goal of our work.
+
+Many research efforts have been made (Xu et al., 2021;Mao et al., 2021;Chen et al., 2021), for example, using bidirectional machine reading comprehension (BMRC) for ASTE.
+
+It handles the task effectively, but problems still remain.
+
+In the structure of BMRC, the shared classifiers may lead to query conflicts based on specific context, thus affecting the model performance.
+
+Some important strategies are also ignored, such as word segmentation, span matching and probability generation.
+
+In this paper, we present a robustly optimized BMRC method for ASTE.
+
+The task is transformed into a machine reading comprehension problem.
+
+The complex correspondence between the aspect and opinion is processed through bidirectional query based on specific context.
+
+Such relationship can be effectively used to make their extraction mutually beneficial, thus facilitating better prediction of various sentiments.
+
+In order to deal with the ASTE task more efficiently, we incorporate the word segmentation and exclusive classifiers, and improve the span matching where the priority rule of the combination of probability and position relationship has been added.
+
+We also optimize the generation of probability to avoid its unilateral decrease.
+
+Our contributions can be summarized as follows:
+
+• Exclusive classifiers are designed in BMRC, so as to avoid the interference between different question answering steps and the query conflict.
+
+• We further advance the prediction performance by adding word segmentation, improving span matching and probability generation.
+
+• Extensive experiments are conducted on benchmark datasets, where our model achieves the state-of-the-art performance.

@@ -1,0 +1,63 @@
+In this work, we have studied various ways to use weak supervision for automatic word segmentation.
+
+In language documentation scenarios, such supervision is often available, taking the form of a partial annotation or word lists.
+
+Bayesian non-parametric models lend themselves well to this setting, and our experiments have shown that two variants of a simple unigram model were getting a substantial boost from weak supervision, a result that has been obtained with two languages currently being documented.
+
+The most effective approach seems to start with a small set of fully segmented data, which helps learning in two ways: as a training signal for segmentation and as lexical prior for the base distribution.
+
+Based on this observation, we have further evaluated the longer-term benefits of an incremental training regime and also contrasted the improvement obtained using a word-based vs a morpheme-based vocabulary list.
+
+Our future work will continue to explore the interplay between word and morpheme segmentations, as both are required in actual documentation settings, possibly extending our analyses on additional languages.
+
+We will also consider supervising the annotation process with lists of non-inflected forms, which requires to jointly learn inflectional patterns and segmentation.
+
+Finally, our main objective remains to integrate these techniques into an annotation platform and evaluate how much they help speed up the annotation process, hence the need to control the run-time of our algorithms.
+
+A.1 Full results
+
+Table 5 displays the complete results of Table 2 with both precision and recall for the three evaluation levels.
+
+SentencePiece (SP) tends to have more balanced scores for precision and recall, whereas dpseg displays a wider gap between the two metrics, especially at type level.
+
+The 'Morf' column displays the performance of Morfessor 2.0 (Creutz and Lagus, 2002;Smit et al., 2014).
+
+10 These results have been obtained with the morph-length parameter set to the observed average token length (4.19).
+
+This setting led to better F-scores than using the gold number of types for num-morph-types or the default Morfessor model.
+
+The Morfessor model outperforms SentencePiece significantly for both boundary (BF) and token (WF) F-scores, while it lags behind for the type-based metrics.
+
+Compared to the unsupervised dpseg, Morfessor is worse on all accounts by a wide margin.
+
+Table 6, in turn, displays the complete results of Table 3, again with both precision and recall for the three evaluation levels.
+
+The 'Morf' column in Table 6 also represents the Morfessor results, with a morph-length parameter of 4.73.
+
+Here again, Morfessor outperforms Senten-cePiece on the boundary and token-level F-scores (to a smaller extent) but not at type level.
+
+Finally, Table 7 displays the complete results for the word and morpheme experiment (Table 4).
+
+reference obengi amipasa koo sa kř unsupervised obengia mipasa koo sakř supervised obengi amipasa koo sakř Figure 4 shows an example sentence derived from the Mboshi data.
+
+The word 'obengi' is present in the supervision dictionary.
+
+In the unsupervised model (unsupervised line), the word was wrongly  segmented, affecting the second word, 'amipasa'.
+
+In the supervised model with d.mix+2gram, the word is correctly segmented as 'obengi', and the second word is also correct, although not in the supervision dictionary.
+
+Figure 5 presents two of the 200 sentences used for supervision in Mboshi.
+
+This means that all the words in the example are in the supervision dictionary, which can explain why words such as 'owoi', 'atyeeli', or 'lekonyi' are correctly segmented in the weakly supervised setting.
+
+Yet, some errors remain (e.g. 'adimo' instead of 'adi mo') mainly because of the cooccurrence effect.
+
+reference atyeeli adi mo lekonyi unsupervised at yee li adi mole konyi supervised atyeeli adimo lekonyi reference nř owoi dzue la baa unsupervised nř o wo i dzuela baa supervised nř owoi dzue la baa
+
+Our experiments have been carried out on an In-tel® Xeon® Processor E5-2643 v3 (6 cores and 12 threads).
+
+With this processor, the baseline dpseg model on the 3K Japhug corpus takes around 10 hours for 20,000 iterations of Gibbs sampling.
+
+All results in this paper have been obtained with a random seed of 42.
+
+The remaining parameters are presented in Section 4.2.

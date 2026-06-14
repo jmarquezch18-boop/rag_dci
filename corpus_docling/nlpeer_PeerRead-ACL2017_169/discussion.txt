@@ -1,0 +1,7 @@
+To demonstrate the value of ERRANT, we applied it to the data produced in the CoNLL-2014 shared task (Ng et al., 2014).
+
+Specifically, we automatically annotated all the system hypotheses and official reference files.
+
+8 Although ERRANT can be applied to any dataset of parallel sentences, we chose to evaluate on CoNLL-2014 because it represents the largest collection of publicly available GEC system output.
+
+For more information about the systems in CoNLL-2014, we refer the reader to the shared task paper.

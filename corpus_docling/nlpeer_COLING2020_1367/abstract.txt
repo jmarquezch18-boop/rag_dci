@@ -1,0 +1,5 @@
+This paper describes the first, three-year phase of a project at the National Research Council of Canada that creates software to assist Indigenous communities in preserving their languages and extending their use.
+
+The project aimed to work within the empowerment paradigm, where collaboration with communities and fulfillment of their goals is central.
+
+Since many of the technologies we developed were in response to community needs, the project ended up as a collection of diverse subprojects, including the creation of a sophisticated framework for building verb conjugators for highly inflectional polysynthetic languages (such as Kanyen'kéha, in the Iroquoian language family), release of what is probably the largest available corpus of sentences in a polysynthetic language (Inuktut) aligned with English sentences and experiments with machine translation (MT) systems trained on this corpus, free online services based on automatic speech recognition (ASR) for easing the transcription bottleneck for speech recordings, software for implementing text prediction and read-along audiobooks for Indigenous languages, and several other subprojects.

@@ -1,0 +1,1 @@
+We now introduce the task of entity set expansion (ESE), existing paradigms and evaluation methods.

@@ -1,0 +1,91 @@
+We have presented NLU++, a novel dataset for task-oriented dialogue (ToD) NLU that overcomes the shortcomings of previous NLU evaluation sets.
+
+NLU++ presents a multi-intent and slot-rich ontology, defines generic and domain-specific intents and slots to promote data reusability, and it focuses on the creation of high-quality complex examples and annotations collected by dialogue experts.
+
+Experimental results show that NLU++ raises the bar with respect to current NLU benchmarks, helping better discriminate and compare the performance of current state-of-the-art NLU models, particularly in low-data setups.
+
+We hope that NLU++ will be valuable in guiding future modeling efforts for ToD NLU, both in academia and in industry.
+
+Limitations and Future Work.
+
+This work has shown that a better design of the intent set can improve data reusability.
+
+However, the current ontology does not cover generic sets of intents exhaustively, and we acknowledge a (sometimes) fine line between truly generic intents versus intents 'anecdotally' shared by two domains (e.g., refund).
+
+Further, the boundaries of some generic intents can sometimes be unclear and difficult to annotate, even for expert annotators.
+
+18 Future work should try to ground the set of generic intents.
+
+Further, we believe that span-based annotation might be sub-optimal for canonical values such as times and dates, where small differences in the span would lead to evaluation errors but would not suppose a problem for the value to be parsed.
+
+In addition, separating time and date intervals in different slots increases the difficulty of the annotations and models need to learn a more conflicting set of slots.
+
+Further, NLU++ currently provides fine-grained slots such as date_from, date_to and date to enable more complex scenarios, but such a design might slow down annotation process and make it cumbersome.
+
+Future work includes rethinking the SL task for these slots.
+
+Finally, while single-turn NLU is more dataefficient and easier to model, some user utterances only make sense in the presence of context from the previous system utterance.
+
+While some previous datasets (Coope et al., 2020) deal with this issue with the help of extra annotations indicating if a slot has been requested, in this work we opt for using non-contextualised slots such as number and time and let the policy handle the contextualisation.
+
+However, future work should start looking into NLU datasets composed by system + user turns.
+
+Before data collection: all the data has been collected by workers of PolyAI Limited and all the annotators are also employees of PolyAI Limited.
+
+During data collection: we did not include any personal information (e.g. personal names or addresses) and all the examples that included any had been fully anonymised or removed from the dataset.
+
+All the names in the dataset are created by randomly concatenating names and surnames from the list of the top 10K names from the US registry.
+
+Upon collection, the dataset has undergone an additional check by the internal Ethics committee of the company.
+
+NLU++ is licensed under CC-BY-4.0.
+
+The complete ontology of NLU++ is provided in Table 9 andTable 10.
+
+Detection Experiments
+
+CONVERT (Henderson et al., 2020) is trained with the conversational response selection objective (Henderson et al., 2019b) on large Reddit data (Al-Rfou et al., 2016;Henderson et al., 2019a), spanning more than 700M (context, response) sentence pairs.
+
+Thanks to its naturally conversational pretraining objective, it has been shown to be especially well-suited for conversational tasks such as intent detection (Casanueva et al., 2020) and slot labelling (Coope et al., 2020).
+
+It outputs 1,024-dim sentence encodings.
+
+github.com/davidalami/ConveRT LABSE.
+
+Language-agnostic BERT Sentence Embedding (LaBSE) (Feng et al., 2020) adapts pretrained multilingual BERT (mBERT) (Devlin et al., 2019) using a dual-encoder framework (Yang et al., 2019) with larger embedding capacity (i.e., a shared multilingual vocabulary of 500k subwords).
+
+While LaBSE is the current state-of-the-art multilingual encoder, it also displays very strong monolingual English performance (Feng et al., 2020).
+
+It produces 768-dim sentence encodings.
+
+huggingface.co/sentence-transformers/ LaBSE ROBL-1B and LM12-1B (Reimers and Gurevych, 2019;Thakur et al., 2021) are sentence encoders which fine-tune the pretrained Roberta-Large (ROBL) language model (Liu et al., 2019a) and the 12-layer MiniLM (Wang et al., 2020b), respectively, again using a contrastive dual-encoder framework (Reimers and Gurevych, 2019).
+
+The models are fine-tuned on a set of more than 1B sentence pairs: this set comprises various data such as Reddit 2015-2018 comments (Henderson et al., 2019a), Natural Questions (Kwiatkowski et al., 2019), PAQ (question, answer) pairs (Lewis et al., 2021), to name only a few.
+
+19 ROBL-1B outputs 19 In a nutshell, the contrastive fine-tuning task which combines all the heterogeneous datasets is as follows: given a 'query' sentence from each sentence pair, and a set of R randomly sampled negatives plus
+
+1 true positive (the sentence from the same pair), the model should predict which sentence from the set of R + 1 sentences is actually paired with the query sentence in the dataset.
+
+The full list of all datasets along with the exact model specifications is at:
+
+1,024-dim encodings, while LM12-1B produces 384-dim encodings.
+
+We opted for those two models in particular as one represents a class of large sentence encoders (ROBL-1B), and the other is lightweight (LM12-1B), while both display very strong performance in a myriad of sentence similarity and semantic search tasks, see www.sbert.net/docs/ pretrained_models.html.
+
+We rely on the same SQuAD-tuned language models as Namazifar et al. (2021).
+
+ROBB-QA can be found online at: https://huggingface.
+
+co/deepset/roberta-base-squad2; ALB-QA is available at: https://huggingface.co/twmkn9/ albert-base-v2-squad2 D Appendix: Slot Labeling Baselines CONVEX (Henderson and Vulić, 2021) demonstrates strong SL performance, especially in fewshot settings.
+
+It is pretrained on a pairwise cloze task extracted from the Reddit examples (Henderson et al., 2019a), and the majority of the pretrained model's parameters in CONVEX are kept frozen during fine-tuning, making it an extremely efficient model.
+
+We adopt the suggested hyper-parameters from Henderson and Vulić (2021).
+
+QA-Based: Namazifar et al. ( 2021) train an extractive QA-based model to extract the spans of the slots from the input user utterance as answers to manually defined natural language questions (one per slot).
+
+It follows the same idea as QA-based ID models.
+
+We also provide such questions for each slot along with NLU++ for model training and inference: see the questions in Table 10.
+
+huggingface.co/sentence-transformers/ all-roberta-large-v1.

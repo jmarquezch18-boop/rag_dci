@@ -1,0 +1,55 @@
+We set out to understand the factors influencing the asymmetry in the glacier extent between the Quinault and Elwha valleys of the Olympic Mountains.
+
+To this end, we characterized the modern precipitation patterns and assessed the potential influence of various climate indices on these patterns.
+
+We calculated ratios of average precipitation in the Elwha basin relative to the Quinault basin using three different datasets, namely PRISM (2020) data, river discharge data (USGS 2022a, 2022b), and WRF model output.
+
+We conclude that the long-term ratio of average precipitation between the two basins likely remained at or above 0.50 (< 100 % more precipitation in the Quinault than the Elwha) during recent glaciations.
+
+We find no evidence of atmospheric or climatic influences, such as weather regimes, that would cause a more severe precipitation gradient in a glacial climate.
+
+Therefore, we make the conservative assumption that the modern climate is a good representation of past spatial gradients in precipitation.
+
+To better understand the response of glaciers in the region to climate, we employed a one-dimensional glacier flowline model simulating the response of glaciers in both valleys to a range of climate states.
+
+This included variations in sea level temperature (T SL ) and the glacial drying factor (GDF).
+
+There exist a set of T SL and GDF pairs within the expected paleoclimate range that produce an equilibrium ice margin in the Quinault valley at the position of the local Last Glacial Maximum terminal moraine.
+
+Over this same set of climate conditions, the Elwha glacier showed extremely variable behavior.
+
+Within the Quinault equilibrium climate range, a 1 • C change in temperature corresponded to an expansion of nearly 40 km in the Elwha glacier.
+
+Further investigation revealed that this behavior was related to the valley geometry of the Elwha valley, with the glacier experiencing an ice elevation feedback as it advanced into the narrowing section of the valley and thickened.
+
+This ice elevation feedback occurs in both the Quinault and Elwha valleys but is more pronounced in cooler and drier climates.
+
+In general, our model was able to reproduce the observed extent of glaciers in warmer climates with higher rates of precipitation.
+
+The occurrence of an ice elevation feedback in both valleys, which was linked to the valley geometry, highlights the importance of considering local topography in studies of glacier dynamics.
+
+Our model focused on glacier asymmetry due to the asymmetry in the precipitation and did not consider the differences in the efficiency of melting across the Olympic Mountains.
+
+Our parameter tests suggest that if the melt efficiency was even slightly greater in the Elwha valley relative to the Quinault valley, then it could have been a significant factor limiting the growth of the Elwha glacier during the last glacial episode.
+
+Further investigation with the flowline model could examine the impact of spatial variability in glacier melting.
+
+Overall, we find that spatially variable precipitation influences the extent of glaciers and that the sensitivity of glaciers to climate varies in space within the Olympic Mountains.
+
+This conclusion has implications for other regions with spatial gradients in precipitation including the Andes Mountains, the European Alps, the Southern Alps, and Central Asia.
+
+Specifically, we suggest that glacier sensitivity to climate likely varies across precipitation gradients forced by topography.
+
+Furthermore, the local spatial variability in the relationship between glaciers and climate complicates predictions of the response of glaciers to ongoing anthropogenic climate change, as small changes in climate may have different impacts for different glaciers within the same mountain range.
+
+Considering the complex interplay between local topography and climate, it is necessary to take into account these spatial gradients in future climate projections for accurate predictions of individual glacier behavior in mountainous regions.
+
+Code and data availability.
+
+Data related to the climate analysis are archived at https://doi.org/10.4211/hs.
+
+0ae232525f984007ba96c1762f21dd3d (Margason, 2023b).
+
+The MATLAB code of the glacier flowline model, including input data, is available at https://doi.org/10.4211/hs.
+
+fe28143081434b0d90f8cffc88e1bfff (Margason, 2023a).

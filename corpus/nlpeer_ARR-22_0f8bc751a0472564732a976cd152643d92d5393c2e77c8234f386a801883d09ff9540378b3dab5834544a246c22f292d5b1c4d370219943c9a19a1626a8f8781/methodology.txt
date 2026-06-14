@@ -1,0 +1,79 @@
+The inside model m in which is modeled at a sentence level, computes an inside score s in (i, j) from the inside vector representation h in (i, j) of each span in the unlabeled input training sentence U. To compute h in (i, j), we fine-tune the sequence classification model that encodes a fixed-vector representation for each token in the dataset.
+
+This captures the phrase information of the inner content in the span.
+
+In order to prepare the features for the inside model, we make use of a seed bootstrapping technique (Section 4.2.1).
+
+Once we build the inside model m in , we get the most confidently-classified inside strings from U based on a set threshold τ = (τ min , τ max ).
+
+Here, τ min and τ max , form the confidence bounds to select distituents and constituents respectively.
+
+We select a random sample of c constituents and d distituents with appropriate labels from these most confident inside strings comprising the labeled inside set I.
+
+To perform the iterative self-training procedure, we follow the steps as detailed in Figure 2.
+
+While building the outside model, we extract the tokens at the span boundaries of the pair of outside strings, which is of the form consisting of the triple (x i-1 , [MASK], x j+1 ).
+
+The outside model computes an outside score s out (i, j) from the outside vector representation h out (i, j) of each span, which models the contextual information of the span.
+
+To compute h out (i, j), we extract the triple for every span (i, j) in the dataset and fine-tune another sequence classification model that encodes a fixed-vector representation for each triple.
+
+We fine-tune the RoBERTa model with a sequence classification layer on top using a cross-entropy loss (see Section A.1 in Appendix for training and hyperparameter details).
+
+As we supply input data, the entire pre-trained RoBERTa BASE model and the additional untrained classification layer is trained on our specific downstream task.
+
+To compute h in (i, j), we run the RoBERTa BASE model and retrieve the [CLS] token representation for the span enclosed between the i th and the j th element.
+
+The inside model is evaluated on MCC (Matthews Correlation Coefficient) as well as F 1 because the classes are imbalanced.
+
+After fine-tuning, our best inside model achieves 0.62 MCC and 0.91 F 1 on the internal validation set.
+
+Finally, we fine-tune the inside model on the unlabeled training sentences that generates an inside score s in (i, j) for every span.
+
+Since our major focus was on PTB, we have listed a few heuristics that inject further bias into the algorithm acting as the another form of weak supervision.
+
+Moreover, incorporating such rules was not necessary for CTB and KTB as our models showed superior performance without them.
+
+Once we compute the inside score, s in (i, j), we use the following refinement strategies to prune out false constituents: We delete any constituent if it starts or ends with the most common word succeeding the comma punctuation.
+
+Additionally, we take the most common starting word and check if its accompanying word does not belong to the NLTK stop words list.
+
+We assign the scores of these corresponding spans in the CYK chart cell to the maximum value.
+
+Intuitively, from the linguistic definition of constituents, we refrain from bracketing if we identify a contiguous group of rare titlecase or uppercase words (tokens not in the top 100 most frequent list in the PTB training sentences).
+
+These heuristics only contribute to a certain extent in making the parser strong, and should be considered as a standard post-processing step.
+
+Overall, we observe 3.8 F 1 improvements in the case of the inside model.
+
+We further note that the contribution due to additional heuristics is much less than the combined self-training and co-training gains since their effect becomes insignificant after multiple iterations of the self-training process due to the predictions approximately following the template rules.
+
+As described in Figure 2, we perform selftraining on the inside model for five iterations.2
+
+We extract the outside strings of spans having the inside score satisfying a pre-determined cutoff value.
+
+The Constituent-Context Model (Klein and Manning, 2002) use a smoothing ratio of 1:5 (constituents to distituents) for the WSJ-10 section to take into account the skewness of random spans more likely to represent distituents.
+
+In the same vein, the values of lower and upper bounds of the threshold are chosen to ensure the distribution of class labels is about 1:10 (with the distituent class being the majority) which is a crude estimate considering much larger sentence lengths in the WSJ-Full section.
+
+Moreover, from a linguistic standpoint, we can be certain that the distituents must necessarily outnumber the constituents.
+
+For the self-training experiments, we set the thresholds, τ min as 0.0005 and τ max as 0.995.
+
+We treat the outside strings satisfying the upper and lower bounds of the threshold as gold-standard outside of constituents and distituents respectively.
+
+To compute h out (i, j), we run the RoBERTa BASE model on leftoutside, i.e., (i -1) th element and right-outside, i.e., (j + 1) th element, along with a [MASK] placeholder token separating the two, and extract the [CLS] token representation.
+
+As done previously, we fine-tune the outside model on the unlabeled training sentences that generates an outside score s out (i, j) for every span.
+
+(Shen et al., 2019) 47.7 49.4 63.9 -Tree Transformer † (Wang et al., 2019) 50.5 52.0 66.2 -Neural PCFG † (Kim et al., 2019a) 50.8 52.6 64.6 -DIORA (Drozdov et al., 2019) -58.9 60.5 -Compound PCFG † (Kim et al., 2019a) 55.2 60.1 70.5 -S-DIORA † (Drozdov et al., 2020) 57.6 64.0 71.8 -Constituency Test (Cao et al., 2020) 62.8 65.9  (2019a) and take the baseline numbers of certain models from (Kim et al., 2019a;Cao et al., 2020).
+
+† denotes models trained without punctuation and denotes models trained on additional data.
+
+Once we have the outside model, we run it on the training sentences and choose the outside string that the classifier is highly confident about.
+
+We extract their inside strings again using the same bounds of the threshold as done previously and retrain the inside model on the old highly confident inside strings along with the new inside strings obtained from the highly confident outside strings.
+
+Similarly, the same technique can be applied to the outside model to augment its input data too.
+
+We repeat this process twice (Figure 3).

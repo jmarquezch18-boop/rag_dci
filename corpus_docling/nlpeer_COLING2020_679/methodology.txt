@@ -1,0 +1,3 @@
+We conduct a human evaluation of several AMR generation systems.
+
+§3.1 discusses the general survey design, while §3.2 discusses details of the pilot survey, which validates the methodology by applying it to data from the SemEval evaluation, and §3.3 discusses the evaluation of more recent systems.

@@ -1,0 +1,27 @@
+We model the NER task as a sequence-labeling task.
+
+Let x = x 1 , . . . , x T be a sequence of T tokens, the model aims to predict a label sequence y = y 1 , . . . , y T , where each label is composed of a position indicator (e.g., BIO schema) and an entity type.
+
+The state-of-the-art sequence-labeling models roughly consist of two components: a neural-based encoder which creates contextualized embeddings r i for each token, and a conditional random field output layer, which captures dependencies between neighboring labels:
+
+P (y 1:T |r 1:T ) ∝ T i=1 ψ i (y i-1 , y i , r i ).
+
+We consider two encoder variants in our study: one based on LSTM (Graves et al., 2013) and one based on BERT (Devlin et al., 2019).
+
+The LSTM-based encoder consists of a context-independent token embedding layer (e.g., GloVe (Pennington et al., 2014)) and a bidirectional LSTM layer, whose weights are learned from scratch.
+
+The representations r i are obtained by concatenating the hidden states of the forward and backward LSTMs at each token position.
+
+The BERT-based encoder consists of a sub-token embedding layer and a stack of multi-head self-attention and fully-connected feed-forward layers.
+
+The final hidden state corresponding to the first sub-token within each token is used as the representation r i .
+
+Studies on domain-specific BERT models show that effectiveness on downstream tasks can be improved when the BERT models are further pretrained on in-domain data (Gururangan et al., 2020;Dai et al., 2020).
+
+We thus choose SciBERT (Beltagy et al., 2019), which is pretrained on scholar articles, and finetune it on the NER task.
+
+In our preliminary experiments, we observe that SciBERT achieves significant better results than BERT (Devlin et al., 2019).
+
+We use the Micro-average string match F 1 score to evaluate the effectiveness of the models.
+
+The model which is most effective on the development set, measured using the F 1 score, is finally evaluated on the test set.

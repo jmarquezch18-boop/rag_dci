@@ -1,0 +1,21 @@
+Our character detection model comprises two steps: first, we automatically mark the animacy of coreference chains, and second we apply a supervised machine learning classifier to identify the characters.
+
+Our character classification model is a simple supervised machine learning classifier with the hand-built features identified above.
+
+We used the extended ProppLearner corpus to explore different combinations of features and their importance to model performance.
+
+The best-performing model uses all seven features.
+
+We then trained and tested this model to the OntoNotes and Corpus of English Novels corpora to see how our model works on different kinds of data sets.
+
+The implementation of our model is done by using an SVM (Chang and Lin, 2011) with a Radial Basis Function Kernel2 .
+
+We have demonstrated the results on different corpora in Table 2.
+
+We trained each model using ten-fold cross-validation, and report macro-averages across the performance on the test folds.
+
+(Cohen, 1960). *Because the co-reference chains on the OntoNotes and CEN corpora are automatically computed, they are noisy.
+
+We performed an evaluation by randomly sampling and correcting coreference chains, and running the classifer on those, thus estimating performance of the classifier on the dataset if it had clean chains.
+
+Details of the sampling are given in footnotes 3 and 4.

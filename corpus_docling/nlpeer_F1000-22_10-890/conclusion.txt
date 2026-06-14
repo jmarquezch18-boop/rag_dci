@@ -1,0 +1,135 @@
+Young people are part of social change, and they bring an impact to the betterment of the environment through recycling activities.
+
+Incorporating gamified learning to improve recycling intention can be brought about through social influence and intrinsic and extrinsic motivations.
+
+The elements of games like leaderboard, levels, points and rewards are significant to develop an engaging and purposeful activity to attract the youth to participate in recycling.
+
+Based on the responses from the youths, the most prominent one is on social influences.
+
+From the FGDs, 16 out of 29 youths think that competition and leaderboard are highly affecting peers to work towards a goal.
+
+They are often feel challenged to perform their best to not lag far behind those with better achievements.
+
+This factor is believed to pose a significant role in encouraging recycling intention among youths.
+
+Besides, to further explore the relationship between gamification, motivation and recycling intention.
+
+The quantitative research method is also a reliable way to investigate the effectiveness of gamification in recycling behaviour, as shown in Table 1.
+
+Therefore, this leads to a higher potential for future studies on quantitative methods.
+
+This study serves as a starting point for researchers to explore the elements influencing youths' intention and behavioural change.
+
+The method used in this study is FGDs.
+
+This research used inter-rater reliability on the coding agreement and the six phases of thematic analysis to reduce ambiguities and develop quality themes and frameworks that lead to wellgrounded gamified online recycling learning.
+
+However, recycling activity requires commitment, and the two-day, twolevel activity represented a short time for attitude development.
+
+It is hoped that with the incorporation of gamified online learning, the impact of social influence on pro-environmental awareness and recycling, similar to the achievements of Greta Thunberg and KAMY, can spread to more young people around the world.
+
+Cultivation of recycling behaviour requires a longer-term gamified activity to effectively close the gap between fun learning and recycling intention.
+
+OpenDans: Online Gamified Learning: Focus Group Discussion Data set, May -August 2020.
+
+https://doi.org/10.17026/ dans-xzu-as8s.
+
+27 This project contains the following underlying data:
+
+• Data file 1.
+
+(Cohen kappa reliability output in.spv format)
+
+• Data file 2 to 6. (Focus Group Discussion Transcription in pdf.)
+
+• Data file 7 to 10 (interrater reliability in.doc, .dat, .sav, and.sps format) In general, the paper sounds like an empirical study, but the process does not sound technically sufficiently.
+
+Please consider the following to improve the paper:
+
+The introduction can be better addressed by discussing the domain of study first, followed with the context of the study.
+
+The aim of the study should be stated in the section as well.
+
+1.
+
+The literature review should also focus on the domain of study, showing the gap (that the study taps into).
+
+The methods are too general and lack justification.
+
+Some parts need strong justifications, like sampling.
+
+The results and discussion are too brief.
+
+Perhaps, you can focus on one factor and discuss more deeply.
+
+Implications should compare the findings in this paper with those previously found by others.
+
+Is the study design appropriate and is the work technically sound? Partly
+
+If applicable, is the statistical analysis and its interpretation appropriate?
+
+Faculty of Psychology, Universtias Negeri Jakarta, Jakarta Selatan, Indonesia I appreciate the authors for bringing a very interesting yet important research theme into the table.
+
+The paper presented an insightful message about the potential uses of gamified based intervention to enhance youth recycling intention.
+
+However, there are number of concerns about the way in which the paper is presented.
+
+The following suggestions are intended to assist the authors in improving the quality of their paper.
+
+The introduction need to be refined, there are numbers of unclear and inefficient sentences:
+
+1) "Most countries have long ago adopted recycling to preserve the environment's health." This sentence is ambiguous, what do the authors mean by the environment's health?
+
+This sentences also need for further grammar check.
+
+2) The sentence in paragraph 2 "A study conducted in 2017 and 2018 shows a negative attitude towards recycling in many countries, claiming that recycling education and infrastructure are insufficient".
+
+The authors indicated "A study" but the citation refers to two different studies.
+
+This sentence also not clear, what do the authors mean by "a negative attitude?" please clarifiy.
+
+1.
+
+Table 1. needs to be clarified.
+
+It may an idea to add study type, findings, and recommendations column for cited papers.
+
+I also notice that some papers included in Table 1. did not clearly state the effectiveness of gamified method as a potential way to enhance people's recycling intention.
+
+e.g. Study by Betaubun & Nasrawati (2020), which according to the author, can be used as a reference to show the use of gamified approach for enhance recycling intention, was as a cross-sectional study.
+
+To provide strong evidences for the potential used of gamification method to enhance recycling intention, I suggest the authors to cite an experiment based publications.
+
+As this is a qualitative study, a research question addressing the effectiveness of the program might be problematic.
+
+Objective indicators and systematic measures should be applied to answer if the program is really effective.
+
+Rather than testing the effectiveness, this study may focus on describing subject's subjective experiences using the program, and how their experiences benefit for developing the program.
+
+Further, the author may describe in more detail about the game itself.
+
+Why and how the game is delivered, e.g., duration, elements, self-guided or full-guided, online/offline, and system requirements of the program.
+
+Braun & Clarke (2006) thematic analysis comprises series of steps when analyzing the qualitative transcriptions.
+
+The steps including how the authors develop low-order and high order themes.
+
+Please consider to explain the analysis steps in more detail.
+
+The authors may need to explain in a bit more detail about the conceptual model (figure 2).
+
+How did the authors come up with this model? What thematic analysis results lead to this model?
+
+Suggestion to test the model using quantitative method should be added.
+
+7.
+
+removed the study by Betaubun & Nasrawati (2020) and replaced it with a new empirical article "Advocating recycling and encouraging environmentally friendly habits through gamification: An empirical investigation" which provides stronger evidences for the effectiveness of gamification in recycling intention.
+
+4) I have enriched the conclusion and discussion part to show how the EGL effectively improves youths' motivation to recycle.
+
+Social influence is emphasised in several sections of the paper.
+
+5) 6 phases of thematic analysis have been added in 3.1 and leading each of the steps in the following sections to provide a clearer reading for the readers.
+
+6) Additional explanation and improvement on the conceptual framework part.

@@ -1,0 +1,11 @@
+In this paper, we evaluated the performance of a pre-trained Transformer model -BERT -in an active learning scenario for text classification in low-resource settings.
+
+We showed that using Monte-Carlo Dropout in the classification architecture is an effective way to approximate model uncertainty on unlabeled training elements.
+
+This technique enables us to select data for annotation that maximize the knowledge gain for the model fine-tuning process.
+
+Experimental results on GLUE data set show that it improves both model performance and training stability.
+
+Finally, in order to improve the efficiency of the fine-tuning process with a small amount of data, we explored the reduction of trainable model parameters by freezing layers of the BERT model up to a certain level of depth.
+
+Comparing the exclusion of layers in the front or the back of the BERT model from training, we found it to be advantageous for training stability when freezing the layers closest to the output.

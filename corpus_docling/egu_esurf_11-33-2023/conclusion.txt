@@ -1,0 +1,75 @@
+In this study, we show that modelling the full subsurface water and ice balance in well-drained blocky deposits with air-filled voids leads to significantly lower ground temperatures in permafrost environments.
+
+In modelling studies on the distribution of permafrost, blocky ground usually is not accounted for, or the water balance is not simulated at this level of detail.
+
+For the Northern Hemisphere permafrost map (Obu et al., 2019), a coarse land cover classification was used in mountain areas which did not represent blocky terrain.
+
+To produce the map, a semi-empirical equilibrium temperature at top of permafrost (TTOP) model was used in which the thermal anomaly of blocky deposits likely could be accounted for by adjusting the r k parameter, which controls the thermal offset of the ground.
+
+A more sophisticated modelling approach as presented in this work could be used to train the more simple TTOP model across a range of climate conditions.
+
+Permafrost mapping with transient models (e.g. Jafarov et al., 2012) often uses fixed ground stratigraphies, in which the sum of water and ice contents does not change for a given layer.
+
+An example is the transient permafrost map for southern Norway (Westermann et al., 2013), which featured a dedicated stratigraphic class for blocky deposits, with a dry upper layer followed by an ice-saturated layer below, very similar to the stratigraphy used for the blocks only, drained scenario in this study.
+
+However, both layers have a fixed thickness, and the sum of water and ice contents is constant so that the temporal evolution of ground ice dynamics cannot be captured.
+
+If the seasonal thaw extends into the ice-rich layer, a pool of meltwater forms which cannot drain and hence strongly delays refreezing in fall, potentially resulting in the degradation of permafrost.
+
+In our simulations with full water/ice dynamics, the ice table instead varies over time, both seasonally and over longer periods in response to the climatic forcing.
+
+Such changes in the ground ice table have for example been observed at the Schilthorn site in the European Alps, where the ground ice table was significantly lowered during a hot summer and did not regrow in the following years, although permafrost conditions persisted (Hilbich et al., 2008).
+
+As this observation site is located on a slope, it is clear that such observed ground ice dynamics can only be reproduced if lateral drainage of meltwater is taken into account.
+
+To improve transient modelling of mountain permafrost distribution, CryoGrid in the configuration used in this study could be adapted for individual grid cells, especially by adjusting the strength of the lateral drainage (i.e. the distance to seepage face) depending on the local slope.
+
+In flat areas and depressions, water would then pool up as for the undrained cases, while both melt-and rainwater would drain in sloping terrain as in the undrained cases, with corresponding changes to the ground thermal regime and permafrost distribution.
+
+Furthermore, our study suggests that the presence of fine sediments in the voids between blocks can strongly alter the ground temperature compared to blocky terrain with air-filled voids.
+
+For spatially distributed mapping, these two cases would have to be distinguished as separate stratigraphic classes, and maps of their spatial extent must be available.
+
+Especially the latter is expected to be a significant challenge, as the surfaces likely appear similar for remote sensors, so that detailed field mapping may be required.
+
+The model approach in this study also offers significant potential to study ground-ice-derived runoff from blocky deposits and rock glaciers.
+
+While the Norwegian study sites are both located in wet climate settings with ample water supply, rock glaciers in more arid regions can be important sources of water (e.g. Croce and Milana, 2002).
+
+The global ratio of rock glacier to glacier water volume equivalent is currently increasing as both systems react differently to a changing climate (Jones et al., 2019).
+
+Therefore, simulations of ground ice volumes and seasonal runoff characteristics in both the present and future climates can be a valuable tool for the assessment of water resources.
+
+Furthermore, rock glaciers are sensitive to climate change (Haeberli et al., 2010), and recent studies have linked rock glacier acceleration to increasing air and ground temperatures (e.g. Kääb et al., 2007;Hartl et al., 2016;Eriksen et al., 2018;Thibert and Bodin, 2022).
+
+Our model approach is likely able to simulate the seasonal ground ice mass balance at different points and elevations of a rock glacier, which could be ingested in a flow model for rock glaciers (e.g. Monnier and Kinnard, 2016).
+
+Finally, permafrost degradation and ground ice loss can also play an important role for slope stability in mountain permafrost environments (e.g. Gruber and Haeberli, 2007;Saemundsson et al., 2018;Nelson et al., 2001).
+
+Simulations of ground ice ta-ble changes, as well as the occurrence of strong melt events with corresponding production of meltwater, could eventually improve assessments of the stability and hazard potential of permafrost-underlain slopes (e.g. Mamot et al., 2021).
+
+In this study, we used the CryoGrid permafrost model to simulate the effect of blocky terrain on the ground thermal regime and ground ice dynamics at two Norwegian mountain permafrost sites (Juvvasshøe and Ivarsfjorden rock glacier).
+
+In particular, we investigated the effect of subsurface drainage, as typical on slopes, for three idealized stratigraphies, named blocks only, blocks with sediment and sediment only.
+
+From this study, the following conclusions can be drawn:
+
+-Markedly lower ground temperatures are found in welldrained, coarse blocky deposits with air-filled voids (blocks only, drained scenario) compared to other scenarios, which are either undrained or feature fine sediments.
+
+This negative thermal anomaly can exceed 2 • C and is mainly linked to differences in the freeze-thaw dynamics caused by the removal of meltwater and the build-up of new ground ice in spring.
+
+The largest anomalies occur in simulations with a thick winter snow cover as ground temperatures in well-drained blocky deposits are less sensitive to insulation by snow than other soils.
+
+We emphasize that the model does not account for well-known factors, such as air convection and the effect of blocks protruding through the winter snow cover.
+
+-For the blocks only, drained scenario, thermally stable permafrost can exist at the Ivarsfjorden rock glacier site (located near sea level), even for a mean annual ground surface temperature of 2.0-2.5 • C. At Juvvasshøe in the southern Norwegian mountains, permafrost is simulated even for a very thick winter snow cover in the blocks only, drained scenario, while all other scenarios in this case feature permafrost-free conditions.
+
+-Transient simulations since 1951 at the Ivarsfjorden rock glacier show a completely or partially degraded ground ice table for all scenarios, except the blocks only, drained scenario.
+
+This result is explained by the overall lower ground temperatures in this scenario, while the simulated warming rates are generally similar for all scenarios, except for periods when strong ground ice melt occurs.
+
+This study suggests that including subsurface water and ice dynamics can drive simulations of mountain permafrost dynamics towards reality, which can for example improve estimates of the lower altitudinal limit of permafrost in blocky terrain.
+
+In addition to permafrost distribution mapping, the presented model approach could be used to simulate the seasonal and multi-annual evolution of the ground ice table, in addition to ground-ice-derived runoff.
+
+It therefore represents a further step to a better understanding and model representation of the permafrost processes in mountain environments.

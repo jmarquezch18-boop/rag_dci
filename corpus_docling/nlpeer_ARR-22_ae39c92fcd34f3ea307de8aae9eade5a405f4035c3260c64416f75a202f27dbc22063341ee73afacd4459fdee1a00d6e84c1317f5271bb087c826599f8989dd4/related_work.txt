@@ -1,0 +1,49 @@
+A Brief History of NLU Datasets.
+
+As a core module of ToD systems, NLU has been researched since the early 1990s, when the Airline Travel Information System (ATIS) project was started (Hemphill   et al., 1990), consisting of spoken queries on flightrelated information.
+
+4 Over the next two decades, very few NLU resources were released.
+
+5The lack of ToD NLU resources ended in 2013, with the beginning of the 'dialogue state tracking (DST) era' (Williams et al., 2013;Henderson et al., 2014;Kim et al., 2016).
+
+Instead of just classifying each turn of the user, DST deals with keeping track of the user's goal over the entire dialogue history, i.e., all the previous user and system turns.
+
+Several datasets where released during the DST challenges, all of them comprising simple intent sets (usually tagged as dialogue acts).
+
+In order to adapt to the increasing data requirements of deep learning models, increasingly larger dialogue datasets have been released in recent years (Budzianowski et al., 2018;Wei et al., 2018;Rastogi et al., 2019;Peskov et al., 2019).
+
+However, the design of ToD datasets comes with some profound differences to datasets for e.g. machine translation or speech recognition, which affect current ToD datasets.
+
+1) The domain-specific nature of ToD datasets made the data tied to its ontologies, not allowing data reusability across different domains.
+
+2) The domain-specific ontologies required a lot of expertise for annotation, therefore many annotation mistakes were made (Eric et al., 2019;Zang et al., 2020).
+
+3) Collecting datasets of that size is unfeasible for development cycles in production, where new domains and models for them need to be very quickly developed and deployed.
+
+Current NLU Trends, inspired by such production requirements, thus deviate from previous DSToriented NLU research in two main aspects.
+
+First, the models went back to focusing on single-turn utterances, which 1) simplifies the NLU design and 2) renders the NLU tasks more tractable.
+
+6 The requirement of fast development cycles also instigated more research on NLU (i.e., ID and SL tasks) in low-data scenarios.
+
+This way, systems can be developed and maintained faster by reducing the data collection and annotation effort.
+
+In addition, the NLU focus shifted from ontologies with only a handful of simple intents and slots (Coucke et al., 2018) to complex ontologies with much larger intent sets (Larson et al., 2019b;Liu et al., 2019b;Casanueva et al., 2020, inter alia).
+
+Inspired by these NLU datasets and empowered by transfer learning with PLMs and sentence encoders (Devlin et al., 2019;Liu et al., 2019a;Henderson et al., 2020), there have been great improvements in single-turn NLU systems recently, especially in low-data scenarios (Coope et al., 2020;Mehri and Eric, 2021;Wu et al., 2020b,a;Krone et al., 2020;Henderson and Vulić, 2021;Namazifar et al., 2021;Dopierre et al., 2021;Zhang et al., 2021a,b).
+
+Current Gaps in NLU Datasets.
+
+However, existing NLU datasets are still not up to the current industry requirements.
+
+1) They use crowdworkers for data collection and annotation, often through simple rephrasings; they thus suffer from low lexical diversity and annotation errors (Larson et al., 2019a).
+
+2) ID datasets always assume a single intent per sentence, which does not support modern production requirements.
+
+3) The ontologies of these datasets are very domain-specific (i.e., they thus do not allow data reusability) and narrow (i.e., they tend to overestimate abilities of the current SotA NLU models).
+
+4) Current NLU datasets do not combine a large set of fine-grained intents (again, with multiintent examples) and a large set of fine-grained slots, which prevents proper and more insightful evaluations of joint NLU models (Chen et al., 2019;Gangadharaiah and Narayanaswamy, 2019).
+
+We note that there has been some work on multilabel ID on ATIS, MultiWOZ and DSTC4 as multiintent datasets; however, their multi-label examples remain very limited, simple, and span a small number of intents (Gangadharaiah and Narayanaswamy, 2019).
+
+Further, synthetic multi-intent datasets have been created by concatenating single-intent sentences, but such datasets also do not capture the complexity of true and natural multi-intent sentences (Qin et al., 2020).

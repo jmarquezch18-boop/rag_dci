@@ -1,0 +1,45 @@
+Knowledge can be elicited from pretrained language models.
+
+Numerous works have shown that pretrained language models implicitly contain a large amount of knowledge that can be queried via conditional generation (Davison et al., 2019;Petroni et al., 2019;Jiang et al., 2020).
+
+Consequently, these models can directly perform inference on tasks like commonsense reasoning (Trinh and Le, 2018;Yang et al., 2020), text classification (Shin et al., 2020;Puri and Catanzaro, 2019), and natural language inference (Shin et al., 2020;Schick and Schütze, 2021).
+
+Inspired by these observations, we elicit question-related knowledge in an explicit form from language models and use them to guide the inference.
+
+Leveraging external knowledge for commonsense reasoning.
+
+Some work uses external commonsense knowledge bases to make improvements on various NLP tasks, including commonsense reasoning.
+
+One approach is to inject commonsense knowledge into language models, either by pretraining on knowledge bases (Ma et al., 2021;Chang et al., 2020;Mitra et al., 2019;Zhong et al., 2019) or finetuning the model so that it can reason with additional retrieved knowledge (Chang et al., 2020;Mitra et al., 2019;Bian et al., 2021).
+
+Another di-rection is to ground the question into a knowledge graph and do inference with graph-based reasoning (Lin et al., 2019;Lv et al., 2020;Yasunaga et al., 2021).
+
+A common prerequisite of these methods is a high-quality, high-coverage, in-domain commonsense knowledge base (Ma et al., 2019).
+
+Some commonsense reasoning datasets are derived from existing knowledge bases; for example, Common-senseQA (Talmor et al., 2019) is derived from ConceptNet (Speer et al., 2017), and Social IQA (Sap et al., 2019b) is derived from ATOMIC (Sap et al., 2019a).
+
+For such datasets, it is natural to elicit related knowledge from the underlying knowledge base that derived them, and typically this would demonstrate considerable gains (Mitra et al., 2019;Chang et al., 2020).
+
+However, if there is a domain mismatch between the dataset and the knowledge base, such gains tend to diminish (Mitra et al., 2019;Ma et al., 2019).
+
+This becomes a bottleneck when encountering datasets that have no suitable knowledge base (e.g. NumerSense (Lin et al., 2020) and CommonsenseQA 2.0 (Talmor et al., 2021)), or when the system needs to handle commonsense queries that do not fit in any of the commonsense domains represented by an existing knowledge base.
+
+Our work overcomes this diffi-culty by leveraging pretrained language models as the source of commonsense knowledge.
+
+Adding generated text during inference.
+
+Recently, several works show that model performance on commonsense reasoning can be boosted by augmenting the question with model-generated text, such as clarifications, explanations, and implications.
+
+Self-talk (Shwartz et al., 2020) elicits clarifications to concepts in the question and appends them to the inference model input.
+
+Contrastive explanations (Paranjape et al., 2021) prompts inference models with generated explanations that contrast between two answer choices.
+
+The aforementioned methods depend on task-specific templates to inquire the generator, which means they are only capable of eliciting a limited variety of knowledge and require careful hand-crafting to transfer to new tasks.
+
+Other explanation-based methods (Latcinnik and Berant, 2020;Rajani et al., 2019) finetune the generator model so that it produces explanations that are used for question augmentation.
+
+DynaGen (Bosselut et al., 2021) uses pretrained commonsense models to generate implications of a question and expands the inference input with these generations.
+
+However, its usage of COMeT (Bosselut et al., 2019) as the generator confines its applicability to the social commonsense domain.
+
+Our work contributes to this general line of research, yet different from these previous methods that elicit knowledge with task-specific templates or from finetuned knowledge generators, our method requires only a few human-written demonstrations in the style of the task, making it much more flexible, easy-to-transfer, and engineering-efficient.

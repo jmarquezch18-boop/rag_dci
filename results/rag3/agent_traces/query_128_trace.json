@@ -1,0 +1,136 @@
+{
+  "query_id": "2f2f032a41170e9076b11476d1a5db33c693141b",
+  "query": "How did you decide which action verbs to select?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "action verbs select"
+      },
+      "result_preview": "No matches found for 'action verbs select'",
+      "elapsed_s": 5.34
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "action verbs choose"
+      },
+      "result_preview": "No matches found for 'action verbs choose'",
+      "elapsed_s": 7.62
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "action verbs"
+      },
+      "result_preview": "Search results for 'action verbs' (1 matches):\n[paper_id=nlpeer_PeerRead-ACL2017_818 | section=discussion | line=1] Metaphorical Language: While our frame patterns are intended to capture action verbs, our templates also match senses of those verbs that can be used with abstract or metaphorical argu",
+      "elapsed_s": 5.17
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_818",
+        "section": "discussion",
+        "start": 1,
+        "end": 5
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_818 / discussion — líneas 1-10 de 21]\nMetaphorical Language: While our frame patterns are intended to capture action verbs, our templates also match senses of those verbs that can be used with abstract or metaphorical arguments, rather than directly physical ones.\n\nOne examp",
+      "elapsed_s": 4.62
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_818",
+        "section": "discussion",
+        "start": 1,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_818 / discussion — líneas 1-21 de 21]\nMetaphorical Language: While our frame patterns are intended to capture action verbs, our templates also match senses of those verbs that can be used with abstract or metaphorical arguments, rather than directly physical ones.\n\nOne examp",
+      "elapsed_s": 4.45
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Metaphorical Language: While our frame patterns are intended to capture action verbs, our templates also match senses of those verbs that can be used with abstract or metaphorical arguments, rather than directly physical ones.\n\nOne example from the development set is \"x contained y.\" While x and y can be real objects, more abstract senses of \"contained\" could involve y as a \"forest fire\" or even a \"revolution.\" In these instances, x > size y is plausible as an abstract notion: if some entity can contain a revolution, we might think that entity as \"larger\" or \"stronger\" than the revolution.\n\nError analysis: Examples 6-10 in Figure 4 highlight failure cases for the model.\n\nExample 6 shows a case where the comparison is nonsensical because \"for\" would naturally be followed by a purpose (\"He drove the car for work.\") or a duration (\"She drove the car for hours.\") rather than a concrete object whose size is measurable.\n\nExample 7 highlights an underspecified frame.",
+      "section": "discussion",
+      "paper_id": "nlpeer_PeerRead-ACL2017_818",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_818_discussion_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_818",
+      "score": 1.0
+    },
+    {
+      "text": "Metaphorical Language: While our frame patterns are intended to capture action verbs, our templates also match senses of those verbs that can be used with abstract or metaphorical arguments, rather than directly physical ones.\n\nOne example from the development set is \"x contained y.\" While x and y can be real objects, more abstract senses of \"contained\" could involve y as a \"forest fire\" or even a \"revolution.\" In these instances, x > size y is plausible as an abstract notion: if some entity can contain a revolution, we might think that entity as \"larger\" or \"stronger\" than the revolution.\n\nError analysis: Examples 6-10 in Figure 4 highlight failure cases for the model.\n\nExample 6 shows a case where the comparison is nonsensical because \"for\" would naturally be followed by a purpose (\"He drove the car for work.\") or a duration (\"She drove the car for hours.\") rather than a concrete object whose size is measurable.\n\nExample 7 highlights an underspecified frame.\n\nOne crowd worker provided the example, \"PERSON stopped the fly with {the jar / a swat-ter},\" where fly < weight {jar, swatter}. However, two crowd workers provided examples like \"PERSON stopped their car with the brake,\" where clearly car > weight brake.\n\nThis example illustrates complex underlying physics we do not model: a brake-the pedal itself-is used to stop a car, but it does so by applying significant force through a separate system.\n\nThe next two examples are cases where the model nearly predicts correctly (8, e.g., \"She lived at the office.\") and is just clearly wrong (9, e.g., \"He snipped off a locket of hair\").\n\nExample 10 demonstrates a case of polysemy where the model picks the wrong side.\n\nIn the phrase, \"She caught the runner in first,\", it is correct that she > speed runner.\n\nHowever, the sense chosen by the crowd workers is that of, \"She caught the baseball,\" where indeed she < speed baseball.",
+      "section": "discussion",
+      "paper_id": "nlpeer_PeerRead-ACL2017_818",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_818_discussion_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_818",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/PeerRead-ACL2017/818_72",
+    "nlpeer/PeerRead-ACL2017/818_73"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.5,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.5,
+    "recall_at_5": 0.5,
+    "recall_at_10": 0.5,
+    "recall_at_20": 0.5,
+    "precision_at_5": 0.5,
+    "ndcg_at_5": 0.6309297535714575,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_PeerRead-ACL2017_818_discussion_0000",
+      "dci_nlpeer_PeerRead-ACL2017_818_discussion_0001"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_818_discussion_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_818_discussion_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.06153846153846154,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

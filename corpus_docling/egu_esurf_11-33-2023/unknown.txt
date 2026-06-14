@@ -1,0 +1,371 @@
+Simulating The Effect Of Subsurface Drainage On The Thermal Regime And Ground Ice In Blocky Terrain In Norway
+
+Abstract
+
+Introduction
+
+Study Sites
+
+Juvvasshøe, Southern Norway
+
+Juvvasshøe (61 • 40 N, 08 • 22 E; 1894 m a.s.l.) (Fig. 1) is a site located in Jotunheimen in the southern Norwegian mountains, well above the tree line.
+
+A 129 m deep borehole was drilled in August 1999 in the PACE (Permafrost and Climate in Europe) project (Harris et al., 2001).
+
+Continuous data streams from this PACE borehole are available with the ex-ception of a gap between 21 December 2011 and 24 April 2014.
+
+The site is located in an extensive blockfield on a mountain plateau with sparse vegetation cover.
+
+The bedrock (crystalline rocks; Farbrot et al., 2011) is located at approximately 5 m depth; the first metre consists of large stones and boulders, and the ground below mainly consists of cobbles (Isaksen et al., 2003).
+
+Between 2000and 2004, Isaksen et al. (2007) measured a mean annual air temperature (MAAT) at 2 m height of -3.3 • C. The mean ground temperature at 2.5 m below the surface during this period was -2.5 • C. The mean annual precipitation was estimated to be between 800 and 1000 mm.
+
+The site is extremely wind-exposed, resulting in a low snow thickness due to wind drift.
+
+Hipp et al. (2012) described a snow depth of less than 20 cm, while the snow thickness in surrounding, lower-lying and less exposed sites can be up to 140 cm.
+
+Isaksen et al. (2007) measured the difference between the mean annual ground surface temperature and MAAT, which is the surface offset, at exposed and less exposed sites in this area.
+
+At sites with a significant snow cover, the surface offset was more than 2 • C, while at exposed (including Juvvasshøe) sites this offset is generally below 1 • C. The permafrost thickness at the PACE borehole was estimated to be approximately 380 m (Isaksen et al., 2001), with the lower permafrost limited at ca. 1450 m a.s.l.
+
+(Farbrot et al., 2011).
+
+The thickness of the active layer increased from 215 cm in 1999 (Isaksen et al., 2001) to ca. 250 cm in 2019 (Etzelmüller et al., 2020).
+
+A weak zero curtain effect suggests a low water content in the active layer (Isaksen et al., 2007).
+
+A warming of 0.2 and 0.7 • C per decade in surface air temperature and ground surface temperature, respectively, occurred between 2000temperature, respectively, occurred between and 2019temperature, respectively, occurred between (Etzelmüller et al., 2020)).
+
+Ivarsfjorden Rock Glacier, Northern Norway
+
+Ivarsfjorden is a small fjord arm of the larger Hopsfjorden, located on the Nordkinn Peninsula in Troms and Finnmark county in northern Norway (Fig. 1).
+
+Deglaciated around 14-15 cal kyr BP (calibrated kiloyears before present; Romundset et al., 2011), the peninsula is dominated by flat mountain plateaus of exposed bedrock, in situ weathered material and coarse-grained till (Lilleøren et al., 2022) and feature steep slopes towards the sea.
+
+The coastal areas of Finnmark have a wet maritime climate, with mean annual precipitation around 1000 mm (Saloranta, 2012).
+
+Lilleøren et al. (2022) describe a MAAT of 1.6 • C between 2010 and 2019 in the area of the rock glacier, which lies in a south-west-northeast-trending valley at an elevation extent of roughly 60 to 160 m a.s.l.
+
+The mountain at its east (443 m a.s.l.) serves as the source area with rockfall debris and coarse talus slopes being common.
+
+The bedrock in Ivarsfjorden consists of sandstones and phyllites (NGU, 2022).
+
+Sandstones often generate coarse, bouldery material, which is favourable for the formation of rock glaciers (Haeberli et al., 2006).
+
+The rock glacier in Ivarsfjorden is north-west-facing and has previously been interpreted as relict (Lilleøren and Etzelmüller, 2011), but a detailed analysis showed that a limited ice core might still be present (Lilleøren et al., 2022).
+
+A negative MAAT around 100 to 150 years ago is an indication that rock glaciers in this area were likely active at the end of the Little Ice Age (LIA).
+
+Refraction seismic tomography surveys indicate a porous airfilled stratigraphy such as blocky talus deposits near the surface at parts of the rock glacier.
+
+While observed mean annual ground surface temperatures between 2015 and 2020 are all positive, negative surface temperatures during summer have been observed by a thermal camera at the front slope of the rock glacier.
+
+This is likely an indication of the chimney effect and thus of connected voids that support airflow.
+
+Methods
+
+The Cryogrid Community Model
+
+Downscaling Of Model Forcing
+
+Model Set-Up
+
+Validation Runs
+
+As a prerequisite for conducting model experiments on ground stratigraphy and drainage (Sects. 3.3.2 and 3.3.3), validation runs are set up to show that the model can reproduce key characteristics of the thermal regime at the two sites in a satisfactory manner (based on available observations).
+
+Furthermore, we use the observations to determine the bestfitting snowfall factor for the two sites, which is subsequently used in the transient runs (Sect. 3.3.3).
+
+At Juvvasshøe, temperature measurements in a borehole are available from 2000 to 2019, allowing a comparison at different depths.
+
+At the Ivarsfjorden rock glacier site, observations of ground temperature at deeper depths are lacking, but measurements of nearsurface ground temperatures are available from July 2016 to July 2019 (Lilleøren et al., 2022).
+
+These are compared to simulation results to ensure that the model reproduces the observed surface offset between air and ground surface, largely caused by the winter snow cover (e.g. Martin et al., 2019;Schmidt et al., 2021).
+
+At both sites, the model is run for the entire period of available forcing data, leaving at least 60 years for the model spin-up, which is sufficient to analyse ground temperatures in the uppermost metres of the ground column.
+
+Manual adjustment of the ground stratigraphy (porosity and thus mineral content) and snowfall factor is performed until a good fit with daily measurements is achieved.
+
+At Juvvasshøe, based on observations of blocks and smaller cobbles with finer sediments down to the onset of bedrock at a depth of 5 m (Isaksen et al., 2003), the blocks with sediment stratigraphy is used as a starting point to vary porosities until a good fit is achieved.
+
+As this site is extremely exposed to wind, and most snow is blown away (Isaksen et al., 2003;Westermann et al., 2013), the snowfall factor is stepwise decreased to values below one to improve the model performance.
+
+At Ivarsfjorden, we considered 11 temperature loggers within the rock glacier outline (Fig. 1d in Lilleøren et al., 2022), of which all except for one are placed on the relict surface of the rock glacier (Fig. 2a in Lilleøren et al., 2022).
+
+On the relict surface, deposition of finer sediment in between blocks is more likely than on the active surface, due to the lack of movement.
+
+Here, the blocks with sediment stratigraphy is considered appropriate and used as a starting point for the calibration.
+
+At both sites, the root-mean-square error (RMSE) and bias are calculated in order to provide an objective measure of the model fit.
+
+At Juvvasshøe this was accomplished for daily values at 0.4 and 2 m depth, while at Ivarsfjorden the mean daily ground surface temperature of the loggers within the rock glacier outline is used.
+
+Equilibrium Runs
+
+The goal of equilibrium runs is to investigate the sensitivity of the ground thermal regime towards ground properties and drainage conditions, using both the undrained and drained set-up for the three idealized stratigraphies (Table 1), which results in six scenarios.
+
+As the heavily wind-affected snow cover is a key source of spatial variability in ground temperatures in the Norwegian mountains (Gisnås et al., 2014(Gisnås et al., , 2016)), the model is run for a range of snowfall factors between 0.0 and 1.5 (Table 2) for each scenario.
+
+This analysis allows us to identify the magnitude of the thermal anomaly that the subsurface drainage induces at various amounts of snow, as well as estimate the threshold snow amount for permafrost existence in the six scenarios.
+
+This analysis is performed for equilibrium conditions for 10-year periods of roughly stable climate, which is iterated three times until a steady-state temperature profile of the uppermost 5 m is established.
+
+For Juvvasshøe, the period 2000 to 2010 is selected as the model can be initialized with real-time borehole data.
+
+For Ivarsfjorden, the comparatively cold period 1962 to 1971 is selected as this relatively stable period is the coldest period in the available forcing data and thus the closest to Little Ice Age climate conditions, when the Ivarsfjorden rock glacier was very likely active (Lilleøren et al., 2022).
+
+Transient Runs
+
+The goal of the transient runs is to analyse the effect of ground stratigraphies and drainage conditions on the transient response of ground temperatures and ice tables to climate warming.
+
+For this purpose, we perform model simulations from 1951 to 2019, when air temperatures increased by more than 1 • C in Norway.
+
+To initialize simulations, we perform a model spin-up by iterating three times over the coldest 10-year period in the forcing data (1962)(1963)(1964)(1965)(1966)(1967)(1968)(1969)(1970)(1971), which is sufficient to achieve a stable ice table.
+
+This is the same period as in the equilibrium runs (see Sect.
+
+4), for which it was selected to capture permafrost conditions at the Ivarsfjorden rock glacier site (see Sect. 4).
+
+Thus, the transient runs allow us to analyse the evolution of the permafrost towards the warming of the recent decades.
+
+We only use the best-fitting snowfall factor (Table 2), as derived from the validation runs (Sect. 3.3.1), but again perform simulations for the three idealized stratigraphies and undrained and drained conditions.
+
+This way, we can evaluate whether different ground stratigraphies or drainage conditions lead to different warming rates of ground temperatures, as well as different thresholds for permafrost thaw.
+
+Results
+
+Comparison To In Situ Measurements
+
+The results of the validation runs at Juvvasshøe are compared with measured daily ground temperatures at the PACE bore-hole (Etzelmüller et al., 2020).
+
+Figure 3 shows the comparison of measured ground temperatures with modelled temperatures at 0.4 and 2.0 m depth for the best-fitting model configuration.
+
+The snowfall factor for this model set-up is 0.25; i.e. incoming snowfall is reduced by 75 % in order to capture the effect of snow ablation due to wind drift.
+
+This resulted in mean annual maximum snow depths of 34 cm, in broad agreement with observations from the site (Isaksen et al., 2003) and earlier modelling studies at the site (Westermann et al., 2013).
+
+The subsurface stratigraphy for this model configuration is highly similar to the blocks with sediment stratigraphy, but with a slightly lower porosity of 0.2 (i.e. a volumetric mineral content of 0.8).
+
+This would for example correspond to blocks and cobbles with a porosity of 0.4 (0.5 for blocks with sediment), filled with fine sediments with a porosity of 0.5 (and field capacity 0.25), which is plausible given the broad characteristics of the observed borehole stratigraphy (Isaksen et al., 2003).
+
+This configuration used drained conditions, although differences with undrained conditions are minimal for this stratigraphy.
+
+For daily temperatures at 0.4 m depth, the RMSE and bias are 2.1 and -0.6 • C, respectively, while they are 1.2 and -0.7 • C at 2 m depth.
+
+There is a mismatch in the timing of spring temperatures at 2 m depth in several years, for which modelled temperatures increase later than measured values.
+
+This is likely a result of differences in the snowmelt, as the snowpack dynamics resulting from wind redistribution are not completely captured by the snowfall scaling with a constant snowfall factor (e.g. Martin et al., 2019).
+
+Furthermore, the uppermost 1 m contains large stones and boulders, while the layer below is characterized by smaller stones and cobbles (Isaksen et al., 2003), so that a ground stratigraphy with two layers in the uppermost 5 m may further improve the performance of the simulations.
+
+At the rock glacier in Ivarsfjorden, a comparison between modelled and measured temperature is performed for average daily ground surface temperatures, using the mean of the measurements at 11 sites within the rock glacier as a target for the comparison (Fig. 4).
+
+The best-fitting model configuration was found to be the blocks with sediment stratigraphy and a snowfall factor of 1.0, resulting in an RMSE of 1.3 • C and a bias of -0.4 • C. As in Juvvasshøe, the configuration used drained conditions, while differences with undrained conditions are small.
+
+Figure 4 also shows the significant spatial variability in ground surface temperatures, which is particularly large in winter.
+
+Also in periods when the simulation results and the mean of the measurements visibly deviate, the simulations remain within the range of the measurements.
+
+While there are some deviations between the observations and simulation results at both Juvvasshøe and Ivarsfjorden, we conclude that the model set-up, including the model forcing, can capture the general ground surface temperature regime at both sites, which is a prerequisite for obtaining meaningful results from the equilibrium and transient runs.
+
+Equilibrium Ground Temperatures And Sensitivity To Snow
+
+Figure 5 shows the average ground temperature at 2 m depth for the three stratigraphies, the drained and the undrained scenario, and different snowfall factors at both sites.
+
+At both sites there is a clear pattern of lower temperatures in the blocks only, drained scenario (solid blue line) compared to all five other scenarios.
+
+For snowfall factors of 0.75 and larger, the difference in ground temperature between blocks only, drained and the other scenarios is in the range of 1.1 to 1.8 • C at Juvvasshøe and in the range of 1.1 to 2.2 • C at Ivarsfjorden.
+
+This shows that the magnitude of the negative thermal anomaly increases with a larger amount of snowfall.
+
+Results of the sensitivity study to porosity of the soil (Table S1) show that mean ground temperatures are within 0.4 • C between the highest and lowest porosity tested.
+
+Annual maximum snow depths at a snowfall factor of 1.0 are between 1.5 and 2.4 m at Juvvasshøe and between 0.4 and 1.0 m at Ivarsfjorden.
+
+At Juvvasshøe, all three undrained scenarios feature positive ground temperatures at snowfall factors of 0.75 and above, which corresponds to permafrostfree conditions.
+
+Temperatures in the blocks with sediment, drained and sediment only, drained runs are positive for a snowfall factor of 1.0 and above.
+
+The ground temperature in the blocks only, drained runs remains below -1.0 • C for all snowfall scenarios.
+
+A similar pattern is seen in Ivarsfjorden, although a snowfall factor of 1.5 results in positive temperatures for the scenario blocks only, drained, which is clear evidence of the overall warmer ground temperatures.
+
+Temperatures for the blocks with sediment stratigraphy are positive for snowfall factors exceeding 0.5 and exceeding 0.75 for the other scenarios (with the exception of the blocks only, drained scenario; see above).
+
+For snowfall factors above 0.25, ground temperature at 2 m depth increases with snow depth as a result of increased insulation of the ground during winter.
+
+However, the increase from a snowfall factor of 0 to 0.25 leads to a slight cooling for the drained scenarios as opposed to a slight warming in the undrained scenarios.
+
+The reason for this cooling is likely the higher winter albedo of the completely snow-free ground (for a snowfall factor of 0), which outweighs the insulating of the shallow snow cover for a snowfall factor of 0.25.
+
+Figure 6 shows simulated temperatures for 1 year at the ground surface and 2 m depth for drained conditions for both blocks only and the blocks with sediment scenarios for Juvvasshøe (snowfall factor 0.75).
+
+While ground surface temperatures are largely similar during the snow-free summer season, they decrease much faster in fall for the blocks only compared to the blocks with sediment scenario, for which the slow refreezing of the active layer leads to a prolonged warming of the ground surface from below.
+
+In the blocks only scenario, on the other hand, the active layer contains only little water so that refreezing occurs within only a short time period.
+
+The rapid cooling in the blocks only scenario is also visible within the permafrost table at 2 m depth, resulting in lower winter temperatures compared to the blocks with sediment curve and thus explaining the simulated differences in mean ground temperature.
+
+Figure 7 shows the corresponding snow cover and volumetric ground ice content in the upper metre of the ground for the blocks only, drained scenario.
+
+A largely stable ground ice table forms already at a depth of about 0.5 m, while the active layer is almost free of ground ice in winter, corresponding to the low water contents for thawed conditions, enabling rapid refreezing and thus strong cooling during winter.
+
+During and after snowmelt, meltwater infiltrates in the blocky layer and refreezes at the then very cold ice table, resulting in the formation of new ground ice, which slowly melts during the course of summer.
+
+The slight increase in the ground ice table in early winter is due to refreezing of residual water above the ice table from rain and snowmelt events in October which has not fully drained before refreezing.
+
+Transient Response To Climate Warming
+
+The ERA5 reanalysis dataset allows us to simulate the evolution of the ground thermal regime and ground ice content from 1951 to 2019, during which mean air temperatures increased from -4.5 • C (1951-1960) to -3.8 • C (2010-2019) for Juvvasshøe and from 0.5 • C (1951-1960) to 1.2 • C (2010-2019) at Ivarsfjorden.
+
+Figure 8 shows the ground ice content for different scenarios in Ivarsfjorden.
+
+In all simulations, stable permafrost conditions with a stable ice table form during the spin-up period (using model forcing for the cold period 1962-1971; Table 2), with volumetric ice contents of 0.5 (blocks only, sediment only) and of 0.25 (blocks with sediment) according to the applied stratigraphy (Table 1).
+
+In the period 1951 to 2019, ground ice content evolves as a response to the applied climate forcing, showing different responses of the ground ice table.
+
+In the blocks only, drained scenario, the ice table in the upper 5 m (so between the active layer and the bedrock) does not lower by a significant amount (0.1 m lowering), while the ice table lowers by 1.2 m in the blocks only, undrained scenario.
+
+The ice table in the blocks with sediment stratigraphy disappears by 1985 and 1975 in the undrained and drained scenarios, respectively.
+
+Finally, the sediment only simulations show an intermediate effect where the ice table has lowered by 1.7 and 1.6 m for undrained and drained conditions, respectively, by 2019.
+
+The complete degradation in the blocks with sediment runs compared to partial degradation in all other scenarios (except blocks only, drained) is not unexpected since this stratigraphy has a 25 % porosity (and thus ice content), compared to 50 % in the others.
+
+We conclude that the ground stratigraphy and drainage conditions strongly control the response of the ground towards warming, with full degradation of near-surface permafrost in both blocks with sediment runs; partial degradation in the blocks only, undrained run and in both sediment only runs; and finally continued stable permafrost conditions in the blocks only, drained simulation.
+
+At the Juvvasshøe site, the ice table remains stable in all simulations, but a slight lowering occurs in the blocks with sediment scenarios.
+
+Figure 9 shows the change in temperatures at 5 m depth for the drained scenarios, which at the Ivarsfjorden rock glacier (snowfall factor 1.0) correspond to a full (blocks with sediment) and partial (sediment only) lowering of the ice table, as well as a relatively stable (blocks only) ice table.
+
+The blocks only simulation shows an increase from -0.6 to -0.2 • C between the 1951-1960 and 2010-2019 means, not being strongly influenced by latent heat effects due to the relatively stable ice table.
+
+The sediment only case experiences only minimal warming, as it is strongly influenced by the ongoing ground ice melt, which confines ground temperatures to close to 0 • C. Finally, the complete disappearance of ground ice in the blocks with sediment run coincided with a warming to positive temperatures, from 0.0 to 0.6 • C. At Juvvasshøe, permafrost degradation and thus strong ground ice melt does not occur for any of the scenarios for a snowfall factor of 0.25, and ground temperatures only increased by 0.2 • C (blocks only) to 0.4 • C (blocks with sediment and sediment only) between the 1951-1960 and 2010-2019 means (Fig. 8).
+
+The results of the transient runs indicate that the subsurface stratigraphy and drainage conditions strongly affect the timing of permafrost degradation in blocky terrain.
+
+While ground ice melt controls the warming rates at Ivarsfjorden, only small differences in warming rates are simulated for the still stable permafrost in Juvvasshøe.
+
+However, we emphasize that the simulations at Juvvasshøe were performed for a shallow snow cover (sf = 0.25) for which differences in modelled ground temperatures are small (Fig. 5).
+
+Only the subsurface domain is shown, with the ground surface elevation at 106 m a.s.l.
+
+In the active layer, ice contents increase and decrease annually, corresponding to the active layer refreezing and thawing.
+
+The ground ice table is defined as the uppermost cell where ground ice persists for more than 2 years and follows the permafrost table.
+
+Discussion
+
+Limitations Of The Model Set-Up
+
+The Effect Of The Ground Ice Dynamics On Ground Temperatures
+
+Despite the uncertainties in the model set-up, our results show a clear negative thermal anomaly for the blocks only, drained scenario.
+
+If the winter snow depth is sufficiently high, a surface cover of coarse blocks with air-filled voids (i.e. high porosity and low water holding capacity) results in 2 m ground temperatures 1 to 2 • C lower than for the other stratigraphies.
+
+In the Ivarsfjorden simulations, the blocks only, drained scenario is the only one where near-surface permafrost conditions persist even today, while near-surface permafrost degrades for the blocks with sediment and sediment only scenarios.
+
+This is accompanied by a strong thermal offset, with a mean ground surface temperature of more than 2 • C for the blocks only, drained scenario, while the mean ground temperatures at 2 m were below 0 • C. Interestingly, the temperature anomaly appears largely constant over time in the transient simulations, except for periods when permafrost disappears in one of the scenarios and confines ground temperatures to 0 • C, which delays further ground warming.
+
+For lower snow depths, the temperature anomaly becomes smaller and eventually vanishes for the (largely irrelevant) case of permanently snow-free conditions.
+
+The negative temperature anomaly largely accumulates during fall and winter (Fig. 6).
+
+The active layer contains very little water in the blocks only, drained scenario.
+
+Dry soils have a lower thermal conductivity compared to wet soils, but the lack of latent heat release allows for rapid refreezing during fall, which enables fast cooling of the deeper soil layers and thus leads to overall lower winter temperatures.
+
+In spring, this "cold content" (i.e. sensible heat) of the ground is partly transformed into the build-up of new ground ice (i.e. latent heat; Fig. 7) which only melts slowly during summer due to the insulation of the overlying blocky layer.
+
+This timing of the ground ice formation is strongly different from all other scenarios, for which ground ice mostly forms in fall/early winter due to refreezing of the water contained in the active layer (e.g. Hinkel et al., 2001).
+
+A somewhat similar effect has been described for peat plateaus in northern Norway, where simulations yielded 2 • C lower temperatures for well-drained peat compared to water-saturated peat (Martin et al., 2019).
+
+This refreezing of the active layer can take several months and is further delayed if a significant snow cover forms during this period, which leads to overall higher winter temperatures in the permafrost due to the insulation (Zhang, 2005).
+
+It is exactly for these "high-snow situations" (corresponding to higher snowfall factors in our sensitivity analyses) that the temperature anomaly of the blocks only, drained scenario is largest.
+
+Our results for example suggest that permafrost can occur for blocky ground on slopes around Juvvasshøe, even if the winter snow cover exceeds 2 m thickness.
+
+We note that the thermal anomaly caused by the ground ice dynamics in blocky ground is not related to convective processes (Harris and Pedersen, 1998) or the effect of blocks protruding through the snow cover (Juliussen and Humlum, 2008;Gruber and Hoelzle, 2008).
+
+The simulated temperature anomaly is similar to the 1.3-2.0 • C lower temperatures that Juliussen and Humlum (2008) found in blockfields compared to till and bedrock in central-eastern Norway.
+
+While a complete process model for blocky ground and rock glaciers will certainly have to take air convection and the interplay between surface blocks and the snow cover into account, it is encouraging that the relatively simple model approach presented in this work offers prospects to improve our estimates of permafrost occurrence in mountain environments.
+
+In a first-order approach, thermal anomalies can be translated into elevation differences by assuming a temperature lapse rate so that the impacts on the lower altitudinal limit of permafrost can be estimated.
+
+For a lapse rate of 0.5 • C per 100 m (e.g. Farbrot et al., 2011), the lower limit of permafrost in drained, blocky deposits in Norway would be 300 to 400 m lower compared to "normal" permafrost represented by the other scenarios.
+
+For the Ivarsfjorden site, these numbers compare favourably to the Scandinavian permafrost map (Gisnås et al., 2017) which shows a lower discontinuous permafrost limit in Finnmark at around 400 m a.s.l., approximately 300 m above the rock glacier.
+
+Implications For Future Work
+
+Conclusions
+
+Figure 1.
+
+Location of the two sites in Norway (© Norwegian Mapping Authority).
+
+(1) Blockfield at Juvvasshøe (1894 m a.s.l.), (2) rock glacier at Ivarsfjorden (60-160 m a.s.l.).
+
+Figure 2.
+
+Schematic of the model grid, indicating cell sizes at different depths and upper and lower boundary conditions.
+
+As an upper boundary condition, the surface energy balance (SEB) forced by near-surface meteorological data is used.
+
+The lower boundary condition is provided by a constant geothermal heat flux, Q geo .
+
+Figure 3.
+
+Modelled and measured ground temperature at the PACE borehole in Juvvasshøe at 0.4 (a) and 2.0 m (b) depth.
+
+The shaded area indicates a period when no borehole data are available.
+
+Figure 4.
+
+Daily modelled and measured ground surface temperatures in Ivarsfjorden from July 2016 to July 2019.
+
+The shaded area indicates the minimum to maximum range of measured daily values from 11 loggers (based on Lilleøren et al., 2022), while the black line represents the mean value of all loggers.
+
+Figure 5.
+
+Equilibrium ground temperature at 2 m depth for three idealized stratigraphies (Table 1) and different snowfall factors.
+
+Each data point represents one model run of one of the six scenarios at a certain snowfall factor.
+
+Figure 6.
+
+Modelled ground temperature at 0.05 (a) and 2 m (b) depth for the blocks only, drained and blocks with sediment, drained scenarios during a year of an equilibrium run at Juvvasshøe for sf = 0.75.
+
+The snow-free summer season is highlighted.
+
+Note that the upper plot is truncated at 17 • C, and maximum summer temperatures are 26 • C in both scenarios.
+
+Figure 7.
+
+Modelled volumetric ground ice content in the upper 1 m of the ground (below 1894 m a.s.l.) and the snow cover (above 1894 m a.s.l.) for the blocks only, drained scenario during 1 year of an equilibrium run at Juvvasshøe for sf = 0.75.
+
+Note the rise in the ground ice table, here defined as the uppermost cell where ground ice persists for 2 or more years, in June after infiltrated snowmelt water refreezes.
+
+Figure 8.
+
+Modelled volumetric ground ice content at Ivarsfjorden between 1951 and 2019 for the idealized stratigraphies in undrained and drained conditions and sf = 1.0.Only the subsurface domain is shown, with the ground surface elevation at 106 m a.s.l.
+
+In the active layer, ice contents increase and decrease annually, corresponding to the active layer refreezing and thawing.
+
+The ground ice table is defined as the uppermost cell where ground ice persists for more than 2 years and follows the permafrost table.
+
+Figure 9.
+
+Ground temperature at 5 m depth for the idealized stratigraphies under drained conditions; sf = 1.0 for Ivarsfjorden and sf = 0.25 for Juvvasshøe.
+
+Mineral content, porosity and field capacity (all in volume fraction) and soil freezing characteristic for the three idealized subsurface stratigraphies.
+
+Overview of basic model settings for the different simulation types.
+
+A spin-up of subsurface temperatures is achieved by repeated simulations for the spin-up period (until a stable temperature profile is reached), before the actual model run for the simulation period is conducted. "Idealized" stratigraphy and drainage refers to three subsurface stratigraphies (Table1) combined with two types of drainage conditions.
+
+See

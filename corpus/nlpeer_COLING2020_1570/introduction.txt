@@ -1,0 +1,51 @@
+Research on object naming (Ordonez et al., 2016;Graf et al., 2016;Eisape et al., 2020), such as the linguistic analysis of the naming behavior of humans and computational models, requires natural and reliable object naming data.
+
+Such data should contain naturally occurring naming variation, i.e., that the same object can very often be called by different names.
+
+For instance, a duck can be called duck, bird, animal, etc.
+
+At the same time, in cases where a naming dataset provides multiple names for a given object, it is important to verify that this apparent naming variation is not a mere consequence of, for instance, lexical errors or different people naming different objects in the same scene.
+
+In this work, we assess the factors that affect the collection of object naming data in the typical Language & Vision (L&V) setup, and test whether these factors impact the accuracy or apparent accuracy of a L&V object labeling model.
+
+Existing work in L&V has relied on data collection methods that prompt natural language users to freely talk about or refer to particular objects in an image (Kazemzadeh et al., 2014;Yu et al., 2016;Silberer et al., 2020).
+
+Common to these methods is the use of images as a proxy for the actual context of language use (i.e., the real world), and the use of bounding boxes drawn onto the image to indicate the target object that is to be named.
+
+These two common aspects, essentially simulating real-world linguistic reference, have enabled large-scale data collection leveraging existing Computer Vision datasets.
+
+However, both aspects also introduce potential confounding factors, such as referential uncertainty, where a bounding box may fail to uniquely identify the target object, or visual uncertainty, i.e., an object may be more difficult to recognize from a still image than in a real-world scenario.
+
+In this work we analyze, after expansion with new meta-annotations, an existing dataset that was created using the method just described, namely ManyNames (Silberer et al., 2020).
+
+1 It builds upon object annotations in Visual Genome (Krishna et al., 2016), and provides up to 36 name annotations for each of 25K objects in images, where the objects belong to 7 different domains (e.g., animals, people, food).
+
+To crowdsource the names, Silberer et al. presented subjects with an image and asked them to freely name the target object that was marked by a bounding box.
+
+The resulting dataset appeared to exhibit naming variation, with an average of roughly 3 distinct names per object, but, as mentioned in Silberer et al., the presence of naming errors in the data prevent one from drawing conclusions about naming behavior, in humans and in computational models.
+
+Indeed, upon manual inspection we found errors of the kinds we mentioned above: some subjects named a different object from the one highlighted by the bounding box, or intended to name the correct object but used a clearly incorrect name (see Figure 1 for examples).
+
+Our first contribution is to assess the factors that affect the collection of valid naming data in the typical L&V setup.
+
+To this end, we collect and analyze verification annotations for ManyNames via crowdsourcing.
+
+Our analysis shows a) that the predominant type of error in ManyNames is a referential mistake (where subjects name an object other than the target); b) that naming variation in ManyNames is still substantial after correcting for errors and uncertainty, with objects having an average of 2.2 distinct names; and c) that there are differences between domains in the confounding factors, and in the degree of genuine naming variation.
+
+We publish a verified version of ManyNames (called ManyNames v2) that we derived through our analysis, to serve as a reliable, verified object naming dataset for future work.
+
+1  As our second contribution, we assess if the confounders identified by means of our analysis impact the accuracy of a L&V object labeling model.
+
+We introduce a diagnostic evaluation based on ManyNames v2.
+
+It moves beyond the single-label setup that is common in computer vision and L&V while avoiding the aforementioned confounds.
+
+That is, the verification annotations of ManyNames v2 enable us to establish whether a name predicted by the model coincides with the most frequent human response, a less frequent but still valid name, or a mistake (and, in the latter case, of which kind).
+
+To the best of our knowledge, to date there exists no work in L&V that performs a systematic investigation of the kind we do here for object naming.
+
+We showcase the potential of this evaluation method by analyzing the performance of a popular L&V model, Bottom-up (Anderson et al., 2018).
+
+We show a) that a single-label evaluation greatly underestimates the naming capabilities of Bottom-Up, which actually come close to our estimated human upper bound; and b) that, however, its effectiveness varies across domains.
+
+We furthermore find c) that the model is confused by the same aspects that confuse humans (as categorized in ManyNames v2), but not always to the same degree, which suggests that the gap between humans and models regarding actual human object naming is still larger than the overall accuracy on its own would suggest.

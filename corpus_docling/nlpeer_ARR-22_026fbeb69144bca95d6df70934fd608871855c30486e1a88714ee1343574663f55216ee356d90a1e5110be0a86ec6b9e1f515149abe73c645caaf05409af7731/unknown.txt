@@ -1,0 +1,85 @@
+Text Smoothing: Enhance Various Data Augmentation Methods On Text Classification Tasks
+
+Abstract
+
+Introduction
+
+Related Work
+
+Smoothed Representation
+
+We use BERT as a representative example of MLM.
+
+Given a downstream task dataset, namely
+
+D = {t i , p i , s i , l i } N i=1
+
+, where N is the number of Listing 1: Codes to implement text smoothing in PyTorch instances, t i is the one-hot encoding of a text (a single sentence or a sentence pair), p i is the positional encoding of t i , s i is the segment encoding of t i and l i is the label of this instance.
+
+We feed the one-hot encoding t i , positional encoding p i as well as the segment encoding s i into BERT, and fetch the output of the last layer of the transformer encoder in BERT, which is denoted as:
+
+- → t i = BERT(t i )(1)
+
+where -→ t i ∈ R seq_len,emb_size is a 2D dense vector in shape of [sequence_len, embedding_size].
+
+We then multiply -→ t i with the word embedding matrix W ∈ R vocab_size,embed_size in BERT, to get the MLM prediction results, which is defined as:
+
+MLM(t i ) = softmax( - → t i W T )(2)
+
+where each row in MLM(t i ) is a probability distribution over the token vocabulary, representing the context-compatible token choices in that position of the input text learned by pre-trained BERT.
+
+Mixup Strategy
+
+The mixup (Zhang et al., 2017) is defined as:
+
+x = λx i + (1 -λ)x j (3) ỹ = λy i + (1 -λ)y j (4)
+
+where (x i , y i ) and (x j , y j ) are two feature-target vectors drawn at random from the training data, and λ ∈ [0, 1].
+
+In text smoothing, the one-hot representation and smoothed representation are derived from the same raw input, their lables are identical and the interpolation operation will not change the label.
+
+So the mixup operation can be simplified to:
+
+t i = λ • t i + (1 -λ) • MLM(t i ) (5)
+
+where t i is the one-hot representation, MLM(t i ) is the smoothed representation, t i is the interpolated representation and λ is the balance hyperparameter to control interpolation strength.
+
+In the downstream tasks, we use interpolated representation instead of the original one-hot representation as input.
+
+CBERT (Wu et al., 2019a) masks some tokens and predicts their contextual substitutions with pretrained BERT.
+
+BERTexpand, BERTprepend (Kumar et al., 2020) conditions BERT by prepending class labels to all examples of given class. "expand" a the label to model vocabulary, while "prepend" without.
+
+GPT2context (Kumar et al., 2020) provides a prompt to the pre-trained GPT model and keeping generating until the EOS token.
+
+BARTword, BARTspan (Kumar et al., 2020) conditions BART by prepending class labels to all examples of given class.
+
+BARTword masks a single word while BARTspan masks a continuous chunk.
+
+Experiment Setting
+
+Experimental Results
+
+Conclusoins
+
+This article proposes text smoothing, an effective data augmentation method, by converting sentences from their one-hot representations to smoothing representations.
+
+In the case of a low data regime, text smoothing is significantly better than various data augmentation methods.
+
+Furthermore, text smoothing can further be combined with various data augmentation methods to obtain better performance.
+
+masked language modeling (MLM) *The first two authors contribute equally.
+
+† Corresponding author.
+
+Figure 1: The blue part demonstrates the use of text smoothing data augmentation for downstream tasks, and the red part directly uses the original input.
+
+Figure 2: Interpolation of the smoothed representation and the original one-hot representation.
+
+sentence = "My favorite fruit is pear ." lambd = 0.1 # interpolation hyperparameter mlm.train() # enable dropout, dynamically mask tensor_input = tokenizer(sentence, return_tensors="pt") onehot_repr = convert_to_onehot( ** tensor_input) smoothed_repr = softmax(mlm( ** tensor_input).logits[0]) interpolated_repr = lambd * onehot_repr + (1 -lambd) * smoothed_repr
+
+Data statistics in low-resource regime settings.
+
+Evaluating data augmentation methods on different datasets in a low-resource regime.
+
+The effect of text smoothing combined with other data augmentation methods in low-resource regime.

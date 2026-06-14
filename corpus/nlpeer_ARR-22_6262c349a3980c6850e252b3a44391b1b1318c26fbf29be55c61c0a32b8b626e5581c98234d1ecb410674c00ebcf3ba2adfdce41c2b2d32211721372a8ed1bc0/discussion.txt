@@ -1,0 +1,47 @@
+What is the ideal amount of training steps for fine-tuning? To investigate the amount of update steps needed to fully adapt to the new speaker with the added difficulty of learning a new language, we show the cosine similarity of a speaker embedding of the fine-tuned model to that of the ground truth throughout the fine-tuning process in figure 4.
+
+The speaker embedding is built according to the ECAPA-TDNN architecture (Desplanques et al., 2020) and provided open source by SpeechBrain (Ravanelli et al., 2021).
+
+It is trained on VoxCeleb 1 and 2 (Nagrani et al., 2017(Nagrani et al., , 2019;;Chung et al., 2018) which to the best of our knowledge does not overlap with any of the other training and evaluation data we used.
+
+We tried to decrease adaptation time further by incorporating said speaker embedding similarity as an additional objective function, similar to Nachmani et al. (2018), we did however see only marginal improvements in the amount of steps needed at the expense of greatly increased training time.
+
+Can this setup handle zero-shot phonemes?
+
+We show the model's zero shot capabilities in figure 5.
+
+We removed Dutch and Finnish from the training data of the meta-checkpoint and trained another version of it, to be able to see how it handles all of the now completely unseen phonemes specific to German.
+
+While their correct position in plot (a) can be considered given, since it shows the articulatory featurespace, their meaningful positions in plot (b) and (c) show that the meta-checkpoint does not just collapse the vector of the unseen phoneme to the one it is most similar to, but actually generalizes.
+
+While their pronunciation when produced does not match the correct pronunciation perfectly, it can be understood in the context of a longer sequence.
+
+This is congruent with the results of Staib et al. (2020).
+
+During the adaptation phase, the pronunciation of the unseen phonemes rapidly matches the correct pronunciation after less than 100 steps.
+
+Does this setup learn the difference between language and speaker? When analyzing the finetuned meta-checkpoint, we observed that it seems to link the language of the input to the voice of the speaker.
+
+For example when synthesizing an unseen Hungarian text using Tacotron 2, the voice of the synthesis resembles that of the Hungarian female speaker, even though the model has been fine-tuned on the male German speaker and there are no additional conditioning signals.
+
+We hypothesize that the LAML procedure induces certain subsets of parameters in the model to be speaker dependent and the encoder of the model priming those parameters purely based on the phoneme sequence.
+
+This leads us to believe, that the fine-tuning of all parameters in the model may neither be necessary, nor even the best way of adapting to new data.
+
+This also fits the observations of the speaker embedding over time, since the Tacotron model adapts to the new speaker very rapidly.
+
+Further investigations into the interactions between parameter groups could allow cutting down the amount of parameters that need to be trained significantly, further reducing the need for training data.
+
+How can we bring down FastSpeech 2's data need further? A similar observation regarding language and speaker can be made with FastSpeech 2, however as could be seen from the experiment on naturalness and the training time, the FastSpeech 2 model can benefit more from additional data and training time.
+
+This may come down to its nearly twice as high parameter count.
+
+So a more effective fine-tuning strategy, that considers some parameters as constants, could benefit the fine-tuning capabilities of the FastSpeech 2 model greatly.
+
+Does this work across language families? One limitation to our findings is that we investigated only the transfer of languages that share similar phoneme inventories.
+
+It is possible that fine-tuning to a language that uses e.g. the lexical tone rather than pitch accents or word accents would require pretraining in more closely related high-resource languages, such as Chinese.
+
+However, as Vu and Schultz (2013) find in their analysis of multilingual ASR, the fast adaptation of an acoustic model trained on multiple languages to unseen languages works well, even across different language families.
+
+We thus believe that the technique and analysis presented in this paper also holds across language families and types.

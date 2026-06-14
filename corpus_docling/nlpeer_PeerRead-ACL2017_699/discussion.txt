@@ -1,0 +1,15 @@
+Our experimental results demonstrate that the CopyRNN model not only performs well on predicting present keyphrases, but also has the ability to generate topically relevant keyphrases that are absent in the text.
+
+In a broader sense, this model attempts to map a long text (i.e., paper abstract) with representative short text chunks (i.e., keyphrases), which can potentially be applied to improve information retrieval performance by generating high-quality index terms, as well as assisting user browsing by summarizing long documents into short, readable phrases.
+
+Thus far, we have tested our model with scientific publications and news articles, and have demonstrated that our model has the ability to capture universal language patterns and extract key information from unfamiliar texts.
+
+We believe that our model has a greater potential to be generalized to other domains and types, like books, online reviews, etc., if it is trained on a larger data corpus.
+
+Also, we directly applied our model, which was trained on a publication dataset, into generating keyphrases for news articles without any adaptive training.
+
+We believe that with proper training on news data, the model would make further improvement.
+
+Additionally, this work mainly studies the problem of discovering core content from textual materials.
+
+Here, the encoder-decoder framework is applied to model language; however, such a framework can also be extended to locate the core information on other data resources, such as summarizing content from images and videos.

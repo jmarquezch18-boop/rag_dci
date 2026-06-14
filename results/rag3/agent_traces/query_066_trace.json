@@ -1,0 +1,138 @@
+{
+  "query_id": "ae75b890d30e2879b6a6571bbc634ee4e6157e30",
+  "query": "What is the practical application of measuring the performance of a method using MAP at gold-k?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "MAP evaluation"
+      },
+      "result_preview": "No matches found for 'MAP evaluation'",
+      "elapsed_s": 5.35
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "MAP practical use"
+      },
+      "result_preview": "No matches found for 'MAP practical use'",
+      "elapsed_s": 7.13
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "mean average precision"
+      },
+      "result_preview": "Search results for 'mean average precision' (1 matches):\n[paper_id=nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7 | section=results | line=3] Furthermore, the ranked expansion results are evaluated agains",
+      "elapsed_s": 5.01
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+        "section": "results",
+        "start": 1,
+        "end": 5
+      },
+      "result_preview": "[nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7 / results — líneas 1-9 de 9]\nWidely-used benchmarks for ESE, such as Wiki and APR (Shen et al., 2017), are based on wellformed text corpora like Wikipedia a",
+      "elapsed_s": 6.83
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+        "section": "results",
+        "start": 10,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7 / results — líneas 5-9 de 9]\nFor example, there are 195 countries but only 10-50 predictions are evaluated.\n\nIn following sections, we argue that existing b",
+      "elapsed_s": 9.61
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Widely-used benchmarks for ESE, such as Wiki and APR (Shen et al., 2017), are based on wellformed text corpora like Wikipedia and focus only on well-defined concepts such as countries, US states, and diseases.\n\nFurthermore, the ranked expansion results are evaluated against the ground truth using Mean Average Precision (MAP) at different top-k positions where k is much smaller than the size of entity set.\n\nFor example, there are 195 countries but only 10-50 predictions are evaluated.\n\nIn following sections, we argue that existing benchmarks and evaluation metrics may not be adequate enough to estimate the real-world performance of the ESE methods and introduce new benchmarks and evaluation metrics to address their limitations.\n\nWe now outline our experiment set-up designed to explore the suitability of existing benchmarks, metrics, and methods.",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_results_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "score": 1.0
+    },
+    {
+      "text": "For example, there are 195 countries but only 10-50 predictions are evaluated.\n\nIn following sections, we argue that existing benchmarks and evaluation metrics may not be adequate enough to estimate the real-world performance of the ESE methods and introduce new benchmarks and evaluation metrics to address their limitations.\n\nWe now outline our experiment set-up designed to explore the suitability of existing benchmarks, metrics, and methods.",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_results_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_151",
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_152",
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_266",
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_267"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 0.25,
+    "recall_at_3": 0.25,
+    "recall_at_5": 0.25,
+    "recall_at_10": 0.25,
+    "recall_at_20": 0.25,
+    "precision_at_5": 0.5,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_results_0000",
+      "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_results_0001"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_results_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_results_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.026143790849673203,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

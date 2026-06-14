@@ -1,0 +1,27 @@
+In this study, we investigate the maximum physical and biogeochemical potential of macroalgae open-ocean mariculture and sinking (MOS) as an ocean-based carbon dioxide removal (CDR) method.
+
+Embedding a macroalgae model into an Earth system model, we simulate macroalgae mariculture in the open-ocean surface layer followed by fast sinking of the carbon-rich macroalgal biomass to the deep seafloor (depth>3000 m), which assumes no remineralization of the harvested biomass during the quick sinking.
+
+We also test the combination of MOS with artificial upwelling (AU), which fertilizes the macroalgae by pumping nutrient-rich deeper water to the surface.
+
+The simulations are done under RCP 4.5, a moderate-emissions pathway.
+
+When deployed globally between years 2020 and 2100, the carbon captured and exported by MOS is 270 PgC, which is further boosted by AU of 447 PgC. Because of feedbacks in the Earth system, the oceanic carbon inventory only increases by 171.8 PgC (283.9 PgC with AU) in the idealized simulations.
+
+More than half of this carbon remains in the ocean after cessation at year 2100 until year 3000.
+
+The major side effect of MOS on pelagic ecosystems is the reduction of phytoplankton net primary production (PNPP) due to the competition for nutrients with macroalgae and due to canopy shading.
+
+MOS shrinks the mid-layer oxygen-minimum zones (OMZs) by reducing the organic matter export to, and remineralization in, subsurface and intermediate waters, while it creates new OMZs on the seafloor by oxygen consumption from remineralization of sunken biomass.
+
+MOS also impacts the global carbon cycle by reducing the atmospheric and terrestrial carbon reservoirs when enhancing the ocean carbon reservoir.
+
+MOS also enriches dissolved inorganic carbon in the deep ocean.
+
+Effects are mostly reversible after cessation of MOS, though recovery is not complete by year 3000.
+
+In a sensitivity experiment without remineralization of sunken MOS biomass, the whole of the MOS-captured carbon is permanently stored in the ocean, but the lack of remineralized nutrients causes a long-term nutrient decline in the surface layers and thus reduces PNPP.
+
+Our results suggest that MOS has, theoretically, considerable CDR potential as an ocean-based CDR method.
+
+However, our simulations also suggest that such large-scale deployment of MOS would have substantial side effects on marine ecosystems and biogeochemistry, up to a reorganization of food webs over large parts of the ocean.

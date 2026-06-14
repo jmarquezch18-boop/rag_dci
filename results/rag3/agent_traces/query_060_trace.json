@@ -1,0 +1,101 @@
+{
+  "query_id": "c0701214e646badb3bbb44e4985982c8e9e65fc7",
+  "query": "What measures have been taken to ensure the accuracy of the confidence network?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "confidence network accuracy"
+      },
+      "result_preview": "No matches found for 'confidence network accuracy'",
+      "elapsed_s": 7.17
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "confidence estimation methods"
+      },
+      "result_preview": "No matches found for 'confidence estimation methods'",
+      "elapsed_s": 8.35
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "confidence network reliability"
+      },
+      "result_preview": "No matches found for 'confidence network reliability'",
+      "elapsed_s": 3.83
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "confidence network validation"
+      },
+      "result_preview": "No matches found for 'confidence network validation'",
+      "elapsed_s": 10.82
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "confidence network validation techniques"
+      },
+      "result_preview": "No matches found for 'confidence network validation techniques'",
+      "elapsed_s": 4.09
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/83dc885bef279cbb7a3b5b173494428b6cd043d34527016519250477d274fd1793fa0bddd2bd4bbb3edfa9709ddc85e90825a0554bfa8eceb8cb34d813c06c53_79",
+    "nlpeer/ARR-22/83dc885bef279cbb7a3b5b173494428b6cd043d34527016519250477d274fd1793fa0bddd2bd4bbb3edfa9709ddc85e90825a0554bfa8eceb8cb34d813c06c53_80",
+    "nlpeer/ARR-22/83dc885bef279cbb7a3b5b173494428b6cd043d34527016519250477d274fd1793fa0bddd2bd4bbb3edfa9709ddc85e90825a0554bfa8eceb8cb34d813c06c53_81",
+    "nlpeer/ARR-22/83dc885bef279cbb7a3b5b173494428b6cd043d34527016519250477d274fd1793fa0bddd2bd4bbb3edfa9709ddc85e90825a0554bfa8eceb8cb34d813c06c53_105",
+    "nlpeer/ARR-22/83dc885bef279cbb7a3b5b173494428b6cd043d34527016519250477d274fd1793fa0bddd2bd4bbb3edfa9709ddc85e90825a0554bfa8eceb8cb34d813c06c53_111",
+    "nlpeer/ARR-22/83dc885bef279cbb7a3b5b173494428b6cd043d34527016519250477d274fd1793fa0bddd2bd4bbb3edfa9709ddc85e90825a0554bfa8eceb8cb34d813c06c53_117"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [],
+    "approved_by_oracle": [],
+    "oracle_decisions": []
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.057971014492753624,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

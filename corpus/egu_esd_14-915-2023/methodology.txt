@@ -1,0 +1,123 @@
+ISAM has a dynamic growth module to simulate various crops (Song et al., 2013).
+
+Gahlot et al. (2020) used the dynamic crop module to represent Indian spring wheat by calibrating the allocation and growth parameters (supplement of Gahlot et al., 2020).
+
+The allocation and the growth parameters were calibrated using data from the experimental site at IARI, New Delhi, which was operational for three growing seasons: 2013-2014, 2014-2015, and 2015-2016.
+
+Carbon fluxes were measured during the 2013-2014 growing season, and phenology data were measured during the latter two seasons.
+
+ISAM was calibrated and validated using phenology observations from the 2014-2015 and 2015-2016 growing seasons (Gahlot et al., 2020).
+
+Taking this work forward, we used the same configuration of the model to estimate the carbon fluxes in the spring wheat croplands of India.
+
+The modeling approach used in the study is as follows.
+
+First, ISAM was run in site-scale mode to simulate the carbon fluxes at the IARI site driven by prescribed management data.
+
+The simulations were evaluated against field measurements from the IARI site for the 2013-2014 growing season.
+
+Next, ISAM was run at a country scale to simulate carbon fluxes over wheat-growing regions of India from 1901-2016.
+
+Finally, we conducted numerical experiments to simulate the impacts of environmental drivers and agricultural management practices on carbon fluxes.
+
+This study used ISAM in the same configuration as Gahlot et al. (2020).
+
+For brevity, here we briefly describe the model and its configuration.
+
+More details are available in Gahlot et al. (2020) and Gahlot (2020).
+
+We used two versions of ISAM crop modules to validate the improvements made by Gahlot et al. (2020), ISAM C 3 _crop and ISAM dyn_wheat .
+
+The two versions were run for the same period and used the same input data, and the simulated carbon fluxes were compared.
+
+The ISAM C 3 _crop module has static phenology and prescribed leaf area index (LAI) using observations from the Moderate Resolution Imaging Spectroradiometer (MODIS) aboard the Terra and Aqua satellites.
+
+The ISAM C 3 _crop module used a static root parameterization with fixed rooting depth and fixed root fraction in each soil layer.
+
+Energy and water fluxes as well as carbon assimilation are calculated through coupled canopy photosynthesis, energy, and hydrological processes.
+
+Assimilated carbon is allocated to vegetation pools in fixed fractions.
+
+Gahlot et al. (2020) used the dynamic equations in ISAM developed by Song et al. (2013) for soybeans and updated a few parameters from the literature and a few through calibration to simulate spring wheat (ISAM dyn_wheat ) (supplement of Gahlot et al., 2020).
+
+ISAM dyn_wheat differs from the static version in three schemes: dynamic phenology, carbon allotment, and vegetation structure growth.
+
+For example, allocating net assimilated carbon to leaves, roots, stems, and grain pools at each model time step is a dynamic process based on the crop's light, temperature, water, and nitrogen availability.
+
+This allocation scheme aims to minimize the adverse effects of limited light, water, and nutrient stress on the crop (Gahlot, 2020).
+
+For more details on the dynamic modules in ISAM dyn_wheat , please refer to Gahlot (2020).
+
+ISAM dyn_wheat is equipped with dynamic planting date criteria and heat stress modules to simulate the effects of environmental factors on the spring wheat growing season and phenology (Gahlot et al., 2020).
+
+The dynamic planting date is calculated in ISAM, as shown in Table S2 of Gahlot et al. (2020).
+
+The wheat-growing regions are divided based on the 1901-1950 climatological minimum temperature.
+
+A specific criterion is assumed for each region depending on the region's characteristics (Table S2: Gahlot et al., 2020).
+
+Yield is a proxy for the carbon uptake by the crops.
+
+The initial reproductive stage in ISAM marks the onset of the storage organs.
+
+The allocation of assimilated carbon to the storage organ begins, and the vegetative development of the plant stops.
+
+The next stage, the post-reproductive stage, marks the solidification of grains and increased nutrient allocation to the grains while ensuring that capable roots support the plant.
+
+After the crop reaches maturity, the total grain allocation from the initial reproductive stage to maturity is converted to yield.
+
+Various factors like light availability, temperature stress, and nitrogen availability act as limiting factors to crop growth, and nutrient allocation is promoted in the crop so that the impact of these factors is minimized (supplement of Gahlot et al., 2020).
+
+Since yield is a major part of the carbon taken up by the crop, its validation against observations is necessary and is shown in Sect.
+
+3.2.
+
+ISAM simulates the processes through which external drivers can affect crop growth.
+
+For example, temperature influences maximum carboxylation rates, which regulates carbon assimilation (Song et al., 2013).
+
+ISAM can simulate nitrogen dynamics and the interactive effects of carbonnitrogen cycles caused by climate change or increasing [CO 2 ] (Yang et al., 2009).
+
+Nitrogen fertilization through deposition onto the soil serves as a nitrogen input to the ISAM nitrogen cycle (Jain et al., 2009).
+
+When water and mineral N are scarce, the carbon cycle and assimilation suffer because of reduced carbon allocation to leaves and stems (Song et al., 2013).
+
+Added water through irrigation reduces the water stress on crops in water-limited situations, thereby increasing carbohydrate production.
+
+To evaluate the ISAM dyn_wheat crop phenology and yield, we digitized the spring wheat crop dataset from 2000-2021.
+
+The dataset was extracted from the theses of MSc and PhD students at various agricultural institutions across India.
+
+Until recently, these theses were not available in the public domain, but through the efforts of KRISHIKOSH, a thesis repository, it now holds a large number of theses.
+
+The dataset we compiled comprises nine spring wheat sites and 26 growing seasons (Table S1).
+
+Comparing the spring wheat phenology and yield simulated by ISAM across 26 growing seasons adds to the much-needed validation of ISAM.
+
+Field observations of carbon fluxes are limited in India, and none are available in the public domain.
+
+We obtained field observations of carbon fluxes for the 2013-2014 spring wheat-growing season from the IARI (New Delhi) experimental spring wheat farm (Kumar et al., 2021).
+
+The farm, covering 650 m 2 , is located at 28 • 40 N, 77 • 12 E. The site has an eddy covariance (EC) flux tower that gave gross primary production (GPP), total ecosystem respiration (TER), and net ecosystem production (NEP).
+
+The tower had enough area to ensure an upwind stretch of homogeneous vegetation, essential for measuring fluxes using the EC technique (Schmid, 1994).
+
+The spring wheat crop was planted on 16 December 2013 at the site.
+
+Nitrogen fertilizer at 120 kg N ha -1 was applied in three installments of 60, 30, and 30 kg N ha -1 on the planting day and the 25th and 67th days after sowing.
+
+The field was irrigated five times throughout the growing season to avert water stress.
+
+To extend our validation of carbon fluxes simulated by ISAM, we conducted a literature review to find papers that reported carbon fluxes from spring wheat.
+
+We found two such studies: Patel et al. (2011) and Patel et al. (2021).
+
+Data were not available as a supplement in these papers.
+
+Therefore, we extracted the data from the figures.
+
+We extracted the monthly mean NEP data from Fig. 2 of Patel et al. (2011) and Fig. 2b of Patel et al. (2021).
+
+Although we extracted the flux data, we do not have the field activities to simulate site-scale simula-tions.
+
+Therefore, we compared our regional-scale simulations against these carbon flux data.

@@ -1,0 +1,25 @@
+In this section, we conduct three groups of ablation studies to investigate the contribution of each component in LaCon.
+
+We only conduct experiments on MRPC, RTE, and CoLA datasets due to space limitation.
+
+The experimental results are shown in Table 3.
+
+First, we replace the multi-head ICL with single head version (LaCon w/ L ICL ).
+
+Table 3 shows the performance drops on all three datasets.
+
+We conjecture that the multi-head version can learn different parts of the local features of the representation, which can catch the text semantics in more fine-grained granularity.
+
+Second, we remove each of our proposed CL loss separately, and the results in the second part of Table 3 demonstrate that ICL plays a more important role while LCL and LER are complementary to further improve the performance.
+
+We also try to add each CL loss in an accumulative way, please refer to Appendix A.1 for more details.
+
+Finally, we try to remove the projection head g from LaCon and the performance degrades significantly, which indicates g is critical in CL.
+
+Previous researches (Chen et al., 2020c) also find the projector head can eliminate the non-task relevant features of the encoder in CL and benefit the downstream tasks.
+
+Meanwhile, Table 3 shows that it is basically useless by adding g to BERT directly (BERT w/ g), indicating that the projector head needs to be used with CL.
+
+In this section, we conduct further experiments under more challenging few-shot and data imbalance settings.
+
+We also discuss the hyper-parameter tuning and the impact of class number on LaCon.

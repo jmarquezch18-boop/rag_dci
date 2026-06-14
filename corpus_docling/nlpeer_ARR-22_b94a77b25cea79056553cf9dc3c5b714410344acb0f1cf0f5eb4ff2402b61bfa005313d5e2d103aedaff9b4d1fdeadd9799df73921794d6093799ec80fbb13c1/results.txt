@@ -1,0 +1,33 @@
+Following Goldwater et al. (2009), evaluation relies on 'PRF' metrics: precision, recall, and F-score, defined as follows: precision P = T P T P +F P , recall R = T P T P +F N , and F-score F = 2 * precision * recall precision+recall , where TP are the true positives (match in the reference and segmented texts), FP are the false positives, and FN are the false negatives.
+
+These metrics are computed at three levels: 6• boundary level (BP, BR, BF): compare the reference boundary vectors with the predictions;
+
+• token level (WP, WR, WF): compare word in the reference and segmented sentences: a correct match requires two correct boundaries;
+
+• type level (LP, LR, LF): compare the set of unique words in the reference and segmented utterances.
+
+To have an overall view of the output text, we also report the average type and token lengths (TL and WL) as well as their counts (N type and N token ), as in Table 1.
+
+Numbers are computed on the entire text (including the supervised part).
+
+This section presents the results for the models presented above.
+
+We also report the performance of SentencePiece, another word segmentation tool based on a unigram language model (Kudo, 2018): 7  To boost this baseline, the vocabulary size has been set to the reference number of N type (cf.
+
+Table 1).
+
+Supplementary material additionally contains results for Morfessor baselines (Creutz and Lagus, 2002), with the corresponding weak supervision.
+
+As a reminder, our supervision here consists of the first 200 sentences in the text, either directly given as observed boundaries or used to generate the initial word list.
+
+Table 3 displays a selection of results for Japhug (segmented in words).
+
+As previously observed, supervision noticeably improves the results for both models, with pypseg outperforming dpseg by a small margin on all metrics.9 Note also that SP is much worse than Bayesian models, only reaching the same F-score as dpseg for the LF metric.
+
+The best results are obtained with lexical supervision and the d.mix+2gram model for dpseg: it combines the type boost in P 0 from d.mix and the improved base model from d.2gram.
+
+32.9k 34.2k 36.6k 33.8k 34.3k 33.8k 25.1k 25.0k 33.9k 33.5k 33.7k 24.8k   model (green) can be attributed to the use of the bigram character model.
+
+It gives this model an initial edge over o.regular that remains significant for the first 3,000 sentences.
+
+Here again, the benefits of improving the base distribution (character-based model) as much as possible in the early training iterations clearly appear.

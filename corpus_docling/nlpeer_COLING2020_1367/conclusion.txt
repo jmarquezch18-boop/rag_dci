@@ -1,0 +1,33 @@
+One of the reviewers of this paper pointed out that its main scientific finding is that "money works!" Strategically deployed, funding for research into technologies for neglected languages can have a significant impact.
+
+This reviewer even suggested that the project described here might have lessons for governments in other parts of the world which seek to help minority languages.
+
+There is a caveat: the research must be done respectfully, in collaboration with the communities who are the custodians of these languages.
+
+There should be no room in this field for scholars whose main goal is extracting "interesting" research without considering the linguistic needs of communities.
+
+Our greatest challenge in this project was doing our best to build respectful relationships with communities.
+
+The two goals do not necessarily conflict.
+
+There are many interesting research themes that have the potential to help under-resourced languages.
+
+Examples in this project include implementing verb conjugators, machine translation, and speech recognition for polysynthetic languages.
+
+But there are also low-hanging fruit, challenges that do not require advanced research -they can be tackled with today's technologies -but which, when overcome, can have linguistic benefits for communities.
+
+An example is the production of Read-along audio books in Indigenous languages.
+
+Automating this process posed a technical challenge of only moderate difficulty, but educators find the end product very useful.
+
+Our focus in Phase II is on making the technologies described above easier for Indigenous communities to deploy themselves.
+
+For instance, we would like to make the Read-along interface so user-friendly that there is no need to consult the NRC team to produce Read-along versions of audio books (the team is having trouble keeping up with demand).
+
+We have a similar goal for text prediction on mobile devices.
+
+It will be harder to develop a framework that enables Indigenous educators to build software-based verb conjugators for their languages without requiring the educators to have specialized IT knowledge, but we are working on this as well.
+
+Ideally, we will make all the technologies described above more user-friendly.
+
+All software developed by NRC's ILT project team will be released as open-source.

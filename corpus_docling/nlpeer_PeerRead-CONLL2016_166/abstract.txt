@@ -1,0 +1,13 @@
+Named Entity Recognition (NER) models for language L are typically trained using annotated data in that language.
+
+We study cross-lingual NER, where a model for NER in L is trained on another, source, language (or multiple source languages).
+
+We introduce a language independent method for NER, building on cross-lingual wikification, a technique that grounds words and phrases in non-English text into English Wikipedia entries.
+
+Thus, mentions in any language can be described using a set of categories and FreeBase types, yielding, as we show, strong language-independent features.
+
+With this insight, we propose an NER model that can be applied to all languages in Wikipedia. When trained on English, our model outperforms comparable approaches on the standard CoNLL datasets (Spanish, German, and Dutch) and also performs very well on lowresource languages (e.g., Turkish, Tagalog, Yoruba, Bengali, and Tamil) that have significantly smaller Wikipedia.
+
+Moreover, our method allows us to train on multiple source languages, typically improving NER results on the target languages.
+
+Finally, we show that our languageindependent features can be used also to enhance monolingual NER systems, yielding improved results for all 9 languages.

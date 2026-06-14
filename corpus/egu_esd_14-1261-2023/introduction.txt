@@ -1,0 +1,59 @@
+Mass-transport processes associated with the propagation of non-breaking ocean surface waves strongly affect the mixing of oceanic waters and the global exchange of heat at the air-water interface.
+
+Surface waves transfer energy into turbulence, modifying the mixing intensity of the upper ocean (Qiao et al., 2004(Qiao et al., , 2010(Qiao et al., , 2013)).
+
+Therefore, the correct identification and quantification of mass-transport processes associated with water waves leading to mixing of subsurface ocean waters is of practical importance for short-term and long-term weather forecasts.
+
+Small-scale and large-scale climate modelling equally benefits from including the wave-induced mixing predictions into the general ocean circulation simulations (e.g. Qiao et al., 2004;Xia et al., 2006).
+
+Including the parameterized wave-induced mixing in ocean circulation models confirms that its contribution qualitatively improves the reliability of numerical results (e.g. Song et al., 2007;Shu et al., 2011).
+
+Despite the fact that some field measurements lead to the conclusion that surface waves contribute to heat exchange of the upper ocean (Matsuno et al., 2006), it is difficult to collect reliable in situ data confirming the role of non-breaking surface waves in vertical mixing processes.
+
+An alternative approach to the problem is to investigate the wave-induced mixing based on the physical tests in a wave flume or a wave basin.
+
+Laboratory experiments are the source of valuable information on wave-induced mixing processes as they provide data enabling the evaluation of wave-induced mixing coefficient (e.g. Babanin and Haus, 2009;Dai et al., 2010;Sulisz and Paprota, 2015).
+
+In a wave flume, the mixing originated from breaking and non-breaking waves may be investigated to evaluate the real contribution from the non-breaking surface waves to general ocean circulation, which is of fundamental importance for calibration of wave-induced mixing models (Sulisz and Paprota, 2019).
+
+It should be noted that the experimental data are affected by undesirable spurious laboratory effects requiring special attention when analysing the results of mass-transport processes driven by waves (e.g. Paprota and Sulisz, 2018;Paprota, 2020).
+
+The study extends the analysis of wave-induced vertical mixing performed by Sulisz and Paprota (2019), which used a weakly nonlinear theory applied to mechanically generated water waves.
+
+The improvements cover the more exact calculations of the wave velocity field using a fully non-linear wavemaker model, which was successfully verified with respect to kinematics of regular waves against laboratory measurements collected in the flume (Paprota and Sulisz, 2018;Paprota, 2020).
+
+This method allows modelling of non-breaking waves with strong nonlinearities and admits amplitude dispersion, nonlinear wave-wave interactions in deep and intermediate waters, and solitary wave propagation, which go beyond the applicability of weakly nonlinear approaches.
+
+The model belongs to a family of wave solutions based on a pseudo-spectral approach, which consider highly nonlinear non-breaking waves and originate from methods derived by Dommermuth and Yue (1987) and West et al. (1987) (see also Paprota and Sulisz, 2019, for a review).
+
+The application of the fully nonlinear model should lead to the more accurate estimation of the phase-averaged wave velocity field and, hopefully, the more reliable evaluation of the evolving water temperature field under regular waves.
+
+Since the numerical model provides a full description of the evolution of the velocity field, it is possible to separate the Stokes drift from Lagrangian and Eulerian mean velocities (see Paprota et al., 2016;Paprota and Sulisz, 2018;Paprota, 2020).
+
+Hence, the results presented in this study may improve simple models based on Stokes drift applicable to ocean waves of random (spectral) nature (Myrhaug et al., 2018), while the derived modelling framework may be modified to cover open-ocean hydrodynamics with other forms of introducing waves (Paprota, 2019).
+
+New contributions are also presented with regard to methods of calculations of time-mean flows, which are essential for the present analyses.
+
+Namely, a new Eulerian procedure is reported, which is different to the Lagrangian-based method applied in earlier studies (Paprota et al., 2016;Paprota and Sulisz, 2018;Paprota, 2020).
+
+The study also highlights the differences between two methods of calculation of velocity distribution of time-mean wave-induced flows based on either Lagrangian particle tracking or approximated Eulerian averaging.
+
+In the case of the former, an improved and more accurate procedure of estimating the phase-averaged velocity is developed.
+
+This study presents the methods of an analysis of waveinduced vertical mixing from the wavemaker perspective.
+
+The derived mathematical modelling approach may be directly applied to experimental activities aiming at recognizing, quantifying and parameterizing wave-induced vertical mixing effects (see e.g. Dai et al., 2010;Sulisz and Paprota, 2015) for a better design of physical model set-up and a wave parameter selection in the laboratory.
+
+The awareness of the influence of laboratory side effects on the experimental outcome is essential for the correct interpretation of the results.
+
+This issue was raised in earlier studies (Sulisz andPaprota, 2015, 2019).
+
+The paper is composed as follows.
+
+First, an outline of the coupled theoretical model describing the mixing processes under mechanically induced water waves is presented.
+
+Then, a comprehensive comparison between weakly and fully non- linear approaches is given using numerical results to evaluate the effects of strong nonlinearity on vertical mixing processes.
+
+Finally, a discussion on the major results is provided together with remarks on accuracy and reliability of mathematical and numerical methods together with further discussions on putting the results of the study in a broader context of earth system modelling with respect to general ocean circulation.
+
+The paper is then completed by a summary and conclusions.

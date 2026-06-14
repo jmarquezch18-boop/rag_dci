@@ -1,0 +1,641 @@
+Robustness Of The Aging Effect Of Smiling Against Vertical Facial Orientation [Version 3; Peer Review: 2 Approved]
+
+Abstract
+
+The face is a valuable source of information for social communication, and humans have developed specific processing methods for others' faces.
+
+For example, humans immediately lose the ability to recognize other's faces when the orientation or parts' position of the face becomes unnatural (Tanaka & Farah, 1993;Yin, 1969).
+
+These distortions in face processing highlight that the face is processed holistically in contrast to other visual stimuli.
+
+Therefore, we cannot identify others' faces and judge facial expressions when holistic processing is inhibited (e.g., Rakover, 2013).
+
+This holistic processing of the face creates complex interactions between multiple factors, such as the interaction between emotion and gender (Atkinson et al., 2005).
+
+Age is among the crucial information obtained from the face.
+
+We generally estimate a person's age from their faces and accordingly change our attitude and manner of speaking (Ryan et al., 1986).
+
+Among the many information dimensions that can easily be extracted from a face, age is considered the primary dimension (George & Hole, 1998).
+
+Thus, accurate age identification is crucial in determining social roles and facilitating social interaction.
+
+However, various factors distort age perception (see Moyse, 2014).
+
+Previous studies have specifically focused on the effects of gender and race on perceived age (Dehon & Brédart, 2001;Nkengne et al., 2008).
+
+Interestingly, several studies have reported that humans have a counterintuitive bias regarding age.
+
+We associate smiling with youth, that is, it is generally believed that when people see a smiling person, they feel that person is younger.
+
+Indeed, previous research has provided evidence that individuals with a smile appear younger than those with other facial expressions (Hass et al., 2016;Voelkle et al., 2012).
+
+However, contrary to the commonly held association between smiling and youth, Ganel (2015) showed that a smiling face is estimated to be older than a neutral face.
+
+This phenomenon, in which smiling faces are evaluated as being older than neutral faces, is called the aging effect of smiling (AES; Ganel & Goodale, 2021).
+
+AES is attributed to wrinkles around the eyes caused by smiling (Ganel, 2015;Ganel & Goodale, 2021).
+
+In contrast, when participants were asked to retrospectively estimate the mean age of several faces (i.e., face group), they estimated that the smiling face group was younger than the neutral face group (Ganel & Goodale, 2018).
+
+These studies indicate that the effect of emotional expressions on age estimation depends on the method of estimation (i.e., directly or retrospectively).
+
+Recently, our study showed that AES was consistently confirmed regardless of the stimulus or participants' race or culture (Yoshimura et al., 2021).
+
+Specifically, smiling faces were estimated to be older than neutral faces for both Swedes and the Japanese.
+
+In contrast, participants in both countries estimated the smiling faces to be younger when estimating the age retrospectively.
+
+These results suggest that AES is robust across cultures, although the direction of this effect changes depending on the task.
+
+The AES mechanism, however, remains unclear.
+
+What can be assumed is that AES is associated with some type of characteristic information of face perception or emotion processing that accompanies changes in facial expressions.
+
+Age is considered a relatively primary piece of information extracted from the face (Bruce & Young, 1986), and previous research suggests that age perception may be based on facial surface or shape information (George & Hole, 2000).
+
+However, other studies have suggested that facial expression processing relies on holistic processing (Maurer et al., 2002;Tanaka & Sengco, 1997).
+
+Since previous studies have reported that smiling is associated with younger age (Hass et al., 2016;Voelkle et al., 2012), AES may be mediated by smiling.
+
+When holistic processing of facial expressions is inhibited, the scope of faces that the observer can process is constricted, and facial features are processed sequentially and independently (Rossion, 2009).
+
+Additionally, a previous study suggested that AES is driven by wrinkles around the eyes produced by smiling (Ganel, 2015).
+
+Therefore, if inverted faces that inhibit holistic processing are age estimated, the effect of local feature processing can be highlighted in inverted smiling faces.
+
+In such cases, inverted smiling faces could be evaluated as older than upright, smiling faces.
+
+To extend AES findings, the present study examined whether AES was mediated by smiling.
+
+Here, we used inverted faces in the experiment because they inhibit the holistic processing of facial expressions while maintaining visual information (Rakover, 2013).
+
+Specifically, we divided the participants into two groups: one observing upright faces and the other observing inverted faces.
+
+They were asked to estimate the ages of smiling, neutral, and surprised faces.
+
+The estimated age for each facial expression was then compared between the groups.
+
+Even if AES was boosted with an inverted smiling face,
+
+We corrected a typographical error.
+
+Any further responses from the reviewers can be found at the end of the article we could not rule out the possibility that inversion itself has the effect of making the facial expression stimulus older.
+
+Hence, we set a surprised face as the control condition because the surprised expression produces facial morphological changes other than the smiling condition, which has been used in previous studies (Ganel & Goodale, 2018;Yoshimura et al., 2021).
+
+Comparing smiling faces with neutral or surprised faces allows us to distinguish whether AES is mediated by smiles rather than by facial morphological changes.
+
+If the enhancement of AES was due to the prioritization of local information processing for the smiling expression, as holistic processing was suppressed, there would not be a significant difference between facial orientations in the surprised face.
+
+This study employed a mixed factorial design.
+
+The participants were recruited through the online survey platform, Yahoo! Crowdsourcing.
+
+The target age was 15-35 years old to address potential sources of bias caused by unexpected deviations in the age of the respondents.
+
+The survey was published on the platform (survey period: November 24-25, 2021) and participants could select to participate in the survey for a minimal compensation of 10 "PayPay bonus rights" (electronic money).
+
+We determined the sample size to be N = 100 because Yahoo! Crowdsourcing has specifications for recruiting participants in units of 50; thus, we recruited 50 participants per facial orientation group.
+
+Participants were recruited separately for tasks in which upright or inverted faces were presented, and the study's purpose was not disclosed to the participants.
+
+The experiment was conducted in accordance with the principles of the Declaration of Helsinki.
+
+The ethics committee of Kyushu University approved the study protocol (approval date: July 27, 2021; approval number: 2021-013).
+
+Completion of the experiment was taken as consent to participate from participants.
+
+Participants had the right to withdraw from the experiment at any time without providing a reason.
+
+It was also explained to them that their responses would not be tied to them personally.
+
+The Japanese facial stimuli consisted of head-and-shoulder photos of 30 women and 30 men with smiling, neutral, and surprised expressions from the ATR Facial Expression Image Database (DB99) (ATR-Promotions, Kyoto, Japan; 2562 photos; Ogawa & Oda, 1998; M age = 21.1 years, ranging from 20 to 24 years).
+
+The face image database systematically contains the faces of male and female individuals and their three facial expressions.
+
+The first 30 images from each list of the faces were used as the facial stimuli for the present study, thus a total of 180 images were selected (2 genders Â 3 facial expressions Â 30 individuals).
+
+Japanese facial photos were adjusted to 7 Â 9 cm and divided into three sets for each emotional expression (smiling, neutral, and surprised sets), with each set consisting of 60 photos.
+
+Next, we prepared six counterbalanced sets of 60 photos by extracting 20 photos from each emotional expression set.
+
+This was done to avoid presenting the same individuals repeatedly with different facial expressions.
+
+Therefore, the participants were randomly assigned to one of the six counterbalanced sets.
+
+The experiments were conducted online, and the procedures were controlled using jsPsych (Version 6. 3.1;de Leeuw & Motz, 2016).
+
+In addition, the Cognition platform was used for data collection.
+
+In each trial, participants were presented with a smiling, neutral, or surprised face.
+
+They were then asked to estimate the age of each facial stimulus and enter their estimated age in a text box.
+
+To detect satisficers (Maniaci & Rogge, 2014), the directed questions scale (DQS) (answer: "9 years old") was also set on the 30th trial of the task.
+
+In this DQS trial, we also presented a beast-man 1 with the same composition as the other stimuli.
+
+All analyses were conducted using RStudio (Version 1.4.1717; RStudio Team, 2021) and R (Version 4.1.1; R Core Team, 2020).
+
+A two-way mixed analysis of variance (ANOVA) was performed to examine the differences in the estimated age of the facial expressions of each face group.
+
+Subsequently, a Scheffé multiple comparison test was also performed to compare the difference in each pair.
+
+The alpha level of statistical significance was set at 0.05.
+
+From the internet protocol addresses collected in the experiment, we checked whether any individuals participated in both the upright and inverted face conditions.
+
+In total, 104 Japanese people (52 people per group) were recruited to participate in the online experiment (51 males, 51 females, and two non-respondents; M age = 29.56, SD = 7.04).
+
+Duplicate data were 1 Image of a cat's face superimposed on a human face.
+
+excluded from the analysis because we could not confirm whether they were answered by different individuals.
+
+We also excluded data from participants who answered the DQS incorrectly.
+
+The final number of valid data used in the analysis was 98 (we excluded data from six participants) (Yoshimura, 2022).
+
+We also removed trials where the estimated ages were outside AE 2.5 SD from the participants' mean in each condition.
+
+Figure 1 shows the distribution of the mean estimated age for each expression in the upright and inverted face conditions.
+
+We conducted a two-way mixed ANOVA with facial expression (smiling, neutral, or surprised) as the within-subjects factors and facial orientation (upright or inverted) as the between-subjects factors.
+
+The results revealed a main effect of facial expression (F(2, 189) = 23.11, p < .001, η 2 G = .01).
+
+However, the main effect of facial orientation (F(1, 96) < 0.000, p = .98, η 2 G < .001) and the interaction between facial expression and facial orientation (F(2, 189) = 1.33, p = .27, η 2 G = .01) were not significant.
+
+Based on the main effect of facial expression, we also conducted a Scheffé multiple comparison test of the facial expressions.
+
+The results showed that participants estimated smiling faces to be significantly older than neutral faces (t(96) = 5.52, p < .001, d = 0.56).
+
+In addition, the results also showed that they estimated surprised faces to be significantly older than neutral faces (t(96) = 6.40, p < .001, d = 0.65).
+
+We performed an equivalence test (Lakens et al., 2018) for facial orientation as a post-hoc and exploratory analysis.
+
+We set equivalence bounds to AE 0.5, as the medium effect size (i.e., Cohen's d).
+
+The results showed that the mean estimated ages in the upright and inverted conditions were significantly equivalent (t(95.34) = 2.453, p < 0.01).
+
+The present study aimed to examine how holistic processing of facial expressions contributes to AES.
+
+In the experiment, we asked two groups of participants (given upright or inverted faces) to estimate the age of each facial expression; we then compared the estimated ages.
+
+The results showed that smiling faces were estimated to be older than neutral faces, indicating that AES was replicated.
+
+However, there was no significant difference in the estimated age between the upright and inverted conditions.
+
+More importantly, AES was confirmed even when inverted faces were presented.
+
+We predicted that inverted smiling faces would be evaluated as even older than upright faces if AES were mediated by smiling.
+
+However, this analysis revealed no significant effect on facial orientation.
+
+Furthermore, we conducted an equivalence test for facial orientation as an exploratory and post-hoc analysis and found that the mean estimated ages in both the upright and inverted conditions were significantly equivalent.
+
+Thus, these results suggest that AES is insensitive to holistic processing.
+
+Given the results of this experiment, we assumed that holistic processing of emotional expressions is insufficient to modulate AES significantly.
+
+Another unexpected result was an increase in the estimated age of surprised faces.
+
+This result may reflect the contribution of perceptual processing to AES occurrence.
+
+Previous studies have reported that AES is affected by changes in the skin surface and other facial parts (e.g., wrinkles around the eye region) over a lifespan (Ganel, 2015;Ganel & Goodale, 2018, 2021).
+
+Considering age estimation results for smiling and neutral faces, AES was less affected by face inversion.
+
+Therefore, age estimation for facial expressions is considered insensitive to holistic processing.
+
+Additionally, a previous study reported no decrease in the accuracy of age estimation, even when participants estimated the age of inverted, negation, or blurred face stimuli (George & Hole, 2000).
+
+These results highlight the possibility that AES is processed based on perceptual analysis of facial features, that is, the structural encoding stage (Calder & Young, 2005).
+
+From this point of view, the surprising faces used in this study also have wrinkles on the forehead, and this feature may produce an aging effect on facial expressions.
+
+However, it should be noted that age estimation is not only determined by facial features, as a previous study indicated that age estimation also involves holistic processing using the composite paradigm (Hole & George, 2011).
+
+Another possible factor is that the attractiveness of facial parts may affect age estimation.
+
+Some previous studies have reported that masked faces were more attractive or vice versa (Hies & Lewis, 2022;Miyazaki & Kawahara, 2016;Patel et al., 2020).
+
+The fact that age could be estimated only for the upper half of the face and that age estimation did not depend on holistic processing leads to speculate the potential involvement of attractiveness.
+
+Specifically, the change in shape due to facial expressions may have reduced the attractiveness of the parts, thereby altering the apparent age.
+
+Therefore, the attractiveness of facial parts is also worth considering in further studies, such as whether it is indeed involved and, if so, what the causal mechanism entails.
+
+The present study's findings indicate that AES is based on more primary and local facial features and extends studies on AES (Ganel, 2015;Ganel & Goodale, 2018, 2021;Yoshimura et al., 2021).
+
+However, it remains unclear why smiling faces are rated as younger in memory-based age estimation.
+
+Age estimation for memory representations of faces may be processed through different mechanisms than perceptual representations of faces in the process of dissociated facial processing (Weigelt et al., 2014).
+
+Furthermore, such a bias in opposite directions in memory and perception for identical stimuli has been observed in spatial processing (Yamada et al., 2011).
+
+Future research should further examine these questions.
+
+The present study did not address the cross-cultural validity.
+
+A previous study compared the differences between Western Caucasians and East Asians in eye movements to inverted faces (Rodger et al., 2010).
+
+This study reported cultural differences in the fixation area to the face, even for inverted faces.
+
+Given the results, it should be noted that the results of this study are generalizable only to Japanese participants estimating the age of Japanese faces.
+
+Major concerns:
+
+(1) The flow of logic regarding the hypothesis is difficult to understand and needs to be improved.
+
+In the fifth paragraph of the introduction, the authors write "… and previous research suggests that age perception may be based on facial surface or shape information (George & Hole, 2000).
+
+However, other studies have suggested that facial expression processing relies on holistic processing (Maurer et al., 2002;Tanaka & Sengco, 1997).
+
+As shown in previous research, facial expressions interact with other dimensions such as identity and trustworthiness (Engell et al., 2010;Ganel & Goshen-Gottstein, 2002).
+
+When the holistic processing of facial expressions is inhibited, observers' perceptual fields are constricted and facial features are processed sequentially and independently (Rossion, 2009).
+
+In such cases, inverted smiling faces could be evaluated as older than upright smiling faces".
+
+Overall, the text in this paragraph seems to be a bit short on explanations and hard to follow. If I understand correctly, I think the authors are trying to say the following here: (a) Some previous studies suggest that age estimation relies on local features of faces.
+
+(b) Some previous studies suggest that facial expression processing relies on the holistic processing of the faces.
+
+(c) Holistic processing is inhibited when faces are inverted.
+
+(d) Disruption of holistic face processing would lead to a greater impact of the local facial feature processing on age estimation.
+
+When holistic processing is inhibited, facial expression processing and the related complex cognitive processing would also be inhibited.
+
+It has also been reported that facial features are processed sequentially and independently when holistic processing is inhibited.
+
+(e) AES may be caused by a local facial feature, that is, wrinkles around the eyes caused by smiling, not by the facial expression of smiling per se.
+
+(f) Collectively, due to the relatively heightened impact of local feature processing in inverted faces, inverted smiling faces may be evaluated as older than upright smiling faces.
+
+However, the explanation about (e) is lacking from the current text, which makes it difficult to understand the logic here.
+
+I also found it confusing that the authors predict/interpret the results of their experiment in terms of "whether holistic processing is involved in AES" in some parts of the manuscript and "whether the relatively heightened impact of local feature processing in the inverted face condition leads to greater AES" in other parts without a clear and explicit distinction between the two.
+
+(2) It is not clear to me why the authors set the surprised face condition.
+
+The authors write, "Hence, we set a surprised face (i.e., neutral expression) as the control condition." in the last paragraph of the introduction.
+
+I do not understand this sentence because a surprised face cannot be regarded as an emotionally neutral face and, in addition, the authors set the neutral expression condition besides the surprise expression condition.
+
+I assume that the authors wanted to use a facial stimulus with an expression that was not a smile.
+
+If so, the authors should describe the difference between smiling and surprised (and neutral) faces in terms of the local features.
+
+(3) Not only the smiling faces but also the surprised faces were estimated to be older in the current experiment.
+
+I suspect that this may be due to the wrinkles on the forehead and nasolabial folds when a surprised expression is generated.
+
+(4) The last sentence of the third paragraph of the introduction, "These studies indicate that the effect of emotional expressions on age estimation depends on the method of estimation (i.e., directly or retrospectively).": Does the term "AES" refer only to the phenomenon that smiling faces are estimated to be older than neutral faces in direct age estimations, or does it also refer to the phenomenon that smiling face group is retrospectively estimated to be younger? I got confused to read the sentence above.
+
+(5) The second to last sentence of the fifth paragraph of the introduction, "perceptual fields":
+
+This term requires a brief explanation.
+
+(6) Figure 1: The authors should explain what the black dots in this figure are.
+
+(7) The last sentence of the second paragraph of the discussion, "Considering that age is one of the social characteristics critical to encoding the identity of others, the results of this study seem reasonable. ": I am having difficulty figuring out what they mean here.
+
+Specifically to which results are they referring?
+
+(8) The first sentence of the fourth paragraph of the discussion, "The findings of the present study indicate that the association between smiling and youth is a misconception, …": Given that the authors, as they state, did not investigate whether smiling faces are rated as younger in memory-based age estimation, the word "misconception" may be too strong and should be toned down.
+
+Are all the source data underlying the results available to ensure full reproducibility? Yes
+
+Competing Interests: No competing interests were disclosed.
+
+Reviewer Expertise: cognitive psychology I confirm that I have read this submission and believe that I have an appropriate level of expertise to confirm that it is of an acceptable scientific standard, however I have significant reservations, as outlined above.
+
+(AES) in direct age estimation of faces.
+
+The authors conducted an experiment in which participants were presented with either upright or inverted faces and asked to estimate the individuals' age.
+
+There were three conditions involving the expressions of the faces: smiling, surprised, and neutral.
+
+The results showed that AES was observed regardless of the face orientations, suggesting that holistic processing of facial processing does not contribute to the occurrence of AES.
+
+The results also showed that surprised faces, as well as smiling faces, were estimated to be older than neutral faces.
+
+The work is technically sound, and the topic and results would be of interest to a broad audience.
+
+However, I have some concerns, both major and minor, which I address below.
+
+Reply: Thank you for taking the time and effort to check our manuscript.
+
+We appreciate your helpful comment.
+
+Individual replies to your comments are provided below.
+
+(1) The flow of logic regarding the hypothesis is difficult to understand and needs to be improved.
+
+In the fifth paragraph of the introduction, the authors write "… and previous research suggests that age perception may be based on facial surface or shape information (George & Hole, 2000).
+
+However, other studies have suggested that facial expression processing relies on holistic processing (Maurer et al., 2002;Tanaka & Sengco, 1997).
+
+As shown in previous research, facial expressions interact with other dimensions such as identity and trustworthiness (Engell et al., 2010;Ganel & Goshen-Gottstein, 2002).
+
+When the holistic processing of facial expressions is inhibited, observers' perceptual fields are constricted and facial features are processed sequentially and independently (Rossion, 2009).
+
+In such cases, inverted smiling faces could be evaluated as older than upright smiling faces".
+
+Overall, the text in this paragraph seems to be a bit short on explanations and hard to follow. If I understand correctly, I think the authors are trying to say the following here: (a) Some previous studies suggest that age estimation relies on local features of faces.
+
+(b) Some previous studies suggest that facial expression processing relies on the holistic processing of the faces.
+
+(c) Holistic processing is inhibited when faces are inverted.
+
+(d) Disruption of holistic face processing would lead to a greater impact of the local facial feature processing on age estimation.
+
+When holistic processing is inhibited, facial expression processing and the related complex cognitive processing would also be inhibited.
+
+It has also been reported that facial features are processed sequentially and independently when holistic processing is inhibited.
+
+(e) AES may be caused by a local facial feature, that is, wrinkles around the eyes caused by smiling, not by the facial expression of smiling per se.
+
+(f) Collectively, due to the relatively heightened impact of local feature processing in inverted faces, inverted smiling faces may be evaluated as older than upright smiling faces.
+
+However, the explanation about (e) is lacking from the current text, which makes it difficult to understand the logic here.
+
+I also found it confusing that the authors predict/interpret the results of their experiment in terms of "whether holistic processing is involved in AES" in some parts of the manuscript and "whether the relatively heightened impact of local feature processing in the inverted face condition leads to greater AES" in other parts without a clear and explicit distinction between the two.
+
+Reply: The logic of this paragraph is exactly as you have commented.
+
+Notably, we have not clarified point (e) in this paragraph.
+
+Therefore, we have added a sentence to this paragraph explaining that wrinkles around the eyes drive the AES.
+
+We have also revised the paragraphs to enable readers to understand the logic in (a)-(f).
+
+Furthermore, based on Reviewer 1's comment, the hypothesis statement has been changed to whether AES is mediated by smiling.
+
+(2) It is not clear to me why the authors set the surprised face condition.
+
+The authors write, "Hence, we set a surprised face (i.e., neutral expression) as the control condition." in the last paragraph of the introduction.
+
+I do not understand this sentence because a surprised face cannot be regarded as an emotionally neutral face and, in addition, the authors set the neutral expression condition besides the surprise expression condition.
+
+I assume that the authors wanted to use a facial stimulus with an expression that was not a smile.
+
+If so, the authors should describe the difference between smiling and surprised (and neutral) faces in terms of the local features.
+
+We apologize for this misleading wording.
+
+Here the description of "neutral expression" was intended to indicate a neutral emotional valence (neither positive nor negative).
+
+The present study used surprised faces because the expression had a change in facial morphology despite neutral emotional valence.
+
+Additionally, surprise is a common facial expression used in previous AES studies (Ganel, 2018;Yoshimura et al., 2021).
+
+However, we also understand your comment that a surprised face cannot be regarded as emotionally neutral.
+
+This is because, for example, in the circumplex affect model, the surprise is neutral in valence but not in arousal (Russell & Barrett, 1999).
+
+Moreover, a recent study on facial expressions reported that surprised and neutral faces were mapped separately (Guan, Wei, Hauer, & Liu, 2021).
+
+Therefore, we avoided claims about neutral emotions in surprised faces.
+
+In our manuscript, we have also explained that surprised faces were selected as facial expression stimuli with facial morphological changes other than smiling.
+
+Minor concerns and comments:
+
+(3) Not only the smiling faces but also the surprised faces were estimated to be older in the current experiment.
+
+I suspect that this may be due to the wrinkles on the forehead and nasolabial folds when a surprised expression is generated.
+
+We also suspect that the older age of the surprised face is due to the wrinkles caused by the change in facial expression.
+
+This point is included as an interpretation of the results in the Discussion section.
+
+Thus, we have revised the paragraph based on your comment ( 7).
+
+(4) The last sentence of the third paragraph of the introduction, "These studies indicate that the effect of emotional expressions on age estimation depends on the method of estimation (i.e., directly or retrospectively).": Does the term "AES" refer only to the phenomenon that smiling faces are estimated to be older than neutral faces in direct age estimations, or does it also refer to the phenomenon that smiling face group is retrospectively estimated to be younger? I got confused to read the sentence above.
+
+Reply: AES refers only to the effect of smiling faces estimated to be older than neutral ones.
+
+To avoid this misunderstanding, we explained this phenomenon in the third paragraph.
+
+(5) The second to last sentence of the fifth paragraph of the introduction, "perceptual fields": This term requires a brief explanation.
+
+The description of "perceptual fields" was intended to refer to the scope of a face that observers can process.
+
+Therefore, we revised the relevant description in the manuscript to clarify this point.
+
+Reply: The black dots represent outliers for each facial expression.
+
+We added this explanation to the figure.
+
+(7) The last sentence of the second paragraph of the discussion, "Considering that age is one of the social characteristics critical to encoding the identity of others, the results of this study seem reasonable.": I am having difficulty figuring out what they mean here.
+
+Specifically to which results are they referring?
+
+Reply: This sentence was intended to refer to the result that the age of each expression was perceptually estimated, regardless of the emotional valence of each expression.
+
+However, the relevant descriptions are difficult to understand.
+
+We also realized that the logical sentence development of this paragraph itself might not convey the point we are trying to argue.
+
+Therefore, we revised this paragraph to convey the intent of our argument.
+
+(8) The first sentence of the fourth paragraph of the discussion, "The findings of the present study indicate that the association between smiling and youth is a misconception, …": Given that the authors, as they state, did not investigate whether smiling faces are rated as younger in memory-based age estimation, the word "misconception" may be too strong and should be toned down.
+
+Reply: This study is an extension of our previous research (Yoshimura et al., 2021), and we have already investigated whether the association between smiling and youth is a misconception.
+
+Therefore, we apologize for the inadequate explanation of this point in the manuscript.
+
+Accordingly, we have removed the relevant sections to avoid confusion.
+
+Further, we have added sentences to clarify that this study is an extension of the previous studies.
+
+Department of Psychology, Ben-Gurion University of the Negev, Beer-Sheva, Israel
+
+The manuscript is an extension of earlier work that looked at the ageing effect of smiling.
+
+This is a nice extension of the effect, which compared it between upright and inverted faces.
+
+The AES is maintained in both presentation formats.
+
+The authors argue that the results show that age estimations do not rely on holistic processing.
+
+The research topic is of interest, the manuscript is generally well written, and the paradigm and analyses are solid.
+
+However, there are several theoretical reservations that warrant revisions of some of the arguments put forward in the manuscript.
+
+I feel that the issue of face inversion and its effects on age judgments is not properly discussed.
+
+The facial inversion effect refers to the larger decrement in face recognition accuracy due to inversion compared to other objects that are not faces.
+
+This effect probably documents holistic, or configural processing of faces.
+
+It is true that similar effects have been found for the processing of expression.
+
+It is less clear whether age estimations are affected ○ by holistic processing; George & Hole (2000) showed that biases in age perception are similar for upright and inverted faces.
+
+1 Yet, the same authors also provided evidence for holistic processing of age, using the composite paradigm (Hole & George, 2011).
+
+2 Now, the AES is proposed to be mediated by smile-related wrinkling in the region of the eyes.
+
+This effect is probably not based on holistic processing.
+
+The current manuscript provides converging evidence for this idea by using face inversion.
+
+Therefore, one important note is that the current results do not speak to whether or not age processing is holistic.
+
+They do show that the AES is not based on holistic processing.
+
+To show that age perception is based on holistic processing, one needs to examine accuracy in age perception and to compare it between upright and inverted faces.
+
+To compute accuracy, it is crucial to have data about the real ages of the photographed faces and to compute the average absolute error in each condition (Voelkle et al., 2012).
+
+3 What the authors do here is computing biases in age estimations.
+
+Bias relates to the AES, but bias and accuracy are partially independent variables.
+
+A similar amount (and direction) of bias does not necessarily reflect similar accuracy.
+
+In order to make arguments about holistic processing of age, the authors need to use the real ages of the faces and to compute accuracy in each condition.
+
+Only if accuracy is not substantially impaired for inverted faces, it is possible to argue that age processing is not holistic.
+
+Otherwise, the only inference that could be made is that the AES is not based on holistic processing.
+
+Such a conclusion is fine, but the authors need to revise the manuscript accordingly.
+
+In several places in the text, the authors argue that they study "how the holistic processing of facial expressions could be involved in AES".
+
+This assertion is not correct and should be revised.
+
+It is true that expression could be processed in a holistic manner, but this doesn't mean that the effects of smiling on the AES are holistic; first, it is unclear if smiling is processed before age estimations are made.
+
+More importantly, the fact that aspects of the smile (e.g., wrinkling) affect age estimation bias cannot be used to infer that the holistic processing of smiling mediates such an effect.
+
+The effect is probably mediated by local aspects of the smile rather than by holistic processing.
+
+Such arguments in the text should be revised.
+
+It is fine to argue that the AES is mediated by smiling rather than to make the unsupported argument that holistic processing is not involved.
+
+The authors seem to confuse holistic processing with interactive processing between different facial dimensions (e.g., expression and identity).
+
+The two aspects could be related to one another, but they are attributed to different mechanisms.
+
+The authors should avoid discussing them as the same concept.
+
+Naoto Yoshimura, Kyushu University, Fukuoka, Japan
+
+The manuscript is an extension of earlier work that looked at the ageing effect of smiling.
+
+This is a nice extension of the effect, which compared it between upright and inverted faces.
+
+The AES is maintained in both presentation formats.
+
+The authors argue that the results show that age estimations do not rely on holistic processing.
+
+The research topic is of interest, the manuscript is generally well written, and the paradigm and analyses are solid.
+
+However, there are several theoretical reservations that warrant revisions of some of the arguments put forward in the manuscript.
+
+Reply: Thank you for your valuable comment.
+
+We are happy to address each comment.
+
+I feel that the issue of face inversion and its effects on age judgments is not properly discussed.
+
+The facial inversion effect refers to the larger decrement in face recognition accuracy due to inversion compared to other objects that are not faces.
+
+This effect probably documents holistic, or configural processing of faces.
+
+It is true that similar effects have been found for the processing of expression.
+
+It is less clear whether age estimations are affected by holistic processing; George & Hole (2000) showed that biases in age perception are similar for upright and inverted faces.1 Yet, the same authors also provided evidence for holistic processing of age, using the composite paradigm (Hole & George, 2011).2 Now, the AES is proposed to be mediated by smile-related wrinkling in the region of the eyes.
+
+This effect is probably not based on holistic processing.
+
+The current manuscript provides converging evidence for this idea by using face inversion.
+
+Therefore, one important note is that the current results do not speak to whether or not age processing is holistic.
+
+They do show that the AES is not based on holistic processing.
+
+Reply: As you say, our study does not indicate whether age processing is based on holistic processing, although it could suggest that AES is not based on holistic processing.
+
+However, your point is valid, and we are vague in our manuscript regarding this discussion.
+
+Therefore, we revised some parts of the manuscript to clarify the argument that the "AES" is not based on holistic processing.
+
+To show that age perception is based on holistic processing, one needs to examine accuracy in age perception and to compare it between upright and inverted faces.
+
+To compute accuracy, it is crucial to have data about the real ages of the photographed faces and to compute the average absolute error in each condition (Voelkle et al., 2012).3 What the authors do here is computing biases in age estimations.
+
+Bias relates to the AES, but bias and accuracy are partially independent variables.
+
+A similar amount (and direction) of bias does not necessarily reflect similar accuracy.
+
+In order to make arguments about holistic processing of age, the authors need to use the real ages of the faces and to compute accuracy in each condition.
+
+Only if accuracy is not substantially impaired for inverted faces, it is possible to argue that age processing is not holistic.
+
+Otherwise, the only inference that could be made is that the AES is not based on holistic processing.
+
+Such a conclusion is fine, but the authors need to revise the manuscript accordingly.
+
+○ Reply: Thank you for your suggestion.
+
+Unfortunately, as you specified, our study did not examine the accuracy of age perception.
+
+This is because the dataset of Japanese stimuli used did not include information on the actual age of each individual.
+
+However, the mean absolute error for each condition must be calculated and compared to discuss the holistic processing of age perception.
+
+Therefore, we revised the Discussion section to reflect our assertion that AES is not based on holistic processing.
+
+In several places in the text, the authors argue that they study "how the holistic processing of facial expressions could be involved in AES".
+
+This assertion is not correct and should be revised.
+
+It is true that expression could be processed in a holistic manner, but this doesn't mean that the effects of smiling on the AES are holistic; first, it is unclear if smiling is processed before age estimations are made.
+
+More importantly, the fact that aspects of the smile (e.g., wrinkling) affect age estimation bias cannot be used to infer that the holistic processing of smiling mediates such an effect.
+
+The effect is probably mediated by local aspects of the smile rather than by holistic processing.
+
+Such arguments in the text should be revised.
+
+It is fine to argue that the AES is mediated by smiling rather than to make the unsupported argument that holistic processing is not involved.
+
+We appreciate your pointing this out.
+
+Following this comment, we revised the sentences that claim "how the holistic processing of facial expressions could be involved in AES" to those that state "whether the AES is mediated by smiling."
+
+The authors seem to confuse holistic processing with interactive processing between ○ different facial dimension (e.g., expression and identity).
+
+The two aspects could be related to one another, but they are attributed to different mechanisms.
+
+The authors should avoid discussing them as the same concept.
+
+Reply: We appreciate your comment and have removed the description of the facial dimensions and added text about holistic processing.
+
+Competing Interests: No competing interests were disclosed.
+
+The benefits of publishing with F1000Research: Your article is published within days, with no editorial bias • You can publish traditional articles, null/negative results, case reports, data notes and more •
+
+The peer review process is transparent and collaborative • Your article is indexed in PubMed after passing peer review • Dedicated customer support at every stage • For pre-submission enquiries, contact research@f1000.com
+
+Figure 1. Violin and box plots show the mean estimated age distribution for each expression by facial orientation.
+
+The black dots represent the outliers for each facial expression.
+
+p < 0.001 = ***.
+
+The authors should explain what the black dots in this figure are.
+
+Bertin C, Stamatas GN, et al.: Influence of facial skin attributes on the perceived age of Caucasian women.
+
+Journal of the European Academy of Dermatology and Venereology: JEADV.
+
+2008; 22(8):

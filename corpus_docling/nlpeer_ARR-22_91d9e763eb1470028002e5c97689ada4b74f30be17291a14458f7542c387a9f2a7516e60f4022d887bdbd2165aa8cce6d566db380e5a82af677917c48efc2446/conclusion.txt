@@ -1,0 +1,87 @@
+In this paper, we proposed a novel supervised contrastive learning approach for language understanding.
+
+To utilize the class labels sufficiently, we devise three novel contrastive objectives, including a multi-head instance-centered contrastive loss, a label-centered contrastive loss, and a label embedding regularizer.
+
+Extensive experiments were conducted on eight public datasets from GLUE and CLUE benchmarks, showing the competitiveness of LaCon against various strong baselines.
+
+Besides, we also demonstrate the strong capacity of LaCon on more challenging few-shot and data imbalance settings, which leads up to 9.4% improvement on the FewGLUE and FewCLUE benchmarks.
+
+LaCon does not require any complicated network architecture or any extra data augmentation, and can be easily plugged into mainstream pre-trained language models.
+
+In the future, we will explore more advanced representation fusion approaches to enhance the capability of LaCon and plan to extend LaCon to the computer vision and speech fields.
+
+In this section, we supplement more ablation results by adding each proposed CL loss cumulatively.
+
+We conduct experiments on MRPC, RTE, and CoLA datasets and keep the setting consistent with Section 3.4.
+
+Table 6 demonstrates that the contribution of each component in more details.
+
+We supplement more experimental results on the remaining datasets of GLUE and CLUE benchmarks.
+
+We follow the same experimental setup with Section 3.1.
+
+Please note that SST-B is a regression task that is beyond the capacity of the proposed La-Con.
+
+The official CLUE benchmark has replaced CMNLI with OCNLI dataset, and the CSL dataset is a keyword recognition task, which is not suitable for our proposed model.
+
+Thus, we omit the experiments on above three datasets and report the performance on the remaining language understanding tasks including SST-2, MNLI, AFQMC, OCNLI and IFLYTEK.
+
+Table 7 shows that, LaCon-vanilla consistently outperforms BERT fine-tuned with CE, and LaConfusion still beats the baselines among all datasets, which further demonstrates the superiority of our proposed method.
+
+In this section, we conduct the theoretical analysis to prove the rationality and necessity of our proposed ICL and LCL losses.
+
+We also explain why these two losses are complementary.
+
+Finally, we analyze the computational efficiency of ICL and LCL compared to InfoNCE (van den Oord et al., 2018) and SCL (Khosla et al., 2020).
+
+The recent researches (Li et al., 2020;Gao et al., 2019) reveal that the anisotropy problem of pretrained language models, which shows that the learnt embeddings occupy a narrow cone in the dense vector space, harming the uniformity of the models and limiting the representation capacity.
+
+The singular values of the contextual embeddings decay drastically with most of them nearly zeros (Wang and Isola, 2020).
+
+CL is proposed to eliminate the long-tail distribution problem of singular values, aiming to enhance the representation capacity (Gao et al., 2021;Yan et al., 2021;Gunel et al., 2021).
+
+From the spectrum perspective (Wang et al., 2020;Wang and Isola, 2020)  Table 7: Performance on the remaining datasets of GLUE and CLUE.
+
+Baseline* means the best performance of our baselines.
+
+The evaluation metrics are the same as the official GLUE (Wang et al., 2019) and CLUE (Xu et al., 2020) benchmarks (all with significance value p < 0.05).
+
+models.
+
+Therefore, we can form an asymptotic equivalent objective of the L ICL (Equation 3) as Equation 10.
+
+(x, y) ∼ A(y) denotes instances (i.e. x) with corresponding label (i.e. y) and y -denotes the label that is different from y. The first item keeps instances and corresponding labels similar and the second item pushes the mismatched instances and labels apart.
+
+We can further derive Equation 11 using Jensen's inequality because e(.) is convex.
+
+Therefore, minimizing the L ICL equals to minimization of summation of all elements in HL T ∈ R N ×C .
+
+Because both H and L are normalized, tr(H T L) is a constant due to all diagonal elements are ones.
+
+sum(HL T ) is an upper bound of the largest singular value (Merikoski, 1984) and minimization of the sum(HL T ) will flatten the singular values distribution of HL T .
+
+As the HL T is a non-squared matrix, we need to optimize both the left and right singular values using HL T and LH T in order to effectively eliminate the anisotropy and promote the uniformity of pre-trained language models in classification tasks to enhance the model capacity.
+
+Thus, we also need to optimize the label-centered contrastive loss L LCL at the same time.
+
+From above analysis, we can see that L ICL and L LCL are complementary to each other.
+
+Similarly, we can derive that minimizing L LCL results in the minimization of sum(LH T ) ∈ R C×N .
+
+L ICL = - 1 τ E (x,
+
+Although both ICL and LCL calculate the N ×C similarity scores for a mini-batch, they are different.
+
+The ICL is the average of the instance-level per sample loss while the LCL is the per label loss.
+
+The ICL intends to align each instance to corresponding label correctly.
+
+The LCL makes the instances of different labels far away from each other and instances of the same label more compact.
+
+They consider different aspects of instance and label representation through operating the N × C similarity scores differently according to Equation 3 and 5.
+
+Compared to InfoNCE, ICL improves the computational efficiency from O(N 2 ) to O(N C) because we only need to contrast the instance representation with corresponding label representations for per example loss, which is extremely useful for language understanding tasks (Wang et al., 2019;Xu et al., 2020) that commonly consist of 2 or 3 labels.
+
+Similarly, LCL is also more computationally efficient as it only contrasts one label representation to several instances rather than computes all pairs of instances belonging to a given label in the mini-batch.
+
+Thus it improves the complexity from O(N 2 ) to O(CN ) compared with SCL too.

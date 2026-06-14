@@ -1,0 +1,345 @@
+Cross-Lingual Named Entity Recognition Via Wikification
+
+Abstract
+
+Introduction
+
+Related Work
+
+Projection
+
+Projection methods take a parallel corpus between source and target languages, annotate the source side, and push annotations across learned alignment edges.
+
+Assuming that source side annotations are of high quality, success depends largely on the quality of the alignments, which depends, in turn, on the size of the parallel data, and the difficulty of aligning with the target language.
+
+There is work on projection for POS tagging (Yarowsky et al., 2001;Das and Petrov, 2011;Duong et al., 2014), NER (Wang and Manning, 2014;Kim et al., 2012;Ehrmann et al., 2011), and parsing (Hwa et al., 2005;McDonald et al., 2011).
+
+Wang and Manning (2014) show that projecting expectations of labels instead of hard labels can improve results.
+
+They experiment in two different settings: weakly-supervised, where only parallel data is available, and semi-supervised, where annotated training data is available along with unlabeled parallel data.
+
+Using Wikipedia
+
+Wikipedia has been used for a large number of NLP tasks, from use as a semantic space (Gabrilovich and Markovitch, 2007;Chang et al., 2008;Song and Roth, 2014), to generating parallel data (Smith et al., 2010), to use in open information extraction (Wu and Weld, 2010).
+
+It has also been used to extract training data for NER, under the intuition that Wikipedia is already (partially) annotated with NER labels, in the form of links to pages.
+
+Nothman et al. (2012) generate silver-standard NER data from Wikipedia using link targets, and other heuristics.
+
+This can be gathered for any language in Wikipedia, but several of the heuristics depend on language-specific rules.
+
+Al-Rfou et al. (2015) generate training data from Wikipedia articles using a similar manner.
+
+The polyglot word embeddings (Al-Rfou et al., 2013) are used as features in their NER model.
+
+Although the features are delexicalized, the embeddings are unique to each language, and so the model cannot transfer.
+
+Kim et al. (2012) use Wikipedia to generate parallel sentences with NE annotations.
+
+They propose a semi-CRF model for aligning entities in parallel sentences.
+
+Results are very strong on Wikipedia data.
+
+This is a hybrid approach in that it is supervised projection using Wikipedia.
+
+Our work is most closely related to Kazama and Torisawa (2007).
+
+They do NER using Wikipedia category features for each mention.
+
+However, their method for wikifying text is not robust to ambiguity, and they only do monolingual NER.
+
+Sil and Yates (2013) create a joint model for NER and entity linking in English. They avoid the traditional pipeline by overgenerating mentions in the first stage and using NER features to rank candidates.
+
+While the results are promising, the model is not scalable to other languages because it requires both a trained NER and a NP chunker.
+
+Direct Transfer
+
+In direct transfer once trains a model in a highresource setting using delexicalized features, that is, features that do not depend on word forms, and then directly applies it to text in a new language.
+
+Täckström et al. (2012) experimented with direct transfer of dependency parsing and NER, and showed that using word cluster features can help, especially if the clusters are forced to conform across languages.
+
+The cross-lingual word clusters were induced using large parallel corpora.
+
+Building on this work, Täckström (2012) focuses solely on NER, and includes experiments on self-training and multi-source transfer for NER.
+
+Their experiments are orthogonal to ours, and could be combined nicely.
+
+This work is closest to ours in terms of method, and therefore we com-
+
+Non-Lexical Previous Tags Freebase types of (w i-1 , w i , w i+1 ) Wikipedia categories of (w i-1 , w i , w i+1 )
+
+(t i-1 , t i-2 ) Tag Context (distr. for [w i , w i+1 , w i+2 ]) Lexical Forms (..., w i-1 , w i ,
+
+Table 1: Feature groups.
+
+Base features are the features used by Ratinov and Roth (2009), the state of the art English NER model.
+
+Gazetteers and crosslingual wikifier features are described in detail in Section 3.
+
+pare against it in our experiments.
+
+Our work falls under the umbrella of direct transfer methods combined with the use of Wikipedia.
+
+We introduce wikifier features, which are truly delexicalized, and use Wikipedia as a source of information for each language.
+
+Named Entity Recognition Model
+
+Base Features
+
+Non-Lexical Features Ratinov and Roth (2009) uses a small number of non-lexical features.
+
+For example, the previous tag feature is useful in predicting I-tags, because the previous tag should never be an O. The tag context feature looks in a 1000 word history and gathers statistics over tags assigned to words [w i , w i+1 , w i+2 ].
+
+These features are included in all experiments.
+
+In contrast with (Täckström et al., 2012), we do not use POS tags as features.
+
+We could not get the universal POS tags for all languages in our experiments, and an earlier experiment indicated that adding POS tags does not improve the performance due to the accuracy of tagger.
+
+Lexical Features Lexical features are very important for monolingual NER.
+
+In the direct transfer setting, lexical features are useful if the target language is close to the training language.
+
+We use a small number of simple features, including word forms, affixes, capitalization, and tag patterns.
+
+The latter feature considers a small window (at most 2 tokens) before the word in question.
+
+If there is a named entity in the window, it makes a feature out of NETag+w i-2 + w i-1 .
+
+Word type features simply indicate whether the word in question is all capitalized, is all digits, or is all letters.
+
+Gazetteer Features
+
+One of the larger performance improvements in Ratinov and Roth (2009) came from the use of (partial matches with) gazetteers.
+
+We include gazetteers also in our model, except we gather them in each language from Wikipedia.
+
+As in Ratinov and Roth (2009), we use the gazetteers as features.
+
+Specifically, we group them by topic, and use the name of the gazetteer file as the feature.
+
+The method iteratively extends a short window to the right of the word in question.
+
+As the window increases in size, we search all gazetteers for occurrences of the phrase in the window.
+
+If we find a match, we add a feature to each word in the phrase according to its position in the phrase, either B for beginning, or I for inside.
+
+This method generalizes gazetteers to unseen entities.
+
+For example, given the phrase "Bill and Melinda Gates Foundation", "Bill" is marked as both B-PersonNames and B-Organizations, while "Foundation" is marked as I-Organizations.
+
+Imagine encountering at test time a fictional organization called "Dave and Sue Harris Foundation." Although there is no gazetteer that contains this name, we have learned that "B-PersonName and B-PersonName B-PersonName Foundation" is a strong signal for an organization.
+
+Cross-Lingual Wikifier Features
+
+As shown in Figure 1, disambiguating words to Wikipedia entries allows us to obtain useful information for NER from the corresponding Free-Base types and Wikipedia categories.
+
+A crosslingual wikifier grounds words and phrases of non-English languages to the English Wikipedia, which provides language-independent features for transferring an NER model directly.
+
+We use the system proposed in Tsai and Roth (2016), which grounds input strings to the intersection of (the title spaces of) the English and the target language Wikipedias.
+
+The only requirement is a multilingual Wikipedia dump and it can be applied to all languages in Wikipedia.
+
+Since we want to ground every n-gram (n ≤ 4) in the document, deviating from the normal usage that only considers a few mentions of interest, we modify the system in the following two ways:
+
+• The original candidate generation process queries the index by both whole input string and the individual tokens of the string.
+
+For the n-grams where n > 1, we generate title candidates only according to the whole string, not individual tokens.
+
+If we allow generating title candidates based on individual tokens then, for instance, the bigram "in Germany" will be linked to the title Germany thus wrongly considered as a named entity.
+
+• The original ranking model includes the embeddings of other mentions in the document as features.
+
+It is clear that if we know what other important entities exist in the document, they provide useful clues to disambiguate a mention.
+
+However, if we want to wikify all n-grams, it makes no sense to include all of them as features, since the ranking model has already included features from TF-IDF weighted context words.
+
+After wikifying every n-gram1 , we set the types of each n-gram as the coarse-and fine-grained FreeBase types and Wikipedia categories from the top 2 title candidates returned by wikifier.
+
+For each word w i , we use the types of w i , w i+1 , and w i-1 , and the types of the n-grams which contain w i as features.
+
+Moreover, we also include wikifier's ranking features from the top candidate as features.
+
+This could serve as a linker (Ratinov et al., 2011), which rejects the top prediction if it has a low confidence.
+
+Experiments And Analysis
+
+Datasets
+
+We use data from CoNLL2002/2003 shared tasks (Tjong Kim Sang, 2002;Tjong Kim Sang and De Meulder, 2003).
+
+The 4 languages represented are English, German, Spanish, and Dutch, each annotated using the IOB1 labeling scheme, which we convert to the BIO labeling scheme.
+
+All training is on the train set, and testing is on the test set.
+
+The evaluation metric for all experiments is phrase level F1, as explained in (Tjong Kim Sang, 2002).
+
+In order to experiment on a broader range of languages, we also use data from the REFLEX (Simpson et al., 2008) and LORELEI projects.
+
+From LORELEI, we use Turkish, 2 From REFLEX, we use Bengali, Tagalog, Tamil, and Yoruba. 3 While Turkish, Tagalog, and Yoruba each has a few non-Latin characters, Bengali and Tamil are with an entirely non-Latin script.
+
+This is a major reason for inclusion in our experiments.
+
+We use the same set of test documents as used in Zhang et al. (2016).
+
+All other documents in the REFLEX and LORELEI packages are used as the training documents in our monolingual experiments.
+
+We refer to these five languages collectively as low-resource languages.
+
+Besides PER, LOC, and ORG, some lowresource languages contain TIME tags and TTL tags, which represented titles in text, such as Secretary, President, or Minister.
+
+Since such words are not tagged in the CoNLL training data, we opted to simply remove these tags.
+
+On the other hand, there is no MISC tag in the low-resource languages.
+
+Instead, many MISC-tagged entities in the CoNLL datasets have LOC tags in the RE-FLEX and LORELEI packages, e.g., Italian and 2 LDC2014E115 3 LDC2015E13,LDC2015E90,LDC2015E83,LDC2015E91
+
+Chinese.
+
+We modify a MISC-tagged word to LOC tag if it is grounded to an entity with location as a FreeBase type, and remove all the other MISC tags in the training data.
+
+This process of changing MISC tags is only done when we train on CoNLL documents and test on low-resource languages.
+
+The only requirement to build the cross-lingual wikifier model is a multilingual Wikipedia dump, and it can be trivially applied to all languages in Wikipedia.
+
+The top section of Table 2 lists Wikipedia sizes in terms of articles,4 the number of titles linked to English titles, and the number of training and test mentions for each language.
+
+Besides the English gazetteers used in Ratinov and Roth (2009), we collect gazetteers for each language using Wikipedia titles.
+
+A Wikipedia title is included in the list for person names if it contains FreeBase type person.
+
+Similarly, we also create a location list and an organization list for each language.
+
+The total number of names in the gazetteers of each language is listed in Table 2.
+
+Monolingual Experiments
+
+Direct Transfer Experiments
+
+Quality Of Wikifier Features
+
+One immediate question is, why are wikifier features less helpful on the low-resource languages results than on the CoNLL languages? In this experiment, we show that smaller Wikipedia sizes result in worse Wikipedia features, which is the  reason Yoruba has bad 'Wikifier only' results and then only small improvement from the wikifier features over base features.
+
+The cross-lingual wikifier that we use in our system only grounds words to the intersection of the English and target language Wikipedia.
+
+Given a Wikipedia title in the target language, we first retrieve FreeBase IDs by querying the FreeBase API.
+
+If it fails, we find the corresponding English Wikipedia title via interlanguage links and then query the API with the English title.
+
+However, FreeBase does not contain entities in Yoruba, Bengali, and Tamil, so the first step will always fail for these three languages.
+
+We remove this step in the experiments of high-resource languages and the results are shown in the row 'W.-FB query ' of Table 3.
+
+We see that the performance drops significantly, because many words have no features from FreeBase types.
+
+Next, we randomly remove 50% and 90% of the interlanguage links to English titles.
+
+This will not only reduce the number of fired features from Wikipedia categories, but also Free-Base types since English titles are used to query FreeBase IDs.
+
+When 90% of interlanguage links are removed, the scores of Spanish and German are closer to Yoruba's score (27.91).
+
+Training Languages
+
+In all previous experiments, the training language is always English.
+
+In order to test the efficacy of training with languages other than English, we create a train/test matrix with all combinations of languages, as seen in Figure 2.
+
+The vertical axis represents training language, and the horizontal axis represents test language.
+
+A darker color signifies a higher score.
+
+For example, if we train on Spanish (ES) and test on Yoruba (YO), we get an F1 of 37.5.
+
+When the training or test language is Bengali (BN) or Tamil (TA), we only use wikifier features.
+
+For other settings, all features are included.
+
+Note that when the test language is one of the CoNLL languages (EN, NL, DE, ES) and the training language is a non-CoNLL language, we ignore all MISC tags in evaluation, since there is no MISC tag in the low-resource languages.
+
+The diagonals represent the monolingual setting in which we use all features for all languages.
+
+Since we are interested in transferring a model, we ignore the diagonals, and identify the best training language for a given test language as the largest off-diagonal in each column.
+
+These are demarcated with red boxes.
+
+English is the best for most languages, with the only exception of Spanish being the best for Yoruba.
+
+It makes sense that high-resource languages are better training languages because 1) there are more annotated training instances, 2) larger Wikipedia creates denser wikifier features, therefore providing better estimation of the weights to these features.
+
+This experiment shows that we can augment training data from other languages' annotated documents.
+
+Although the performance only increases a little, it does not hurt most of the time.
+
+Domain Adaptation
+
+To improve the results of the monolingual experiments, we consider the domain adaptation setting where there is annotated data for both source and target domains.
+
+The question is whether training data from the source domain can improve a model that is trained solely on the target-domain data.
+
+In this experiment, we use English as the source domain, and use Spanish, Dutch, Turkish, and Tagalog as four different target domains.
+
+We compare three approaches:
+
+• Target: only uses the training data in the target domain.
+
+This is the setting of the monolingual experiments in Table 2.
+
+• Src+Tgt: directly uses the training data from both source and target domains.
+
+This method is identical to the setting in our previous multi-source direct transfer experiments.
+
+• FrustEasy: the "Frustratingly Easy" adaptation framework proposed by (Daumé, 2007).
+
+All types of features are used in all settings.
+
+The results are shown in Table 5.
+
+We can see that although Src+Tgt is always the best approach, the improvement over the baseline, Target, is tiny.
+
+Interestingly, the FrustEasy framework does not help for most languages.
+
+This result is consistent with the analysis and observation in Chang et al. (2010) that 1) when the source and target domains are very different, the baseline approach (Target) is very strong, and 2) when there are cross-domain clustering features (e.g., the wikifier features), Src+Tgt is better than FrustEasy.
+
+To further improve the monolingual baselines via adaptation from other languages, better crosslingual or language-independent information may be needed.
+
+Conclusion And Discussion
+
+Figure 2: Different training/test language pairs.
+
+Scores shown are the F1 scores.
+
+The red boxes signify the best non-target training languages.
+
+Schwierigkeiten beim nachvollziehenden Verstehen Albrecht Lehmann läßt Flüchtlinge und Vertriebene in Westdeutschland
+
+w i+1 , ...)
+
+Data sizes, monolingual experiments, and direct transfer experiments.
+
+Wiki size is the number of articles in Wikipedia.
+
+For monolingual experiments, we train the proposed model on the training data of the target languages. 'Wikifier only' uses the previous tags features also.
+
+For direct transfer experiments, all models are trained on CoNLL English training set.
+
+The rows marked Täckström come from
+
+shows the results of training on multiple languages.
+
+We use all features in this experiment.
+
+The row "EN" only trains the model on the English training documents, and the results are iden-
+
+The F1 scores of the proposed direct transfer model on three low-resource languages using training data in multiple languages.
+
+The row "ALL-Test Lang" trains the model on all languages except the test language, Bengali, and Tamil.
+
+Bengali and Tamil are excluded since we use all features in this experiment.
+
+.49 73.86 77.64 79.96 Src+Tgt 84.17 84.81 74.52 77.80 80.33 FrustEasy 83.89 84.08 73.73 77.04 79.69
+
+The domain adaptation experiments.
+
+The source domain (English) training examples are used to improve the monolingual baseline model (Target) which is only trained on the target domain (Spanish, Dutch, Turkish, and Tagalog) training data.
+
+The numbers are the phrase-level F1 scores.

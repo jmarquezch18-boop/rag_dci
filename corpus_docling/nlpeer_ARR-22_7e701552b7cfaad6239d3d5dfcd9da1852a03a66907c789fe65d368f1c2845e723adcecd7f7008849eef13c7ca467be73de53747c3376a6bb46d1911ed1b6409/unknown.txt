@@ -1,0 +1,203 @@
+Constructing Open Cloze Tests Using Generation And Discrimination Capabilities Of Transformers
+
+Abstract
+
+Introduction
+
+Related Work
+
+Model
+
+Extensions
+
+Our neural transformer-based sequence tagging model can be very effective at proposing potentially good gaps, but the task becomes more challenging when we expect the output to meet additional requirements such as no repetitions, no gap interdependence, a minimum distance between gaps and a varied selection of lexico-grammatical items.
+
+We address these issues using two complementary strategies: a manipulation of the loss function and a post-processing module.
+
+Loss Manipulation
+
+In order to spread gaps evenly throughout the text, we modify the token-level loss function of our tagging model by imposing a higher penalty on tokens that are in close proximity to a gap.
+
+Let g be the position of a gap in the sequence, then for each token in position i in the proximity of g, i.e. |g -i| < D, the loss function l i ′ for the token in position i is defined as:
+
+l i ′ = l i * W |g -i| (1)
+
+where W represents the penalty and D is the maximum distance scope for penalisation.
+
+3 Equation 1 thus gives more weight to tokens closer to gaps, which results in higher penalisation of their cost functions whenever they are misclassified.
+
+Post-Processing
+
+We also employ a post-processing strategy where we replace the gaps that are repeated in the text with better options.
+
+We optimise the choice of these alternative gaps by considering the distance between them and the resulting distribution of gaps with different part-of-speech (PoS) tags.
+
+Our post-processing step can be seen as a reranking function.
+
+The gap candidates that are originally ranked based on the model's confidence scores change their ranking to match other desirable requirements of a well-structured cloze test.
+
+If the selected n-best gaps include repetitions, our post-processing algorithm randomly chooses one of them at a time and attempts to replace it with a better alternative.
+
+An alternative gap is deemed better if 1) its answer is not a repetition of another gapped word, 2) its distance to other selected gaps meets the minimum required distance or is higher than the pairwise distances of the originally selected gaps, and 3) it improves the PoS distribution of the gapped words.
+
+The PoS distribution of each new selection of gaps is compared to the average gapped PoS distribution of the cloze tests in the training data using Kullback-Leibler (KL) divergence.
+
+A combination of gaps that yields lower KL divergence is assumed to be a better solution.
+
+These extensions to the base model bring our final cloze tests closer to those created by human experts by automatically controlling variables that would otherwise need to be adjusted manually.
+
+This makes our solution a fully-automated system that can produce ready-to-use cloze tests from an input text passage.
+
+Data
+
+To the best of our knowledge, there are no public datasets of full-text open cloze tests that could be used for our task.
+
+The CLOTH dataset (Xie et al., 2018), for example, contains gapped passages designed for language learners, but it is primarily focused on reasoning and reading comprehension and uses multiple choice questions where distractors play a major role, making it substantially different to the task we aim to model.
+
+For this reason, we use a collection of expertly created open cloze tests at the B2 CEFR level that was kindly provided by Cambridge University Press & Assessment (CUP&A) for research purposes.
+
+Each task consists of a text passage of no more than 300 tokens, a variable number of gaps (between 8 and 16) and a list of valid answers for each gap (between 1 and 7).
+
+During the design process, the tasks undergo extensive quality control and pretesting, so their gaps are guaranteed to be very effective at assessing student ability.
+
+For training, we reconstruct the texts by replacing each gap with its first answer and we split the whole collection into train, dev and test.
+
+Details of our dataset are shown in Table 1.
+
+Given the lack of publicly available data, we make our test set available with this paper so as to provide a common benchmark for the task and to encourage further research in this area.
+
+All the texts were tokenised and parsed using spaCy v2.3 4 .
+
+Along with all the tokens in the sequences, we also input dependency parsing information to the system.
+
+More specifically, we concatenate the ELECTRA representation of each token with the representation of its head in the dependency graph.
+
+6 On top of the encoding layers, we have two branches that are being learned simultaneously (Figure 2).
+
+The first branch is a simple linear layer that aims to classify each token as a gap or non-gap.
+
+For the second branch, we add ELECTRA's generation layer plus a linear layer which aims to predict the best word from the whole vocabulary as an auxiliary task.
+
+We are only interested in predicting the answer words for the gaps.
+
+Therefore, we change the input to the second branch by masking the words that are predicted as gaps by the first branch at each step of training.
+
+We employ crossentropy loss on each branch and ignore the loss values for the tokens that are not masked in the second branch.
+
+The whole architecture is updated based on the sum of the two losses.
+
+Fine-tuning parameters are specified in Appendix B.
+
+Baselines
+
+We compare our multi-objective ELECTRA model to other systems, namely:
+
+Random baseline Generates a random set of gaps for each task based on the average probability distribution of gapped PoS in the training data.
+
+Exercise Maker Generates gaps using rules and a pre-compiled list of commonly gapped words from a variety of Cambridge English main suite exams (Malafeev, 2014).
+
+Set to FCE mode for our experiments.
+
+BERT Predicts potentially good gaps using BERT (Devlin et al., 2019) for token classification.
+
+We use the pre-trained base model with standard parameters and fine-tune the weights of the whole architecture.
+
+Standard ELECTRA Similar to BERT, it predicts potentially good gaps using a standard pre-trained ELECTRA-base model.
+
+This is a single-objective model that is fine-tuned on token classification only.
+
+Both random and Exercise Maker attempt to generate the same number of gaps per task as defined in the gold standard, although this is not always possible since the required conditions (such as specific words or PoS) are not always met.
+
+Evaluation
+
+Results And Discussion
+
+Automatic Evaluation
+
+Human Evaluation
+
+Predictions By Gapped Word Frequency
+
+We found that our model does not overfit to words that are most frequently gapped in the training data, with correlation between gapped word frequency Gardening It is early summer , the season of abundance , when my garden is at at its fullest .
+
+Flowers are in in bloom and the grass is growing so so fast that half an hour after cutting it , I seem to be back where where I started .
+
+This year for the first time I am attempting to grow my my own vegetables , an attempt that has so far far proved very successful .
+
+My vegetable plants have been yielding an abundance of produce , in fact much more more than I can possibly consume myself . I 'm convinced that you cannot plant even a single tomato without without feeling a connection to the earth and to the countless generations who have worked the land before you .
+
+To plant seeds and then to harvest what you have grown gives a a deep sense of satisfaction .
+
+I believe that many doctors and mental health organisations all around around the world now recognise the value of gardening to the well-being of those who who take part in this activity .
+
+and F 1 scores in the test set being negligible (Pearson's r = 0.0108, Spearman's ρ = 0.0915).
+
+Interestingly, while our model was unable to predict gaps not previously seen in the training data (turned, amount, pushed and started), it did predict a (previously unseen) gap for the word fewer, which did not match the gold standard but was unanimously deemed good by our annotators.
+
+Predictions By Pos
+
+We also classified predictions based on their PoS tags 8 and report performance in The two worst performing classes are PART (the particles to and not) and AUX (auxiliary verbs) and, once again, we conjecture that these words are so common in the language and in non-gapped positions that the model is unable to get them right most of the time.
+
+The remaining PoS classes vary in performance but we found only very weak correlation between PoS gap frequency in the test set and F 1 scores (Pearson's r = 0.1932, Spearman's ρ = 0.1350).
+
+When we look at human annotations on the test set, however, performance by PoS is consistently higher and more even across the board. If we require that gaps are rated 'good' by at least two annotators, accuracy values range between 75% and 100% for all PoS, with a mean of 85%.
+
+Under these conditions, the best performing classes are NOUN (100%), INTJ (100%) and ADJ (95%), which agree with automatic evaluation.
+
+Out of these, only NOUN achieves perfect accuracy across all annotators.
+
+The worst performing classes are PRON (77%), NUM (77%) and VERB (75%) as opposed to the previous AUX and PART counterparts (now 79% and 83% respectively).
+
+When we require agreement by all annotators, the worst overall class is CCONJ with 44%.
+
+Qualitative Analysis
+
+Conclusion And Future Work
+
+Figure 2:Architecture of our multi-objective ELECTRA-based system.
+
+The model is simultaneously trained on two objectives: 1) token classification and 2) LM prediction of gapped words.
+
+Figure3: Frequency of pairs of gaps with distance ranging from 0 to 3.
+
+Distance is measured by the number of words in between two gapped words.
+
+The minimum acceptable number of words between two gaps is 4.
+
+Figure 4: Average frequency of the reasons given by the annotators for rejecting a gap.
+
+Figure 5: Sample output of our extended ELECTRA model.
+
+Darker shades of red indicate higher confidence in inserting a gap.
+
+Predicted gaps are framed in black while gold standard gaps are in yellow font.
+
+Number of tasks, tokens and gaps in each section of the data.
+
+appropriate, i.e. it is expected to be effective during testing.
+
+Bad Too close to other gaps The gap is in close proximity to another gap.
+
+Bad Too many possible answers The gap allows too many answers (often more than 5).
+
+Bad Too many gaps of this type There are many gaps with the same part-of-speech or testing focus in the text.
+
+Bad Answers can change meaning The gap can be filled by answers that would change the meaning of the text, e.g. 'and' or 'but'.
+
+Bad Answers can have different PoS The gap can be filled by answers that have a different grammatical function, e.g.
+
+Labels used in human annotation.
+
+Models' performance on the development set.
+
+Results of multi-objective ELECTRA when we predefine the number of predicted gaps.
+
+Analysis of our model after adding extensions: loss manipulation and post-processing.
+
+Accuracy of our extended multi-objective ELECTRA model based on automatic and human evaluation on the test set.
+
+Performance by PoS on the test set based on automatic evaluation.
+
+The most frequently gapped PoS tags in our datasets correspond to closed word classes (such as ADP, DET, SCONJ, AUX, etc.), which is expected given that our open cloze tests are mostly focused on testing grammar rather than vocabulary.
+
+The best predicted classes, however, are NUM, SCONJ, NOUN, ADJ and INTJ which on closer inspection turn out to 8 Using the Universal Dependencies tagset: https:// universaldependencies.org/u/pos/ be very restricted classes: NUM includes only the word one, INTJ only the word like, SCONJ only a few subordinating conjunctions while NOUN and ADJ, despite being open classes, are limited to words used in common constructions such as order (in order to) or same (the same).

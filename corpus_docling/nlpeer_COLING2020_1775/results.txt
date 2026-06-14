@@ -1,0 +1,45 @@
+We start by briefly explaining the classification algorithm and the feature selection methods we use in our experiments (subsection 4.1).
+
+Afterwards, we elaborate on the classification models trained on the OntoNotes data using the proposed feature sets (subsection 4.2).
+
+The section continues with two feature selection experiments with which we assess the importance of the features (subsection 4.3 and subsection 4.4).
+
+The next step is to use different subsets of the features and to re-run the classification algorithms, to see how this will affect the accuracy of the models.
+
+To assess the features, we use the built-in permutation importance (Breiman, 2001) of RF, ranking the "importance" of the features.
+
+According to Strobl et al. (2008), to measure the importance of the feature X i , first the model is built, and its accuracy is computed in Out-of-bag (OOB) observations.
+
+Afterwards, any link between the values of X i and the outcome of the model is broken by the permutation of all the values of X i , and the accuracy of the model with the permuted values is re-computed.
+
+The difference between the accuracy of the new model and the original score is defined as the permutation importance of X i .
+
+Hence, if a feature has noise or random values, it is likely that the permutation does not influence the accuracy.
+
+Instead, a high difference between the two rates signal the importance of the feature for the prediction task.
+
+Figure 1 shows the importance of different variables in the seven models.
+
+The higher the value of the Mean Decrease in Accuracy on the x-axis, the greater the importance of the feature.
+
+Also, we computed the p-values for the variables following the method of Altmann et al. (2010) under the null hypothesis that the permutation of the variable has no impact on the accuracy.
+
+Out of the 65 distinct features, the null hypothesis was confirmed for 4 features from the UDeL dataset (w and, w but, w then & w command) and one feature from OSU (compet txt).
+
+The rest of features contributed to the models with varying degrees of importance.
+
+Our second method is Sequential Forward Search.
+
+The algorithm starts with an empty set and adds the features until this no longer yields much improvement in accuracy.
+
+The algorithm stops if the improvement is below the minimum required value of improvement (alpha=0.01) that we set.
+
+We used the R package mlr (Bischl et al., 2016) for the implementation of the SFS algorithm.
+
+The learner we used in this model is classif.randomForest and the resampling strategy is Holdout.
+
+Each box in Figure 2 shows the selected features of each feature set.
+
+Firstly, in 4.5.1, we explore the accuracy of different subsets of each feature set based on the results of the RFI and SFS experiments.
+
+In 4.5.2, we explore the subsets of all the features combined, trying to come up with an optimal consensus set of features.

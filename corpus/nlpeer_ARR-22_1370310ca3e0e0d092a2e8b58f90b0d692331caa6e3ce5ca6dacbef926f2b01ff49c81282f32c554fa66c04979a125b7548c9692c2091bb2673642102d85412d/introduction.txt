@@ -1,0 +1,27 @@
+The usefulness of learned self-attention functions often correlates with how well it aligns with human attention (Das et al., 2016;Klerke et al., 2016;Barrett et al., 2018;Zhang and Zhang, 2019;Klerke and Plank, 2019).
+
+In this paper, we evaluate how well attention flow (Abnar and Zuidema, 2020) in large language models, namely BERT (Devlin et al., 2019), RoBERTa (Liu et al., 2019) and T5 (Raffel et al., 2020), aligns with human eye fixations during task-specific reading, compared to other shallow sequence labeling models (Lecun and Bengio, 1995;Vaswani et al., 2017) and a classic, heuristic model of human reading (Reichle et al., 2003).
+
+We compare the learned attention functions and the heuristic model across two taskspecific English reading tasks, namely sentiment analysis (SST movie reviews) and relation extraction (Wikipedia), as well as natural reading, using a publicly available dataset with eye-tracking recordings of native speakers of English (Hollenstein et al., 2018).
+
+We compare human and model attention patterns on both sentiment reading and relation extraction tasks.
+
+In our analysis, we compare human attention to pre-trained Transformers (BERT, RoBERTa and T5), from-scratch training of two shallow sequence labeling architectures (Lecun and Bengio, 1995;Vaswani et al., 2017), as well as to a frequency baseline and a heuristic, cognitively inspired model of human reading called the E-Z Reader (Reichle et al., 2003).
+
+We find that the heuristic model correlates well with human reading, as has been reported in Sood et al. (2020b).
+
+However when we apply attention flow (Abnar and Zuidema, 2020), the pre-trained Transformer models also reach comparable levels of correlation strength.
+
+Further fine-tuning experiments on BERT did not result in increased correlation to human fixations.
+
+To understand what drives the differences between models, we perform an in-depth analysis of the effect of word predictability and POS tags on correlation strength.
+
+It reveals that Transformer models do not accurately capture tail phenomena for hard-to-predict words (in contrast to the E-Z Reader) and that Transformer attention flow shows comparably weak correlation on (proper) nouns while the E-Z Reader predicts importance of these more accurately, especially on the sentiment reading task.
+
+In addition, we investigate a subset of the ZuCo corpus for which aligned task-specific and natural reading data is available and find that Transformers correlate stronger to natural reading patterns.
+
+We test faithfulness of these different attention patterns to produce the correct classification via an input reduction experiment on task-tuned BERT models.
+
+Our results highlight the trade-off between model faithfulness and sparsity when comparing importance scores to human attention, i.e., less sparse (higher entropy) attention vectors tend to be less faithful with respect to model predictions.
+
+Our code is available at github.com/ oeberle/task_gaze_transformers.

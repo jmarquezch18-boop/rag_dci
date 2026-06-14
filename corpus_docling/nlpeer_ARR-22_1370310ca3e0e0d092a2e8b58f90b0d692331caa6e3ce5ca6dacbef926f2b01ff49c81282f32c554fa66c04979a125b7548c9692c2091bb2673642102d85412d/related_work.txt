@@ -1,0 +1,21 @@
+Saliency modeling Early computational models of visual attention have used bottom-up approaches to model the neural circuitry representing pre-attentive selection processes from visual input (Koch and Ullman, 1985) and later the central idea of a saliency map was introduced (Niebur and Koch, 1996).
+
+A central hypothesis studying eye movements under task conditions is known as Yarbus theorem stating that a task can be directly decoded from fixation patterns (Yarbus, 1967) which has found varying support (Greene et al., 2012;Henderson et al., 2013;Borji and Itti, 2014).
+
+More recently, extracting features from deep pre-trained filters in combination with readout networks has boosted performance on the saliency task (Kümmerer et al., 2016).
+
+This progress has enabled modeling of more complex gaze patterns, e.g. vision-language tasks such as image captioning (Sugano and Bulling, 2016), visual question answering (Das et al., 2016) or text-guided object detection (Vasudevan et al., 2018).
+
+Predicting text gaze patterns has been studied extensively, often in the context of probabilistic (Feng, 2006;Hara et al., 2012;Matthies and Søgaard, 2013;Hahn and Keller, 2016) or token transition models (Nilsson and Nivre, 2009;Haji-Abolhassani and Clark, 2014;Coutrot et al., 2017).
+
+More recently deep language features have been used as feature extractors in modeling text saliency (Sood et al., 2020a;Hollenstein et al., 2021) opening the question of their cognitive plausibility.
+
+Eye-tracking signals for NLP Augmenting machine learning models using human gaze information has been shown to improve performance for a number of different settings: Human attention patterns as regularization during model training have resulted in comparable or improved task performance in tagging part-of-speech (Barrett and Søgaard, 2015a,b;Barrett et al., 2018), sentence compression (Klerke et al., 2016), detecting sentiment (Mishra et al., 2016(Mishra et al., , 2017) ) or reading comprehension (Malmaud et al., 2020).
+
+In these works, general free-viewing gaze data is used without consideration of the specific training task which opens the question of task-modulation in human reading.
+
+From natural to task-specific reading Recent work on reading often analyses eye-tracking data in combination with neuroimaging techniques such as EEG (Wenzel et al., 2017) and f-MRI (Hillen et al., 2013;Choi et al., 2014).
+
+Research questions thereby focus either on detecting relevant parts in text (Loboda et al., 2011;Wenzel et al., 2017) or the difference between natural and pseudo-reading, i.e., text without syntax/semantics (Hillen et al., 2013) or pseudo-words (Choi et al., 2014).
+
+To the best of our knowledge there has not been any work on comparing fixations between natural reading and task-specific reading on classical NLP tasks such as relation extraction or sentiment classification.

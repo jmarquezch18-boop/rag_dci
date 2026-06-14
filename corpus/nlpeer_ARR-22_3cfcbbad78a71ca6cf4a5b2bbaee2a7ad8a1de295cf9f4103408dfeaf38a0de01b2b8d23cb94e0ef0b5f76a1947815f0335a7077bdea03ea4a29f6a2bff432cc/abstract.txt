@@ -1,0 +1,13 @@
+Historical records in Korea before the 20 th century were primarily written in Hanja, an extinct language based on Chinese characters and not understood by modern Korean or Chinese speakers.
+
+Historians with expertise in this time period have been analyzing the documents, but that process is very difficult and time-consuming, and language models would significantly speed up the process.
+
+Toward building and evaluating language models for Hanja, we release the Hanja Understanding Evaluation dataset consisting of chronological attribution, topic classification, named entity recognition, and summary retrieval tasks.
+
+We also present BERT-based models continued pretraining on the two major corpora from the 14 th to the 19 th centuries: the Annals of the Joseon Dynasty and Diaries of the Royal Secretariats.
+
+1 We compare the models with several baselines on all tasks and show there are significant improvements gained by training on the two corpora.
+
+Additionally, we run zeroshot experiments on the Daily Records of the Royal Court and Important Officials (DRRI).
+
+The DRRI dataset has not been studied much by the historians, and not at all by the NLP community.

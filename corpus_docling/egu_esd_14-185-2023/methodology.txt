@@ -1,0 +1,207 @@
+In this study, we employ the University of Victoria Earth system climate model (UVic ESCM) version 2.9 (Weaver et al., 2001;Eby et al., 2009;Keller et al., 2012), which consists of three dynamically coupled components: a three-dimensional ocean circulation model (Pacanowski, 1996) including a dynamic-thermodynamic sea-ice model (Bitz and Lipscomb, 1999), a terrestrial model (Meissner et al., 2003;Weaver et al., 2001) and a simple one-layer atmospheric energymoisture balance model (Fanning and Weaver, 1996).
+
+The model has a fully coupled carbon cycle including dynamic terrestrial, atmospheric and oceanic carbon inventories.
+
+The horizontal resolution of all components is 3.6 • longitude ×1.8 • latitude, and the ocean component has 19 vertical layers.
+
+The descriptions of air-sea gas exchange and seawater carbonate chemistry are based on the Ocean Carbon Cycle Model Intercomparison Project (OCMIP) abiotic protocol (Orr et al., 1999).
+
+The ocean biogeochemistry is presented with a nutrients-phytoplankton-zooplankton-detritus (NPZD) model that includes one general phytoplankton, diazotrophs, and one zooplankton type (Keller et al., 2012;Eby et al., 2013).
+
+The UVic ESCM has been evaluated in several recent studies (e.g., Keller et al., 2014;Mengis et al., 2016;Reith et al., 2016;Kvale et al., 2021).
+
+In this study, the modeling of macroalgae is done with a macroalgae growth model coupled into the UVic ESCM.
+
+The aim of the macroalgae model is to investigate the carbon sequestration capacity of MOS and the potential impacts on marine biogeochemistry.
+
+In the macroalgae model, the net growth rate is affected by several limiting factors, including nutrients, temperature and solar radiation intensity.
+
+The cellular C : N : P ratio of macroalgae is fixed.
+
+The loss of macroalgal biomass includes erosion and grazing by zooplankton.
+
+The deployment of MOS is done with an algorithm that considers spatial and temporal conditions.
+
+The macroalgae model is also connected to global marine biogeochemical processes, including the inorganic carbon and nutrient pools.
+
+In the surface layers, it impacts phytoplankton via nutrients competition and canopy shading.
+
+The single, aggregated zooplankton compartment of the biogeochemical model, which represents higher trophic levels, is also designed to graze on macroalgae.
+
+In the bottom layers, the remineralization of sunken macroalgal biomass will consume the dissolved oxygen, which in turn limits the rate of remineralization.
+
+The macroalgae model is an idealized generic model of genus Laminaria and Saccharina, mainly based on Martins and Marques (2002) and Zhang et al. (2016).
+
+The rate of biomass change is governed by Eq. ( 1) as the imbalance of NGR (net growth rate, d -1 ) and LR (loss rate, fraction of daily biomass loss due to mortality, erosion and grazing by zooplankton, d -1 ).
+
+Modeled macroalgae is seeded 5 m below sea surface, considering the light requirement and reduction of damaging risks by surface wave activity (Eq. 11).
+
+The deployment of macroalgae considers ambient nutrients availability and avoidance of winter periods (Sect. 3.1).
+
+The NGR is regulated by
+
+dBiomass dt = (NGR -LR) × Biomass (1)
+
+NGR = R growth -R resp ,(2)
+
+where R growth is the gross growth rate (d -1 ), and R resp is the respiration rate (d -1 ).
+
+The growth rate of macroalgae (R growth ) is given by Eq. ( 3), regulated by water temperature (T ), solar irradiance (I ) and dissolved nutrient concentrations (NO 3 and PO 4 , NP).
+
+R growth = µ max × f (T w ) × f (NP) × f (I ma )(3)
+
+In the current model, the macroalgal growth rates are controlled by external concentrations of available nutrients via assumed Michaelis-Menten kinetics with half-saturation constants K N and K P for NO 3 and PO 4 , respectively:
+
+f (N) = NO 3 K N + NO 3 ,(4)
+
+f (P) = PO 4 K P + PO 4 ,(5)
+
+f (NP) = Min{f (N), f (P)}. (6
+
+)
+
+The need for iron is not considered in our macroalgae growth model.
+
+Although iron is utilized during macroalgae growth (e.g., Suzuki et al., 1995;Kuffner and Paul, 2001), iron limitation on macroalgae is not widely discussed, especially for the genus Saccharina.
+
+Besides, as iron is a micronutrient needed in low quantities, the MOS platform could be designed with an iron supply for the macroalgae, in which case MOS could be considered to include a targeted variant of the ocean iron fertilization concept.
+
+The temperature limiting factor used here is an optimum curve following Bowie et al. (1985).
+
+T opt is the speciesspecific optimum temperature at which the growth rate is maximized.
+
+T max and T min define the upper and lower temperature limits above and below which macroalgae growth ceases.
+
+The temperature optimum curve of the macroalgae is shown in Fig. A3.
+
+f (T w ) = e -2.3×X 2 T (7) X T = T w -T opt T x -T opt (8) T x = T min if T w ≤ T opt T max if T w > T opt (9)
+
+Respiration is described by an Arrhenius function considering water temperature T w in degrees Celsius (Duarte and Ferreira, 1997;Martins and Marques, 2002):
+
+R resp = R max20 × r (T w -20) ,(10)
+
+where R max20 is the maximum respiration rate of the simulated macroalgae species at 20 • C, and r stands for the empirical coefficient for macroalgae respiration (Table 1).
+
+The limiting factor of solar irradiance density for macroalgae photosynthesis (f (I ma )) is given in Eq. ( 11) (Steele's photo-inhibition relationship - Kirk, 1994):
+
+f (I ma ) = I ma I opt × e (1-Ima I opt ) ,(11)
+
+where I ma stands for the shortwave radiation intensity reaching the depth Z (given by Eq. 12), and I opt stands for the optimum light intensity for macroalgae growth (constant, Table 1).
+
+I ma = I s × e -k w Z m - Zm 0 (P o +P D )k c ×dZ m × df (12)
+
+Equation ( 12) calculates the shortwave radiation (I ma ) reaching the depth Z m .
+
+This is modified from Keller et al. (2012) and Schmittner et al. (2005), with Z m denoting the depth of MOS macroalgae platforms beneath the water surface.
+
+Z m is assumed to be 5 m, compromising the empirical depth with sufficient light for macroalgae photosynthesis (1 to 2 m for cultivation (Buck and Buchholz, 2004), 0 to 10 m for wild communities (Eriksson and Bergström, 2005)) and the depth to reduce the risks of damage by stressful turbulence or severe weather events (e.g., hurricanes).
+
+df denotes the day length as a fraction of 24 h. I s stands for the shortwave radiation density at the top of the layer.
+
+P O and P D are the biomass of ordinary phytoplankton and diazotrophs, respectively, in the layers above the macroalgae.
+
+k w is the light attenuation coefficient for water.
+
+I opt is the optimum light intensity for macroalgae growth.
+
+k c is the light attenuation coefficient of phytoplankton and also accounts for co-varying particulate and dissolved inorganic and organic materials (Kvale and Meissner, 2017).
+
+As described in Sect.
+
+2.2.1, the morphology of the frond will not be considered, and the self-shading effects by fronds are not considered here (Duarte and Ferreira, 1997;Brush and Nixon, 2010).
+
+The loss rate LR is regulated by the following:
+
+LR = ER + Graze ma ,(13)
+
+ER = Biomass × R erosion ,(14)
+
+Graze ma = µ max Z Z × ψ ma × Biomass,(15)
+
+where the erosion of biomass (ER) is controlled by the individual erosion rate R erosion .
+
+As the frond morphology of macroalgae is not modeled here, we set the R erosion as a constant independent of physical impacts (Trancoso et al., 2005;Zhang et al., 2016).
+
+The eroded macroalgal biomass will be directly converted back to nutrients and DIC (dissolved inorganic carbon) according to the macroalgae stoichiometry ratios without remineralization or further degradation by zooplankton.
+
+We set this parameterization of erosion, a small biomass loss of 0.01 % per day, pragmatically as instantaneous remineralization rather than introducing another finite remineralization and finite sinking parameterization with difficult-to-constrain parameters.
+
+It was used to minimize the computational expense of the model and to avoid having to add another state variable that is subjected to physical transport.
+
+Graze ma is the biomass loss due to grazing by zooplankton.
+
+Z is the zooplankton biomass which is calculated by the NPZD model.
+
+µ max Z stands for the maximum potential growth rate of zooplankton, defined in Keller et al. (2012, Eq. 28).
+
+The zooplankton grazing preference on macroalgae (ψ ma ) is defined in Sect. 2.2.3.
+
+For simplicity and to limit the number of state variables, we made the following modifications to the macroalgae model:
+
+1. We did not include a dynamic C : N : P ratio or a representation of luxury nutrient uptake and storage (Broch and Slagstad, 2012;Hadley et al., 2015).
+
+Instead, the C : N : P ratio of the macroalgae biomass was set as a constant (Table 1), which is based on seasonally averaged measurements of the biomass composition of these genera (Zhang et al., 2016;Martins and Marques, 2002).
+
+2.
+
+The macroalgae life cycle processes (e.g., alternations of generations) are also not considered in our model (Brush and Nixon, 2010;Trancoso et al., 2005;Duarte and Ferreira, 1997).
+
+We thus assumed that the plantlet (e.g., sporophytes for Saccharina) will be reseeded annually on the MOS infrastructure.
+
+The assumed deployment strategy, i.e., timing of seeding and sinking, of MOS is latitude dependent according to the seasonality of solar irradiance (see Sect.
+
+3.1).
+
+Whenever conditions are unfavorable for macroalgae and no growth occurs during an annual cycle, no re-seeding of macroalgae will occur in these regions.
+
+The parameterization of DOC release by macroalgae could not be included because of the lack of enough information.
+
+Few studies exist, and the uncertainties about the release of DOC are large.
+
+For example, Barrón et al. (2014) reported a release of DOC by macroalgae from a few species of 23.2 ± 12.6 mmol C m -2 d -1 with no information on bioavailability.
+
+Meanwhile, refractory DOC dynamics are difficult to include in a global Earth system model and are beyond the scope of this study (Anderson et al., 2015;Mentges et al., 2019;Zakem et al., 2021).
+
+Thus, the DOC release from macroalgae is not included in this study.
+
+Validation of the macroalgae model is crucial, as the productivity and macroalgal biomass yield are vital for CO 2 sequestration.
+
+Here, we examine the simulated seasonality, NPP rate and biomass yield of MOS in comparison with available observations and assessments.
+
+Simulated NPP is high in the first year of deployment in many regions because nutrients are abundant, and then it sharply declines in the following years as a new local biogeochemical state is reached.
+
+Thereafter, NPP gradually reaches a relatively steady state by 2024 (Fig. A2).
+
+To provide some validation of the macroalgae model, we select three areas named Area I, II and III from Belt N, M and S and analyze their performance in year 2024 (Fig. 3).
+
+Each area covers four grid boxes in the uppermost ocean layer of the UVic ESCM.
+
+According to Sect. 3.1 and Table 2, the seeding date for MOS is 1 May in Area I, 1 January in Area II and 1 November in Area III, while the sinking dates are 31 October, 31 December and 30 April the next year, correspondingly.
+
+As a result, shown in Fig. 3, the macroalgae NPP in Area I peaks around September with the accumulation of macroalgae biomass in that area.
+
+In Area II, due to the nutrient limitation and nutrient competition with ambient phytoplankton, macroalgae biomass grows slower than in the other two areas, leading to a later peak of NPP around October.
+
+In Area III, which is located in the Southern Ocean where the nutrients are rich, the macroalgae NPP peaks in February.
+
+These results indicates a plausible seasonality of our macroalgae model.
+
+In our simulations, simulated macroalgae NPP rates are comparable to the observed ranges in the productive areas that we selected here.
+
+Observed wild macroalgae NPP varies widely, ranging from 91 to 750 gC m -2 yr -1 (Krause-Jensen and Duarte, 2016).
+
+Our model reproduces the macroalgae NPP of 159.2-199.3 gC m -2 yr -1 in the selected areas (Table 4).
+
+Simulated biomass yields in these areas are in the previously reported range as well.
+
+Reports of the biomass yield of aqua-cultured Laminaria saccharina (now regarded as a synonym of Saccharina latissima) range from 40 t DW km -2 yr -1 in an offshore cultivation experiment by Buck and Buchholz (2004) to 456 t DW km -2 in a coastal cultivation experiment by Peteiro et al. (2014).
+
+In our simulations, the yield of selected areas ranges from 492.4 to 648.2 t DW km -2 yr -1 .
+
+The selected Area I yields 648.2 DW km -2 yr -1 .
+
+In regions with similar latitudes to that of Area I, the biomass yield of aqua-cultured Saccharina japonica (formerly classified as Laminaria japonica) was ∼ 300 t DW km -2 yr -1 in China (Zhang et al., 2016) and reached 7280 t DW km -2 yr -1 in Japan (Yokoyama et al., 2007).
+
+Nevertheless, some simulated low values from the globally averaged and latitudinal belt-averaged results are not surprising considering that the open ocean tends to be more nutrient limited than coastal or near-shore regions where the aforesaid observed macroalgae NPP was mea-sured.
+
+Our results provide some confidence that our idealized model can simulate macroalgae well enough with respect to typical biomass yield, seasonality and geographical distribution.

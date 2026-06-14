@@ -1,0 +1,349 @@
+Label Anchored Contrastive Learning For Language Understanding
+
+Abstract
+
+Introduction
+
+Model
+
+The Input Encoder
+
+The input of LaCon contains two parts consisting of the text and all the labels for the task.
+
+Since SOTA language understanding classification models follow the "pre-training then fine-tuning" two-stage paradigm, here we take the prevalent pre-trained language model (PtLM) as input encoder.
+
+In this paper, we select BERT-base (Devlin et al., 2019) as the backbone for PtLM (denoted as f ) without loss of generality.
+
+Given a text x = {w 1 , w 2 , ..., w M } containing M tokens, the output of PtLM (i.e. BERT) is E = f P tLM ([CLS], w 1 , ..., w M ) where , where the dimension of the g is also d. For a mini-batch X with N training samples, the text representations can be obtained as Equation 1.
+
+H = g • f P tLM (X)
+
+, where
+
+X = x 1 , x 2 , ..., x N and H ∈ R N ×d(1)
+
+Along with each mini-batch, LaCon also maps the C classes into C label embeddings.
+
+For simplicity, we look up in a learnable weight matrix W emb and map the k th label into the k th row of W emb , where the W emb is randomly initialized.
+
+The dimension d is the same as PtLM.
+
+We then normalize the vectors for both L and H using the l 2 norm.
+
+L = lookup([1, 2, ..., C], W emb ) where L ∈ R C×d and W emb ∈ R C×d (2)
+
+Instance-Centered Contrastive Loss
+
+Given a mini-batch of input text and corresponding label (x i , y i ), as shown in Figure 1 (a), the instance-centered contrastive loss (ICL) takes each instance x i as anchor, and mines positive and negative samples from class labels.
+
+ICL aims to encourage each text representation and corresponding label representation to be closer while pushing far away mismatched instance-label pairs.
+
+As shown in Equation 3, we modify the InfoNCE (van den Oord et al., 2018) to calculate the loss.
+
+Here we leverage the cosine similarity function as the distance metric sim. τ is the temperature hyper-parameter, which can be tuned to improve the performance.
+
+Lower temperature increases the influence of examples that are harder to separate, effectively creating harder negatives.
+
+Similar to the self-supervised CL, ICL also takes only one positive and many negatives.
+
+Differently, the positive is not generated from data augmentation, and the negatives are not randomly sampled from the same mini-batch.
+
+By treating the class labels as data samples, ICL can mine better positive and negatives with the supervision signal.
+
+By minimizing the ICL, the instance representation is aligned to its label representation in the same semantic space, which encourages the model to learn a more representative embedding for each class label.
+
+Inspired by the image-augmented views proposed in CV (He et al., 2019;Chen et al., 2020b,c;Grill et al., 2020), we also leverage the multi-head mechanism proposed in Transformer (Vaswani et al., 2017) to compute the ICL for each head representation with smaller representation dimension.
+
+Each head can be regarded as a clipped local view of the instance or label representation.
+
+Suppose we have m heads for both instance representation and label representation, then for the k th head, the corresponding representations for training sample (x i , y i ) are h k x i and l k y i , and the dimension of each vector becomes d ′ = d/m.
+
+Then, we apply the contrastive loss for each head by following Equation 4.
+
+Compared with InfoNCE, L ICL and L ′ ICL do not suffer from small batch size issue (He et al., 2019;Chen et al., 2020c) because we only need to contrast the instance representation with corresponding label representation for per example loss.
+
+L ′ ICL = - 1 N m k=1 x i ,y i log exp(sim(h k x i , l k y i )/τ )
+
+Label-Centered Contrastive Loss
+
+As shown in Figure 1 (b), we can take the class label in a mini-batch as anchor, and mine positive/negative samples from corresponding instances.
+
+Suppose there are |P | classes in the batch, where
+
+P = {p|1 ≤ p ≤ C ∧ |A(p)| > 0}.
+
+We define that A(p) denotes the set of indices of all positive instances whose label is p, i.e. A(p) = {x i |y i = p}. And B(p) represents the set of negative instances whose label is not p, i.e. B(p) = {x j |y j ̸ = p}. Then we can calculate the label-centered contrastive loss (LCL) as Equation 5, which promotes the instances of a specific label to be more similar than the others for each label.
+
+Similar to the previous SCL (Khosla et al., 2020;Gunel et al., 2021), LCL also contains many positives per anchor and many negatives.
+
+Different from SCL which sums up all the softmax scores among all pairs of instances of the same class in a batch, LCL is based on comparing a specific label representation with corresponding instances (i.e. A(p)).
+
+LCL is more stable as the label representation serves as the anchor which can be stably updated.
+
+LLCL = - 1 |P | p∈P a∈A(p) log exp(sim(Lp, Ha)/τ ) b∈B(p) exp(sim(Lp, Hb)/τ ) (5)
+
+ICL and LCL are complementary to each other and more computationally efficient than previous SCL.
+
+We conduct the detailed theoretical analysis in Appendix A.3 due to space limitation.
+
+Label Embedding Regularizer
+
+Recent researches (Wang and Isola, 2020) demonstrate that it is common and useful to add a regularization term during training to eliminate the anisotropy problem.
+
+Inspired by this, We devise a label embedding regularizer as shown in Equation 6to promote the uniformity of our model and prevent model degeneration.
+
+As illustrated in Figure 1 (c), the label embedding regularizer (LER) encourages the label representations to be dispersed in the unit hypersphere uniformly.
+
+The LER loss is the exponential mean of the cosine similarity for all pairs of label representations.
+
+As -1 ≤ sim(L i , L j ) ≤ 1, it is quite sensitive to the loss change as the gradient is larger than 1 for exp(x) w.r.t x ≥ 0.
+
+Thus, we add 1.0 to the cosine similarity so that the value of LER varies from 0 to e 2 -1.
+
+L LER = avg( i̸ =j (exp(1.0 + sim(L i , L j )) -1.0) (6)
+
+Finally, the overall loss function of LaCon is summarized as follows:
+
+L = L ′ ICL + L LCL + λ * L LER (7)
+
+where λ is a hyper-parameter to balance the influence of our regularization term.
+
+Matching Based Class Prediction
+
+Since LaCon is capable of learning instance and label representations jointly, we can predict the class by matching the instance representation to all label representations directly during inference, just as shown in Equation 8.
+
+We denote this simple and direct approach as LaCon-vanilla.
+
+H x is the instance representation and L j is the label representation of Class j. sim denotes the cosine similarity and 1 ≤ j ≤ C denotes the corresponding label.
+
+The advantage of LaCon-vanilla is that it does not require any complicated network architecture and can be easily plugged into the mainstream PtLMs.
+
+As a result, our inference-time model contains exactly the same number of parameters as the model using the same encoder but trained with cross entropy loss.
+
+pred = arg max (j){score j |sim(H x , L j )} (8)
+
+Lacon With Label Fusion
+
+Previous researches (Akata et al., 2016;Wang et al., 2018;Xiao et al., 2019;Pappas and Henderson, 2019;Miyazaki et al., 2020) have proved that incorporating the label semantics into the sentence representation can improve the model performance because the label information can highlight the alignment of input tokens and label information via carefully designed fusion mechanism.
+
+Inspired by LEAM (Wang et al., 2018), here we design a fusion block to enhance the instance representations by utilizing the learnt discriminative label embeddings.
+
+We firstly calculate the cosine similarity interaction matrix G between words and labels, and then apply a convolution then max-pooling layer (conv max ) to measure the attention score (β i ) for each word attending the instance representation.
+
+The fusion process is illustrated as Equation 9.
+
+Then the fused vector z is fed into the projection head g to get the enhanced instance representation.
+
+To distinguish with the vanilla model above, we name this approach as LaCon-fusion.
+
+Please note that the fusion block is just applied between the text encoder and projection head, so the class prediction keeps the same as the LaCon-vanilla.
+
+Since the fusion block is not the main focus of this paper, we leave exploring more advanced fusion networks to future work.
+
+Matthew's corr (M' corr) metrics to evaluate the performance.
+
+We run 10 epochs for all the datasets1 and then evaluate the models on dev set.
+
+Our implementation is based on Huggingface Transformers2 .
+
+Baselines
+
+Since LaCon is based on CL and label embedding technique, we compare with several SOTA models in language understanding including BERT-base fine-tuned with cross-entropy (CE) loss, label embedding based models, and self-supervised CL and supervised CL models.
+
+• CE: we directly follow the instructions of original paper (Devlin et al., 2019) to finetune BERT for both English and Chinese langauge understanding tasks.
+
+• LEAM: Wang et al. ( 2018) apply cosine similarity to get matching scores between words and labels and use CNN on the matching matrix to get the label-aware attention weighted text representation for classification.
+
+• LSAN: Xiao et al. (2019) propose a label specific attention network that leverages labelattention and self-attention mechanism with an adaptive attention fusion strategy for multilabel classification.
+
+We use softmax instead of sigmoid for the model output due to our multi-class classification setting.
+
+• CE+CL: Yan et al. (2021) propose to learn sentence representations by joint fine-tuning PtLM with InfoNCE and cross-entropy based on feature augmentation.
+
+Here we leverage the framework of ConSERT (Yan et al., 2021) and the feature augmentation in SimCSE (Gao et al., 2021) to finetune and evaluate the PtLM on classification datasets.
+
+• CE+SCL: Gunel et al. (2021) propose to boost sentence representation learning by finetuning PtLM with both supervised contrastive learning loss (Khosla et al., 2020) and cross entropy loss.
+
+We follow the instructions in (Gunel et al., 2021) to set hyper-parameters.
+
+LEAM and LSAN are label embedding based methods while CE+CL and CE+SCL are contrastive learning based methods.
+
+To compare all models fairly, we use BERT-base encoder for all the baselines and our proposed model.
+
+Main Results
+
+Ablation Study
+
+Discussion
+
+Lacon For Few-Shot Learning
+
+Few-shot learning is critical for applications of language understanding models because the highquality human annotated datasets are usually costly and limited.
+
+Previous researches (Liang et al., 2021;Gunel et al., 2021;Aghajanyan et al., 2021) find that fine-tuning PtLM with cross entropy loss in NLP tends to be unstable across different runs especially when supervised data is limited.
+
+This limitation can result in model degeneration and model shift.
+
+Besides, some researches (Müller et al., 2019) also demonstrate that the cross-entropy optimization goal is not reachable due to the bounding of the gradient, which can also easily result in overfitting.
+
+Since LaCon is equipped by CL, it's interesting to validate if LaCon can overcome the shortcomings of CE under few-shot learning settings.
+
+We conduct further experiments with vanilla La-Con on 5 public English datasets from FewGLUE (Schick and Schütze, 2021) and 3 public Chinese datasets (Tnews, EPRSTMT and BUSTM) from FewCLUE (Xu et al., 2021).
+
+We build all the fewshot learning datasets by sampling 20 samples for each class to form training set.
+
+We also held out the same amount of samples for validation set but keep the whole test set unchanged.
+
+We train the model for 20 epochs and select the best model based on validation set.
+
+Table 4 shows that LaCon significantly outperforms the BERT-base fine-tuned with CE loss with a huge margin.
+
+Specifically, we observe 9.4%, 7%, and 6.2% absolute improvement on BUSTM, QQP, and EPRSTMT.
+
+Additionally, we also conduct more strict experiments by changing the number of samples per class from {10, 20, 50, 100}. Figure 2 demonstrates that the smaller the sample size per class is, the larger gain the model obtains.
+
+All above results indicate that the similarity-based CL losses in LaCon are able to hone in on the important dimensions of the multidimensional hidden representations hence lead to better and more stable few-shot learning results when fine-tuning PtLM.
+
+Lacon For Data Imbalance Setting
+
+The real-world datasets are usually imbalanced for different classes (Cao et al., 2019;Bao et al., 2020), where several dominant classes contain most of the samples while the rest minority classes only hold a handful of samples.
+
+In this section, we conduct experiments to validate the capacity of LaCon under data imbalance setting.
+
+We follow the previous   We argue that LaCon may alleviate data imbalance issue on two aspects: 1) For the infrequent classes, treating labels as anchor or positive/negative may mitigate the data insufficient issue to some extent.
+
+2) Label representations are shared across the whole dataset during training, which may transfer the knowledge from frequent classes to infrequent classes.
+
+To validate above conjecture, we present the performance on the test sets for majority and minority classes separately.
+
+Table 5 shows that LaCon outperforms the baseline on both majority and minority classes and the gain on minority class is much larger.
+
+Visualization
+
+To demonstrate the effectiveness of LaCon on representation learning, we visualize the learned instance representations of LaCon and CE on the MRPC and CoLA dataset.
+
+In Figure 4
+
+Hyper-Parameter Tuning
+
+In this section, we take the RTE dataset as an example for illustrating the hyper-parameter tuning process.
+
+The similar hyper-parameter tuning strategy is applied for other datasets.
+
+The tuning scripts will be released in our source code.
+
+Figure 5 shows the influence of different hyper-parameters.
+
+For each experiment, we conduct a grid-based hyper-parameter sweep for τ between 0.05 and 0.5 with step 0.05, λ between 0.1 and 1.0 with step 0.1, and select the best hyper-parameter for the given dataset.
+
+The τ is the most influential hyperparameter that needs to be tuned carefully with minimum step 0.05.
+
+Larger τ results in lower accuracy in LaCon and the recommended value is around 0.1 and 0.2.
+
+Figure 5 (b) illustrates that the optimal number of heads in Equation 4 is 6 and both the most and fewest heads result in low accuracy while heads with middle sizes get relatively better accuracy scores.
+
+Small number of head shows little diversity in feature clipping while larger one results in very short vectors with poor representation capacity.
+
+The label embedding regularizer weight λ in Figure 5(c) can be set in a wide range, where either without L LER or large λ will result in poor performance.
+
+The Impact Of Class Number
+
+As the number of classes influence the difficulty of classification task directly, in this section, we discuss the impact of class number on our proposed model LaCon.
+
+We pick the DBPedia dataset for experiment.
+
+The original DBPedia dataset includes 14 labels.
+
+We gradually increase the label number from 2 to 14 and randomly select 1000 samples for each label in our experiment as training set.
+
+Meanwhile, we keep the whole samples for the chosen labels in the evaluation set unchanged.
+
+Figure 6 demonstrates that with the increase of the labels, the performance of all models degrades as the task becomes more difficult.
+
+However, LaConfusion outperforms CE+SCL consistently on different number of labels, which shows the advantage of leveraging labels as anchors or positive/negative samples during contrastive learning.
+
+5 Related Work
+
+Contrastive Learning
+
+Contrastive Learning has become a rising domain and achieved significant success in various CV, speech and NLP tasks (He et al., 2019;Chen et al., 2020b;Fang and Xie, 2020;Han et al., 2021;Saeed et al., 2021;Gunel et al., 2021;Gao et al., 2021;Yan et al., 2021).
+
+There are two kinds of CL approaches, which are self-supervised CL and supervised CL.
+
+The self-supervised CL contrasts a  single positive for each anchor (i.e., an augmented version of the same image) against a set of negatives consisting of the entire remainder of the batch.
+
+However, due to the intrinsic discrete nature of natural language, data augmentations are less effective than that in CV.
+
+Recently, researchers (Khosla et al., 2020;Gunel et al., 2021) propose supervised CL, which contrasts the set of all samples from the same class as positives against the negatives from the remainder of the batch.
+
+Suresh and Ong (2021) propose label-aware SCL method via assigning weights to instances of different labels, which treats the negative samples differently.
+
+LaCon belongs to the scope of supervised CL.
+
+Different from (Khosla et al., 2020;Gunel et al., 2021), LaCon can take the labels as anchors or mine negative/positive from labels, which does not need to construct positive pairs from the data augmentation.
+
+Meanwhile, Gunel et al. (2021) combine CL and CE losses at the same time, but LaCon is purely equipped with three CL objectives, including the instance-centered contrastive loss, the label-centered contrastive loss and the label embedding regularizer.
+
+Label Representation Learning
+
+Label representation learning aims to learn the embeddings of labels in classification tasks and has been proven to be effective in various CV (Frome et al., 2013;Akata et al., 2016) and NLP tasks (Tang et al., 2015;Pappas and Henderson, 2019;Nam et al., 2016;Zhang et al., 2018;Wang et al., 2018;Xiao et al., 2019;Miyazaki et al., 2020).
+
+In this work, we compare with two representative label embedding based models, which are LEAM (Wang et al., 2018) and LSAN (Xiao et al., 2019).
+
+Both learn label embeddings and sentence representations in a joint space based on attention mechanism and fuse them to improve the classification.
+
+Differently, LaCon learns the label and instance representations jointly via purely supervised contrastive learning.
+
+Besides, our experiments also verify that after obtaining the discriminative label and instance representations, even simple fusion block can facilitate the language understanding tasks.
+
+Conclusions
+
+Figure1: Overview of LaCon.
+
+The full line is the similarity between a instance and corresponding label, and the dash line is the similarity between the mismatched instance and label.
+
+The lines with the same color denote the per-instance or per-label loss.
+
+Figure 2: Few-shot learning with different number of training samples.
+
+Figure 3: LaCon with Different Imbalance Degree (ρ).
+
+, we use t-SNE (Van der Maaten and Hinton, 2008) to visualize both the high dimensional representations of the instances and labels on a 2D map.
+
+Different classes are depicted by different colors.
+
+As shown in Figure 4 (a), the instances of class A and class B are sparsely located and overlapped in a large area, making it hard to find a hyper-plane to separate them.
+
+However, in Figure 4 (b), the instances gather into two compact clusters and the instances stay close to the corresponding class.
+
+For CoLA, Figure 4 (c) and (d) show the similar trends.
+
+It indicates that LaCon can learn more discriminative instance representations than CE.
+
+Besides, in Figure 4 (b), the instances are near the corresponding label anchor, proving that LaCon can also learn a representative label embedding for each class.
+
+Figure 4: Visualization of label and instance representations for MRPC (a&b) and CoLA (c&d) using T-SNE.
+
+Figure 5: Illustration of hyper-parameters tuning (RTE is taken for example and other datasets are similar).
+
+Figure 6: The impact of class number on LaCon.
+
+Experiments were conducted on DBPedia.
+
+y)∼A(y) (H x L y ) +E x∼A(y) [logE y -/ ∈A(y) (e HxL y -/τ )](10)E x∼A(y) [logE y -/ ∈A(y) (e HxL y -/τ )] Hx i Ly j /τ )
+
+The statistics of datasets that are from GLUE
+
+The experimental results for the Language Understanding Tasks.
+
+Best scores for each dataset are highlight in bold (all with significance value p < 0.05).
+
+Performance under few-shot learning settings.
+
+F1 score for both majority and minority classes.
+
+Due to space limitation, we show results of ρ = 10.
+
+LLER 87.1±0.6 70.5±0.8 61.2±1.1 LaCon-vanilla 87.5±0.8 71.4±0.7 62.4±1.1 Ablation study via adding losses cumulatively.
+
+that analyzes the distribution and uniformity of the learned embedding space, CL flattens singular values of the embeddings thus improves the capacity of language 72.5±0.3 67.4±0.3 60.9±0.2 LaCon-fusion 92.5±0.2 73.9±0.3 74.8±0.5 69.1±0.6 63.5±0.7

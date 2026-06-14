@@ -1,0 +1,43 @@
+Quality Estimation (QE) (Blatz et al., 2004;Specia et al., 2009) models aim at predicting the quality of automatically translated text segments.
+
+Traditionally, these models provide point estimates and are evaluated using metrics like Mean Absolute Error (MAE), Root-Mean-Square Error (RMSE) and Pearson's r correlation coefficient.
+
+However, in practice QE models are built for use in decision making in large workflows involving Machine Translation (MT).
+
+In these settings, relying on point estimates would mean that only very accurate prediction models can be useful in practice.
+
+A way to improve decision making based on quality predictions is to explore uncertainty estimates.
+
+Consider for example a post-editing scenario where professional translators use MT in an effort to speed-up the translation process.
+
+A QE model can be used to determine if an MT segment is good enough for post-editing or should be discarded and translated from scratch. But since QE models are not perfect they can end up allowing bad MT segments to go through for postediting because of a prediction error.
+
+In such a scenario, having an uncertainty estimate for the prediction can provide additional information for the filtering decision.
+
+For instance, in order to ensure good user experience for the human translator and maximise translation productivity, an MT segment could be forwarded for post-editing only if a QE model assigns a high quality score with low uncertainty (high confidence).
+
+Such a decision process is not possible with point estimates only.
+
+Good uncertainty estimates can be acquired from well-calibrated probability distributions over the quality predictions.
+
+In QE, arguably the most successful probabilistic models are Gaussian Processes (GPs) since they considered the state-ofthe-art for regression (Cohn and Specia, 2013;Hensman et al., 2013), especially in the low-data regimes typical for this task.
+
+We focus our analysis in this paper on GPs since other common models used in QE can only provide point estimates as predictions.
+
+Another reason why we focus on probabilistic models is because this lets us employ the ideas proposed by Quiñonero-Candela et al. (2006), which defined new evaluation metrics that take into account probability distributions over predictions.
+
+The remaining of this paper is organised as follows:
+
+• In Section 2 we further motivate the use of GPs for uncertainty modelling in QE and revisit their underlying theory.
+
+We also propose some model extensions previously developed in the GP literature and argue they are more appropriate for the task.
+
+• We intrinsically evaluate our proposed models in terms of their posterior distributions on training and test data in Section 3.
+
+Specifically, we show that differences in uncertainty modelling are not captured by the usual point estimate metrics commonly used for this task.
+
+• As an example of an application for predicitive distributions, in Section 4 we show how they can be useful in scenarios with asymmetric risk and how the proposed models can provide better performance in this case.
+
+We discuss related work in Section 5 and give conclusions and avenues for future work in Section 6.
+
+While we focus on QE as application, the methods we explore in this paper can be applied to any text regression task where modelling predictive uncertainty is useful, either in human decision making or by propagating this information for further computational processing.

@@ -1,0 +1,158 @@
+{
+  "query_id": "f2564b011de1ce166a9e4410c3857b5a9c2496ce",
+  "query": "Can the authors provide an explanation for the significant performance difference between cgexpan and lm-base?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "cgexpan"
+      },
+      "result_preview": "Search results for 'cgexpan' (5 matches):\n[paper_id=nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7 | section=methodology | line=21] CGExpan.\n[paper_id=nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa0",
+      "elapsed_s": 4.01
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+        "section": "methodology",
+        "start": 23,
+        "end": 23
+      },
+      "result_preview": "[nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7 / methodology — líneas 18-28 de 51]\n\nWe compute concept embeddings by averaging embeddings of its seed entities, and rank entity candidates based on the cos",
+      "elapsed_s": 11.59
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+        "section": "methodology",
+        "start": 30,
+        "end": 40
+      },
+      "result_preview": "[nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7 / methodology — líneas 25-45 de 51]\nIn addition, it considers how a candidate in turn ranks the target concept name to improve the quality of rankings.\n\nLM ",
+      "elapsed_s": 10.18
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+        "section": "methodology",
+        "start": 25,
+        "end": 45
+      },
+      "result_preview": "[nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7 / methodology — líneas 20-50 de 51]\n\nCGExpan.\n\nCGExpan (Zhang et al., 2020b) is a SOTA LM-based method that iteratively uses Hearst patterns (Hearst, 1992) ",
+      "elapsed_s": 9.86
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "lm-base"
+      },
+      "result_preview": "Search results for 'lm-base' (12 matches):\n[paper_id=nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7 | section=methodology | line=23] CGExpan (Zhang et al., 2020b) is a SOTA LM-based method that iterativel",
+      "elapsed_s": 8.65
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "We compute concept embeddings by averaging embeddings of its seed entities, and rank entity candidates based on the cosine similarity of concept and entity embeddings.\n\nCGExpan.\n\nCGExpan (Zhang et al., 2020b) is a SOTA LM-based method that iteratively uses Hearst patterns (Hearst, 1992) as prompts to obtain scores for ranking candidates.\n\nIn addition, it considers how a candidate in turn ranks the target concept name to improve the quality of rankings.\n\nLM Probing Baseline (LM-Base).",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_methodology_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "score": 1.0
+    },
+    {
+      "text": "In addition, it considers how a candidate in turn ranks the target concept name to improve the quality of rankings.\n\nLM Probing Baseline (LM-Base).\n\nWe develop a simpler baseline that also uses Hearst patterns to prompt LMs and obtain scores for entity candidates.\n\nHowever, it does not include any other mechanisms such as concept name guidance and iterative expansion like CGExpan.\n\nEnsemble Methods.\n\nWe use mean reciprocal rank (MRR) as the representative for ensemble methods since it does not require any additional training data.\n\nGiven the rankings from multiple methods, we compute MRR score of each entity: e) , where n is the number of methods combined, and r i (e) is the ranking of entity e under method i. We then re-rank all entities based on their MRR score.\n\nIn this work, we study combinations of two ESE methods leading to 6 ensembles.\n\nWe study 4 settings that offer interesting combinations across different paradigms:\n\nM RR(e) = 1 n n i=1 1 r i (\n\n• MRR-Baseline: Emb-Base + LM-Base.",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_methodology_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "score": 1.0
+    },
+    {
+      "text": "CGExpan.\n\nCGExpan (Zhang et al., 2020b) is a SOTA LM-based method that iteratively uses Hearst patterns (Hearst, 1992) as prompts to obtain scores for ranking candidates.\n\nIn addition, it considers how a candidate in turn ranks the target concept name to improve the quality of rankings.\n\nLM Probing Baseline (LM-Base).\n\nWe develop a simpler baseline that also uses Hearst patterns to prompt LMs and obtain scores for entity candidates.\n\nHowever, it does not include any other mechanisms such as concept name guidance and iterative expansion like CGExpan.\n\nEnsemble Methods.\n\nWe use mean reciprocal rank (MRR) as the representative for ensemble methods since it does not require any additional training data.\n\nGiven the rankings from multiple methods, we compute MRR score of each entity: e) , where n is the number of methods combined, and r i (e) is the ranking of entity e under method i. We then re-rank all entities based on their MRR score.\n\nIn this work, we study combinations of two ESE methods leading to 6 ensembles.\n\nWe study 4 settings that offer interesting combinations across different paradigms:\n\nM RR(e) = 1 n n i=1 1 r i (\n\n• MRR-Baseline: Emb-Base + LM-Base.\n\n• MRR-SOTA: SetExpan + CGExpan.\n\n• MRR-Corpus: SetExpan + Emb-Base.",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_methodology_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_176",
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_177",
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_184",
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_185",
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_194",
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_195"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_methodology_0000",
+      "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_methodology_0001",
+      "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_methodology_0002"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_methodology_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_methodology_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_methodology_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.055865921787709494,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

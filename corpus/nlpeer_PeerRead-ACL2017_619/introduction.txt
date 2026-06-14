@@ -1,0 +1,21 @@
+Most writing-related natural language processing (NLP) research focuses on the analysis of single drafts.
+
+Examples include document-level quality assessment (Attali and Burstein, 2006;Burstein and Chodorow, 1999), discourse-level analysis and mining (Burstein et al., 2003;Falakmasir et al., 2014;Persing and Ng, 2016), and fine-grained error detection (Leacock et al., 2010;Grammarly, 2016).
+
+Less studied is the analysis of changes between drafts -a comparison of revisions and the properties of the differences.
+
+Research on this topic can support applications involing revision analysis (Zhang and Litman, 2015), paraphrase (Malakasiotis and Androutsopoulos, 2011) and correction detection (Swanson and Yamangil, 2012;Xue and Hwa, 2014).
+
+Although there are some corpora resources for NLP research on writing comparisons, most tend to be between individual sentences/phrases for tasks such as paraphrase comparison (Dolan and Brockett, 2005;Tan and Lee, 2014) or grammar error correction (Dahlmeier et al., 2013;Yannakoudakis et al., 2011).
+
+In terms of revision analysis, the most relevant work analyzes Wikipedia revisions (Daxenberger and Gurevych, 2013;Bronner and Monz, 2012); however, the domain of Wikipedia is so specialized that the properties of Wikipedia revisions do not correspond well with other kinds of texts.
+
+This work presents the ArgRewrite corpus1 to facilitate revision analysis research for argumentative essays.
+
+The corpus consists of a collection of three drafts of essays written by university students and employees; the drafts are manually aligned at the sentence level, then the purpose of each revision is manually coded using a revision schema closely related to argument mining/discourse analysis.
+
+Within the domain of argumentative essays, the corpus will be useful for supporting research in argumentative revision analysis and the application of argument mining techniques.
+
+The corpus may also be useful for research on paraphrase comparisons, grammar error correction, and computational stylistics (Popescu and Dinu, 2008;Flekova et al., 2016).
+
+In this paper, we present two example uses of our corpus: 1) rewriting behavior data analysis, and 2) automatic revision purpose classification.

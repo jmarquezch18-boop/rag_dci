@@ -1,0 +1,179 @@
+Do Transformer Models Show Similar Attention Patterns To Task-Specific Human Gaze?
+
+Abstract
+
+Introduction
+
+Pre-Trained Language Models Vs
+
+Experiments
+
+Data
+
+The ZuCo dataset (Hollenstein et al., 2018) contains eye-tracking data for 12 participants (all English native speakers) performing natural reading and relation extraction on 300 and 407 English sentences from the Wikipedia relation extraction corpus (Culotta et al., 2006) respectively and sentiment reading on 400 samples of the Stanford Sentiment Treebank (SST) (Socher et al., 2013).
+
+For our analysis, we extract and average word-based total fixation times across participants and focus on the task-specific relation extraction and sentiment reading samples.
+
+Models
+
+Optimization
+
+For training models on the different tasks we remove all sentences that overlap between ZuCo and the original SST and Wikipedia datasets.
+
+Models are then trained on the remaining train-split data until early stopping is reached and we report results over five runs.
+
+We provide further details on the optimization and model task performance in Appendix A.
+
+Metric
+
+To compare models with human attention, we compute Spearman correlation between human and model-based importance vectors after concatenation of individual sentences as well as on a tokenlevel, see Hollenstein and Beinborn (2021).
+
+This enables us to distinguish unrelated effects caused by varying sentence length from token-level importance.
+
+As described before, we extract human attention from gaze (ZuCo), simulated gaze (E-Z Reader), raw attentions (BERT, RoBERTa, T5), relevance scores (CNN, self-attention) and inverse token probability scores (BNC).
+
+2 We use ZuCo to-kens to align sentences across tokenizers and apply max-pooling of scores when bins are merged.
+
+Main Result
+
+Analyses
+
+In addition to our main result -that pre-trained language models are competitive to heuristic cognitive models in predicting human eye fixations during reading -we present a detailed analysis, investigating what our main results depend on, where 3 We have experimented with oracle analyses selecting the maximally correlating attention head in the last layer for each sentence and find that correlations are generally weaker than with attention flow.
+
+pre-trained language models improve on cognitive models, and where they are still challenged.
+
+Fine-tuning BERT does not change correlations to human attention We find that fine-tuning base and large BERT models on either task does not significantly change correlations and are of similar strength to untuned models.
+
+This observation can be embedded into findings that Transformers are equipped with overcomplete sets of attention functions that hardly change until the later layers, if at all, during fine-tuning and that this change is also dependent on the tuning task itself (Kovaleva et al., 2019;Zhao and Bethard, 2020).
+
+In addition, we observe that Transformer flows propagated back from early, medium and final layers do not considerably change correlations to human attention.
+
+This can be explained by attention flow filtering the path of minimal value at each layer as discussed in Abnar and Zuidema (2020).
+
+Attention flow is important The correlation analysis emphasizes that we need to capture the layered propagation structure in Transformer models, e.g., by using attention flow, in order to extract importance scores that are competitive with cognitive models.
+
+Interestingly, selecting the highest correlating head for the last attention layer produces generally weaker correlation than attention flows.
+
+3 This offers additional evidence that raw attention weights do not reliably correspond to token relevance (Serrano and Smith, 2019;Abnar and Zuidema, 2020) and, thus, are of limited use to compare task attention to human gaze.
+
+Differences between language models BERT, RoBERTa and T5 are large-scale pretrained language models based on Transformers, but they also differ in various ways.
+
+One key difference is that BERT and RoBERTa use absolute position encodings, while T5 uses relative encodings.
+
+BERT and RoBERTa differ in that (i) BERT has a next-sentence-prediction auxiliary objective; (ii) RoBERTa and T5 were trained on more data; (iii) RoBERTa uses dynamic masking and trains with larger mini-batches and learning rates, while T5 uses multi-word masking; (iv) RoBERTa uses byte pair encoding for subword segmentation.
+
+We leave it as an open question whether the superior attention flows of BERT, compared to RoBERTa and T5, has to do with training data, next sentence prediction, or fortunate hyper-parameter settings, but note that BERT is also known to have  higher alignment with human-generated explanations than other large-scale pre-trained language models (Prasad et al., 2021).
+
+E-Z Reader is less sensitive to hard-to-predict words and POS We compare correlations to human fixations with attention flow values for Transformer models in the last layer, the E-Z Reader and the BNC baseline for different word predictability scores computed with a 5-gram Kneser-Ney language model (Kneser and Ney, 1995;Chelba et al., 2013).
+
+Figure 3 shows the results on SST and Wikipedia for equally sized bins of word predictability scores.
+
+We can see that the Transformer models correlate better for more predictable words on both datasets whereas the E-Z Reader is less influenced by word predictability and already shows medium correlation on the most hard-to-predict words (0.3 -0.4 for both, SST and Wikipedia).
+
+In fact, on SST, Transformers only pass the E-Z Reader on the most predictable tokens (word predictability > 0.03).
+
+We also compare correlations to human fixations Input reduction When comparing machines to humans we typically regard the psychophysical data as the gold standard.
+
+We will now take the model perspective and test fidelity of both human and model attention patterns in task-tuned models.
+
+By this we aim to test how effective the exact token ranking based on attention scores is at producing the correct output probability.
+
+We perform such an input reduction analysis (Feng et al., 2018)   our analysis, we observe -as to be expected -that adding tokens according to token probability (BNC prob) performs even worse than randomly adding tokens.
+
+From-scratch trained models (CNN and self-attention) are most effective in selecting taskrelevant tokens, and even more so than using any Transformer attention flow.
+
+Adding tokens based on human attention is as effective for the sentiment task as the E-Z Reader.
+
+Interestingly, for the relation extraction task, human attention vectors provide the most effective flipping order after the relevance-based shallow methods.
+
+All Transformerbased flows perform comparably in both tasks.
+
+To better understand what drives these effects we extract the fraction of POS tags for the first added token (see Figure 4 and full results in the Appendix Figure 5).
+
+we see that the E-Z Reader overestimates the importance of punctuation, whereas proper nouns are least dominant in comparison to the other models.
+
+Entropy levels of Transformer flow is similar to those in human attention Averaged sentencelevel entropy values on both datasets reveal that BERT, RoBERTa and T5 attention flow, the E-Z Reader and BNC obtain similar levels of sparsity as human attention around 3.4-3.6 bits as summarized in Table 1.
+
+Entropies are lower for the shallow networks with self-attention (LRP) at 1.8-2.2 bits and CNN (LRP) at around 2.9 bits.
+
+This difference in sparsity levels might explain the advantage of CNN and shallow self-attention in the input reduction analysis: Early addition of few but very relevant words has a strong effect on the model's decision compared to less sparse scoring as, e.g. in Transformers.
+
+The shallow models were also trained from-scratch for the respective tasks whereas all other models (including human attention) are heavily influenced by a more general modeling of language which could explain attention to be distributed more broadly over all tokens.
+
+Table 2: Correlations between human fixations and models on 48 duplicates appearing in the ZuCo dataset for both natural reading (NR) and relation extraction (taskspecific reading -TSR).
+
+Natural reading versus task-specific reading A unique feature of the ZuCo dataset is that it contains a subset of sentences that were presented to participants both in a task-specific (relation extraction) and a natural reading setting.
+
+This allows for a direct comparison of how correlation strength is influenced by the task.
+
+In Table 2 correlations of human gaze-based attention with model attentions are shown.
+
+The highest correlation can be observed when comparing human attention for task-specific and natural reading (0.72).
+
+The remaining model correlations correspond to the ranking and correlation strength observed in the main result (see Figure 1).
+
+We observe lower correlation scores for the task-specific reading as compared to normal reading among attention flow, the E-Z Reader and BNC.
+
+This suggests that these models capture the statistics of natural reading -as is expected for a cognitive model designed to the natural reading paradigm -and that task-related changes in human fixation patterns are not reflected in Transformer attention flows.
+
+Interestingly, averaged last layer attention heads show a reverse effect (but at much weaker correlation strength).
+
+This might suggest that pre-training in Transformer models induces specificity of later layer attention heads to tasksolving instead of general natural reading patterns.
+
+Related Work
+
+Discussion And Conclusion
+
+Figure 1: Spearman correlation analysis between human attention and different models for two task settings.
+
+Solid bar edges indicate sentence-level correlations in contrast to a token-level analysis.
+
+Left: Sentiment Reading on the SST dataset.
+
+Right: Relation Extraction on Wikipedia.
+
+Standard deviations over five seeds are shown for fine-tuned models and correlations are statistically significant with p < 0.01 unless stated otherwise (ns: not significant).
+
+Figure 2: Upper: Correlations between human fixation and different models for SST (left) and Relation Extraction (right) for the six most common POS tags.
+
+Lower: Average attention value after standardization (mean=0, std=1) for respective POS tag and model.
+
+Figure 3: Correlation between human fixations and different models for SST (left) and Wikipedia (right) with respect to word predictability in equally sized bins.
+
+Word predictability scores, were calculated with a 5-gram Kneser-Ney language model.
+
+Respective bin limits are given on the x-axis.
+
+Samples for every other bin are displayed on the upper x-axis.
+
+based on the top-6 (most tokens) Part-of-speech (POS) tags.
+
+On SST, correlations with E-Z Reader are very consistent across POS tags whereas attention flow shows weak correlations on proper nouns (0.12), nouns (0.16) and verbs (0.16) as presented in Figure2.
+
+The BNC frequency baseline correlates well with human fixations on adpositions (ADP) which both assign comparably low values.
+
+Proper nouns (PROPN) are overestimated in BNC as a result of their infrequent occurrence.
+
+using fine-tuned BERT models for both sentiment classification and relation extraction as the reference model and present results in Figure 4.
+
+In
+
+Figure 4: Results of our reduction analysis where most important tokens are selected and fed into fine-tuned BERT models for sentiment classification (left) and relation extraction (right).
+
+Upper: we gradually measure output probability for the true label.
+
+Higher area under the curve reflects a stronger model sensitivity to adding important tokens.
+
+Lower: Fractions of Most-selected POS tags at the first flip are displayed for human attention (TSR), flow 11, E-Z and BNC token probability.
+
+Figure 5: Full distribution of POS tags of most important first flip tokens for the task of sentiment reading (top) and relation extraction (bottom).
+
+Accuracy and F1 scores after fine-tuning on the respective task dataset over five runs: sentiment reading on SST (SR) and relation extraction on Wikipedia (REL).
+
+Samples that overlap with the ZuCo dataset were filtered out.
+
+Full correlation analysis for sentiment reading (left) and relation extraction (right).
+
+We show Spearman and Pearson correlation coefficients between human fixations and models.
+
+Correlation coefficients were calculated per sentence and averaged (sen) or after concatenation of all sentences (tok)

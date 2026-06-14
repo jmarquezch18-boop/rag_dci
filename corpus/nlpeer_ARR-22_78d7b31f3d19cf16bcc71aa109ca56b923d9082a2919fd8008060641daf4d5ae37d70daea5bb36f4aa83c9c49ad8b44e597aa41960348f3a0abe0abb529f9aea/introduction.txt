@@ -1,0 +1,37 @@
+It remains an open research question whether external knowledge is needed for commonsense reasoning.
+
+On one hand, a substantial body of prior work has reported that integrating external knowledge can help improve task performance (Mitra et al., 2019;Bian et al., 2021, inter alia), especially if the knowledge is high quality (e.g. hand-crafted by experts).
+
+On the other hand, recent leaderboards are often dominated by large-scale pretrained models that are fine-tuned on a target benchmark (Khashabi et al., 2020;Lourie et al., 2021), suggesting that the benefits of external knowledge may wash away as the underlying models increase in size and are pretrained on ever larger amounts of raw text.
+
+Even if external knowledge is found to be effective on a particular task, flexibility remains a fundamental hurdle to integrating external knowl-Figure 1: Generated knowledge prompting involves (i) using few-shot demonstrations to generate questionrelated knowledge statements from a language model; (ii) using a second language model to make predictions with each knowledge statement, then selecting the highest-confidence prediction.
+
+edge, as many benchmarks currently lack appropriate knowledge bases with sufficient coverage.
+
+Furthermore, prior methods often require task-specific, custom supervision for knowledge integration (Mitra et al., 2019;Chang et al., 2020), introducing a burden for rapidly adapting new pretrained models to a wide variety of tasks.
+
+In this paper, we investigate whether external knowledge can be helpful for commonsense reasoning, even on top of the largest state-of-the-art pretrained models (e.g. T5-11b (Raffel et al., 2019) and its variants), with a focus on four recent commonsense benchmarks.
+
+To facilitate easier adaptation with any zero-shot or finetuned models, we propose an approach that does not require access to a structured knowledge base or joint finetuning for knowledge integration.
+
+The key insight behind our method, Generated Knowledge Prompting (sketched in Figure 1), is that we can generate useful knowledge from a language model, then provide the knowledge as an input prompt that is concatenated with a question.
+
+To krill and plankton 0.99
+
+Table 1: Examples where prompting with generated knowledge rectifies model prediction.
+
+Each section shows the correct answer in green, the incorrect answer in red, and the prediction scores from the inference model that only sees the question (top) and the same model that sees the question prompted with the given knowledge (bottom).
+
+support a variety of settings without finetuning, the quality and flexibility of knowledge is crucial.
+
+We propose a simple, yet effective, method that elicits knowledge statements (i.e. knowledge expressed as natural language statements) from generic language models in a few-shot setting.
+
+Compared to prior work that elicits knowledge via clarification questions (Shwartz et al., 2020) or contrastive explanations (Paranjape et al., 2021), our approach can generate knowledge flexibly, beyond the scope of pre-defined templates (Table 1).
+
+Experiments show that our method improves both zero-shot and finetuned models on numerical commonsense (NumerSense (Lin et al., 2020)), general commonsense (CommonsenseQA (Talmor et al., 2019), CommonsenseQA 2.0 (Talmor et al., 2021)), and scientific commonsense (QASC (Khot et al., 2020)) benchmarks, setting a new state-ofthe-art on three of these datasets.
+
+It outperforms the template-based knowledge generation method self-talk (Shwartz et al., 2020), while performing comparably to retrieval-based systems.
+
+We find three factors contribute to the performance of generated knowledge prompting: (i) the quality of knowledge, (ii) the quantity of knowledge where the performance improves with more knowledge statements, and (iii) the strategy for integrating knowledge during inference.
+
+Our qualitative analysis suggests that the generated knowledge statements cover a variety of types, and can transform commonsense question answering to explicit reasoning procedures, e.g. deduction, that are supported by off-the-shelf and finetuned language models.

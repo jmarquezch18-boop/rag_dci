@@ -1,0 +1,29 @@
+Neural networks have become ubiquitous in machine translation due to their elegant architecture and good performance.
+
+The representations they use for linguistic units are crucial for obtaining high-quality translation.
+
+In this work, we investigated how neural MT models learn word structure.
+
+We evaluated their representation quality on POS and morphological tagging in a number of languages.
+
+Our results lead to the following conclusions:
+
+• Character-based representations are better than word-based ones for learning morphology, especially in rare and unseen words.
+
+• Lower layers of the neural network are better at capturing morphology, while deeper networks improve translation performance.
+
+We hypothesize that lower layers are more focused on word structure, while higher ones are focused on word meaning.
+
+• Translating into morphologically-poorer languages leads to better source-side representations.
+
+This is partly, but not completely, correlated with BLEU scores.
+
+• The attentional decoder learns impoverished representations that do not carry much information about morphology.
+
+These insights can guide further development of neural MT systems.
+
+For instance, jointly learning translation and morphology can possibly lead to better representations and improved translation.
+
+Our analysis indicates that this kind of approach should take into account factors such as the encoding layer and the type of word representation.
+
+Another area for future work is to extend the analysis to other word representations (e.g. byte-pair encoding), deeper networks, and more semantically-oriented tasks such as semantic rolelabeling or semantic parsing.

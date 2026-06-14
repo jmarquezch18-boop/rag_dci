@@ -1,0 +1,31 @@
+We describe our experimental setup in terms of the datasets used, modeling and evaluation procedures, in this section.
+
+Accuracy and F1-score are reported for classification and mean-absolute error (MAE) and meansquared error (MSE) are reported for regression.
+
+To evaluate ranking performance, we calculate the Normalized Discounted Cumulative Gain (NDCG), Spearman's Rank Correlation(SRC), Kendall's Tau Correlation Coefficient (KTCC), and the percentage of slugs ranked completely correct, which we denote as Ranking Accuracy (RA).
+
+There is some work on evaluating ranking in NLP (Lapata, 2006;Katerenchuk and Rosenberg, 2016), without any consensus on the most suited metric.
+
+Hence, we chose to report multiple metrics instead of one, based on the commonly reported measures for such tasks.
+
+We compare classification and regression predictions too using ranking metrics, in addition to traditional measures.
+
+To examine the ranking performance, the texts from each dataset are first grouped by their slugs.
+
+Then, ground-truth ranking of the texts within the slugs are compared against the rankings formed from the predicted scores of the models.
+
+For NDCG, we used the ground-truth reading levels as the relevance score.
+
+For all the metrics, We took the model predictions as is, and did not employ specific means to address ties (which can happen in classification).
+
+The metrics themselves address ties in different ways.
+
+NDCG averages ties in predicted scores, KTCC penalizes ties in ground truth and predicted scores, and SRC calculates the average rank of ties.
+
+Ranking accuracy does not handle ties.
+
+We performed within corpus evaluation for classification, and within/cross corpus as well as crosslingual evaluation for regression and ranking.
+
+We did not employ classification approaches in the last two evaluation settings as there is no way of resolving ties with classifier predictions.
+
+Further, regression and ranking gave better performance than classification in monolingual, within-corpus settings.

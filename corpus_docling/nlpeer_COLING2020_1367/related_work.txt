@@ -1,0 +1,71 @@
+There are about 70 Indigenous languages from 10 distinct language families currently spoken in Canada (Rice, 2008).
+
+Most of these languages have complex morphology; they are polysynthetic or agglutinative.
+
+Commonly, a single word carries the meaning of an entire clause in Indo-European languages.
+
+All Indigenous languages in Canada were targeted by government policies that sought to eradicate them.
+
+These policies were implemented through legislation, such as the Indian Act,2 which discouraged, and often made illegal, gathering for cultural practices and speaking ancestral languages.
+
+Many Indigenous children were forcibly removed from their communities and placed in compulsory boarding schools (known as Residential Schools) or adopted by non-Indigenous families (known as the Sixties Scoop (Fachinger, 2019)).
+
+According to the Truth and Reconciliation Commission of Canada, the residential school system was "created for the purpose of separating Aboriginal children from their families, in order to minimize and weaken family ties and cultural linkages" (Government of Canada, 2015, preface).
+
+The resilience of Indigenous communities can be seen in the many ways that they have resisted assimilation and continued to teach, learn, and speak their languages (Pine and Turin, 2017).
+
+The benefits associated with the use of these languages are wide-ranging (Whalen et al., 2016;Reyhner, 2010;Oster et al., 2014;Marmion et al., 2014).
+
+For instance, there is a correlation between Indigenous language use and a decrease in youth suicide rates on reserves in British Columbia (Chandler and Lalonde, 1998;Hallett et al., 2007).
+
+However, many communities face decreasing numbers of first language (mother tongue) speakers, due to declining language transmission rates (Norris, 2018).
+
+Much Indigenous language revitalization work in Canada focuses on preservation of language through recording the speech of Elders: recordings and transcriptions are a vital resource for language learning by younger generations.
+
+Figure 1 (obtained from the Statistics Canada website) shows the number of speakers per language in 2016 (Statistics Canada, 2017).
+
+The languages underlined in red are those with which the ILT project has interacted in some way.
+
+These census numbers are controversial.
+
+This figure is included to give the non-expert reader a general idea of the number of speakers of each language; for detailed demographic information, one should consult experts on each individual language.
+
+3 Text-based subprojects
+
+Early in the ILT project, Owennatékha (Brian Maracle), the director of Onkwawenna Kentyohkwa (Our Language Society), asked whether NRC would be able to create a software-based verb conjugator.
+
+Onkwawenna Kentyohkwa is an adult immersion school in the Six Nations Grand River Territory in Ontario that takes students through 2000 hours of Kanyen'kéha immersion over two years.
+
+Kanyen'kéha is an Iroquoian language, commonly known as "Mohawk", spoken in territory that spans present-day Ontario, Quebec, and New York State.
+
+Iroquoian languages are highly polysynthetic.
+
+Learning and teaching verbs in Kanyen'kéha is a formidable task.
+
+There are millions of conjugations for even the most common verbs.
+
+It is therefore only possible to create a verb conjugator with reasonable coverage in software, not on paper.
+
+Verb roots in Kanyen'kéha are bound morphemes: they do not, on their own, constitute words.
+
+A pronominal prefix, a verb root and an aspectual ending are always present (for commands the aspectual ending is null).
+
+A verb can contain pre-and post-pronominal prefixes and pre-aspectual suffixes.
+
+Kanyen'kéha has 14 stand-alone or 'free' pronouns, and 72 bound pronouns, meaning the combinatorial inflectional possibilities are much larger than in English, French, or other European languages.
+
+This complexity adds to the difficulty of teaching the language: even learning how to properly conjugate a modest number of verbs requires a significant amount of work.
+
+For detailed information on Kanyen'kéha syntax, see Kanatawakhon (2002).
+
+In 2017, we began building the verb conjugator for Kanyen'kéha described below (Kazantseva et al., 2018).
+
+We are now building a verb conjugator for Michif, an unrelated polysynthetic language.
+
+For each language, we have been working with members of the relevant community to develop a conjugator that does not replace learners' experience of studying verbal morphology at schools in the community, but that complements it.
+
+These conjugators rely on finite-state transducers (FSTs) which are rule-based.
+
+Rule-based approaches may seem outdated in contrast to statistical or neural methods.
+
+However, with most Indigenous languages, existing corpora are not large enough to produce accurate statistical models.

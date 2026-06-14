@@ -1,0 +1,11 @@
+We use the state of the art English NER model of Ratinov and Roth (2009) as the base model.
+
+This model approaches NER as a multiclass classification problem with greedy decoding, using the BIO labeling scheme.
+
+The underlying classifier is averaged perceptron.
+
+Table 1 summarizes the features used in our model.
+
+These can be divided into a base set of standard features which are included in Ratinov and Roth (2009), a set of gazetteer features which are based on titles in multilingual Wikipedia, and our novel cross-lingual wikifier features.
+
+The base set of features can be further divided into nonlexical and lexical categories.

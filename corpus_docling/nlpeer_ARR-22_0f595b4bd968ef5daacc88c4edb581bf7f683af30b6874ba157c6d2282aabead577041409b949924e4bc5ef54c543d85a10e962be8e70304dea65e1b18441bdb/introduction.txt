@@ -1,0 +1,19 @@
+Evaluation of open-domain dialogue is particularly challenging and has been cited in high-profile competitions as a known open problem (Dinan et al., 2019).
+
+Challenges arise primarily from the fact that in real-world conversations there exists such a vast number of possible appropriate responses.
+
+Subsequently, dialogue evaluation that relies on comparison with pre-created reference dialogues incur substantial false-negative rates as many appropriate responses are unfairly penalized simply for not corresponding closely with references.
+
+In addition, evaluation faces further challenges with respect to the ability to fully take into account dialogue history.
+
+1In this paper, we present a new method of opendomain dialogue evaluation based on human assessment of live conversations with models that avoids the need for pre-created reference dialogues and ensures full familiarity with dialogue history, ticking two important boxes in terms of validity.
+
+Although live human evaluation of models has the advantage of being highly valid, reliability unfortunately cannot be assumed and developing methods of evaluation for language tasks that achieve high rater consistency has been challenging, often resulting in low levels of agreement between annotators (Finch and Choi, 2020;Callison-Burch et al., 2011, 2012;Bojar et al., 2013Bojar et al., , 2014;;Mehri and Eskenazi, 2020b).
+
+Despite challenges in this respect, our proposed method provides highly reliable evaluation, achieving a correlation of r = 0.969 in selfreplication experiments.
+
+Additionally, the evaluation can be carried out cheaply and on a large scale through strict quality controlled crowd-sourcing, as well as including score standardization for fairer ranking of competing models.
+
+We make the data and code publicly available to aid future research.
+
+2

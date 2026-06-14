@@ -1,0 +1,309 @@
+Massive-Scale Decoding For Text Generation Using Lattices
+
+Abstract
+
+Introduction
+
+Problem & Setup
+
+We define our algorithm in the context of conditional text generation (Sutskever et al., 2014;Bahdanau et al., 2014).
+
+Conditional text generation is formulated as sequence transformation from a source input x to target output y = (y 1 , . . . , y n ) via a neural text generation model parameterized by θ.
+
+Each y i is a symbol in a vocabulary V. The probability of a decoded sequence is given by p(y | x; θ) = n t=1 p(y t | y <t , x; θ).
+
+Decoding text from a model can be framed as a search problem, where the search objective is to find the periments will seek to compare different methods using the same search budget.
+
+We will define this more precisely in Sec. 7.
+
+Inadequacies Of Beam Search
+
+As we have alluded to, beam search is inadequate for our goal for several reasons.
+
+We show experiments on these aspects in this section and Appendix A.
+
+Better Model Score Better Hypothesis The most critical issue is that beam search is designed to efficiently approximate arg max ŷ = p(ŷ | x; θ), but the optimal model score is neither our goal nor a guarantee of a good hypothesis.
+
+In Figure 3, we compare the correlation of model score and ROUGE under beam search for text summarization.
+
+The Pearson correlation between these two variables is very weak.
+
+Beyond ROUGE score, the example in Fig. 1 shows that the main differences between these summaries may be minor differences in surface realization that have little effect on our qualitative judgments of summary quality.
+
+The hypothesis with the best score under beam search is not substantially better quality than hypotheses with slightly lower scores.
+
+Are the model outputs from BS and DBS diverse? We use Self-BLEU (SBL) (Zhu et al., 2018) to measure the BLEU score for randomly sampled pairs from each algorithm's output.
+
+The lower the self-BLEU, the more dissimilar the pairs are.
+
+On decoding summaries on XSum, the SBL for BS/DBS are 87/79 while a nucleus sampling method can achieve 57/50 depending on the configuration.
+
+Although DBS slightly improves the diversity compared to the original variant, the overlap of outputs from beam search based method is still very high, and the diversity remains a challenge.
+
+Poor Efficiency from Pruning One final issue with beam search is that most of its computation is not even useful in producing finished hypotheses; that is, the set Y of answers produced does not contain most of the nodes expanded in the typical course of operation.
+
+We conduct an empirical pruning study on a summarization dataset and three translation datasets and show the results in Table 1.
+
+For all studied cases, beam search and diverse beam search prune over half of the expanded nodes.
+
+Many pruned hypotheses are not truly ungrammatical or low quality, but are merely slightly less likely than other nodes.
+
+How we can preserve more of the explored lattice and do so efficiently is addressed in next by our use of best-first search.
+
+Modified Best-First Search
+
+As established in the previous section, beam search prunes many paths that would potentially yield high-quality summaries and wastes computational resources expanding nodes that aren't included in a if isRecomb( ĥ, C) then 5:
+
+doRecomb( ĥ, C) 6: continue 7:
+
+end if 8:
+
+if ĥ = EOS then 9:
+
+v greedy = arg max v∈V p(v | ĥ, x; θ) 10: C ← C ∪ ĥ 20: end while final search graph.
+
+We tackle this issue by changing from beam search to best-first search (BFS) (Hart et al., 1968;Pearl, 1984).
+
+BFS prioritizes searching over nodes according to a scoring function, giving us more flexibility in how we explore the space.
+
+Our chief modification of the base algorithm is a heuristic we call depth-first completion.
+
+for v ∈ V do 11: score ← s( ĥ v) // concatenation 12: if v = v greedy then 13: score ← ∞ // depth-
+
+Depth-first Path Completion Neural text generation is a search problem with large branching factor (V) and deep search depth (sequence length).
+
+As a result, applying BFS with the scoring function being the model score of a state often leads to a broad search that rarely returns a valid path.
+
+One solution to this problem is to incorporate a heuristic based on length.
+
+Model score is monotonically decreasing as a sequence grows in length, so prior work (Wu et al., 2016;Zhang et al., 2018;Meister et al., 2020b) has used a length reward term to alleviate this issue.
+
+2 We found that, even with a length heuristic, BFS will still have "dangling" nodes that are not part of any path to an EOS (goal) token, and it might return few or no valid hypotheses.
+
+Recognizing our objective from Equation 1, we can take a simple step to ensure that every node ends up on some completed path: eagerly do a greedy search from each node until we reach n eos 2 This can be considered a heuristic like in (weighted) A * search, but it is not necessarily admissible or consistent.
+
+Next expanding nodes Node being expanded
+
+(-1.7, plant) (-1.8, company) … … (-1.6, company) (-1.5, facility) … … ∞ ( , …) -1.4 ∞ … … … … … … Explored 𝒞
+
+Frontier 𝒪
+
+Figure 5: Depth-first completion.
+
+The red node is the current node being expanded.
+
+We depth-first expand a sequence of nodes (in blue) to get a completed path.
+
+or exceed a maximum length.
+
+In Algorithm 1, we implement this by modifying the priority of the highest scored token with ∞ (line 12), so it will be explored immediately after the current time step.
+
+In Figure 5, we illustrate depth-first completion.
+
+Search Algorithm We describe BFS with depthfirst completion in Algorithm 1.
+
+The algorithm is a modified best-first search algorithm applied to text generation.
+
+s(•) is a function to evaluate the value of a path.
+
+Typically it is defined as s(y) = log p(y t | y <t ).
+
+b is the budget for total model calls to neural text generation model.
+
+Note that isRecomb and doRecomb do not invoke the neural generation model, so they do not count towards the computation budget we defined here.
+
+In practice, we only consider top 5 expansions rather than the whole vocabulary V for line 10.
+
+Path Recombination
+
+Path recombination, also known as hypothesis recombination, was originally proposed and used in phrase-based machine translation (Och et al., 2001;Koehn et al., 2003;Zhang et al., 2018).
+
+The idea of path recombination is to combine similar paths if what the model predicts for them in the future is the same, reflecting a similar dynamic programming principle as the Viterbi algorithm.
+
+We focus on finding hypotheses which approximately exhibit this property, and show that merging them can yield high-quality outputs.
+
+Figure 2 shows an example of recombination.
+
+The two hypotheses being merged here roughly convey the same intent, and it turns out that the shared suffix "has gone into" is a strong indicator that the model will treat them similarly in the rest of the generation.
+
+This criterion can be checked empirically, but it is not practical to do so during search.
+
+To approximate equivalence, we define a similarity function isRecomb(h, ĥ) to determine if an expanded node ĥ should be merged with an existing expanded node h. A similar recombination idea was explored in Zhang et al. (2018).
+
+Following their work, we explore a family of rule-based heuristics for merging.
+
+There are two rules: (1) two strings share a common n-gram suffix, (2) the length difference of two strings is less than α.
+
+Assume that the canonical paths for h and ĥ are lengths l and l, then isRecomb(h, ĥ) = 1[π(h) l-n+1,...,l = π( ĥ) l-n+1,..., l ∧ |l -l|< α] where α and n are hyper-parameters.
+
+3 For a large enough value of n, note that the shared suffixes encourage hypotheses like this in Figure 6 that share large parts of the structure already.
+
+Prior Work: BSZBEAM Zhang et al. (2018) use their merging criterion in the context of beam search for neural machine translation.
+
+If the merging criteria hold, ĥ will be recombined with h. However, ĥ will not be considered as a future merging candidate.
+
+We call this merging strategy ZBEAM.
+
+We implement this model together with its merging criteria and denote it as BSZBEAM.
+
+This strategy is tailored to beam search and explores a more limited set of merges than we do.
+
+Canonical Paths After recombination, a single node may represent multiple different possible sentence prefixes.
+
+If an edge is created due to the extension of search graph via model's prediction, we call it a GEN edge.
+
+Otherwise, the edge is created due to path recombination, and we call it a MRG edge.
+
+We define the notion of a canonical path, which represents the single path used to score candidate expansions.
+
+Definition 5.2 (Canonical Path).
+
+Let n be a node.
+
+The canonical path to n is defined as the unique path from n sos to n consisting only of GEN edges.
+
+Theorem 5.1.
+
+For any node n in the graph except n sos , there exists exactly one canonical path.
+
+We present the proof in Appendix.
+
+C. We define the path of a node n, π(n), as returning the sequence of words corresponding to the canonical path of that node.
+
+Expanding n computes P (y | π(n)) under the neural model.
+
+Recombination Mechanism
+
+We illustrate the two major recombination techniques we introduce, RCB and ZIP, in Figure 6.
+
+These methods represent our two implementations of doRecomb in Algorithm 1.
+
+RCB: Generalization of ZBEAM ZBEAM has a major limitation: a limited set of merging candidates.
+
+The potential merge candidates in ZBEAM are only nodes in the current beam hypotheses and their previous steps, so the method cannot merge with nodes from earlier timesteps.
+
+For example, "A waste plant has gone into" cannot be merged with the hypothesis with ending in node 4 shown in Figure 6.
+
+The proposed generalization, RCB, addresses this limitation.
+
+We index all of the nodes in the lattice across all timesteps by their n-grams using a hash table, making it O(1) time to look up an n-gram pattern and retrieve potential merge candidates if they exist.
+
+ZIP: Recombining More If we take a closer look at RCB in Figure 6, we see that even in the merged structure, nodes 3 and 7 and nodes 2 and 6 are preserved as separate.
+
+They do not pass the recombination criterion themselves, but these nodes are part of the suffix matched strings, still correspond to the same words, and have the same directly generated next word.
+
+There is reason to believe that these might be equivalent as well.
+
+Hence, we explore a variant called ZIP that propagates the merge backwards through the lattice.
+
+This change relaxes the merging criterion and up to n pairs of nodes are combined when a merge is identified, leading to a more compact lattice.
+
+We describe some of the details in Appendix D.
+
+Our Methods In this work, we combine the two proposed techniques, the modified best-first search (BFS) and recombination methods, together.
+
+Hence, we name them as BFSRCB and BFSZIP.
+
+Evaluation
+
+Datasets & Base Models
+
+Search Budget
+
+To fairly compare the resource usage of all methods, we define the search budget as the number of calls to the neural model, equivalent to the number of nodes expanded.
+
+4 With beam size k and maxi-mum length T , beam search methods are given a theoretical budget of kT .
+
+We could simply allow best-first search and sampling methods to expand this number of nodes.
+
+However, since hypotheses may terminate before they reach EOS, empirically there is a gap between effective length (the average generated hypothesis length) and max length for both beam search and sampling.
+
+To balance the computation used across the different methods, we apply a correction factor so that the different methods are expanding the same number of nodes in aggregate.
+
+We increase the beam size k by 50% for translation, from 8 to 12, and 25% for summarization, from 16 to 20, for our baseline methods: k to BS, DBS, NCLS, TEMP, and BSZBEAM.
+
+This correction was empirically determined to balance the number of nodes expanded between our method and the baselines.
+
+We emphasize that this correction improves the baseline performance relative to our methods.
+
+Search Algorithms
+
+We implemented GREEDY, BS, DBS, NCLS, and TEMP as baseline methods.
+
+NCLS 0.9 represents nucleus sampling method with p = 0.9.
+
+We refer to Appendix E for detailed descriptions.
+
+We also experiment with basic BFS without path recombination, but including our depth-first path completion technique to ensure that finished hypotheses are produced.
+
+BSZBEAM is our implementation of Zhang et al. (2018).
+
+We integrate RCB with nucleus sampling and best-first search as NCLSRCB and BFSRCB.
+
+We also test BFS with the ZIP strategy.
+
+BFSZIP is a resource-efficient version of BFSZIP where only 25% of the search budget is used, exploring what this method can achieve with a lower budget given its more aggressive merges.
+
+Evaluation Metrics
+
+Results
+
+Related Work
+
+Discussion & Conclusion
+
+Figure 1: A lattice of outputs yielded by path recombination is a more efficient way to represent and explore related generation outputs compared to beam search.
+
+Best-first search with depth-first completion and path recombination Input: Generation model θ with vocabulary V, search budget b, O and C denote open set (max priority queue) and closed set, isRecomb and doRecomb are functions checking and running path recombination.
+
+Output: All completed paths P 1: O ← {(∞,n sos )}, C ← ∅, expanded ← 0. 2: while expanded < b do 3: ĥ ← O.pop() 4:
+
+Figure 7: Empirical verification of merging criteria.
+
+We experiment with n = {2, 4, 6} for n-gram suffix matching.
+
+We sample 1,000 recombinations from BFSRCB and BFSZIP respectively, and run greedy inference based on merged hypotheses.
+
+We use Exact Match (EM) to measure how often two merged hypotheses give the same greedy future generations considering the next L tokens after the merge.
+
+Figure8: Two examples on XSum by BFSZIP.
+
+The start of sentence is denoted in dark color, and all the endings are in gray.
+
+We combine tokens to phrases when possible for visualization purpose.
+
+More examples are presented in Appendix.
+
+H.
+
+Strong equivalence). Let a and b be two prefix strings starting with n sos .
+
+a and b are strongly equivalent if P (y | a) = P (y | b) holds for all y.
+
+Figure 10: An illustration of removing unexplored hypotheses from search frontier in ZIP.
+
+While typically the goal of decoding is to find the hypothesis with the highest possible model score, we instead focus on finding a large set of "good enough" hypotheses.
+
+That is, finding a set Y:
+
+Pruning ratio of BS and DBS on different tasks and datasets with beam size k. We report the average percentage of explored nodes getting pruned and not appearing in a finished hypothesis.
+
+Theoretically, two search states should only be recombined if they yield the exact same distribution over future generation decisions (see strong equivalence in Ap-
+
+Results decoding text summaries on XSum.
+
+Diversity metrics are rounded to integers to save space.
+
+Results on WMT14 Fr-En and WMT19 Zh-En.
+
+Columns are the same as for summarization, although BLEU is used instead of ROUGE.
+
+Trends are roughly similar, with BFSRCB providing high diversity at good quality and BFSZIP offering a strong tradeoff between computational resources and diversity.
+
+, we present two examples on XSum by BFSZIP.
+
+The upper example has more word level recombination and paraphrasing while the bottom one has more ways of ending and more diverse content coverage.
+
+We show more examples on both summarization
+
+.

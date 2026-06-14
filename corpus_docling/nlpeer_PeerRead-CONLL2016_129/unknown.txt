@@ -1,0 +1,199 @@
+Semi-Supervised Convolutional Networks For Translation Adaptation With Tiny Amount Of In-Domain Data
+
+Abstract
+
+Introduction
+
+Cnns For Text Classification
+
+In a text classification task, key phrases (or ngrams) can help in determining the class of the text, regardless of their locations in the text.
+
+For example, the word "desktop" in a sentence may indicate this sentence has computers as its topic; the phrase "not satisfactory" may indicate that the sentiment of the entire sentence is negative.
+
+This kind of strong local information about the class of a text can appear in different regions in the input.
+
+Convolutional neural networks are useful for text classification because convolutional and pooling layers allow the model to find such local indicators, wherever they are in the text.
+
+Recently, CNNs have shown promising results on many text classification tasks, such as sentiment analysis (Kalchbrenner et al., 2014;Kim, 2014), topic and sentiment classification (Johnson and Zhang, 2015a;Johnson and Zhang, 2015b), paraphrase identification (Yin and Schütze, 2015), entity relation type classification (Zeng et al., 2014;dos Santos et al., 2015), short-text classification (Wang et al., 2015), event extraction and detection (Chen et al., 2015;Nguyen and Grishman, 2015), question understanding and answering (Dong et al., 2015), and box-office prediction based on reviews (Bitvai and Cohn, 2015).
+
+Within the CNN architecture, people also use word embeddings for text classification.
+
+(Kalchbrenner et al., 2014) proposes a CNN framework with multiple convolution layers, with latent, dense and low-dimensional word embeddings as inputs.
+
+(Kim, 2014) defines a one-layer CNN architecture with comparable performance to (Kalchbrenner et al., 2014).
+
+The word embeddings input to the CNN can be pre-trained, and treated as fixed input, or tuned for a specific task.
+
+(Johnson and Zhang, 2015b) extends their "one-hot" CNN in (Johnson and Zhang, 2015a) to take region embeddings trained on unlabeled data as CNN input.
+
+CNNs that input word embeddings trained on unlabeled data are considered to be semi-supervised CNNs.
+
+Semi-Supervised Cnn
+
+A CNN is a feed-forward network consisting of convolutional and pooling layers.
+
+Each neuron in the convolutional layer of a CNN processes a segment of input signals, which could be a region in an image or a window of words in a sentence.
+
+The convolution layer consists of a set of kernels that compute the dot product between different segments of the input.
+
+The kernel associated with the l-th segment of the input x computes:
+
+σ(W • w l (x) + b),(1)
+
+where w l (x) ∈ R q is the input window vector that represents the l-th segment of data.
+
+Weight matrix W ∈ R m×q and bias vector b ∈ R m are shared by all the kernels in the same layer, and are learned during the training process.
+
+Because the convolution kernel allows interaction between different parts of the input, it reduces the requirement to select features by hand.
+
+Important features in a sentence are automatically selected with pooling, which is a form of non-linear down-sampling.
+
+It takes the maximum or the average value observed in each of the d dimension vectors over different windows.
+
+As a result, information from multiple d dimension vectors is kept in a single d dimensional vector.
+
+At training time, both the weight vectors and the bias vectors are learned with stochastic gradient ascent.
+
+One-Hot Cnn
+
+When applying CNN to NLP tasks, the first layer of the network takes word embeddings as input.
+
+Word embeddings can be pre-trained using tools such as word2vec (Mikolov et al., 2013) or GloV e (Pennington et al., 2014), in which case a table lookup is enough.
+
+Alternatively, these vectors can be learned from scratch as a step in the network training process.
+
+When there are enough in-domain data, training in-domain word embeddings is meaningful.
+
+However, when the in-domain data are limited, the word embeddings learned from these data are unreliable.
+
+In this case, the input sentence x can be represented with one-hot vectors where each vector's length is the vocabulary size, value 1 at index i indicates word i appears in the sentence, and 0 indicates its absence.
+
+A CNN with one-hot vector input is called "one-hot CNN" (Johnson and Zhang, 2015a).
+
+w l (x) can be either a concatenation of one-hot vectors, in which the order of concatenation is the same as the word order in the sentence, or it can be a bag-of-word/n-gram vector.
+
+The bag-of-word (BOW) representation loses word order information but is more robust to data sparsity.
+
+In (Johnson and Zhang, 2015a), a CNN whose input being BOW representation is called bow-CNN while input with concatenation of vectors is called seq-CNN.
+
+The window size and stride (distance between the window centers) are meta-parameters.
+
+σ in Equation 1 is a component-wise non-linear function such as ReLU.
+
+Thus, each kernel generates an m-dimensional vector where m is the number of weight vectors or neurons.
+
+These vectors from all the windows of each sentence are aggregated by the pooling layer, by either componentwise maximum (max pooling) or average (average pooling), then used by the top layer as features for classification.
+
+Semi-Supervised Cnn
+
+Although the size of the in-domain data is normally small, the unlabeled data from general domains are much larger and easier to obtain.
+
+To exploit large amounts of unlabeled data, we adopt a semi-supervised learning framework similar to (Johnson and Zhang, 2015b).
+
+It first learns word embedding from unlabeled data, then generates the text segment embedding based on these unsupervised word embeddings.
+
+Both the one-hot vectors from the labeled data and the segment embeddings from unlabeled data are combined to train the CNN classifier.
+
+The word embeddings map each word to a realvalued, dense vector (Bengio et al., 2003).
+
+Word embeddings are often learned with an unsupervised learning paradigm: each dimension of the continuous word embeddings aims at capturing a latent feature, reflecting certain syntactic and semantic meanings of the word.
+
+A widely used approach for generating useful word embeddings was proposed in (Mikolov et al., 2013).
+
+This method learns the word embeddings such that the likelihood of generating a word based on its contexts (or generating the context of a given word, aka "skip-gram" model) is maximized.
+
+It speeds up the training with the hierarchical softmax strategy and a simplified learning objective, which scales very well to very large training corpora.
+
+We adopt the skip-gram model, which intuitively learns a classifier that predicts words conditioned on the central word's vector representation.
+
+An advantage of such distributed representations is that words that have similar contexts, and therefore similar syntactic and semantic properties, will tend to be near one another in the low-dimensional vector space.
+
+Given the word embeddings trained from unlabeled data, a sentence is represented as a sequence of d-dimensional vectors, which is the input to a convolution network that generates feature vectors for each text segment.
+
+The segment vectors and one-hot vectors are fed into another convolution layer, which outputs the classification labels.
+
+The second network is trained with the labeled indomain/out-domain data.
+
+Therefore, Equation 1 is replaced with:
+
+σ(W • w l (x) + V • u l (x) + b),(2)
+
+where w l (x) is the one-hot vector obtained from segment l in a sentence, and u l (x) is the embed-ding learned from the unlabeled data (general domain training data), applied to the same segment.
+
+We train this model with the labeled data.
+
+We update the weights W, V, bias b, and the top-layer parameters so that the loss function is minimized on the labeled training data.
+
+Adaptation Based On Data Selection
+
+We use the in-domain data from the translation task as positive samples, and randomly select the same number of sentences from the general domain data as negative samples.
+
+We train the CNN model on the positive and negative samples with the one-hot CNN or semi-supervised CNN described previously.
+
+The trained CNN model is then used to classify the sentence pairs in the general domain data.
+
+The sentence pairs with high in-domain scores are selected to train the machine translation system.
+
+We classify the source sentence and target sentences separately.
+
+The CNN model computes two scores for each sentence pair.
+
+The sentence pairs are selected based on the source scores, target scores or the sum of source and target scores (Moore and Lewis, 2010).
+
+Experiments show that selection based on the sum of the source and target scores achieves the best performance.
+
+We empirically determine the number of selected in-domain sentences for each MT system based on experimental results on a separate validation set.
+
+When selecting the negative samples, we either randomly sample from the whole data pool, or select from the sentences which have been labeled as negative in the first round classification.
+
+Additional experiments show that the results from these two methods are very similar, so we sample the negative samples from the whole general domain for simplicity.
+
+Experiments
+
+Data Setting
+
+We carried out experiments in four different data settings.
+
+All four have large amounts of bilin-gual training data: 9-15M sentences.
+
+The first two involve translation into English (en) from Chinese (zh) and Arabic (ar), while the last two involve translation from English to Spanish (es) and Chinese.
+
+The training data are all publicly available, either from LDC,1 and transcriptions of TED talks2 where the data are the mixture of newswire, web crawl, UN proceedings and TED talks, etc., or from WMT, 3 where the data are the mixture of Europarl, web crawl, news-commentary, UN proceedings, etc.
+
+The dev and test sets are "short messages (sms)" for the first task, which are also available from LDC; "tweets" for the second task; publicly available "Facebook post" for the remaining two tasks.
+
+The last three tasks are from social media -an intriguing new area of application for MTwhere in-domain parallel training data are seldom publicly available.
+
+Table 1 summarizes the statistics of the training, dev, and test data for all the test sets.
+
+Experiment Setup
+
+Ngram: Data Selection By 3-Gram Lms With
+
+Witten-Bell7 smoothing (Axelrod et al., 2011) 3. rnnlm: Data selection by recurrent neural network LM, with the RNNLM Toolkit (Duh et al., 2013) 4. comblm: Data selection by the combined LM using ngram & rnnlm (equal weight) (Duh et al., 2013).
+
+All systems are trained with a standard phrasebased SMT system with standard settings, i.e., GIZA++ alignment, phrase table Kneser-Ney smoothing, hierarchical reordering models, target side 4-gram language model, "gigaword" 5-gram language model for systems with English as the target language, etc.
+
+Experimental Results
+
+Discussion
+
+Conclusions And Future Work
+
+adaptation techniques Domain adaptation to SMT systems has recently received considerable attention.
+
+Based on the availability of in-domain bilingual or monolingual training data, there are several adaptation scenarios.
+
+Different domain adaptation techniques, including self-training, data selection, data weighting, etc., have been developed for different scenarios.
+
+Figure 1: The performance on zh2en sms task with different numbers of in-domain sentences to train LM-based vs. CNN-based classifiers, which are then used to select 300K sentence pairs for MT system training.
+
+X-axis is the number of in-domain sentences, Y-axis is BLEU score.
+
+Summary of the results.
+
+Data size is given as number of sentence pairs.
+
+The number of selected in-domain sentences is determined by the performance on held-out data.
+
+"M" represents million, "K" represents thousand. */** means result is significantly better than the "alldata" baseline at p < 0.05 or p < 0.01 level, respectively. +/++ means result is significantly better than the best LM-based method at p < 0.05 or p < 0.01 level, respectively.

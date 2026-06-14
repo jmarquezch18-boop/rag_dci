@@ -1,0 +1,29 @@
+Data-driven models employ different features to make choices similar to those made by humans.
+
+For instance, Greenbacker and McCoy (2009a) used linguistically informed features such as recency, subjecthood, parallelism and ambiguity.
+
+In a comprehensive study, Kibrik et al. (2016) argued that reference generation is a multifactorial process governed by various linguistically motivated features.
+
+Hendrickx et al. (2008), on the other hand, focused more on existing patterns in the text and less on the use of linguistic categories.
+
+In a more recent study , Castro Ferreira et al. (2016) used features marking the syntactic position, recency and referential status of the referents to model the referential choice variations.
+
+In one of the few studies targeting feature selection, Greenbacker and McCoy (2009b) surveyed the psycholinguistics literature to decide on feature sets for their SRF study.
+
+They implemented several linguistically informed rules in their prototyping system, and "examined the incorrect classifications which resulted in an attempt to discover which other factors suggested by psycholinguistic research could explain the patterns they observed." Additionally, they incorporated some of the features used in Hendrickx et al. (2008) and created an extensive set of features which they felt had an impact on the referential choice.
+
+Afterwards, they trained C5.0 decision trees on 5 subsets of these features.
+
+The interesting result of their study is that the maximum number of features does not necessarily lead to best results.
+
+The problem with their study is that firstly, they do not propose any explanation on how they have selected different subsets.
+
+Secondly, their feature selection strategy is subjective, since it mostly concerns with the features they find important, and has less to do with the features of other models.
+
+Lastly, they have provided no linguistic explanation for their best performing system.
+
+Kibrik et al. (2016) also briefly talked about the feature selection in their study, highlighting the importance of recency-related features.
+
+Although their study is linguistically informed, the annotation effort behind it is very intense.
+
+The question is whether they could achieve a nearly similar performance using a smaller set of features.

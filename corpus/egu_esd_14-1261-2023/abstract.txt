@@ -1,0 +1,7 @@
+A semi-analytical solution to an advection-diffusion equation is coupled with a nonlinear wavemaker model to investigate the effect of strong nonlinearity on wave-induced mixing.
+
+The comparisons with weakly nonlinear model predictions reveal that in the case of waves of higher steepness, enhanced mixing affects the subsurface layer of the water column.
+
+A fully nonlinear model captures the neglected higher-order terms from a weakly nonlinear solution and provides a reliable estimation of the time-mean velocity field.
+
+The corrected wave-induced mass-transport velocity leads to improved estimates of subsurface mixing intensity and ocean surface temperature.

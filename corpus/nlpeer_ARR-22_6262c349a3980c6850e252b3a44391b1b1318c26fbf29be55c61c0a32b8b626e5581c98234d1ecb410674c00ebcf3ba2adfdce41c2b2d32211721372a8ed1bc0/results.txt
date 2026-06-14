@@ -1,0 +1,31 @@
+In order to investigate the effectiveness of our proposed LAML procedure, we train a Tacotron 2 model and a FastSpeech 2 model on the full Karlsson dataset as a strong baseline.
+
+We also train another Tacotron 2 model and another FastSpeech 2 model on speech in 8 languages with one speaker per language (Nancy dataset and CSS10 dataset) and fine-tune those models on a randomly chosen 30 minute subset from the Karlsson dataset.
+
+To our surprise, we did not only match, but even outperform the model trained on 29 hours with the model fine-tuned on just 30 minutes in multiple metrics.
+
+As a second baseline we tried to train another meta-checkpoint using the embedding lookup-table approach to also further investigate the effectiveness of the articulatory features.
+
+We did however not manage to get such a model to converge to a usable state.
+
+This already shows the superiority of the articulatory feature representations for such a multilingual use-case.
+
+Furthermore we tried to fine-tune the well trained English single speaker models from the first experiment on the 30 minutes of German to have another baseline that can be used to measure the impact of the LAML procedure.
+
+This setup however also did not yield any usable results.
+
+During the fine-tuning process, the model was capable of speaking German with a strong English accent, yet it did not properly learn to speak in the voice of the target speaker.
+
+By the time the model learned to speak in the new speaker's voice, it had overfitted the 30 minutes of training data and collapsed, producing no more intelligible speech.
+
+We conclude that the method proposed in this paper not only improves on the ability to use cross-lingual data easily, but actually enables it in the first place.
+
+Both the articulatory features, as well as the LAML pretraining seem necessary to achieve cross-lingual fine-tuning on low-resource data.
+
+The texts we use for the following experiments are disjunct from any training data used.
+
+Human speech as gold standard is not used, since we are interested in the difference in performance between the systems, not their absolute performance.
+
+The close to state-of-the-art performance of the baselines is considered as given, considering their ideal training conditions and use of proven methods.
+
+Furthermore, we chose to use German as our benchmark language over an actual low-resource language, since it is much easier to acquire reliable ratings on intelligibility and naturalness for German, than it would be for an actual low-resource language.

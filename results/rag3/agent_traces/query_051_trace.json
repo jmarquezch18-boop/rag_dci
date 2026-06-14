@@ -1,0 +1,136 @@
+{
+  "query_id": "d21452946e97bf0e1c6c6359138a49957df062e4",
+  "query": "What other tasks have you tested to demonstrate that the conclusions extracted from the experiments generalize?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "tasks"
+      },
+      "result_preview": "Search results for 'tasks' (21 matches):\n[paper_id=nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea | section=introduction | line=17] The pre-trained Transformer language models (TLMs) can be easily reused ",
+      "elapsed_s": 4.98
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+        "section": "introduction",
+        "start": 15,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea / introduction — líneas 10-25 de 69]\n\nSimilarly, a neural summarization model could benefit from these hierarchical structure information.\n\nIn this paper, w",
+      "elapsed_s": 10.81
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9",
+        "section": "methodology",
+        "start": 3,
+        "end": 3
+      },
+      "result_preview": "[nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9 / methodology — líneas 1-8 de 35]\nThe architecture of our MTL model for an essay of M traits is shown in Figure 2.\n\nHere, the word embedding layer is shared",
+      "elapsed_s": 11.14
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "applications"
+      },
+      "result_preview": "Search results for 'applications' (21 matches):\n[paper_id=nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5 | section=introduction | line=1] Accompanying the revolution of pre-trained models in many NLP appl",
+      "elapsed_s": 5.6
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "generalize"
+      },
+      "result_preview": "Search results for 'generalize' (11 matches):\n[paper_id=nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d | section=abstract | line=5] It remains unclear whether we can rely on this static evaluation for mod",
+      "elapsed_s": 6.67
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Similarly, a neural summarization model could benefit from these hierarchical structure information.\n\nIn this paper, we focus on extractive text summarization of single documents, which is the task of binary sentence classification with labels indicating whether a sentence should be included in a summary.\n\nRecently, pre-trained language models based on Transformer (Vaswani et al., 2017), such as BERT (Devlin et al., 2019), have been widely used to extract contextual representations from texts.\n\nThe pre-trained Transformer language models (TLMs) can be easily reused for finetuning on the downstream tasks, so that the representations already learned from the large pretraining corpora are preserved.\n\nLiu and Lapata (2019) have achieved the state-of-the-art (SOTA) performance by fine-tuning BERT for extractive summarization on short document datasets including CNN/DailyMail.\n\nHowever, the TLMs consider merely the sequential-context-dependency by adding a linear positional encoding to each input token embeddings.\n\nThe hierarchical text structure information is not taken into account explicitly.\n\nWe propose a novel approach to formulate, extract, encode and inject the hierarchical structure (HiStruct) information explicitly into an extractive summarization model (HiStruct+ model), which consists of a TLM for sentence encoding and two stacked inter-sentence Transformer layers for hierarchical learning and extractive summarization (see Figure 1).",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "score": 1.0
+    },
+    {
+      "text": "The architecture of our MTL model for an essay of M traits is shown in Figure 2.\n\nHere, the word embedding layer is shared across all the tasks.\n\nIn the multi-task learning framework, each stack is used to learn an essay representation for each essay trait.\n\nIn a similar manner, the essay representation for the overall score is learnt and it is concatenated with the predicted trait scores before being sent to a Dense layer with a sigmoid activation function to score the essay holistically.",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9",
+      "chunk_id": "dci_nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9_methodology_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/COLING2020/1265_81",
+    "nlpeer/COLING2020/1265_82"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 0.5,
+    "recall_at_3": 0.5,
+    "recall_at_5": 0.5,
+    "recall_at_10": 0.5,
+    "recall_at_20": 0.5,
+    "precision_at_5": 0.5,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0000",
+      "dci_nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9_methodology_0001"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_82520f1d31572d488cfeae02712db642750fda4063e5eab8a771a000f6e17e1397ab18af73e5362e4d660b3dcc78b2260e121fdefc4c1664448e1c30066d5cb9_methodology_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.05,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

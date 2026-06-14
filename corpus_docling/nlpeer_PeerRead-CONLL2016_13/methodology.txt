@@ -1,0 +1,47 @@
+This section first motivates the design decisions of our model for event linking, before going into details about its two-step architecture.
+
+Event features from literature So far, a wide range of features has been used for the representation of events and relations for extraction (Zhou et al., 2005;Mintz et al., 2009;Sun et al., 2011;Krause et al., 2015) and coreference resolution (Bejan and Harabagiu, 2010;Lee et al., 2012;Liu et al., 2014;Araki and Mitamura, 2015;Cybulska and Vossen, 2015) purposes.
+
+The following is an attempt to list the most common classes among them, along with examples:
+
+• lexical: surface string, lemma, word embeddings, context around trigger • syntactic: depth of trigger in parse tree, dependency arcs from/to trigger • discourse: distance between coreference candidates, absolute position in document • semantic (intrinsic): comparison of event arguments (entity fillers, present roles), event type of coreference candidates • semantic (external): coreference-candidates similarity in lexical-semantic resources (WordNet, FrameNet) and other datasets (VerbOcean corpus), enrichment of arguments with alternative names from external sources (DBpedia, Geonames)
+
+While lexical, discourse, and intrinsic-semantic features are available in virtually all application scenarios of event extraction/linking, and even syntactic parsing is no longer considered an expensive feature source, semantic features from external knowledge sources pose a significant burden on the application of event processing systems, as these sources are created at high cost and come with limited domain coverage.
+
+Fortunately, recent work has explored the use of a new feature class, sentential features, for tackling relation-/event-extraction related tasks with neural networks (Zeng et al., 2014;Nguyen and Grishman, 2015;Chen et al., 2015;dos Santos et al., 2015;Zeng et al., 2015).
+
+These approaches have shown that processing sentences with neural models yields representations suitable for IE, which motivates their use in our approach.
+
+The second part is fed with two such event-mention representations plus a number of pairwise features for the input event-mention pair, and calculates a coreference score.
+
+Data properties A preliminary analysis of one dataset used in our experiments (ACE ++ ; see Section 5) further motivates the design of our model.
+
+We found that 50.97 % of coreferential event-mentions pairs share no arguments, either by mentioning distinct argument roles or because one/both mentions have no annotated arguments.
+
+Furthermore, 47.29 % of positive event-mention pairs have different trigger words.
+
+It is thus important to not solely rely on intrinsic event properties in order to model event mentions, but to additionally take the surrounding sentence's semantics into account.
+
+Another observation regards the distance of coreferential event mentions in a document.
+
+55.42% are more than five sentences apart.
+
+This indicates that a locality-based heuristic would not perform well and also encourages the use of sentential features for making coreference decisions.
+
+We implemented our model using the TensorFlow framework (Abadi et al., 2015, v0.6), and chose the ACE 2005 dataset (Walker et al., 2006, later: ACE) as our main testbed.
+
+The annotation of this corpus focuses on the event types Conflict.A
+
+Attack, Movement.Transport, and Life.D
+
+Die reporting about terrorist attacks, movement of goods and people, and deaths of people; but also contains many more related event types as well as mentions of businessrelevant and judicial events.
+
+The corpus consists of merely 599 documents, which is why we create a second dataset that encompasses these documents and additionally contains 1351 more web we experimented with different convolution window sizes n, activation functions for the similarityfunction layer in model part (b), whether to use the dual pooling and final hidden layer in model part (a), whether to apply regularization with 2 penalties or Dropout, and parameters to Adam (η, β 1 , β 2 , ).
+
+We started our exploration of this space of possibilities from previously reported hyperparameter values (Zhang and Wallace, 2015;Chen et al., 2015) and followed a combined strategy of random sampling from the hyperparameter space (180 points) and line search.
+
+Optimization was done by training on ACE ++ train and evaluating on ACE ++ valid .
+
+The final settings we used for all following experiments are listed in Table 2.
+
+W w is initialized with pre-trained embeddings of (Mikolov et al., 2013)

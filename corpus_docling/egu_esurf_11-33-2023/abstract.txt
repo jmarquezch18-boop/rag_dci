@@ -1,0 +1,25 @@
+Ground temperatures in coarse, blocky deposits such as mountain blockfields and rock glaciers have long been observed to be lower in comparison with other (sub)surface material.
+
+One of the reasons for this negative temperature anomaly is the lower soil moisture content in blocky terrain, which decreases the duration of the zero curtain in autumn.
+
+Here we used the CryoGrid community model to simulate the effect of drainage on the ground thermal regime and ground ice in blocky terrain permafrost at two sites in Norway.
+
+The model set-up is based on a one-dimensional model domain and features a surface energy balance, heat conduction and advection, as well as a bucket water scheme with adjustable lateral drainage.
+
+We used three idealized subsurface stratigraphies, blocks only, blocks with sediment and sediment only, which can be either drained (i.e. with strong lateral subsurface drainage) or undrained (i.e. without drainage), resulting in six scenarios.
+
+The main difference between the three stratigraphies is their ability to retain water against drainage: while the blocks only stratigraphy can only hold small amounts of water, much more water is retained within the sediment phase of the two other stratigraphies, which critically modifies the freeze-thaw behaviour.
+
+The simulation results show markedly lower ground temperatures in the blocks only, drained scenario compared to other scenarios, with a negative thermal anomaly of up to 2.2 • C. For this scenario, the model can in particular simulate the time evolution of ground ice, with build-up during and after snowmelt and spring and gradual lowering of the ice table in the course of the summer season.
+
+The thermal anomaly increases with larger amounts of snowfall, showing that well-drained blocky deposits are less sensitive to insulation by snow than other soils.
+
+We simulate stable permafrost conditions at the location of a rock glacier in northern Norway with a mean annual ground surface temperature of 2.0-2.5 • C in the blocks only, drained simulations.
+
+Finally, transient simulations since 1951 at the rock glacier site (starting with permafrost conditions for all stratigraphies) showed a complete loss of perennial ground ice in the upper 5 m of the ground in the blocks with sediment, drained run; a 1.6 m lowering of the ground ice table in the sediment only, drained run; and only 0.1 m lowering in the blocks only, drained run.
+
+The interplay between the subsurface water-ice balance and ground freezing/thawing driven by heat conduction can at least partly explain the occurrence of permafrost in coarse blocky terrain below the elevational limit of permafrost in non-blocky sediments.
+
+It is thus important to consider the subsurface water-ice balance in blocky terrain in future efforts in permafrost distribution mapping in mountainous areas.
+
+Furthermore, an accurate prediction of the evolution of the ground ice table in a future climate can have implications for slope stability, as well as water resources in arid environments.

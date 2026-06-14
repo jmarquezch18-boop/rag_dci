@@ -1,0 +1,121 @@
+We implement the models using Huggingface Transformers (Wolf et al., 2020).
+
+We take the CA-NINE layer from Huggingface Transformers and use an independent implementation of Charformer1 .
+
+Our source code is available on Github.2 Hyperparameters and other experimental details can be found in Appendix B.
+
+We evaluate the models on translation between English paired with German, French, and Arabic (with English as both input and output) using the IWSLT 2017 datasets (Cettolo et al., 2017) with a training data size of around 200k sentences for each language pair (see Appendix B for details).
+
+For the subword models, we tokenize the input using the Moses tokenizer (Koehn et al., 2007) and then further split the words into subword units using BPE (Sennrich et al., 2016) with 16k merge operations.
+
+For the character models, we limit the vocabulary to 300 UTF-8 characters.
+
+We use the Transformer Base architecture (Vaswani et al., 2017) in all experiments.
+
+We make no changes to it in the subword and baseline character experiments.
+
+In the later experiments, we replace the embedding lookup with the character processing architectures.
+
+For the Lee-style encoder, we chose similar hyperparameters as related work (Banar et al., 2020).
+
+For experiments with Charformer and CANINE models, we set the hyperparameters such that they cover the same character span before downsampling as the Lee-style encoder, which causes the models to have fewer parameters than a Lee-style encoder.
+
+Note however that for both the Charformer and the CANINE models, the number of parameters is almost independent of the character window width.
+
+For all three character processing architectures, we experiment with downsampling factors of 3 and 5 (a 16k BPE vocabulary corresponds to a downsampling factor of about 4 in English).
+
+Based on the results of the experiments with the IWSLT data, we further experiment only with the Lee-style encoder using a downsampling factor of 3 on the source side.
+
+Additionally, we experiment with hybrid systems with a subword encoder and character decoder.
+
+We train translation systems of competitive quality on two high-resource language pairs, English-Czech and English-German, and perform an extensive evaluation.
+
+For English-to-Czech translation, we use the CzEng 2.0 corpus (Kocmi et al., 2020b) that aggregates and curates all sources for this language pair.
+
+We use all 66M authentic parallel sentence pairs and 50M back-translated Czech sentences.
+
+For the English-to-German translation, we use a subset of the training data used by Chen et al. (2021).
+
+The data consists of 66M authentic sentence pairs filtered from the available data for WMT and 52M back-translated German sentences from News Crawl 2020.
+
+We tag the back-translation data (Caswell et al., 2019).
+
+We use the Transformer Big architecture for all experiments with hyperparameters following Popel and Bojar (2018).
+
+For the Lee-style encoder, we double the hidden layer sizes compared to the IWSLT experiments (following the hidden size increase between the Transformer Base and Big architectures).
+
+In contrast to the previous set of experiments, we use Fairseq (Ott et al., 2019).
+
+Our code is available on Github5 .
+
+System outputs are attached to the paper in the ACL anthology.
+
+We evaluate the systems not only on WMT20 test sets but also on data that often motivated the research of character-level methods.
+
+We evaluate the out-of-domain performance of the models on the NHS test set from the WMT17 Biomedical Task (Jimeno Yepes et al., 2017) and on the WMT16 IT Domain test set (Bojar et al., 2016).
+
+We use the same evaluation metrics as for the IWSLT experiments.
+
+We estimate the confidence intervals using bootstrap resampling (Koehn, 2004).
+
+We also assess the gender bias of the systems (Stanovsky et al., 2019;Kocmi et al., 2020a), using a dataset of sentence pairs with stereotypical and non-stereotypical English sentences.
+
+We measure the accuracy of gendered nouns and pronouns using word alignment and morphological analysis.
+
+Morphological generalization is often mentioned among the motivations for character-level modeling.
+
+Therefore, we evaluate our models using Mor-phEval (Burlot and Yvon, 2017;Burlot et al., 2018).
+
+Similar to the gender evaluation, MorphEval also uses contrastive sentence pairs that differ in exactly one morphological feature.
+
+Accuracy on the sentences is measured.
+
+Besides, we assess how well the models handle lemmas and forms that were unseen at training time.
+
+We tokenize and lemmatize all data with UDPipe (Straka and Straková, 2017).
+
+On the WMT20 test set, we compute the recall of test lemmas that were not in the training set and the recall of word forms that were not in the training data, but forms of the same lemma were.
+
+Note that not generating a particular lemma or form is not necessarily an error.
+
+Therefore, we report the recall in contrast with the recall of lemmas and forms that were represented in the training data.
+
+Character-level models are also supposed to be more robust towards source-side noise.
+
+We evaluate the noise robustness of the systems using synthetic noise.
+
+We use TextFlint (Wang et al., 2021) to generate synthetic noise in the source text with simulated typos and spelling errors.
+
+We generate 20 noisy versions of the WMT20 test set and report the average chrF score.
+
+The main results are presented in Table 3.
+
+The main trends in the translation quality are the same as in the case of IWSLT data: subword models outperform character models.
+
+Using Lee-style encoding narrows the quality gap and performs similarly to models with subword tokens on the source side.
+
+Although domain robustness often motivates character-level experiments, our experiments show that the trends are domain-independent, except for English-German IT Domain translation.
+
+The similar performance of the subword encoder and the Lee-style encoder suggests that the hidden states of the Lee-style encoder can efficiently emu-late the subword segmentation.
+
+We speculate that the main weaknesses remain on the decoder side.
+
+In the English-to-Czech direction, the characterlevel models perform worse in gender bias evaluation, although they better capture grammatical gender agreement according to the MorphEval benchmark.
+
+On the other hand, character-level models make more frequent errors in the tense of coordinated verbs.
+
+There are no major differences in recall of novel forms and lemmas.
+
+For the English-to-German translation, characterlevel methods reach better results on the gender benchmark.
+
+We speculate that getting gender correct in German might be easier because unlike Czech it does not require subject-verb agreement.
+
+The average performance on the MorphEval benchmark is also slightly better for character models.
+
+Detailed results on MorphEval are in Tables 7 and8 in the Appendix.
+
+The higher recall of novel forms also suggests slightly better morphological generalization.
+
+The only consistent advantage of the characterlevel models is their robustness towards source side noise.
+
+Here, the character-level models outperform both the fully subword model and the subword encoder.

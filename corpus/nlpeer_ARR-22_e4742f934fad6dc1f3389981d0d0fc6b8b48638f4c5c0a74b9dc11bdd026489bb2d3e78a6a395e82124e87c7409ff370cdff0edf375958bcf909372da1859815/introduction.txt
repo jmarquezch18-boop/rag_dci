@@ -1,0 +1,41 @@
+The task of reading comprehension, where models are required to process a text and answer questions about it, has seen rapid progress in recent years.
+
+As systems have increasingly matched humans on popular datasets (Rajpurkar et al., 2016(Rajpurkar et al., , 2018)), researchers have developed newer, more complex formulations of the task, such as very long contexts and answers (Kwiatkowski et al., 2019), multi-hop reasoning (Yang et al., 2018), and discrete operations over the content of paragraphs (Dua et al., 2019).
+
+One thing these datasets have in common is that the answer is constrained to be a single span that can be extracted or computed from the context.
+
+However, in practice, the answer to a question will often consist of multiple parts.
+
+As in the example in Figure 1, the answer set contains 10 countries, 1 Available at: https://multi-span.github.io Question: Which countries does the Danube River flow through?
+
+Passage: ... Originating in Germany, the Danube flows southeast for 2,850 km (1,770 mi), passing through or bordering Austria, Slovakia, Hungary, Croatia, Serbia, Romania, Bulgaria, Moldova and Ukraine before draining into the Black Sea. ... Answer set: {Germany, Austria, Slovakia, Hungary, Croatia, Serbia, Romania, Bulgaria, Moldova, Ukraine } some of which are discontiguous in the passage.
+
+Such cases are largely ignored in existing reading comprehension research, in part because there are no datasets of multi-span questions.
+
+In this paper, we introduce MultiSpanQA, a new reading comprehension dataset consisting of 6,536 multi-span examples.
+
+The raw questions and passages are extracted from Natural Questions ("NQ": Kwiatkowski et al. (2019)), a large-scale opendomain QA dataset.
+
+Trained annotators were asked to identify question-passage pairs where the answer was multi-span, and annotate the spans.
+
+In addition to the basic version of the dataset consisting entirely of multi-span answers, we also prepare an expanded version with a selection of unanswerable questions, and questions with single-and multispan answers, intended to reflect a more realistic QA setup.
+
+We further classify answer semantics into 5 categories, and manually label the logical structure of the answer spans.
+
+We introduce metrics to evaluate multi-span QA systems across these different tasks.
+
+We propose several baselines, and a new model which casts the task as a sequence tagging problem.
+
+The proposed model combines a sequence tagger with a span number predictor, span structure predictor, and span adjustment module.
+
+Experimental results show that the proposed model surpasses all baselines and achieves 59.28% exact-match F1 score and 76.50% partial-match F1 score.
+
+To summarize, our contributions are:
+
+• A new reading comprehension dataset containing 6.5k high-quality multi-span answers, along with analysis and metrics for multi-span QA.
+
+• A novel label set for capturing the semantics of multi-span answers, with annotations.
+
+• A new model for multi-span reading comprehension which achieves state-of-the-art results on our dataset.
+
+2 Related Work

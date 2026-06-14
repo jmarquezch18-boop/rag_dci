@@ -1,0 +1,89 @@
+Institutional press releases are an important presentation of science research to the public (Autzen, 2014).
+
+A press release serves the dual purpose of science communication and public relations (Carver, 2014).
+
+Now that research and innovation have become essential drivers of economic growth and international competitiveness, research institutions are facing growing competition for research funding and talents, and are increasingly emphasizing the commercialization of university research.
+
+Such pressure results in tension between the goal of responsible science reporting and the goal of marketing when issuing press releases (Caulfield and Ogbogu, 2015;Samuel et al., 2017).
+
+A survey study on UK science press officers found that they were aware of such tension, and were trying to balance and achieve both sensation and accuracy in a delicate way (Samuel et al., 2017).
+
+In addition, prior studies have found an increasing influence of press release on the content of science news since the 1980s (Bauer and Bucchi, 2007;Göpfert, 2007).
+
+Actually, press releases have become the dominant link between academia and news media (Sumner et al., 2014;Brechman et al., 2009).
+
+A number of studies have found that journalists rely heavily on press release materials to write science news stories, instead of acting as watchdogs by conducting independent investigations (De Semir et al., 1998;Schwitzer, 2008;Lewis et al., 2008;Woloshin et al., 2009;Taylor et al., 2015).
+
+For example, over one third of U.S health news stories were largely or solely based on press releases (Woloshin et al., 2009).
+
+Under-staffed smaller newspapers even used press releases verbatim (Ashwell, 2016).
+
+This trend is likely to continue as science news reporting positions are cut and journalists are rushed for time (Schwitzer, 2008;Galewitz, 2006).
+
+Journalists have long been criticized for pursuing sensational stories that overstate research results (Fahnestock, 1998).
+
+However, recent studies have found that press releases may contain more exaggerations than news stories.
+
+According to (Sumner et al., 2014), 58%-86% of news stories derived from the exaggerated press releases contained similar exaggerations, compared with the exaggeration rate of 10%-18% in news articles when the press releases were not exaggerated.
+
+In the context of the high institutional expectation for generating "hype" and the shrinking of journalism as the watchdog, it has been argued that press releases have become a major source of exaggeration in science communication, e.g. (Woloshin and Schwartz, 2002;Brechman et al., 2009;Sumner et al., 2014;Sumner et al., 2016).
+
+Furthermore, university press releases were found to contain more exaggerations than journal press releases, probably because the university press officers face more pressure to generate expectations and hype (Sumner et al., 2016).
+
+Prior studies on exaggeration in press releases have been limited to manual content analysis, which have provided valuable insights for understanding the types of exaggeration and estimating the problem severity at certain times.
+
+For example, (Sumner et al., 2014) is the first study on estimating the exaggeration rate in press releases by manually checking a sample of press releases from 20 UK univerities in 2011.
+
+However, the manual content analysis method falls short for answering important research questions that require large-scale, real-time analyses, such as longitudinal trend of exaggeration rate over time.
+
+This creates a need to develop a computational approach that can consistently measure exaggeration in a large number of press releases, and further study its trend and difference by factors such as the source of press releases (e.g. academic institutions vs. journal publishers).
+
+Although computational modeling of exaggeration in press releases is a new research problem, it is closely related to the field of NLP applications for information credibility assessment, especially in the health domain, given the strong need for curbing misinformation in recent years.
+
+The task of credibility assessment has often been modeled as a text categorization problem.
+
+A common way to categorize credibility is true/fake binary prediction, e.g. (Abbasi et al., 2012;Dhoju et al., 2019).
+
+However, many online documents are not completely true or fake.
+
+Instead, multiple claims can be made in one document, and claims can be inaccurate in different ways.
+
+Therefore, a more precise way to assess credibility is faceted evaluation guided by established credibility frameworks with multiple quality criteria.
+
+Some frameworks were designed for rating online health information, such as the HON principles and DISCERN.
+
+For example, the DISCERN instrument includes 16 questions, such as "are the aims clear?" and "is it balanced and unbiased?" (Charnock et al., 1999).
+
+In comparison, HealthNewsReview.org designed 10 criteria specifically for news stories.
+
+These criteria include exaggeration, missing information, etc.
+
+Expert ratings based on these criteria have been used to train NLP models.
+
+For example, an automated system was developed to assess health websites' conformity to the HON principles (Boyer and Dolamic, 2015).
+
+AutoDISCERN is an NLP tool designed to automatically assign DISCERN quality ratings to webpages using hierarchical encoder attention-based neural network (Kinkead et al., 2020).
+
+NLP models were also developed to automate ratings based on the ten HealthNewsReview criteria (Dai et al., 2020).
+
+These methods rely on human expert ratings to train credibility prediction models.
+
+In comparison, our method links press releases to the original research papers for fact checking, and we focus on exaggeration, a specific criterion used by HealthNewsReview, due to its significant impact on the quality of press releases (Sumner et al., 2014).
+
+Our work is also built upon prior studies on identifying causal relations, e.g. (Li and Mao, 2019).
+
+A causal relation can be broadly defined as any type of cause-effect relation between events, for example Event A is the consequence of Event B (Bethard and Martin, 2008;Mirza and Tonelli, 2014).
+
+It is commonly realized by causal indicators such as "because", "as a result of", "as a consequence of" (Prasad et al., 2008).
+
+This broad definition is also adopted in the NLP tasks SemEval-2007(Girju et al., 2007) and SemEval-2010 (Hendrickx et al., 2009).
+
+However, a causal relation presented in a research finding sentence is in a more specific linguistic format, i.e. a relation between an independent variable and a dependent variable (Cofield et al., 2010), such as "smoking causes cancer".
+
+To identify causal claims in research findings, Yu et al. (2019) developed a corpus of claims with different strength levels and trained a BERT-based model to distinguish them.
+
+Compared to research papers, press releases are a different genre.
+
+Li et al. (2017) found that genre differences may result in more challenge for identifying causal claims in news articles.
+
+Based on these prior studies, we decided to construct a new corpus for identifying causal claims in press releases, which are more similar to news stories, and to develop prediction models based on BERT.

@@ -1,0 +1,13 @@
+In Section 3.4 we obtained ManyNames v2, which provides a reliable categorization of object names: the top name, alternative names for the same object (i.e., in the consistent response set), adequate names for other objects (i.e., outside the consistent response set), and inadequate names of various types.
+
+We now use it to define a diagnostic evaluation method for object naming models, one which is more fine-grained than the predominant single-label evaluation.
+
+It also allows to assess whether models are affected by the same issues as humans, in particular referential and visual uncertainty.
+
+We apply our evaluation to Bottom-Up (Anderson et al., 2018) as a representative L&V object naming model, which has been widely used for transfer learning in L&V (Lu et al., 2019;Gao et al., 2019;Chen et al., 2019;Cadene et al., 2019;Tan and Bansal, 2019, inter alia).
+
+In contrast to existing works in Computer Vision research (Hoiem et al., 2012) on diagnosing the effects of object or image characteristics on model performance, ManyNames allows us to compare the model against an upper bound of the human performance in object naming, estimated via the verification annotations.
+
+Our analysis focuses on two questions: First, can an object detector that was trained in a single-label setting (i.e., towards predicting unique ground truth names) account for the naming variation inherent in human object naming behavior?
+
+Second, does the model exhibit a similar sensitivity as humans to the interaction between domains (humans, clothes, etc.) as well as the visual characteristics of target objects?

@@ -1,0 +1,171 @@
+{
+  "query_id": "8d8302ac5cae236232617fac58ffa1d1cc46167b",
+  "query": "What is the definition of a plot?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "plot"
+      },
+      "result_preview": "Search results for 'plot' (12 matches):\n[paper_id=nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea | section=results | line=7] To analyze the output summaries from an overall perspective, we plot the distri",
+      "elapsed_s": 4.92
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_COLING2020_660",
+        "section": "introduction",
+        "start": 18,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_COLING2020_660 / introduction — líneas 13-25 de 43]\nOthers have taken supervised machine learning approaches (Calix et al., 2013;Barros et al., 2019), where a classifier is trained over data annotated by people.\n\nSome approaches, e.g., examining characters' social networks (Sack, 2013), take",
+      "elapsed_s": 6.96
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_COLING2020_660",
+        "section": "introduction",
+        "start": 13,
+        "end": 25
+      },
+      "result_preview": "[nlpeer_COLING2020_660 / introduction — líneas 8-30 de 43]\n\nA number of approaches have been proposed for automatically identifying characters.\n\nSome approaches, for example, have sought to solve the character identification task using domain-specific ontologies (Declerck et al., 2012) or reasoning ",
+      "elapsed_s": 6.14
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_COLING2020_660",
+        "section": "introduction",
+        "start": 15,
+        "end": 25
+      },
+      "result_preview": "[nlpeer_COLING2020_660 / introduction — líneas 10-30 de 43]\n\nSome approaches, for example, have sought to solve the character identification task using domain-specific ontologies (Declerck et al., 2012) or reasoning by reference to an existing case base (Valls-Vargas et al., 2014).\n\nOthers have take",
+      "elapsed_s": 10.8
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_COLING2020_660",
+        "section": "introduction",
+        "start": 19,
+        "end": 30
+      },
+      "result_preview": "[nlpeer_COLING2020_660 / introduction — líneas 14-35 de 43]\n\nSome approaches, e.g., examining characters' social networks (Sack, 2013), take character identification for granted, implementing heuristic-driven approaches over named entities or coreference chains that are not examined for their effica",
+      "elapsed_s": 9.28
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Others have taken supervised machine learning approaches (Calix et al., 2013;Barros et al., 2019), where a classifier is trained over data annotated by people.\n\nSome approaches, e.g., examining characters' social networks (Sack, 2013), take character identification for granted, implementing heuristic-driven approaches over named entities or coreference chains that are not examined for their efficacy.\n\nRegardless of approach, all prior work of which we are aware has, unfortunately, had a relatively impoverished concept of character, at least from a narratological point of view.\n\nIn particular, a key aspect of any character is that it contributes to the plot-characters are not just any animate entity in the narrative-and all prior work essentially ignores this point.\n\nHere we build on a prior proposal of ours 1 Code and data may be downloaded from https://doi.org/10.34703/gzx1-9v95/RB6ZH0.\n\nThis work is licensed under a Creative Commons Attribution 4.0 International License.\n\nLicense details: http:// creativecommons.org/licenses/by/4.0/. (Jahan and Finlayson, 2019) to incorporate this narratologically grounded definition of character into automatic character identification.",
+      "section": "introduction",
+      "paper_id": "nlpeer_COLING2020_660",
+      "chunk_id": "dci_nlpeer_COLING2020_660_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_COLING2020_660",
+      "score": 1.0
+    },
+    {
+      "text": "A number of approaches have been proposed for automatically identifying characters.\n\nSome approaches, for example, have sought to solve the character identification task using domain-specific ontologies (Declerck et al., 2012) or reasoning by reference to an existing case base (Valls-Vargas et al., 2014).\n\nOthers have taken supervised machine learning approaches (Calix et al., 2013;Barros et al., 2019), where a classifier is trained over data annotated by people.\n\nSome approaches, e.g., examining characters' social networks (Sack, 2013), take character identification for granted, implementing heuristic-driven approaches over named entities or coreference chains that are not examined for their efficacy.\n\nRegardless of approach, all prior work of which we are aware has, unfortunately, had a relatively impoverished concept of character, at least from a narratological point of view.\n\nIn particular, a key aspect of any character is that it contributes to the plot-characters are not just any animate entity in the narrative-and all prior work essentially ignores this point.\n\nHere we build on a prior proposal of ours 1 Code and data may be downloaded from https://doi.org/10.34703/gzx1-9v95/RB6ZH0.\n\nThis work is licensed under a Creative Commons Attribution 4.0 International License.\n\nLicense details: http:// creativecommons.org/licenses/by/4.0/. (Jahan and Finlayson, 2019) to incorporate this narratologically grounded definition of character into automatic character identification.\n\nWe first define and operationalize our concept of character, and use that concept to generate annotated data (170 narrative texts drawn from 3 different corpora) with high inter-annotator agreement.\n\nThen we demonstrate a straightforward supervised machine learning model using seven features that performs quite well on these data.",
+      "section": "introduction",
+      "paper_id": "nlpeer_COLING2020_660",
+      "chunk_id": "dci_nlpeer_COLING2020_660_introduction_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_COLING2020_660",
+      "score": 1.0
+    },
+    {
+      "text": "Some approaches, for example, have sought to solve the character identification task using domain-specific ontologies (Declerck et al., 2012) or reasoning by reference to an existing case base (Valls-Vargas et al., 2014).\n\nOthers have taken supervised machine learning approaches (Calix et al., 2013;Barros et al., 2019), where a classifier is trained over data annotated by people.\n\nSome approaches, e.g., examining characters' social networks (Sack, 2013), take character identification for granted, implementing heuristic-driven approaches over named entities or coreference chains that are not examined for their efficacy.\n\nRegardless of approach, all prior work of which we are aware has, unfortunately, had a relatively impoverished concept of character, at least from a narratological point of view.\n\nIn particular, a key aspect of any character is that it contributes to the plot-characters are not just any animate entity in the narrative-and all prior work essentially ignores this point.\n\nHere we build on a prior proposal of ours 1 Code and data may be downloaded from https://doi.org/10.34703/gzx1-9v95/RB6ZH0.\n\nThis work is licensed under a Creative Commons Attribution 4.0 International License.\n\nLicense details: http:// creativecommons.org/licenses/by/4.0/. (Jahan and Finlayson, 2019) to incorporate this narratologically grounded definition of character into automatic character identification.\n\nWe first define and operationalize our concept of character, and use that concept to generate annotated data (170 narrative texts drawn from 3 different corpora) with high inter-annotator agreement.\n\nThen we demonstrate a straightforward supervised machine learning model using seven features that performs quite well on these data.",
+      "section": "introduction",
+      "paper_id": "nlpeer_COLING2020_660",
+      "chunk_id": "dci_nlpeer_COLING2020_660_introduction_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_COLING2020_660",
+      "score": 1.0
+    },
+    {
+      "text": "Some approaches, e.g., examining characters' social networks (Sack, 2013), take character identification for granted, implementing heuristic-driven approaches over named entities or coreference chains that are not examined for their efficacy.\n\nRegardless of approach, all prior work of which we are aware has, unfortunately, had a relatively impoverished concept of character, at least from a narratological point of view.\n\nIn particular, a key aspect of any character is that it contributes to the plot-characters are not just any animate entity in the narrative-and all prior work essentially ignores this point.\n\nHere we build on a prior proposal of ours 1 Code and data may be downloaded from https://doi.org/10.34703/gzx1-9v95/RB6ZH0.\n\nThis work is licensed under a Creative Commons Attribution 4.0 International License.\n\nLicense details: http:// creativecommons.org/licenses/by/4.0/. (Jahan and Finlayson, 2019) to incorporate this narratologically grounded definition of character into automatic character identification.\n\nWe first define and operationalize our concept of character, and use that concept to generate annotated data (170 narrative texts drawn from 3 different corpora) with high inter-annotator agreement.\n\nThen we demonstrate a straightforward supervised machine learning model using seven features that performs quite well on these data.\n\nOur error analysis reveals several choke points in the performance of the system, most importantly the quality of the co-reference chains.\n\nThe paper proceeds as follows.\n\nFirst, we discuss the definition of the character as presented by narratologists, contrasting this concept with those used in prior computational work, and describe an operationalized concept of character that can be annotated with high inter-annotator agreement ( §2).",
+      "section": "introduction",
+      "paper_id": "nlpeer_COLING2020_660",
+      "chunk_id": "dci_nlpeer_COLING2020_660_introduction_0003",
+      "source_url": "https://arxiv.org/abs/nlpeer_COLING2020_660",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/COLING2020/660_51"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_COLING2020_660_introduction_0000",
+      "dci_nlpeer_COLING2020_660_introduction_0001",
+      "dci_nlpeer_COLING2020_660_introduction_0002",
+      "dci_nlpeer_COLING2020_660_introduction_0003"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_COLING2020_660_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_COLING2020_660_introduction_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_COLING2020_660_introduction_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_COLING2020_660_introduction_0003",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.029850746268656716,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

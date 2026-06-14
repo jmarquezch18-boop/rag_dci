@@ -1,0 +1,25 @@
+Figure 1 shows the increase in travel to the ACL annual meeting over the past 40 years.
+
+Whereas conferences used to be the privilege of a few academics, they are now attended by participants from companies, research institutes and universities across the world.
+
+This comes with an increase in the total volume of work published, and with it an increase in the carbon emissions attributed to travelling to in-person events.
+
+In this study we seek to quantify the impact of conferences that are increasingly diverse in terms of participation and location (undoubtedly beneficial) on the increased carbon emissions (undoubtedly detrimental).
+
+We base our analysis on publications spanning 55 years , taken from the ACL Anthology1 .
+
+We use NLP tools to parse each document and identify the locations of the conference venues and lead researcher's institution.
+
+We answer the following questions:
+
+1. Where is NLP research performed and presented?
+
+2. What are the environmental costs?
+
+3. Do conferences increase local participation?
+
+4. Which events attract a diverse audience and how do they compare to non-physical venues?
+
+To the best of our knowledge, our work is the first to quantitatively explore the relationship between the location of conferences in a research field and diversity of participation.
+
+We make our dataset and code available2 to enable further discussion on the costs and benefits of in-person meetings.

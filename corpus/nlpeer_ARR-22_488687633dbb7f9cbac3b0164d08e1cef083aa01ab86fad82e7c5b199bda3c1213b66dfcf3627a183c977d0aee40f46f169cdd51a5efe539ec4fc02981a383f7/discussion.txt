@@ -1,0 +1,41 @@
+While multifaceted, vague, and non-named entities can be present in well-curated data, the corresponding benchmarks and downstream applications target real-world named entities and ignore non-named entities (Paris and Suchanek, 2021).
+
+In contrast, in most user-generated text domains, the concepts of interest for downstream applications (semantic search feature as discussed above) are not limited to named-entities only and may exhibit multifaceted, vague, and non-named entities (e.g., facts about a hotel such as amenities and attractions).
+
+With the increasing use of user-generated text in NLP applications (Xu et al., 2021), it is therefore important to investigate the impact of the aforementioned characteristics on the performance of the ESE methods.
+
+We now discuss the implications of the proposed benchmark, metrics, and experiment observations.
+
+Capturing the silent majority.
+
+Recent work (Paris and Suchanek, 2021) shows that the majority of the entities in Wikipedia articleswhich feeds knowledge-bases such as DBpedia (Auer et al., 2007) and YAGO (Suchanek et al., 2007) -are non-named and recommends adding the silent majority to these KBs for completeness.
+
+To this end, our proposed benchmark highlights the importance of capturing multifaceted, vague, and non-named entities present in user-generated text.
+
+For example, domain-specific KBs such as the Amazon Product Knowledge Graph (Karamanolakis et al., 2020) rely on user-generated text to collect entities for concepts of interest.
+
+These KBs power many downstream tasks such as semantic search, question answering, and conversational AI.
+
+Therefore, these KBs would remain incomplete without capturing the different types of entities identified in our benchmark.
+
+Practical usage.
+
+The goal of our evaluation metrics (evaluation at k g ) is to characterize the performance of ESE methods in the presence of entity types that are typically present in user-generated text.
+
+Note that we do not recommend replacing the existing metric MAP@K = 20.
+
+Our proposed MAP@K g metric is complementary and is designed to stress test ESE methods in scenarios where coverage is an important criteria (e.g., KB population.)
+
+) Top-20 predictions do not have enough representation of non-named, multifaceted, and vague entities.
+
+Therefore, when evaluating ESE methods designed for user-generated text on our benchmark, the proposed evaluation at k g metric may help practitioners measure the suitability of a method.
+
+Towards domain-specific ESE.
+
+Our study highlights that compared to simple ESE baselines, SOTA methods exhibit poor performance on usergenerated text.
+
+On the other hand, for well-curated text, SOTA methods outperform the baselines.
+
+However, the purpose of this study is not to show that there are better approaches than SOTA methods.
+
+Instead, we draw attention to the fact that, there is potential for future research on developing methods for user-generated text domain.

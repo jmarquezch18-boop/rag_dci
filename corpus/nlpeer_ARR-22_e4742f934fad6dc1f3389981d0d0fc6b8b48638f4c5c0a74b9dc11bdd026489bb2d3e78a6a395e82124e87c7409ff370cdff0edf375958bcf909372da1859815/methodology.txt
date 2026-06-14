@@ -1,0 +1,47 @@
+Formally, given a question and passage pair q, p , the task of multi-span QA involves finding all answer spans s 1 , s 2 , ...s n , which are neither duplicated nor overlap with each other, as well as predict the answer structures.
+
+By investigating the failures of the sequence tagging baseline, we find there is an issue that the model struggles to capture global information.
+
+For example, the number of answer spans may be specified in the question, but cannot be imposed as a constraint on the tagger.
+
+To better use such global information, we propose a span encoder, a number of span predictor, an answer structure predictor, and a span adjustment module (as in Figure 2), which can be combined with any on-the-fly sequence tagger (encoder).
+
+Contextualiseed Encoder Given a pair of question q and passage p, we first encode the question and context together using a sequence pair encoder as:
+
+H = Encoder( q, p ) ∈ R l×h (1)
+
+where H = [H [CLS] ; H q ; H p ] is the contextualised token representation of all input tokens with a pooled global token [CLS], h is the hidden-layer size, and l is the input length.
+
+After encoding, we fetch the hidden states of the context tokens and input them to a linear classifier to perform a preliminary token-level answer span prediction, as:
+
+T p = F F N (H p ) ∈ R lp×t (2)
+
+where l p denotes the length of passage, and t denotes the number of labels (t = 3 in for IOB tagging scheme).
+
+Span Encoder According to the arg max of preliminary predictions T p , we take the continuous token representations of the predicted spans as span representation s 1 , s 2 , ...s n , where
+
+s i = [H s i , H s i +1 , ...H s i +k-1 ] ∈ R k×h ,
+
+I = SpanEncoder(I span ) ∈ R (n+1)×h (3)
+
+Objective Function We fetch the hidden state of span-level [CLS] token I [CLS] and input it to two feed-forward networks to predict the number of answer spans and the answer structure, respectively, as below:
+
+P num = F F N (I [CLS] )(4)
+
+P structure = F F N (I [CLS] )(5)
+
+We use cross-entropy loss for answer span and structure prediction, and mean-square loss for span number regression.
+
+For training, we use the weighted sum of the three losses:
+
+L = L spans + λ 1 L num + λ 2 L structure(6)
+
+Finally, a span adjustment module is used to explicitly combine the predicted span number with the span texts.
+
+We first assign a confidence score to each label of the preliminary classification using a softmax layer:
+
+α conf = softmax(U p ) ∈ R lp×t (7)
+
+The confidence of a predicted answer span a i is defined as the maximum confidence of the tokens within a i .
+
+Suppose there are k spans that been tagged as answers and the predicted number of span is n, if n < k, we rank the predicted spans by confidence score, and keep the top-n answer spans as answers.

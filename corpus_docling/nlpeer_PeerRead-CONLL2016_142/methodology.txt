@@ -1,0 +1,25 @@
+Traditionally, QE is treated as a regression task with hand-crafted features.
+
+Kernel methods are arguably the state-of-the-art in QE since they can easily model non-linearities in the data.
+
+Furthermore, the scalability issues that arise in kernel methods do not tend to affect QE in practice since the datasets are usually small, in the order of thousands of instances.
+
+The most popular method for QE is Support Vector Regression (SVR), as shown in the multiple instances of the WMT QE shared tasks (Callisonburch et al., 2012;Bojar et al., 2013;Bojar et al., 2014;Bojar et al., 2015).
+
+While SVR models can generate competitive predictions for this task, they lack a probabilistic interpretation, which makes it hard to extract uncertainty estimates using them.
+
+Bootstrapping approaches like bagging (Abe and Mamitsuka, 1998) can be applied, but this requires setting and optimising hyperparameters like bag size and number of bootstraps.
+
+There is also no guarantee these estimates come from a well-calibrated probabilistic distribution.
+
+Gaussian Processes (GPs) (Rasmussen and Williams, 2006) is an alternative kernel-based framework that gives competitive results for point estimates (Cohn and Specia, 2013;Shah et al., 2013;Beck et al., 2014b).
+
+Unlike SVR, they explicitly model uncertainty in the data and in the predictions.
+
+This makes GPs very applicable when well-calibrated uncertainty estimates are required.
+
+Furthermore, they are very flexible in terms of modelling decisions by allowing the use of a variety of kernels and likelihoods while providing efficient ways of doing model selection.
+
+Therefore, in this work we focus on GPs for probabilistic modelling of QE.
+
+In what follows we briefly describe the GPs framework for regression.

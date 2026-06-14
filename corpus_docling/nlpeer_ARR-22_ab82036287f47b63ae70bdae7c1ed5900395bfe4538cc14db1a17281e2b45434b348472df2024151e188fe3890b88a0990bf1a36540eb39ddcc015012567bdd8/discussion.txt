@@ -1,0 +1,35 @@
+In this paper we proposed a neural pairwise ranking model for ARA (N P RM ).
+
+We performed within corpus, cross-corpus and cross-lingual evaluations to benchmark N P RM .
+
+Our results in the context of the research questions we started with (Section 1) are discussed below:
+
+1. Is neural, pairwise ranking a better approach than classification or regression for ARA, to achieve cross-corpus compatibility? -While regression, classification, and pairwiseranking models all achieve comparable performance in a within-corpus scenario, pairwise ranking performs better in cross-corpus and cross-lingual evaluation scenarios.
+
+2. Is zero-shot, cross-lingual transfer possible for ARA models through such a ranking approach?
+
+-Our experiments show that zeroshot cross-lingual ARA is possible with pairwise ranking.
+
+Our proposed model, N P RM , trained with English texts achieved > 80% ranking accuracy on both NewsEla-Es and Vikidia-Fr datasets.
+
+Limitations of NPRM: N P RM models the relative reading difficulty level between texts.
+
+While this approach has performed well for our generalizability experiments, there is a general lack of interpretability with N P RM .
+
+For example, the NewsEla-en dataset contains reading level designations that align with the common core educational standards (Porter et al., 2011), and are interpreted to match the school grades of U.S students from kindergarten to high school.
+
+Since the aggregation process of N P RM sums the predicted scores between pairwise comparisons of an intended ranking, the aggregated score is bounded above by the input list size, is unlikely to correspond to the original reading level scale.
+
+Further, N P RM takes a list of texts as input and the model forces the constraint of having at least two texts to be ranked as input.
+
+Hence, N P RM is suitable only for scenarios where ranking by reading level is useful (e.g., ranking of search results by their reading level).
+
+Outlook: All the five datasets used in these experiments come primarily from news and wikipedia articles.
+
+However, the ARA is also studied in other domains (e.g., financial disclosures (Loughran and McDonald, 2014)).
+
+Future work can test the validity of the conclusions of this paper in new domains.
+
+Further, all the datasets are human created texts.
+
+It would be interesting to explore how the model works for applications like text simplification and machine translation, which can support existing research on evaluating machine generated text.

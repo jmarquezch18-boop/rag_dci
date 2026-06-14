@@ -1,0 +1,7 @@
+In this section, we introduce the details of LaCon.
+
+We focus on the language understanding classification tasks.
+
+For a multi-class classification problem with C classes, we work with a batch of training examples {x i , y i }, where 1 ≤ i ≤ N and 1 ≤ y i ≤ C. Our target is to learn discriminative representations for both instances and class labels.
+
+As Figure 1 shows, we propose three supervised CL based objectives, including the instance-centered contrastive loss, the label-centered contrastive loss, and the label embedding regularizer loss.

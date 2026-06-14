@@ -1,0 +1,25 @@
+For human evaluation and analysis, we choose the following four conversational QA models with different model architectures and training strategies:
+
+BERT.
+
+It is a simple BERT (Devlin et al., 2019) baseline which concatenates the previous two turns of question-answer pairs, the question, and the passage as the input and predicts the answer span.
+
+3This model is the same as the "BERT + PHQA" baseline in Qu et al. (2019a).
+
+GraphFlow.
+
+Chen et al. (2020) propose a recurrent graph neural network on top of BERT embeddings to model the dependencies between the question, the history and the passage.
+
+HAM.
+
+Qu et al. (2019b) propose a history attention mechanism (HAM) to softly select the most relevant previous turns.
+
+ExCorD. Kim et al. (2021) train a question rewriting model on CANARD (Elgohary et al., 2019) to generate context-independent questions, and then use both the original and the generated questions to train the QA model.
+
+This model achieves the current state-of-the-art on QuAC (67.7% F1).
+
+For all the models except BERT, we use the original implementations for a direct comparison.
+
+We report their performance on both standard benchmark and our evaluation in Table 2.
+
+3 Human Evaluation

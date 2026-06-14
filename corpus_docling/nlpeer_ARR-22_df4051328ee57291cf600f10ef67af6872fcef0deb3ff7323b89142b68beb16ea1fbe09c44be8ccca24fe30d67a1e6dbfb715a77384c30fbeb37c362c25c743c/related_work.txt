@@ -1,0 +1,31 @@
+Existing work on diacritizing Hebrew is not common, and all efforts build on word-level features.
+
+Kontorovich (2001) trains an HMM on a vocalized and morphologically-tagged portion of the Hebrew Bible containing 30,743 words, and evaluates the result on a test set containing 2,852 words, achieving 81% WOR accuracy.
+
+Note that Biblical Hebrew is very different from Modern Hebrew in both vocabulary, grammatical structure, and diacritization, and also has many words with diacritization.
+
+In our system, we exclude the Bible altogether from the training set, as its inclusion actively hurts performance on the validation set, which consists of Modern Hebrew.
+
+Tomer (2012) designs a diacritization system for Hebrew verbs consisting of a combination of a verb inflection system, a syllable boundary detector, and an SVM model for classifying verb inflection paradigms.
+
+The focus on verbs in a type-level setup makes this work incomparable to ours or to others in this survey.
+
+In Arabic, diacritization serves a comparable purpose to that in Hebrew, but not exclusively: most diacritic marks differentiate consonantal phonemes from each other, e.g. /b/ vs. /t/ (which only the sin/shin dot does in Hebrew), whereas vocalization marks are in a one-to-one relationship with their phonetic realizations, e.g. only the fatha as in /ba/ encodes the /a/ vowel.
+
+Dictionary-less Arabic diacritization has been attempted using a 3-layer Bi-LSTM (Belinkov and Glass, 2015).
+
+Abandah et al. (2015) use a Bi-LSTM where characters are assigned either one or more diacritic symbols.
+
+Our system differs from theirs by virtue of separating the diacritization categories.
+
+Mubarak et al. (2019) tackled Arabic diacritization as a sequence-to-sequence problem, tasking the model with reproducing the characters as well as the marks.
+
+Zalmout and Habash (2017) have made the case against RNN-only systems, arguing for the importance of morphological analyzers in Arabic NLP systems.
+
+We concede that well-curated systems may perform better than uncurated ones, particularly on low-resource languages such as Hebrew, but we note that they are difficult to train for individual use cases and are burdensome to incorporate within larger systems.
+
+Diacritics restoration in Latin-based scripts, applicable mostly to European languages, forms a substantially different problem from the one in Hebrew given the highly lexicalized nature of diacritic usage in these languages and the very low rate of characters requiring diacritics.
+
+The state-of-theart systems in such languages employ transformer models in a sequence-to-sequence setup (Náplava et al., 2021;Stankevičius et al., 2022), supplanting character-RNN sequence prediction architectures reminiscent of ours (Náplava et al., 2018).
+
+Indeed, the authors of this latter work note the only non-European in their dataset, Vietnamese, as a special outlier.

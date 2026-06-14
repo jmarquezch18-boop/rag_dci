@@ -1,0 +1,135 @@
+{
+  "query_id": "ee956c6a1b9b9808fc77d7d1f8f82237123f5000",
+  "query": "What is meant by \"edit boundaries might be unusual\"?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "edit boundaries"
+      },
+      "result_preview": "Search results for 'edit boundaries' (1 matches):\n[paper_id=nlpeer_PeerRead-ACL2017_169 | section=results | line=5] Raters were warned that the edit boundaries had been determined automatically and hence might be unusual, but that they should focus on the appropriateness of the error type regardless",
+      "elapsed_s": 3.03
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "determined automatically"
+      },
+      "result_preview": "Search results for 'determined automatically' (1 matches):\n[paper_id=nlpeer_PeerRead-ACL2017_169 | section=results | line=5] Raters were warned that the edit boundaries had been determined automatically and hence might be unusual, but that they should focus on the appropriateness of the error type r",
+      "elapsed_s": 6.33
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "determined automatically"
+      },
+      "result_preview": "Search results for 'determined automatically' (1 matches):\n[paper_id=nlpeer_PeerRead-ACL2017_169 | section=results | line=5] Raters were warned that the edit boundaries had been determined automatically and hence might be unusual, but that they should focus on the appropriateness of the error type r",
+      "elapsed_s": 4.83
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_169",
+        "section": "results",
+        "start": 3,
+        "end": 7
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_169 / results — líneas 1-12 de 25]\nAs our new error scheme is based solely on automatically obtained properties of the data, there are no gold standard labels against which to evaluate classifier performance.\n\nFor this reason, we instead carried out a small-scale manual eval",
+      "elapsed_s": 4.52
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_169",
+        "section": "results",
+        "start": 3,
+        "end": 8
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_169 / results — líneas 1-13 de 25]\nAs our new error scheme is based solely on automatically obtained properties of the data, there are no gold standard labels against which to evaluate classifier performance.\n\nFor this reason, we instead carried out a small-scale manual eval",
+      "elapsed_s": 7.25
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "As our new error scheme is based solely on automatically obtained properties of the data, there are no gold standard labels against which to evaluate classifier performance.\n\nFor this reason, we instead carried out a small-scale manual evaluation, where we simply asked 5 GEC researchers to rate the appropriateness of the predicted error types for 200 randomly chosen edits in context (100 from FCE-test and 100 from CoNLL-2014) as \"Good\", \"Acceptable\" or \"Bad\". \"Good' meant the chosen type was the most appropriate for the given edit, \"Acceptable\" meant the chosen type was appropriate, but probably not optimum, while \"Bad\" meant the chosen type was not appropriate for the edit.\n\nRaters were warned that the edit boundaries had been determined automatically and hence might be unusual, but that they should focus on the appropriateness of the error type regardless of whether they agreed with the boundary or not.\n\nIt is worth stating that the main purpose of this evaluation was not to evaluate the specific strengths and weaknesses of the classifier, but rather ascertain how well humans believed the predicted error types characterised each edit.\n\nGEC is known to be a highly subjective task ( Table 3: The percent distribution for how each expert rated the appropriateness of the predicted error types.\n\nE.g. Rater 3 considered 83% of all predicted types to be \"Good\".",
+      "section": "results",
+      "paper_id": "nlpeer_PeerRead-ACL2017_169",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_results_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_169",
+      "score": 1.0
+    },
+    {
+      "text": "As our new error scheme is based solely on automatically obtained properties of the data, there are no gold standard labels against which to evaluate classifier performance.\n\nFor this reason, we instead carried out a small-scale manual evaluation, where we simply asked 5 GEC researchers to rate the appropriateness of the predicted error types for 200 randomly chosen edits in context (100 from FCE-test and 100 from CoNLL-2014) as \"Good\", \"Acceptable\" or \"Bad\". \"Good' meant the chosen type was the most appropriate for the given edit, \"Acceptable\" meant the chosen type was appropriate, but probably not optimum, while \"Bad\" meant the chosen type was not appropriate for the edit.\n\nRaters were warned that the edit boundaries had been determined automatically and hence might be unusual, but that they should focus on the appropriateness of the error type regardless of whether they agreed with the boundary or not.\n\nIt is worth stating that the main purpose of this evaluation was not to evaluate the specific strengths and weaknesses of the classifier, but rather ascertain how well humans believed the predicted error types characterised each edit.\n\nGEC is known to be a highly subjective task ( Table 3: The percent distribution for how each expert rated the appropriateness of the predicted error types.\n\nE.g. Rater 3 considered 83% of all predicted types to be \"Good\".\n\nNg, 2015) and so we were more interested in overall judgements than specific disagreements.",
+      "section": "results",
+      "paper_id": "nlpeer_PeerRead-ACL2017_169",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_results_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_169",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/PeerRead-ACL2017/169_69"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 1.0,
+    "recall_at_3": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "recall_at_20": 1.0,
+    "precision_at_5": 1.0,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The excerpts state that the edit boundaries \"had been determined automatically\" and that raters were warned they \"might be unusual\". No further explanation of what makes them unusual is provided in the excerpts.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_PeerRead-ACL2017_169_results_0000",
+      "dci_nlpeer_PeerRead-ACL2017_169_results_0001"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_results_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_results_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.3943661971830986,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

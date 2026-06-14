@@ -1,0 +1,137 @@
+{
+  "query_id": "eeba4b725b3f8ad526cddce373ff444a591594c9",
+  "query": "What could explain the difference in performance between the DICTA test set and the new test set, particularly the difference between the cha and wor scores?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "performance"
+      },
+      "result_preview": "Search results for 'performance' (21 matches):\n[paper_id=nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea | section=results | line=1] We evaluate the performance of our summarization models automatically us",
+      "elapsed_s": 8.96
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+        "section": "introduction",
+        "start": 19,
+        "end": 19
+      },
+      "result_preview": "[nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea / introduction — líneas 14-24 de 69]\n\nRecently, pre-trained language models based on Transformer (Vaswani et al., 2017), such as BERT (Devlin et al., 2019),",
+      "elapsed_s": 18.04
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "dataset impact"
+      },
+      "result_preview": "No matches found for 'dataset impact'",
+      "elapsed_s": 10.76
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "ablation study"
+      },
+      "result_preview": "Search results for 'ablation study' (4 matches):\n[paper_id=nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea | section=abstract | line=13] The ablation study demonstrates that the hierarchical position infor",
+      "elapsed_s": 8.91
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+        "section": "abstract",
+        "start": 10,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea / abstract — líneas 5-13 de 13]\nIn addition, section titles usually indicate the common topic of their respective sentences.\n\nWe propose a novel approach to",
+      "elapsed_s": 15.96
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Recently, pre-trained language models based on Transformer (Vaswani et al., 2017), such as BERT (Devlin et al., 2019), have been widely used to extract contextual representations from texts.\n\nThe pre-trained Transformer language models (TLMs) can be easily reused for finetuning on the downstream tasks, so that the representations already learned from the large pretraining corpora are preserved.\n\nLiu and Lapata (2019) have achieved the state-of-the-art (SOTA) performance by fine-tuning BERT for extractive summarization on short document datasets including CNN/DailyMail.\n\nHowever, the TLMs consider merely the sequential-context-dependency by adding a linear positional encoding to each input token embeddings.\n\nThe hierarchical text structure information is not taken into account explicitly.",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "score": 1.0
+    },
+    {
+      "text": "In addition, section titles usually indicate the common topic of their respective sentences.\n\nWe propose a novel approach to formulate, extract, encode and inject hierarchical structure information explicitly into an extractive summarization model based on a pre-trained, encoderonly Transformer language model (HiStruct+ model), which improves SOTA ROUGEs for extractive summarization on PubMed and arXiv substantially.\n\nUsing various experimental settings on three datasets (i. e., CNN/DailyMail, PubMed and arXiv), our HiStruct+ model outperforms a strong baseline collectively, which differs from our model only in that the hierarchical structure information is not injected.\n\nIt is also observed that the more conspicuous hierarchical structure the dataset has, the larger improvements our method gains.\n\nThe ablation study demonstrates that the hierarchical position information is the main contributor to our model's SOTA performance.",
+      "section": "abstract",
+      "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_abstract_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/df4051328ee57291cf600f10ef67af6872fcef0deb3ff7323b89142b68beb16ea1fbe09c44be8ccca24fe30d67a1e6dbfb715a77384c30fbeb37c362c25c743c_50",
+    "nlpeer/ARR-22/df4051328ee57291cf600f10ef67af6872fcef0deb3ff7323b89142b68beb16ea1fbe09c44be8ccca24fe30d67a1e6dbfb715a77384c30fbeb37c362c25c743c_51",
+    "nlpeer/ARR-22/df4051328ee57291cf600f10ef67af6872fcef0deb3ff7323b89142b68beb16ea1fbe09c44be8ccca24fe30d67a1e6dbfb715a77384c30fbeb37c362c25c743c_53"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0000",
+      "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_abstract_0001"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_abstract_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.03846153846153846,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

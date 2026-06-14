@@ -1,0 +1,279 @@
+Weakly Supervised Word Segmentation For Computational Language Documentation
+
+Abstract
+
+Introduction
+
+Background
+
+Supervising Word Segmentation
+
+In this section, we discuss realistic sources of weak supervision for segmentation tasks and how they can be included in Bayesian models.
+
+Finding Supervision Information
+
+Segmentation boundaries Segmentation data, corresponding to the location of boundary (and non-boundary) information, can be obtained in different ways.
+
+For instance, when audio recordings are available, prosodic cues such as short silences or specific intonative patterns can serve to identify plausible locations for word endings.
+
+Longer pauses generally denote the end of an utterance, which we assume are already given.
+
+This would yield a sparse partial annotation, where supervision data is randomly scattered across the corpus.
+
+Another realistic situation where we have access to a partial annotation is when a small subset is already segmented.
+
+In this case, the partial annotation is dense and concentrated in a few sentences, a semi-supervised setting also studied in (Sirts and Goldwater, 2013).
+
+We thus consider two questions: (a) which is more effective between dense and sparse annotations? (b) how effective is supervision in an incremental learning regime, where automatic (dense) annotations are progressively corrected and used to update the model?
+
+Word lists Word lists constitute another valuable and common source of information.
+
+They may contain morphs, morphemes, lexemes or fully inflected forms, with various levels of information (part-ofspeech, gloss, translation, etc.).
+
+In this study, we consider that lists of surface forms are available and evaluate their usefulness, depending on their size and on the way they were collected.
+
+A related question is about the relative interest of word and morph lists, which we study in Section 5.3.
+
+The use of more sophisticated forms of lexical information regarding word structure, PoS, is out of the scope of this paper and is left for future work.
+
+Having a collection of fully segmented utterances, as discussed above, is another way to generate word lists.
+
+So these two sources of information must be viewed as complementary ways to supervise the task at hand: boundary marks at the token level, word list at the type level.
+
+Forms Of Weak Supervision
+
+Segmentation boundaries Observed segmentation boundaries can be used to facilitate the training process.
+
+Two experimental conditions, both affecting the Gibbs sampler (gs), have been considered:
+
+• gs.sparse: a fraction (λ%) of the actual boundaries are observed, which corresponds to a sparse annotation scenario.
+
+• gs.dense: for λ% of sentences, all boundary and non-boundary variables are given.
+
+In both cases, we modify the sampling process and make sure that the value of observed variables is not sampled, as in (Sirts and Goldwater, 2013).
+
+Using a word list Assuming now that a word list D is available, we consider the following approaches to reinforce the likelihood of units in D in the output segmentation:
+
+• d.count: D is used to initialise the 'internal' model dictionary, and words in D are created with a fixed pseudo-count of value λ.
+
+Formally, ∀w ∈ D, the counting function n w () of Equation (1) will add λ to their actual count.
+
+• d.mix: D is combined with the base distribution, resulting in the following mixture P 0 :
+
+P 0 (w) = λ |D| 1 {w∈D} + (1 -λ)P 0 (w),(3)
+
+where λ ∈ [0, 1], |D| is the size of D, and 1 {w∈D} is the indicator function testing membership in D. As for d.count, P 0 increases the probability of words in D, but in a looser way, due to the term αP 0 in Equation (1).
+
+• d.ngram: the baseline dpseg version uses a uniform character model for P 0 (Equation ( 2)); here, we use D to train a character n-gram language model (LM), with n = 2 and add-k smoothing in our experiments.
+
+• d.mix+ngram: this method combines d.mix and d.ngram: P 0 is replaced with the mixture P 0 of Equation ( 3) and the character model is an n-gram LM.
+
+This can be viewed as a proxy to the complete nested Dirichlet Process of Mochihashi et al. (2009), with D implementing a cache mechanism for known words.
+
+We have also used weaker forms of supervision aimed at learning a better length model, with hardly any improvement with respect to the baseline; these results are not reported below.
+
+Incremental Training
+
+In addition to the static use of supervision information described above, we also considered a more dynamic training regime, where dense annotations are provided in a sequential manner through interaction with an expert linguist, enabling incremental learning.
+
+To measure the effectiveness of this approach, we contrast three scenarios in Section 5.2:
+
+• the baseline is the post-edition of a fully unsupervised model without further training;
+
+• the post-edition of a fully unsupervised model, with additional Gibbs sampling iterations every batch utterances for iter iterations.
+
+This aims at propagating forward the supervision information obtained from past annotations.
+
+This method is referred to as o.regular.
+
+• on top of this, we also used the past annotated sentences to reestimate the base distribution of the underlying process as in d.ngram.
+
+The corresponding results are labelled o.2level in Figure 2.
+
+4 Experimental settings
+
+Linguistic Material
+
+Two languages have been considered in this paper: Mboshi and Japhug.
+
+Mboshi is a tonal Bantu language spoken in the Republic of Congo (Bantu C25).
+
+The data has been collected as part of the BULB project (Adda et al., 2016).
+
+It has seven vowels and 25 consonant phonemes with five prenasalised consonants (made of two to three consonants), a common feature in Bantu languages (Embanga Aborobongui, 2013;Kouarata, 2014).
+
+Although the language is usually not written, linguists have transcribed it with graphemes in a way that approximates the phonetic content.
+
+To mark the distinction between long and short vowels, they were either duplicated (VV) or not (V).
+
+One challenge for Mboshi word segmentation is its complex phonological rules, notably, vowel elision patterns whereby a vowel disappears before another one (also a common Bantu feature) (Rialland et al., 2015).
+
+This kind of phenomenon makes it harder to find the boundaries.
+
+From a morphological point of view, words are composed of roots and affixes.
+
+Another characteristic Bantu feature is its deletion rule for class-prefix consonants in nouns.
+
+Templates for verb structure are also quite rigid, with affixes following a strict ordering (Godard et al., 2018a).
+
+Our corpus is a manual alphabetic transcription of audio recordings.
+
+3 It contains 5,312 sentences segmented in words, one sentence per line.
+
+Japhug is a Sino-Tibetan language from the Gyalrong family spoken in the Sichuan province in China.
+
+Japhug has eight vowels and 50 consonant phonemes, which can combine to create a large number (more than 400) of consonant clusters.
+
+The rich cluster feature is one important characteristic of Japhug, which actually has one of the largest inventory of consonant clusters in the Trans-Himalayan language family.
+
+The structure of these clusters can be analysed by looking at patterns of partial reduplication of syllable initial consonants.
+
+There are no tones in this language.
+
+Japhug also has a rich morphology, both for verbs and nouns.
+
+Remarkably, in verb forms, up to six or seven prefixes can be chained to express features such as tense, aspect, modality, while suffixation is used to express inflectional phenomena.
+
+Even though these processes are quite regular, they contribute to generating a large number of possible word forms.
+
+Recordings, annotated corpora, and dictionaries for Japhug are available from the Pangloss collection.
+
+4 An extensive description of the language is given in (Jacques, 2021).
+
+5Our training material has been extracted from the L A T E X source files of this book, by collecting all Japhug examples.
+
+These can easily be retrieved by searching the \gll command introducing Japhug sentences.
+
+Not only are the resulting sentences well-curated, but they are also segmented at two levels: words and morphemes.
+
+This will lead to a specific experiment presented in Section 5.
+
+For the latter, we use the word-based and morphemebased segmentations.
+
+Table 1 displays the general statistics for the two languages.
+
+N utt , N type , and N token represent the number of utterances, of word types, and of word tokens, respectively.
+
+WL represents the average token length, while TL is the average type length.
+
+The sentences used for semi-supervision correspond to the first 200 sentences of each dataset, which is a realistic amount of data.
+
+Likewise, lexical supervision corresponds to the list of words observed in the same 200 sentences, and respectively contain 517 words for Mboshi, 664 words and 493 morphemes for Japhug.
+
+Model Settings
+
+Evaluation Metrics
+
+Results
+
+Using Weak Supervision
+
+Dpseg
+
+Table 2 displays our experimental results for the 5K Mboshi corpus for SentencePiece (SP), dpseg and pypseg with various amounts of supervision.
+
+First, the unsupervised dpseg model has better results than SP on all three levels by a significant margin.
+
+SP, on the other hand, produces more types as it 'knows' the actual number of types to generate.
+
+Regarding segmentation boundaries, the gs.sparse model has disappointing results, with scores lower than the baseline.
+
+On the other hand, the dense supervision manages to improve the baseline scores by around 2.5 points for BF, 4.5 points for WF, and 7.5 points for LF.
+
+This is an encouraging result, since, with less than 5% of the whole text, the model has improved in a noticeable way, especially at type level, which seems to be difficult for fully unsupervised learning.
+
+When supervising with a word list, all models but d.2gram outperform the baseline.
+
+Yet, the d.count and d.mix methods have lower scores than the gs.dense: this was expected for BF and WF-where directly supervising boundaries is likely to be more useful than an indirect one, but less so for LF.
+
+Regarding the d.2gram model, its poor BF and WF scores are more than compensated by an increase of around 12 points in LF, showing the impact of a better type model.
+
+Finally, by combining the d.mix and d.2gram strategies, d.mix+2gram obtains the overall best results.
+
+Pypseg
+
+Results are in the right part of Table 2, where the baseline is the fully unsupervised pypseg.
+
+It slightly outperforms dpseg by less than 1 point in terms of F-scores.
+
+In our setting, although PYP increases the number of discovered types, it does not improve the performance in any significant manner.
+
+This trend is confirmed for weakly supervised models:8 the gs.dense model is the only one benefiting from a small improvement in all Fscores.
+
+d.count underperforms both the baseline and its dpseg version.
+
+With worsened BF and WF scores compared to the baseline, d.mix+2gram with pypseg is worse than with dpseg.
+
+Overall, the former seems to benefit less from annotations than the latter.
+
+The performance of the bigram character model is noteworthy both with dpseg and pypseg.
+
+This improvement alone (i.e. d.2gram) is responsible not only for a large increase in LF, but also for an average type length that gets much closer to its true value (6.39 in the reference, 6.60 with dpseg and d.mix+2gram).
+
+Results For Japhug
+
+Incremental Learning
+
+Supervising Words And Morphemes
+
+This section addresses a recurring issue in word segmentation model related to the linguistic nature of the units learnt by the model and the consequences of choosing one or the other reference in training.
+
+The Japhug corpus contains both annotation levels and is a perfect test bed for this study.
+
+We have thus used a segmentation model (dpseg) with and without weak supervision (using the d.mix+2gram variant) at the level of words or morphemes, and the results are also evaluated against the two references (a segmentation in words or in morphemes).
+
+Results are in Table 4.
+
+In the unsupervised setting, segmentation metrics are markedly better with morpheme-based ref- erences, especially for the LF metric.
+
+This again shows the tendency of the unigram model to oversegment the training sentences.
+
+With word supervision, we observe a shift in behaviour that is consistent with the provided annotations: better word-level metrics with word-based annotations, and accordingly, a decrease of performance for morpheme-based scores.
+
+With morpheme supervision, results are more contrasted: an improvement for word segmentation (because some words are also morphemes) that is not matched for morpheme boundaries.
+
+Looking at the detailed results (see appendix A.1, Table 7), one can see that this is due to an undersegmentation, which yields a poor recall at the boundary and token levels.
+
+Here, the main remaining benefit of supervision is an increase in the LF score.
+
+These preliminary results suggest that considering only one type of boundary is a too naive view of the segmentation process and does not allow us to fully benefit from annotated data.
+
+They call for models that would carefully distinguish boundaries within words and between words, with appropriate supervision for each of these levels.
+
+Error Analysis
+
+Related Work
+
+Conclusion And Outlook
+
+Figure 2 displays the evolution of the boundary error rate (number of errors over 100 sentences / length of the 100 sentences) as more annotated sentences are available, for three contrasts of § 3.3 (baseline, o.regular, and o.2level).
+
+We use the dpseg model and 50 complementary Gibbs sampling iterations every 100 sentences.
+
+Figure 2: Average loss over 100 sentences on the 5K Mboshi text with incremental training (batch = 100, iter = 50)
+
+Figure 3: Example of a segmentation error for the Mboshi sentence: 'these children are the same size'.
+
+Figure 4: Example of Mboshi sentence ('the hunter made a path through the forest') corrected through supervision (here, d.mix+2gram): 'obengi' is a word in the supervision dictionary
+
+Figure 5: Examples of Mboshi sentences used for supervision (here, d.mix+2gram): 'Termite workers are on the dead wood ' and 'Did you listen to their voices? '
+
+Statistics for the Mboshi and Japhug corpora.
+
+Results on the 5K Mboshi text for various models and weak supervision settings (20K iterations, 200 supervision sentences, λ = 0.25).
+
+SP stands for SentencePiece; mix+2 for d.mix+2gram.
+
+Results on the 3K Japhug text with various models (20K iterations, 200 supervision sentences).
+
+SP stands for SentencePiece; mix+2 for d.mix+2gram.
+
+Comparison of the results on the 3K Japhug text with the word or morpheme segmented reference (ref.), dictionary from 200 supervision sentences (sup.)
+
+.43 61.10 63.75 76.62 61.39 76.67 BR 59.82 74.93 90.20 91.19 81.11 90.08 80.22 BF 59.74 62.38 72.85 75.04 78.80 73.02 78.40 WP 30.28 31.12 38.98 43.55 54.44 39.42 53.97 WR 30.35 42.05 55.18 59.92 57.23 55.51 56.15 WF 30.31 35.77 45.69 50.44 55.80 46.10 55.04 LP 20.51 20.05 39.95 50.77 49.93 40.92 49.
+
+Complete results on the 3K Japhug text with various models (20K iterations, 200 supervision sentences).
+
+SP stands for SentencePiece, Morf for Morfessor.
+
+Complete results on the 3K Japhug text with the word or morpheme segmented reference (ref.), dictionary from 200 supervision sentences (sup.)

@@ -1,0 +1,279 @@
+Automatic Annotation And Evaluation Of Error Types For Grammatical Error Correction
+
+Abstract
+
+Introduction
+
+Edit Extraction
+
+The first stage of automatic annotation is edit extraction.
+
+Specifically, given an original and corrected sentence pair, we need to determine the start and end boundaries of any edits.
+
+This is fundamentally an alignment problem:
+
+We took a guide tour on center city .
+
+We took a guided tour of the city center .
+
+Table 1: A sample alignment between an original and corrected sentence (Felice et al., 2016).
+
+The first attempt at automatic edit extraction was made by Swanson and Yamangil (2012), who simply used the Levenshtein distance to align parallel original and corrected sentences.
+
+As the Levenshtein distance only aligns individual tokens however, they also merged all adjacent nonmatches in an effort to capture multi-token edits.
+
+Xue and Hwa (2014) subsequently improved on Swanson and Yamangil's work by training a maximum entropy classifier to predict whether edits should be merged or not.
+
+Most recently, Felice et al. (2016) proposed a new method of edit extraction using a linguistically-enhanced alignment algorithm supported by a set of merging rules.
+
+More specifically, they incorporated various linguistic information, such as part-of-speech and lemma, into the cost function of the Damerau-Levenshtein2 algorithm to make it more likely that tokens with similar linguistic properties aligned.
+
+This approach ultimately proved most effective at approximating human edits in several datasets (80-85% F 1 ), and so we use it in the present study.
+
+Automatic Error Typing
+
+Having extracted the edits, the next step is to assign them error types.
+
+While Swanson and Yamangil (2012) did this by means of maximum entropy classifiers, one disadvantage of this approach is that such classifiers are biased towards their particular training corpora.
+
+For example, a classifier trained on the First Certificate in English (FCE) corpus (Yannakoudakis et al., 2011) is unlikely to perform as well on the National University of Singapore Corpus of Learner English (NU-CLE) (Dahlmeier and Ng, 2012) or vice versa, because both corpora have been annotated according to different standards (cf.
+
+Xue and Hwa (2014)).
+
+Instead, a dataset-agnostic error type classifier is much more desirable.
+
+A Rule-Based Error Type Framework
+
+A Dataset-Agnostic Classifier
+
+One of the key strengths of a rule-based approach is that by being dependent only on automatic mark-up information, our classifier is entirely dataset independent and does not require labelled training data.
+
+This is in contrast with machine learning approaches which not only learn dataset specific biases, but also presuppose the existence of sufficient quantities of training data.
+
+A second significant advantage of our approach is that it is also always possible to determine precisely why an edit was assigned a particular error category.
+
+In contrast, human and machine learning classification decisions are often much less transparent.
+
+Finally, by being fully deterministic, our approach bypasses bias effects altogether and should hence be more consistent.
+
+Automatic Markup
+
+The prerequisites for our rule-based classifier are that each token in both the original and corrected sentence is POS tagged, lemmatized, stemmed and dependency parsed.
+
+We use spaCy3 v1.7.3 for all but the stemming, which is performed by the Lancaster Stemmer in NLTK.
+
+4 Since fine-grained POS tags are often too detailed for the purposes of error evaluation, we also map spaCy's Penn Treebank style tags to the coarser set of Universal Dependency tags.
+
+5 We use the latest Hunspell GB-large word list6 to help classify non-word errors.
+
+The marked-up tokens in an edit span are then input to the classifier and an error type is returned.
+
+Error Categories
+
+The complete list of 25 error types in our new framework is shown in Table 2.
+
+Note that most of them can be prefixed with 'M:', 'R:' or 'U:', depending on whether they describe a Missing, Replacement, or Unnecessary edit, to enable evaluation at different levels of granularity (see Appendix A for all valid combinations).
+
+This means we can choose to evaluate, for example, only replacement errors (anything prefixed by 'R:'), only noun errors (anything suffixed with 'NOUN') or only replacement noun errors ('R:NOUN').
+
+This flexibility allows us to make more detailed observations about different aspects of system performance.
+
+One caveat concerning error scheme design is that it is always possible to add new categories for increasingly detailed error types; for instance, we currently label [could → should] a tense error, when it might otherwise be considered a modal error.
+
+The reason we do not call it a modal error, however, is because it would then become less clear how to handle other cases such as [can → should] and [has eaten → should eat], which might be considered a more complex combination of modal and tense error.
+
+As it is impractical to create new categories and rules to differentiate between such narrow distinctions however, our final framework aims to be a compromise between informativeness and practicality.
+
+Classifier Evaluation
+
+Error Type Scoring
+
+Having described how to automatically annotate parallel sentences with ERRANT, we now also have a method to annotate system hypotheses; this is the first step towards an error type evaluation.
+
+Since no scorer is currently capable of calculating error type performance however (Dahlmeier and Ng, 2012;Felice and Briscoe, 2015;Napoles et al., 2015), we instead built our own.
+
+Fortunately, one benefit of explicitly annotating system hypotheses is that it makes evaluation much more straightforward.
+
+In particular, for each sentence, we only need to compare the edits in the hypothesis against the edits in each respective reference and measure the overlap.
+
+Any edit with the same span and correction in both files is hence a true positive (TP), while unmatched edits in the hypothesis and references are false positives (FP) and false negatives (FN) respectively.
+
+These results can then be grouped by error type for the purposes of error type evaluation.
+
+Finally, it is worth noting that this scorer is much simpler than other scorers in GEC which typically incorporate edit extraction or alignment directly into their algorithms.
+
+Our approach, on the other hand, treats edit extraction and evaluation as separate tasks.
+
+Gold Reference Vs. Auto Reference
+
+Before evaluating an automatically annotated hypothesis against its reference, we must also address another mismatch: namely that hypothesis edits must be extracted and classified automatically, while reference edits are typically extracted and classified manually using a different framework.
+
+Since evaluation is now reduced to a straightforward comparison between two files however, it is especially important that the hypothesis and references are both processed in the same way.
+
+For instance, a hypothesis edit [have eating → has eaten] will not match the reference edits [have → has] and [eating → eaten] because the former is one edit while the latter is two edits, even though they equate to the same thing.
+
+To solve this problem, we can reprocess the references in the same way as the hypotheses.
+
+In other words, we can apply ERRANT to the references such that each reference edit is subject to the same automatic extraction and classification criteria as each hypothesis edit.
+
+While it may seem unorthodox to discard gold reference information in favour of automatic reference information, this is necessary to minimise the difference between hypothesis and reference edits and also standardise error type annotations.
+
+To show that automatic references are feasible alternatives to gold references, we evaluated each team in the CoNLL-2014 shared task using both types of reference with the M 2 scorer (Dahlmeier and Ng, 2012), the de facto standard of GEC evaluation, and our own scorer.
+
+Table 4 hence shows that there is little difference between the overall scores for each team, and we formally validated this hypothesis for precision, recall and F 0.5 by means of bootstrap significance testing (Efron and Tibshirani, 1993) between automatic and gold references (1,000 iterations, p > .05) which leads us to conclude that our automatic references are qualitatively as good as human references.
+
+Comparison With The M 2 Scorer
+
+Despite using the same metric, Table 4 also shows that the M 2 scorer tends to produce slightly higher F 0.5 scores than our own.
+
+This initially led us to believe that our scorer was underestimating performance, but we subsequently found that instead the M 2 scorer tends to overestimate performance (cf.
+
+Felice and Briscoe (2015) and Napoles et al. (2015)).
+
+In particular, given a choice between matching [have eating → has eaten] from Annotator 1 or [have → has] and [eating → eaten] from Annotator 2, the M 2 scorer will always choose Annotator 2 because two true positives (TP) are worth more than one.
+
+Similarly, whenever the scorer encounters two false positives (FP) within a certain distance of each other,7 it merges them and treats them as one false positive; e.g. [is a cat → are a cats] is selected over [is → are] and [cat → cats] even though these edits are best handled separately.
+
+In other words, the M 2 scorer exploits its dynamic edit boundary prediction to artificially maximise true positives and minimise false positives and hence produce slightly inflated scores.
+
+A dash indicates the team's system did not attempt to correct the given error type (TP+FP = 0).
+
+Conll-2014 Shared Task Analysis
+
+Edit Operation
+
+In our first category experiment, we simply investigated the performance of each system in terms of Missing, Replacement and Unnecessary edits.
+
+The results are shown in Table 5 with additional information in Appendix B, Table 10.
+
+The most surprising result is that five teams (AMU, IPN, PKU, RAC, UFC) failed to correct any unnecessary token errors at all.
+
+This is noteworthy because unnecessary token errors account for roughly 25% of all errors in the CoNLL-2014 test data and so failing to address them significantly limits a system's maximum performance.
+
+While the reason for this is clear in some cases, e.g. UFC's rule-based system was never designed to tackle unnecessary tokens (Gupta, 2014), it is less clear in others, e.g. there is no obvious reason why AMU's SMT system failed to learn when 8 http://www.comp.nus.edu.sg/ ∼ nlp/conll14st.html to delete tokens (Junczys-Dowmunt and Grundkiewicz, 2014).
+
+AMU's result is especially remarkable given that their system still came 3rd overall despite this limitation.
+
+In contrast, CUUI's classifier approach (Rozovskaya et al., 2014) was the most successful at correcting not only unnecessary token errors, but also replacement token errors, while CAMB's hybrid MT approach (Felice et al., 2014) significantly outperformed all others in terms of missing token errors.
+
+It would hence make sense to combine these two approaches, and indeed recent research has shown this improves overall performance (Rozovskaya and Roth, 2016).
+
+General Error Types
+
+Table 6 shows precision, recall and F 0.5 for each of the error types in our proposed framework for each team in CoNLL-2014.
+
+As some error types are more common than others, we also provide the TP, FP and FN counts used to make this table in Appendix B, Table 11.
+
+Overall, CAMB was the most successful team in terms of error types, achieving the highest Fscore in 10 (out of 24) error categories, followed by AMU, who scored highest in 6 categories.
+
+All but 3 teams (IITB, IPN and POST) achieved the best score in at least 1 category, which suggests that different approaches to GEC complement different error types.
+
+Only CAMB attempted to correct at least 1 error from every category.
+
+Other interesting observations we can make from this table include:  • Despite the prevalence of spell checkers nowadays, many teams did not seem to employ them; this would have been an easy way to boost overall performance.
+
+• Although several teams built specialised classifiers for DET and PREP errors, CAMB's hybrid MT approach still outperformed them.
+
+This might be because the classifiers were trained using a different error type framework however.
+
+• CUUI's classifiers significantly outperformed all other approaches at ORTH and VERB:FORM errors.
+
+This suggests classifiers are well-suited to these error types.
+
+• Although UFC's rule-based approach was the best at VERB:SVA errors, CUUI's classifier was not very far behind.
+
+• Only AMU managed to correct any CONJ errors.
+
+• Content word errors (i.e. ADJ, ADV, NOUN and VERB) were unsurprisingly very difficult for all teams.
+
+Detailed Error Types
+
+In addition to analysing general error types, the modular design of our framework also allows us to evaluate error type performance at an even greater level of detail.
+
+For example, Table 7 shows the breakdown of Determiner errors for two teams using different approaches in terms of edit operation.
+
+Note that this is a representative example of detailed error type performance, as an analysis of all error type combinations for all teams would take up too much space.
+
+While CAMB's hybrid MT approach achieved a higher score than CUUI's classifier overall, our more detailed evaluation reveals that CUUI actually outperformed CAMB at Replacement Determiner errors.
+
+We also learn that CAMB scored twice as highly on M:DET and U:DET than it did on R:DET and that CUUI's significantly higher U:DET recall was offset by a lower precision.
+
+Ultimately, this shows that even though one approach might be better than another overall, different approaches may still have complementary strengths.
+
+Multi Token Errors
+
+Another benefit of explicitly annotating all hypothesis edits is that edit spans become fixed; this means we can evaluate system performance in terms of edit size.
+
+Table 8 hence shows the overall performance for each team at correcting multitoken edits, where a multi-token edit is an edit that has at least two tokens on either side.
+
+In the CoNLL-2014 test set, there are roughly 220 such edits (about 10% of all edits).
+
+In general, teams did not do well at multi-token edits.
+
+In fact only three teams achieved scores greater than 10% F 0.5 and all of them used MT (AMU, CAMB, UMC).
+
+This is significant because recent work has suggested that the main goal of GEC should be to produce fluent-sounding, rather than just grammatical sentences, even though this often requires complex multi-token edits (Sakaguchi et al., 2016).
+
+If no system is particularly adept at correcting multi-token errors however, robust fluency correction will likely require more sophisticated methods than are currently available.
+
+Detection Vs. Correction
+
+Another important aspect of GEC that is seldom reported in the literature is that of error detection; i.e. the extent to which a system can identify erroneous tokens in text.
+
+This can be calculated by comparing the edit overlap between the hypothesis and reference files regardless of the proposed correction in a manner similar to Recognition evaluation in the HOO shared tasks for GEC (Dale and Kilgarriff, 2011).
+
+Figure 1 hence shows how each team's score for detection differed in relation to their score for correction.
+
+While CAMB scored highest for detection overall, it is interesting to note that CUUI ultimately performed slightly better than CAMB at correction.
+
+This suggests CUUI was more successful at correcting the errors they detected than CAMB.
+
+In contrast, IPN and PKU are notable for detecting significantly more errors than they were able to correct.
+
+Nevertheless, a system's ability to detect errors, even if it is unable to correct them, is still likely to be valuable information to a learner (Rei and Yannakoudakis, 2016).
+
+Finally, although we do not do so here, our scorer is also capable of providing a detailed error type breakdown for detection.
+
+Conclusion
+
+(a) He IS asleep now. [IS → is]: orthography (b) He iss asleep now. [iss → is]: spelling (c) He has asleep now. [has → is]: verb (d) He being asleep now. [being → is]: form (e) He was asleep now. [was → is]: tense (f) He are asleep now. [are → is]: SVA To handle these cases, we hence wrote the following ordered rules: 1. Are the lower case forms of both sides of the edit the same? (a) 2. Is the original token a real word? (b) 3.
+
+Do both sides of the edit have the same lemma? (c) 4. Is one side of the edit a gerund (VBG) or participle (VBN)? (d) 5. Is one side of the edit in the past tense (VBD)? (e) 6. Is one side of the edit in the 3rd person present tense (VBZ)? (f)
+
+Figure 1: The difference between detection and correction scores for each team overall.
+
+The list of 25 main error categories in our new framework with examples and explanations.
+
+Bryant and
+
+Overall scores for each team in CoNLL-2014 using gold and auto references with both the M 2 scorer and our simpler edit comparison approach.
+
+All scores are in terms of F 0.5 .
+
+Precision, recall and F 0.5 for Missing, Unnecessary, and Replacement errors for each team.
+
+Precision, recall and F 0.5  for each team and error type.
+
+A dash indicates the team's system did not attempt to correct the given error type (TP+FP = 0).
+
+The highest F-score for each type is highlighted.
+
+Detailed breakdown of Determiner errors for two teams.
+
+Each team's performance at correcting multi-token edits; i.e. there are at least two tokens on one side of the edit.
+
+There are 55 total possible error types.
+
+This table shows all of them except UNK, which indicates an uncorrected error.
+
+A dash indicates an impossible combination.
+
+True Positive, False Positive and False Negative counts for each team in terms of Missing, Replacement and Unnecessary edits.
+
+The total number of edits may vary for each system, as this depends on the individual references that are chosen during evaluation.
+
+These results were used to make Table5.
+
+True Positive, False Positive and False Negative counts for each error type for each team.
+
+These results were used to make Table6.

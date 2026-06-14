@@ -104,25 +104,35 @@ rag2:
     - "Unknown"
 
 rag3:
-  # ── Retrieval (sin reranker) ──────────────────────────────────────────────
-  k_candidates: 20          # candidatos ANN; mismo que RAG 1 y RAG 2
-  oracle_top_n: 7           # top-N por score vectorial presentados al oráculo
-                            # (igual que reranker_top_n de RAG 2 para comparación justa)
-  section_filter: null
+  # ── Ollama / DeepSeek-R1 ─────────────────────────────────────────────────
+  ollama:
+    base_url: "http://localhost:11434"
+    model: "deepseek-r1:14b"
+    temperature: 0.0
+    timeout_seconds: 120
 
-  # ── Oráculo de curación (mismos parámetros que RAG 2) ────────────────────
-  oracle_similarity_threshold: 0.75
+  # ── Loop agéntico ReAct ───────────────────────────────────────────────────
+  agent:
+    max_iterations: 5              # máximo de búsquedas por query
+    max_results_per_grep: 20       # límite de líneas por grep
+    context_window_lines: 5        # líneas de contexto alrededor de un match
+    max_evidence_chunks: 10        # máximo fragmentos acumulados antes del oráculo
 
-  # ── Faithfulness coseno ───────────────────────────────────────────────────
+  # ── Corpus de texto plano ─────────────────────────────────────────────────
+  corpus:
+    path: "./corpus"
+    text_format: "txt"
+    sections: ["abstract", "introduction", "methodology", "results", "discussion", "limitations"]
+
+  # ── Curación ─────────────────────────────────────────────────────────────
   faithfulness_cosine_threshold: 0.75
-
-  # ── Fallback ──────────────────────────────────────────────────────────────
   min_approved_for_generation: 1
   fallback_top_n: 3
 
-  # ── Subsets (misma semilla que RAG 1 y RAG 2 para comparabilidad) ─────────
-  metrics_subset_size: 200
-  metrics_subset_seed: 42
-
-  # ── Colección Qdrant (reutiliza la de RAG 2 — mismos chunks) ─────────────
-  qdrant_collection: "peerqa_chunks_rag2"
+  # ── Evaluación ────────────────────────────────────────────────────────────
+  evaluation:
+    judge_model: "llama-3.3-70b-versatile"
+    judge_provider: "groq"
+    judge_subset_size: 50
+    metrics_subset_size: 200
+    metrics_subset_seed: 42

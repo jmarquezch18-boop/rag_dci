@@ -1,0 +1,137 @@
+{
+  "query_id": "b4872cdd5e953402e1281dddef42ded91564f45e",
+  "query": "How does your method differ from existing methods for visual and language understanding with multilinguality, such as VQA, captioning, and retrieval?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "multilinguality"
+      },
+      "result_preview": "No matches found for 'multilinguality'",
+      "elapsed_s": 6.06
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "multilingual"
+      },
+      "result_preview": "Search results for 'multilingual' (21 matches):\n[paper_id=nlpeer_COLING2020_341 | section=abstract | line=1] This paper proposes a framework for the expression of typological statements which uses realvalued logics to capture the empirical truth value (truth degree) of a formula on a given data sour",
+      "elapsed_s": 4.24
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b",
+        "section": "introduction",
+        "start": 17,
+        "end": 47
+      },
+      "result_preview": "[nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b / introduction — líneas 12-52 de 67]\n\nSecond, previous works (Fried et al., 2018;Wang et al., 2019a;Landi et al., 2021;Wang et al., 2020a;Huang et al., 2019",
+      "elapsed_s": 12.32
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b",
+        "section": "introduction",
+        "start": 12,
+        "end": 52
+      },
+      "result_preview": "[nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b / introduction — líneas 7-57 de 67]\nthese agents suffers from domain shift (i.e., pretrained linguistic and visual representation might not generalize to VL",
+      "elapsed_s": 9.59
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "VQA OR captioning OR retrieval AND multilinguality"
+      },
+      "result_preview": "No matches found for 'VQA OR captioning OR retrieval AND multilinguality'",
+      "elapsed_s": 8.09
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Second, previous works (Fried et al., 2018;Wang et al., 2019a;Landi et al., 2021;Wang et al., 2020a;Huang et al., 2019a;Ma et al., 2019a;Majumdar et al., 2020;Qi et al., 2020a) on vision-language navigation have seen that agents tend to perform substantially worse in environments that are unseen during training, indicating the lack of generalizability of the navigation agent.\n\nIn this paper, we propose to address these two challenges via crosslingual and environment agnostic representations.\n\nAlthough some initial progress (Huang et al., 2019b;Majumdar et al., 2020;Hong et al., 2021;Chen et al., 2021) has been made towards introducing pre-trained linguistic representations into vision-language navigation agents, how to understand and utilize paired multilingual instructions to transfer the pre-trained linguistic representation to multilingual navigation agent still remains unexplored.\n\nWe argue that for a multilingual agent, the linguistic representation can capture more visual concepts from learning the similarity between paired multilingual instructions.\n\nAs shown in Figure 1, though the three instructions shown here are in different languages and vary in length and level of detail2 , all of them correspond to the sample path -Path A. Hence, by learning the similarity between these paired instructions, the cross-lingual language representation of the same visual concept mentioned in these paired instructions (e.g., the red words correspond to the same visual object \"wash basin\") will be close to each other, making it easier for the agent to comprehend.\n\nFurthermore, the cross-lingual language representation will benefit from the complementary information from instructions in different languages since they elicit more references to visible entities.\n\nFor example, in Figure 1, the target room environment \"washroom\" is only mentioned in English instructions.\n\nHindi and Telugu instructions could benefit from learning the connection between \"washroom\" and \"wash basin\" through learning from the English instruction.\n\nMoreover, many methods have been proposed to encourage agent generalization to unseen environments during training (Tan et al., 2019;Wang et al., 2020c;Fu et al., 2020;Zhang et al., 2020).\n\nZhang et al. (2020) has shown that it is the low-level appearance information that causes the environment bias.\n\nTo mitigate this bias, previous works only consider one single environment when learning the visual representation for a given path.\n\nWe instead learn an environment-agnostic visual representation by exploring the connections between multiple environments.\n\nFor the example shown in Figure 1, Path A and Path B are two semantically aligned paths in different environments.\n\nIn both cases, the agent needs to head into the washroom and stop beside the wash basin.\n\nLearning the relationship between these paired paths helps the agent comprehend concepts like \"bath tub\", and not be distracted by the low-level appearance of the objects in unseen environments.\n\nOverall, in this paper, we propose 'CLEAR: Cross-Lingual and Environment-Agnostic Representations' to address the two challenges above.\n\nFirst, we define a visually-aligned instruction pair as two instructions that correspond to the same navigation path.\n\nGiven the instruction pairs, we transfer the pre-trained multilingual BERT (Devlin et al., 2019) to the Vision-Language Navigation task by encouraging these paired instructions to be embedded close to each other.\n\nSecond, we identify semantically-aligned path pairs based on the similarity between instructions.\n\nIntuitively, if the similarity between the two instructions is high, then their corresponding navigation path will be semantically similar (i.e., mentioning the same objects like \"wash basin\").",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b",
+      "chunk_id": "dci_nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b",
+      "score": 1.0
+    },
+    {
+      "text": "these agents suffers from domain shift (i.e., pretrained linguistic and visual representation might not generalize to VLN task) (Huang et al., 2019b).\n\nLearning the instruction representation while also learning how to navigate based on the instruction is even more challenging for a multi-lingual agent, since more language variance is injected via multi-lingual instructions.\n\nAt the same time, it also poses the important question that whether we can utilize multi-lingual instructions to learn a better cross-lingual representation and improve instruction-path grounding and referencing.\n\nSecond, previous works (Fried et al., 2018;Wang et al., 2019a;Landi et al., 2021;Wang et al., 2020a;Huang et al., 2019a;Ma et al., 2019a;Majumdar et al., 2020;Qi et al., 2020a) on vision-language navigation have seen that agents tend to perform substantially worse in environments that are unseen during training, indicating the lack of generalizability of the navigation agent.\n\nIn this paper, we propose to address these two challenges via crosslingual and environment agnostic representations.\n\nAlthough some initial progress (Huang et al., 2019b;Majumdar et al., 2020;Hong et al., 2021;Chen et al., 2021) has been made towards introducing pre-trained linguistic representations into vision-language navigation agents, how to understand and utilize paired multilingual instructions to transfer the pre-trained linguistic representation to multilingual navigation agent still remains unexplored.\n\nWe argue that for a multilingual agent, the linguistic representation can capture more visual concepts from learning the similarity between paired multilingual instructions.\n\nAs shown in Figure 1, though the three instructions shown here are in different languages and vary in length and level of detail2 , all of them correspond to the sample path -Path A. Hence, by learning the similarity between these paired instructions, the cross-lingual language representation of the same visual concept mentioned in these paired instructions (e.g., the red words correspond to the same visual object \"wash basin\") will be close to each other, making it easier for the agent to comprehend.\n\nFurthermore, the cross-lingual language representation will benefit from the complementary information from instructions in different languages since they elicit more references to visible entities.\n\nFor example, in Figure 1, the target room environment \"washroom\" is only mentioned in English instructions.\n\nHindi and Telugu instructions could benefit from learning the connection between \"washroom\" and \"wash basin\" through learning from the English instruction.\n\nMoreover, many methods have been proposed to encourage agent generalization to unseen environments during training (Tan et al., 2019;Wang et al., 2020c;Fu et al., 2020;Zhang et al., 2020).\n\nZhang et al. (2020) has shown that it is the low-level appearance information that causes the environment bias.\n\nTo mitigate this bias, previous works only consider one single environment when learning the visual representation for a given path.\n\nWe instead learn an environment-agnostic visual representation by exploring the connections between multiple environments.\n\nFor the example shown in Figure 1, Path A and Path B are two semantically aligned paths in different environments.\n\nIn both cases, the agent needs to head into the washroom and stop beside the wash basin.\n\nLearning the relationship between these paired paths helps the agent comprehend concepts like \"bath tub\", and not be distracted by the low-level appearance of the objects in unseen environments.\n\nOverall, in this paper, we propose 'CLEAR: Cross-Lingual and Environment-Agnostic Representations' to address the two challenges above.\n\nFirst, we define a visually-aligned instruction pair as two instructions that correspond to the same navigation path.\n\nGiven the instruction pairs, we transfer the pre-trained multilingual BERT (Devlin et al., 2019) to the Vision-Language Navigation task by encouraging these paired instructions to be embedded close to each other.\n\nSecond, we identify semantically-aligned path pairs based on the similarity between instructions.\n\nIntuitively, if the similarity between the two instructions is high, then their corresponding navigation path will be semantically similar (i.e., mentioning the same objects like \"wash basin\").\n\nWe further filter out image pairs (a pair of paths will contain multiple image pairs) that do not contain the same objects, for higher path pair similarity.\n\nThen, we train an environment agnostic visual representation that learns the connection between these semantically-aligned path pairs.\n\nWe conduct experiments on the Room-Across-Room (RxR) dataset (Ku et al., 2020), which contains instruction in three languages (English, Hindi, and Telugu).",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b",
+      "chunk_id": "dci_nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_introduction_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_63",
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_64",
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_65"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 0.3333333333333333,
+    "recall_at_3": 0.6666666666666666,
+    "recall_at_5": 0.6666666666666666,
+    "recall_at_10": 0.6666666666666666,
+    "recall_at_20": 0.6666666666666666,
+    "precision_at_5": 1.0,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_introduction_0000",
+      "dci_nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_introduction_0001"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_introduction_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.029850746268656716,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

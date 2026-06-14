@@ -1,0 +1,17 @@
+We use the Random Forest algorithm (RF), an ensemble learning method, as our classifier in this study.
+
+The classification is based on the results achieved from the myriad of decision trees it generates while training (Nayak and Natarajan, 2016;Biau, 2012).
+
+We employ RF because it also reliably computes the permutation importance of the variables while training the classification models.
+
+Afterwards, we use two automatic feature selection methods to assess the features used in each model: "Rank Features by Importance" [henceforth RFI] and "Sequential Forward Search" [henceforth SFS].
+
+These methods will be detailed in subsection 4.3 and subsection 4.4.
+
+To implement RF, we used ranger (Wright and Ziegler, 2015), which is a fast implementation of Random Forests in R. Table 8 presents the results of the models with the original features of each feature set.
+
+IS-G Ferreira OSU ICSI Kibrik UDeL CNTS Accuracy 0.68 0.601 0.697 0.69 0.793 0.624 0.723
+
+Table 8: Accuracy rates of the RF models with their original features According to Table 8, the model trained by the Kibrik feature set has the highest accuracy (henceforth, best performing model), followed respectively by the CNTS and OSU models.
+
+In the next section, we evaluate the features of each set to see which contributed the most to the predictive success of the models.

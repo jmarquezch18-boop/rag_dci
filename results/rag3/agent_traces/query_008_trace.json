@@ -1,0 +1,201 @@
+{
+  "query_id": "6ceebb857d2674bd38452e8bc30a3d280f2ce647",
+  "query": "What is the reason for the lower performance on Vikidia-FR compared to Newsela-ES?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "Vikidia-FR Newsela-ES performance"
+      },
+      "result_preview": "No matches found for 'Vikidia-FR Newsela-ES performance'",
+      "elapsed_s": 2.55
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "Vikidia-FR"
+      },
+      "result_preview": "Search results for 'Vikidia-FR' (1 matches):\n[paper_id=nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8 | section=discussion | line=13] Our proposed model, N P RM , trained with English texts achieved > 80%",
+      "elapsed_s": 8.97
+    },
+    {
+      "iteration": 2,
+      "tool": "read_file",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+        "section": "methodology"
+      },
+      "result_preview": "[nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8 / methodology]\nThe data for our pairwise ranking model takes the form of (document, reading level) pairs.\n\nLet X = [(x 1 , y 1 ), ..., (x n , y n )] be n su",
+      "elapsed_s": 6.16
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+        "section": "methodology",
+        "start": 38,
+        "end": 52
+      },
+      "result_preview": "[nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8 / methodology — líneas 33-57 de 95]\nWe evaluate the performance of the pairwise ranking approach as follows: for a list of texts to be ranked of size S and ",
+      "elapsed_s": 7.68
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+        "section": "methodology",
+        "start": 38,
+        "end": 52
+      },
+      "result_preview": "[nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8 / methodology — líneas 33-57 de 95]\nWe evaluate the performance of the pairwise ranking approach as follows: for a list of texts to be ranked of size S and ",
+      "elapsed_s": 7.75
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "The data for our pairwise ranking model takes the form of (document, reading level) pairs. Let X = [(x 1 , y 1 ), ..., (x n , y n )] be n such pairs, where x i is the vector representation for document i and y i is the corresponding reading level. We then construct m pairwise permutations from X to form X . The members of X are constructed as follows: if a pair of documents and reading levels (x i , y i ) and (x j , y j ) are chosen, then both permutations ((x i , x j ), (y i , y j )) and ((x j , x i ), (y j , y i )) are added to X . The neural pairwise ranking model (N P RM ) aims to maximize P (y i > y j |x i , x j ) Formally, this is parametrized as P (y i > y j |x i , x j ) N P RM (x i , x j ) = sof tmax(ψ(f (x i , x j ))) = [s ij1 , s ij2 ] where f is a neural model, ψ is a flexible function, s ij1 represents the predicted score of P (y i > y j |x i , x j ) and s ij2 represents the predicted score of 1 -P (y i > y j |x i , x j ). Training labels are created as y ij = [1, 0] if y i ≥ y j [0, 1] if y i < y j We then calculate the loss function as L = -y ij1 • log(s ijk1 ) -y ij2 • log(s ijk2 ) and back-propagate the errors with stochastic gradient descent. This",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+      "chunk_id": "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+      "score": 1.0
+    },
+    {
+      "text": "as y ij = [1, 0] if y i ≥ y j [0, 1] if y i < y j We then calculate the loss function as L = -y ij1 • log(s ijk1 ) -y ij2 • log(s ijk2 ) and back-propagate the errors with stochastic gradient descent. This loss function is known as the Pairwise Logistic Loss (Han et al., 2020). Implementation Our neural pairwise ranking model (N P RM ) consists of a BERT (Devlin et al., 2018) model as f and a fully connected layer as ψ. We evaluate the performance of the pairwise ranking approach as follows: for a list of texts to be ranked of size S and each text x a within the list, 1 ≤ a ≤ S we compute Score(x a ) = b =a N P RM (x a , x b ) We then rank each text x a by Score(x a ) in descending order. This pairwise ranking framework allows for N P RM to model relative reading difficulties between texts. While other neural methods have been proposed with more sophisticated learning objectives for ranking problems in the past (Wang et al., 2018;Ai et al., 2019), these methods require fixedsize inputs to rank. The N P RM only needs a minimum of two texts to form a ranking for each, and the aggregation process of scores between pairwise permutations of texts can easily produce rankings for an arbitrary list size larger than two. The aggregation process also produces a bounded (by the list size), but continuous score for each document, which results in a ranking with no ties, as long as the input documents are different. Additionally, the choice of f in the N P RM framework can allow for multi-lingual predictability, improved performance, or improved efficiency. Due",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+      "chunk_id": "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+      "score": 1.0
+    },
+    {
+      "text": "a bounded (by the list size), but continuous score for each document, which results in a ranking with no ties, as long as the input documents are different. Additionally, the choice of f in the N P RM framework can allow for multi-lingual predictability, improved performance, or improved efficiency. Due to the flexible modeling structure that the N P RM maintains, we hypothesize that with the aid of a multilingual language model, zero-shot cross lingual ARA assessment may also be possible with N P RM . We demonstrate this possibility later in the paper1 . Our primary focus in this paper is on the pairwise ranking model. However, we also compared the performance of other classification, regression, and ranking approaches with our pairwise ranking model to establish strong points of comparison. Feature representation: While the use of linguistic features, and more recently, contexual embeddings, have been explored in ARA, noncontextual embeddings were not explored much. Hence, in this paper, we employ three noncontextual embeddings (GloVe (Pennington et al., 2014), Word2vec (Mikolov et al., 2013a), fastText (Bojanowski et al., 2017)) for training classification/regression/ranking models. Document-level embeddings are obtained by aggregating and averaging word-level embeddings for each token in the text. In addition, we also used a BERT (Devlin et al., 2018) based classifier. Classification The following models were used for formulating baselines and comparisons for classification. Reading levels are treated as class labels, and evaluation is done via 5-Fold cross validation. • Non-contextual embeddings fed into a Hierarchical Attention Network (HAN) (Yang et al., 2016). This model was used with and without linguistic features in the past, for reading level classification (Deutsch et al. (2020) and Martinc et al. (2021) respectively). • 110-M parameter, 12-layer, BERT model with a fully connected layer and a softmax output. The model is then fine-tuned",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+      "chunk_id": "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+      "score": 1.0
+    },
+    {
+      "text": "(Yang et al., 2016). This model was used with and without linguistic features in the past, for reading level classification (Deutsch et al. (2020) and Martinc et al. (2021) respectively). • 110-M parameter, 12-layer, BERT model with a fully connected layer and a softmax output. The model is then fine-tuned on the classification task with categorical cross-entropy loss. Regression The following models were used for formulating baselines for regression. Reading levels are treated as continuous outputs, and results are obtained through 5-Fold cross validation. • Non-contextual word-level embeddings as input into an Ordinary Linear Regression (OLS) model. • 110-M parameter BERT model with a fully connected layer. The model is then fine-tuned on the regression task with the mean squared error loss and will be referred to as regBERT in this paper. (non-neural) Pairwise Ranking We employ an SVMRank model with a pairwise ranking framework similar to N P RM , but using the noncontextual word embeddings for feature extraction. Input features for the SVM model are obtained by differencing the obtained embeddings in the following manner: for any text representations x i , x j , with reading levels y i , y j , form training examples as x i = x i -x j and x j = x j -x i , and training labels as: y i = 1 y i ≥ y j 0 y i < y j y j = 1 y j ≥ y i 0 y j < y i Predicted scores are aggregated in the same manner as in N P RM to form rankings. Results are obtained through 5-Fold cross validation.",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+      "chunk_id": "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0003",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+      "score": 1.0
+    },
+    {
+      "text": "Predicted scores are aggregated in the same manner as in N P RM to form rankings. Results are obtained through 5-Fold cross validation.",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+      "chunk_id": "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0004",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+      "score": 1.0
+    },
+    {
+      "text": "We evaluate the performance of the pairwise ranking approach as follows: for a list of texts to be ranked of size S and each text x a within the list, 1 ≤ a ≤ S we compute\n\nScore(x a ) = b =a N P RM (x a , x b )\n\nWe then rank each text x a by Score(x a ) in descending order.\n\nThis pairwise ranking framework allows for N P RM to model relative reading difficulties between texts.\n\nWhile other neural methods have been proposed with more sophisticated learning objectives for ranking problems in the past (Wang et al., 2018;Ai et al., 2019), these methods require fixedsize inputs to rank.\n\nThe N P RM only needs a minimum of two texts to form a ranking for each, and the aggregation process of scores between pairwise permutations of texts can easily produce rankings for an arbitrary list size larger than two.\n\nThe aggregation process also produces a bounded (by the list size), but continuous score for each document, which results in a ranking with no ties, as long as the input documents are different.\n\nAdditionally, the choice of f in the N P RM framework can allow for multi-lingual predictability, improved performance, or improved efficiency.\n\nDue to the flexible modeling structure that the N P RM maintains, we hypothesize that with the aid of a multilingual language model, zero-shot cross lingual ARA assessment may also be possible with N P RM .\n\nWe demonstrate this possibility later in the paper1 .\n\nOur primary focus in this paper is on the pairwise ranking model.\n\nHowever, we also compared the performance of other classification, regression, and ranking approaches with our pairwise ranking model to establish strong points of comparison.\n\nFeature representation: While the use of linguistic features, and more recently, contexual embeddings, have been explored in ARA, noncontextual embeddings were not explored much.",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+      "chunk_id": "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0005",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_220",
+    "nlpeer/ARR-22/ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_221",
+    "nlpeer/ARR-22/ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_222",
+    "nlpeer/ARR-22/ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_223",
+    "nlpeer/ARR-22/ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_224",
+    "nlpeer/ARR-22/ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_225"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 0.16666666666666666,
+    "recall_at_3": 0.5,
+    "recall_at_5": 0.5,
+    "recall_at_10": 0.6666666666666666,
+    "recall_at_20": 0.6666666666666666,
+    "precision_at_5": 0.6,
+    "ndcg_at_5": 0.8318724637288826,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0000",
+      "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0001",
+      "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0002",
+      "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0003",
+      "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0004",
+      "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0005"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0003",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0004",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_ab82036287f47b63ae70bdae7c1ed5900395bfe4538cc14db1a17281e2b45434b348472df2024151e188fe3890b88a0990bf1a36540eb39ddcc015012567bdd8_methodology_0005",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.025806451612903226,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

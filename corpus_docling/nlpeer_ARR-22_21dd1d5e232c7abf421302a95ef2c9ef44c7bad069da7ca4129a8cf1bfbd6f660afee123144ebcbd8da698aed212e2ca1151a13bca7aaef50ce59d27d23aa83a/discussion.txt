@@ -1,0 +1,67 @@
+In order to contextualise the numbers reported in Tables 1 and2  present the highlights in this section.
+
+Readers interested in language-specific analysis (including many more examples) are encouraged to read Appendix A.1.
+
+We focused on errors committed by CrossAligner and XeroAlign IO , which achieved the best individual and combined scores.
+
+We sampled 100 random errors from each of the following settings: Hindi, French and German from MTOP, Portuguese, Chinese and Spanish from M-ATIS and Thai from MTOD for a diverse pool of errors.
+
+The authors adjudicated with native speakers to categorise mistakes into the following types.
+
+Error Types We discovered two main sources of mistakes: A boundary error occurs when the model predicts more or fewer entity words/tokens than given in the gold annotation.
+
+A semantics error occurs when the wrong entity class/type is predicted.
+
+Models can therefore commit: 1) both errors resulting in Poor Transfer, 2) a boundary error without a semantic error and vice versa giving us a Partial Transfer or 3) neither error (a false negative), which we deemed an Acceptable Transfer.
+
+We report individual and average error occurrences as well as transfer type percentages in Table 3.
+
+Poor Transfer indicates that the prediction error is too serious and unusable (even misleading) in a real-world personal assistant.
+
+This is typically due to both a boundary and a semantics error, however, some mistakes can be serious enough alone to result in poor transfer.
+
+For example, a boundary error can cause the retrieved name of a dish, person or a location to be incomplete and therefore invalid.
+
+A semantics error that classifies '10 secondes' (French) as 'date_time' instead of 'mu-sic_rewind_time' would elicit the wrong agent response thus is unusable.
+
+On average, ∼28% of mistakes fall into the 'Poor Transfer' category.
+
+Partial Transfer is defined as either a boundary or a semantics error where neither is considered a serious problem.
+
+Such entities could be made usable in a personal assistant application with simple post-processing rules.
+
+Around 33 percent of errors were deemed to be partially correct.
+
+Often, this was due to including some adjacent punctuation or an article/preposition as part of the entity or a slightly shorter/longer news headline even though a search engine query with that string would have returned the relevant article.
+
+Entities such as '24 minat ka' (Hindi) versus '24 minat' (24 minutes) exemplify the fact that a disputed entity boundary is the most frequent source of error in this category.
+
+On the semantics side, we considered a location partially correct if 'state_name' instead of 'city_name' (for Washington D.C.) was predicted, a location was expected and the boundary was accurate.
+
+These examples are 'errors' we considered correct and usable 'as is' because neither the entity boundary nor its semantics were thought to be wrong.
+
+On average, we deemed almost 39% of entities acceptable for a realworld personal assistant application with around half of those being down to annotation problems (labels missing or incorrect).
+
+In other cases, we accepted predictions that offered a valid alternative e.g. when both 'me' (French) and 'je' (I/me) are present in the user utterance and both refer to the same 'person_reminded'.
+
+Valid alternatives were predicted but annotated somewhat differently.
+
+For example, when the entity boundary was slightly wider 'de ida e volta' (Portuguese) instead of 'ida e volta' (round trip) where both entities are correct.
+
+Similarly, classifying 'salmon' as an ingredient rather than a dish (when 'salmon' is an object of 'prepare') was considered an acceptable transfer.
+
+While the intent classification task is transferred well in a cross-lingual setting, performing better than training on labelled data, our SOTA slot recog-nition F-Score is almost 7 points behind Target Language.
+
+We think there are several factors involved.
+
+Articles, some prepositions, conjunctions, determiners and/or possessives do not transfer easily and may largely be ignored by the XLM as they don't carry important sentence level (e.g. intent) semantics.
+
+English is not ideal as a cross-lingual pivot for many of the dozens of languages covered by the XLM as elements of culture and vernacular that may not have a direct English equivalent don't transfer easily in a zero-shot setting.
+
+Aligning on the most well-resourced language in the same family should help (Xia et al., 2021).
+
+The limits of machine translation, especially for lowresource languages (Mager et al., 2021), can further inhibit alignment methods that leverage parallel data.
+
+Inconsistency of annotation (intra-language and inter-language) is a source of errors when the key concepts are learnt in one language and evaluated (sometimes unreliably) in the target language.
+
+Finally, there were no substantial qualitative differences between XeroAlign IO and CrossAligner in our error analysis suggesting that the aforementioned error patterns may be a feature of the XLM model itself, the nature of the datasets or some as yet unknown confounding variable rather than the choice of the alignment method.

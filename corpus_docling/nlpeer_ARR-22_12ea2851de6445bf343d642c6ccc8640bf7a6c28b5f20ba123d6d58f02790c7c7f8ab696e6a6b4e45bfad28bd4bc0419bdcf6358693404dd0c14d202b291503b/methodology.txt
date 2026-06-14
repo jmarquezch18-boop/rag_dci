@@ -1,0 +1,81 @@
+We evaluate several Transformer-based architectures for character-level MT.
+
+A major issue with character-level sequence processing is the sequence length and low information density compared to subword sequences.
+
+Architectures for characterlevel sequence processing typically address this issue by locally processing and shrinking the sequences into latent word-like units.
+
+In our experiments, we explore several ways to do this.
+
+First, we directly use character embeddings as input to the Transformer.
+
+Second, following Banar et al. (2020), we use the convolutional character processing layers proposed by Lee et al. (2017).
+
+Third, we replace the convolutions with local selfattention as proposed in the CANINE model (Clark et al., 2021).
+
+Finally, we use the recently proposed Charformer architecture (Tay et al., 2021).
+
+Lee-style encoding.
+
+Lee et al. (2017) process the sequence of character embeddings with convolutions of different kernel sizes and number of output channels.
+
+In the original paper, this was followed by 4 highway layers (Srivastava et al., 2015).
+
+In our preliminary experiments, we observed that a too deep stack of highway layers leads to diminishing gradients, and we replaced the second two High-way layers with feedforward sublayers as used in the Transformer architecture (Vaswani et al., 2017).
+
+CANINE.
+
+Clark et al. (2021) experiment with character-level pre-trained sentence representations.
+
+The character-processing architecture is in principle similar to Lee et al. (2017) but uses more modern building blocks.
+
+Character embeddings are processed by a Transformer layer with local selfattention which only allows the states to attend to states in their neighborhood.
+
+This is followed by downsampling using strided convolution.
+
+Originally, CANINE used a local self-attention span as long as 128 characters.
+
+In the case of MT, this would usually span the entire sentence, so we use significantly shorter spans.
+
+Charformer.
+
+Unlike previous approaches, Charformer (Tay et al., 2021) does not apply a nonlinearity on the embeddings and gets latent subword representations by repeated averaging of character embeddings.
+
+First, it processes the sequence using a 1D convolution, so the states are aware of their mutual local positions in local neighborhoods.
+
+Second, non-overlapping character n-grams of length up to N are represented by averages of the respective character embeddings.
+
+This means that for each character, there is a vector that represents the character as a member of n-grams of length 1 to N .
+
+In the third step, the character blocks are scored with a scoring function (a linear transformation), which can be interpreted as attention over the N different n-gram lengths.
+
+The attention scores are used to compute a weighted average over the n-gram representations.
+
+Finally, the sequence is downsampled using mean-pooling with window size and stride size N (i.e., the maximum n-gram size).
+
+Whereas Lee-style encoding allows using lowdimensional character embeddings and keeps most parameters in the convolutional layers, CANINE and Charformer need the character representation to have the same dimension as the following Transformer layer stack.
+
+Two-step decoding.
+
+The architectures mentioned above allow the Transformer layers to operate more efficiently with a shorter and more information-dense sequence of states.
+
+However, while decoding, we need to generate the target character sequence in the original length, by outputting a block of characters in each decoding step.
+
+Our preliminary experiments showed that generating blocks of characters non-autoregressively leads to incoherent output.
+
+Therefore, we propose a twostep decoding architecture where the stack of Transformer layers operating over the downsampled sequence is followed by a lightweight LSTM autoregressive decoder (see Figure 3).
+
+The input to the LSTM decoder is a concatenation of the embedding of the previously generated character and a projection of the Transformer decoder output state.
+
+At inference time, the LSTM decoder generates a block of characters and inputs them to the character-level processing layer.
+
+The Transformer decoder computes an output state that the LSTM decoder uses to generate another character block.
+
+More details are in Appendix A.
+
+Modifying Charformer for the two-step decoding would require a long padding at the beginning of the sequence causing the decoder to diverge.
+
+Because of that, we use Lee-style encoding on the decoder side when using Charformer in the encoder.
+
+First, we conduct all our experiments on the small IWSLT datasets.
+
+Then we evaluate the most promising architectures on larger datasets.

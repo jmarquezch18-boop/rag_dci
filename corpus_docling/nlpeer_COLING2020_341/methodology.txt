@@ -1,0 +1,17 @@
+1.1 Language-property matrix Universals are modelled as logical formulae which consist of variables and logical connectives.
+
+The variables are organized in an |L| × |P | matrix V , where L is the set of investigated languages and P is the set of typological properties/features.
+
+The variable at v p represents the value for the property p of the language .
+
+In our framework, these values are truth values in the range [ 0, 1 ].
+
+In the simplest case, they are binary truth values as in the example matrix below.
+
+V = SOV SVO Postp. Prep. . . .         0 1 0 1 . . . English 1 1 0 1 . . . German 1 0 1 0 . . . Japanese . . . . . . . . . . . . . . . . . .(1)
+
+Formulae can be constructed from the language-property matrix by logical connectives, such as the conjunction in (2).3
+
+φ := v SVO ∧ v Prep.
+
+(2)

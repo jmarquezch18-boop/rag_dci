@@ -1,0 +1,5 @@
+There are three main branches of work for extending NLP systems to many languages: projection across parallel data, Wikipedia-based approaches, and direct transfer.
+
+Projection and direct transfer take advantage of the success of NLP tools on high-resource languages.
+
+Wikipediabased approaches exploit the fact that, by editing Wikipedia, thousands of people have made annotations in hundreds of languages.

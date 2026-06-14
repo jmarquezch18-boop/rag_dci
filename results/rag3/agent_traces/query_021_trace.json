@@ -1,0 +1,124 @@
+{
+  "query_id": "962be5303d07e7707c9750241730986cfeb7d754",
+  "query": "What data was used to perform the significance test?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "significance test"
+      },
+      "result_preview": "Search results for 'significance test' (2 matches):\n[paper_id=nlpeer_ARR-22_0f595b4bd968ef5daacc88c4edb581bf7f683af30b6874ba157c6d2282aabead577041409b949924e4bc5ef54c543d85a10e962be8e70304dea65e1b18441bdb | section=abstract | line=11] Furthermore, due to the lack of appropriate methods of statistica",
+      "elapsed_s": 3.54
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-CONLL2016_129",
+        "section": "results",
+        "start": 45,
+        "end": 50
+      },
+      "result_preview": "[nlpeer_PeerRead-CONLL2016_129 / results — líneas 40-55 de 109]\n\n6 The four baselines are:\n\n1. alldata: All general-domain data.\n\nWe evaluated the system using BLEU (Papineni et al., 2002) score on the test set.\n\nFollowing (Koehn, 2004), we use the bootstrap resampling test to do significance testin",
+      "elapsed_s": 5.4
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-CONLL2016_129",
+        "section": "methodology",
+        "start": 5,
+        "end": 30
+      },
+      "result_preview": "Error: nlpeer_PeerRead-CONLL2016_129/methodology.txt no existe",
+      "elapsed_s": 8.95
+    },
+    {
+      "iteration": 3,
+      "tool": "list_sections",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-CONLL2016_129"
+      },
+      "result_preview": "Secciones de 'nlpeer_PeerRead-CONLL2016_129':\nabstract\ndiscussion\nintroduction\nresults",
+      "elapsed_s": 7.53
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-CONLL2016_129",
+        "section": "results",
+        "start": 45,
+        "end": 50
+      },
+      "result_preview": "[nlpeer_PeerRead-CONLL2016_129 / results — líneas 40-55 de 109]\n\n6 The four baselines are:\n\n1. alldata: All general-domain data.\n\nWe evaluated the system using BLEU (Papineni et al., 2002) score on the test set.\n\nFollowing (Koehn, 2004), we use the bootstrap resampling test to do significance testin",
+      "elapsed_s": 5.39
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "6 The four baselines are:\n\n1. alldata: All general-domain data.\n\nWe evaluated the system using BLEU (Papineni et al., 2002) score on the test set.\n\nFollowing (Koehn, 2004), we use the bootstrap resampling test to do significance testing.\n\nTable 2 summarizes the results and numbers of the selected sentences for each task.\n\nFirst, we can see that all the data selection methods improved the performance over the baseline \"alldata\" with much less training data (only around 2.5% to 10% of the whole training data).\n\nConsistent with (Duh et al., 2013), the three LM based data selection all got improvements, where \"rnnlm\" obtained better performance than the \"ngram\" on average.\n\nIt is not clear that combining the two language model methods (\"comblm\") yields further improvement.",
+      "section": "results",
+      "paper_id": "nlpeer_PeerRead-CONLL2016_129",
+      "chunk_id": "dci_nlpeer_PeerRead-CONLL2016_129_results_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-CONLL2016_129",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/PeerRead-ACL2017/169_96",
+    "nlpeer/PeerRead-ACL2017/169_97"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_PeerRead-CONLL2016_129_results_0000"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-CONLL2016_129_results_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.03252032520325203,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

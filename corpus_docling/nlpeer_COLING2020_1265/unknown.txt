@@ -1,0 +1,159 @@
+Fine-Tuning Bert For Low-Resource Natural Language Understanding Via Active Learning
+
+Abstract
+
+Introduction
+
+Methods
+
+Base Model
+
+How To Select Data
+
+When labeled training data is sparse, but unlabeled in-domain data is readily available, manual labeling of all data is often not feasible due to cost.
+
+In this scenario, it is advantageous to let the current model select Q data points that it is most confused about from the pool of potential but yet unlabeled training elements (U ) to be labeled by an human annotator.
+
+Then, they can be included in the training set T new = T old ∪ U x∈U argmax (a(x,M)) 1,...,Q where a(x, M) is a function predicting the knowledge gain of the model M when trained on the datum x. Thus, the model is specifically trained on data that it can not yet confidently classify to maximize the knowledge gain in each training step, while keeping the cost of labeling new data constant.
+
+We propose to estimate model prediction uncertainty by using Bayesian approximations as presented in Gal and Ghahramani (2016) for data selection process.
+
+The main idea is to leverage stochastic regularization layers (e.g. Dropout or Gaussian noises) that can be used to approximate model uncertainty (φ(x)) on any datum (x) by performing multiple stochastic forward passes for each element in U .
+
+This is implemented by applying the layer operation not only during training but also during the interference stage of the model.
+
+Multiple forward passes of the model M with the same parameters (θ) and inputs (x) thus yield different model outputs (y), as each pass samples a concrete model from a approximate distribution q * θ (ω) that minimizes the Kullback-Leibler divergence to the true model posterior p(ω|T ).
+
+Gal and Ghahramani (2016) call this Monte-Carlo-Dropout (MC-Dropout) as the repeated, non-deterministic forward passes of the model can be interpreted as a Monte-Carlo process.
+
+To decide which elements in U are chosen, different acquisition functions (a(x, M)) could be used.
+
+In this work, we focus on the "Bayesian Active Learning by Disagreement (BALD)" (Houlsby et al., 2011) acquisition strategy because it demonstrated very good performance in comparison to other strategies in the experiments by Gal et al. (2017) as well as in our own preliminary experiments.
+
+BALD calculates the information gain for the model's parameters that can be achieved with the new data points, that is, the mutual information between predictions and parameters I [y, ω|x, T ].
+
+Hence, this acquisition function has maximum values for inputs that produce disagreeing predictions with high uncertainty.
+
+This is equivalent to high entropy in the logits (the unscaled output of the network before the final softmax normalization) in a classifier model, as multiple (stochastic) forward passes of the model with the same input yield different classification results.
+
+We use the same approximation of BALD that Gal et al. (2017) used in their work (equation 1) where p s c is the probability of class association (i.e. the softmax scaled logits) for input x and class c for one of S samples ω s ∼ q * θ (ω) from the model's approximated posterior distribution, i.e. p s = softmax(M(y|x, θ, ω s )).
+
+a BALD (x, M) = - c∈C 1 S S s=1 p s c log 1 S S s=1 p s c + 1 S s=S c∈C,s=1 p s c log p s c ≈ I [y, ω|x, T ](1)
+
+As a baseline, we compare the BALD strategy with random sampling of elements in U .
+
+That is,
+
+a Rand (x, M) = unif [0, 1), where unif [a, b) is a sample from the uniform distribution in the half- closed interval [a, b).
+
+When using the BALD acquisition function, we sample for S = 50 forward passes and add Q = 100 data points with the highest model uncertainty according to the calculated BALD scores.
+
+When randomly acquiring new data points for the baseline, no forward passes are needed (S = 0) while the number of acquisitions Q stays constant.
+
+The MC-Dropout layers that apply the dropout operation also during a stochastic forward pass of the model, are only placed in the classification architecture, thus the base model is used unaltered with regular dropout layers only active during the training phase.
+
+In our CNN architecture, the dropout is only applied in the penultimate layer of the network.
+
+We use the same dropout rate of 0.1 as Devlin et al. (2019) in the decoder.
+
+This means that the stochastic forward passes only affect the output of the layers after the first MC-Dropout layer in the model.
+
+Thus, only a single and relativley expensive pass through the transformer is needed in each learning step while the required multiple passes though the subsequent classifiers are comparatively cheap.
+
+How To Fine-Tune Models
+
+Results
+
+Effect Of Training Data Size
+
+As expected, all models benefit from an increased number of training elements until reaching comparable performance to the results reported by (Devlin et al., 2019) when trained on the whole data set.
+
+However, Figure 2 shows that, while the accuracy is generally increasing for all experiments when introducing more training data, the model has a much larger increase in performance at the beginning, while adding another partition of the data set to an already large training set can only marginally improve the model's accuracy.
+
+Adding more data, however, generally reduces the variance in model performance between runs when randomly initializing the classification architecture's parameters.
+
+Due to these observations and for comparability of the results between data sets, the experiments in the following subsections are all performed on an initial training set of S 10 and reevaluated repeatably for 9 iterations after adding another partition of 100 elements until the final subset S 910 is reached.
+
+While at this point the performance has not yet converged to the final accuracies for any dataset, the performance changes drastically in these early training stages, which is ideal for our experimental comparison of training speed increases.
+
+Active Learning
+
+The active learning setting requires a pool of unlabeled data to pick the next training elements to acquire.
+
+Ideally, the knowledge gain a(x, M) of all elements in the dataset would be approximated, however due to the need of multiple forward passes for each element in the pool to approximate a only a subset U = S 20,000 \ S 10 was chosen for our experiments to seed up training.
+
+Thus, the size of U can be seen as a hyperparameter to speed up training with the trade off of the risk to exclude highly relevant data points from the available pool data.
+
+The size of U was chosen by increasing it for multiple runs until the performance increase leveled off and acquisition times were still acceptable.
+
+Since training with the random strategy does not have the same trade-off, all available data points in the pool can be used for the acquisition without lengthening the training.
+
+The results in Figure 3 show a better mean accuracy for all models and generally across all training set sizes when the BALD strategy is used, compared to picking random training elements from U .
+
+Another noteworthy observation is the lower spread of model accuracy between experiments when training data is selected based on the active learning strategy.
+
+These results show a strong indication that the Monte-Carlo approximation of model uncertainty works for state of the art Transformer architectures like the BERT model and can improve training performance when an active learning scenario in a low-resource setting is feasible.
+
+Figure 4 visualizes the mean absolute difference of model parameters on a per-layer basis when finetuning on the QNLI data set.
+
+Note that the frozen layers have a mean absolute difference of 0 as the training does not alter any parameters in these layers.
+
+When randomly sampling from U is used to choose new data elements, layers closer to the output of the model generally have a higher change in their parameters during training which is in line with the findings by Yosinski et al. (2014), Howard and Ruder (2018) and Hao et al. (2019) which show that, while fine-tuning a Transformer-based language model, the front layers have a more general language understanding while the later layers capture more task specific concepts and thus need to be trained more.
+
+However, if the active learning strategy is used, layers closer to the output of the BERT model have a smaller value change while the relative mean absolute difference in the layers of the CNN is comparable between the two strategies.
+
+This indicates that the active learning strategy specifically selects data points that train the first and thus more general layers of the BERT model.
+
+Layer Freezing To Reduce Number Of Parameters
+
+Freezing of layers with a smaller overall change in parameters during training may be beneficial in lowresource scenarios, since this reduces the number of parameters in the model equally while potentially enabling more freedom in the layers that need to be tuned more.
+
+Based on this hypothesis, we compare the model's performance when freezing different numbers of layers starting on both, the input and output of the BERT model.
+
+Table 1 shows a general increase in model performance when freezing 25% of the BERT's layers, indicating that a reduction of parameters in the low-resource setting is indeed beneficial.
+
+However, with 50% of the layers fixed during training, the average performance of the model decreases again, in many cases even below the baseline where all parameters are trainable.
+
+This is an indicator that the BERT model needs fine-tuning and freezing a large ratio of layers may result in a model that can not adapt adequately to the task and is in line with the results of Peters et al. (2019).
+
+Figure 5 and Table 2 also show the mean accuracy and bounds of these experiments over a range of different numbers of training elements.
+
+The average accuracy of the models after multiple training trials do not show any conclusive advantage of freezing the later BERT layers over the the ones in the front.
+
+However, for all data sets the models are more stable during the training over different runs, indicated by a lower average width of the bounds when using F = -3.
+
+2: Mean width of the confidence intervals, i.e. the difference between upper and lower limit, over different runs using the BALD acquisition strategy.
+
+Qualitative Analysis
+
+Related Work
+
+Conclusion
+
+Figure 1: High-level overview of the architecture used in our experiments including a depiction of the simple FFNN decoder used by Devlin et al. (2019) highlighting where our model differs from the original experiment setup.
+
+Figure 2: Accuracies of the BERT model when adapted on 100% and 10% (using random aquisition) of the available training data respectively.
+
+Figure 4: Visualization of the mean absolute difference of parameters when training a classifier model on the QNLI data set.
+
+The blue bars indicate the variance over all weight changes.
+
+The red line indicates the border between the BERT model and the decoder CNN.
+
+Layers 12, 13 and 14 are the parallel convolutional layers, 15 and 16 the fully-connected hidden and output layers.
+
+Figure5: The effect of layer-freezing on the stability of the training during active learning using the BALD strategy.
+
+The semi-transparent area in the chart is the confidence interval over multiple runs of the configuration, while the solid line denotes the average accuracy.
+
+Mean accuracies of the model after training on 910 data points using the BALD acquisition strategy.
+
+)
+
+.
+
+However, all this prior work does not use general LMs but transfers knowledge from a pre-trained model to a Differences in number of elements in the largest and smallest group in the trainset:∆ |T | = max(|T c |) -min(|T c |)
+
+Examples from the MNLI Dataset with the two input sentences and the associated class label.
+
+The first column shows whether or not this data point was queried by the active learner during the complete training, a BALD (x, M) is the calculated BALD score of the input after 5 acquisition iterations (|T | = 510).

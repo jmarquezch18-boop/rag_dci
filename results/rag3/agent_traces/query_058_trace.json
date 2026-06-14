@@ -1,0 +1,120 @@
+{
+  "query_id": "94d3d227741b9bf8258649cb3567dc790b9dca07",
+  "query": "Why do the authors use regularization for label embeddings but not for instance embeddings?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "regularization label embeddings"
+      },
+      "result_preview": "No matches found for 'regularization label embeddings'",
+      "elapsed_s": 6.44
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "label embedding regularization"
+      },
+      "result_preview": "No matches found for 'label embedding regularization'",
+      "elapsed_s": 11.49
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "label embedding weight decay"
+      },
+      "result_preview": "No matches found for 'label embedding weight decay'",
+      "elapsed_s": 10.71
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "label embedding"
+      },
+      "result_preview": "Search results for 'label embedding' (9 matches):\n[paper_id=nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731 | section=introduction | line=47] To solve this problem, (Wu et al., 2019a) proposed to train lab",
+      "elapsed_s": 5.96
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_91d9e763eb1470028002e5c97689ada4b74f30be17291a14458f7542c387a9f2a7516e60f4022d887bdbd2165aa8cce6d566db380e5a82af677917c48efc2446",
+        "section": "introduction",
+        "start": 35,
+        "end": 45
+      },
+      "result_preview": "[nlpeer_ARR-22_91d9e763eb1470028002e5c97689ada4b74f30be17291a14458f7542c387a9f2a7516e60f4022d887bdbd2165aa8cce6d566db380e5a82af677917c48efc2446 / introduction — líneas 30-50 de 69]\n\nMotivated by above analysis, we propose a novel label anchored supervised contrastive learning approach (denoted as La",
+      "elapsed_s": 9.3
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Motivated by above analysis, we propose a novel label anchored supervised contrastive learning approach (denoted as LaCon), which combines the advantages of both contrastive learning and label embedding techniques.\n\nSpecifically, we have the following three novel designs: 1) Instance-centered contrastive loss (ICL), which uses the InfoNCE (van den Oord et al., 2018) to encourage each text representation and its corresponding label representation to be closer while pushing far away mismatched instance-label pairs.\n\nWe further apply a multi-head mechanism to catch different aspects of text semantics.\n\n2) Label-centered contrastive loss (LCL), which takes label as anchor, and encourages the label representation to be more similar to the corresponding instances belonging to the same class in a mini-batch than the instances with different labels.\n\n3) Label embedding regularizer (LER), which keeps the inter-label similarity as low as possible thus the feature space of each class is more dispersed to prevent representation degeneration.\n\nBy combining above three losses, LaCon can learn good semantic representations within the same space for both input instances and labels.\n\nIt's also well aligned with the two key properties related to CL: alignment and uniformity (Wang and Isola, 2020), where alignment favors encoders that assign similar features to similar samples.\n\nUniformity prefers a feature distribution that preserves maximal information, i.e., the uniform distribution on the unit hypersphere.\n\nTo validate the effectiveness of LaCon, we perform extensive experiments on eight language understanding tasks.\n\nWe take the popular pre-trained language model BERT-base (Devlin et al., 2019) as text encoder without loss of generality.",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_91d9e763eb1470028002e5c97689ada4b74f30be17291a14458f7542c387a9f2a7516e60f4022d887bdbd2165aa8cce6d566db380e5a82af677917c48efc2446",
+      "chunk_id": "dci_nlpeer_ARR-22_91d9e763eb1470028002e5c97689ada4b74f30be17291a14458f7542c387a9f2a7516e60f4022d887bdbd2165aa8cce6d566db380e5a82af677917c48efc2446_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_91d9e763eb1470028002e5c97689ada4b74f30be17291a14458f7542c387a9f2a7516e60f4022d887bdbd2165aa8cce6d566db380e5a82af677917c48efc2446",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/91d9e763eb1470028002e5c97689ada4b74f30be17291a14458f7542c387a9f2a7516e60f4022d887bdbd2165aa8cce6d566db380e5a82af677917c48efc2446_72",
+    "nlpeer/ARR-22/91d9e763eb1470028002e5c97689ada4b74f30be17291a14458f7542c387a9f2a7516e60f4022d887bdbd2165aa8cce6d566db380e5a82af677917c48efc2446_86",
+    "nlpeer/ARR-22/91d9e763eb1470028002e5c97689ada4b74f30be17291a14458f7542c387a9f2a7516e60f4022d887bdbd2165aa8cce6d566db380e5a82af677917c48efc2446_87",
+    "nlpeer/ARR-22/91d9e763eb1470028002e5c97689ada4b74f30be17291a14458f7542c387a9f2a7516e60f4022d887bdbd2165aa8cce6d566db380e5a82af677917c48efc2446_94"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 0.25,
+    "recall_at_3": 0.25,
+    "recall_at_5": 0.25,
+    "recall_at_10": 0.25,
+    "recall_at_20": 0.25,
+    "precision_at_5": 1.0,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_91d9e763eb1470028002e5c97689ada4b74f30be17291a14458f7542c387a9f2a7516e60f4022d887bdbd2165aa8cce6d566db380e5a82af677917c48efc2446_introduction_0000"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_91d9e763eb1470028002e5c97689ada4b74f30be17291a14458f7542c387a9f2a7516e60f4022d887bdbd2165aa8cce6d566db380e5a82af677917c48efc2446_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.03669724770642202,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

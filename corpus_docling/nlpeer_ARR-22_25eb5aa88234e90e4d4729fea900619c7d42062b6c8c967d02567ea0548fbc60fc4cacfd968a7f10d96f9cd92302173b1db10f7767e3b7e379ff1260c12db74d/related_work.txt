@@ -1,0 +1,21 @@
+Conversational question answering.
+
+In recent years, several conversational question answering datasets have emerged, such as QuAC (Choi CANNOT ANSWER G/H/E: Gold, The Portland Zoo, Osceola, Fox...  Anantha et al., 2021;Qu et al., 2020) Different from single-turn QA datasets (Rajpurkar et al., 2016), conversational QA requires the model to understand the question in the context of conversational history.
+
+There have been many methods proposed to improve conversational QA performance (Ohsugi et al., 2019;Chen et al., 2020;Qu et al., 2019b;Kim et al., 2021) and significant improvements have been made on conversational QA benchmarks.
+
+Besides text-based conversational QA tasks, there also exist conversational QA benchmarks that require external knowledge or other modalities (Saeidi et al., 2018;Saha et al., 2018;Guo et al., 2018;Das et al., 2017).
+
+Only recently has it been noticed that the current method of evaluating conversational QA models is flawed.
+
+Mandya et al. (2020); Siblini et al. (2021) point out that using gold answers in history is not consistent with real-world scenarios and propose to use predicted history for evaluation.
+
+Different from prior works, in this paper, we conduct a large scale human evaluation to provide evidence for why goldhistory evaluation is sub-optimal.
+
+In addition, we point out that even predicted-history evaluation has issues with invalid questions, for which we propose rewriting questions to further mitigate the gap.
+
+Automatic evaluation of dialogue systems.
+
+Automatically evaluating dialogue systems is difficult due to the nature of conversations.
+
+In recent years, the NLP community has cautiously re-evaluated and identified flaws in many popular automated evaluation strategies of dialogue systems (Liu et al., 2016;Sai et al., 2019), and have proposed new evaluation protocols to align more with human evaluation in a real-world setting: Huang et al. ( 2020  2020) train models to predict the relatedness score between references and model outputs, which are shown to be better than BLEU (Papineni et al., 2002) or ROGUE (Lin, 2004).

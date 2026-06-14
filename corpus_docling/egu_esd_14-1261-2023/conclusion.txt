@@ -1,0 +1,17 @@
+The applicability of the wave-induced mixing model for waves generated in a wave flume is validated based on the solution admitting higher-order nonlinearities.
+
+In the range of wave conditions covering transitional and shallow waters, the weakly nonlinear results are in reasonable agreement with the more accurate pseudo-spectral solution in the case of waves of low to moderate steepness.
+
+The general discrepancy grows by increasing the wave height and the wavelength.
+
+Unlike the weakly nonlinear approach, the higher-order model is able to predict enhanced subsurface streaming affecting the evolution of the surface temperature for more severe sea states.
+
+It is due to the fact that the time-independent velocity field predicted by both methods differs especially in the subsurface and near-bottom layers of the oscillating water body.
+
+General ocean circulation models admitting wave-induced vertical mixing but relying on simplified assumptions cannot predict input from mixing with sufficient accuracy.
+
+It is necessary to apply at least a weakly nonlinear correction to obtain reasonable approximation.
+
+For improved predictions, advanced highly nonlinear models are preferred, which is confirmed by the present study.
+
+Moreover, the derived method allows a return current to be correctly quantified in experimental investigations on wave-induced vertical mixing for better interpretation of laboratory results, giving more information for further improvements to parametrization schemes.

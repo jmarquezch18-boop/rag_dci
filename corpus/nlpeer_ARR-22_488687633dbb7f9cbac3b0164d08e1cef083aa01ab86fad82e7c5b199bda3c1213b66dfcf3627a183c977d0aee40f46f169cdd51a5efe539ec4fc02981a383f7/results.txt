@@ -1,0 +1,9 @@
+Widely-used benchmarks for ESE, such as Wiki and APR (Shen et al., 2017), are based on wellformed text corpora like Wikipedia and focus only on well-defined concepts such as countries, US states, and diseases.
+
+Furthermore, the ranked expansion results are evaluated against the ground truth using Mean Average Precision (MAP) at different top-k positions where k is much smaller than the size of entity set.
+
+For example, there are 195 countries but only 10-50 predictions are evaluated.
+
+In following sections, we argue that existing benchmarks and evaluation metrics may not be adequate enough to estimate the real-world performance of the ESE methods and introduce new benchmarks and evaluation metrics to address their limitations.
+
+We now outline our experiment set-up designed to explore the suitability of existing benchmarks, metrics, and methods.

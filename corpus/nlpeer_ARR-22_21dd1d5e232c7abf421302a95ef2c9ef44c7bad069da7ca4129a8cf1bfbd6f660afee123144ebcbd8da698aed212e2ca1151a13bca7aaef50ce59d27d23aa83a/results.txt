@@ -1,0 +1,35 @@
+Datasets Three multilingual datasets are used to compare our methods with their most relevant counterparts.
+
+Multilingual Task-Oriented Parsing (MTOP) comprises 15K-22K utterances in each of 6 languages (en, de, fr, es, hi, th) spanning 11 domains (Li et al., 2021b).
+
+The Multilingual Task-Oriented Dialogue (MTOD) consists of 43K English, 8K Spanish and 5K Thai utterances covering 3 domains (Schuster et al., 2019).
+
+The Multilingual ATIS++ (M-ATIS) contains up to 4.5K commands in each of 8 languages (en, es, pt, de, fr, zh, ja, hi, tr) featuring user interactions with a travel information system (Xu et al., 2020).
+
+XLM Our pretrained language model of choice is XLM-RoBERTa (Conneau et al., 2020).
+
+We use the large (550M parameters) model from HuggingFace (Wolf et al., 2019) with a hidden_size = 1,024.
+
+Training Setup We use a minimalist setup that features default settings and components to focus the results on the methods rather than hyperparameter tuning or custom architecture design.
+
+We implemented all models with PyTorch using fixed hyperparameters between experiments except for MTOD, where due to its size, we trained with fewer epochs and a lower learning rate (both 50% lower2 ).
+
+Terminology Henceforth, we refer to models trained with labelled data in each language as Target Language, the models trained only on English data as Zero-Shot, our translate-intent method as Translate-Intent (TI), the scores reported by Gritta and Iacobacci (2021) as Previous SOTA, our IO-only implementation of that model as XeroAlign IO (XA IO ), our contrastive alignment method as Contrastive (CTR) and our main method as CrossAligner (CA).
+
+Lastly, the simple sum of alignment losses is referred to as 1+1 and the weighted sum from 3.4 as CoV.
+
+Metrics We use Accuracy for intent classification and F-Score for entity/slot recognition.
+
+In addition, we use an Overall score (the average of F-Score and Accuracy) for model ranking, similar to Hu et al. (2020); Wang et al. (2019Wang et al. ( , 2018)).
+
+Results are shown as averages (MEAN) over all test sets and datasets, presented in Tables 1 and2.
+
+Intent classification is thus evaluated on ∼20,000 diverse user commands and entity recognition on ∼60,000 individual slots from 100+ slot types.
+
+For a full breakdown, see Tables 4, 5 and 6 in Appendix A.2.
+
+Statistical Significance For a robust comparison with the previous SOTA, we conduct a two-tailed ztest for the difference of proportions (Schumacker, 2017).
+
+Our most effective method is statistically significant for all datasets at p < 0.01.
+
+The margin of improvement for slot tagging is +2.3 (F-Score) over previous SOTA and significant at p < 0.01.

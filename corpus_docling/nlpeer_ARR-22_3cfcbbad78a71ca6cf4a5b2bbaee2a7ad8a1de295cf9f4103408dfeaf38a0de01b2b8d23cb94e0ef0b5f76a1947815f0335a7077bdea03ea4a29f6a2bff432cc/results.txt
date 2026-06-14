@@ -1,0 +1,91 @@
+We conduct experiments on HUE with our pretrained model.
+
+For the baseline model, we use BERT without pretraining and compare it to various BERT models described in Section 3.1.
+
+Specifically, we fine-tune each model to act as a re-ranker in the retrieval task for the summary retrieval.
+
+We first retrieve top-k relevant gangs (summaries) with BM25 (Robertson and Zaragoza, 2009) among all gangs in the dataset.
+
+Then, we fine-tune the model as a binary classifier to determine whether the summary matches the content of the mok with the cross-entropy loss (Nogueira and Cho, 2019).
+
+If the ground truth summary is not included in the top-k relevant summary candidates, we replace the last k th summary with the ground truth.
+
+We use k = 12 for training and k = 100 for inference.
+
+As the representative metrics, we present F1 scores for CA, TC, and NER tasks, and Mean Reciprocal Rank (MRR) for SR.
+
+The detailed results with other metrics are also available in Appendix.
+
+Table 4 shows the overall experimental results.
+
+The bold and the underlined texts in the table specify the best and the second best result, respectively.
+
+BERT without any pretraining shows the poorest results across all the tasks.
+
+AnchiBERT and mBERT, which are existing language models on the relevant domains, show better results, and the models continued pretraining on Hanja documents achieve the best performance among all tasks.
+
+This tendency indicates that all these tasks on understanding historical documents require pretraining language models on time-specific and domain-specific data.
+
+AnchiBERT pretrained on the Hanja corpora shows slightly better performance than mBERT pretrained on the same corpora.
+
+We assume this is because the original training corpora of AnchiB-ERT are much closer to the Hanja documents, even the era of those two corpora are completely different.
+
+The writing style of both Hanja documents in the Joseon dynasty and anthologies in ancient China had come from Classical Chinese and share similarities.
+
+On the other hand, the training corpora of mBERT is a contemporary texts whose characters contains Traditional Chinese, but the structure and the format might be considerably changed.
+
+Chronological Attribution (CA) Our models continued pretraining on Hanja corpora outperform other baselines on CA.
+
+Detailed analysis on CA result is illustrated in Section 6.1.
+
+Topic Classification (TC) Figure 1 gives ROC curves and AUC values of each model on each task.
+
+Our models show the similar trends to the overall results, outperforming other language models.
+
+For the evaluation results including F1 score, we find and set the best threshold to each label by Youden's index (Youden, 1950).
+
+While F1 score goes down as the number of classes increases from 4 to 106, there is no significant difference on AUC value.
+
+This might result from consistently high recall achieving around 90% on both tasks.
+
+It indicates that the threshold is too low and models tend to predict plausible topics as many as they can, which might be solved by controlling the threshold.
+
+AnchiBERT pretrained on AJD and DRS, which shows the best performance, predicts 6.39 labels in average, while the average number of ground truth labels of the minor categories is 1.97.
+
+This is probably due to the meaning overlaps in minor categories.
+
+For instance, minor categories such as revenue, finance, general price level, and commerce are the sub-categories of economy in the major categories, whose use case cannot be strictly distinguished.
+
+It would be more appro- Summary Retrieval (SR) All fine-tuned BERTbased re-rankers outperform BM25 whose MRR is merely 29.87%, mostly retrieving the ground truth answer at the first trial.
+
+Likewise, our models shows the best results, while BERT without pretraining show the lowest MRR.
+
+It additionally implies that BERT-based re-rankers might be exploited for retrieving relevant documents from different chronicles in terms of written style or contents.
+
+Countless number of Hanja documents still remain without any analysis and new documents continue to be unearthed.
+
+Therefore, we run zero-shot experiments to verify the effectiveness of our language models on extracting information from the historical documents irrelevant to the training corpora.
+
+We use DRRI dataset which is not included in both pretraining and fine-tuning data of our Hanja language models and execute CA and NER.
+
+Table 7 shows experimental results with CA and NER on DRRI.
+
+All models perform comparably well on the both tasks, regarding that random model will achieve approximately 3.70% performances with 27 classes in CA.
+
+Also, all models in CA commonly show high precision which might be due to the monotonous and redundant phrases in the veritable records.
+
+It shows similar trends compared to the Table 4, but the gap among models was notably emphasized in the zero-shot settings.
+
+This results imply that our CA models might be exploited for the time period prediction of unseen documents in anthology with a reliable level.
+
+Our models outperform others on NER achieving absolutely high performances, though entity maps between AJD and DRRI do not match strictly.
+
+Interestingly, all models tend to predict location entities better than person entities which is the opposite result compared to the original NER on AJD.
+
+It is probably due to the characteristics of each entity, where location entities are all commonly used in nationwide while person entity might differ by situation.
+
+Further analysis on person and location entities in the view of time changes is described in Section 6.2.
+
+We present that our models trained on the corpora of the Joseon dynasty provide reliable results on unseen records, implying that our model can be exploited for the low-resourced documents.
+
+6 Further Analysis

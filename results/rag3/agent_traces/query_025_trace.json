@@ -1,0 +1,105 @@
+{
+  "query_id": "386f8fcdac1af53ccf85dbe8f54ed0874425acbe",
+  "query": "Is the proposed transferred model only trained on the navigation step of R2R and CVDN, while the representation step is taken from RXR?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "transferred model"
+      },
+      "result_preview": "No matches found for 'transferred model'",
+      "elapsed_s": 6.04
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "R2R navigation"
+      },
+      "result_preview": "No matches found for 'R2R navigation'",
+      "elapsed_s": 7.18
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "model training"
+      },
+      "result_preview": "Search results for 'model training' (3 matches):\n[paper_id=nlpeer_COLING2020_1265 | section=introduction | line=23] That leads to the next question: How can layer freezing techniques (Yosinski et al., 2014;Howard and Ruder, 2018;Peters et al., 2019), i.e. reducing the parameter space, impact model t",
+      "elapsed_s": 8.23
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "R2R navigation"
+      },
+      "result_preview": "No matches found for 'R2R navigation'",
+      "elapsed_s": 6.64
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "RXR representation"
+      },
+      "result_preview": "No matches found for 'RXR representation'",
+      "elapsed_s": 4.58
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_79",
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_80",
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_81",
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_82",
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_135",
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_134",
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_136",
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_137",
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_138",
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_139"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [],
+    "approved_by_oracle": [],
+    "oracle_decisions": []
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.04145077720207254,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

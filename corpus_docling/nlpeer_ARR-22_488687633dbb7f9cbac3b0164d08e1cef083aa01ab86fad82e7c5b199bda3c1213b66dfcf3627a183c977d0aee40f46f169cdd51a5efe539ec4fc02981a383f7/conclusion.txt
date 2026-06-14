@@ -1,0 +1,5 @@
+We conduct a comprehensive study to analyze the performance of ESE in user-generated text.
+
+We observe that user-generated text has characteristics that are not captured in existing benchmarks, and propose new benchmarks and evaluation metrics.
+
+Our findings indicate that state-of-the-art methods are not very effective in user-generated text and are often outperformed by simpler baselines.

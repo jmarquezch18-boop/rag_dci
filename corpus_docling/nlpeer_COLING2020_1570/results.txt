@@ -1,0 +1,67 @@
+As for the diagnostic evaluation method, let n be the name that is predicted by Bottom-Up for a given image with a bounding box indicating a target object o i for this image.
+
+The method checks whether n is in the object's consistent response set according to ManyNames v2, further subdividing the positive cases by whether n matches the top name n top (correct.n top ) or one of its adequate alternative names (correct.same-object).
+
+We treat cases where the predicted name n is not in the consistent response set as incorrect (although this rests on assumptions, see below), which we subdivide with the help of the verification data we collected, distinguishing cases in which (i) n must have been intended for a different object (i.e., SAMEOBJECT(n|n top ) = 0, henceforth incorrect.other-obj), (ii) n was intended for the target object but is inadequate (SAMEOBJECT(n|n top ) > 0 ∧ ADEQUACY(n) ≤ 0.4), (iii) a name that was given by only a single annotator (incorrect.singleton), and (iv) a name that did not occur in the ManyNames v1 response set (incorrect.unobserved).
+
+Our treatment of categories (iii) and (iv) as incorrect is a simplifying assumption to facilitate analysis.
+
+7 Among the incorrect cases we treat (i)-(iii) as human-like errors, because at least one ManyNames v1 annotator produced the name, and (iv) as a non-human-like error, assuming a human would not give that name.
+
+We use the object labeling model Bottom-Up (Anderson et al., 2018) 8 , which builds upon the Faster R-CNN architecture (Ren et al., 2015), and which was initialized with features pre-trained on 1K ImageNet classes (Deng et al., 2009;Russakovsky et al., 2015) with the ResNet-101 classification model (He et al., 2016).
+
+The model was originally optimized for a set of 1, 600 frequent names in Visual Genome (VG).
+
+For evaluation we use those names in the Bottom-Up vocabulary which also occur among the 7, 970 names in ManyNames v2, resulting in a target vocabulary of 1, 253 names.
+
+We test on the subset of ManyNames images that are included in the VG test split that was used by Anderson et al. (2018), and whose top ManyNames name is covered by the evaluation vocabulary (1, 145 images in total).
+
+We compare model effectiveness against the human upper bound, which is computed by taking all name tokens of an object's response set in MN v1 as name predictions of a 'human model', and applying our evaluation methodology to them.
+
+Table 3 shows the main results of Bottom-Up and the human upper bound.
+
+Bottom-Up achieves an accuracy of 73.4% on the top names (first column), but when taking all correct names into account its accuracy is +14.5% points higher (87.9%, third column).
+
+This shows that the standard single-label evaluation of recognition models in Computer Vision substantially underestimates model effectiveness, punishing models for what are actually valid alternatives.
+
+It also illustrates, especially for the evaluation of L&V methods, the importance of taking into account linguistic variation when assessing model effectiveness on human language in visual scenes (Vedantam et al., 2015;Jedoui et al., 2019).
+
+Not shown in the table, we found that evaluating Bottom-Up using the supposed ground-truth name n vg from Visual Genome (the dataset upon which ManyNames is built), instead of n top from ManyNames, underestimates model effectiveness even further (down to 61.2% accuracy, not in the table).
+
+This demonstrates that many annotations are needed (such as the 36 of ManyNames) for the top name to accurately reflect naming preferences.
+
+We refer to Appendix B for a more detailed analysis of this.
+
+As for the human upper bound, Bottom-Up comes close in general (87.9% accuracy, compared to 91.1% for humans), and even has a similar distribution across correct top and correct alternative names of around 74% and 15%, respectively (columns 1 and 2).
+
+Among Bottom-Up's incorrect predictions, almost half are human-like according to our categorization, i.e., cases where Bottom-Up predicted a name for another object, an inadequate name, or a singleton (2.5 + 1.5 + 1.0 vs. 7.1, i.e., 41% vs. 59%).
+
+Overall, we conclude that Bottom-Up can accurately simulate human object naming in images, and, like humans, is affected by visual and referential uncertainty caused by the task setup, foremost, by relying on bounding boxes in images to delineate a target object.
+
+However, a closer look per domain, given in Table 4, reveals that confounding factors do affect Bottom-Up and humans differently.
+
+Bottom-Up has a higher overall accuracy (third column) than humans on the people domain (88.9% vs. 87.8%), but 15% points worse on the clothing domain (76.3% vs. 91.7%).
+
+Qualitative analysis shows that the model is, as humans, quite susceptible to referential issues in the people and clothing domains, but with the effect of learning a bias towards people: it tends to recognize the wearer rather than the clothing item (e.g., Bottom-Up predicted man for the clothing item in Fig. 1g).
+
+Indeed, 45% of cases in other-object and singletons, and 75% of unobserved cases were due to the model predicting a person instead of a clothing name.
+
+The only other domain in which Bottom-Up falls short against the human bound by quite a margin is food (81.6% accuracy, 10% points lower).
+
+Qualitative analysis revealed that 67% of its incorrect name predictions (most of which are in unobserved) are related to referential and/or visual issues.
+
+This has the effect of confusing the depicted object with kitchenware (see the cake-board example in Fig. 1f) or with visually similar objects.
+
+In some cases the model's predictions (e.g., bread in Fig. 1h) are also controversial for humans and subject to personal differences (see Section 3.5).
+
+With respect to predicted naming variation, we find contrasts in the vehicles and people domains: In vehicles, although the Bottom-up's overall accuracy is human-like, it has a weaker preference for the top name than humans, favoring alternative names.
+
+These alternatives often involve synonymy (e.g., airplane-plane) as well as difficult-to-name objects where the top and alternative names seem equally plausible (e.g., Fig. 1i).
+
+We find the reverse in the people domain, where Bottom-Up predicts the top name more often than humans, i.e., human responses are more varied.
+
+In sum, we have shown that, when taking natural naming variation into account, a representative labeling model performs close to humans, in two respects: its overall accuracy, and its tendency to predict the top name around 74% of the time, alternative correct names around 15%, and incorrect names in the remaining cases.
+
+At the same time, we found differences between model and human behavior, in particular in the people, clothing and food domains, where the model exhibits less variation than humans, has learnt a bias towards a competing domain, or generally performs worse.
+
+This highlights the importance of fine-grained evaluation on the basis of reliable data that captures both natural naming variation and errors, such as ManyNames v2.

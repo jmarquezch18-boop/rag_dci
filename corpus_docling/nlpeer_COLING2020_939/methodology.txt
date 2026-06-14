@@ -1,0 +1,123 @@
+In this section we introduce our two new path-based models, hypo2path and Path Encoder1 , along with the four benchmark models.
+
+TransE In the TransE model (Bordes et al., 2013), a semantic relationship is interpreted as a vector translation in embedding space.
+
+Given a triplet (s, r, t) of a source node s, a relation r, and a target node t, the model learns embeddings for the nodes and relation such that the target vector t is near s + r.
+
+M3GM Max-Margin Markov Graph Models (M3GM) (Pinter and Eisenstein, 2018) exploit graph motif properties in WordNet (e.g., number of cycles of length 2 or 3) to predict different semantic relations.
+
+As a global feature model, M3GM reranks the top N candidates predicted by a local distributional feature model such as TransE (Bordes et al., 2013).
+
+CRIM Bernier-Colborne and Barriere (2018) proposed a hybrid system which exploits both unsupervised pattern-based hypernym discovery and supervised projection learning (Ustalov et al., 2017).
+
+The core idea of the supervised algorithm is to learn multiple projection matrices which map a query embedding to a target hypernym.
+
+Their system ranked first on the three subtasks in SemEval-2018 Task 9 (Camacho-Collados et al., 2018).
+
+Text2edges The approach most similar to ours is (Prokhorov et al., 2019), which represents each hyponym using its textual definition from WordNet and maps it to its taxonomy path from the root to its parent node.
+
+Given the definition of a query hyponym, a bidirectional LSTM encoder-decoder with attention is used to generate the taxonomic path starting from the root node.
+
+For example, the definition of swift ("a small bird that resembles a swallow and is noted for its rapid flight") is mapped to the sequence 'animal, chordate, vertebrate, bird, apodiform bird'.
+
+Their best system, text2edges with pre-trained Con-ceptNet numberbatch embeddings (Speer et al., 2017), uses a reduced set of artificial edge label symbols rather than the original node labels.
+
+Similar to our approach, text2edges uses a sequence-to-sequence model with an attention mechanism.
+
+However, there are several important differences.
+
+First, it encodes the definition of an input hyponym, while our prediction conditions only on the vector representation of the synsets themselves without looking at their definitions.
+
+Obtaining a definition of an unknown word is not always feasible, especially for domain-specific jargon and neologisms that are frequently used but seldom defined in dictionaries.
+
+On the other hand, computing their embeddings is a less challenging task when using approaches such as fastText (Bojanowski et al., 2017), which also works for words seen only once because it interpolates from embeddings of each word piece. 6 Another key difference is that it can only apply to rooted tree graphs with a single root.
+
+For this reason, it cannot be trained on the verb taxonomy in WordNet, which has more than one root.
+
+We next discuss some related path encoding approaches which we do not compare in our experiments.
+
+First, Das et al. (2017) proposed a model for link prediction that is similar to Path Encoder.
+
+Given a multirelational knowledge base, their task is to assign the correct relation to those entity pairs linked by an entity-relation path but without a direct relation between them.
+
+Here, sequences of entities and relations are encoded with an LSTM and the relation whose vector is closest to the encoded path is returned.
+
+In our task, however, concepts are linked by only one relation (hypernymy or instance hypernymy).
+
+This prevents us from drawing additional information from other relation paths between synsets.
+
+Alsuhaibani et al. ( 2019) also use a path-based model, but predict hyponyms rather than hypernyms in WordNet.
+
+Their model learns hierarchical embeddings over the taxonomy, where each leaf node is represented as the sum of the embeddings of its first four hypernyms (i.e., one direct and three indirect hypernyms in the taxonomy path).
+
+The model predicts the hyponym of a given path by maximizing the distance between the sum of the hypernym vectors and candidate hyponym vectors.
+
+However, this approach cannot be used for hyponyms that never appear in the taxonomy.
+
+4 Experimental Setup 4.1 Dataset: WN18RR-hp WN18RR (Dettmers et al., 2018) is a filtered version of the WN18 dataset (Bordes et al., 2014), a subset of WordNet 3.0 which only contains synsets with at least fifteen connections to other synsets.
+
+WN18RR removed seven inverse relations (such as hyponymy) from WN18 that caused a test leakage problem.
+
+For this work, we only use two relations in WN18RR: hypernymy and instance hypernymy.
+
+Instance hypernymy can be thought of as a special type of hypernymy; it only holds between an instance that is a terminal node (e.g., specific persons, countries, and geographic entities) and its hypernym (common noun).
+
+Also, we evaluate verb and noun hypernymy separately because verb hypernymy (troponymy) in WordNet is conceptually distinct from noun hypernymy, as it expresses a manner relation rather than an IS-A relation (Fellbaum, 2002).
+
+To avoid giving an unfair advantage to the path-based models, we filtered both validation and test sets to only include hyponym queries that are unseen anywhere in the full taxonomy paths of the training data.
+
+By eliminating the queries observed during path training, we made sure that all evaluated queries are equally new to both path-based models (e.g., hypo2path) and non-path models (e.g., hypo2hyper).
+
+We also exclude hyponyms from the test and validation sets which appear as hyponyms in the training set7 to prevent the models from merely copying.
+
+We denote this subset as WN18RR-hp.
+
+In The WordNet taxonomy is a directed acyclic graph where many hypernyms have multiple paths to the root.
+
+When training path models (i.e., hypo2path, Path Encoder, and text2edges), we included every existing path to a query's parent as individual target instance(s).
+
+Baselines We include two simple baselines, closest vector and closest co-hyponym, in order to gauge reasonable lower bounds for our metrics.
+
+The closest vector baseline is obtained by predicting the hypernym whose vector is closest (using the Euclidean norm) to the given synset, choosing from among all the hypernyms in the training set.
+
+On the other hand, closest co-hyponym is obtained by predicting the hypernym of the closest hyponym in the training set, i.e., under the assumption that nearby vectors are co-hyponyms.
+
+TransE, M3GM, CRIM, and text2edges Our replications of the benchmark models are based on the original source code12 keeping the default hyperparameters except for a few things: For TransE and CRIM, we tuned for the best number of training epochs.
+
+We increased the early stopping threshold to five epochs for TransE, as the model stopped too early with the default setting.
+
+Also, we only trained the supervised part of CRIM, since the unsupervised part of CRIM requires an external corpus for training.
+
+All models except text2edges used fastText embeddings to compute synset embeddings.
+
+For text2edges, we replicated their best system which takes the pretrained ConceptNet numberbatch embeddings to represent words in node definitions.
+
+For all models except M3GM, we trained a separate model for each relation of WN18RR-hp (noun, instance noun, verb).
+
+On the other hand, we trained all three relations in a single M3GM model, as it employs graph motif features of different relations.
+
+We trained this multi-relational M3GM model as a re-ranker of TransE that was also trained on all three relations.
+
+13 We did not run a post-hoc tuning for graph score weights in M3GM.
+
+Path Generators: hypo2path and hypo2hyper We implemented a sequence-to-sequence model with Luong attention in Keras, which we used for the hypo2path and hypo2hyper experiments.
+
+We used a single-layer unidirectional LSTM with 256 hidden units and a dropout rate of 0.3 for both the encoder and the decoder.
+
+We trained the network with teacher forcing and used the Adam optimizer with a learning rate of 0.001 and batch size of 256.
+
+The embedding layer was frozen during training.
+
+Synsets without pretrained embeddings were assigned random vectors with elements sampled uniformly from [-.25, .25].
+
+Greedy decoding was used to generate sequences.
+
+14 We did not perform any hyperparameter tuning for these models.
+
+Path Encoder The Path Encoder model was implemented in PyTorch, using a single-layer bidirectional LSTM to encode the path and a fully-connected layer to map the output to the target embedding space.
+
+The dimension of the LSTM cell was 1024 for nouns and instance nouns and 512 for verbs.
+
+The learning rates in {0.01, 0.001} and margins in {0.1, 0.3, 0.5, 0.7} were tuned differently for noun, instance noun, and verb experiments.
+
+We used the same dropout rate, batch size and choice of optimizer as in the hypo2path experiments.

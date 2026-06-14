@@ -1,0 +1,17 @@
+Background: Previous studies have shown that the association between smiling and youth is a misconception; smiling faces have been estimated to be older than neutral faces.
+
+Previous studies have indicated that this aging effect of smiling (AES) is due to eye wrinkles caused by the facial action of smiling.
+
+However, whether holistic processing for facial expressions is involved in AES has not been investigated.
+
+The present study aimed to clarify these issues.
+
+Methods: Participants were recruited to participate in an online experiment that had a 3 (facial expression: smiling/neutral/surprised) × 2 (facial orientation: upright/inverted) mixed design.
+
+Participants were presented with an upright or inverted face for each expression (neutral, smiling, and surprised) and were asked to estimate the individual's age.
+
+Results: In total, 104 participants were included in the analysis.
+
+The results show that smiling faces were estimated to be older than neutral faces, whereas there was no significant difference between upright and inverted faces.
+
+Conclusions: Our findings suggest that AES is not dependent on holistic processing.

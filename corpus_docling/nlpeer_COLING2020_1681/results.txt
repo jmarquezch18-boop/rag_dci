@@ -1,0 +1,45 @@
+Our model scores 75.4% on the original ContraPro.
+
+This is a very strong result compared to previous work (Müller et al., 2018) The straightforward adversarial modifications we make drop the ContraPro scores by over 10%, as shown by Figure 1.
+
+We analyze examples that are scored incorrectly.
+
+Some of the attacks introduce an entity that can in principle be referenced by it, like extending the antecedent with "the company's".
+
+In these cases, the new entity's influence on the model is expected, although ideally, the prediction should not change.
+
+More surprisingly, attacks that introduce a human entity drop the scores as well.
+
+The two largest examples are appending "…but he wasn't sure" and extending the original antecedent with Maria's.
+
+Our synonym replacement leads to a 6% drop in scores.
+
+Intuitively, the adversarial attacks should not contribute to large drops in scores which is contrary to the empirical evidence.
+
+Nevertheless, no attack reduces the model's scores close to the original sentence-level baseline.
+
+Thus, we conclude that the concatenation model handles cr, but likely with brittle heuristics.
+
+Although the results expose potential issues with the model, it is still difficult to pinpoint the specific problems.
+
+This reveals a larger issue with pronoun translation evaluation that cannot be addressed with simple adversarial attacks on existing general-purpose challenge sets.
+
+We propose , a more systematic approach that targets each of the previously outlined cr pipeline steps with data synthetically generated from corresponding templates.
+
+We find that the model performs poorly when actual cr is required.
+
+It frequently falls back to choosing the neuter es or preferring a position (e.g. first of two entities) for determining the gender.
+
+For Markable Detection the model always predicts the neuter es regardless of the actual genders of the entities.
+
+In the Overlap template, we find that the model fails to recognize the overlap and instead, has a general preference for one of the two clauses.
+
+For instance in the case of verb-overlap, the model had a solid accuracy of 64.1% if the verb overlapped from the first clause ("The cat ate We also see weak performance for world knowledge.
+
+An accuracy of 55.7% is slightly above the heuristic of randomly choosing an entity (= 50.0%).
+
+With a strong bias for the neuter es, the model has a high accuracy of 96.2% for event reference and pleonastic templates, where es is always the correct answer.
+
+Based on the strong performance on the Gender template in 6.1.4, we conclude the model consistently memorized the gender of concrete nouns.
+
+Hence, cr mistakes stem from Step 1 or Step 2, suggesting that the model failed to learn proper cr.

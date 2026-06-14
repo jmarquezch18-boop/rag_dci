@@ -1,0 +1,41 @@
+The importance of combating misinformation was once again illustrated by the coronavirus pandemic, which came along with a lot of "potentially lethal" misinformation.
+
+At the beginning of the COVID-19 pandemic, the United Nations (UN) (DGC, 2020) started even using the term "infodemic" for this phenomenon of misinformation and called for proper dissemination of reliable facts.
+
+However, tackling misinformation online and specifically on social media platforms is challenging due to the variety of information, volume, and speed of streaming data.
+
+As a consequence, several studies have explored different aspects of COVID-19 misinformation online including sharing patterns (Pennycook et al., 2020), platform-dependent engagement patterns (Cinelli et al., 2020), web search behaviors (Rovetta and Bhagavathula, 2020), and fake images (Sánchez and Pascual, 2020).
+
+We are primarily interested in claims on social media from a multimodal perspective (Figure 1).
+
+Claim detection can be seen as an initial step in fighting misinformation and as a precursor to prioritize potentially false information for fact-checking.
+
+Traditionally, claim detection is studied from a linguistic standpoint where both syntax (Rosenthal and McKeown, 2012) and semantics (Levy et al., 2014) of the language matter to detect a claim accurately.
+
+However, claims or fake news on social media are not bound to just one modality and become a complex problem with additional modalities like images and videos.
+
+While it is clear that a claim in the text is denoted in verbal form, it can also be part of the visual content or as overlaid text in the image.
+
+Even though much effort has been spent on the curation of datasets (Boididou et al., 2016;Nakamura et al., 2020;Jindal et al., 2020) and the development of computational models for multimodal fake news detection on social media (Ajao et al., 2018;Wang et al., 2018;Khattar et al., 2019;Singhal et al., 2019), hardly any research has focused on multimodal claims (Zlatkova et al., 2019;Cheema et al., 2020b).
+
+In this paper, we extend the definitions of claims and check-worthiness from previous work (Barrón-Cedeno et al., 2020;Nakov et al., 2021) to multimodal claim detection and introduce a novel dataset called Multimodal Claims (MM-Claims) curated from Twitter to tackle this critical problem.
+
+While previous work has focused on factually-verifiable check-worthy (Barrón-Cedeno et al., 2020;Alam et al., 2020) or general claims (i.e., not necessarily factually-verifiable, e.g., (Gupta et al., 2021)) on a single topic, we focus on three different topics, namely COVID-19, Climate Change and Technology.
+
+As shown in Figure 1, MM-Claims aims to differentiate between tweets without claims (Figure 1a) as well as tweets with claims of different types: claim but not check-worthy (Figure 1b), check-worthy claim (Figure 1c), and check-worthy visually relevant claim (Figure 1d).
+
+Our contributions can be summarized as follows:
+
+• a novel dataset for multimodal claim detection in social media with more than 3000 manually annotated and roughly 82 000 unlabeled image-text tweets is introduced;
+
+• we present details about the dataset and the annotation process, class definitions, dataset characteristics, and inter-coder agreement;
+
+• we provide a detailed experimental evaluation of strong unimodal and multimodal models highlighting the difficulty of the task as well as the role of image and text content.
+
+The remainder of the paper is structured as follows.
+
+Section 2 describes the related work on unimodal and multimodal approaches for claim detection.
+
+The proposed dataset and the annotation guidelines are presented in Section 3.
+
+We discuss the experimental results of the compared models in Section 4, while Section 5 concludes the paper and outlines areas of future work.

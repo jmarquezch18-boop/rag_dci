@@ -1,0 +1,35 @@
+CrossAligner The focus of our primary method was to improve slot filling as the model must classify dozens of entity types in each dataset and to that end, it is an effective approach.
+
+CrossAligner exceeds the F-Score of the Previous SOTA by 2.7 points (82.5 versus 79.8).
+
+This is 1.4 points higher than XeroAlign IO and 6 points higher than Zero-Shot.
+
+than XeroAlign IO , 94.7 is still 0.4 higher than Target Language.
+
+CrossAligner's overall score is 0.6 higher than previous SOTA, which outperformed the common 'translate-train' models, including entity projection and word alignment.
+
+In order to demonstrate the necessity and specificity of the proposed architecture, we tested mean-pooled token embeddings as well as a CLS embedding as the input to CrossAligner instead of the entity classifier logits.
+
+The scores declined from 94.7/82.5 (88.6 Overall) to 92.3/80 (86.2 Overall) with a CLS sentence representation and 82.1/78.7 (80.4 Overall) for mean-pooled embeddings.
+
+Future applications of our method to other NLP tasks must note that CrossAligner is most effective for tasks with a complex entity tag set where the presence of entities in a sentence is informative, i.e. a higher complexity and slot density should lead to a higher performance.
+
+In addition, CrossAligner combines well with other losses as we show in Section 5.2.
+
+Translate-Intent Our alternative to the common 'translate-train' baseline is not only conceptually simpler (no explicit slot recognition training), it also outperforms the previous Translate-Train SOTA scores (78.5 vs 76.6 F-Score, 95.9 vs 95.1 accuracy and 87.2 vs 85.9 Overall).
+
+Translate-Intent does not require error-prone preprocessing such as word/label alignment and can therefore be readily used as a default 'translate-train' baseline in future work.
+
+Note that using mean-pooled token embeddings as sentence representations is not recommended for Translate-Intent as this causes the F-Score to decline sharply (-25 points).
+
+Contrastive Alignment Despite orders of magnitude less data than used in related work (Section 2), our Contrastive Alignment showed a marginal improvement over the previous SOTA on intent classification (96.3 vs 96.1) thus by 0.1 Overall. That said, even though the contrastive loss pushes negative sentence embeddings away from the positives, this does not seem to confer a strong advantage over the previous SOTA, which only used positive examples.
+
+We have also evaluated an implementation of Contrastive Alignment using mean-pooled token embeddings as sentence representations, however, the Overall score declined to 86.8 (versus 88.1 with a standard CLS embedding).
+
+XeroAlign IO Our implementation of the previous SOTA with an additional post-processing step (described in 3.1) increased the F-Score by 1.
+
+Other models also benefit from IO-only training, for example, the Zero-Shot model gains 2.6 points (73.9 up to 76.5 F-Score).
+
+One theoretical limitation of IO-only training is that given a sequence of 'B-LOC I-LOC B-LOC', the IO-only models would incorrectly classify this as a single entity.
+
+However, in practice, this is rare and not something we have seen during preprocessing or error analysis.

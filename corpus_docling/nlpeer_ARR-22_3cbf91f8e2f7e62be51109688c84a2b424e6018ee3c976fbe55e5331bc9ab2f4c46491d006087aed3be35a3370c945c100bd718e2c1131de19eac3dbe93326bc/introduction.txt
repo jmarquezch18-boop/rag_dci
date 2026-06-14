@@ -1,0 +1,85 @@
+The aim of data-to-text (D2T) generation is to produce natural language descriptions of structured data (Gatt and Krahmer, 2018;Reiter and Dale, 1997).
+
+Although pipelines of rule-based D2T generation modules are still used in practice (Dale, 2020), end-to-end approaches based on PLMs recently showed superior benchmark performance (Ke et al., 2021;Chen et al., 2020a;Ferreira et al., 2020;Kale and Rastogi, 2020b;Ribeiro et al., 2020), surpassing pipeline systems (Ferreira et al., 2019) in both automatic and human evaluation metrics.
+
+Finetuning PLMs on human-written references is widely accepted as a standard approach for adapting PLMs to the D2T generation objective and achieving good performance on a given benchmark (Agarwal et al., 2021;Ke et al., 2021).
+
+However, finetuning a model on the domain-specific data leads to overfitting to the particular benchmark, decreasing performance on out-of-domain 1 Our code and data is available at https://github.
+
+com/kasnerz/zeroshot-d2t-pipeline.
+
+In-domain knowledge is included only in the simple hand-crafted templates for each predicate.
+
+data (Laha et al., 2019).
+
+Gathering a large set of references for a particular domain is also costly and time-consuming as it usually requires collecting human-written references through crowdsourcing (Dušek et al., 2020).
+
+These problems can be partially mitigated using few-shot approaches (Chen et al., 2020b;Ke et al., 2021;Su et al., 2021a), which operate with only several dozens or hundreds of annotated examples, but the robustness of these approaches is questionable-selecting a representative set of examples which would improve performance is difficult (Chang et al., 2021a), and the limited sample is often noisy, increasing the chance of hallucinations and omissions (Dušek et al., 2019;Harkous et al., 2020;Rebuffel et al., 2022).
+
+In this paper, we present a zero-shot alternative to the traditional finetuning paradigm by formulating the D2T generation from RDF triples as a sequence of general-domain operations over text in natural language.
+
+We start by transforming individual triples to text using trivial templates, which we subsequently order, aggregate, and compress on the paragraph level to produce the resulting description of the data.
+
+In constrast to traditional pipeline systems, all our pipeline modules are built upon PLMs and operate over sentences in natural language.
+
+The modules are trained on our new WIKI-FLUENT corpus, which contains 934k examples of first paragraphs from the English Wikipedia, each supplied with a synthesized set of simple templatelike sentences which together convey the meaning of the original paragraph.
+
+Our approach allows generating natural language descriptions from RDF triples with a minimum amount of domain-specific rules or knowledge and without using training data from the D2T datasets.
+
+Although our approach is primarily a probe into the territory of zero-shot approaches and cannot yet match the quality of stateof-the-art models, we show that it can yield large improvements upon simple baselines and match older supervised systems on automatic metrics for text fluency.
+
+Moreover, the semantic accuracy metrics and our manual error analysis suggest that our approach offers a way to prevent omissions and hallucinations common in few-shot approaches.
+
+Our contributions are the following: (1) We propose an alternative D2T generation approach based on general-domain text-to-text operations (ordering, aggregation, and paragraph compression).
+
+( 2) We introduce a synthetic WIKIFLUENT corpus containing 934k sentences based on English Wikipedia, providing training data for the operations in (1).
+
+( 3) We apply our system on two D2T datasets and evaluate its performance both automatically and manually, including the contribution of individual pipeline modules.
+
+( 4) We release our code, data, pretrained models, and system outputs to ease future research.
+
+1   2 Related Work D2T Generation with PLMs Large neural language models pretrained on self-supervised tasks (Lewis et al., 2020;Liu et al., 2019;Devlin et al., 2019) have recently gained a lot of traction in D2T generation research (Ferreira et al., 2020;Kasner and Dušek, 2020b).
+
+Following Chen et al. (2020b), other works adopted PLMs for few-shot D2T generation (Chang et al., 2021b;Su et al., 2021a).
+
+Kale and Rastogi (2020b) and Ribeiro et al. (2020) showed that PLMs using linearized representations of data can outperform graph neural networks on graph-to-text datasets, recently surpassed again by graph-based models (Ke et al., 2021;Chen et al., 2020a).
+
+Although the models make use of generaldomain pretraining tasks, all of them are eventually finetuned on domain-specific data.
+
+Pipeline-based D2T Generation Until the recent surge of end-to-end approaches (Dušek et al., 2020), using several modules connected in a pipeline was a major approach for D2T generation (Gatt and Krahmer, 2018;Reiter, 2007;Reiter and Dale, 1997).
+
+Our approach is inspired by the pipeline approaches, in particular the pipelines utilizing neural modules (Ferreira et al., 2019).
+
+In contrast with these approaches, our pipeline works with unstructured data in natural language and it operates in zero-shot setting, i.e. without using any training data from target D2T datasets.
+
+Laha et al. (2019) introduce a three-step pipeline for zero-shot D2T generation similar to ours.
+
+Unlike the approach we describe here, they use a semiautomatic template generation system,2 their sentence fusion is rule-based, and they do not address content planning.
+
+Content Planning in D2T Generation Content planning, i.e. the task of ordering input facts and aggregating them into individual sentences, is one of the steps of the traditional D2T pipeline (Gatt and Krahmer, 2018).
+
+As shown by Moryossef et al. (2019a,b) and confirmed by other works (Puduppully et al., 2019;Zhao et al., 2020;Trisedya et al., 2020;Su et al., 2021b), including a content plan improves the quality of outputs in neural D2T pipelines.
+
+Unlike the aforementioned planners, which use predicates or keys from D2T datasets for representing the data items, our planner is trained on ordering sentences in natural language.
+
+Sentence Ordering Sentence ordering is the task of organizing a set of natural language sentences to increase the coherence of a text (Barzilay et al., 2001;Lapata, 2003).
+
+Several neural methods for this task were proposed, using either interactions between pairs of sentences (Chen et al., 2016;Li and Jurafsky, 2017), global interactions (Gong et al., 2016;Wang and Wan, 2019), or combination of both (Cui et al., 2020).
+
+We base our ordering module ( §5.2) on the recent work of Calizzano et al. (2021), who use a pointer network (Wang and Wan, 2019;Vinyals et al., 2015) on top of a PLM.
+
+Aggregating Input into Sentences Typically, multiple pieces of input information need to be merged into a single sentence.
+
+Previous works (Wiseman et al., 2018;Shao et al., 2019;Shen et al., 2020;Xu et al., 2021) capture the segments which correspond to individual parts of the input as latent variables.
+
+Unlike these works, we adopt a simpler scenario using an already ordered sequence of facts (see §3.1), into which we selectively insert delimiters to mark sentence boundaries.
+
+We introduce paragraph compression (PC) as a new task and the final step in our D2T generation pipeline.
+
+This task combines several standard natural-language tasks including sentence fusion, rephrasing, and coreference resolution.
+
+Unlike text summarization or simplification (Zhang et al., 2020;Jiang et al., 2020), we aim to convey the complete semantics of the text without omitting any facts.
+
+In contrast to sentence fusion (Geva et al., 2019;Barzilay and McKeown, 2005) or sentence compression (Filippova and Altun, 2013), we operate in the context of multiple sentences in a paragraph.
+
+The task is the central focus of our WIKIFLUENT corpus ( §4).

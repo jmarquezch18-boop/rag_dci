@@ -1,0 +1,33 @@
+Open cloze (Taylor, 1953) tests are a common type of exercise where words are removed from a piece of text and must then be filled in by the students without any options to choose from.
+
+They are often used in language learning environments as a quick and effective way to test vocabulary, grammar and reading comprehension (Tremblay, 2011;Trace, 2020).
+
+However, designing high-quality cloze tests for language learning is a laborious process that involves finding an optimal distribution of gaps based on aspects such as function, distance, number of answers, etc. (ALTE, 2005;2011).
+
+In this paper, we propose a strategy to construct open cloze exercises using transformer models (Vaswani et al., 2017).
+
+Our transformer-based architecture employs two objectives to predict the words that should be gapped in a text passage.
+
+Our main objective is standard token classification, where we aim to minimise the error of classifying a token as a gap or not.
+
+The second and auxiliary objective is a language-model-based objective whereby we attempt to minimise the language model error when predicting the right answer for each gap.
+
+Our solution is based on a pre-trained ELECTRA (Clark et al., 2020) model that is finetuned on the two described objectives in a multitask scenario.
+
+Our output aims to mimic the style of open cloze tests in the First Certificate in English (FCE) exam 1 , which is targeted at learners of English at the B2 proficiency level of the Common European Framework of Reference (CEFR) for languages (Council of Europe, 2001).
+
+Unlike other tests, the FCE open cloze task aims to simultaneously test many aspects of grammar and vocabulary that students are expected to know at this level.
+
+Since the tests are created from a text passage, they must be skilfully designed in order to ensure an optimal distribution of gaps that adheres to guidelines.
+
+A shortened example is shown in Figure 1.
+
+Our system is evaluated under two settings: 1) automatic evaluation, where the generated gaps are compared to gold-standard gaps proposed by test experts, and 2) human evaluation, where the quality of the generated gaps is judged by test experts.
+
+The main contributions of our work are as follows: 1) we are the first to employ transformer models for open cloze test generation, 2) unlike previous studies, we work at the paragraph level, which is a much more challenging task, 3) we propose a multi-task learning approach with two objectives: one is to classify tokens into gaps/non-gaps and the other to minimise the error of re-generating the gapped word, 4) we report state-of-the-art results, outperforming previous work and a strong baseline, 5) we propose additional components to control the structure of the final cloze tests as human experts do, 6) we perform both automatic and human evaluation and 7) we make our test data, system output and human annotations available to the research community 2 .
+
+I first saw some guys doing motorbike stunts.
+
+I'd never seen anyone riding a motorbike using just the back wheel before and I was (3) impressed I went straight home and taught (4) to do the same.
+
+Figure 1: Sample FCE open cloze test (shortened).

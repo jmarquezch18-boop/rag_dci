@@ -1,0 +1,53 @@
+Learning directly from plain diacritized text can go a long way, even with relatively limited resources.
+
+NAKDIMON demonstrates that a simple architecture for diacritizing Hebrew text as a sequence tagging problem can achieve performance on par with much more complex systems.
+
+We also introduce and release a corpus of dotted Hebrew text, as well as a source-balanced test set.
+
+In the future, we wish to evaluate the utility of dotting as a feature for downstream tasks such as question answering, machine translation, and speech generation, taking advantage of the fact that our simplified model can be easily integrated in an end-to-end Hebrew processing system.
+
+We collected the data for our training set and test sets from open online sources, while making sure their terms allow research application and privacy is not impugned.
+
+NAKDIMON's architecture does not encourage memorization of training data and the system is not trained for generating text.
+
+We consider a main use case for our system to be assisting Hebrew learners in reading.
+
+We therefore expect NAKDIMON to facilitate life in Israel for immigrants still struggling with Hebrew, among other underprivileged groups.
+
+Automatic dotting can increase inclusion in Hebrew-prominent societies for literacy-challenged individuals, and derivative improvements in text-to-speech applications can assist those with impaired vision.
+
+Lastly, dotting can help researchers with limited understanding of Hebrew access resources in the language.
+
+Hebrew is a gendered language.
+
+Orthographically, in many cases the lack of dots masks gender ambiguity, allowing both masculine and feminine readings for a given word (e.g. ְ ‫ְתּ‬ ‫ַח‬ ‫ל‬ ‫שׁ‬ / ָ ‫ְתּ‬ ‫ַח‬ ‫ל‬ ‫שׁ‬ 'you.fem sent' / 'you.masc sent').
+
+While wellperforming automatic dotting can help alleviate these ambiguities and reduce the amount of potentially prejudiced readings, we recognize the large body of work on gender bias in NLP (Blodgett et al., 2020), including in Hebrew NLP (Moryossef et al., 2019), and the findings that an imbalanced training set may result in an even more skewed distribution of gender bias in applications (Zhao et al., 2017).
+
+We believe our unlexicalized approach is more robust to such bias compared with other systems, and have already started quantifying and addressing these issues as we find them in ongoing work.
+
+In the meantime, we offer this paragraph as a disclaimer.
+
+We apply the following resolution tactics for added letters in undotted text: (a) We almost never remove or add letters to the original text (unless it is completely undiacritizable).
+
+(b) We keep dagesh in letters that follow a shuruk which replaces a kubuts, and similarly for yod (hirik male replacing hirik haser).
+
+(c) When we have double vav or double yod, the second letter is usually left undotted, except when it is impossible to have the correct vocalization this way.
+
+Resolving ktiv haser discrepancies from Morfix outputs is done by adding missing vowel letters, or removing superfluous vowel letters, in such a way that would not count as an error if it is correct according to Academy regulations.
+
+We tried to further improve NAKDIMON by initializing its parameters from a language model trained to predict masked characters in a large undotted Wikipedia corpus (440MB, 30% mask rate), but were only able to achieve an improvement of 0.07%.
+
+Attempted architectural modifications, including substituting a Transformer (Vaswani et al., 2017) for the LSTM; adding a CRF layer to the decoding process; and adding a residual connection between the character LSTM layers, yielded no substantial benefits in these experiments.
+
+Similarly, varying the number of LSTM layers between 2 and 5 (keeping the total number of parameters roughly constant, close to the 5,313,223 parameters of our final model) had little to no impact on the accuracy on the validation set.
+
+We present results for the Dicta test set in Table 5.
+
+In order to provide fair comparison and to preempt overfitting on this test data, we ran this test in a preliminary setup on a variant of NAKDIMON which was not tuned or otherwise unfairly trained.
+
+This system, NAKDIMON 0 , differs from our final variant in three main aspects: it is not trained on the Dicta portion of our training corpus ( §2.2), it is not trained on the AUTOMATIC corpus, and it employs a residual connection between the two character Bi-LSTM layers.
+
+Testing on the Dicta test set required some minimal evaluation adaptations resulting from encoding constraints (for example, we do not distinguish between kamatz katan and kamatz gadol).
+
+Thus, we copy the results reported in

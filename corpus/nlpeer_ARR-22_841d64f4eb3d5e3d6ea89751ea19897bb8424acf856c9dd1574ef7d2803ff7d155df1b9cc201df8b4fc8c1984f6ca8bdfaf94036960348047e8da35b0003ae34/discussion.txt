@@ -1,0 +1,133 @@
+We presented an algorithm for decoding in text generation with two main components: best-first search to more efficiently structure exploration of the space and hypothesis recombination to encode summaries in a lattice structure.
+
+We showed that across summarization and machine translation, these lattices successfully encode large numbers of high-quality generation options.
+
+There are a few limitations of our method.
+
+First, we currently benchmark these techniques using number of nodes expanded, not wall clock time.
+
+There are strategies for parallelizing the BFS expansion (Shu and Nakayama, 2018), but it remains to be seen how this parallelism compares to the parallelism achieved by beam search.
+
+Regardless, the dramatically larger number of hypotheses we return outweighs efficiency differences for now.
+
+Second, we focus on auto-regressive methods in this paper.
+
+However, we believe our framework could also be applied and adopted to non auto-regressive generation models (Song et al., 2021)
+
+In spite of the issues with beam search that we describe in the main text, perhaps beam search could still be viable with larger beam sizes if more computational resources are available.
+
+We experiment with beam sizes of 2 {4,5,6,7} and see how diversity scales with beam size.
+
+In Figure 4, we found that an exponential increase of beam size does not lead to a strong increase of number of novel bigram in beam search.
+
+In DBS, the diversity does ramp up, but the quality of the generated text decreases substantially.
+
+For BS and DBS, increasing beam size is not an effective solution for better diversity.
+
+We compare the oracle R2 of BS/DBS with larger beam size in Figure 9.
+
+The oracle R2 increases slowly as k doubles, but our model BFSRCB with k = 16 achieves 35.8, much higher than all BS/DBS cases.
+
+In the strictest form, recombining two hypotheses assumes the following equivalence between them: Merging such states in the search tree is valid with no loss of information, as any expanded node will receive the same score under both prefixes.
+
+However, this assumption is not realistic since seq2seq models condition on the entire sequence so far, and any tiny perturbation changes the predicted distribution.
+
+To relax the assumption, we then propose the weak alternative.
+
+C Proof of Theorem 5.1
+
+Proof by induction.
+
+Base case: we begin with just n sos in the lattice, which has exactly one canonical path consisting of itself.
+
+Inductive case: assume every node in the lattice has exactly one canonical path.
+
+We have to consider two cases when expanding a node in the lattice:
+
+(1) Expanding the node n as normal.
+
+In this case, n is on the search frontier due to its parent node n being expanded, which establishes a GEN edge from n to n. Since n has exactly one canonical path, n then has exactly one canonical path consisting of the canonical path to n extended to n.
+
+(2) Applying recombination.
+
+This operation only adds MRG edges and deletes nodes, neither of which have any impact on the canonical paths.
+
+We summarize the key differences of ZBEAM, RCB and ZIP in Table 5.
+
+In ZIP, nodes that are already expanded might be removed from the lattice due to recombination.
+
+For example, in Figure 6, node 6 and 7 are removed in this fashion.
+
+In general, we handle this by re-mapping the eliminated node to its surviving counterpart.
+
+Any reference to node 7 is routed to node 3, or whatever node 3 is mapped to.
+
+This procedure is defined and implemented as a union-find data structure.
+
+Deduplication of Unexplored Successors After the ZIP procedure, we also remove the unexplored successors of the merged nodes, like node 6, 7, and 8 in Fig. 6.
+
+We show a more detailed example in Figure 10.
+
+In ZIP, we will merge node 3 and node 6. If we take a closer look at the successors of these two nodes, the distributions could be similar and in fact are expected to be if the equivalence criteria hold.
+
+We remove the unexplored direct successors of the merged node as part of the merging process, and the surviving node (node 3) captures these with similar probabilities regardless.
+
+GREEDY is the deterministic greedy decoding method that always selects the highest probability token as prediction.
+
+The equivalent beam size for this approach is 1 since we only run one pass.
+
+BS & DBS stand for beam search and its variant diverse beam search (Vijayakumar et al., 2018).
+
+In our configuration, we use Hamming distance as the diversity function and set the diversity strength to 1.5, following Vijayakumar et al. (2018).
+
+NCLS is the nucleus sampling method proposed in Holtzman et al. (2020), which encourages quality by truncating the distribution over the vocabulary with a parameter p before sampling.
+
+We experiment it with p = 0.9 and p = 0.8.
+
+TEMP changes the temperature of softmax function to reshape the prediction distribution (Ficler and Goldberg, 2017).
+
+We set the temperature parameter τ = 1.5 so the prediction picks more lowscored tokens than τ = 1.
+
+In our beam search implementation, the size of the search frontier O is up to the beam size k. When a path is completed, we move it from the search frontier O to a completed set F to free up the beam for exploring unfinished hypotheses.
+
+Naturally, finished hypotheses F in the end can be of variable length.
+
+After reaching the max generation step T , we sort all hypotheses in F according to the model score.
+
+Following common practice in libraries such as Transformers (Wolf et al., 2020), we return a number of completed hypotheses equal to the beam size.
+
+Table 6 shows an additional experiment on English-French.
+
+We do not evaluate on grammaticality due to the GECToR model being specialized to English.
+
+The results show broadly similar trends as those in Table 3, discussed in the main text.
+
+We show three examples with visualization in Figure 11,12 and 13.
+
+We use PyVis as the visualization tool.
+
+6 More examples are available at anonymized.
+
+Resources Used All experiments were conducted on a server with 32GB RAM and Intel Xeon E5-2630 CPU, using a single NVIDIA GTX1080.
+
+The total computational budget in GPU hours is within 50 hours for experiments in text summarization and machine translation.
+
+Memory and Runtime Although the final lattices returned encode large numbers of paths, they do not take large amounts of memory.
+
+Because the number of nodes in a lattice is no larger than the number of node expansion operations during beam search, it is always less than the search budget and can be stored compactly.
+
+Moreover, the wall clock time of our BFS-Recomb strategy is manageable, on the order of between 1 and 10 seconds for summarization.
+
+As mentioned in the Conclusion, additional parallelism can be combined with our BFS search to further improve the time and make it comparable to beam search.
+
+However, even this version of the algorithm can be "embarrassingly" parallelized across examples to improve efficiency.
+
+We randomly sample 100 data instances from the validation set for each dataset, and they are used by all methods.
+
+When sampling is needed, we take 1,000 samples for each data instance, so all the metrics are reported on 100,000 translations/summaries for one dataset.
+
+By generating additional outputs from a generation model, we may cause a system to produce outputs that are biased, factually inaccurate, or contain hallucinations.
+
+However, all of these risks are present in the raw text generation models as well.
+
+Moreover, because we present many options, we believe our approach more appropriately reflects the model's uncertainty over its output, and may have a part to play in mitigating such risks in systems of the future.

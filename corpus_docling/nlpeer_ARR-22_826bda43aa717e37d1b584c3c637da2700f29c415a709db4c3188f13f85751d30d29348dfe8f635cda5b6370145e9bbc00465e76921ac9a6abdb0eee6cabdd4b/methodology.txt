@@ -1,0 +1,19 @@
+In this section, we present our CLEAR method that learns cross-lingual language representations and environment-agnostic visual representations.
+
+Given these learned language and visual representations, we then train the agent on the vision-andlanguage navigation task with imitation learning and reinforcement learning.
+
+The overall representation learning and navigation agent training processes are illustrated in Figure 2.
+
+We next describe our representation learning methods in Sec. 3.1 and Sec. 3.2.
+
+The navigation model (Tan et al., 2019) and training process are detailed in Appendix.
+
+For simplicity, we use 3 as batch size when illustrating the positive pairs and negative pairs.
+
+Right: then the agent is trained on the vision-and-language navigation task based on these learned representations.
+
+In this section, we compare with SimCSE (Gao et al., 2021) which is lower than our visual representation (35.6/53.7).
+
+Furthermore, we experiment with using both dropout as positives and our identified path pairs as positives.
+
+The performance decreases in nDTW score (52.4) compared with only using our identified path pairs as positives (53.7).

@@ -1,0 +1,53 @@
+Understanding the uncertainties surrounding the rate and magnitude of ice loss from the Greenland Ice Sheet (GrIS) and Antarctica Ice Sheet (AIS; e.g., DeConto and Pollard, 2016;Edwards et al., 2019;Noble et al., 2020) is key to estimating the sensitivity of our planet to warmer climatic conditions.
+
+To better constrain these uncertainties, significant effort has been made to understand how Earth's ice sheets have evolved during past warm periods (Tierney et al., 2020).
+
+Marine Isotope Stage (MIS) 5e, here referred to as the Last Interglacial (LIG, is regarded as a process analogue for future warmer climates.
+
+In the LIG, global temperatures were 1-2 • C warmer and there is general consensus that the eustatic sea level was up to 1-5 m higher than present (Dyer et al., 2021).
+
+This consensus stems from geologic work on different types of sea level indicators found along the world's shorelines (Rovere et al., 2016).
+
+However, peak LIG eustatic sea level estimates vary widely, also because different locations are subject to vertical land motions that need to be accounted for before reconstructing paleo global mean Published by Copernicus Publications on behalf of the European Geosciences Union.
+
+P. Boyden et al.: Refining patterns of melt with forward stratigraphic models sea level (GMSL) from field data.
+
+These post-depositional processes include glacial isostatic adjustment (GIA), sediment loading, subsidence, tectonics, and dynamic topography (Creveling et al., 2015;Simms et al., 2013;de Gelder et al., 2020;Malatesta et al., 2022;Austermann et al., 2017).
+
+A further challenge resides in interpreting, within fossil LIG coastal sequences, short-lived sea level oscillations or sudden accelerations.
+
+In the granitic Seychelles, for example, isolated in situ MIS 5e corals have been sampled and surveyed 8 m above mean sea level (a.m.s.l.) with similar facies found directly offshore in the modern intertidal (Dutton et al., 2015).
+
+Previous lithological descriptions by Montaggioni and Hoang (1988) and a detailed modern investigation by Vyverberg et al. (2018) suggest that alternating reef sequences and coral rubble/coralline algae layers could represent a step-wise increase in sea level throughout the LIG.
+
+However, these are isolated pockets of preserved reef material, and it is uncertain as to whether this sequence is derived from short-term environmental change (e.g., wave climate, coral bleaching, increased sediment input) or if indeed it is evidence of a broader series of sea level rise and stillstand events within the LIG.
+
+Off the western coast of Australia, O' Leary et al. (2013) found evidence of a slow increase in sea level before a 9 m a.m.s.l.
+
+peak at the end of the LIG.
+
+Recent reevaluation of sea level indicators in the Bahamas show a significantly lower eustatic sea level (1.2-5.3 m, 95 % confidence interval) with an initial peak and no evidence of a late-LIG peak (Dyer et al., 2021).
+
+Empirical attempts have also been made to extract global LIG sea level patterns, for example, Kopp et al. (2009) provide a statistical approach to integrate existing individual sea level indicators into a global model based on probability densities and produced a probable "double-peak" eustatic curve with both an early and late peak in LIG sea level.
+
+Such sudden dynamism in LIG sea level cannot be identified in ice proxies, such as pollen records and ice-rafted debris (e.g., Barlow et al., 2018).
+
+Unfortunately, solutions to this dilemma are dependent on the facies that are preserved and their geographic distribution in any given region.
+
+Unlike late Holocene studies in the tropics, where nearshore seismic and drilling campaigns on coral reef slopes can synthesize broad lithostratigraphic sequences, Pleistocene studies usually rely on either poorly preserved or spatially limited emerged reefs.
+
+Due to the inaccessibility of most emergent reef complexes, methods other than landbased seismic surveying and drilling are needed in order to supplement field observations and test interpretations.
+
+One potential solution lies in the use of forward stratigraphic models (FSMs).
+
+Over the last 2 decades, a suite of 2D and 3D carbonate-specific FMSs have been developed either to aid in petroleum exploration (large, basin scales) or in recent Quaternary investigations (small, reef-specific scales).
+
+These include CARB3D+ (Warrlich et al., 2002(Warrlich et al., , 2008;;Barrett and Webster, 2012), pyReef-Core and BayesReef (Salles et al., 2018;Pall et al., 2020), ReefSAM (Barrett and Webster, 2017), and Dionisos (Granjeon et al., 1999).
+
+While each model has individual merits, Dionisos has proven to be consistently robust in predicting intermediate-scale reef development over the Quaternary (Seard et al., 2013;Montaggioni et al., 2015).
+
+Building on the success of Montaggioni et al. (2015) to model tropical atoll development through the Quaternary, this study aims to explore the late-LIG sea level jump conundrum through the application of a suite of GIA models to fringing reef inside Dionisos.
+
+Here, we take an idealized version of the modern fringing reef system observed offshore southwestern Madagascar and subject it to glacial/interglacial cycles starting at 400 ka, before deviating from the baseline model at the start of the LIG.
+
+Resulting 3D shorelines and synthetic well logs aim to re-evaluate substadial melting patterns previously interpreted from outcrop evidence in Boyden et al. (2022).

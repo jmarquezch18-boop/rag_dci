@@ -1,0 +1,11 @@
+Automatic Readability Assessment (ARA), the task of assigning a reading level to a text, is traditionally treated as a classification problem in NLP research.
+
+In this paper, we propose the first neural, pairwise ranking approach to ARA and compare it with existing classification, regression, and (non-neural) ranking methods.
+
+We establish the performance of our model by conducting experiments with three English, one French and one Spanish datasets.
+
+We demonstrate that our approach performs well in monolingual single/cross corpus testing scenarios and achieves a zero-shot cross-lingual ranking accuracy of over 80% for both French and Spanish when trained on English data.
+
+Additionally, we also release a new parallel bilingual readability dataset in English and French.
+
+To our knowledge, this paper proposes the first neural pairwise ranking model for ARA, and shows the first results of cross-lingual, zeroshot evaluation of ARA with neural models.

@@ -1,0 +1,15 @@
+To solve this problem, we took inspiration from Swanson and Yamangil's (2012) observation that most error types are based on part-of-speech (POS) categories, and wrote a rule to classify an edit based only on its automatic POS tags.
+
+We then added another rule to similarly differentiate between Missing, Unnecessary and Replace-ment errors depending on whether tokens were inserted, deleted or substituted.
+
+Finally, we extended our approach to classify errors that are not well-characterised by POS, such as Spelling or Word Order, and ultimately assigned all error types based solely on automatically-obtained, objective properties of the data.
+
+In total, we wrote roughly 50 rules.
+
+While many of them are very straightforward, significant attention was paid to discriminating between different kinds of verb errors.
+
+For example, despite all having the same correction, the following sentences contain different types of common learner errors: While the final three rules could certainly be reordered, we informally found the above sequence performed best during development.
+
+It is also worth mentioning that this is a somewhat simplified example and that there are additional rules to discriminate between auxiliary verbs, main verbs and multi verb expressions.
+
+Nevertheless, the above case exemplifies our approach, and a more complete description of all rules is provided with the software.

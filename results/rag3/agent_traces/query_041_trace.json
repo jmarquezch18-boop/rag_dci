@@ -1,0 +1,117 @@
+{
+  "query_id": "c3790b0e0925f080c8d91160ae348f35ac367993",
+  "query": "Why was word overlap used instead of an exact match when comparing f1(s∗_{j,1}, s_{j,1})?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "word overlap exact match"
+      },
+      "result_preview": "No matches found for 'word overlap exact match'",
+      "elapsed_s": 3.95
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "word overlap"
+      },
+      "result_preview": "Search results for 'word overlap' (1 matches):\n[paper_id=nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d | section=results | line=49] We determine whether e * j = e j by checking if F1(s * j , s j ) > 0, w",
+      "elapsed_s": 5.49
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "exact match limitation"
+      },
+      "result_preview": "No matches found for 'exact match limitation'",
+      "elapsed_s": 8.83
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "F1 score entity matching limitation"
+      },
+      "result_preview": "No matches found for 'F1 score entity matching limitation'",
+      "elapsed_s": 6.35
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d",
+        "section": "results",
+        "start": 45,
+        "end": 55
+      },
+      "result_preview": "[nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d / results — líneas 40-60 de 121]\n\nDetecting invalid questions.\n\nWe make the assumption that if the coreference model resolves mentions in Q * i differently ",
+      "elapsed_s": 7.69
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Detecting invalid questions.\n\nWe make the assumption that if the coreference model resolves mentions in Q * i differently between using gold history\n\n(Q * 1 , A * 1 , ..., A * i-1 , Q * i ) and predicted history (Q * 1 , A 1 , ..., A i-1 , Q * i ), then Q * i is identified as hav- ing an unresolved coreference issue.\n\nThe inputs to the coreference model for Q * i are the following: assuming e * j and e j have a shared mention in Q * i .\n\nWe determine whether e * j = e j by checking if F1(s * j , s j ) > 0, where s * j and s j are the first mention of e * j and e j respectively, and F1 is the wordlevel F1 score, i.e., e * j = e j as long as their first mentions have word overlap.\n\nThe reason we take the F1 instead of exact match to check whether the entities are the same is stated in Appendix A.\n\nS * i = [BG; Q * i-k ; A * i-k ; Q * i-k+1 ; A * i-k+1 ; ...; Q * i ] S i = [BG; Q * i-k ; A i-k ; Q * i-k+1 ; A i-k+1 ; ...; Q * i ],\n\nOur first strategy is to substitute the entity names in Q * i with entities in E * , if Q * i is invalid.\n\nThe rewritten question, instead of the original one, will be used in the conversation history and fed into the model.\n\nWe denote this evaluation method as rewritten-question evaluation (Auto-Rewrite), and Figure 4 illustrates a concrete example.",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d",
+      "chunk_id": "dci_nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d_results_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d_252"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 1.0,
+    "recall_at_3": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "recall_at_20": 1.0,
+    "precision_at_5": 1.0,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The reason we take the F1 instead of exact match to check whether the entities are the same is stated in Appendix A.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d_results_0000"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d_results_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.2727272727272727,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

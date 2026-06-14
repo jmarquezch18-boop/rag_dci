@@ -1,0 +1,45 @@
+We introduce generated knowledge prompting, a simple method to elicit and integrate knowledge from language models so as to improve performance on commonsense reasoning tasks.
+
+In particular, we generate knowledge statements by prompting a language model with task-specific, humanwritten, few-shot demonstrations of questionknowledge pairs.
+
+We show that knowledge can be integrated by simply plugging it in at inference time, with no need to finetune the model for knowledge integration.
+
+Our method shows effectiveness across multiple datasets, sets the new state-of-theart on three commonsense reasoning tasks, and works under a variety of settings.
+
+The method's success highlights language models as sources of flexible, high-quality knowledge for commonsense reasoning.
+
+Table 6 summarizes the comparison between our generated knowledge prompting method and prior methods that add generated text to an inference model for commonsense reasoning tasks.
+
+Our method is unique because it uses few-shot demonstrations to prompt for knowledge generation, and can apply to finetuned inference models without joint finetuning with knowledge.
+
+Table 7 through 10 shows the full prompts for knowledge generation that we use for each evaluated task: NumerSense, CSQA, CSQA2, and QASC.
+
+Table 11 and 12 shows the detailed guidelines we use for human evaluation of generated knowledge.
+
+Limitations.
+
+Our method is tested on a representative selection of commonsense reasoning tasks and datasets.
+
+Applying this method to other tasks may require people with moderate expertise to craft a task-specific prompt to feed into the method.
+
+Risks.
+
+It is possible that our proposed method may lower the performance of commonsense reasoning systems, if not implemented properly or using badly-designed prompts.
+
+Such risk can be mitigated by following the prompt design guidelines in this paper ( §2.1).
+
+We do not train any new model in this paper.
+
+Inference is conducted on Quadro RTX 8000 GPUs and costs about 200 GPU hours in total.
+
+Knowledge generation is done with the OpenAI GPT-3 API, with an approximate cost of $500.
+
+Our method is implemented with PyTorch and the Huggingface Transformers library.
+
+Knowledge Generator Inference Model CAGE (Rajani et al., 2019) task-finetuned joint-finetuned Latcinnik and Berant (2020) task-finetuned joint-finetuned DynaGen (Bosselut et al., 2021) task-finetuned joint-finetuned Self-talk (Shwartz et al., 2020) template-prompted 0-shot Contrastive expl.
+
+(Paranjape et al., 2021) template-prompted 0-shot & joint-finetuned Generated knowledge prompting (ours) demonstrations-prompted 0-shot & task-finetuned Table 6: Comparison of methods that add generated text to an inference model.
+
+Knowledge Generator: taskfinetuned -a model finetuned to generate task-specific knowledge; template-prompted -an off-the-shelf LM from which knowledge statements are elicited via templates; demonstration-prompted -an off-the-shelf LM from which knowledge statements are elicited via few-shot demonstrations ( §2.1).
+
+Inference Model: 0-shot -an off-the-shelf LM that is set up to make predictions; task-finetuned -a model finetuned with task training data (and without seeing extra knowledge); joint-finetuned -a model finetuned with task training data and generated knowledge.

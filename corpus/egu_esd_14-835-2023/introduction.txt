@@ -1,0 +1,91 @@
+With a share of 14 % (8.5 Pg) of the total CO 2 -equivalent emissions in 2018, the transport sectors are major contributors to climate change (Lamb et al., 2021).
+
+This share is dominated by land transport (including road and rail transport and inland navigation), which is responsible for 80.4 % of it, while international shipping and aviation (international and domestic) account for the remaining 8.4 % and 11.2 %, respectively.
+
+Moreover, the transport sectors are characterized by an approximately steady growth in emissions of greenhouse gases, at a rate of about 2 % per year in the last 3 decades, mostly driven by developed countries (North America and Europe) and, since the beginning of the century, by the fast-growing economies of eastern Asia (Lamb et al., 2021).
+
+Traffic volumes are projected to grow further in the coming decades (Girod et al., 2013;Sims et al., 2014), modulated by the current efforts to decarbonize this sector in order to achieve the goals of the Paris Agreement (Pietzcker et al., 2014;Creutzig et al., 2015;Esmeijer et al., 2020) and by the uncertain recovery path from the COVID-19 pandemic, which significantly affected the recent global emissions (Liu et al., 2020;Le Quéré et al., 2020).
+
+Although the climate policies mostly target the emissions of CO 2 and other greenhouse gases, the combustion processes powering vehicles, ships, and aircraft are also responsible for the emissions of several types of short-lived pollutants, such as nitrogen oxides (NO x = NO + NO 2 ); carbon monoxide (CO); non-methane hydrocarbons (NMHCs); sulfur dioxide (SO 2 ); and aerosol particles in form of black carbon (BC), organic carbon (OC), and primary aerosol sulfate (SO 4 ).
+
+These compounds have a detrimental effect on the air quality and can also impact climate (Fiore et al., 2012;von Schneidemesser et al., 2015).
+
+For example, NO x and NMHCs are precursors of ozone, which is a well-known greenhouse gas (e.g. Stevenson et al., 2013;Mertens et al., 2018), while aerosols and their precursors can alter the planetary radiation balance via their direct interaction with solar radiation (absorption and scattering, leading to warming and cooling, respectively; Boucher et al., 2013).
+
+Perhaps most importantly, aerosol can further impact the climate by interacting with clouds and modifying their radiative properties, resulting in an overall cooling effect (Bellouin et al., 2020).
+
+Air pollution reduction measures targeting these compounds may therefore affect both air quality and climate, with beneficial effects for both in some cases (e.g. when targeting BC, which has a warming effect on climate and a detrimental impact on air quality; Bond et al., 2013) and trade-offs in other cases, like sulfur reduction policies, which improve air quality but reduce the cooling impact due to the aerosol indirect effect on clouds (Fuglestvedt et al., 2009).
+
+Furthermore, these policies are implemented at different scales, with land transport being mostly targeted at the national or regional (e.g. European) level, while shipping and aviation are regulated at the international level, via the International Maritime Organization (IMO) and the International Civil Aviation Organization (ICAO), respectively, although regional policies are also applied in shipping, for instance the implementation of the Sulfur Emissions Control Areas (SECAs; Buhaug et al., 2009;Smith et al., 2014).
+
+To fully characterize the impact of short-lived pollutants from the transport sectors it is therefore necessary to consistently account for changes in the atmospheric composition and climate impact and, at the same time, to address regional dependencies.
+
+In this study, we focus on the impact of transport-induced aerosol and aerosol precursor species.
+
+We update the assessments of Righi et al. (2013Righi et al. ( , 2015Righi et al. ( , 2016) ) and improve them in three major aspects:
+
+1. We use the recent CMIP6 emission inventory (Gidden et al., 2019;Feng et al., 2020), thus replacing the CMIP5 inventory (Lamarque et al., 2010) applied in our previous studies, and now consider the year 2015 instead of 2000 as a reference for present-day conditions.
+
+2. We implement the Shared Socioeconomic Pathways (SSPs; O'Neill et al., 2017) for the future projections, which are a new generation of scenarios developed in support of the Intergovernmental Panel on Climate Change (IPCC) Sixth Assessment Report (Gidden et al., 2019).
+
+They are socioeconomic scenarios that include assumptions on several indicators (population, wealth, urbanization, etc.) to describe society's ability to cope with climate change and are further combined with the climate pathways based on the narratives of Representative Concentration Pathways (RCPs; van Vuuren et al., 2011) for climate policies, resulting in a matrix of possible futures.
+
+3. We apply a newer version of the global chemistryclimate model EMAC (ECHAM-MESSy Atmospheric Chemistry; Jöckel et al., 2010), featuring an updated aerosol scheme (MADE3, i.e. the third version of the Modal Aerosol Dynamics for Europe adapted for global applications; Kaiser et al., 2014) and a state-of-the-art two-moment cloud scheme (Kuebbeler et al., 2014) accounting for aerosol-cloud interactions for all cloud phases (liquid, mixed phase, and ice).
+
+This model configuration has been thoroughly tuned and evaluated by Kaiser et al. (2019) and Righi et al. (2020), demonstrating its ability to represent key aspects of aerosol, cloud, and radiation processes.
+
+Being key targets of decarbonization and air pollution control policies, the transport sectors are the subject of active research.
+
+Lund et al. (2014a) applied a global chemistrytransport model to quantify the effect of short-lived pollutants on climate when replacing conventional diesel fuels with biofuels in the EU road transport sector and found a 15 % and 80 % reduction in radiative forcing (RF) when replacing 20 % and 100 % of diesel with biofuels, respectively.
+
+Lund et al. (2014b) considered the climate impact of black carbon from road diesel engines in 2010 and 2050 following a current-legislation scenario and found that Europe gives the largest contribution in 2010, while southern and eastern Asia dominate in 2050, as a result of different implementations of reduction measures.
+
+The potential global relevance of local policies on land-based transport was highlighted by Hendricks et al. (2018), who estimated the climate impact of German land-based transport using a combination of modelling techniques and found that this is dominated by CO 2 , while the effect of short-lived pollutants is negligible.
+
+They also note, however, that this might be different in other regions or countries, depending on the specific composition of the land transport fleet and on its age as well as on the photochemical activity, which varies considerably around the globe.
+
+The climate impact of ozone from global land transport and shipping was quantified by Mertens et al. (2018), who applied an innovative tagging method to track the emissions from specific sectors in a global model simulation and thus isolated the climate impact with better accuracy than in standard perturbation approaches.
+
+This resulted in higher land-transportand shipping-induced concentrations of surface-level ozone and in a RF of 92 and 62 mW m -2 for the two sectors, respectively.
+
+The shipping sector is particularly interesting due to the new regulations introduced by MARPOL 73/78 (the International Convention for the Prevention of Pollution from Ships) in its Annex VI to globally limit fuel sulfur content (FSC) in shipping (Buhaug et al., 2009), which took full effect in 2020.
+
+Sofiev et al. (2018), Kontovas (2020), andBilsback et al. (2020) showed how reducing FSC leads to reduced SO 2 emissions and lower shipping-induced aerosol concentrations: while this is beneficial for air quality and reduces premature mortality, it may also remove the cooling from the aerosol effects, hence accelerating global warming.
+
+Another policy-relevant issue is the opening of Arctic routes in the near future (Stephenson et al., 2018) and its impacts on the regional and global climate.
+
+As shown in Righi et al. (2013, hereafter R13), FSC is also critical for the aviation sector, as sulfate particles produced in the aircraft exhaust plume could be transported downwards and potentially impact low-level clouds, resulting in a significant (albeit quite uncertain) aerosol indirect effect.
+
+R13 estimated this effect to be between -70 and -15 mW m -2 , depending on the assumptions on the size of the emitted sulfate particles, but found no statistically significant effect when a low FSC was assumed for the aircraft fleet.
+
+This effect was also simulated by Gettelman and Chen (2013), who however considered generally smaller particle sizes for aerosol sulfate in their assumptions, thus finding a larger RF in the range of -164 to -23 mW m -2 .
+
+A later study by Kapadia et al. (2016) supported these estimates and again found a reduction in the indirect effect under a scenario with low aviation FSC, while Matthes et al. (2021) showed that the impact of aviation aerosol on low clouds may be dependent on the cruise altitude of the global fleet.
+
+Aviation emissions of soot also potentially impact ice clouds (Hendricks et al., 2005(Hendricks et al., , 2011;;Penner et al., 2018), but this effect is very uncertain and strongly dependent on the assumed ice nucleating abilities of soot.
+
+In the model configuration adopted in the present study, we conservatively assume a very low ice-nucleating efficiency for aviation soot so that its impact on climate via the interaction with natural cirrus clouds may be considered negligible (Righi et al., 2021).
+
+Despite active research on the impact of the transport sectors on the atmosphere and climate, the literature on the impact of specific sectors in the context of the SSPs is still limited, and a detailed analysis of the role of transport-induced aerosol is still lacking.
+
+Lund et al. (2019) assessed the anthropogenic aerosol forcing in a subset of the SSP scenarios until the end of the century, concluding that the air pollution control measures assumed in these scenarios span a much broader range of emissions than in the previous RCPs.
+
+Lund et al. (2020) used a climate response emulator to calculate the temperature response of various short-lived compounds under the SSPs and compared it to the one of CO 2 , showing that the role of short-lived compounds on climate is projected to remain relevant throughout the century, with strong regional variations.
+
+Hence, reassessing the impact of transport on aerosol concentrations, also with a focus on regional effects, is essential to understand the scope of the air pollution measures covered by the SSP narratives and the resulting climate impacts.
+
+This paper is organized as follows: Sect.
+
+2 briefly describes the EMAC model with the aerosol submodel MADE3 and the method used to estimate the impact of the transport sectors.
+
+A detailed analysis of the emission inventories for the present day and the future projections is provided in Sect.
+
+3, focusing on the share of the three transport sectors in the total emissions of aerosol and precursors.
+
+The impact of transport on the aerosol concentration is discussed in Sect.
+
+4, while Sect. 5 deals with the climate impacts.
+
+A summary of the conclusions of this study is provided in Sect.
+
+6.

@@ -1,0 +1,37 @@
+We briefly point out other relevant approaches and efforts from the vast amount of literature.
+
+Event coreference In addition to the competitors mentioned in Section 5, approaches for event linking were presented, e.g., by Chen and Ji (2009), who determine link scores with hand-crafted compatibility metrics for event mention pairs and a maximum-entropy model, and feed these to a spectral clustering algorithm.
+
+A variation of the eventcoreference resolution task extends the scope to cross-document relations.
+
+Cybulska and Vossen (2015) approach this task with various classification models and propose to use a type-specific granularity hierarchy for feature values.
+
+Lee et al. (2012) further extend the task definition by jointly resolving entity and event coreference, through several iterations of mention-cluster merge operations.
+
+Sachan et al. (2015) describe an active-learning based method for the same problem, where they derive a clustering of entities/events by incorporating bits of human judgment as constraints into the objective function.
+
+Araki and Mitamura (2015) simultaneously identify event triggers and disambiguate them wrt.
+
+one another with a structured-perceptron algorithm.
+
+Resources Besides the ACE 2005 corpus, a number of other datasets with event-coreference annotation have been presented.
+
+Hovy et al. (2013) reports on the annotation process of two corpora from the domains of "violent events" and biographic texts; to our knowledge neither of them is publicly available.
+
+OntoNotes (Weischedel et al., 2013) comprises different annotation layers including coreference (Pradhan et al., 2012), however intermingles entity and event coreference.
+
+A series of releases of the EventCorefBank corpus (Bejan and Harabagiu, 2010;Lee et al., 2012;Cybulska and Vossen, 2014) combine linking of event mentions within and across documents, for which Liu et al. (2014) report a lack of completeness on the withindocument aspect.
+
+The ProcessBank dataset (Berant et al., 2014) provides texts with event links from the difficult biological domain.
+
+Other A few approaches to the upstream task of event extraction, while not considering withindocument event linking, still utilize discourse-level information or even cross-document inference.
+
+For example, Liao and Grishman (2010) showed how the output of sentence-based classifiers can be filtered wrt.
+
+discourse-level consistency.
+
+Yao et al. (2010) resolved coreferences between events from different documents in order to make a global extraction decision, similar to (Ji and Grishman, 2008) and (Li et al., 2011).
+
+In addition to convolutional neural networks, more types of neural architectures lend themselves to the generation of sentential features.
+
+Recently many recursive networks and recurrent ones have been proposed for the task of relation classification, with state-of-the-art results (Socher et al., 2012;Hashimoto et al., 2013;Ebrahimi and Dou, 2015;Xu et al., 2015;Li et al., 2015).

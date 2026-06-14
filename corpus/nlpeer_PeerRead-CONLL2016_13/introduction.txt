@@ -1,0 +1,31 @@
+Event extraction aims at detecting mentions of realworld events and their arguments in text documents of different domains, e.g., news articles.
+
+The subsequent task of event linking is concerned with resolving coreferences between recognized event mentions in a document, and is the focus of this paper.
+
+Several studies investigate event linking and related problems such as relation mentions spanning multiple sentences.
+
+Swampillai and Stevenson (2010) find that 28.5 % of binary relation mentions in the MUC 6 dataset are affected, as are 9.4 % of relation mentions in the ACE corpus from 2003.
+
+Ji and Grishman (2011) estimate that 15 % of slot fills in the training data for the "TAC 2010 KBP Slot Filling" task require cross-sentential inference.
+
+To confirm these numbers, we analyzed the event annotation of the ACE 2005 corpus and found that approximately 23 % of the event mentions lack arguments which are present in other mentions of the same event instance in the respective document.
+
+These numbers suggest that event linking is an important task.
+
+Previous approaches for modeling event mentions in context of coreference resolution (Bejan and Harabagiu, 2010;Sangeetha and Arock, 2012;Liu et al., 2014) make either use of external feature sources with limited cross-domain availability like WordNet (Fellbaum, 1998) and FrameNet (Baker et al., 1998), or show low performance.
+
+At the same time, recent literature proposes a new kind of feature class for modeling events (and relations) in order to detect mentions and extract their arguments, i.e., sentential features from event-/relationmention representations that have been created by taking the full extent and surrounding sentence of a mention into account (Zeng et al., 2014;Nguyen and Grishman, 2015;Chen et al., 2015;dos Santos et al., 2015;Zeng et al., 2015).
+
+Their promising results motivate our work.
+
+We propose to use such features for event coreference resolution, hoping to thereby remove the need for extensive external semantic features while preserving the current stateof-the-art performance level.
+
+Our contributions in this paper are as follows: We design a neural approach to event linking which in a first step models intra-sentential event mentions via the use of convolutional neural networks for the integration of sentential features.
+
+In the next step, our model learns to make coreference decisions for pairs of event mentions based on the previously generated representations.
+
+This approach does not rely on external semantic features, but rather employs a combination of local and sentential features to describe individual event mentions, and combines these intermediate event representations with standard pairwise features for the coreference decision.
+
+The model achieves state-of-the-art performance in our experiments on two datasets, one of which is publicly available.
+
+Furthermore, we present an analysis of the system errors to identify directions for further research.

@@ -1,0 +1,119 @@
+{
+  "query_id": "f29ff7d6be64035f374fe6b3fc470453591154e9",
+  "query": "Will the annotated mistakes be released upon the release of MNV2?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "annotated mistakes"
+      },
+      "result_preview": "No matches found for 'annotated mistakes'",
+      "elapsed_s": 5.01
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "annotation errors"
+      },
+      "result_preview": "Search results for 'annotation errors' (3 matches):\n[paper_id=nlpeer_COLING2020_939 | section=results | line=55] The WordNet verb hierarchy also has a number of annotation errors described in Richens (2008).\n[paper_id=nlpeer_ARR-22_ae39c92fcd34f3ea307de8aae9eade5a405f4035c3260c64416f75a202f27dbc2206",
+      "elapsed_s": 4.85
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_ae39c92fcd34f3ea307de8aae9eade5a405f4035c3260c64416f75a202f27dbc22063341ee73afacd4459fdee1a00d6e84c1317f5271bb087c826599f8989dd4",
+        "section": "introduction",
+        "start": 25,
+        "end": 35
+      },
+      "result_preview": "[nlpeer_ARR-22_ae39c92fcd34f3ea307de8aae9eade5a405f4035c3260c64416f75a202f27dbc22063341ee73afacd4459fdee1a00d6e84c1317f5271bb087c826599f8989dd4 / introduction — líneas 20-40 de 53]\n\nHowever, designing domain ontologies and NLU datasets is also critical for steering further progress in NLU, both from",
+      "elapsed_s": 9.15
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "annotated data release"
+      },
+      "result_preview": "No matches found for 'annotated data release'",
+      "elapsed_s": 10.63
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "data release process"
+      },
+      "result_preview": "No matches found for 'data release process'",
+      "elapsed_s": 10.58
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "However, designing domain ontologies and NLU datasets is also critical for steering further progress in NLU, both from methodology and application perspective.\n\nPut simply, current publicly available NLU datasets do not keep up to date with current industry/application requirements for many reasons.\n\n1) They are usually crowdsourced by untrained annotators (thus typically optimised for quantity rather than quality), yielding examples with low lexical diversity and prone to annotation errors.\n\n2) They typically assume one intent per example, and thus enable only much simpler single-label ID experiments; such setups are not realistic in more complex industry settings (see Figure 1 again) and lead to unnecessarily large intent sets.\n\n3) Their ontologies are tied to specific domains, making it difficult to reuse already available annotated data in other domains.\n\n4) The complexity of the defined tasks and ontologies is limited; the undesired artefact is that current NLU datasets might overestimate the NLU models' abilities, and are not able to separate models any more performance-wise.\n\n2 2 For instance, for some standard and commonly used NLU datasets such as ATIS (Hemphill et al., 1990;Xu et al., 2020) and SNIPS (Coucke et al., 2018), the results of SotA models are all in the region of 97-98 F1, with new models getting statistically insignificant gains which might be due to overfitting to the test set or even some remaining annotation errors.\n\nIn order to address all these gaps, we introduce NLU++, a novel NLU dataset which provides highquality NLU data annotated by dialogue experts.\n\nNLU++ provides multi-intent, slot-rich and semantically varied NLU data, and is inspired by a number of NLU challenges which ToD systems typically face in production environments.\n\nUnlike previous ID datasets, examples are annotated with multiple labels, named intent modules3 (see Table 1), with some examples naturally obtaining even up to 6-7 labels.",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_ae39c92fcd34f3ea307de8aae9eade5a405f4035c3260c64416f75a202f27dbc22063341ee73afacd4459fdee1a00d6e84c1317f5271bb087c826599f8989dd4",
+      "chunk_id": "dci_nlpeer_ARR-22_ae39c92fcd34f3ea307de8aae9eade5a405f4035c3260c64416f75a202f27dbc22063341ee73afacd4459fdee1a00d6e84c1317f5271bb087c826599f8989dd4_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_ae39c92fcd34f3ea307de8aae9eade5a405f4035c3260c64416f75a202f27dbc22063341ee73afacd4459fdee1a00d6e84c1317f5271bb087c826599f8989dd4",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/COLING2020/1570_150",
+    "nlpeer/COLING2020/1570_151",
+    "nlpeer/COLING2020/1570_152"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 0.3333333333333333,
+    "recall_at_3": 0.3333333333333333,
+    "recall_at_5": 0.3333333333333333,
+    "recall_at_10": 0.3333333333333333,
+    "recall_at_20": 0.3333333333333333,
+    "precision_at_5": 1.0,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_ae39c92fcd34f3ea307de8aae9eade5a405f4035c3260c64416f75a202f27dbc22063341ee73afacd4459fdee1a00d6e84c1317f5271bb087c826599f8989dd4_introduction_0000"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_ae39c92fcd34f3ea307de8aae9eade5a405f4035c3260c64416f75a202f27dbc22063341ee73afacd4459fdee1a00d6e84c1317f5271bb087c826599f8989dd4_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.03669724770642202,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

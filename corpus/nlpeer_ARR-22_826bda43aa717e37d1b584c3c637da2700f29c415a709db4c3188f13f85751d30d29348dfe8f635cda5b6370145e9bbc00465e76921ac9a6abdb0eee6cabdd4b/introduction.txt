@@ -1,0 +1,67 @@
+The Vision-and-Language Navigation task requires an agent to navigate through the environment based on language instructions.
+
+This task has two unsolved challenges.
+
+First, directly introducing pretrained linguistic and visual representations into 1 Code and model are available at https://github. com/jialuli-luka/CLEAR.
+
+these agents suffers from domain shift (i.e., pretrained linguistic and visual representation might not generalize to VLN task) (Huang et al., 2019b).
+
+Learning the instruction representation while also learning how to navigate based on the instruction is even more challenging for a multi-lingual agent, since more language variance is injected via multi-lingual instructions.
+
+At the same time, it also poses the important question that whether we can utilize multi-lingual instructions to learn a better cross-lingual representation and improve instruction-path grounding and referencing.
+
+Second, previous works (Fried et al., 2018;Wang et al., 2019a;Landi et al., 2021;Wang et al., 2020a;Huang et al., 2019a;Ma et al., 2019a;Majumdar et al., 2020;Qi et al., 2020a) on vision-language navigation have seen that agents tend to perform substantially worse in environments that are unseen during training, indicating the lack of generalizability of the navigation agent.
+
+In this paper, we propose to address these two challenges via crosslingual and environment agnostic representations.
+
+Although some initial progress (Huang et al., 2019b;Majumdar et al., 2020;Hong et al., 2021;Chen et al., 2021) has been made towards introducing pre-trained linguistic representations into vision-language navigation agents, how to understand and utilize paired multilingual instructions to transfer the pre-trained linguistic representation to multilingual navigation agent still remains unexplored.
+
+We argue that for a multilingual agent, the linguistic representation can capture more visual concepts from learning the similarity between paired multilingual instructions.
+
+As shown in Figure 1, though the three instructions shown here are in different languages and vary in length and level of detail2 , all of them correspond to the sample path -Path A. Hence, by learning the similarity between these paired instructions, the cross-lingual language representation of the same visual concept mentioned in these paired instructions (e.g., the red words correspond to the same visual object "wash basin") will be close to each other, making it easier for the agent to comprehend.
+
+Furthermore, the cross-lingual language representation will benefit from the complementary information from instructions in different languages since they elicit more references to visible entities.
+
+For example, in Figure 1, the target room environment "washroom" is only mentioned in English instructions.
+
+Hindi and Telugu instructions could benefit from learning the connection between "washroom" and "wash basin" through learning from the English instruction.
+
+Moreover, many methods have been proposed to encourage agent generalization to unseen environments during training (Tan et al., 2019;Wang et al., 2020c;Fu et al., 2020;Zhang et al., 2020).
+
+Zhang et al. (2020) has shown that it is the low-level appearance information that causes the environment bias.
+
+To mitigate this bias, previous works only consider one single environment when learning the visual representation for a given path.
+
+We instead learn an environment-agnostic visual representation by exploring the connections between multiple environments.
+
+For the example shown in Figure 1, Path A and Path B are two semantically aligned paths in different environments.
+
+In both cases, the agent needs to head into the washroom and stop beside the wash basin.
+
+Learning the relationship between these paired paths helps the agent comprehend concepts like "bath tub", and not be distracted by the low-level appearance of the objects in unseen environments.
+
+Overall, in this paper, we propose 'CLEAR: Cross-Lingual and Environment-Agnostic Representations' to address the two challenges above.
+
+First, we define a visually-aligned instruction pair as two instructions that correspond to the same navigation path.
+
+Given the instruction pairs, we transfer the pre-trained multilingual BERT (Devlin et al., 2019) to the Vision-Language Navigation task by encouraging these paired instructions to be embedded close to each other.
+
+Second, we identify semantically-aligned path pairs based on the similarity between instructions.
+
+Intuitively, if the similarity between the two instructions is high, then their corresponding navigation path will be semantically similar (i.e., mentioning the same objects like "wash basin").
+
+We further filter out image pairs (a pair of paths will contain multiple image pairs) that do not contain the same objects, for higher path pair similarity.
+
+Then, we train an environment agnostic visual representation that learns the connection between these semantically-aligned path pairs.
+
+We conduct experiments on the Room-Across-Room (RxR) dataset (Ku et al., 2020), which contains instruction in three languages (English, Hindi, and Telugu).
+
+Empirical results show that our proposed representations significantly improves the performance over the mono-lingual model (Shen et al., 2022) by 2.59% in nDTW score on RxR test leaderboard.
+
+We further show that our CLEAR approach outperforms our baseline that utilizes ResNet (He et al., 2016) to extract image features by 5.3% in success rate and 4.3% in nDTW score (and it also outperforms a stronger baseline that utilizes the recent CLIP (Radford et al., 2021) method to extract image features).
+
+Moreover, our CLEAR approach shows better generalizability when transferred to Room-to-Room (R2R) dataset (Anderson et al., 2018b) and Cooperative Vision-and-Dialogue Navigation dataset (Thomason et al., 2019), and adapted to other SotA VLN Agent (Chen et al., 2021).
+
+We also demonstrate the advantage of optimizing similarity between all the three languages in RxR dataset for language representation learning and the effectiveness of the way we generate positive path pairs for visual representation learning.
+
+Lastly, we demonstrate that our cross-lingual language representation captures visual semantics underlying the instructions, and our environment-agnostic visual representation generalizes better to the unseen environment with both qualitative and quantitative analysis.

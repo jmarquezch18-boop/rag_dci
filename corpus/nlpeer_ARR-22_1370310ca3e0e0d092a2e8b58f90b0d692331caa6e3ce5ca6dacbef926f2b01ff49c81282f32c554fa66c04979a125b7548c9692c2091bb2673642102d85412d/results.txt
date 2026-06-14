@@ -1,0 +1,19 @@
+To evaluate how well model and human attention patterns for sentiment reading and relation extraction align, we compute pair-wise correlation scores as displayed in Figure 1.
+
+Reported correlations are statistically significant with p < 0.01 if not indicated otherwise (ns: not significant).
+
+After ranking based on the correlations on sentence-level, we observe clear differences between sentiment reading on SST and relation extraction on Wikipedia for the different models.
+
+For sentiment reading, the E-Z Reader and BNC show the highest correlations followed by the Transformer attention flow values (the ranking between E-Z/BNC and Transformer flows is significant at p < 0.05 ).
+
+For relation extraction, we see the highest correlation for BERTbase attention flows (with and without fine-tuning) and BERT-large followed by the E-Z Reader (ranking is significant at p < 0.05).
+
+On the lower end, computing means over BERT attentions across the last layer shows weak to no correlations for both tasks.
+
+3 The shallow architectures result in low to moderate correlations with a distinctive gap to attention flow.
+
+Focusing on flow values for Transformers, BNC and E-Z Reader, correlations are stable across word and sentence length.
+
+Correlations grouped by sentence length shows stable values around 0.6 (SST) and 0.4 -0.6 (Wikipedia) except for shorter sentences where correlations fluctuate.
+
+To check the linear relationship between human and model attention patterns we additionally compute token-and sentence-level Pearson correlations which can be found in Appendix B. Results confirm that Spearman and Pearson correlation coefficients as well as rankings hardly differ -which suggests a linear relationship -and that correlation strength is in line with Hollenstein and Beinborn (2021).

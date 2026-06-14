@@ -1,0 +1,105 @@
+In this section, we conduct experiments to validate and analyze the proposed NER model.
+
+First, we show that adding wikifier features improves results on monolingual NER.
+
+Second, we show that wikifier features are strong signals in direct transfer of a trained NER model across languages.
+
+Finally, we explore the importance of Wikipedia size to the quality of wikifier features and study the use of multiple source languages.
+
+We begin by showing that wikifier features help when we train and test on the same language.
+
+The middle section of Table 2 shows these results.
+
+In the 'Wikifier only' row, we use only wikifier features and previous tags features.
+
+This is intended to show the predictive power of wikifier features alone.
+
+Without using any lexical features, it gets good scores on the languages that have a large Wikipedia.
+
+These numbers represent the quality of the cross-lingual wikifier in that language, which in turn is correlated with the size of Wikipedia and size of the intersection with English Wikipedia.
+
+The next row, 'Base features', shows that lexical features are always better than wikifier features only.
+
+This agrees with the common wisdom that lexical features are important for NER.
+
+Adding gazetteers to the base features improves by more than 3 points for higher-resource languages.
+
+This is because the low-resource languages have much smaller gazetteers which have lower coverage than other languages' gazetteers.
+
+Finally, the '+Wikifier' row shows that our proposed features are valuable even in combination with strong features.
+
+It improves upon base features and gazetteer features for all 9 languages.
+
+(Täckström et al., 2012), and are the baseline and clustering result.
+
+The plus signs (+) signify cumulative addition.
+
+EN: English, NL: Dutch, DE: German, ES: Spanish, TR: Turkish, TL: Tagalog, YO: Yoruba, BN: Bengali, TA: Tamil.
+
+These numbers may be less than state of the art because the features we use are designed for English, and may not capture lexical subtleties in every language.
+
+Nevertheless, they show that wikifier features have a non-trivial signal that has not been captured by other features.
+
+We evaluate our direct transfer experiments by training on English and testing on the target language.
+
+The results from these experiments are shown in the bottom section of Table 2.
+
+The 'Wikifier only' row shows that the wikifier features alone preserve a signal across languages.
+
+Interestingly, for both Bengali and Tamil, this is the strongest signal, and gets the highest score.
+
+If the lexical features are included when we train the English model, the learning algorithm will give them too much emphasis, thus decreasing the importance of the wikifier features.
+
+Since Bengali and Tamil use non-Latin scripts, no lexical feature in English will fire at test time.
+
+Thus, approaches that include base features perform poorly.
+
+The results of 'Base features' can be viewed as a sort of language similarity to English, which, in this case, is related to lexical overlap and similarity between the scripts.
+
+Comparing to monolingual experiments, we can see that the lexical features become weak in the cross-lingual setting.
+
+The gazetteer features are again shown to be very useful for almost all languages except Bengali and Tamil due to the reason explained in the monolingual experiment and to the inclusion of lexical features.
+
+For all other languages, the gain from adding gazetteers is even larger than it is in the monolingual setting.
+
+For nearly every language, wikifier features help dramatically, which indicates that they are very good delexicalized features.
+
+Wikifier features add more than 10 points on Dutch, German, and Turkish.
+
+The trend in Table 2 suggests the following strategy when we want to extract named entities in a new foreign language: It is better to include all features if the foreign language uses Latin script, since the names are likely to be mentioned similarly to the English names.
+
+Otherwise, using wikifier features only could be the best setting.
+
+Täckström et al. (2012) also directly transfer an English NER model using the same setting as ours: train on the CoNLL English training set and predict on the test set of other three languages.
+
+We compare our baseline transfer model (Base Features) to the row denoted by "Täckström baseline".
+
+Even though we do not use gold POS tags, we see that our results are comparable.
+
+The second Täckström row uses parallel text to induce multilingual word clustering.
+
+While this approach is orthogonal to ours, and could be used in tandem to get even better scores, we compare against it for lack of a more closely aligned scenario.
+
+We see that for each language, our approach significantly outperforms their approach.
+
+We note that our numbers are comparable to those reported for WIKI-2 in Nothman et al. (2012) for the CoNLL languages (with the exception of German, where their result is higher).
+
+However, they require language-specific heuristics to generate silver-standard training data from Wikipedia articles.
+
+What they gain for single languages, they likely lose in generalization to other languages.
+
+This approach is orthogonal to ours; we, too, can use their silver-standard data in training.
+
+For the low-resource languages, we compare our direct transfer model with the expectation learning model proposed in Zhang et al. (2016).
+
+This model is not a direct transfer model, but it does not use any training data in the target languages either.
+
+Instead, for each target language, it generates patterns from parallel documents between English and the target language, a large monolingual corpus in the target language, and one-hour interaction with a native speaker of the target language.
+
+Note that they also use a crosslingual wikifier, but only for refining the entity types.
+
+On the other hand, in our model, the features from the wikifier are used both in detecting entity mention boundaries and entity types.
+
+We can see that our approach performs better than their model on all five languages even though we assume much fewer resources.
+
+The difference is most significant on Turkish, Tagalog, and Bengali.

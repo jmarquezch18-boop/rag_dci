@@ -1,0 +1,215 @@
+{
+  "query_id": "9c04f85fb5baad69d0ae21c1c2c07abc0422bd55",
+  "query": "What concrete steps can be taken to ensure a more diverse cross-cultural representation when building an NLP model?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "cross-cultural"
+      },
+      "result_preview": "Search results for 'cross-cultural' (6 matches):\n[paper_id=nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd | section=methodology | line=43] Highlighting limitations in current strategies, as well as succes",
+      "elapsed_s": 4.91
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+        "section": "methodology",
+        "start": 38,
+        "end": 52
+      },
+      "result_preview": "[nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd / methodology — líneas 33-57 de 123]\nOn the other hand, a relatively homogeneous culture can span multiple languages, as in the Nordic countries (Sahlgren e",
+      "elapsed_s": 9.73
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+        "section": "methodology",
+        "start": 38,
+        "end": 52
+      },
+      "result_preview": "[nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd / methodology — líneas 33-57 de 123]\nOn the other hand, a relatively homogeneous culture can span multiple languages, as in the Nordic countries (Sahlgren e",
+      "elapsed_s": 10.46
+    },
+    {
+      "iteration": 3,
+      "tool": "read_file",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+        "section": "methodology"
+      },
+      "result_preview": "[nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd / methodology]\nLanguage technology is rapidly advancing for a minority of the world's languages.\n\nAt the same time, the majority of languages are falling be",
+      "elapsed_s": 10.16
+    },
+    {
+      "iteration": 4,
+      "tool": "read_file",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+        "section": "methodology"
+      },
+      "result_preview": "[nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd / methodology]\nLanguage technology is rapidly advancing for a minority of the world's languages.\n\nAt the same time, the majority of languages are falling be",
+      "elapsed_s": 8.52
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "On the other hand, a relatively homogeneous culture can span multiple languages, as in the Nordic countries (Sahlgren et al., 2021).\n\nContributions.\n\nWe propose a framework for understanding the challenges that cultural diversity poses for NLP to serve all users, as well as the opportunities that NLP creates to understand these differences better.\n\nWe consider four elements: linguistic form, common ground, aboutness and values.\n\nWe then survey existing strategies in NLP to address these challenges.\n\nHighlighting limitations in current strategies, as well as successful examples, we propose directions for future development of cross-cultural NLP.\n\nModels can be culturally biased even when trained on culturally diverse data.\n\nOn the other end, diverse cultural representation can in some cases be achieved with specific training strategies, not only data selection and annotation.\n\nTransfer learning and pre-training.\n\nA common strategy in machine learning is to transfer the knowledge acquired for a task, domain or language to another.\n\nIt is used extensively in the context of cross-lingual learning, motivated by similarities between languages and cultures: if only the form differs between languages, then models can learn to abstract away from it and transfer from resourcerich languages, obviating task-specific training data in many languages (Agić, 2017;Wu and Dredze, 2019;Blloshmi et al., 2020).\n\nIn this context, approaches for creating crosslingual word embeddings (Klementiev et al., 2012;Ammar et al., 2016) are based on the assumption that the semantic spaces of different languages are approximately isomorphic.\n\nHowever, this assumption is violated in practice (Søgaard et al., 2018(Søgaard et al., , 2019)).",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "score": 1.0
+    },
+    {
+      "text": "Language technology is rapidly advancing for a minority of the world's languages. At the same time, the majority of languages are falling behind (Joshi et al., 2020). It is essential that language technology can serve the speakers of a wide variety of languages, who come from a wide variety of cultures. In this paper, we argue that doing so requires accommodating these speakers not only on a linguistic level, but also on a cultural level. Culture, like language, is a term that is hard to pin down, but generally describes the way of life of a collective group of people, and distinguishes them from other groups with other cultures (Mora, 2013;Shweder et al., 2007). Culture encompasses both material as well as non-material aspects, such as beliefs and linguistic practices (Kendall et al., 2005). Moreover, since \"[c]ulture is the acquired knowledge people use to interpret experience and generate behavior\" (Spradley, 1972), it is also the lens through which people understand linguistic messages. Culturally maladapted messages can and will be misinterpreted; NLP must be culturally sensitive in order to avoid doing harm. Language and culture interact in a number of ways (see Figure 1). This paper aims to illuminate these connections, in order to motivate and inform future NLP work. Beyond linguistic form and style, how things are expressed in language, they include common ground, the shared knowledge based on which people reason and communicate; aboutness, what information people care to convey; and objectives or values, the goals people strive for (e.g., when developing language technology). Since language and culture are intertwined, the different dimensions may be difficult to tease apart (Hovy and Yang, 2021): for example, the lexicon is shaped both by the need to convey information people care about, and by the conceptual categories grounded in the environment. Style is",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "score": 1.0
+    },
+    {
+      "text": "when developing language technology). Since language and culture are intertwined, the different dimensions may be difficult to tease apart (Hovy and Yang, 2021): for example, the lexicon is shaped both by the need to convey information people care about, and by the conceptual categories grounded in the environment. Style is related to values and societal structure: formality levels in Japanese, for example, reflect the hierarchy of Japanese society (Gao, 2005). Nevertheless, language and culture are not interchangeable terms. Culture varies greatly within languages (Lin et al., 2018). For example, the assumption that \"English\" in and of itself carries a single set of worldviews, interests and norms is unjustified (Paul and Girju, 2009;Wilson et al., 2016). On the other hand, a relatively homogeneous culture can span multiple languages, as in the Nordic countries (Sahlgren et al., 2021). Contributions. We propose a framework for understanding the challenges that cultural diversity poses for NLP to serve all users, as well as the opportunities that NLP creates to understand these differences better. We consider four elements: linguistic form, common ground, aboutness and values. We then survey existing strategies in NLP to address these challenges. Highlighting limitations in current strategies, as well as successful examples, we propose directions for future development of cross-cultural NLP. Models can be culturally biased even when trained on culturally diverse data. On the other end, diverse cultural representation can in some cases be achieved with specific training strategies, not only data selection and annotation. Transfer learning and pre-training. A common strategy in machine learning is to transfer the knowledge acquired for a task, domain or language to another. It is used extensively in the context of cross-lingual learning, motivated by similarities between languages and cultures: if only the form differs between languages, then models can learn to abstract away from",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "score": 1.0
+    },
+    {
+      "text": "strategy in machine learning is to transfer the knowledge acquired for a task, domain or language to another. It is used extensively in the context of cross-lingual learning, motivated by similarities between languages and cultures: if only the form differs between languages, then models can learn to abstract away from it and transfer from resourcerich languages, obviating task-specific training data in many languages (Agić, 2017;Wu and Dredze, 2019;Blloshmi et al., 2020). In this context, approaches for creating crosslingual word embeddings (Klementiev et al., 2012;Ammar et al., 2016) are based on the assumption that the semantic spaces of different languages are approximately isomorphic. However, this assumption is violated in practice (Søgaard et al., 2018(Søgaard et al., , 2019)). Among linguistic reasons, cultural factors (e.g., conceptualisation) can play a role in the mismatch between the spaces. Though hardly ever considered when selecting the source language for model transfer, considering cultural factors improves performance on target languages in pragmatically motivated tasks (Sun et al., 2021). In recent years, model transfer has been the mainstream paradigm with the advent of pretrained language models (PLMs), and specifically, multilingual PLMs such as mBERT (Devlin et al., 2019) and XLM-R (Conneau et al., 2020). Language models require massive amounts of data to pre-train. Since corpora are largely skewed in favour of few languages, this leads to crosslingual disparities. To mitigate this issue, Conneau and Lample (2019) introduced an exponential smoothing of the language sampling rate leading to a less skewed data selection. Conneau et al. (2020) and Xue et al. (2021) further studied the effect of the language sampling rate, and found that more uniform sampling improves performance in low-resource languages, but hurts high-resource languages. The reliance on pre-training means that what PLMs encode has far-reaching consequences. Several works find differences in culture-specific commonsense knowledge in multilingual",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0003",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "score": 1.0
+    },
+    {
+      "text": "Xue et al. (2021) further studied the effect of the language sampling rate, and found that more uniform sampling improves performance in low-resource languages, but hurts high-resource languages. The reliance on pre-training means that what PLMs encode has far-reaching consequences. Several works find differences in culture-specific commonsense knowledge in multilingual PLMs, depending on the language used to probe them. These include differences in factual knowledge (Kassner et al., 2021), grounding of time-of-day expressions (Shwartz, 2022), andsocial value (Lin et al., 2021b). Understanding these differences better will facilitate cultural adaptation and debiasing of NLP systems. Training. The common methodology for training machine learning models (e.g., empirical loss minimisation) relies on maximising average performance across training examples (instead of groups, e.g., languages), which often leads to low minority performance, a phenomenon named representation disparity (Hashimoto et al., 2018). Model performance for minorities is often disregarded in favour of majority groups, as shown for race (Blodgett and O'Connor, 2017), gender (Jørgensen and Søgaard, 2021), and age (Zhang et al., 2021). Deriving fair models from biased data is a promising countermeasure (Mehrabi et al., 2021). In a cross-cultural setting, methodologies that account for model up-dates for different groups (Hashimoto et al., 2018;Sagawa et al., 2020;Levy et al., 2020) could potentially reduce cultural biases. Most methods to balance for bias require access to protected demographic attributes (Sagawa et al., 2020), and these only partially reflect culture. In this direction, Zhou et al. (2021) andPonti et al. (2021) propose using Group Distributionally Robust Optimisation (group DRO; Oren et al., 2019) to optimise worst-case performance across languages. Similarly, de Lhoneux et al. ( 2022) used Worst-Case-Aware Curriculum Learning (Zhang et al., 2020) to improve group (language) performance parity in cross-lingual dependency parsing. However, Lent et al. (2021) find that group DRO has no benefit in a low-resource",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0004",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "score": 1.0
+    },
+    {
+      "text": "Oren et al., 2019) to optimise worst-case performance across languages. Similarly, de Lhoneux et al. ( 2022) used Worst-Case-Aware Curriculum Learning (Zhang et al., 2020) to improve group (language) performance parity in cross-lingual dependency parsing. However, Lent et al. (2021) find that group DRO has no benefit in a low-resource settings, namely for Creole languages. Such techniques can potentially be applied to pre-training multilingual language models with better cross-lingual parity, possibly in addition to improved data sampling. Furthermore, a fairer model with respect to other attributes, besides the language dimension, can lead to less culturally biased models. While these measures are widely discussed in a multilingual framework, they are also applicable in a monolingual setting to favour a more equal representation of different cultures in a single language (e.g., a fairer representation of English-speaking communities for English NLP). Limitations. Nonetheless, cross-lingual countermeasures are culture-agnostic. In other words, even if we sample languages equally, cross-cultural disparity persists, as data for a given language is also not balanced in terms of sources, and hence cultures. However, one can directly target a more diverse cross-cultural representation by applying the same principles in terms of cultures instead of languages. Ideally, methods such as data sampling or group DRO should facilitate generalisation of universallycommon knowledge from highly-represented cultures, while granting equal representation to minority cultures. Overemphasising the former is problematic as it contributes to cultural homogenisation, while the latter enables mitigation of cross-cultural biases present in the underlying training data and models. There is no substitute for a larger representation of minority cultures in the data used for training and evaluation. Finally, practical concerns include the level of granularity at which cultural groups are defined and annotated in the data (e.g., as metadata attributes or criteria for splitting text corpora). There is a continuum from",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0005",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "score": 1.0
+    },
+    {
+      "text": "substitute for a larger representation of minority cultures in the data used for training and evaluation. Finally, practical concerns include the level of granularity at which cultural groups are defined and annotated in the data (e.g., as metadata attributes or criteria for splitting text corpora). There is a continuum from representing each individual separately (which may raise privacy concerns) to considering large, culturally diverse groups (such as all Spanish speakers) as a homogeneous mass. Again, NLP dataset creators as well as model developers must be aware of the trade-off between generalisation and adaptation here.",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0006",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_145",
+    "nlpeer/ARR-22/013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_148",
+    "nlpeer/ARR-22/013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_149",
+    "nlpeer/ARR-22/013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_150"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.5,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.5,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "recall_at_20": 1.0,
+    "precision_at_5": 0.8,
+    "ndcg_at_5": 0.6608397947263839,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "According to the excerpts, diverse cultural representation can in some cases be achieved with specific training strategies, not only data selection and annotation. Additionally, transfer learning and pre-training can be used to transfer knowledge acquired for a task, domain, or language to another, motivated by similarities between languages and cultures. However, the excerpts do not provide more specific details on what these training strategies entail.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0000",
+      "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0001",
+      "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0002",
+      "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0003",
+      "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0004",
+      "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0005",
+      "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0006"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0003",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0004",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0005",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb5dea5fc495faf2bbb77205bc3f765fcd_methodology_0006",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.1348314606741573,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

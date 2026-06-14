@@ -1,0 +1,21 @@
+The warmest peak of the Last Interglacial (ca. 128-116 ka) is considered a process analogue and is often studied to better understand the effects of a future warmer climate on the Earth's system.
+
+In particular, significant efforts have been made to better constrain ice sheet contributions to the peak Last Interglacial sea level through field observation of paleo relative sea level indicators.
+
+Along tropical coastal margins, these observations are predominantly based on fossil shallow coral reef sequences, which also provide the possibility of gathering reliable U-series chronological constraints.
+
+However, the preservation of many Pleistocene reef sequences is often limited to a series of discrete relative sea level positions within the interglacial, where corals suitable for dating were preserved.
+
+This, in turn, limits our ability to understand the continuous evolution of paleo relative sea level through an entire interglacial, also affecting the possibility of unraveling the existence and pattern of substadial sea level oscillations.
+
+While the interpretation of lithostratigraphic and geomorphologic properties is often used to overcome this hurdle, geological interpretation may present issues related to subjectivity when dealing with missing facies or incomplete sequences.
+
+In this study, we try to step back from a conventional approach, generating a spectrum of synthetic Quaternary subtropical fringing reefs for a site in southwestern Madagascar (Indian Ocean).
+
+We use the Dionisos forward stratigraphic model (from Beicip-Franlab) to build a fossil reef at this location.
+
+In each model run, we use distinct Greenland and Antarctica ice sheet melt scenarios produced by a coupled ANICE-SELEN glacial isostatic adjustment model.
+
+The resulting synthetic reef sequences are then used test these melt scenarios against the stratigraphic record.
+
+We propose that this sort of stratigraphic modeling may provide further quantitative control when interpreting Last Interglacial reef sequences.

@@ -37,3 +37,6 @@ tqdm>=4.67.0
 
 # RAG 2 — parsing estructurado de PDFs
 docling>=2.0.0
+
+# RAG 3 — cliente Ollama para DeepSeek-R1 (agente DCI)
+ollama>=0.3.0

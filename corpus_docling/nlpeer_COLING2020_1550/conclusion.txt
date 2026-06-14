@@ -1,0 +1,21 @@
+The overall conclusion that can be drawn from this work is how powerful and strong the evaluated architectures are for the examined task related to Fake News Detection.
+
+Even with minimal hyperparameter tuning and only finetuning for 3 epochs, the models already performed considerably well on both data sets.
+
+With respect to the considered hyperparameters the two most important conclusions are to not only finetune the classification and pooling layers that are stacked on top of the pretrained models4 .
+
+Secondly, the most important hyperparameter is the learning rate.
+
+The recommendation of Goodfellow et al. (2016) to focus on the learning rate, when one has only time to address one single hyperparameter can be confirmed.
+
+At last, the models are relatively robust with respect to the learning rate schedule, the batch size, as long as it is adjusted to the learning rate and to a certain degree also the sequence length.
+
+Furthermore, the excessive pretraining approach of RoBERTa can outperform the permutation language model objective of XLNet.
+
+Fake News detection itself is often time treated as a inherently binary task5 (i.e. a document either contains Fake News or it does not).
+
+The underlying truth, however, might be more complicated, since most of the times a document can not unambiguously be assigned to either of these two classes.
+
+This is why our experiments on the FNC-1 data sets, which comprehend Fake News detection as a multi-class classification problem, might be more beneficial for this field of research compared to experiments on data sets with a binary target.
+
+We would not a go as far as concluding that these findings are without further ado transferable to other Fake News related data sets using different tasks or label sets, but nevertheless think that our findings can serve as starting points for further experiments in related fields.

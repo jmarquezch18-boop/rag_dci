@@ -1,0 +1,475 @@
+Robust Global Detection Of Forced Changes In Mean And Extreme Precipitation Despite Observational Disagreement On The Magnitude Of Change
+
+Abstract
+
+Introduction
+
+Methodology
+
+Model Simulations And Observational Data
+
+Data Processing
+
+Rx1d is determined as the maximum daily amount of precipitation per year for each location on the original grid.
+
+We regrid modelled PRCPTOT and Rx1d fields onto the grids of HadEX3 and GHCNDEX.
+
+This order of operations -first extract maxima, then regrid -is used to avoid that Rx1d values acquire additional bias due to the spatial averaging involved in regridding; the approach used is closest to how observational Rx1d indices are computed, as described above.
+
+A disadvantage of this order of operations is that annual Rx1d values may occur on different days in neighbouring grid cells, meaning that the regridded values strictly no longer represent the most extreme day per grid cell but rather a representative local extreme level.
+
+This is however also the case for observations.
+
+As the GPCC grid is nearly identical to the GHCN-DEX grid, we regrid GPCC to the GHCNDEX grid so that the GHCNDEX-regridded CMIP6 simulations can be used.
+
+PRCPTOT and Rx1d annual anomalies with respect to the 1951-2014 reference period are determined per grid cell on the observational grids.
+
+For CMIP6 data, anomalies of individual members are computed with respect to the annual mean of the ensemble mean of the model in question.
+
+For these ensemble means, all available model members are used to reduce noise where possible, even though only three members are used in the RR model training.
+
+This removes potential systematic model biases in absolute precipitation levels, which is required for meaningful prediction of forced trends.
+
+These fields of single-model ensemble member anomalies, masked to observational coverage, serve as predictors to train the RR model, with the goal of predicting the forced response, and are used as RR inputs to obtain model forced response estimates.
+
+The observational anomalies serve as input to the trained RR model to determine the observed forced response estimate.
+
+In a second application of the method, we subtract the masked, area-weighted spatial mean from the predictors and observational data for each time step.
+
+These detrended predictors thus only contain the relative pattern changes in precipitation.
+
+The RR model's purpose is to predict the forced response from the predictors (anomaly maps); hence the RR model is trained with a forced response proxy as target variable (predictand).
+
+Different RR models are trained for PRCPTOT and Rx1d -each has their own forced response proxy as target variable.
+
+In order to include the pattern of change, the main forced response metric used in this study is based on empirical orthogonal function (EOF) analysis of the unmasked multi-model mean anomaly maps, conceptually similar to a traditional way of extracting forced responses (e.g. Santer et al., 1995;Hegerl et al., 1996).
+
+Multi-model mean anomalies are determined by taking the mean of the singlemodel ensemble means and centring this on the 1951-2014 reference period.
+
+By first computing single-model ensemble means, all models contribute equally to the multi-model mean regardless of ensemble size.
+
+The first EOF of the data represents the spatial pattern that explains most of the variance in the data, and its corresponding first principal component is a time series reflecting the strength of that pattern in the data.
+
+We perform the EOF analysis over the entire length (1850-2100) of the multi-model mean record.
+
+The first principal component correlates highly with the area-weighted global mean change; the average Pearson correlation coefficient is 0.9 for PRCPTOT and 0.99 for Rx1d (see Fig. S3 in the Supplement), and the first EOF pattern is very similar to the linear multi-model mean trend pattern (see Fig. 2 in Sect.
+
+3.1).
+
+Given that model mean trends reflect the response to external forcing due to the averaging out of internal variability, this correspondence between the (multi-)model mean trend pattern and global mean trends on the one hand and the first EOF and principal component on the other hand implies that the first EOF can be assumed to reflect externally caused variance.
+
+The first principal component is therefore set to be the multi-model forced response best estimate.
+
+Each model's ensemble mean data is projected onto the first EOF of the multi-model mean to obtain model-specific forced responses, which form the targets for RR training.
+
+Despite the high correlation between model global mean changes and EOF projections, we prefer to use the EOFbased target as a default, since the first EOF captures the forced pattern of change, and its corresponding principal component time series captures the strength of that pattern.
+
+The first principal component is thus a reflection of the forced pattern strength (e.g. Marvel and Bonfils, 2013), meaning the forced response in all regions is somewhat reflected in this time series and not averaged out as in the global mean. Yet, Fig. S10 shows that using model ensemble global mean as forced response target for detection does not lead to qualitatively different conclusions.
+
+The procedure described above is visualised in a flowchart in Fig. S1, and the EOF patterns and model-specific targets are shown in Fig. S2.
+
+The EOF-derived targets are relatively noisy; however, smoothing the forced response targets with a 21-year LOWESS filter before RR model training yields virtually identical results, indicating that the low-frequency components of the targets govern the RR model configurations.
+
+Ridge Regression
+
+The detection fingerprint is generated by regressing the forced response targets onto the spatiotemporal predictors using ridge regression, referred to as training.
+
+The resulting fingerprint is a spatial map of coefficients reflecting the relationship between predictors and forced response targets in model simulations.
+
+For the RR training procedure, we store the predictors in a 2D matrix X of size n × p (rows × columns), where each column corresponds to a grid cell in the coverage mask (with one extra column for the intercept) and the concatenated time series of three members per model make up the rows.
+
+The target variable is a vector y of length n consisting of a concatenation of the targets matching the predictors; i.e. the model member predictors predict their "own" model ensemble mean forced response target, to retain within-model physical consistency.
+
+The output of the RR training procedure is a coefficient vector β of length p such that y = Xβ + .
+
+(1)
+
+Effectively, β -the fingerprint -consists of coefficients for each grid cell in the coverage mask.
+
+Applying β to model output (X mod ) or observational data (X obs ) then gives ŷmod = X mod β,
+
+(2)
+
+ŷobs = X obs β,(3)
+
+in which ŷmod and ŷobs are statistical predictions of the modelled and observed forced response, referred to as forced response estimates.
+
+In order to assess whether the external forcing has an effect that is distinct from internal variability, the fingerprint is applied to piControl model simulations to generate an unforced control forced response estimate: ŷmod,pi .
+
+All piControl data (4500 years) are input into the RR model to have a control distribution that is as large as possible.
+
+β is obtained numerically in R using the package glmnet for k-fold cross-validated ridge regression (Friedman et al., 2010;Simon et al., 2011).
+
+To determine β, the residual sum of squares plus the sum of squared coefficients (L2 norm) times a parameter λ -the objective function -is minimised; see Eq. ( 4) for the minimisation problem.
+
+The regularisation parameter λ can be tuned: the higher λ, the stronger the regularisation.
+
+This regularisation is the key characteristic of ridge regression.
+
+argmin β (y -Xβ) T (y -Xβ) Residual sum of squares + λ β T β L2-norm (4)
+
+The RR cost function is minimised for a set of λs through k-fold cross-validation, in which each fold contains data from one model.
+
+The simultaneous training and crossvalidation on all models ensures that the resulting RR fingerprint generalises well across models, reflecting where they agree and avoiding overfitting to any particular model.
+
+Training on many climate realisations ensures that the resulting RR fingerprint leads to forced response estimates that are robust to internal variability.
+
+This means higher coefficients are given to grid cells where internal variability is smaller relative to the long-term trend, reflecting where signal-to-noise ratios and thus predictive value for the forced response estimates are higher.
+
+Figure 1 shows a visualisation of the ridge regression procedure, to intuitively clarify the relative roles of simulated data and observations in this approach.
+
+For a more detailed description of RR with glmnet, see Friedman et al. (2010), Simon et al. (2011), andSippel et al. (2020).
+
+Regularisation is used since the high number of predictors and their spatial dependence may otherwise lead to overfitting and unphysical coefficient fingerprints in which, for example, high positive coefficients are offset by adjacent negative coefficients.
+
+Regularisation acts to reduce overfitting and results in a more homogeneous and smoother fingerprint, which more closely resembles the spatial scales of precipitation change patterns.
+
+It also increases generalisability of the fingerprint and thus improves performance when applied to data that have not been seen in the training, such as observations.
+
+There is no objective best approach to select the regularisation parameter λ.
+
+Smaller λs reduce bias but increase variance (overfitting), whereas larger λs do the opposite (Friedman et al., 2010;Simon et al., 2011).
+
+There are several common options for λ selection: as a default we use λ sel , of which the definition and selection procedure are described in Sect.
+
+S1.3.
+
+We reason that the most regularised RR model with good performance is a good choice for the detection model, since model performance is very similar within the range of common λs, whereas fingerprint interpretability decreases for λs at the low end of the range.
+
+Sensitivities to λ selection are addressed in Sect.
+
+3.4.
+
+Note that all the model simulations we use serve as input for RR training -i.e.
+
+the model forced response estimates shown in Sect.
+
+3 are not out-of-sample application.
+
+Since the purpose of the RR model is to estimate the observed forced response from observational data that was not used in training, no independent model data sample for model forced response estimation is needed.
+
+Figure S4 shows that pre-crossvalidation results of the RR model applied to out-of-fold data are nearly identical to results of the final cross-validated model.
+
+Forced Trends And Signal Time Of Emergence
+
+To assess the strength of the observed forced response estimates, we compare linear trends in ŷobs for the different observational datasets to linear trends in the multi-model forced response best-estimate y as well as to the range of unforced trends given by the piControl forced response estimates ŷpi .
+
+In this study, we consider forced change to be detected if ŷobs trend magnitudes lie outside the 95 % range of trends from control simulations ( ŷpi ).
+
+The magnitude of the observed forced response estimate ŷobs trends relative to the multi-model forced response best-estimate y trends indicates whether CMIP6 models over-or underestimate the real-world forced signals in PRCPTOT and Rx1d.
+
+Besides linear trends, we also assess the signal-to-noise ratio (SNR) of the observed forced response estimates.
+
+We define SNR based on Hawkins et al. (2020), but we note that the signals here are global, as opposed to local signals in Hawkins et al. (2020).
+
+In order to separate the signal from the noise in forced response estimates, they are related to a smoothed, long-term forcing proxy as a covariate.
+
+Since global precipitation change scales with global temperature change, as described in the introduction, the long-term trend in precipitation forced response estimates can be isolated using the long-term trend in global temperature (see Fig. S5).
+
+Hence, the signal S is defined as the observed forced response estimate regressed onto smoothed global mean surface temperature from Cowtan and Way (2014).
+
+Global mean surface temperature is smoothed with a 21-year LOWESS filter to remove interannual variability while keeping the longterm trend (Hawkins et al., 2020).
+
+The noise N is defined as the standard deviation (σ ) of the residuals of this linear fit, i.e. σ ( ŷobs -S).
+
+The SNR (S/N ) thus relates the observed forced response estimate signal to observed forced response estimate noise, providing a measure of signal emergence.
+
+The mean signal is centred to zero in the 21-year period 1951-1971, as we see minimal measurable forcing effects in precipitation metrics up to then.
+
+Between the 1951-1971 period and the present, the signal and thus the SNR increases.
+
+This allows us to determine the time of emergence of a forced climate signal in mean and extreme precipitation, defined as the year after which the SNR consistently remains higher than 2.
+
+Results And Discussion
+
+Precipitation Change In Model Simulations And Observations
+
+Detection Fingerprints And Observed Forced Response Estimates
+
+Figure 3 shows the detection fingerprints, forced response estimates, and forced trends for models and observations obtained with RR.
+
+Figure 3a andb show the regression coefficient fingerprints that best predict the forced response while minimising variance due to internal variability and model disagreement, as described in Sect.
+
+2. Only the fingerprint on the HadEX3 mask is shown here, GHCNDEX-masked and GPCC-masked fingerprints feature similar patterns where coverage overlaps, as shown in Fig. S6, increasing confidence in the generated RR fingerprints and the method.
+
+For both PRCPTOT (Fig. 3a) and Rx1d (Fig. 3b), large coefficients indicate changes with a high SNR and a time evolution that corresponds to the global forced response time evolution.
+
+Positive coefficients indicate changes with the same sign as the global forced response, whereas negative coefficients indicate changes with opposite sign.
+
+RR tends to rely on regions with smaller but more robust changes for forced response prediction, whereas some regions with larger changes such as the tropics contribute less to the prediction, due to their high internal variability and uncertainty (Kent et al., 2015).
+
+Regions with very small coefficients coincide with where CMIP6 models have been shown to disagree strongly on the sign of change, for example the location of the transition from negative (south) to positive (north) coefficients in Europe for PRCPTOT and central America and the whole of Australia for both PRCPTOT and Rx1d (Douville et al., 2021;Giorgi et al., 2014;Westra et al., 2013;Sun et al., 2022;Kotz et al., 2022;Kent et al., 2015).
+
+For many of these regions, the disagreement among models about precipitation change can be traced back to the influence of circulation changes on precipitation changes, which are particularly uncertain, for example, the expansion of subtropical dry zones.
+
+Several specific features that reflect the forced response pattern of PRCPTOT and Rx1d can be distinguished in the fingerprints.
+
+The PRCPTOT fingerprint features negative coefficients in southern Europe and northern Africa as well as southern Africa and Australia, which reflect the drying pattern corresponding to expected forced change in the hydro- logical cycle (Douville et al., 2021).
+
+Additionally, the climatologically wet Pacific Northwest exhibits positive coefficients as the air that rains out due to orographic lift by the Cascade, Coastal, and Olympic mountain ranges becomes increasingly moist with climate change.
+
+The rain shadow on the lee side features negative coefficients.
+
+The Rx1d fingerprint looks more homogeneously positive than for PRCP-TOT, reflecting the expectation of a positive trend in Rx1d over almost all land regions, as seen in Fig. 2  (Pfahl et al., 2017).
+
+The strong positive coefficients in northern Europe and the North American western coast can likely be explained by the systematic nature of extreme precipitation in these regions -wet ocean westerlies making landfallwhich results in a consistent response to increased atmospheric moisture and thus high predictive value for the global forced response (Pfahl and Wernli, 2012).
+
+The smaller posi- tive or even negative coefficients in the tips of South America and southern Africa correspond to regions where dynamical changes are known to mask thermodynamic increases in Rx1d (Pfahl et al., 2017;Kotz et al., 2022;Li et al., 2021).
+
+The similarities in the maps for PRCPTOT and Rx1d indicate that the signs of change in PRCPTOT and Rx1d correspond in most regions, pointing towards a precipitation distribution shift to higher mean and extreme precipitation levels.
+
+As mentioned, however, the magnitude of the increase is larger for Rx1d than for PRCPTOT, and regions where negative changes in PRCPTOT exist in combination with positive changes in Rx1d are also found.
+
+This corresponds to widening of the precipitation distribution and complies to the expected forced increase in precipitation variability (Zittis et al., 2021;Pendergrass et al., 2017).
+
+From an impact perspective, this could imply that the background climate in some regions dries while wet extremes become more intense, which can increase both drought and flood risks (Tramblay et al., 2019).
+
+Figure 3c andd show the forced response estimates for PRCPTOT (Fig. 3c) and Rx1d (Fig. 3d), which are the result of applying the RR fingerprints to model simulations and observational data.
+
+The green/blue shading shows the range of forced response estimates from CMIP6 individual member data for all observational masks.
+
+The consistency of the trend in the model forced response estimate envelopes and the multi-model forced response best estimate (black line) confirms that the RR fingerprints are indeed suited to capture the global climate change signal in PRCPTOT and Rx1d from spatially incomplete model data.
+
+The model forced response estimates show a slight high bias in early years where the target is at the low end of its range and a slight low bias in late years where the target is at the high end of its range.
+
+This effect is expected since the regularisation "trades" some goodness of fit for generalisability and makes the forced response estimates more conservative.
+
+The coloured lines show forced response estimates from observations.
+
+The observed forced response estimates lie well within the model forced response estimate range, exhibit similar variance, and follow the trend of the multi-model forced response best estimate.
+
+These trends in the observed PRCPTOT and Rx1d forced response estimates indicate that the strength of the forcing pattern does indeed increase in observations and generally agrees with model projections.
+
+The grey dashed lines show the 95 % range of the forced response estimate from unforced piControl data, and the pi-Control forced response estimate distribution is also shown as a point cloud to the right of the time series, reflecting the internal variability range of the detection pattern.
+
+Over the historical period, observed forced response estimates have moved from the middle towards the upper bound of the pi-Control range, and the multi-model forced response best estimate and model forced response estimates leave the piControl range still in the first half of the 21st century.
+
+All of the above points to the unambiguous detection of forced climate change in annual PRCPTOT and Rx1d in all observational datasets used.
+
+We note that the GHCNDEX forced response estimate for PRCPTOT shows a distinct uptick towards the end of the record, which likely is related to the coverage of GHCN-DEX being almost exclusively in the higher northern latitudes (more so than for the other datasets), which contribute disproportionately in these particular years.
+
+However, based on the analysis here, we cannot differentiate whether this is an artefact, internal variability, or indicative of an increasing forced rate of change in PRCPTOT.
+
+Besides visual inspection of forced response estimate time series, quantitative detection statements can be made based on the trends in these time series.
+
+For lack of evidence for a particular forced response polynomial, the high amount of noise in observed forced response estimates, and ease of interpretation, linear trends are assumed.
+
+The trends in PRCP-TOT and Rx1d, however, are not constant with time in the period of interest, so we also include the dependence of forced trend estimates on the length and start year of the trend period.
+
+Figure 3e and f show a quantitative overview of the linear trends of targets and forced response estimates as a function of start year and trend length.
+
+Findings are normalised with respect to the 1951-2018 multi-model forced response best-estimate trend.
+
+Since forced trends in both PRCPTOT and Rx1d only begin to appear around 1975, the multi-model forced response best-estimate trends are larger in more recent trend periods that omit earlier years (toward the right side of the x axis).
+
+The model forced response estimate trend 95 % ranges (green/blue shading) are reasonably symmetric around the multi-model forced response best estimate and include the majority of the ensemble mean target trends (black boxplots).
+
+This agreement of model forced response estimate trends with forced response target trends shows that the RR model does well in estimating the forced trend magnitudes.
+
+Part of the intermodel spread in both forced response targets (boxplots) and model forced response estimates is explained by the different climatological levels of precipitation among models and their different climate sensitivities and in part by model uncertainties in temperature-independent precipitation adjustments (Fläschner et al., 2016).
+
+Despite the large spread, there is only little overlap of the model forced response estimate trend range and the piControl trend range (grey shading), implying that almost the entire range of model forced response estimate trends lies outside the range of trends possible in an unforced climate.
+
+This confirms once again that there is a robust forced signal in mean and extreme precipitation.
+
+The observed forced response estimate trends for both PRCPTOT and Rx1d (coloured lines) exceed zero and lie within the model forced response estimate trend range and outside the piControl range for all trend lengths (apart from GPCC trends over the most recent 40 years or shorter), confirming detection of forced change in observations.
+
+Although forced change is unambiguously detected in all datasets, the degree of observed change depends on the observational dataset considered.
+
+GHCNDEX yields higher observed forced response estimate trends than the multi-model forced response bestestimate trend for PRCPTOT, whereas HadEX3 and GPCC yield lower observed forced trends.
+
+Hence, GHCNDEX suggests that CMIP6 models underestimate the forced change in PRCPTOT, whereas HadEX3 and GPCC suggest CMIP6 models overestimate it.
+
+The higher trends in GHCNDEX PRCPTOT are partly caused by the few high outliers towards the end of the GHCNDEX time series mentioned earlier but also persist when these are removed from the time series.
+
+For Rx1d, GHCNDEX and HadEX3 forced response estimates show more similar trends, although GHCNDEX trends again exceed HadEX3 trends for trends that include years before 1975.
+
+For more recent periods, GHCNDEX shows smaller trends than HadEX3.
+
+In general, forced response estimate trend increases in both observational datasets flatten out for periods from 1975 to the present, where trends smaller than the multi-model forced response best estimate are found.
+
+By contrast, periods including years prior to 1975 suggest observed trends larger than in the multi-model forced response best estimate.
+
+Whereas the magnitudes of the observed forced response estimate trends differ considerably among the observational datasets in some cases, as highlighted above, the relative trend fluctuations over time resemble each other in all datasets.
+
+This consistency of results increases confidence in the robustness of the method and suggests that differences in spatial coverage and data operations among observational datasets are the main sources of uncertainty in observed forced trend estimation.
+
+Although these results are sufficient to conclude that the detection of forced change in global mean and extreme precipitation is unequivocal, internal variability and short record length preclude our ability to conclude whether the observed change is weaker or stronger than models suggest.
+
+The use of multiple observational datasets and the time-dependent view of the forced trends in observations shows that the magnitude of forced change detected in precipitation observations is sensitive to choices on the specifics of the analysis.
+
+In previous studies, opposing conclusions have been drawn as to the magnitude of forced precipitation change in observations relative to model simulations, as noted in the introduction.
+
+Our results show that both conclusions can be true, depending on the observational dataset and the forced trend metric used.
+
+Confidence in these results is strengthened by the consistency of the variability in the model forced response estimates and observed forced response estimates.
+
+The residuals of the linear fit to the observed and modelled forced response estimates have comparable distributions, shown in Fig. S7.
+
+This residual variance consistency justifies the use of the model-derived RR fingerprint on observations, and decreases the likelihood of spurious detection.
+
+Confidence in the method is also enhanced by its robustness to target metric; the results above also hold when the global mean is used as a forced response target, as shown in Fig. S10.
+
+In addition, the main finding that the magnitude of detected forced changes in precipitation observations relative to simulated forced changes depends on the dataset holds also when relative precipitation metrics such as percentage change or percentage change per temperature change are assessed, shown in Sect.
+
+S2.3.
+
+Detection Based On Relative Spatial Patterns Of Precipitation Alone
+
+It is not surprising that forced change in mean and extreme precipitation can be detected on a global scale, given the consensus on global mean increases in PRCPTOT and Rx1d with increasing global temperatures.
+
+A more powerful detection statement can potentially be made, however, if forced change can be detected in the spatial pattern of precipitation observations alone, excluding the global mean trend.
+
+Therefore we attempt to construct RR models based on training data from which the global mean trend is removed (detrended) by subtracting the coverage-masked, area-weighted spatial mean for each time step.
+
+The resulting fingerprints are then applied to observations which are detrended in the same way.
+
+Figure 4a and b show the RR fingerprints for detrended predictors on the HadEX3 mask for mean and extreme precipitation (GHCNDEX and GPCC masked fingerprints look similar where coverage overlaps; see Fig. S8).
+
+In these fingerprints, negative coefficients indicate a change that is in phase with the forced response but of opposite sign (inversely correlated), which can point to a decrease but also to an increase with a smaller slope than the (coverage-masked) global mean increase.
+
+The latter is the case when coefficients flip sign from positive in Fig. 3, where the trend is included, to negative in Fig. 4.
+
+Positive coefficients in Fig. 4, on the other hand, indicate increases with slopes larger than the global mean increase.
+
+As for the fingerprints in Fig. 3, large coefficient magnitudes in Fig. 4 signify high SNR but not necessarily large changes in an absolute sense.
+
+Inspection of the detrended fingerprints leads to several interesting insights.
+
+Both for PRCPTOT and Rx1d we see that some regions with large regression coefficients flip sign.
+
+As stated above, this reflects high-SNR changes in the same sign but with a smaller rate of change than the global mean.
+
+This again shows that RR relies to a large degree on regions with small but consistent changes, for example the Tibetan plateau for PRCPTOT.
+
+This effect is even more strongly visible in the Rx1d fingerprint, since continental Europe and western North America -the regions with strong positive coefficients in the fingerprint with global mean included -flip sign.
+
+Rx1d increases in these regions are thus smaller than global mean yet are strong indicators of forced change in the context of internal variability and uncertainty among models.
+
+Rx1d increases are likely dominated by large tropical rainfall increases, as indicated by persistent positive coefficients in tropical regions and the North American and Asian east coasts.
+
+For both PRCPTOT and Rx1d, the regions of primary importance largely remain the same between the two fingerprint types.
+
+This implies that the fingerprint with the global mean trend included picks up on high SNR forced signals beyond the large-scale mean increase.
+
+The observed forced response estimates for detrended PRCPTOT and Rx1d (coloured lines) in Fig. 4c andd show a clear positive trend that is in agreement with the multi-model forced response best estimate (black line).
+
+Recall that the forced response estimates in Fig. 4c and d are derived from observations from which the global mean is removed, meaning that the relative spatial patterns of PRCPTOT and Rx1d alone exhibit a clearly detectable forced long-term trend.
+
+However, the larger spread in the observed forced response estimates compared to Fig. 3c andd shows that detrending of the predictors -i.e.
+
+removing part of the signal -results in larger variability of the observed forced response estimates, which reduces the SNR of the trends.
+
+The model forced response estimates also exhibit larger variability, which causes the forced and piControl trend ranges (green/blue and beige/grey) to overlap more (Fig. 4e andf), indicating a lower detectability of forced change in detrended model data.
+
+Particularly for GHCNDEX-masked Rx1d data (green shading in Fig. 4f), the low coverage in combination with detrending removes so much information that forced response estimation from model data is substantially impaired.
+
+With weaker regularisation the forced trend still cannot be estimated from detrended GHCNDEX data.
+
+Despite the reduced information given to the RR model in the detrended case, Fig. 4e andf show that forced change is still detected using the spatial pattern alone.
+
+The observed forced trends lie outside the piControl range and are in reasonable agreement with the multi-model forced response best-estimate trends for longer trend lengths.
+
+For shorter trend lengths, the higher variability in the forced response estimates leads to higher trend variability as well.
+
+Consistent with Fig. 3e andf, we see that HadEX3 and GPCC show smaller PRCPTOT trends than the multi-model forced response best estimate, whereas GHCNDEX shows larger trends.
+
+We note that very high GHCNDEX PRCPTOT forced response estimate trends seen here are untrustworthy given that GHCNDEX residual consistency in the detrended setup is insufficient (see Fig. S9).
+
+HadEX3 Rx1d trends agree very well with the multi-model forced response best-estimate trends.
+
+A possible interpretation of the forced change detection in HadEX3 Rx1d but lack thereof in GHCNDEX Rx1d is that the forced response in Rx1d can be detected in absence of the global mean but that sufficient coverage is necessary.
+
+The seemingly higher sensitivity of Rx1d to detrending is likely because the Rx1d forced response is more spatially homogeneous, which implies that global mean detrending removes much more of the signal than for the spatially heterogeneous PRCPTOT forced response.
+
+Taken together, the above shows, first, detection of forced change in mean and extreme precipitation beyond a global mean trend and, second, the power of RR for signal extraction from high-dimensional noisy data.
+
+Finally, the fact that the relationship between relative spatial precipitation patterns and the forced precipitation trend derived from climate model simulations (the ridge model) holds in observations suggests accuracy of the CMIP6 climate models in simulating the processes relevant to the spatial pattern of forced change in mean and extreme precipitation.
+
+Time Of Emergence
+
+The forced response estimates and trends in Figs. 3 and4 provide evidence that the observed forced trends are larger than the unforced piControl trend distribution, both with and without global mean signal.
+
+Figure 5 provides the SNR as a quantitative assessment of the observed forced response estimate signal strength relative to the observed forced response estimate variability, as defined in Sect.
+
+2.4.
+
+Besides the default case (solid lines, corresponding to the forced response estimates in Fig. 3c andd), the detrended SNR (dotted, corresponding to the forced response estimates in Fig. 4c andd) as well as the SNR for less regularised RR models with minimal cross-validated mean squared error (λ min ) (dashed) are shown (Friedman et al., 2010;Simon et al., 2011).
+
+Section S2.4 shows the sensitivity of time of emergence to additional method choices.
+
+Time of emergence -the time after which the SNR consistently lies above 2 -is indicated by the vertical lines.
+
+We consider the above definition of time of emergence a consistent measure of effective SNR in the real climate, since both signal and noise are derived from observations.
+
+To assess the effects of possible autocorrelation within observational residuals as well as possible biases due to the relatively small sample size, we also compute SNRs with respect to a noise measure derived from forced response estimates of control simulations, as in Hawkins and Sutton (2012).
+
+This definition of SNR results in similar outcomes (not shown).
+
+Overall, Fig. 5a andb show emergence of forced change within 4 years of 2000 in both PRCPTOT and Rx1d in GHC-NDEX and HadEX3 for the default setup (solid lines).
+
+The nearly identical time of emergence for PRCPTOT and Rx1d obtained using our method of forced response estimation is noteworthy, given earlier suggestions of a later emergence of PRCPTOT due to higher uncertainties and internal variability (Fischer et al., 2014;Fischer and Knutti, 2014).
+
+The exact time of emergence differs between datasets, as expected given the different trends seen in Fig. 3, and GPCC PRCP-TOT does not show emergence at all due to its weaker trend combined with high variability.
+
+We note that GPCC is constructed using a different gridding procedure than HadEX3 and GHCNDEX, and also our handling of GPCC is different due to the need to specify a coverage mask based on station density, whereas HadEX3 and GHCNDEX provide their own coverage masks.
+
+Interestingly, Rx1d time of emergence is earlier in HadEX3, despite larger long-term linear trends in GHCNDEX.
+
+This reflects the higher efficiency of RR in reducing variance while capturing the signal for the higher spatial coverage of HadEX3.
+
+The benefit of regularisation becomes evident when comparing the default case to the λ min setup, where regularisation is such that the training cross-validation error is smallest (see Sect.
+
+S1.3 for a more extensive definition).
+
+For λ min forced response estimates, SNR is lower and time of emergence is later (despite slightly larger forced response estimate trends), due to the increased variance in the λ min forced response estimates caused by overfitting on the training data.
+
+For GPCC this effect is not seen, since the regularisation for GPCC in the default case is weak; i.e. λ sel and λ min are not far apart and variance in the forced response estimate hardly increases for λ min .
+
+Lastly, the effect of removing the global mean from the data (detrended), discussed in the previous section, is shown in the dotted lines.
+
+Due to the increased variance in the forced response estimates, SNRs decrease and times of emergence increase.
+
+Yet, signals have emerged or are close to emergence in all detrended cases except for GHCNDEX Rx1d, once again confirming the detection of forced climate change in spatial patterns of PRCPTOT and Rx1d.
+
+All of the above points to detection and emergence of a forced response in observations of mean and extreme precipitation, robustness of the detection method, and representation accuracy of forced and internal variability patterns of precipitation in climate models.
+
+Conclusions And Outlook
+
+Figure 1.
+
+Flowchart of ridge regression model training procedure as well as application of detection model to observations.
+
+Figure 2.
+
+Mean total precipitation (PRCPTOT, a, c, e, g) and extreme precipitation (Rx1d, b, d, f) 1951-2014 annual linear trends in the CMIP6 multi-model mean (a, b), in HadEX3 observational data (c, d), in GHCNDEX observational data (e, f), and in GPCC observational data (g).
+
+Figure 3.
+
+Annual mean total precipitation (PRCPTOT) and extreme precipitation (Rx1d) ridge regression detection fingerprints for HadEX3 coverage (a, b), corresponding forced response estimates (FREs) (c, d) and linear forced response estimate trends as a function of trend period (e, f).
+
+In (c) and (d), black lines represent the multi-model forced response (FR) best estimate, coloured shading the full range of model forced response estimates, coloured lines the observed forced response estimate, grey dashed lines the unforced internal variability of the forced response pattern (piControl forced response estimate 95 % range (2.5 % to 97.5 % quantile range)).
+
+In (e) and (f), black lines represent the multi-model forced response best-estimate trend, coloured shading the 95 % range of model forced response estimate trends, coloured lines the observed forced response estimate trends, grey shading the piControl trends, black boxplots the model ensemble mean target trends.
+
+Trends are computed from a variable start year until the end year of the observational time series (2018 for HadEX3, 2019 for GPCC, 2020 for GHCNDEX, 2018 for multi-model forced response best estimate and model ensemble mean trend).
+
+Start years vary between 1951 and 1991 with increments of 5 years.
+
+piControl trends are computed over periods equally long as the corresponding forced trends.
+
+All linear trends are normalised with respect to the multi-model forced response best-estimate 1951-2018 trend, i.e. the leftmost point on the black line.
+
+Figure 4.
+
+As Fig. 3 but for detrended predictors.
+
+Detrending implies removing the masked, area-weighted spatial mean from the model member data and observational data for each time step.
+
+Figure 5. SNRs of mean total precipitation (PRCPTOT) (a) and extreme precipitation (Rx1d) (b) forced response estimates in GHCNDEX, HadEX3 and GPCC, including sensitivities to regularisation parameter (dashed) and global mean detrending (dotted).
+
+Exceedance of an SNR of 2 implies emergence.
+
+Signal is defined as forced response estimate regressed onto 21-year LOWESS filtered global mean surface temperature, noise as residuals of this fit.
+
+of Science, Office of Biological & Environmental Research (BER), Regional and Global Model Analysis (RGMA) component of the Earth and Environmental System Modeling Program under Award Number DE-SC0022070 and National Science Foundation (NSF) IA 1947282 and by the National Center for Atmospheric Research (NCAR), which is a major facility sponsored by the NSF under Cooperative Agreement No. 1852977.

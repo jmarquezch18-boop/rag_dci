@@ -1,0 +1,25 @@
+We have introduced a variety of cross-lingual methods for task-oriented XNLU to enable effective zero-shot transfer by learning alignment with unlabelled parallel data.
+
+The principal method, CrossAligner, transforms English train data into a new language-agnostic task used to align model predictions across languages, achieving SOTA on entity recognition.
+
+We then presented a Contrastive Alignment that optimises for a small cosine distance between translated sentences while increasing it between unrelated sentences, using orders of magnitude less data than previous works.
+
+We proposed Translate-Intent, a fast and simple baseline that beats previous Translate-Train SOTA approaches without error-prone data transformations such as slot label projection.
+
+The best overall performance across nine languages, fifteen tests sets and three task-oriented multilingual datasets was achieved by a Coefficient of Variation weighted combination of CrossAligner and XeroAlign IO .
+
+Our quantitative analysis investigated which types of auxiliary losses yield the most effective combinations.
+
+This resulted in several proposed configurations also exceeding previous SOTA scores.
+
+Our detailed qualitative error analysis revealed that the best methods have the potential to approach target language performance as most errors were deemed to be of low to medium severity.
+
+We hope our contributions and resources will inspire exciting future work in this fascinating NLP research area.
+
+titres' (news_type), which is plausible but less coherent than the model's prediction.
+
+Spanish Once again, articles, some prepositions and occasionally conjunctions e.g. ' de', 'las', 'y', 'la', 'por' (of, the, and, a, in/for)
+
+The full language breakdown for MultiATIS++ (Table 4) and MTOP+MTOD (Table 5).
+
+Table 6 shows the full details of the combinations of losses from

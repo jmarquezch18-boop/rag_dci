@@ -1,0 +1,11 @@
+Task-oriented personal assistants enable people to interact with a host of devices and services using natural language.
+
+One of the challenges of making neural dialogue systems available to more users is the lack of training data for all but a few languages.
+
+Zero-shot methods try to solve this issue by acquiring task knowledge in a high-resource language such as English with the aim of transferring it to the lowresource language(s).
+
+To this end, we introduce CrossAligner, the principal method of a variety of effective approaches for zero-shot cross-lingual transfer based on learning alignment from unlabelled parallel data.
+
+We present a quantitative analysis of individual methods as well as their weighted combinations, several of which exceed state-of-the-art (SOTA) scores as evaluated across nine languages, fifteen test sets and three benchmark multilingual datasets.
+
+A detailed qualitative error analysis of the best methods shows that our fine-tuned language models can zero-shot transfer the task knowledge better than anticipated.

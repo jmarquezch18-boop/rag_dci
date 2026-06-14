@@ -1,0 +1,123 @@
+Restoring Hebrew Diacritics Without A Dictionary
+
+Abstract
+
+Introduction
+
+Dotting As Sequence Labeling
+
+The input to the dotting task consists of a sequence of characters.
+
+Each of the characters is assigned three values, from three separate diacritic categories: one category for the dot distinguishing shin ( ‫)שׁ‬ from sin ( ‫,)שׂ‬ two consonants sharing a base character ‫;ש‬ another for the presence of dagesh/mappiq, a central dot affecting pronunciation of some consonants, e.g. ‫פּ‬ /p/ from ‫פ‬ /f/, but also present elsewhere; and one for all other diacritic marks, which mostly determine vocalization, e.g. ‫ד‬ /da/ vs. ‫ד‬ /de/. Diacritics of different categories may co-occur on single letters, e.g. , or may be absent altogether.
+
+Full script Hebrew script written without intention of dotting typically employs a compensatory variant known colloquially as full script (ktiv male, ‫מלא‬ ‫,)כתיב‬ which adds instances of the letters ‫י‬ and ‫ו‬ in some places where they can aid pronunciation, but are incompatible with the rules for dotted script.
+
+In our formulation of dotting as a sequence tagging problem, and in collecting our test set from raw text, these added letters may conflict with the dotting standard.
+
+For the sake of input integrity, and unlike some other systems, we opt not to remove these characters, but instead employ a dotting policy consistent with full script.
+
+See Appendix A for further details.
+
+Training Corpora
+
+Dotted modern Hebrew text is scarce, since speakers usually read and write undotted text, with the occasional diacritic added for disambiguation when context does not suffice.
+
+As we are unaware of legally-obtainable dotted modern corpora, we use a combination of dotted pre-modern texts as well as automatically and semi-automatically dotted modern sources to train NAKDIMON:
+
+The PRE-MODERN portion is obtained from two main sources: A combination of late pre-modern text from Project Ben-Yehuda, mostly texts from the late 19th century and the early 20th century;5 rabbinical texts from the medieval period, the most important of which is Mishneh Torah (obtained from Project Mamre);6 and 23 short stories from the short story project.7 This portion contains roughly 1.81M Hebrew tokens, most of which are dotted, with a varying level of accuracy, varying dotting styles, and varying degree of similarity to Modern Hebrew.
+
+The AUTOMATIC portion contains 547 short stories taken from the short story project.
+
+The stories are dotted using Dicta without manual validation.
+
+The corpus contains roughly 1.27M Hebrew tokens.
+
+Lastly, the MODERN portion contains manually collected text in Modern Hebrew, mostly from undotted sources, which we dot using Dicta and follow up by manually fixing errors, either using Dicta's API or via automated scripts which catch common mistakes.
+
+We made an effort to collect a diverse set of sources: news, opinion columns, paragraphs from books, short stories, Wikipedia articles, governmental publications, blog posts and forums expressing various domains and voices, and more.
+
+Our MODERN corpus contains roughly 326K Hebrew tokens, and is much more consistent and similar to the expectation of a native Hebrew speaker than the PRE-MODERN or the AUTOMATIC corpora, and more accurately dotted than the AU-TOMATIC corpus.
+
+The sources and statistics of this dataset are presented in Table 2.
+
+New Test Set
+
+Shmidman et al. (2020) provide a benchmark dataset for dotting modern Hebrew documents.
+
+However, it is relatively small and non-diverse: all 22 documents in the dataset originate in a single source, namely Hebrew Wikipedia articles.
+
+Therefore, we created a new test set 8 from a larger variety of texts, including high-quality Wikipedia articles and edited news stories, as well as user-generated blog posts.
+
+This set consists of ten documents from each of eleven sources (5x Dicta's test set), and totals 20,474 Hebrew tokens, roughly 3.5x Dicta's.
+
+We use the same technique and style for dotting this corpus as we do for the MODERN corpus ( §2.2), but the documents were 8 https://github.com/elazarg/hebrew_ diacritized/tree/master/test_modern collected in different ways.
+
+Nakdimon
+
+NAKDIMON embeds the input characters and passes them through a two-layer Bi-LSTM (Hochreiter and Schmidhuber, 1997).
+
+The LSTM output is fed into a single linear layer, which then feeds three linear layers, one for each diacritic category (see §2).
+
+Each character then receives a prediction for each category independently and all predicted marks are added to it as output.
+
+Decoding is performed greedily, with no validation of readability or any other dependence between character-level decisions.
+
+The input is pre-processed by removing all but Hebrew characters, spaces and punctuation; digits are converted to a dedicated symbol, as are Latin characters.
+
+All existing diacritic marks are stripped, and each document is split into chunks bounded at whitespace, ignoring sentence boundaries.
+
+We train NAKDIMON first over PRE-MODERN, then over the AUTOMATIC corpus, and then by over the MODERN corpus.
+
+During training, the loss is the sum of the cross-entropy loss from all three categories.
+
+Trivial decisions, such as the label for the shin/sin diacritic for any non-‫ש‬ letter, are masked.
+
+Tuning experiments are detailed in Appendix B; an evaluation of a preliminary version of NAKDI-MON over the Dicta test set is in Appendix C, and Hyperparameters are detailed in Appendix D.
+
+Experiments
+
+Results
+
+Error Analysis
+
+Related Work
+
+Conclusion
+
+‫ַת‬ ‫ח‬ ‫ָטוֹס‬ ‫ַמּ‬ ‫ה‬ hamatos naxat b-rakut 'The plane landed softly' (c) ‫כוֹת‬ ‫ְר‬ ‫בּ‬ ‫ַת‬ ‫ח‬ ‫ָטוֹס‬ ‫ַמּ‬ ‫ה‬ hamatos naxat braxot
+
+Figure 1: WOR error rate on validation set as a function of training set size vs. Dicta, over five runs.
+
+Other metrics show similar trends.
+
+Figure 1 shows the favorable effect of training NAKDIMON over an increasing amount of MOD-ERN text.
+
+Data sources for our MODERN Hebrew training set.
+
+Rows marked with * were automatically dotted via the Dicta API and corrected manually.
+
+Rows with † were dotted at low quality, requiring manual correction.
+
+The rest were available with professional dotting.
+
+Document-level macro % accuracy.
+
+Correct Incorrect .
+
+‫בעיניי‬ ‫לה‬ ‫להסתכל‬ ‫וצרי‬ . . .
+
+‫י‬ ‫י‬ ‫ֵינ‬ ‫ָע‬ ‫בּ‬ ‫י‬ ‫י‬ ‫ֵינ‬ ‫ְע‬ ‫בּ‬ '. . . and we need to look her in the eyes (/in eyes).' . . .
+
+‫בסבלנות‬ ‫ל‬ ‫יענו‬ . . .
+
+ָ ‫ל‬ ְ ‫ל‬ '. . . you.sg.f (/unreadable) will be answered patiently. . . ' . . .
+
+‫הראשוני‬ ‫האייפו‬ ‫משתמשי‬ . . .
+
+Examples of words dotted incorrectly (top) or correctly (bottom) only by NAKDIMON.
+
+Document-level macro % accuracy on the test set from Shmidman et al. (2020) and on our new test set.
+
+We cannot report our full NAKDIMON's performance on the former, as we use the test set for parts of its training.
+
+MAJALL is reported as MAJORITY in the main text; MAJMOD only considers text in the MODERN portion of our training set.

@@ -1,0 +1,11 @@
+We present NLU++, a novel dataset for natural language understanding (NLU) in task-oriented dialogue (ToD) systems, with the aim to provide a much more challenging evaluation environment for dialogue NLU models, up to date with the current application and industry requirements.
+
+NLU++ is divided into two domains (BANKING and HOTELS) and brings several crucial improvements over current commonly used NLU datasets.
+
+1) NLU++ provides fine-grained domain ontologies with a large set of challenging multi-intent sentences, introducing and validating the idea of intent modules that can be combined into complex intents that convey complex user goals, combined with finer-grained and thus more challenging slot sets.
+
+2) The ontology is divided into domain-specific and generic (i.e., domainuniversal) intent modules that overlap across domains, promoting cross-domain reusability of annotated examples.
+
+3) The dataset design has been inspired by the problems observed in industrial ToD systems, and 4) it has been collected, filtered and carefully annotated by dialogue NLU experts, yielding high-quality annotated data.
+
+Finally, we benchmark a series of current state-of-the-art NLU models on NLU++; the results demonstrate the challenging nature of the dataset, especially in low-data regimes, the validity of 'intent modularisation', and call for further research on ToD NLU.

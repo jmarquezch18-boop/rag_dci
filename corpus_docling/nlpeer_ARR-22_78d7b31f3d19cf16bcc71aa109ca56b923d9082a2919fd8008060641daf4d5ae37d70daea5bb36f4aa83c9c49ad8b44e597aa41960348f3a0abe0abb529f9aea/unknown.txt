@@ -1,0 +1,211 @@
+Generated Knowledge Prompting For Commonsense Reasoning
+
+Abstract
+
+Introduction
+
+Generated Knowledge Prompting
+
+A multiple-choice commonsense reasoning task involves predicting an answer a ∈ A q given a ques-tion q ∈ Q, where the set of choices A q is finite and can vary by question, and both questions and answers are variable-length text sequences.
+
+Our method answers commonsense questions in two steps.
+
+The first step is knowledge generation, where we use a language model p G (k|q) to generate knowledge statements conditioned on the question:
+
+K q = {k m : k m ∼ p G (k|q), m = 1 . . . M },
+
+where each knowledge statement k m is a variablelength text sequence.
+
+Intuitively, each statement contains information that is helpful for answering the question (e.g. Table 1).
+
+The second step is knowledge integration, where generated knowledge is integrated into the decision process of a language model used for inference, â = arg max a∈Aq p I (a|q, K q )
+
+In contrast, the vanilla setting of using the inference model without knowledge is represented by â = arg max a∈Aq p I (a|q).
+
+Next, we describe the knowledge generation and integration steps in detail.
+
+Knowledge Generation
+
+We generate question-related knowledge statements by prompting a language model.
+
+The prompt consists of an instruction, a few demonstrations that are fixed for each task, and a new-question placeholder.
+
+The demonstrations are human-written, and each consists of a question in the style of the task and a knowledge statement that is helpful for answering this question.
+
+For a given task, we write five demonstrations using the format in Table 2.
+
+We write questions (or select them from the training set, when available) that are representative of When generating knowledge for a new question q, we plug the question into the placeholder, and repeatedly sample generated continuations of this prompt to obtain a set of knowledge statements K q = {k 1 , k 2 , . . . , k M }.
+
+For full prompts on all the tasks we evaluate on, see Appendix A.2.
+
+Knowledge Integration Via Prompting
+
+In the knowledge integration step, we use a language model -called the inference model -to make predictions with each generated knowledge statement, then select the highest-confidence prediction.
+
+Specifically, we use each knowledge statement to prompt the model, forming M knowledgeaugmented questions:
+
+q 0 = q, q 1 = [k 1 ||q], . . . , q M = [k M ||q] where [•||•] denotes text concatenation.
+
+We compute an aggregated score for each answer choice a using the augmented question that best supports it under the inference model:
+
+p I (a|q, K q ) ∝ max 0≤m≤M p I (a|q m ).
+
+(1)
+
+Intuitively, this favors knowledge statements that strongly support one of the choices.
+
+The predicted answer is then,
+
+â = arg max a∈Aq max 0≤m≤M p I (a|q m ),
+
+which is the choice that gets most support from one of the knowledge statements.
+
+This prediction uses a single knowledge statement, which we refer to as the selected knowledge:
+
+k = k m where m = arg max 0≤m≤M max a∈Aq p I (a|q m ).
+
+The inference model may be any existing language model taken off-the-shelf (i.e. zero-shot) or finetuned on the task.
+
+We do not do any further finetuning with knowledge prompting.
+
+Experimental Setup
+
+Datasets And Task Setup
+
+We evaluate our method on four commonsense reasoning datasets which cover a variety of challenges and problem formats.
+
+NumerSense (Lin et al., 2020) consists of numerical statements about common objects and concepts where for each sentence we need to recover a masked number word.
+
+The choices are integers ranging from zero to ten, plus the word no, so the task can be framed as a multiple-choice problem.
+
+Since NumerSense is a diagnostic dataset, we only use zero-shot inference models, which is the current SOTA.
+
+We follow Zhang (2021) who uses the state-of-the-art zero-shot T5 with text-infilling setup and select the choice with highest likelihood on its token(s).
+
+We also implement zero-shot GPT-3 inference, where we plug in each choice to the question and compute the choice probability as the generative probability of the entire sentence, normalized over all the choices.
+
+CommonsenseQA (CSQA) (Talmor et al., 2019) is a 5-way multiple-choice QA dataset about common world scenarios.
+
+We do inference with the zero-shot and finetuned T5 models.
+
+For zero-shot T5, we format the question as text-infilling, and predict the choice with highest sequence-to-sequence language modeling probability.
+
+For finetuned T5 (including UnifiedQA which is SOTA), we use the same setup as Khashabi et al. (2020).
+
+CommonsenseQA 2.0 (CSQA2) (Talmor et al., 2021) is a binary classification dataset where we need to judge whether commonsense statements are true or false.
+
+We only do inference with the finetuned model, due to poor calibration of zero-shot models on this dataset.
+
+We use finetuned Unicorn (Lourie et al., 2021), which is the current SOTA, following the setup in Talmor et al. (2021).
+
+QASC (Khot et al., 2020) is an 8-way multiplechoice QA dataset about grade school science.
+
+This dataset also includes two pieces of background knowledge per question, whose composition fully answers the question.
+
+We do inference with zeroshot T5 and finetuned T5 (including UnifiedQA which is SOTA), using the same setups as CSQA.
+
+Knowledge Generation Baselines
+
+We study the impact of our knowledge generation method (shorthanded as K) by comparing with the following baselines: No knowledge (∅) We refer to inference without any knowledge statements as the vanilla baseline.
+
+Random sentences (R) Sampling random sentences from the language model without conditioning on the question.
+
+We use the same implementation setup as our knowledge generation method (i.e. also using GPT-3, with the same hyperparameters).
+
+Context sentences (C) Sampling sentences from the context of the question.
+
+This is implemented by sampling text continuations of the question from the language model.
+
+We use the same implementation setup as our knowledge generation method.
+
+Template-generated knowledge (T ) Self-talk (Shwartz et al., 2020) uses manually-designed templates to elicit knowledge statements from language models.
+
+For fair comparison, we use GPT-3 as the knowledge generator in self-talk, and bound the number of generations to M = 20 per question.
+
+Templates and other hyperparameters are kept the same as their original paper.
+
+Retrieval-based knowledge (IR) Instead of being generated, knowledge can be retrieved from appropriate sources.
+
+We consider the following retrieval-based methods.
+
+For NumerSense, knowledge is retrieved from sentences in Wikipedia and GenericsKB.
+
+For CSQA2, we use snippets returned by Google when querying the question.
+
+For QASC, we use the associated fact sentences that are used to create each question.
+
+Answers (A) Instead of generating knowledge, GPT-3 can be prompted to generate direct answers to questions.
+
+In the prompts, we use the same input questions as those in knowledge generation, while replacing the knowledge statement with the ground truth answer.
+
+We consider two baselines:
+
+(1) Generate one answer per question and use this to measure the performance of the few-shot GPT-3 inference model; (2) Generate M = 20 answers per question, and use these answers to prompt the SOTA inference models.
+
+Experimental Results
+
+Overall Performance
+
+Table 3 shows the results on zero-shot and finetuned models following our task setups.
+
+New state-of-the-art.
+
+We apply our method on top of the same inference model used in the previous state-of-the-art.
+
+On NumerSense, we achieve a  3 indicate that our method consistently improves upon the vanilla baseline set by finetuned inference models (though by smaller margins than in the zero-shot settings).
+
+Knowledge Generation Methods
+
+Analysis
+
+Human Evaluation
+
+Qualitative Examples
+
+Table 5 shows a few examples where the generated knowledge rectifies model prediction.
+
+Due to space constraints we only show the selected knowledge ( §2.2) for each question.
+
+In all examples, the model without prompted knowledge assigns a higher score to an incorrect answer than the correct answer, while with knowledge prompting, the correct answer is assigned a much higher score.
+
+Prompting with generated knowledge can transform commonsense reasoning into explicit reasoning procedures such as paraphrasing, induction, deduction, analogy, abductive reasoning, logical elimination, negation, and numerical reasoning.
+
+Table 5: More examples where prompting with generated knowledge reduces the reasoning type and rectifies the prediction.
+
+The first row of each section is the original question and the inference results associated with it; the second row is a model-generated knowledge statement that prompts the inference model.
+
+We show correct answers in green, incorrect answers in red, and their corresponding scores assigned by the inference model.
+
+Related Work
+
+Conclusion
+
+Figure 2: Performance with different number of generated knowledge statements per question (QASC dev set, T5-11b inference model).
+
+Figure 3: Improvement on top of different sizes of inference model (Numersense dev set).
+
+Figure 4: Improvement by different sizes of knowledge generation model (Numersense dev set, T5-11b inference model).
+
+Figure  4shows the NumerSense performance gain when using different sizes of GPT-3 as the knowledge generation model.
+
+On top of the T5-11b inference model, The 6.7B knowledge model gives
+
+Figure 5: Human evaluation of generated knowledge.
+
+Left: Percentage of good knowledge statements along each axis.
+
+Right: Agreement between human and machine on helpfulness of selected knowledge.
+
+Birds have two wings.
+
+Penguin is a kind of bird.
+
+Knowledge: Clouds are made of water vapor.
+
+Experimental results of applying different knowledge generation methods on various tasks and inference models.
+
+T5-11b is the zero-shot inference model, whereas other inference models are finetuned based on T5-11b.
+
+We bold the best and underline the second best numbers.
+
+Previous SOTA and retrieval-based methods are also based on the inference model in their corresponding column: * T5-11b 1.1 +digits (Submission by ISI Waltham);

@@ -1,0 +1,5 @@
+Development of reliable evaluation of open-domain dialogue has been highlighted as a known openproblem.
+
+We overcome previous challenges and provide a new human evaluation methodology shown as highly consistent, with results for models correlating at r = 0.969 in two separate data collection runs.
+
+Our evaluation has the advantage of highly accurate quality control of crowd-sourcing, differences in scoring strategies to be ironed out via score standardization, applicability of standard significance testing while increasing the reliability of results.

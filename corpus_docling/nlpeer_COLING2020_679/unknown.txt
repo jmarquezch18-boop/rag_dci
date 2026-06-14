@@ -1,0 +1,205 @@
+A Human Evaluation Of Amr-To-English Generation Systems
+
+Abstract
+
+are mostly accurate in ranking systems, but that collecting separate judgments for fluency, adequacy, and error types allows us to characterize the relative strengths and weaknesses of each system in more detail.
+
+Finally, we discuss common errors among sentences which received low scores from annotators, identifying issues for future researchers to address including hallucination, anonymization, and repetition.
+
+Background
+
+Evaluation Of Amr Generation
+
+Recent Advances In Amr Generation
+
+Shortly after the 2017 shared task, Konstas et al. (2017) made significant advances to the field with a neural sequence-to-sequence approach, mitigating the limitations of the small amount of AMR-annotated data by augmenting training data with a jointly-trained parser.
+
+Later work (Song et al., 2018) builds on this approach but uses a graph-to-sequence model to preserve information from the structure of the AMR.
+
+Several recent papers have explored variations on a graphto-sequence approach: improvements in encoding reentrancies and long-range dependencies (Damonte and Cohen, 2019), a dual graph encoder that captures top-down and bottom-up representations of graph structure (Ribeiro et al., 2019), and a densely-connected graph convolutional network (Guo et al., 2019).
+
+Recent sequence-to-sequence approaches include using structure-aware self-attention to capture relations between concepts within a sequence-to-sequence transformer model (Zhu et al., 2019), generating syntactic constituency trees as an intermediate step before generating surface structure (Cao and Clark, 2019), and fine-tuning GPT-2 on AMR (Mager et al., 2020).
+
+While neural approaches have achieved state-of-the-art BLEU scores, a few recent works have instead approached AMR generation through more rule-based methods.
+
+Manning (2019) constrains their system with rules, supplemented by simple statistical models, to avoid certain types of errors, such as hallucinations, that are possible in neural systems.
+
+Lapalme (2019) create a fully rule-based generation system to help humans check their AMR annotations.
+
+Methodology
+
+Survey Design
+
+Figures 1 and2 show examples of the survey interface for one sentence.
+
+Scalar Scores: The SemEval-2017 evaluation of AMR generation elicited judgments in the form of relative rankings of output from three systems at a time (May and Priyadarshi, 2017).
+
+However, recent work in evaluation of machine translation (Bojar et al., 2016) has found that direct assessment is a preferable method to collect judgments, partly because it evaluates absolute quality of translations.
+
+We use a similar direct assessment method, providing annotators with a slider which represents scores from 0 to 100, although annotators are not shown numbers.
+
+Unlike recent WMT evaluations, we collect separate scalar scores for fluency and adequacy.
+
+This has been common practice in many evaluations of NLG and MT; for example, Gatt and Belz (2010) also use separate direct assessment sliders for these two dimensions for NLG.
+
+Referenceless Design: Many human evaluations of NLG and MT, including the SemEval evaluation for AMR, provide a reference for the annotator to compare to the system output.
+
+However, since AMR is underspecified with respect to many aspects of phrasing including tense, number, word order, and definiteness, comparison to a single reference risks biasing annotators toward the specific phrasing used in the reference.
+
+Thus, each survey given to annotators consists of two sections: in the first half, annotators judged fluency, and saw only the output sentences; in the second, they judged the same sentences on adequacy, and were shown the AMR from which the sentence was generated, allowing them to compare the meanings.
+
+This design required that our annotators be familiar with the AMR scheme to identify mismatches in the concepts and relations expressed in the sentences.
+
+Adequacy Error Types: In addition to numeric scores, under each adequacy slider are three checkboxes where annotators can indicate whether certain types of adequacy errors apply:
+
+• That they cannot understand the meaning of the utterance (i.e. it is disfluent enough to be incomprehensible, making it difficult to meaningfully judge adequacy) • That information in the AMR is missing from the utterance • That information not present in the AMR is added in the utterance These options allow for a more nuanced analysis of the types of mistakes made by different systems than numerical scores alone would provide.
+
+Survey Structure: Instructions for judging fluency are provided at the beginning of the survey, and instructions for adequacy are shown before the start of the adequacy portion.
+
+For fluency, annotators are asked to "indicate how well each one represents fluent English, like you might expect a person who is a native speaker of English to use," and told that "some of these may be sentence fragments rather than complete sentences, but can still be considered fluent utterances." For adequacy, they are instructed to "determine how accurately the sentence expresses the meaning in the AMR." The full text of these instructions, which also includes examples, is provided in the supplementary material.
+
+Each page of the survey includes each system's output for a given sentence, presented in a random order.
+
+The reference is also included as a sentence to judge, but is not distinguished from the system outputs.
+
+Pilot Evaluation
+
+Main Evaluation
+
+Analysis
+
+Survey Reliability
+
+Pilot: The only previous human evaluation of several AMR-to-English generation systems was in the SemEval-2017 task discussed above.
+
+Since our survey had several differences from this previous evaluation, it was possible that the methodological differences could lead to substantial differences in judgments on the same data.
+
+Thus, before conducting the main survey, we validated our methodology by comparing the results of the pilot survey to that of the SemEval-2017 evaluation.
+
+This is the first evaluation of AMR generation to collect separate judgments for fluency and adequacy.
+
+We hypothesized that this would provide a finer-grained characterization of system behavior, and that annotators would be able to distinguish these two scales, though they are related (incomprehensible sentences necessarily have low fluency as well as accuracy, while references and high-quality output have near-perfect fluency and adequacy).
+
+Indeed, we find a Spearman's rank correlation of 0.68 between fluency and adequacy ratings in the pilot, indicating that while they are related, annotators were largely able to evaluate these two dimensions separately.
+
+The average fluency scores from our evaluation match the ranking of systems found in May and Priyadarshi (2017).
+
+Average adequacy scores are the same except that the third-and fourth-place systems switch places.
+
+This suggests that our methodology is reliable for ranking systems, and that separating judgments for fluency and adequacy allows for a more nuanced view of relative system performance than overall quality judgments.
+
+Finally, we calculate inter-annotator agreement (IAA) to measure how consistently annotators could make these judgments.
+
+We measure IAA for the numeric fluency and adequacy scores with Spearman's correlation, and for each adequacy error type with Cohen's Kappa.
+
+We find an average pairwise IAA of 0.78 for fluency and 0.67 for adequacy.
+
+For error types, we get lower agreement: average pairwise Kappa scores are 0.44 for incomprehensibility, 0.53 for missing information, and 0.28 for added information.
+
+This indicates that guidelines on when to annotate these error types were not made clear enough for annotators to apply them consistently; future studies using this methodology should clarify these guidelines for more reliable results.
+
+Main Survey: On this survey we find an overall Spearman's correlation of 0.58 between fluency and adequacy, indicating that annotators were able to evaluate these two dimensions separately.
+
+This correlation is lower than in the pilot, which may be due to clearer instructions given to annotators on what is meant by "fluency" and "adequacy", or because the two dimensions are easier to separate when fewer sentences are of very low quality.
+
+Since each set of 10 AMRs (60 judgments of each type per annotator) was double-annotated by a different pair of annotators, we evaluate IAA separately for each pair.
+
+Results are shown in table 1.
+
+Agreement scores vary considerably, but indicate moderate agreement overall.
+
+We find that IAA for fluency is moderate to high for most annotator pairs, with two exceptions.
+
+IAA is higher for adequacy than for fluency in 8 out of 10 cases, and reflects at least moderate agreement in all cases.
+
+For adequacy error types, IAA scores vary greatly and many are low.
+
+This indicates that guidelines given to annotators may not have been clear enough.
+
+For example, it was expected that annotators would infer, based on their knowledge that AMR does not specify tense, that sentences should not be considered wrong for having any particular tense; however, we learned after the evaluation that at least one annotator marked some cases of non-present tense in sentences as added information.
+
+q q q q q q q q q q q q 0 50 100 annotator score (a) Fluency by annotator q q q q q q q q q q q 0 50 100 annotator score   Table 3: Of 100 sentences, number with low fluency or adequacy (bottom 1/3 of both annotators' scores).
+
+Figure 3 gives each annotator's distribution of ratings, showing that different individuals distributed their judgments over the available 0-100 scale in different ways.
+
+Since each annotator judged each system the same number of times, this is not a problem for comparison of systems.
+
+However, when identifying low-scoring sentences ( §4.4 and §4.5), we normalize by annotator to account for these differences.
+
+Quality Of Systems
+
+Table 2 shows the average score given for each system for fluency and adequacy, as well as how often each was marked as having each adequacy error type.
+
+We find that on both fluency and adequacy scores, Konstas performs best, followed by Zhu, and Manning performs the worst.
+
+Guo and Ribeiro are in between and within 5 points of each other on each measure, with Ribeiro performing better on fluency and Guo on adequacy.
+
+Unsurprisingly, the lower a system's average fluency score, the more often sentences were marked as incomprehensible.
+
+The Missing Information and Added Information labels support the suggestion of Manning ( 2019) that although their system performs worse than others by most measures, its constraints make it less likely than machine-learning-based systems to omit or hallucinate information.
+
+Konstas's system performs the next-best by both of these measures; in particular, it rarely adds information not present in the AMR.
+
+Ribeiro's system is most prone to errors of these types, omitting information in nearly half of sentences and hallucinating it in nearly a third.
+
+Overall, the results from these questions indicate that neural AMR generation systems are prone to omit or hallucinate concepts from the AMR with concerning frequency.
+
+q q q q q q q q q q q q q q 0 50 100 konstas zhu ribeiro guo manning system score (a) Fluency by system q q q q q q q q q q q 0 50 100 konstas zhu ribeiro guo manning system score Figures 4a and4b show the distributions of scores each system received for fluency and adequacy, respectively.
+
+1 These show that Konstas is skewed toward very high scores, and that Manning skews toward low scores especially for fluency.
+
+Table 4: Each system's scores on automatic metrics for the full dataset of 1371 sentences (All) and the subset of 100 sentences used in the human evaluation (Sub.).
+
+Comparison To Automatic Metrics
+
+To investigate how well automatic metrics align with human judgments of the relative quality of these systems, we compute BLEU (Papineni et al., 2002), METEOR (Banerjee and Lavie, 2005), TER (Snover et al., 2006), and CHRF++ (Popović, 2017), and BERTScore (Zhang et al., 2020) for each system.2 Results are shown in table 4.
+
+All these metrics at least agree with humans that the Konstas and Zhu systems are the best, followed by Ribeiro and Guo, and that Manning is the worst.
+
+Within the top two, humans found Konstas substantially better than Zhu.
+
+When using the full data, all automatic metrics agree that Konstas is best, although for all but CHRF++ this is by a small margin.
+
+When evaluated only on sentences used in the human evaluation, only METEOR, CHRF++, and BERTScore preserve this ranking; BLEU finds the two essentially tied, while TER finds Zhu slightly better.
+
+For the middle two, humans preferred Ribeiro on fluency but preferred Guo on adequacy.
+
+On the full dataset, all the metrics capture that these systems are of very similar overall quality, varying only by a fraction of a point.
+
+On the subset of sentences, all metrics except BERTScore prefer Ribeiro, suggesting that these metrics may align more with human judgments of fluency than of adequacy.
+
+Overall, these results show that these metrics essentially capture human rankings of these systems on this dataset, although further research would be needed to more robustly confirm the validity of these metrics for the task.
+
+The results also highlight the limitations of metrics that produce only single scores.
+
+While these metrics can only capture that the Ribeiro and Guo systems are similar, our human evaluation found more nuance by identifying criteria on which each one outperforms the other.
+
+Since all these metrics give similar results on system-level rankings, we also calculate each metric's sentence-level correlation with human judgments for adequacy and fluency (each averaged over the two annotator's scores) for more insight into the relative abilities of the metrics to capture human judgments.
+
+Results are shown in table 5.
+
+We find that each metric correlates more strongly with adequacy than with fluency (perhaps related to the higher IAA for adequacy judgments), and that BERTScore has the strongest correlation with human judgments of both.
+
+Our results indicate that BERTScore is the strongest automatic metric for evaluating AMR generation, and that METEOR also appears slightly more reliable than BLEU.
+
+Analysis Of Adequacy Errors
+
+Analysis Of Fluency Errors
+
+Conclusion And Future Work
+
+Figure 1: Screenshot from the fluency section of the survey.
+
+Figure 2: Screenshot from the adequacy section of the survey.
+
+Figure 3: Violin plots of ranges of human judgments for each annotator.
+
+Figure 4: Violin plots of human judgments for each system.
+
+h / happen-02 :ARG1 (l / like-01 :ARG0 (i / i) :ARG1 (d / develop-02 :ARG1 (l2 / lot :mod (l3 / large))))))
+
+For each system, average fluency and adequacy scores and percentage where each adequacy error type was selected.
+
+Scores for the reference sentences are included for comparison.
+
+Sentence-level correlations of each metric with average human judgments.

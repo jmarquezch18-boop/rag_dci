@@ -1,0 +1,65 @@
+We use two different measures that represent the accuracy of model predictions: a hard accuracy measure (hit at one, H@1) and a "ballpark match" (soft accuracy) measure (WuP).
+
+H@1 score As one of the most commonly used evaluation metrics for the relation prediction task, the hits-at-k (H@k) is the proportion of correct predictions (hits) within the top k ranked predictions.
+
+As the most intuitive and practical measure of each model's performance, we only consider the top first prediction accuracy (H@1), and not others with larger k (e.g., H@10).
+
+Wu & Palmer similarity (WuP) The Wu and Palmer score (Wu and Palmer, 1994) is a similarity measure between two nodes in a taxonomy that ranges between 0 and 1.
+
+To quantify how close they are, it considers how deep the two nodes and their closest common ancestor are in a taxonomy.
+
+For instance, the WuP score for orange.n.01 and lemon.n.01 is 0.75, while it is only 0.35 for orange.n.01 and car.n.01.
+
+To assess how close a prediction is to the gold hypernym, we compute the WuP score between them using NLTK's implementation.
+
+8 We report an averaged WuP score of each system.
+
+Results Overall, hypo2path rev shows the highest aggregate (micro-averaged) H@1 (dev: 24.43, test: 25.59) across the three hypernymy relations (nouns, instance nouns, and verbs), while CRIM has the best aggregate ballpark correctness (WuP) scores that are closely followed by hypo2path rev (Table 6).
+
+For both nouns (Table 3) and instance nouns (Table 4), hypo2path rev15 is a clear winner in terms of H@1.
+
+Despite being a simple model, it achieves the best H@1 with notable improvements over more complex benchmarks.
+
+We observe large gains (5.17 points) on nouns over CRIM and some gains (1.27 points) on instance nouns over text2edges.
+
+With respect to the ballpark accuracy (WuP), hypo2path shows similar performance to CRIM and text2edges on nouns, while text2edges does slightly better on instance nouns.
+
+For nouns, the reversed hypo2path model ('hypo2path rev') achieved the best performance on H@1, while the non-reversed and reversed versions performed similarly in terms of WuP scores.
+
+Without reversing the path, the model's H@1 slightly degraded, and is closer to hypo2hyper's results.
+
+The performances of Path Encoder followed closely after the proposed three encoder-decoder models.
+
+On instance nouns, performances of different models are overall much higher than on nouns.
+
+The best results are observed from the hypo2hyper, hypo2path rev, and text2edges models.
+
+That hypo2hyper and hypo2path rev perform similarly is not surprising: instance hypernymy is less likely to be learned from path generation, as it is a special type of hypernymy that only holds between a leaf and its parent node.
+
+On the other hand, none of the models16 does well on verb hypernymy (Table 5).
+
+CRIM achieved the highest scores overall for verbs.
+
+Consistent with the experiments on nouns and instance nouns, hypo2path rev had relatively strong performance, with 9.22 H@1 on the test set, which is comparable to the best H@1 (9.71).
+
+However, the best H@1 is still below 10% and the best WuP score is not much higher than the closest co-hyponym baseline.
+
+Discussion Despite being trained with about ten times less data, scores for instance hypernymy are generally much higher than for noun hypernymy.
+
+Our finding that it is easier to predict hypernyms for individual entities than for common nouns is consistent with previous work (Boleda et al., 2017;Camacho-Collados et al., 2018;Balažević et al., 2019;Nguyen et al., 2019).
+
+On the other hand, scores for hypernymy amongst verbs are very low, despite having about twice as much training data as instance hypernyms.
+
+This could be due both to the fact that verbs have more  complex semantics than nouns and to the structure of the WordNet verb hierarchy; while the noun subgraph is a single tree rooted at entity.n.01, the verb subgraph consists of 599 shallow trees.
+
+The WordNet verb hierarchy also has a number of annotation errors described in Richens (2008).
+
+In addition, verbs are more polysemous than nouns (Fellbaum, 1990), and the hypernym relation for verbs (troponymy) encompasses a diverse set of heterogeneous subsumption relations (Fellbaum, 2002;Richens, 2008).
+
+Our results also suggest that it may be more effective to learn hypernymy separately from other lexical relations, rather than in a multi-relational setup.
+
+For example, M3GM trained with all 11 relations of WN18RR achieved a high aggregate validation H@1 of 39.88 in our replication , but a much lower H@1 for hypernymy (1.19) and instance hypernymy (3.74).
+
+These were evaluated on the original WN18RR, following Pinter and Eisenstein (2018), so these scores are not comparable to Tables 3,4, 5, 6.
+
+Unlike Pinter and Eisenstein (2018), we evaluated M3GM in one direction (i.e., only hypernym prediction, rather than both hyponym and hypernym prediction).17 These results are in line with the H@10 scores reported by Nguyen et al. (2019) and Balažević et al. (2019), which are substantially lower for hypernymy than for the other lexical relations in WN18RR.

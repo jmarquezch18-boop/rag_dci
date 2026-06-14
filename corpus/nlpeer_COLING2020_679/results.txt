@@ -1,0 +1,87 @@
+Automatic Metrics: The vast majority of AMR generation papers measure their performance only with automatic metrics.
+
+The most common of these metrics is BLEU (Papineni et al., 2002), which is typically used to determine the state of the art.
+
+However, it is unclear whether BLEU is a reliable metric to compare AMR generation systems: May and Priyadarshi (2017) found that BLEU disagreed with human judgments on the ranking of five AMR generation systems, including disagreeing on which system was the best.
+
+Concerns have also been raised about the suitability of BLEU for NLG in general; for example, Reiter (2018) found that BLEU has generally poor correlations with human judgments for NLG.
+
+Novikova et al. (2017) compared many metrics to human judgments on NLG from meaning representations and concluded that use of reference-based metrics relies on an invalid assumption that references are correct and complete enough to be used as a gold standard.
+
+Some recent AMR generation papers have reported other automatic metrics alongside BLEU.
+
+Many have reported METEOR (Banerjee and Lavie, 2005), and a few have included TER (Snover et al., 2006) and, more recently, CHRF++ (Popović, 2017) and BERTScore (Zhang et al., 2020).
+
+However, it is unclear how accurately any of these metrics capture the relative performance of AMR generation systems.
+
+Human Evaluation: Prior to this work, the only human evaluation comparing several AMR generation systems was the SemEval-2017 AMR shared task, which used a ranking-based evaluation of five systems (May and Priyadarshi, 2017).
+
+All of these systems perform far below the current state-of-the-art, making a new evaluation necessary.
+
+While most AMR generation papers have reported no human evaluation of their systems, a few have conducted smaller-scale evaluations.
+
+Ribeiro et al. (2019) conducted a Mechanical Turk evaluation to compare their best graph encoder model with a sequence-to-sequence baseline, finding that their model performs better on both meaning similarity between the generated sentence and the gold reference, and readability of the generated sentence.
+
+Mager et al. (2020) carry out a human evaluation of overall quality, comparing their GPT-2-based system to three others (Guo et al., 2019;Ribeiro et al., 2019;Zhu et al., 2019), all of which are also evaluated in our experiment.
+
+For the three systems included in both our evaluation and theirs, the relative results are comparable; Mager et al. (2020) find their own system to be better than all three.
+
+Lapalme (2019) also conducted a small human evaluation in which annotators chose the best output out of three options: their own system, ISI (Pourdamghani et al., 2016), and JAMR (Flanigan et al., 2016).
+
+They find that their rule-based system is on par with ISI and much better than JAMR, despite having a much lower BLEU.
+
+Beyond AMR generation, other NLG tasks are also often evaluated only with automatic metrics; for example, Gkatzia and Mahamood (2015) found that 38.2% of NLG papers overall, and 68% of those published in ACL venues, used automatic metrics.
+
+However, as discussed above, many studies have found that these metrics are not a reliable proxy for human judgments.
+
+One example of the use of human evaluation is the Conference on Machine Translation (WMT), which runs an annual evaluation of machine translation systems (e.g. Barrault et al., 2019).
+
+Before collecting the full dataset of human judgments for AMR generation, we completed a smaller pilot experiment to test the validity and practicality of the methodology.
+
+This pilot used the data and systems included in the SemEval-2017 shared task (May and Priyadarshi, 2017).
+
+A random subset of 25 out of the 1293 sentences in the dataset were used.
+
+All were annotated by three annotators, each of whom was a native speaker of English and a linguist with experience with AMR.
+
+We tweaked the design of the later survey based on feedback from the pilot annotators.
+
+In particular, the surveys were shortened (annotators completed two batches of 10 sentences each, instead of one with 25); more thorough instructions were given, with examples; and wording was changed from "sentence" to "utterance" to reflect that some are not full sentences in a grammatical sense.
+
+The main evaluation was larger than the pilot, and evaluated more recent systems, most of which are of a markedly higher quality than those in the pilot.
+
+We contacted the authors of several recent papers on AMR-to-English generation to obtain their system's output for use in the evaluation, and included all systems for which we obtained usable data in time to begin evaluation: Konstas et al. (2017), Guo et al. (2019), Manning (2019), Ribeiro et al. (2019), and Zhu et al. (2019).
+
+These systems are all described in §2.2.
+
+The Konstas and Zhu systems both approach AMR generation as a sequence-to-sequence task: Konstas is pretrained on 'silver' data from a jointly-trained AMR parser to mitigate the limitations of the small amount of gold AMR data, while Zhu uses a transformer-based model.
+
+Guo and Ribeiro both use graph-tosequence models: Guo uses densely-connected graph convolutional networks to model the graph structure, while Ribeiro uses a dual representation to capture both bottom-up and top-down perspectives on the graph.
+
+Finally, Manning is the only non-neural system in this evaluation; it uses handwritten rules to generate possible realizations, augmented with simple statistical modules to choose between candidates.
+
+Data: We use the test set from the LDC2017T10 AMR dataset (Knight et al., 2017).
+
+However, some of the system output we obtained was generated from the earlier 2015 version of this data (LDC2015E86); these test sets contain the same sentences, with some updates to the AMRs, so we decided to only include AMRs at the intersection of these datasets in our evaluation.
+
+Additionally, we chose to exclude AMRs whose root relation was multisentence, which indicates that the portion of text officially segmented as one sentence includes what AMR annotators analyzed as two or more sentences.
+
+These were excluded because they are often very long and pilot annotators found they could be very difficult to read and evaluate, and because unlike other AMR relations, multisentence does not represent a semantic relationship between elements of meaning.
+
+A total of 335 sentences were excluded from consideration due to differences in their AMRs between the different versions of the data, and 71 for being multi-sentence.
+
+Accounting for overlap between the excluded sets, 998 out of 1371 total sentences in the test set were considered eligible for our evaluation.
+
+A random sample of 100 of these were used in the survey.
+
+Annotation: A total of nine annotators participated in this evaluation, including the three who participated in the pilot.
+
+All had prior training in AMR annotation, mostly from taking a semester-long course focused on AMR and other meaning representations.
+
+Six of the annotators were native English speakers; all were either current or former PhD students or professors at our university.
+
+Each person annotated two different batches of 10 sentences each, except for one annotator who did four batches.
+
+The result was that each set of sentences was double-annotated, allowing us to quantify inter-annotator agreement.
+
+Additionally, batches were assigned such that each annotator overlapped with at least two other annotators.

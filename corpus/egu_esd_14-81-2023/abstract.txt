@@ -1,0 +1,23 @@
+Detection and attribution (D&A) of forced precipitation change are challenging due to internal variability, limited spatial, and temporal coverage of observational records and model uncertainty.
+
+These factors result in a low signal-to-noise ratio of potential regional and even global trends.
+
+Here, we use a statistical method -ridge regression -to create physically interpretable fingerprints for the detection of forced changes in mean and extreme precipitation with a high signal-to-noise ratio.
+
+The fingerprints are constructed using Coupled Model Intercomparison Project phase 6 (CMIP6) multi-model output masked to match coverage of three gridded precipitation observational datasets -GHCNDEX, HadEX3, and GPCC -and are then applied to these observational datasets to assess the degree of forced change detectable in the real-world climate in the period 1951-2020.
+
+We show that the signature of forced change is detected in all three observational datasets for global metrics of mean and extreme precipitation.
+
+Forced changes are still detectable from changes in the spatial patterns of precipitation even if the global mean trend is removed from the data.
+
+This shows the detection of forced change in mean and extreme precipitation beyond a global mean trend is robust and increases confidence in the detection method's power as well as in climate models' ability to capture the relevant processes that contribute to largescale patterns of change.
+
+We also find, however, that detectability depends on the observational dataset used.
+
+Not only coverage differences but also observational uncertainty contribute to dataset disagreement, exemplified by the times of emergence of forced change from internal variability ranging from 1998 to 2004 among datasets.
+
+Furthermore, different choices for the period over which the forced trend is computed result in different levels of agreement between observations and model projections.
+
+These sensitivities may explain apparent contradictions in recent studies on whether models under-or overestimate the observed forced increase in mean and extreme precipitation.
+
+Lastly, the detection fingerprints are found to rely primarily on the signal in the extratropical Northern Hemisphere, which is at least partly due to observational coverage but potentially also due to the presence of a more robust signal in the Northern Hemisphere in general.

@@ -1,0 +1,43 @@
+To evaluate the performance of our model, we follow the metrics used in the Room-Across-Room paper (Ku et al., 2020) (details in Appendix): Success Rate (SR), Success rate weighted by Path Length (SPL) (Anderson et al., 2018a), normalized Dynamic Time Warping (nDTW) (Magalhaes et al., 2019), and success rate weighted by Dynamic Time Warping (sDTW) (Magalhaes et al., 2019).
+
+nDTW and sDTW are the main metrics for RxR and SR and SPL are the main metrics for R2R.
+
+We compare our final agent model with results on the Room-Across-Room (RxR) leaderboard.
+
+Our agent is a multilingual model that learn three languages in the same model.
+
+Compared with monolingual agents that learn instructions in three languages separately, a multilingual agent performs worse due to high-resource languages degradation (Ku et al., 2020;Aharoni et al., 2019;Pratap et al., 2020).
+
+Our agent is tested under the single-run setup.
+
+In the single-run setting, the agent only navigates once and does not pre-explore the test environment.
+
+As shown in Table 1, our CLEAR model with CLIP features is 16.88% higher in nDTW score than the baseline mono-lingual model (Ku et al., 2020) ('RxR') that utilizes ResNet features and other base navigation model.
+
+Furthremore, our model is 2.59% higher in nDTW score than the mono-lingual model (Shen et al., 2022) ('CLIP') that utilizes CLIP features and the same base navigation model as ours.
+
+We demonstrate the effectiveness of our learned visual and language representations with ablation studies.
+
+The baseline model (annotated as 'ResNet' in Table 2) uses multilingual BERT and pre-trained ResNet to encode instructions and images without the representation learning stage.
+
+Our CLEAR-ResNet ('ResNet+both' in Table 2) outperforms its baseline models in all evaluation metrics on average.
+
+Specifically, it improves the baseline model by 5.3% in success rate (SR) and 4.3% in nDTW score on average over three languages.
+
+These results demonstrate that our CLEAR agent is not only more capable of reaching the target, but also follows the ground-truth path better.
+
+We then show that both the cross-lingual language representation and environment-agnostic visual representation contribute to the overall improvement.
+
+When the cross-lingual language representation is added ('+text'), we see consistent improvement on the averaged metrics and observe that Hindi benefits most from the crosslingual language representation.
+
+When adding the environment-agnostic visual representation ('+visual'), the nDTW score improves by 2.6%.
+
+These improvements validate the effectiveness of our learned language and visual representations.
+
+Moreover, we show that our CLEAR approach could generalize to other pre-trained visual features.
+
+We implement another model (annotated as 'CLIP' in Table 2) that uses CLIP to encode images, which is a stronger baseline compared with the ResNet baseline ('ResNet' in Table 2).
+
+Our CLEAR-CLIP model ('CLIP+both' in Table 2) also shows 2.7% improvement in success rate (SR) and 1.2% improvement in nDTW score on average over three languages.
+
+This demonstrates the effectiveness of our CLEAR approach over different pre-trained visual features.

@@ -1,0 +1,535 @@
+Contracat: Contrastive Coreference Analytical Templates For Machine Translation
+
+Abstract
+
+Introduction
+
+Coreference Resolution In Machine Translation
+
+Addressing discourse phenomena is important for high-quality MT.
+
+Apart from document-level coherence and cohesion, anaphoric pronoun translation has proven to be an important testing ground for the ability of context-aware nmt to model discourse.
+
+Anaphoric pronoun translation is the focus of several works in context-aware nmt (Bawden et al., 2018;Voita et al., 2018;Stojanovski and Fraser, 2019;Miculicich et al., 2018;Voita et al., 2019;Maruf et al., 2019).
+
+However, the choice of an evaluation metric for cr is nontrivial.
+
+bleu-based evaluation is insufficient for measuring improvement in cr (Hardmeier, 2012) without carefully selecting or modifying test sentences for pronoun translation (Voita et al., 2018;Stojanovski and Fraser, 2018).
+
+Alternatives to bleu include F 1 , partial credit, and oracle-guided approaches (Hardmeier and Federico, 2010;Guillou and Hardmeier, 2016;Miculicich Werlen and Popescu-Belis, 2017).
+
+However, Guillou and Hardmeier (2018) show that these metrics can miss important cases and propose semi-automatic evaluation.
+
+In contrast, our evaluation is completely automatic.
+
+We focus on scoring-based evaluation (Sennrich, 2017), which works by creating contrasting pairs and comparing model scores.
+
+Accuracy is calculated as how often the model chooses the correct translation from a pool of alternative incorrect translations.
+
+Bawden et al. (2018) manually create such a contrastive challenge set for English→French pronoun translation.
+
+ContraPro (Müller et al., 2018) follows this work, but creates the challenge set in an automatic way.
+
+We show that making small variations in ContraPro substantially changes the scores.
+
+Our work is related to adversarial datasets for testing robustness used in Natural Language Processing tasks such as studying gender bias (Zhao et al., 2018;Rudinger et al., 2018;Stanovsky et al., 2019), natural language inference (Glockner et al., 2018) and classification (Wang et al., 2019).
+
+Jwalapuram et al. (2019) propose a model for pronoun translation evaluation trained on pairs of sentences consisting of the reference and a system output with differing pronouns.
+
+However, as Guillou and Hardmeier (2018) point out, this fails to take into account that often there is not a 1:1 correspondence between pronouns in different languages.
+
+As a result, a system translation may be correct despite not containing the exact pronoun in the reference, and incorrect even if containing the pronoun in the reference, because of differences in the translation of the referent.
+
+Moreover, introducing a separate model which needs to be trained before evaluation adds an extra layer of complexity in the evaluation setup and makes interpretability more difficult.
+
+In contrast, templates can easily be used to pinpoint specific issues of an nmt model.
+
+Our templates follow previous work (Ribeiro et al., 2018;McCoy et al., 2019;Ribeiro et al., 2020) where similar tests are proposed for diagnosing nlp models.
+
+Do Androids Dream Of Coreference Translation Pipelines?
+
+Imagine a hypothetical coreference pipeline that generates a pronoun in a target language, as illustrated in Table 1.
+
+First, markables (entities that can be referred to by pronouns) are tagged in the source sentence (we restrict ourselves to concrete entities as we wish to detect gender).
+
+Then, the subset of animate entities are detected, and human entities are separated from other animate ones (since it cannot refer to a human entity).
+
+Second, coreferences are resolved in the source language.
+
+This entails handling phenomena such as world knowledge, pleonastic it, and event references.
+
+Third, the pronoun is translated into the target language.
+
+This requires selecting the correct gender given the referent (if there is one), and selecting the correct grammatical case for the target context (e.g., accusative, if the pronoun is the grammatical object in the target language sentence).
+
+This idealized pipeline would produce the correct pronoun in the target language.
+
+The coreference steps resemble the rule-based approach implemented in Stanford Corenlp's Coref-Annotator (Raghunathan et al., 2010;Lee et al., 2011).
+
+However, nmt models are currently unable to decouple the individual steps of this pipeline.
+
+We propose to isolate each of these steps through targeted examples.
+
+Model
+
+Adversarial Attacks
+
+About Contrapro
+
+ContraPro is a contrastive challenge set for English→German pronoun translation evaluation.
+
+The set consists of English sentences containing an anaphoric pronoun "it" and the corresponding German translations.
+
+It contains three contrastive translations, differing based on the gender of the translation of it: er, sie, or es.
+
+The challenge set artificially balances the amount of sentences where it is translated to each of these three German pronouns.
+
+The appropriate antecedent may be in the main sentence or in a previous sentence.
+
+For evaluation, a model needs to produce scores for all three possible translations, which are compared against ContraPro's gold labels.
+
+We create automatic adversarial attacks on ContraPro that modify theoretically inconsequential parts of the context sentence before the occurrence of it.
+
+Contrary to expectations, we find that accuracy degrades in all adversarial attacks.
+
+Results are presented in Figure 1.
+
+Adversarial Attack Generation
+
+Our three modifications are:
+
+1. Phrase Addition: Appending and prepending phrases containing implausible antecedents:
+
+The Church is merciful but that's not the point.
+
+It always welcomes the misguided lamb.
+
+Possessive Extension:
+
+Extending the original antecedent with a possessive noun phrase: I hear her the doctor's voice!
+
+It resounds to me from heights and chasms a thousand times! 3.
+
+Synonym Replacement: Replacing the original German antecedent with a synonym of a different gender (note: der Vorhang (masc.) and die Gardine (fem.) are synonyms meaning curtain):
+
+The curtain rises.
+
+It rises.
+
+→ Der Vorhang Die Gardine geht hoch.
+
+Er Sie geht hoch.
+
+Phrase Addition is applied to all 12,000 ContraPro examples.
+
+Depending on suitable conditions, the second and third attack are applied to 3,838 and 1,531 examples, respectively.
+
+The Appendix shows results where we vary punctuation and use different added and possessive noun phrases.
+
+Phrase Addition
+
+This attack modifies the previous sentence by appending phrases such as "…but he wasn't sure" and also prepending phrases such as "it is true:...".
+
+A range of other simple phrases can be used, which we leave out for simplicity.
+
+In general, all phrases we tried provided lower scores.
+
+These attacks introduce a human entity, a pleonastic or an event reference it (e.g. "it is true") which are all not plausible antecedents for the anaphoric it.
+
+We present results for appending "it is true" in Figure 1.
+
+Results with using different phrases are presented in the Appendix.
+
+In all cases, we prepend or append the same phrase to all ContraPro examples.
+
+Possessive Extension
+
+This attack introduces a new human entity by extending the original antecedent A with a possessive noun phrase e.g., "the woman's A".
+
+Only two-thirds of the 12,000 ContraPro sentences are linked to an antecedent phrase.
+
+Grammar and misannotated antecedents exclude half of the remaining phrases.
+
+We put pos-tag constraints on the antecedent phrases before extending them.
+
+This reduces our subset to 3,838 modified examples.
+
+Our possessive extensions can be humans (the woman's), organisations (the company's) and names (Maria's).
+
+Synonym Replacement
+
+This attack modifies the original German antecedent by replacing it with a German synonym of a different gender.
+
+For this we first identify the English antecedent and its most frequent synset in WordNet (Miller, 1995).
+
+We obtain a German synonym by mapping this WordNet synsets to GermaNet (Hamp and Feldweg, 1997) synsets.
+
+Finally, we modify the correct German pronoun translation to correspond to the gender of the antecedent synonym.
+
+Approximately one quarter of the nouns in our ContraPro examples are found in GermaNet.
+
+In 1,531 cases, a synonym of different gender could be identified.
+
+Scoring well on the Synonym Replacement attack cannot be done without understanding the pronoun/noun relationship.
+
+This attack gets to the core of whether nmt uses cr heuristics instead.
+
+We evaluate a random sample of 100 auto-modified examples as a quality control metric.
+
+We note 11 issues with semantically-inappropriate synonyms.
+
+Overall, in 14 out of 100 cases, the model switches from correct to incorrect predictions because of synonym-replacement.
+
+Only 4 out of these 14 cases come from the questionable synonyms, showing that the drop in ContraPro scores is meaningful.
+
+Adversarial Attack Results
+
+Templates
+
+Automatic adversarial attacks offer less freedom than templates as many systematic modifications cannot be applied to the average sentence.
+
+Thus, our templates are based on the hypothetical coreference pipeline in Section 3 that target each of the three steps: i) Markable Detection, ii) Coreference Resolution and iii) Language Translation.
+
+Our minimalistic templates draw entities from sets of 25 animals, 20 human professions (McCoy et al., 2019), 15 foods, and 5 drinks, along with associated verbs and attributes.
+
+We use these sets to fill slots in our templates.
+
+Animals and foods are natural choices for subject and object slots referenced by it.
+
+Restricting our sets to interrelated concepts with generically applicable verbs-all animals eat and drink-ensures semantic plausibility.
+
+Other object sets, such as buildings, had more semantic implausibility issues and were not included in the final corpus.
+
+The cat ate the egg.
+
+It ( / ) was big.
+
+Order I stood in front of the cat and the dog.
+
+It ( / ) was big.
+
+Wow! She unlocked it.
+
+The cat and the actress were happy.
+
+However it ( ) was happier.
+
+The cat ate the apple and the owl drank the water.
+
+It ( ) ate the apple quickly.
+
+The cat ate the cookie.
+
+It ( ) was hungry.
+
+The cat ate the sausage.
+
+It was raining.
+
+The cat ate the carrot.
+
+It came as a surprise.
+
+Antecedent Gender I saw a cat.
+
+It( ) was big.
+
+→ Ich habe eine Katze gesehen.
+
+Sie ( ) war groß.
+
+Table 2: Template examples targeting different cr steps and substeps.
+
+For German, we create three versions with er, sie, or es as different translations of it.
+
+Template Generation
+
+Our templates consist of a previous sentence that introduces at least one entity and a main sentence containing the pronoun it.
+
+We use contrastive evaluation to judge anaphoric pronoun translation accuracy for each template; we create three translated versions for each German gender corresponding to an English sentence, e.g. "The cat ate the egg.
+
+It rained." and the corresponding "Die Katze hat das Ei gegessen.
+
+Er/Sie/Es regnete".
+
+To fill a template, we only draw pairs of entities with two different genders, i.e. for animal a and food f : gender(a) = gender(f ).
+
+This way we can determine whether the model has picked the right antecedent.
+
+We refer to "the model picking an antecedent" as the model scoring the target sentence containing the German third person pronoun with the antecedent's gender higher than the provided alternatives.
+
+First, we create templates that analyze priors of the model for choosing a pronoun when no correct translation is obvious.
+
+Then, we create templates with correct translations, guided by the three broad coreference steps.
+
+Table 2 provides examples for our templates and the results are shown in Figure 2.
+
+Template details-entity sets, statistics, etc.-are provided in the Appendix.
+
+Priors
+
+Prior templates do not have a correct answer, but help to understand the model's biases.
+
+We expose three priors with our templates: i) grammatical roles prior (e.g. subject) ii) position prior (e.g. first antecedent) and iii) a general prior if no antecedent and only a verb is present.
+
+For i), we create a Grammatical Role template where both subject and object are valid antecedents.
+
+We find that in 72.3% of the template instances, the model chooses the object as the antecedent.
+
+For ii), we create a Position template where two objects are enumerated (see Table 2).
+
+We create an additional example where the entities order is reversed and test if there are priors for specific nouns or alternatively positions in the sentence.
+
+The model shows a strong prior for neuter by predicting es in most cases, even if the two entities are masculine and feminine.
+
+For iii), we create a Verb template, expecting that certain transitive verbs trigger certain object gender choices.
+
+We use 100 frequent transitive verbs and create sentences such as the example in Table 2.
+
+As expected, it is translated to the neuter es most of the time, with notable exceptions where the verb is strongly associated with a single noun, e.g. "Sie hat sie entriegelt" is scored higher for "She unlocked it".
+
+We presume that the reason for this is that to unlock a door is very common and door (Tür) is feminine in German.
+
+Markable Detection With A Humanness Filter
+
+Before doing the actual cr, the model needs to identify all possible entities that it can refer to.
+
+We construct a template that contains a human and animal which are in principle plausible antecedents, if not for the condition that it does not refer to people.
+
+For instance, the model should always choose cat in "The actress and the cat were hungry.
+
+However it was hungrier.".
+
+We find that the model instead falls back to translating it to the neuter es in all cases.
+
+Coreference Resolution
+
+Having determined all possible antecedents, the model has to choose the correct one, relying on semantics, syntax, and discourse.
+
+The pronoun it can in principle be used as an anaphoric (referring to entities), event reference or pleonastic pronoun (Loáiciga et al., 2017).
+
+For the anaphoric it, we identify two major ways of identifying the antecedent: lexical overlap and world knowledge.
+
+Our templates for these categories are meant to be simple and solvable.
+
+Overlap: Broadly speaking the subject, verb, or object can overlap from the previous sentence to the main sentence, as well as combinations of them.
+
+This gives us five templates: i) subjectoverlap ii) verb-overlap iii) object-overlap iv) subject-verb-overlap and v) object-verb-overlap.
+
+We always use the same template for the context sentence.
+
+e.g. "The cat ate the apple and the owl drank the water.".
+
+For the object-verb-overlap we would then create the main sentence "It ate the apple quickly." and expect the model to choose cat as antecedent.
+
+To keep our overlap templates order-agnostic, we vary the order in the previous sentence by also creating "The owl drank the water and the cat ate the apple." However our results in 6.2 show that the model's predictions are almost completely random and are influenced by position priors, e.g., the first mentioned subject, or a prior for the neuter es when it needs to decide between the two subjects.
+
+World Knowledge: cr has been traditionally seen as challenging as it requires world knowledge.
+
+Our templates test simple forms of world knowledge by using attributes that either apply to animal or food entities, such as cooked for food or hungry for animals.
+
+We then evaluate whether the model chooses e.g. cat in "The cat ate the cookie.
+
+It was hungry." As discussed later, the model occasionally predicts answers that require world knowledge, but most predictions are guided by a prior for choosing the neuter es or a prior for the subject.
+
+Pleonastic and Event Templates: For the other two ways of using it, event reference and pleonastic-it, we again create a default previous sentence ("The cat ate the apple.").
+
+For the main sentence, we used four typical pleonastic and event reference phrases such as "It is a shame" and "It came as a surprise".
+
+We expect the model to correctly choose the neuter es as a translation every time and the strong prior for the neuter gender causes the model to do so nearly perfectly.
+
+Translation To German
+
+After cr, the decoder has to translate from English to German.
+
+In our contrastive scoring approach the translation of the English antecedent to German is already given.
+
+However the decoder is still required to know the gender of the German noun to select between er, sie or, es.
+
+We test this with a list of concrete nouns selected from Brysbaert et al. (2014), which we filter for nouns that occur more than 30 times in the training data.
+
+We are left with 2051 nouns which are plugged into the "I saw a N .
+
+It was {big, small}." template.
+
+Results
+
+Augmentation
+
+We present an approach for augmenting the training data.
+
+While challenging for nlp, we focus on a narrow problem which lends itself to easier data manipulation.
+
+Our previous analyses show that our model is capable of modeling the gender of nouns.
+
+However, they also show a strong prior to translate it to es and very little cr capability.
+
+Our goal with the augmentation is to break off the strong prior and test if this can give rise to better cr in the model.
+
+We attempt to do this by augmenting our training data and call it Antecedent-free augmentation (afa).
+
+We identify candidates for augmentation as sentences where a coreferential it refers to an antecedent not present in the current or previous sentence (e.g., I told you before. <SEP> It is red.
+
+→ Ich habe dir schonmal gesagt.
+
+<SEP> Es ist rot.).
+
+We create augmentations by adding two new training examples where the gender of the German translation of "it" is modified (e.g., the two new targets are "Ich habe dir schonmal gesagt.
+
+<SEP> Er ist rot." and "Ich habe dir schonmal gesagt.
+
+<SEP> Sie ist rot.").
+
+The source side remains the same.
+
+An additional example is shown in Table 3.
+
+Antecedents and coreferential pronouns are identified using a cr tool (Clark and Manning, 2016a;Clark and Manning, 2016b).
+
+We fine-tune our already trained concatenation model on a dataset consisting of the candidates and the augmented samples.
+
+As a baseline, we fine-tune on the candidates only so as to confidently say that any potential improvements come from the augmentations.
+
+Results
+
+Adversarial Attacks
+
+afa provides large improvements, scoring 85.3% on ContraPro.
+
+Results are shown in Figure 3.
+
+The afa baseline (fine-tuning on the augmentation candidates only) improves by 1.94%,
+
+You let me worry about that. <SEP> How much you take for it? Reference Lassen Sie das meine Sorge sein. <SEP> Wie viel kostet er? Augmentation 1
+
+Lassen Sie das meine Sorge sein. <SEP> Wie viel kostet sie?
+
+Augmentation 2
+
+Lassen Sie das meine Sorge sein. <SEP> Wie viel kostet es? presumably because many candidates consist of coreference chains of "it" and the model learns they are important for coreferential pronouns.
+
+However, the improvement is small compared to afa.
+
+Results on ContraPro for each gender (see Appendix) show that performance on er and sie is substantially increased, suggesting that the augmentation successfully removes the strong bias towards es.
+
+Templates provide further evidence about this.
+
+Although, the adversarial attacks lower afa scores, in contrast to concat, the model is more robust and the performance degradation is substantially lower (except on the synonym attack).
+
+We experimented with different learning rates during fine-tuning and present results with the lr that obtained the best baseline ContraPro score.
+
+Detailed scores in the Appendix show how lr can balance the scores across the three different genders.
+
+Furthermore, concat and afa obtain 31.5 and 32.2 BLEU on ContraPro, respectively, showing that this fine-tuning procedure, which is tailored to pronoun translation, does not lead to any degradation in general translation quality.
+
+Templates
+
+From the prior templates, we observe that the prior over gender pronouns is more evenly spread and not concentrated on es.
+
+This also provides for a more even distribution on the Position and Role Prior template.
+
+The results on the prior templates are presented in the Appendix.
+
+The augmented model is also substantially better on markable detection, improving by 27.6%.
+
+Results for templates are presented in Figure 4.
+
+No improvements are observed on the World Knowledge template.
+
+Pleonastic cases are still reasonably handled, although not perfectly as with concat.
+
+The Event template identifies a systematic issue with our augmentation.
+
+We presume this is as a result of the cr tool marking cases where it refers to events.
+
+We do not apply any filtering and augment these cases as well, thus create wrong examples (an event reference it cannot be translated to er or sie).
+
+As a result, the scores are significantly lower compared to concat.
+
+We note that this issue with our model is not visible on ContraPro and the adversarial attacks results.
+
+In contrast, the Event template easily identifies this problem.
+
+afa performs on par with the unaugmented baseline on the Gender template.
+
+However, despite increasing by 3.8%, results on Overlap are still underwhelming.
+
+Our analysis shows that augmentation helps in changing the prior.
+
+We believe this provides for improved cr heuristics which in turn provide for an improvement in coreferential pronoun translation.
+
+Nevertheless, the Overlap template shows that augmented models still do not solve cr in a fundamental way.
+
+Conclusion
+
+Figure 3: Results comparing unaugmented and augmented concat on ContraPro and same 3 attacks as in Figure 1.
+
+Results with non-augmented concat are the same as Figure 1.
+
+Figure4: ContraCAT results with unaugmented and augmented concat.
+
+We speculate that readjusting the prior over genders in augmented concat explains the improvements on Markable and Overlap.
+
+, largely owing to our model being trained on OpenSubtitles, Results with the sentence-level Baseline and concat on ContraPro and three adversarial attacks.
+
+The adversarial attacks modify the context, therefore the Baseline model's results on the attacks are unchanged and we omit them.
+
+Phrase: prepending "it is true: ...".
+
+Possessive: replacing original antecedent A with "Maria's A".
+
+Synonym: replacing the original antecedent with different-gender synonyms.
+
+Results for Phrase Addition are computed based on all 12,000 ContraPro examples, while for Possessive Extension and Synonym Replacement we only use the suitable subsets of 3,838 and 1,531 ContraPro examples, respectively.
+
+Results comparing the sentence-level baseline to concat on ContraCAT.
+
+Pronoun translation pertaining to World Knowledge and language-specific Gender Knowledge benefits the most from additional context. and the dog drank.
+
+It ate a lot.") but a weak accuracy of 39.0% when the verb overlapped from the second clause ("The cat ate and the dog drank.
+
+It drank a lot.".) The overall accuracy for the overlap templates is 47.2%, with little variation across the types of overlap.
+
+Adding more overlap, e.g., by overlapping both the verb and object ("It ate the apple happily"), yields no improvement.
+
+Overall, the model pays very little attention to overlaps when resolving pronouns.
+
+Examples of training data augmentations.
+
+The source side of the augmented examples remains the same.
+
+our model has a score of 72.9% on the unmodified subset of ContraPro.
+
+A refers to the original antecedent noun phrase.
+
+C and it is true. / C. it is true. / C and that is true.
+
+65.1 / 57.9 / 70.4 C but he wasn't sure. / C. but he wasn't sure. 69.0 / 65.8 C but that's not the point. / C. but that's not the point.
+
+Scores for each Possessive-Extension-modification.
+
+For German we append the possessive noun phrase with "von"(=of).
+
+definition German definition Grammatical Role Prior A ate F. It was {big, small, large, tiny}. A hat F gegessen.
+
+Er/Sie/Es war {groß, klein, riesig, winzig}. Position Prior I stood in front of A i and A j .
+
+It was {big, small, large, tiny}. Ich stand vor A i und A j .
+
+A and P were {hungry, tired, happy, nice}. However it was {hungrier, more tired, happier, nicer}. A und P waren {hungrig, müde, glücklich, nett}. Aber er/sie/es war {hungriger, müder, glücklicher, netter}. Verb Overlap* A i {ate, drank} and A j {ate, drank}. It {ate, drank} {a lot, quickly, slowly happily}. A i ate F and A j drank D. It liked {F , D}. A i hat F gegessen und A j hat D getrunken.
+
+Er/Sie/Es mochte {F , D}. Subject Overlap* A i ate F and A j drank D. {A i , A j } liked it.
+
+A i hat F gegessen und A j hat D getrunken.
+
+{A i , A j } mochte ihn/sie/es.
+
+Object-Verb Overlap* A i ate F and A j drank D. It {ate F , drank D} quickly.
+
+A i hat F gegessen und A j hat A i ate F and A j drank D. {A i ate, A j drank} it quickly.
+
+A i hat F gegessen und A j hat D getrunken.
+
+{A i , A j } hat ihn/sie/es schnell {gegessen, getrunken}. Template definitions.
+
+* We switch the position (first or second) of the two involved entities E i and E j .

@@ -1,0 +1,7 @@
+In this paper, we proposed a simple and general semi-supervised method using pre-trained neural language models to augment token representations in sequence tagging models.
+
+Our method significantly outperforms current state of the art models in two popular datasets for NER and Chunking.
+
+Our analysis shows that adding a backward LM in addition to traditional forward LMs consistently improves performance.
+
+The proposed method is robust even when the LM is trained on unlabeled data from a different domain, or when the baseline model is trained on a large number of labeled examples.

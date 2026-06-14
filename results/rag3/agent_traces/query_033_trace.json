@@ -1,0 +1,116 @@
+{
+  "query_id": "5678b6bf40f5958402473fd66a08dc836eaa98a7",
+  "query": "Is the coreference resolution pipeline depicted in Table 1 universally accepted in the field of coreference resolution?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "coreference resolution pipeline"
+      },
+      "result_preview": "No matches found for 'coreference resolution pipeline'",
+      "elapsed_s": 5.85
+    },
+    {
+      "iteration": 1,
+      "tool": "list_papers",
+      "args": {},
+      "result_preview": "Papers disponibles (70):\negu_esd_14-1261-2023\negu_esd_14-185-2023\negu_esd_14-81-2023\negu_esd_14-835-2023\negu_esd_14-915-2023\negu_esurf_11-33-2023\negu_esurf_11-849-2023\negu_esurf_11-917-2023\nnlpeer_ARR-22_013b9bf63a6f68fd0c3ecc36f8cbe2ad5bc92ea3bfe5a9f6c15eb056ecc4f858718410182c3765b2dc2695ae29ba08fb",
+      "elapsed_s": 9.46
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "entity linking"
+      },
+      "result_preview": "Search results for 'entity linking' (3 matches):\n[paper_id=nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7 | section=abstract | line=1] Learning representations of entity mentions is a core component of mo",
+      "elapsed_s": 4.47
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7",
+        "section": "abstract",
+        "start": 1,
+        "end": 1
+      },
+      "result_preview": "[nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7 / abstract — líneas 1-6 de 9]\nLearning representations of entity mentions is a core component of modern entity linking systems for both candidate generation",
+      "elapsed_s": 15.78
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "coreference chain"
+      },
+      "result_preview": "Search results for 'coreference chain' (11 matches):\n[paper_id=nlpeer_COLING2020_660 | section=discussion | line=11] Second, the quality of coreference chains is critical for the character model.\n[paper_id=nlpeer_COLING2020_660 | section=discussion | line=13] We can see from Table 2 that in the init",
+      "elapsed_s": 8.09
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Learning representations of entity mentions is a core component of modern entity linking systems for both candidate generation and making linking predictions.\n\nIn this paper 1 , we present and empirically analyze a novel training approach for learning mention and entity representations that is based on building minimum spanning arborescences (i.e., directed spanning trees) over mentions and entities across documents to explicitly model mention coreference relationships.\n\nWe demonstrate the efficacy of our approach by showing significant improvements in both candidate generation recall and linking accuracy on the Zero-Shot Entity Linking dataset and MedMentions, the largest publicly available biomedical dataset.",
+      "section": "abstract",
+      "paper_id": "nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7",
+      "chunk_id": "dci_nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7_abstract_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/COLING2020/1681_72",
+    "nlpeer/COLING2020/1681_73"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7_abstract_0000"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7_abstract_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.0425531914893617,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

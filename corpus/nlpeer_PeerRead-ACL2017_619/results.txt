@@ -1,0 +1,91 @@
+Testing for H1 Comparing Group A and Group B participants, we observe some differences.
+
+First, we detect that Group A agrees with the statement "The system helps me to recognize the weakness of my essay" more so than Group B (Group A has a mean rating of 3.97 ("Agree") while Group B's is 3.17 ("Neutral"), p < .003).
+
+Second, in Group A, there is a trending positive correlation between the number of revisions8 from Draft2 to Draft3 and the ratings for the statement "The system encourages me to make more revisions than I usually make" (ρ=.33 and p < .07); whereas there is no such correlation for Group B. Additional information about revision purposes may elicit a stronger self-reflection response in Group A participants.
+
+In contrast, in Group B, there is a significant negative correlation between the number of Rev12 and ratings for the statement "it is convenient to view my previous revisions with the system" (ρ=-.36 and p < .05).
+
+This suggests that the character-based interface is ineffective when participants have to reflect on many changes.
+
+On the other hand, when comparing the number of revisions made by Group A and Group B on Rev23 (controlling for their Rev12 numbers), we did not find a significant difference.
+
+As we did not observe a significant difference in the number of revisions made by the two interface groups, we cannot verify that H1 is true; possibly a larger pool of participants is needed, or possibly the writing assignment is not extensive enough (in length and in the number of drafts).
+
+Another possible explanation is that the system might only motivate the users to make more revisions when the feedback is different from the user's intention.
+
+To further verify the correctness of H1, we plan to have the essays graded by experts.
+
+The graded scores could allow us to analyze whether essays improved more when Interface A was used.
+
+Testing for H2 Focusing on the 30 participants from Group A, we check the impact of the feedback regarding Rev12 on how they subsequently revise (Rev23).
+
+We counted the Add and Modify revisions where the participant disagrees with the revision purpose assigned by the annotator in Rev12.
+
+Of those, we then count the number of times the corresponding sentences were further revised 9 .
+
+Of the 53 sentences where the participants disagreed with the annotator, 45 were further revised in the third draft.
+
+The ratio is 0.849, much higher than the overall ratio of general Rev12 revisions being further revised in Rev23 (161/394 = 0.409) and the ratio of the agreed Rev12 revisions being revised in Rev23 (67/341 = 0.196).
+
+In further analysis, a Pearson correlation test is conducted to check the correlation between the number of Rev23 and the number of disagreements for different types of agreement/disagreements, controlling for the number of Rev12.
+
+We find a nega-9 Delete revisions were ignored as the deleted sentences are not traceable in Draft3 tive correlation between Rev23 and the number of cases (r=-0.41, p < .03) in which the revisions annotated as Content are verified by the participants; we also find a positive correlation between Rev23 and the number of cases (r=0.36, p <= .05) in which the revisions annotated as Surface are intended to be Content revisions by the participants.
+
+Both findings are consistent with H2, suggesting that participants will revise further if they perceive that their intended revisions were not recognized.
+
+Testing for H3 We observe that native and L2 speakers exhibit different behaviors.
+
+First, we tested the difference in Content23 and Surface23 10 between these speaker groups with ANOVA.
+
+We observe significant difference in the number of content (p < .02) and surface (p < .03) revisions made by L2 and native speakers.
+
+More specifically, our native speakers make more Content changes while the L2 speakers make more Surface changes.
+
+Second, with ANOVA we found a significant interaction effect of the two factors (Group and users' L2 or native status) (p < .021) on their ratings for the statement "the system helps me to recognize the weakness of my essay" with L2 speakers having a stronger Interface A preference.
+
+Third, we observe a significant positive correlation in the native group between the number of content revisions in Rev23 and the ratings of the statement "the system encourages me to make more revisions than I usually make" (ρ=.4 and p < .009).
+
+This suggests that giving feedback (from either interface) encourages native speakers to make more content revisions.
+
+Finally, in the L2 group, there is a significant negative correlation between the number of surface revisions in Rev12 and the ratings for the statement "the system helps me to recognize the weakness of my es-say" (ρ=-.57 and p < .008).
+
+This shows that giving feedback to L2 speakers is less helpful when they make more surface revisions.
+
+These results are consistent with H3.
+
+Summary Our findings suggest that feedback on revisions do impact how students review and rewrite their drafts.
+
+However, there are many factors at play, including the interface design and the students' linguistic backgrounds.
+
+The first two rows of Table 7 support H4.
+
+We observe that the method (SVM + all features) used in Zhang and Litman (2015) significantly improves performance (compared to a unigram baseline) for half of the classification tasks, which is similar to Zhang and Litman's results on high school (primarily L1) writing.
+
+In our corpus, performance on Claim, Evidence, Rebuttal and Organization was not significantly better than the baseline, possibly due to the limited number of positive training samples for these categories (Table 5).
+
+For example, one reason that the performance in Table 7 for Evidence might be low is that there are less than 100 Evidence instances in Table 5.
+
+For H5, the four rows in the middle of Table 7 show the difference of the cross-validation results on first attempt revisions and second attempt revisions.
+
+The earlier results using all the revisions, versus now just using only Rev12 or Rev23 revisions are similar, which provides little support for H5.
+
+With one exception, the features proposed in Zhang and Litman (2015) could again significantly improve the performance over the unigram baseline, for the same set of categories as when using all the revisions.
+
+However, for the Conventions/Grammar/Spelling category, we did not ob-
+
+The location of revised sentences in the paragraph/essay (e.g., whether the sentence is the first or last sentence of the paragraph/essay, the index of the sentence in the paragraph) Textual
+
+The textual features of revised sentences (e.g., whether the sentence contains a named entity, certain discourse markers ("because", "due to", etc), sentence difference (edit distance, difference in punctuations, etc.) and edit types (Add, Delete or Modify)) Language The language features of revised sentences (e.g., difference in POS tags, spelling/grammar mistakes) serve a significant improvement for revisions from Draft2 and Draft3.
+
+A possible explanation is that there is a bigger difference in the writers' rewriting behavior from Draft2 to Draft3, which increases the difficulty of prediction.
+
+The last two rows of Table 7 support H6.
+
+Interestingly, we observe a better performance on Warrant, General and Word Usage/Clarity with a classifier trained and tested using native essays.
+
+Perhaps essays of native speakers are more similar to each other when revised along these dimensions.
+
+For Conventions/Grammar/Spelling, in contrast, the classifier trained on L2 data yields a better performance on the same native test set.
+
+This may be because the L2 revisions usually include more spelling/grammar corrections.

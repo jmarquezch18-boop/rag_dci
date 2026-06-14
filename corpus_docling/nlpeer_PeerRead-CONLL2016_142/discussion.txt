@@ -1,0 +1,27 @@
+To obtain more insights about the performance in uncertainty modelling we inspected the predictive distributions for two sentence pairs in the fr-en dataset.
+
+We show the distributions for a standard GP and a Warped GP with a tanh3 function in Fig- ure 1.
+
+In the first case, where both models give accurate predictions, we see that the Warped GP distribution is peaked around the predicted value, as it should be.
+
+It also gives more probability mass to positive values, showing that the model is able to learn that the label is non-negative.
+
+In the second case we analyse the distributions when both models make inaccurate predictions.
+
+We can see that the Warped GP is able to give a broader distribution in this case, while still keeping most of the mass outside the negative range.
+
+We also report above each plot in Figure 1 the NLPD for each prediction.
+
+Comparing only the Warped GP predictions, we can see that their values reflect the fact that we prefer sharp distributions when predictions are accurate and broader ones when predictions are not accurate.
+
+However, it is interesting to see that the metric also penalises predictions when their distributions are too broad, as it is the case with the standard GPs since they can not discriminate between positive and negative values as well as the Warped GPs.
+
+Inspecting the resulting warping functions can bring additional modelling insights.
+
+In Figure 2 we show instances of tanh3 warping functions learned from the three datasets and compare them with the log warping function.
+
+We can see that the parametric tanh3 model is able to learn nontrivial mappings.
+
+For instance, in the en-es case the learned function is roughly logarithmic in the low scales but it switches to a linear mapping after y = 4.
+
+Notice also the difference in the scales, which means that the optimal model uses a latent Gaussian with a larger variance.

@@ -1,0 +1,23 @@
+This study uses Dionisos (OpenFlow Suite, v. 2021.1, Update 4, BieicipFranlab, 2021) from IFP Energies nouvelles and Beicip-Franlab to synthesize a suite of emergent LIG coral reef terraces along the southwestern coast of Madagascar, at the Lembetabe site.
+
+In order to test the sensitivity of the geological record to changing sea level conditions, we model three distinct relative sea level scenarios extracted from a coupled ANICE-SELEN model.
+
+As with any model environment, certain limitations arise when transferring the physical environment into the virtual, often leading to an oversimplification of complex physical systems.
+
+The model used in this study is not an exception.
+
+Within the scope of this study, the primary interest is to evaluate shallow water reef evolution through glacial/interglacial cycles.
+
+Dionisos solves sediment transport between cells using a diffusion equation (Granjeon et al., 1999).
+
+As pointed out by Barrett and Webster (2017), this simplification works well for large-scale, basin-wide models but fails to capture the more nuanced hydrodynamics within shallow reef environments.
+
+In order to address this without redesigning the entire Dionisos architecture, characterization of the nearshore wave environment allows for a reasonable approximation at our model grid resolution of 50 m × 50 m. The largest caveat however, is the method in which Dionisos solves for subaerial erosion.
+
+This is partially addressed through the use of user-defined weathering rates for each sediment class.
+
+However, in Lembetabe, modern active dune fields and fossilized aeolianites cover MIS 5e reefs, suggesting extensive offshore migration of dunes during glacial periods (e.g., Battistini, 1965;Boyden et al., 2022).
+
+The speed at which active dunes migrate would limit the overall exposure time of previously deposited limestone (Bristow et al., 2005).
+
+In order to try and limit the overestimation of subaerial weathering, we employ a lower weathering rate than regularly cited for coastal limestone facies (e.g., 100 vs. 250 m Myr -1 , Trudgill et al., 1979).

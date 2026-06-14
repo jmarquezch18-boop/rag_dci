@@ -1,0 +1,581 @@
+The Global Impact Of The Transport Sectors On The Atmospheric Aerosol And The Resulting Climate Effects Under The Shared Socioeconomic Pathways (Ssps)
+
+Abstract
+
+Introduction
+
+Model And Model Simulations
+
+Emissions Of Aerosol And Precursors From The Transport Sectors
+
+The model simulations performed in this study are driven by the anthropogenic and open-burning emission datasets developed in support of the CMIP6 project (Gidden et al., 2019;Feng et al., 2020).
+
+The emission data cover the historical period from the pre-industrial time (1750) to the present day (2014) and future projections until the year 2100 based on the SSPs (O'Neill et al., 2017).
+
+A harmonization procedure is applied to the scenarios to guarantee a smooth transition of the historical emission trajectories into the future projections (see Gidden et al., 2019, for details).
+
+A series of specific assumptions lie behind each of the SSP narratives, concerning, for instance, population and economic growth, urbanization level, policy implementation, technological advancements, availability of resources, human and societal developments, etc.
+
+These assumptions are then elaborated by integrated assessment models to produce emission projections for greenhouse gases, short-lived gases, and aerosol particles.
+
+Note that in their reference version, the SSP storylines do not assume any implementation of climate policies.
+
+In the matrix framework of the SSPs (van Vuuren et al., 2014), climate policies are included at a later stage, when the reference scenarios are combined with mitigation scenarios using the same approach as in the RCPs (Moss et al., 2010;van Vuuren et al., 2011), i.e. targeting a given anthropogenic RF in the year 2100.
+
+Here, we consider a present-day case (2015) and two projections, for a near-(2030) and mid-term (2050) future, both under three SSPs: SSP1 (van Vuuren et al., 2017), SSP2 (Fricko et al., 2017), and SSP3 (Fujimori et al., 2017).
+
+Among the nine available combinations of the SSPs with forcing pathways (Gidden et al., 2019), we choose here SSP1-1.9 (targeting an anthropogenic RF of 1.9 W m -2 in 2100 and matching the 1.5 • C goal of the Paris Agreement), SSP2-4.5 (RF of 4.5 W m -2 in 2100, close to the previous RCP4.5 scenario), and SSP3-7.0 (RF of 7.0 W m -2 in 2100).
+
+For simplicity, in the following we refer to the SSPs just by their number and skip the RF indication, as there is no ambiguity.
+
+Although more SSPs are available in this inventory, the three SSPs analysed here are fairly representative of possible futures, including a sustainability scenario (SSP1) with strong technology development and environmental concerns; a middle-of-the-road scenario (SSP2) reflecting a continuation of historical trends in many aspects; and a regionally heterogeneous scenario (SSP3) characterized by slow economic growth and weak technology development as well as, most importantly for the present assessment, a high level of air pollutant emissions, including aerosol.
+
+We do not consider the long-term future after 2050, as the projections beyond this time horizon are affected by large uncertainties in their driving forces (such as demographic changes, economic growth, and technological development; see Bauer et al., 2017).
+
+The reason for choosing 2015 (from the SSP2 scenario) as the reference for the present day instead of the last year of the historical CMIP6 time series ( 2014) is to have consistent emissions from the same database, i.e. the SSPs.
+
+Note, however, that the small differences between 2014 and 2015 are negligible for the scope of the present assessment and that 2015 emissions are similar in all the scenarios thanks to the harmonization procedure mentioned above.
+
+The total emissions of aerosol and precursor gases from all sectors in the CMIP6 inventory are summarized in Fig. 1 for the present day (2015) and the three SSPs for the years 2030 and 2050.
+
+The total emissions of the anthropogenic non-transport sectors (comprising energy, industry, residential and commercial, agriculture, solvent production and application, and waste) dominate the emission budget of all species in all scenarios, with relative contributions of over 90 % to NH 3 emissions (Fig. 1c) mostly due to the agriculture sector.
+
+The transport sectors are particularly relevant for NO x emissions (Fig. 1a), with large relative contributions from land transport and shipping (mainly driven by emissions from diesel engines) and BC (Fig. 1e; especially for land transport).
+
+Shipping and aviation contributions are generally small, but one should note that ships and aircraft mostly travel in regions which are otherwise hardly affected by anthropogenic emissions; hence their local contribution to atmospheric aerosol concentrations can be relevant even though the emissions are low.
+
+Future emissions in 2030 and 2050 strongly decrease with respect to the present day in SSP1, which is consistent with the narrative underlying this scenario.
+
+According to van Vuuren et al. (2017), SSP1 is characterized by a rapid decline in costs for clean technologies, favouring a rapid transition to electric vehicles, and by an increase in public transport and car sharing.
+
+It further assumes the worldwide implementation of strict air quality policies, currently only applied in Organisation for Economic Co-operation and Development (OECD) countries.
+
+The high share of electric vehicles (up to 75 %) leads to a strong decrease in NO x emissions in SSP1, whose contribution to the total is reduced from 26 % in 2015 to 16 % in 2030 and further down to 6.7 % in 2050, while the contribution of aviation remains constant, around 2 %, and the shipping one is only reduced in 2050, due to the known challenges in electrifying these sectors.
+
+A similar trend can be seen for the other species.
+
+The reduction in SO 2 emissions is stronger than for other species in SSP1, mostly driven by the decrease in the non-traffic anthropogenic emissions, which, however, maintain a roughly constant share of around 85 %-90 % of the total.
+
+The shipping sector contribution to SO 2 remains relatively high until 2030, decreasing only slightly from 9 % in 2015 to 7 % in 2030.
+
+This could be due to the phase-out of traditional (low-sulfur) biofuels in 2030 in this scenario and to the lack of alternative technologies before 2050, when the share is strongly reduced to 1.7 %.
+
+In contrast to the optimistic SSP1 scenario, the SSP2 narrative (Fricko et al., 2017) assumes a significant use of fossil fuel in the future, combined with less stringent air pollution reduction measures.
+
+This leads to an only moderate reduction in the emissions of short-lived compounds in the future.
+
+The share of NO x emissions by land transport and shipping remains approximately constant until 2050 (around 25 % and 14 %, respectively), while for aviation it almost doubles by 2030 (from 1.9 % to 3.4 %) and triples by 2050 (5.3 %).
+
+This is related to the increase in air traffic volumes combined with the lack of efficient alternative technologies for emission reduction in this sector, which only in SSP1 is counteracted by a reduction in air traffic.
+
+Similar trends can be seen for the other species in Fig. 1, with the exception of SO 2 for shipping.
+
+In this case, a very marked decrease in the share of this sector is evident in SSP2, decreasing from 9.1 % in 2015 to 3.1 % in 2030 and 0.4 % in 2050, representing the lowest share of this sector among the three investigated scenarios.
+
+SSP3 represents a more pessimistic scenario, implementing weak air pollution reduction measures, combined with continued dependency on fossil fuels and slow implementation of new technologies (Fujimori et al., 2017).
+
+This scenario further considers a late saturation in transport demand, combined with a low electrification level (up to 10 %).
+
+This leads to an increase in the land transport share of NO x , which, together with the increase in the other non-traffic anthropogenic sources, drives the overall increase in NO x emissions in SSP3 in 2030.
+
+The total NO x emissions then remain approximately constant until 2050, thanks to the reduced share of the shipping sector and the shift to alternative fuels.
+
+Due to the rapid shift to high-speed modes of transport assumed in SSP3, the share of aviation increases as well, from 1.9 % in 2015 to 2.6 % in 2030 and 3.3 % in 2050, although this increase is less marked than in SSP2.
+
+An analogous trend is also evident for SO 2 , BC, and OC emissions, although the latter is partly compensated by a reduction in open-burning emissions in 2030 and 2050.
+
+(Lamarque et al., 2010) used in Righi et al. (2013).
+
+The numbers on the left of each bar indicate the relative contribution (in percent) of each sector to the total (values smaller than 1 % are not shown).
+
+OC emissions are multiplied by a factor of 1.4 in the model to obtain particulate organic matter (POM) emissions, as required by the MADE3 aerosol submodel.
+
+Furthermore, a small fraction (∼ 2 %, depending on the sector) of the emitted SO 2 mass is emitted as primary aerosol sulfate in the model (see Kaiser et al., 2019, for more details).
+
+Note that the vertical scales differ among the panels.
+
+As mentioned above, various combinations of the SSPs with the forcing pathways until 2100 are available.
+
+For example, for SSP1 the SSP1-2.6 pathway is also available in addition to the SSP1-1.9 adopted here.
+
+These two pathways show a similar decreasing emission trend in the future, but with some differences in their total emissions: for NO x , SO 2 , and BC, for instance, the emissions in 2050 are about 52 %, 24 %, and 29 % larger in the SSP1-2.6 pathway.
+
+Similarly, for SSP3 a so-called LowNTCF pathway is also available, characterized by a strong decrease in the emissions of near-term climate forcers until 2050, followed by a slowly decreasing trend.
+
+With respect to the SSP3-7.0 case analysed in this study, the total emissions of NO x , SO 2 , and BC in 2050 are therefore significantly lower in this pathway, namely about 51 %, 46 %, and 54 %, respectively.
+
+Choosing a different pathway within a given SSP has of course an impact on the results.
+
+Nevertheless, the three pathways chosen for this assessment reasonably cover the range of possible future emission trends until 2050.
+
+Since in the present work we use an updated inventory (CMIP6-SSP) with respect to our previous assessment (CMIP5-RCP; R13), in Fig. 1 we also compare the total emissions between these two inventories.
+
+Note that not only the inventory was updated, but we also considered a different baseline year for present-day conditions (2015 instead of 2000).
+
+A general increase in the total emissions can be seen, mostly driven by the anthropogenic non-transport sectors, while only the emissions of CO (Fig. 1b) and SO 2 (Fig. 1d) slightly decrease.
+
+The transport sectors mostly show a decrease in emissions between 2000 and 2015, in both absolute and relative terms, with the notable exception of NO x (Fig. 1a) and BC (Fig. 1e), whose share, however, decreased from 29 % to 26 % and from 17 % to 14 %, respectively.
+
+This indicates that, although the overall growth of land transport volumes of course leads to an increase in emissions of these two highly relevant species for this sector, the introduction of air pollution control measures (e.g. on diesel engines) in developed countries helped to reduce the relative impact of the sector on the global emission budget.
+
+Another interesting case is SO 2 (Fig. 1d) from shipping, which shows a decrease in both absolute and relative terms between 2000 and 2015.
+
+This is a consequence of the limits on shipping FSC introduced in 2010 in the MARPOL Annex VI (Buhaug et al., 2009).
+
+These measures also affected shipping NO x emissions, which however still grew between 2000 and 2015 (Fig. 1a) but kept a stable share of 14 % of the total.
+
+The emissions from the aviation sector increase for all species between 2000 and 2015, which is expected since emission reduction measures in this sector are overcompensated by the high growth rates in traffic volumes during this period.
+
+An important improvement in the CMIP6 inventory is the consideration of the emissions from more species in the aviation sector, while in CMIP5 only NO x and BC were available.
+
+In R13 we nevertheless included SO 2 emissions from aviation, deriving them from BC emissions by scaling with the respective emission factors of the two species.
+
+The emission inventories applied here only provide data for the emitted mass of each compound, whereas the MADE3 aerosol submodel requires emission fluxes for both mass and number.
+
+The latter is derived by assuming typical lognormal size distributions for the emitted particles in each sector based on measurements when available.
+
+Further assumptions are made to assign the emitted mass to the various modes of MADE3.
+
+This follows the same approach as Kaiser et al. (2019), summarized in Table 1.
+
+For the open-burning sector, we follow the AeroCom recommendations (Dentener et al., 2006) and assign the aerosol emissions of primary sulfate (SO 4 ), BC, and OC to the accumulation mode.
+
+For the anthropogenic non-traffic sector, we use the parameters measured by Birmili et al. (2009) in the urban background of Berlin, hence assuming an aged aerosol population.
+
+This assigns the emissions to the accumulation mode only.
+
+Note that no primary SO 4 emissions are considered for this sector.
+
+We use the same parameters for land transport as well, but in this case we assign 10 % of the emitted mass to the Aitken mode, representative of a fresh aerosol population in the urban areas close to the emission sources.
+
+Primary SO 4 emissions from land transport again follow the AeroCom recommendations, assigning the emitted mass to Aitken mode only (note, however, that the land transport emissions of SO 4 are relatively low due to the low sulfur content of gasoline and diesel fuels used for land transport vehicles in most regions of the world).
+
+For shipping, we used the parameters measured by Petzold et al. (2008) in ship plumes.
+
+As for the land transport sector, this assumes a 10 %/90 % split of emitted mass between Aitken and accumulation mode, respectively, but with much larger particles in the accumulation mode (260 nm vs. 138 nm).
+
+As noted by Petzold et al. (2008) and R13, due to a more efficient mixing, the ageing process is particularly effective in the marine boundary layer, leading to a relatively fast growth of particles in ship plumes.
+
+In situ measurements in actual plumes are also used to derive the parameters for the aviation emissions (Petzold et al., 1999).
+
+Due to the high burning efficiency of aircraft turbines, the emitted BC and OC particles are small, with an Aitken mode with a median diameter of 25 nm comprising about 90 % of the emitted mass.
+
+Here we conservatively assume the same size distribution for primary SO 4 as well, although its actual size is much more uncertain, and some studies (e.g. Kärcher et al., 2007) show that small, nucleation-size sulfate particles of the order of a few nanometres are present in aircraft plumes during the dispersion phase.
+
+The assumptions on the particle size distributions summarized in Table 1 are based on measurements performed in past years and are not necessarily representative of the future conditions.
+
+Under the SSP scenarios changes can be expected not only in terms of emission amounts, as discussed above, but also in terms of properties of the emitted particles, such as size distribution, chemical composition, and mixing state.
+
+A few studies, for example, show how these properties change when different fuel types are used in aviation (Petzold et al., 2005;Moore et al., 2017) and in shipping (Petzold et al., 2011).
+
+This might have an impact on not only the size and number concentration of the emitted particles, but also their chemical properties and mixing states, thus affecting their ability to act as cloud condensation nuclei and their resulting climate impacts.
+
+Ideally, different assumptions should be made for each scenario, depending, for instance, on the properties of the fleet and the fuel types implemented in them.
+
+This is an aspect that could be considered in the next generation of scenarios to better support modelling studies and assessments such as the one presented in this work.
+
+Transport Impact On Aerosol Concentrations
+
+Figure 2 shows the impact of land transport, shipping, and aviation on the burdens of various aerosol species and on aerosol particle number.
+
+To obtain more representative values, the burdens are calculated by integrating the aerosol concentrations over the domains relevant to the respective sector.
+
+For land transport and shipping, the two lowermost model layers (from the surface to an altitude of about 250 m) are considered over the continents and over the oceans, respectively.
+
+Aviation concentrations are integrated globally at typical cruise altitudes between about 8 and 12 km.
+
+This approach is consistent with the one adopted in R13, thus allowing for a direct comparison of the results.
+
+In the following, we analyse the impact of the emissions from the three sectors on the burdens and concentrations of relevant aerosol species for the present day (2015) and the three SSP scenarios in 2030 and 2050.
+
+We also compare with the results for the year 2000 obtained with the CMIP5 inventory assessed by R13.
+
+For a correct interpretation of the concentration values discussed in the following, it should be noted that these are large-scale mean concentrations, which are smaller than the peak concentrations occurring close to the emission sources (e.g. at the kerbside).
+
+Such peak values are highly relevant Table 1.
+
+Summary of the emission set-up used for the model simulations in this study, together with the log-normal size distribution parameters applied to derive the number emission fluxes from the mass.
+
+MF is the mass fraction in the Aitken (akn) and accumulation (acc) mode.
+
+D (geometric mean diameter) and σ (standard deviation) are the parameters of the log-normal distribution.
+
+See Kaiser et al. (2019) and references therein for a detailed discussions about these parameters.
+
+for assessing air pollution effects but cannot be resolved by large-scale climate models which rely on mean concentrations driving large-scale climate effects.
+
+Land Transport
+
+The contribution of land transport to present-day aerosol burdens is particularly large for BC and aerosol nitrate (NO 3 ); see Fig. 2a.
+
+The continental near-surface burden of BC is 2.1 Gg in 2015, contributing 19 % of the total, similar to the value for the year 2000.
+
+The nitrate burden from land transport, on the other hand, is larger in 2015 than in R13 (6.3 vs. 2.5 Gg), but its relative contribution is slightly lower (25 % vs. 29 %).
+
+This is consistent with the difference in NO x (a nitrate precursor) emissions between CMIP5 and CMIP6 (Fig. 1a).
+
+In the future scenarios, the absolute impact of land transport on BC is strongly reduced in SSP1 and SSP2 in 2030 and further in 2050, but only in SSP1 does this correspond to a reduction in the relative contributions.
+
+On the one hand, this shows that the optimistic SSP1 scenario implements stringent air quality control policies that can effectively reduce land-transport-induced near-surface concentrations of BC.
+
+On the other hand, the higher degree of electrification of this sector in SSP1 (up to 75 %; van Vuuren et al., 2017) compared to SSP2 (up to 50 %; Fricko et al., 2017) implies strong reductions in BC from land transport, but not from other sectors, hence decreasing the relative contribution of land transport itself.
+
+Similar conclusions hold for nitrate, where again only SSP1 is successful in decreasing the landtransport-induced burden in both absolute and relative terms, with a very large decrease in 2050.
+
+Transport-induced changes in particle number burden are relevant as well for not only air quality but also climate, since aerosol particles can act as cloud condensation nuclei in warm clouds if they grow to a sufficient size.
+
+An increase in their concentration can therefore lead to a change in the microphysical and radiative properties of these clouds (Boucher et al., 2013).
+
+Land transport provides a significant contribution to particle number, with 9 % of the near-surface particle number burden over the continents attributable to this sector in 2015.
+
+This is reduced in SSP1 and SSP2 in 2030 and 2050, while it keeps increasing in SSP3.
+
+Note that the impacts on land-transport-induced particle number concentrations are strongly related to the assumptions on the size distribution of emitted particles.
+
+As shown in R13, assuming size distribution parameters representative of either young or aged particle populations upon emissions can change the resulting impacts on number concentration by about 1 order of magnitude.
+
+As discussed in Sect.
+
+1 and Table 1, here we assume an aged distribution for particles emitted by land transport, representative of air masses on large spatial scales and therefore more consistent with the representation in the coarse resolution of a global model.
+
+The geographical distribution of land-transport-induced surface-level BC concentration is shown in Fig. 3.
+
+In 2015 (Fig. 3b), the largest absolute impacts are found over China, India, and the Arabian Peninsula, with concentration changes of about 1 µg m -3 .
+
+Large values are also simulated over eastern Europe and in some spots in South Africa and South America, corresponding to the largest urban areas.
+
+Western Europe and the eastern US are characterized by generally lower land-transport-induced BC concentrations.
+
+This pattern roughly matches the results for 2000 with the CMIP5 inventory (R13), although with larger values, especially in the Middle East and in eastern and southern Asia.
+
+In relative terms (Fig. 3c), however, the contribution of land transport is confirmed to be relatively small in eastern and southern Asia, amounting to only 10 % to 20 % of the surface-level BC concentration in these countries, due to the prevalence of emissions from other sectors, like the energy production or household sectors.
+
+A somewhat opposite effect is the large relative contribution over the Arabian Peninsula, with 60 %-70 % of BC concentration due to land transport in these regions, following the comparatively low BC emissions from other sectors in this region.
+
+This sector remains quite relevant for air pollution in developed countries as well, with contributions of 30 % to 50 % in Europe and in the US.
+
+These numbers are lower than in 2000, also in terms of absolute land-transport-induced concentration changes, revealing the effectiveness of the air pollution control measures and the technical improvements in this sector over the 15 years.
+
+Figure 3c also reveals the importance of the long-range transport of polluted air masses from the continents to the oceans, especially in the subtropics and at southern mid-latitudes.
+
+As expected, the land-transport-induced BC concentrations are strongly reduced in SSP1 in 2030 (Fig. 3e) and become almost negligible in 2050 (Fig. 3n), with only India and the Arabian Peninsula showing concentration changes larger than 0.05 µg m -3 , although the relative contributions in the Arabian Peninsula still remain high (Fig. 3f,o).
+
+This is consistent with the narrative of this scenario, considering a worldwide transition to a more sustainable future with reduced inequality across countries.
+
+In SSP2, in contrast, only developed countries show a noticeable decrease in BC con-centration in 2030 and 2050, in both absolute and relative terms, while developing countries remain at a similar level as in 2015 (Fig. 3h,i).
+
+In 2050, land transport is still the major source of BC pollution in many regions of the world, including the Arabian Peninsula, North Africa, and Central and South America (Fig. 3k,l).
+
+SSP3 shows no remarkable differences with respect to SSP2 in 2030 (Fig. 3q,r), whereas it is characterized by an increased land-transport-induced concentration in 2050 (Fig. 3t,u), which is again consistent with the storyline of this scenario, assuming large differences between developed and developing countries.
+
+Similar conclusions can be drawn for the other species (Figs. S1-S6 in the Supplement), although in relative terms only nitrate (Fig. S1) and particle number concentrations (Fig. 4) were substantially impacted by land transport in 2015 and in the future projections.
+
+A remarkable feature is the land-transport-induced decrease in surface-level aerosol sulfate concentration over some parts of India and China (Fig. S3), which could be related to an enhanced aerosol removal via wet deposition.
+
+This effect, however, is small in relative terms (< 10 %).
+
+With respect to the RCP scenarios, the projections for the land transport sectors in the SSPs appear to be more coherent with their narratives in terms of short-lived pollutants, while this was not always the case in the RCPs.
+
+Righi et al. (2015), Figure 3.
+
+Land transport impact on surface-level BC concentration.
+
+The left panel shows the background concentration for reference.
+
+The middle and right panels show the land-transport-induced absolute impacts (Eq. 1) and the relative contributions (Eq. 2), respectively.
+
+Grid points where the impacts are not significant at the 95 % confidence level are masked out in grey.
+
+for instance, found that the RCP scenarios with the most stringent climate policies were often characterized by larger impacts on aerosol concentrations, hence showing an anticorrelation between their ranking and the resulting impact on short-lived species.
+
+This is not the case in the SSP scenarios: SSP1 is by far the greenest scenario in terms of air pollution impact, while SSP2 and SSP3 show only limited changes in 2030 and 2050 with respect to the present-day situation, consistent with their underlying storylines and long-term climate projection.
+
+Shipping
+
+As in the year 2000, the shipping sector is characterized by its large contributions to the burdens of nitrate and sulfate (SO 4 ; see Fig. 2b) over the oceans.
+
+The impact of shipping on near-surface nitrate burden over the oceans in 2015 (6.9 Gg) is significantly larger than in R13 for the year 2000 (1.1 Gg), but it remains stable in relative terms at about 25 %.
+
+Sulfate pollution, on the other hand, is smaller than in 2000 (6.3 vs. 9.4 Gg), and its relative contribution is reduced to 9 % compared to the 14 % value reported in R13.
+
+As mentioned above, this can be related to the introduction of the MARPOL Annex VI regulations on the maximum FSC in shipping.
+
+Although fully implemented in 2020, a first step towards the reduction was taken in 2012, reducing the maximum allowed FSC by mass from 4.5 % to 3.5 % globally (Buhaug et al., 2009).
+
+Stricter limits were applied in the SECAs, reducing the cap from 1.5 % to 1 % in 2010 and to 0.1 % in 2015.
+
+This reduction trend appears to continue in the future scenarios, which are all characterized by a reduced impact of sulfate burden.
+
+In 2030, the relative contribution of shipping to nearsurface oceanic sulfate burden is reduced to 6 %-7 % in all scenarios and further to 1 %-4 % in 2050, with the largest (smallest) decrease in SSP1 (SSP3), hence consistent with the scenario narratives.
+
+MARPOL also introduced emission limits on NO x for all new ship engines built after the year 2000 and above a certain power output.
+
+These regulations, however, seem to have a limited impact on the resulting nitrate burdens, which are only slightly reduced in 2030 for all scenarios.
+
+Stronger reductions in near-surface nitrate burden become effective in 2050, especially in SSP1 (4 %) and SSP3 (14 %), while they remain high (23 %) in SSP2, consistent with the high share of shipping NO x emissions in this scenario (Fig. 1).
+
+The shipping impact on particle number burden is quite small, about 1.5 % in 2015, in line with the results of R13.
+
+Such a low impact is a consequence of the very efficient take-up of ultra-fine particles by larger aerosol in ship plumes, which occurs within a timescale of the order of only 1 h (Petzold et al., 2008;Righi et al., 2011).
+
+This process is implicitly considered in our assumptions on the size distribution of ship-emitted particles (see Sect.
+
+1 and Table 1), with 90 % of shipping emissions released in the accumulation mode, and leads to small impacts on particle burden.
+
+These are further reduced in the future scenarios, in line with the reductions in the mass burden of the most relevant species from this sector.
+
+Figure 5 depicts the geographical distributions of shipping-induced near-surface sulfate concentrations.
+
+In 2015 (Fig. 5b), the largest ship-induced concentrations are simulated over the Northern Hemisphere, especially in the eastern Atlantic Ocean, in the northern Indian Ocean, and in the Mediterranean, with values around 1 µg m -3 .
+
+Significant changes of 0.05-0.1 µg m -3 are also simulated over land in many coastal regions of the Northern Hemisphere, confirming the relevance of this sector for continental air pollution (Eyring et al., 2010).
+
+This pattern closely matches the distribution simulated in R13 for the year 2000.
+
+The relative contribution of shipping to surface-level sulfate concentration (Fig. 5c), however, is generally lower than in R13.
+
+In particular, lower contributions are found over the northern Pacific Ocean (20 %-40 %, due to the lower absolute impact of shipping in this region than in R13) and over the southern Atlantic (10 %-30 %, due to the higher background concentration of sulfate in this region than in R13).
+
+An interesting feature is the large contribution of shipping to the sulfate concentration over the northern Atlantic Ocean, between the coasts of Greenland and Scandinavia: this is due to the increased emissions in the polar regions in the CMIP6 dataset for 2015 compared to CMIP5 for 2000, in particular along the Northern Sea Route, which has become more travelled in recent years following the depletion of the Arctic ice.
+
+The shipping impacts are reduced in 2030 in all scenarios, although the geographical distribution remains essentially the same.
+
+This is because the SSPs do not consider any significant change in the route displacement but just apply a scaling of the traffic activity across the existing routes according to a global spatial matrix (Feng et al., 2020).
+
+SSP1 and SSP2 (Fig. 5e,h) project similar ship-induced concentrations, with the highest values reduced to 0.2-0.5 µg m -3 .
+
+In relative terms, however, this translates to a higher impact in SSP1, due to the cleaner background following the reductions in the emissions from other anthropogenic sectors.
+
+In SSP3 (Fig. 5k), the concentration changes in 2030 are still relatively high compared to 2015, although with a smaller relative contribution (Fig. 5l).
+
+The shipping sector has only a negligible impact on sulfate pollution in 2050 in SSP1 and SSP2 (Fig. 5n,o, q, r), while it remains relevant in SSP3, with large induced concentrations, around 0.2-0.5 µg m -3 , in the northern Indian Ocean and around the Mediterranean, but with a relative contribution reduced to a maximum of 20 % over the northern Atlantic Ocean and northern Pacific Ocean (Fig. 5t,u).
+
+The impact on nitrate (Fig. S7) shows a similar geographic distribution, but a much different future evolution.
+
+The shipping-induced nitrate concentrations remain considerably high through 2030 and 2050, with very large relative contributions around and above 70 % over most of the northern-hemispheric oceans and along the major southernhemispheric routes.
+
+This reveals the challenges in reducing Figure 6.
+
+As in Fig. 3, but for the shipping impact on surface-level particle number concentration.
+
+the emissions from NO x in the shipping sectors, contrary to the sulfate, which can be more effectively controlled by reducing the shipping FSC.
+
+Nitrate impacts are effectively reduced only in the green SSP1 scenario in 2050.
+
+Another aspect to be taken into account is the competition between the formation pathways of ammonium sulfate and ammonium nitrate for available ammonia in the lower troposphere, with ammonium sulfate formation being favoured.
+
+A reduction in sulfate concentration makes more ammonia available for the formation of ammonium nitrate, leading to enhanced nitrate formation, hence partly compensating the reduction in sulfate.
+
+Being the largest contributors to shipping pollution, sulfate and nitrate also influence the impact of this sector on particle number concentrations (Fig. 6).
+
+Here again the largest impacts are found over the northern-hemispheric oceans and in the southern high-latitude regions, progressively reducing in 2030 and 2050.
+
+Over the southern extra-tropics shipping induces a reduction in the particle number in most scenarios: this could be due to the relatively large size of ship-induced particles inhibiting the nucleation of new particles typical of the pristine environments of these regions and thus limiting or removing a key source of particle number.
+
+Aviation
+
+Compared to the other two sectors, the impact of aviation on mass burdens is small (Fig. 2c), even though this is calculated in the altitude range of 8 to 12 km, where most of the aviation emissions are released.
+
+Aviation contributes 0.3 Gg to the upper-tropospheric BC burden in 2015, almost 3 times more than in R13.
+
+The contribution is also larger in relative terms (5 % versus 2 %).
+
+This could be due to an increase in BC emissions between 2000 and 2015, but also to the improved model vertical resolution adopted in the present study (41 levels) with respect to R13 (19 levels).
+
+The L41 resolution has been specifically designed to resolve the upper troposphere and the related process in higher detail and has been shown to be suitable in several modelling studies targeting this region (Dietmüller et al., 2014;Bock and Burkhardt, 2016;Righi et al., 2020).
+
+The coarse vertical resolution used in R13 may therefore have resulted in an underestimated impact of aviation-induced BC in the upper troposphere.
+
+This appears to also be the case for sulfate, which shows an aviation-induced upper-tropospheric burden of 7.1 Gg, larger than in R13 by more than a factor of 2.
+
+This is also larger in relative terms (4 % vs. 3 %).
+
+Despite the increased aviation impact on the mass burden, the impact on number is lower than in R13 (1.1 × 10 26 vs. 1.2 × 10 27 particles) by about 1 order of magnitude and by about half in relative terms (6 % vs. 12 %), although identical size distributions for the emitted particles have been assumed in the two studies.
+
+Besides the aforementioned improvement in the vertical resolution, the improved representation of the aerosol dynamics in the new version of the MADE aerosol submodel adopted here (MADE3; Kaiser et al., 2019) could ex-plain these differences, as revealed, for instance, by the much lower background concentration of aerosol particles (Fig. 8a) with respect to the previous assessment.
+
+The EMAC model system has also been updated with respect to the previous assessment and now uses the second version of the MESSy interface, comprising numerous updates in several key submodels, such as for example the scavenging submodel SCAV (Tost et al., 2006).
+
+Aviation-induced upper-tropospheric BC burden keeps growing until 2030 in SSP2 and SSP3 and grows further in 2050 for SSP3.
+
+Aviation-induced BC burden decreases only in the SSP1 scenarios, with a reduction of a factor of more than 2 in 2030 and more in 2050.
+
+In relative terms these changes are less marked, due to the corresponding changes in background BC concentrations.
+
+The sulfate burden follows a similar path, with a weak decrease in SSP1 and a steady increase in SSP2 and SSP3.
+
+This shows that the desulfurization of the aviation sector is not considered to be an emission reduction measure in these scenarios, although it is relatively easy to implement, as it does not require technical modifications nor does it need to cope with the long lifetime of the commercial fleet (e.g. Unger, 2011;Moore et al., 2017).
+
+The spatial distributions of aviation-induced BC concentrations are depicted in Fig. 7 as zonal-mean maps.
+
+In 2015 (Fig. 7b), the largest changes (0.5-1 ng m -3 ) are simulated for the Northern Hemisphere at latitudes > 40 • N at typical cruise levels of 200-350 hPa.
+
+Similarly high concentrations are simulated at lower levels, possibly driven by short-and medium-range flights over the continents, and close to the surface at mid-latitudes, related to landing and take-off and airport activities.
+
+The Southern Hemisphere concentrations are only weakly affected by aviation, with induced changes in BC concentrations below 0.05 ng m -3 .
+
+As inferred from the analysis of the burdens, these values are significantly higher than those reported in R13.
+
+This is also the case for the relative contribution of aviation to BC concentration (Fig. 7c), peaking at 30 %-40 % at high latitude in the Northern Hemisphere at 200-300 hPa.
+
+This is higher than the ∼ 5 % value reported in R13 and shifted northward, although the overall pattern is still comparable.
+
+The future aviation impacts decrease only in the SSP1 scenario while maintaining a similar zonal distribution.
+
+Aviation-induced BC concentrations are reduced to 0.2-0.5 ng m -3 in 2030 and further down to 0.1 ng m -3 over most of the northern latitudes in this scenario (Fig. 7e, n), with minor changes in relative terms (Fig. 7f,o).
+
+In SSP2, the absolute impact remains approximately constant until 2050 (Fig. 7h,q), while it increases in relative terms (Fig. 7i,l), up to 50 %-60 % in 2050.
+
+This is the scenario with the highest relative contribution in the future: even though SSP3 shows much higher absolute impacts (around 1-2 ng m -3 ; Fig. 7k,t), the cleanest background emissions in SSP2 make the aviation sector more impactful in this scenario.
+
+Similar considerations can be made for the aviation-induced impacts on sulfate (Fig. S15), while the nitrate impacts (Fig. S13) show an interesting dual struc- ture, with concentration increases between 5 and 20 ng m -3 throughout the whole troposphere in northern mid-latitudes and significant increases in the upper troposphere at latitudes above 40 • N. As mentioned in Sect.
+
+4.2, this is due to the competition between ammonium sulfate and ammonium nitrate for available ammonia, which is particularly distinct in the upper troposphere due to the low availability of ammonia (e.g. Unger et al., 2013).
+
+Despite the relatively small impact on mass concentrations, of the order of a few nanograms per cubic metre, the aviation sector significantly increases the particle number concentration in the upper troposphere.
+
+This is due to the high efficiency of the combustion processes in aircraft engines, which lead to the formation of smaller BC particles compared to other sectors (Petzold et al., 1999).
+
+Furthermore, sulfur dioxide in aircraft plumes can drive efficient new particle formation in the upper troposphere, contributing to particle number concentrations.
+
+Aviation-induced particle number concentrations as high as 200-500 cm -3 are found in the upper-tropospheric northern mid-latitudes in 2015 (Fig. 8b).
+
+This is about 1 order of magnitude lower than in R13.
+
+The aviation impact also propagates to lower levels, with induced changes of tens of particles per cubic centimetre, with potential impacts on low-level clouds.
+
+The strongest relative contribution of aviation to particle number concentration, however, remains confined in the upper troposphere at midlatitudes, with values of 20 %-30 %, in line with R13.
+
+This means that both the aviation impact and the background are lower in this study than in R13.
+
+This could be due to the improved representation of the nucleation process in MADE3, which assumes a larger size of 10 nm for newly formed particles with respect to its predecessor version in order to better reproduce the observations in the upper troposphere (Kaiser et al., 2019).
+
+As a consequence, the nucleation process leads to the formation of a lower number of particles (see again Fig. 8a).
+
+The aviation impact on particle number concentrations remains large in all future scenarios.
+
+The impacts in the lower troposphere, in particular, increase to values larger than 10 cm -3 in all SSPs, with potential consequences for the aerosol interactions with low clouds.
+
+Interestingly, the relative contribution shows a counterintuitive development, with the highest values in SSP1 and SSP2 (> 60 %) and smaller values in SSP3.
+
+This can be explained by the relatively long lifetime of the fleet in the aviation sector, leading to a slower implementation of technical and policy measures in this sector, which therefore reacts less promptly than the other sectors in determining the background concentrations.
+
+In SSP1, for example, background concentrations are very efficiently reduced in 2030 and 2050 (Fig. 8d,m), while aviation follows a less efficient reduction path (Fig. 8e, n), resulting in a higher relative contribution to overall pollution in the future than in SSP3 (Fig. 8f,o).
+
+Note that, according to Feng et al. (2020), the geographical distribution of aviation emissions in the CMIP6 inventory remains the same as in 2015 in all SSPs and is simply scaled to match the global emissions.
+
+Climate Impacts
+
+To quantify the climate impacts we apply the well-known RF metric (Ramaswamy et al., 2019).
+
+More specifically, the climate impact of the transport sectors is estimated as the difference in the radiative fluxes between a reference and a sensitivity simulation, the latter completely neglecting the emissions of the given sector (see also Sect. 2).
+
+Given that we are using an aerosol-cloud coupled model, the radiative fluxes and the resulting forcings calculated here explicitly consider the impact of cloud adjustments; hence the RF values presented in the following can be regarded as effective radiative forcings.
+
+Furthermore, the model is able to diagnose both the all-sky and the clear-sky aerosol RF: the first considers the changes in radiative fluxes in both cloudy and cloud-free model grid boxes in each model time step, whereas the latter is a diagnostic quantity calculated ignoring the effect of clouds on the radiative fluxes.
+
+The difference between these two quantities can be regarded as a proxy for the RF due to aerosol-cloud interactions.
+
+Note, however, that the clear-sky RF cannot be ascribed to the aerosol-radiation interactions only, as it may include other forcings too (e.g, the ones due to changes in water vapour or to the semi-direct effect).
+
+These caveats should be kept in mind when interpreting the results discussed in this section.
+
+Aerosol from the land transport sector accounts for a RF of -164 mW m -2 in 2015 (Fig. 9a), representing the largest impact among the three sectors.
+
+This estimate is considerably larger than the value of -12 mW m -2 reported in R13.
+
+Although both studies assume the same size distribution for the particles emitted by land transport (based on Birmili et al., 2009), here we further assume that primary sulfate aerosol particles from land transport are emitted in the Aitken mode with a geometric mean diameter of 30 nm (see Table 1).
+
+This results in a larger land-transport-induced impact on particle number concentration (Fig. 4b,c) than in R13, especially in relative terms, with land transport contributions to particle number well above 20 %-30 % in several regions of the world.
+
+This is also due to a different representation of the aerosol particle background in the present study, which is generally lower than in R13 (Fig. 4a) and in better agreement with observations (Kaiser et al., 2019).
+
+The zonal profiles show that the effect is particularly strong in the northern midlatitudes (Fig. S19a), where most emissions are released.
+
+The RFs simulated in the future scenarios clearly match the narratives underlying the SSPs.
+
+In SSP1, the land transport RF is strongly reduced (in absolute terms) to -28 mW m -2 in 2030 and becomes statistically non-significant in 2050.
+
+A less marked reduction in the climate impact of land transport characterizes SSP2, with a RF of -122 mW m -2 in 2030 and -106 mW m -2 in 2050.
+
+Consistent with the nar-rative of the SSP3 scenario, an increase in RF is simulated here, with a stronger land-transport-induced cooling effect of -194 mW m -2 in 2030 and -205 mW m -2 in 2050.
+
+In all cases, the all-sky RF dominates over the clear-sky component, revealing that the land-transport-induced climate impact mostly results from the interactions between aerosol and clouds, thus confirming the results of R13 and Righi et al. (2015).
+
+Aerosol from shipping exerts a RF of -145 mW m -2 in the year 2015 (Fig. 9b), which is slightly smaller than the RF of -181 mW m -2 found in R13.
+
+This is a consequence of the assumption of the size distribution of ship-emitted particles in this study: although we use the same size distribution parameters by Petzold et al. (2008), we assigned only 10 % of the emitted mass to the Aitken mode rather than 20 % as in R13, hence assuming a more aged population.
+
+This reduces the number of emitted particles and in turn the impact of these particles on clouds and the RF.
+
+Another reason, as discussed in Sect.
+
+4.2, is the lower shipping-induced aerosol sulfate in this study, following the introduction of the MAR-POL regulations of FSC starting from 2010.
+
+Since sulfate has a remarkable contribution to cloud condensation nuclei, its reduction affects the RF impact via the aerosol indirect effect.
+
+As for land transport, the shipping RF is significant at the northern mid-latitudes (Fig. S19b) but has an additional very strong component in the Southern Hemisphere, where ship traffic is still relevant along a few routes, and, most importantly, aerosol and precursors are released in a pristine background (Fig. 6a), where the cloud susceptibility can be high.
+
+The shipping-induced negative RF is reduced in all scenarios in 2030, mostly for SSP1 and SSP2 (from -145 to -99 and -95 mW m -2 , respectively), while in SSP3 the reduction is marginal (to -131 mW m -2 ).
+
+In 2050, the greenest SSP1 scenario has the largest climate impact (-120 mW m -2 ), comparable to SSP3 (-110 mW m -2 ).
+
+This might appear counterintuitive but can be explained with the much lower particle number background in this clean scenario (Fig. 6d), such that even a relatively small number of shipping-induced particles leads to a large RF effect.
+
+SSP2, in contrast, projects a non-significant aerosol-climate effect from shipping in this year, consistent with the large reductions in shipping SO 2 emissions in this scenario (see Sect.
+
+3
+
+and Fig. 1d) and stillrelevant background sulfate pollution (Fig. 5p).
+
+The impact of aviation-induced aerosol in 2015 is quantified as -64 mW m -2 , larger than the estimate in R13 by a factor of about 4 (-15 mW m -2 ).
+
+As discussed above, this is due to the larger relative impacts of aviation on particle number concentration in the current study, following an improved representation of background particles, in particular the ones generated by the new-particle-formation process (Kaiser et al., 2019).
+
+Although other modelling groups have confirmed these large aviation RFs (Gettelman and Chen, 2013;Kapadia et al., 2016), the effect of aviation-induced aerosol on liquid clouds is still considered quite speculative (Lee et al., 2021), as large uncertainties exist in the size dis-tribution of emitted particles and in the effectiveness of the downward transport of aviation-induced particles from typical flight altitudes (8-12 km) to the lower atmospheric layers, where they could potentially impact liquid-phase clouds by acting as condensation nuclei.
+
+All SSPs project a steadily increasing impact of the aviation RF, with the strongest growth in SSP2, reaching a RF of -126 mW m -2 in 2050.
+
+As argued in Righi et al. (2016), the long lifetime of the aviation fleet and the tight constraints on safety and costs make the introduction of mitigation measures in aviation more challenging than in other sectors.
+
+In all scenarios the mitigation measures do not lead to a reduction in the overall aviation emissions, which are instead only modulated by different growth rates in overall traffic volumes.
+
+Conclusions And Outlook
+
+Figure 1.
+
+Total emissions of each species from the different sectors in the CMIP6-SSP inventory, compared with emissions from the year 2000 from the CMIP5 inventory
+
+Figure 2.
+
+Absolute impact (a-c) and relative contribution (d-f) of the three transport sectors to the burdens of various aerosol species and of particle number.
+
+The burdens are calculated integrating the concentrations in the two lowermost model layers (from the surface to an altitude of about 250 m) over the continents and over the oceans for land transport and shipping, respectively, while for aviation the concentrations are integrated globally at typical cruise altitudes between about 8 and 12 km.
+
+Changes which are not statistically significant at the 95 % confidence level are shown in grey.
+
+Note the different units for mass (Gg) and number burdens (10 26 particles) in (a)-(c).
+
+Figure7.
+
+Aviation impact on zonally averaged BC concentration.
+
+The left panel shows the background concentration for reference.
+
+The middle and right panels show the land-transport-induced absolute impacts and the relative contributions, respectively.
+
+Grid points where the differences are not significant at the 95 % confidence level are masked out in grey.
+
+Note that, in contrast to the other figures, the units of the absolute changes are nanograms per cubic metre.
+
+Figure 9.
+
+All-sky (solid) and clear-sky (hatched) RF of land transport, shipping, and aviation in the year 2015 and for the three SSP scenarios in 2030 and 2050.
+
+The error bars represent the 95 % confidence interval of the all-sky RF.
+
+The confidence interval is calculated using a twotailed t test.
+
+The crosses indicate non-significant results.
+
+Species MF akn [%] D akn [nm] σ akn MF acc [%] D acc [nm] σ acc

@@ -1,0 +1,487 @@
+Prediction Of The Effects Of The Top 10 Nonsynonymous Variants From 30229 Sars-Cov-2 Strains On Their Proteins [Version 2; Peer Review: 2 Approved] Previously Titled: Prediction Of The Effects Of Nonsynonymous Variants On Sars-Cov-2 Proteins
+
+Abstract
+
+A new coronavirus disease known as COVID-19, caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), was first reported in Wuhan, China in December 2019.
+
+1 SARS-CoV-2 is a positive-sense single stranded RNA virus with a helical nucleocapsid.
+
+The genome size of SARS-CoV-2 is about 30 kilobases.
+
+There are 11 proteincoding genes from the SARS-CoV-2 genome including four structural genes (spike (S), envelope (E), membrane (M), and nucleocapsid (N) genes) and seven nonstructural genes (ORF1ab, ORF3a, ORF6, ORF7a, ORF7b, ORF8 and ORF10).
+
+2 The SARS-CoV-2 virus can rapidly mutate to bypass the immune response of the host.
+
+3 These mutations can be synonymous, nonsynonymous, deletions, insertions, or others.
+
+Nonsynonymous mutations are expected to have a greater impact than synonymous mutations since nonsynonymous mutations affect the amino acid sequences of a protein, subsequently they may change their structures and functions.
+
+According to Kim et al. (2020), a total of 767 synonymous and 1352 nonsynonymous mutations have been identified from SARS-CoV-2 genomes.
+
+4 In another study, a total of 119 SNPs were identified using 11,183 SARS-CoV-2 genomes, in which there were 74 nonsynonymous mutations and 43 synonymous mutations.
+
+5 From a study on the analysis of nonsynonymous mutations in structural proteins of SARS-CoV-2, it has been shown that S and N proteins have higher mutation rate per gene compared to that of E and M proteins.
+
+6 The mutations of SARS-CoV-2 proteins may affect viral transmission, host immune evasion, and disease severity.
+
+Many SARS-CoV-2 S protein mutations, for example, D614G, N501Y have been heavily studied in detail because S protein facilitates viral entry into human host through the binding of ACE2 receptor.
+
+7 S protein D614G mutation increases viral transmission in animal model and human cell line study 8 while S protein N501Y mutation results in an increase in binding to ACE2 receptor 9 and an increase in viral replication in human upper-airway cells.
+
+10 However, the biological consequences of some of these mutations on the functions and structures of SARS-CoV-2 proteins remain unclear.
+
+In our study, computational analysis of the nonsynonymous mutations of SARS-CoV-2 proteins were performed using different bioinformatics tools including co-mutation analysis, protein structure stability and flexibility analysis, and protein function analysis to predict the effects of the mutations on the structures and functions of proteins.
+
+The SARS-CoV-2 genomes data were downloaded from GISAID database (Global Initiative on Sharing All Influenza Data, RRID:SCR_018251).
+
+11 In this study, a total number of 30,229 SARS-CoV-2 virus genomes data with collection dates ranging from 2020-01-01 to 2021-03-21 were retrieved.
+
+The information on the geographical distribution of the SARS-CoV-2 dataset with the date range were summarized in a table as extended data.
+
+12 To make sure that only highquality sequences were used, the filters including complete genome, high coverage (<1% Ns and <0.05% unique amino acid mutations (not seen in other sequences in database) and no insertion/deletion unless verified by submitter) and patient status, excluding low coverage were applied.
+
+The reference strain NC_045512.2 with a total number of 29903 bases was retrieved from NCBI database (NCBI, RRID:SCR_006472).
+
+The wild type protein structures obtained from RCSB PDB (Research Collaboratory for Structural Bioinformatics Protein Data Bank, RRID:SCR_012820) are listed in Table 1.
+
+13 Since N protein R203 and G204 are located at a disordered region which does not have a well-defined threedimensional structure, no experimental structural data was available for the prediction analysis.
+
+A predicted model of N protein model (QHD43423, estimate TM-score = 0.97) generated with D-I-TASSER/C-I-TASSER pipeline was used.
+
+14 Multiple sequence alignment of SARS-CoV-2 genomes Multiple sequence alignment (MSA) was performed using rapid calculation in MAFFT (MAFFT, version 7.467, RRID: SCR_011811) which supports alignment for more than 20,000 sequences.
+
+15 After all SARS-CoV-2 sequences were
+
+The title of the paper and the abstract have been revised to improve the clarity of the writing.
+
+The introduction section with the examples of the effect of nonsynonymous mutations affecting the function of the viral protein has been included in the last paragraph.
+
+The information about the geographical distribution of the SARS-CoV-2 dataset with the date range has been added as extended data.
+
+The detail of the high coverage parameter has been included in the methods section.
+
+Additional information on GTF and VCF files are added in the methods.
+
+Both references for the scoring method of SIFT4G and PROVEAN have been included.
+
+The GTF and VCF files for SIFT4G analysis are deposited in Figshare.
+
+The frequency percentage of the top 10 nonsynonymous mutations in the primary lineages associated with the past and present variant of concern has been included in Table 3.
+
+Figure 2 has been revised with the additional information on amino acid changes.
+
+Co-mutation analysis in the discussion section has been expanded.
+
+Additional paragraph in the discussion section has been added to discuss the impact of our study and to explain why the study of some of the identified mutations remain relevant for the newer variants.
+
+Some citations have been deleted, added or updated accordingly.
+
+Any further responses from the reviewers can be found at the end of the article aligned to the reference genome, the multiple sequence alignment file was visualized under MEGA X software, version 10.2.5 build 10210330 (MEGA Software, RRID:SCR_000667).
+
+The 11 different coding sequences were extracted from these 30,229 strains according to their genomic positions in the reference strain (fasta file format) in NCBI, which is NC_045512.2.
+
+Inappropriate sequences of base calling errors, "N" unresolved nucleotides, and undefinable gaps were omitted.
+
+Then, the frequency and number of nonsynonymous mutations in these 30,229 strains were identified using a Python script.
+
+The frequency percentage of the top 10 nonsynonymous mutations in the primary lineages associated with the past and present variant of concern (VOC) were obtained from COVID CG (COVID CG, RRID:SCR_022266).
+
+16 Co-mutation analysis of SARS-CoV-2 proteins The concurrence ratio of each nonsynonymous mutation in the SARS-CoV-2 genome was determined using GESS database (The Global Evaluation of SARS-CoV-2/hCoV-19 Sequences, RRID:SCR_021847) 17 derived from GISAID web server.
+
+The concurrence search used for the analysis of the concurrence ratio in the top 10 nonsynonymous mutations is listed in Table 2.
+
+The frequency for each SNV in the concurrence search is greater than 0.1%.
+
+The chord diagram for co-mutations of nonsynonymous mutations in the SARS-CoV-2 genome was generated using Circos table viewer (Circos, RRID:SCR_011798).
+
+18
+
+To predict the effects of the mutations on the stability and flexibility of the protein structure, the protein structures were analyzed with DynaMut server (DynaMut, RRID:SCR_021849).
+
+19 The free energy change between the wild type and mutant protein structure (ΔΔG) predicts the status of protein stability, in which the values of ΔΔG above zero indicate a good stabilization while any values below zero or negative indicate a destabilizing outcome.
+
+The difference in entropic energy between the wild type and mutant structures (ΔΔS Vib ENCoM) predicts the status of protein flexibility, in which the values of ΔΔS Vib ENCoM above zero indicate an increase in flexibility while any values below zero or negative indicate a decrease in flexibility.
+
+Prediction of mutation effect on protein function SIFT 4G (Sorting Tolerant From Intolerant For Genomes, RRID:SCR_021850) 20 and PROVEAN (Protein Variation Effect Analyzer, RRID:SCR_002182) 21 were used to predict the deleteriousness of the nonsynonymous single nucleotide polymorphisms (nsSNPs) on SARS-CoV-2 protein structure.
+
+SIFT 4G predicts the effects of the mutations based on the sequence conservation and amino acid properties.
+
+For SIFT 4G analysis, gene annotation file (GTF), fasta file containing the SARS-CoV-2 genome sequences was obtained from Ensembl (Ensembl, RRID:SCR_002344).
+
+22 Subsequently a variant call format file (VCF) comprising all the SNP of SARS-CoV-2 was obtained using SNP-sites tool (RRID:SCR_02226).
+
+12 After that, the SARS-CoV-2 genome database, built with the SIFT 4G algorithm, was created.
+
+Lastly, SIFT 4G annotator was applied to annotate the VCF file with SARS-CoV-2 genome database.
+
+Mutations with a SIFT 4G score of less than 0.05 were considered deleterious.
+
+20 PROVEAN predicts the effects of the mutations based on the principle of alignment-based score.
+
+For PROVEAN analysis, the amino acid sequence along with the amino acid 99.9 0 variation were processed in the PROVEAN server to get the prediction result.
+
+Mutations with a value less than À2.5 were considered as deleterious.
+
+21
+
+The statistics of nonsynonymous mutations in SARS-CoV-2 proteins From the multiple alignment analysis, we identified 231 nonsynonymous mutations from 30,229 SARS-CoV-2 genome sequences.
+
+Figure 1 shows the numbers of the nonsynonymous mutations found in 11 coding sequences of SARS-CoV-2 proteins.
+
+ORF1a has the highest numbers of nonsynonymous mutations, followed by S protein and N protein.
+
+The top 10 highest frequency nonsynonymous mutations affecting 9 amino acids residues including ORF1a nsp5 P108S, ORF1b nsp12 P323L and A423V, S protein N501Y and D614G, ORF3a Q57H, N protein P151L, R203K and G204R and their frequency percentage in the primary lineages associated with the past and present VOCs are shown in Table 3.
+
+Some nonsynonymous mutations may be random and have no or little biological impact on viral transmission and pathogenesis.
+
+If a single nonsynonymous mutation co-mutates with other mutations, they may evolve together and interact functionally.
+
+To study co-mutation between different nonsynonymous mutations, the concurrence ratio of co-mutations in the top 10 nonsynonymous mutations was retrieved from GESS database website as shown in Table 2.
+
+The visualization of co-mutations in the top 10 nonsynonymous mutations generated with Circos table view is shown in Figure 2.
+
+In this chord diagram, connection ribbons represent co-mutations and each ribbon between row and column segments represents the value of concurrence ratio in each top 10 nonsynonymous mutations.
+
+Single colours encoded in circular arranged segments represent its own specific mutation whereas rainbow colours represent co-mutation in each mutation.
+
+The size of circular arrangement segments is proportional to the total value of concurrence ratio in a row or column.
+
+The circular size segment of ORF3a Q57H (G25563T) with the smallest segment size means the total value of concurrence ratio in row or column of ORF3a Q57H (G25563T) having the lowest concurrence ratio.
+
+A high concurrence ratio shows high co-mutation between each mutation with thicker ribbon size.
+
+S protein D614G (A23403G) with all other nine nonsynonymous mutations had concurrence ratios greater than 99%.
+
+On the other hand, low concurrence ratio shows low co-mutation with thinner ribbon size, for example, mutation ORF3a Q57H (G25563T) had the lowest concurrence ratio, only having a high concurrence ratio with S protein D614G (A23403G) and ORF1b nsp12 (P323L) C14408T, the top 2 nonsynonymous mutations which were present in more than 90% of the reported sequences.
+
+Prediction of mutation effect on protein stability and flexibility Table 4 summarizes the results of predicted effects of mutations on protein stability and flexibility obtained from DynaMut.
+
+Only two mutations, namely ORF1a nsp5 P108S and S protein D614G were predicted to be destabilizing with ΔΔG values of À0.288 and À0.072, respectively.
+
+For the prediction of protein flexibility, only S protein D614G was predicted to have an increase in flexibility with an ΔΔS Vib ENCoM value of 0.523.
+
+The prediction results of nonsynonymous mutations in the SARS-CoV-2 proteins using SIFT 4G and PROVEAN are shown in Table 5.
+
+SIFT 4G functional missense mutation score predicted that the P108S mutation in ORF1a nsp5 was deleterious (score 0.00) while four mutations S protein D614G, ORF3a Q57H, N protein R203K and G204R were tolerated (>0.05).
+
+However, the SIFT 4G results of ORF1b nsp12 P323L and A423V, S protein N501Y and N protein  P151L mutations cannot be obtained due to missing data in the Ensembl database.
+
+For the PROVEAN score, three nonsynonymous mutations, namely ORF1a nsp5 P108S, ORF3a Q57H and N protein P151L were predicted to be deleterious (score < À2.5).
+
+However, six nonsynonymous mutations, namely ORF1b nsp12 P323L and A423V, S protein N501Y and D614G, N protein R203K and G204R were predicted to be neutral (score > À2.5).
+
+The top 10 highest frequency nonsynonymous mutations of SARS-CoV-2 identified from 30,229 SARS-CoV-2 genome sequences were further analyzed with co-mutation analysis, prediction of the protein structure stability and flexibility analysis, and prediction of the protein function analysis.
+
+To determine if two nonsynonymous mutations of SARS-CoV-2 proteins co-mutate, concurrence ratio was calculated.
+
+Many nonsynonymous mutations showed a high concurrence ratio, suggesting these mutations may evolve together and interact functionally.
+
+The top 2 nonsynonymous mutations, S protein D614G and ORF1b nsp12 P323L (as known as RNA-dependent RNA polymerase) showed very high concurrence ratio with other mutations since they emerged in the early phase of the pandemic.
+
+23 Previously it has been shown that S protein D614G co-evolved with ORF1b nsp12 P323L.
+
+23 The combination of both mutations may enhance viral fitness based on epidemiological data, although the molecular mechanisms of this evolutionary advantage remain elusive. 23 Interestingly other mutations with high or medium concurrence ratio are found in more than 90% of the lineage B.1.1.7 in the alpha variant, in which its frequency peaked between March-May 2021.
+
+However, the ORF3a Q57H mutation with the lowest concurrence ratio is absent in the lineage B.1.1.7.
+
+Unfortunately, the information on the frequency percentage of ORF1a nsp5 P108S, ORF1b nsp12 A423V and N protein P151L mutations in the primary lineages of different VOCs are not available.
+
+In another study, it has been predicted that multiple SARS-CoV-2 genes may have epistatic interactions linked to viral fitness.
+
+24 The effects of a mutation can be neutral, harmful, or beneficial to the virus.
+
+It is expected that most single mutations have a small effect on viral fitness.
+
+It remains an arduous task to associate a specific phenotype with a single viral mutation since it is possible that a specific phenotype is contributed to by the effects of multiple mutations.
+
+There are huge numbers of single nucleotide polymorphisms (SNPs) present in the SARS-CoV-2 genome, hence evaluating the biological functions of all SNPs using experimental approaches is not feasible.
+
+Therefore, prediction of the effects of SNPs allows us to prioritize variants which may have some significant biological functions.
+
+Our study used the meta-prediction approach to perform functional predictions of nonsynonymous mutations to minimize the false positive rate.
+
+When two or three tools are combined, the prediction accuracy increases and reaches greater performance, however, the sensitivity is subsequently decreased as more tools are combined.
+
+25 Of all these nine protein mutations, only two mutations namely ORF1a nsp5 P108S and S protein D614G were predicted to reduce their stability whereas only S protein D614G may have more a flexible conformation compared to the wild type.
+
+S protein binds to human ACE2 receptors to gain access to the host cell.
+
+7 D614G mutation is found at S1 domain which is involved in receptor binding.
+
+26 Two independent studies of S protein D614G mutant structures derived from cryoelectron microscopy analysis has demonstrated that the G614 mutant adopts a more open conformation compared to D614 wild type.
+
+27,28 Interestingly, an in vitro study has shown that S protein D614G mutation may enhance virus infectivity by promoting the packing of S protein into the virion, not by enhancing the binding of S protein to the ACE2 receptor.
+
+29 On the other hand, ORF1a nsp5, also known as 3C-like protease is responsible for cleaving viral polypeptides during replication.
+
+2 A study by Abe et al., (2021) has showed that ORF1a nsp5 protein P108S mutation associated with the clade, 20B-T (lineage B.1.1.284), diminished its activity, possibly leading to a reduction in disease severity.
+
+30 Since the protein function depends directly on the three-dimensional structure of the protein, we wanted to see if these mutations may affect the function of the protein using SIFT 4G and PROVEAN prediction tools.
+
+The PROVEAN tool is applicable for all organisms.
+
+SIFT4G, instead of SIFT was used since it allows us to build a SARS-CoV-2 genome database with variant annotation.
+
+Interestingly ORF1a nsp5 protein P108S mutation was the only mutation found to be deleterious from both SIFT4G and PROVEAN functional analysis.
+
+Together with the DynaMut stability result, it has been demonstrated that this mutation may be harmful to the virus itself, and can be less damaging to the human host as reported by Abe et al. (2022).
+
+30 On the other hand, ORF3a Q57H and N protein P151L mutations are predicted to be deleterious by the PROVEAN tool only.
+
+ORF 3a is an ion channel (viroporin) which is involved in viral egress steps through lysosomal trafficking.
+
+31,32 ORF3a Q57H mutation not only causes a change in amino acid in ORF3a, but also produces a truncated ORF3b due to the overlapping protein-coding sequences shared by ORF3a and ORF3b.
+
+33 However, there are conflicting results about the effect of the ORF3a Q57H mutation on the human host immune response.
+
+33,34 N protein is involved in the liquid-liquid phase separation for the viral genome packaging.
+
+35 N protein P151L mutation is located at the RNA binding domain.
+
+It has been proposed that this mutation may disrupt the protein-drug interaction.
+
+36 Although another two N protein mutations, R203K and G204R were not predicted to be deleterious in our study, they have been identified in the alpha variant, B.1.1.7, gamma variant, P.1, lambda variant, C.37 and omicron variant, BA.1.
+
+37 While N protein, T205I mutation has been reported in the beta variant, B.1.351 and Mu variant, B.1.621.
+
+37 More recently, another N protein mutation, R203M has been reported in the delta variant, B.1.617.2.
+
+37 Interestingly mutants with N protein S202R or R203M mutations can pack more RNA material compared to the wild type based on in vitro studies.
+
+38 These observations and experimental results suggest that N protein residues, S202, R203, G204 and T205 may play some role on viral RNA replication.
+
+The SARS-CoV-2 virus genome data from GISAID database ranging from 1st January 20 to 22 March 21 were analyzed in this study.
+
+The frequency of alpha variant peaked around March-May 21 in most countries.
+
+37 Hence, it is not surprised that five nonsynonymous mutations, including ORF1b nsp12 P323L, S protein N501Y, S protein D614G, N protein R203K and N protein G204R identified in this study were also part of the defining mutations in the alpha variant.
+
+37 Note that ORF1b nsp12 P323L is the same mutation as ORF1b nsp12 P314L, nsp12 is located between ORF1a and ORF1b, and the last 9 overlapping amino acid residues from ORF1a, SADAQSFLN were included in ORF1b nsp12 P323L.
+
+The mutational profile of SARS-CoV-2 genome is changing very rapidly.
+
+However, it is out of the scope of this paper to monitor the mutational changes of SARS-CoV-2 genome since it is impossible to keep up with the exponential growth of these data.
+
+Interestingly two preprints on genomic surveillance analysis using specimens collected in late 2021 have showed that a small number of wild deer in North America carry the alpha or alpha-like variant.
+
+39,40 Although the alpha variant circulating in human population has been replaced by other variants, it remains to be seen if the alpha variant would jump back from animal to human.
+
+Furthermore, these five nonsynonymous mutations found in the alpha variant were also found in the current dominant variant, the omicron variant as shown in Table 3.
+
+Therefore, it is still relevant to study the consequences of these mutations.
+
+In this study, ORF1a nsp5 P108S, S protein D614G, ORF3a Q57H and N protein P151L mutations have been predicted to alter their structures and/or functions.
+
+Since all the reported variants of concern contain multiple mutations present in multiple SARS-CoV-2 proteins, it is necessary to evaluate the impact of these mutations in combination on viral transmission and pathogenicity.
+
+The biological consequences of these nonsynonymous mutations of SARS-CoV-2 proteins should be further validated with in vivo and in vitro experimental studies in the future.
+
+Figshare: Geographical Distribution (SARS-CoV-2).
+
+https://doi.org/10.6084/m9.figshare.19721716.v1 41 The additional multiple alignment data can be obtained from Figshare Figshare: MSA (SARS-CoV-2).
+
+https://doi.org/10.6084/m9.figshare.16681900.v4 42 This project contains the following underlying data.
+
+• MSA_0 (31-12-2019 to 31-05-2020).fasta file contains multiple sequence alignment data of SARS-CoV-2 genome sequences ranging between 31-12-2019 and 31-05-2020.
+
+• MSA_1 (01-06-2020 to 15-10-2020).fasta file contains multiple sequence alignment data of SARS-CoV-2 genome sequences ranging between 01-06-2020 and 15-10-2020.
+
+• MSA_2 (16-10-2020 to 31-01-2021).fasta file contains multiple sequence alignment data of SARS-CoV-2 genome sequences ranging between 16-10-2020 and 31-01-2021.
+
+• MSA_3 (01-02-2021 to 22-03-2021).fasta file contains multiple sequence alignment data of SARS-CoV-2 genome sequences ranging between 01-02-2021 to 22-03-2021.
+
+In SIFT4G analysis, we used GTF file containing the SARS-CoV-2 genome sequences, and VCF file comprising all the SNP of SARS-CoV-2.
+
+Figshare: SIFT4G (SARS-CoV-2).
+
+https://doi.org/10.6084/m9.figshare.19697365 43 Data are available under the terms of the Creative Commons Attribution 4.0 International license (CC-BY 4.0).
+
+6.
+
+Specifying 10 nonsynonymous variants in the title may help readers from misinterpreting that the paper conducted an intensive investigation of all possible nonsynonymous variants.
+
+7.
+
+The findings reported by the paper might have been limited to the sequences collected from a time-period almost a year ago (2020-01-01 ~ 2021-03-21).
+
+Adding discussion about the impact of the study with the advent of omicron variants would be interesting to readers of wide backgrounds.
+
+If applicable, is the statistical analysis and its interpretation appropriate?
+
+Are all the source data underlying the results available to ensure full reproducibility? Yes
+
+surveillance in different countries due to these possible reasons, such as the quality of the sequencing data, the accessibility to research funding resource, the socioeconomic status, the government policy.
+
+Therefore, it is less relevant for our study since we are not aimed to monitor the SARS-CoV-2 mutation profile in different regions.
+
+4. Co-mutation analysis was particularly intriguing because the co-mutation frequencies were high for most mutations. Can you discuss more about this in the Discussion? Also, I wonder if it will persist when co-mutation analysis were done by genetic nomenclature.
+
+The GESS database we used does not support co-mutation analysis by the clades or lineages.
+
+If we use other tools, we may get different results.
+
+Therefore, we didn't do comutation analysis by the clades or lineages.
+
+However, we expand the discussion part on comutation analysis based on the information of mutation frequency percentage by the lineages derived from COVID CG database.
+
+5. Mutations are as both nucleotide changes and amino acid changes in most figures and tables, but Figure 2 only shows nucleotide changes while Table 4 and  Others:
+
+6.
+
+Specifying 10 nonsynonymous variants in the title may help readers from misinterpreting that the paper conducted an intensive investigation of all possible nonsynonymous variants.
+
+To reflect the scope of the study better, the title of paper has been revised to "Prediction of the effects of the top 10 nonsynonymous variants from 30229 SARS-CoV-2 strains on their proteins."
+
+7.
+
+The findings reported by the paper might have been limited to the sequences collected from a time-period almost a year ago (2020-01-01 ~ 2021-03-21).
+
+Adding discussion about the impact of the study with the advent of omicron variants would be interesting to readers of wide backgrounds.
+
+Different SARS-CoV-2 variants of concern have specific sets of defining mutations; some are common among these VOCs while some are unique.
+
+Additional paragraph in the discussion section has been added to discuss the impact of our study and to explain why the study of some of the identified mutations remain relevant for the newer variants.
+
+Competing Interests: No competing interests were disclosed.
+
+Reviewer Report 28 February 2022 https://doi.org/10.5256/f1000research.76515.r123168
+
+1.
+
+In the Methods section For the downloaded datasets, what was the threshold used for coverage?
+
+A table showing the number of genomes with date (range should do), coverage above threshold, genetic nomenclature (clade name), and geographical information will be helpful to understand the diversity within the dataset.
+
+You have performed a Co-mutation analysis using the GESS database. Does it provide information about the mutation frequency, which genetic nomenclature it was observed? If you can provide that information, it will be useful.
+
+The concurrence table is good, but with knowledge of the above information it will become more relevant.
+
+What was the criteria used for "top 10 nonsynonymous mutations"? 3.
+
+For prediction of mutation effect on protein function, where was the GTF file, as well 4.
+
+as the VCF files, obtained from? There is no mention of whole genome SNP analysis.
+
+This part is a bit confusing.
+
+Clarification is required.
+
+"Mutations with a value less than-2.5 were considered as deleterious". Can you provide a reference showing why -2.5 is used as a threshold?
+
+Same with the SIFT 4G score threshold of 0.05.
+
+In the Results section:
+
+Figure 2: Is it possible to add the amino acid changes (e.g., D614G) instead of just nucleotide mutations for better understanding?
+
+1.
+
+Is it possible to show the genetic nomenclature associated with the top 10 nonsynonymous mutations?
+
+2.
+
+Also, if possible, can you add figures showing the domain or the position on a 3D protein structure? This is optional as you have discussed the domain for few proteins in the discussion section.
+
+3.
+
+In the Discussion section: You write "showed very high concurrence ratio with other mutations since they emerged in the early phase of the pandemic".
+
+How did you come to this conclusion? With reference to our comments in the results and methods section, if you can add this information in a tabular format it will be more informative.
+
+1.
+
+"The combination of both mutations may enhance viral fitness based on epidemiological data".
+
+There is no mention of the epidemiological data in the results section.
+
+If it's in the supplementary files, mention it.
+
+"P108S mutation diminished its activity, possibly leading to a reduction in disease severity." Can you mention in which genetic clade it was observed? 3.
+
+Is the study design appropriate and is the work technically sound? Partly
+
+If applicable, is the statistical analysis and its interpretation appropriate?
+
+Are all the source data underlying the results available to ensure full reproducibility? Yes
+
+the results will be more relevant and can be verified using laboratory techniques.
+
+Hence, we suggest the authors try to incorporate these points and resolve a few issues mentioned below and resubmit the paper with additional tables and content."
+
+We included the information on primary lineages for the past and present VOCs associated with the top 10 nonsynonymous mutations and their mutation frequency in Table 3.
+
+We also included the information about the geographical distribution of the SARS-CoV-2 dataset with the date range summarized in a table as extended data.
+
+We are not performing extra experiments to verify the prediction data since our work is primarily focused on prediction analysis of the mutations.
+
+The lab work is out of the scope of this paper, and it is too time-consuming and labour-intensive to perform experimental works.
+
+"Below are a few comments for the authors we as reviewers suggest:
+
+The introduction seems too small.
+
+More details about the virus and work showing the effect of non-synonymous mutations affecting the viral efficacy need to be mentioned."
+
+The introduction section with the examples of the effect of non-synonymous mutations affecting the viral efficacy has been included in the last paragraph.
+
+For the downloaded datasets, what was the threshold used for coverage?
+
+A table showing the number of genomes with date (range should do), coverage above threshold, genetic nomenclature (clade name), and geographical information will be helpful to understand the diversity within the dataset."
+
+For the downloaded dataset, high coverage filter has been applied.
+
+The high coverage is defined as only entries with <1% Ns and <0.05% unique amino acid mutations (not seen in other sequences in database) and no insertion/deletion unless verified by submitter, according to GISAID.
+
+We included the information on primary lineages for the past and present VOCs associated with the top 10 nonsynonymous mutations and their mutation frequency in Table 3.
+
+We have the information about the geographical distribution of the SARS-CoV-2 dataset with the date range summarized in a table as extended data.
+
+While we observe a diverse genome dataset coming from different regions, we don't know if there is a good correlation between the reported COVID case number and the number of SARS-CoV-2 genome data deposited to GISAID database.
+
+There may be some disparity in genomic surveillance in different countries due to these possible reasons, such as the quality of the sequencing data, the accessibility to the research funding resource, the socioeconomic status, the government policy.
+
+Therefore, it is less relevant for our study since we are not aimed to monitor the SARS-CoV-2 mutation profile in different regions.
+
+"You have performed a Co-mutation analysis using the GESS database. Does it provide information about the mutation frequency, which genetic nomenclature it was observed? If you can provide that information, it will be useful.
+
+The concurrence table is good, but with knowledge of the above information it will become more relevant."
+
+The GESS database doesn't have the information about the mutation frequency of the You write "showed very high concurrence ratio with other mutations since they emerged in the early phase of the pandemic".
+
+How did you come to this conclusion? With reference to our comments in the results and methods section, if you can add this information in a tabular format it will be more informative."
+
+Figure 1.
+
+The numbers of nonsynonymous mutations in 11 coding sequences of SARS-CoV-2 proteins.
+
+5 show only amino acid changes. Can you put amino acid changes on Figure 2 for easy cross-match with other figures and tables?
+
+RE: Figure 2 has been revised with the additional information on amino acid changes.
+
+SARS-CoV-2 protein structures used in this study.
+
+Concurrence ratio of top 10 nonsynonymous mutations in SARS-CoV-2 proteins.
+
+Top 10 nonsynonymous mutations of SARS-CoV-2 proteins and their frequency percentage in the primary lineages of VOCs.
+
+Prediction of nonsynonymous mutation effect on SARS-CoV-2 proteins stability.
+
+Prediction of nonsynonymous mutation effect on SARS-CoV-2 proteins function.
+
+Table3shows that S protein D614G and ORF1b nsp12 P323L mutations have the top 2 highest frequency.
+
+They are found in more than 90% of 30229 SARS-CoV-2 genome sequences, which are from the early batch of SARS-CoV-2 genome data.
+
+A similar finding has been reported by S. Ilmjärv et al., "Concurrent mutations in RNA-dependent RNA polymerase and spike protein emerged as the epidemiologically most successful SARS-CoV-2 variant," Sci. Rep., vol.
+
+11, no. 1, pp. 1-13, Jul. 2021."The combination of both mutations may enhance viral fitness based on epidemiological data".There is no mention of the epidemiological data in the results section.
+
+If it's in the supplementary files, mention it.
+
+We are referring to the study published by S. Ilmjärv et al., "Concurrent mutations in RNA-dependent RNA polymerase and spike protein emerged as the epidemiologically most successful SARS-CoV-2 variant," Sci. Rep., vol.
+
+11, no. 1, pp. 1-13, Jul. 2021.
+
+The genetic clade associated with ORF1a nsp5 P108S is 20B-T (lineage B.1.1.284).
+
+However, it is unknown if this mutation is associated with the past and current of variants of concern since the data is unavailable from COVID CG database.

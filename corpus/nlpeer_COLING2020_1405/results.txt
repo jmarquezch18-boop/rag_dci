@@ -1,0 +1,29 @@
+Table 3 provides the evaluation results on the test sets.
+
+The first conclusion we can draw is that all data augmentation techniques can improve over the baseline where no augmentation is used, although there is no single clear winner across both recurrent and transformer models.
+
+Synonym replacement outperforms other augmentation on average when transformer models are used, whereas mention replacement appears to be most effective for recurrent models.
+
+Second, applying all data augmentation methods together outperforms any single data augmentation on average, although, when the complete training set is used, applying single data augmentation may achieve better results (c.f., MaSciP-Recurrent and i2b2-2010-Transformer).
+
+This scenario may reflect a trade-off between diversity and validity of augmented instances (Hou et al., 2018;Xie et al., 2019).
+
+On the one hand, applying all data augmentation together may prevent overfitting via producing diverse training instances.
+
+This positive effect is especially useful when the training sets are small.
+
+On the other hand, it may also increase the risk of altering the ground-truth label, or generating invalid instances.
+
+This negative effect may dominate for larger training sets.
+
+Third, data augmentation techniques are more effective when the training sets are small.
+
+For example, all data augmentation methods achieve significant improvements when the training set contains only 50 instances.
+
+In contrast, when the complete training sets are used, only three augmentation methods achieve significant improvements and some even decrease the performance.
+
+This has also been observed in previous work on machine translation tasks (Fadaee et al., 2017).
+
+Last but not least, we notice that previous studies mainly investigate the effectiveness of data augmentation with recurrent models where most of the parameters are learned from scratch.
+
+Considering the significant improvements when using pretrained transformer models, we argue that it is important to investigate the effectiveness of techniques also on pretrained models, such as BERT (Devlin et al., 2019), because they are supposed to capture various knowledge via self-supervision learning.

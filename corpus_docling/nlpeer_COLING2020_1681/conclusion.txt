@@ -1,0 +1,83 @@
+In this work, we study how and to what extent cr is handled in context-aware nmt.
+
+We show that standard challenge sets can easily be manipulated with adversarial attacks that cause dramatic drops in performance, suggesting that nmt uses a set of heuristics to solve the complex task of cr.
+
+Attempting to diagnose the underlying reasons for these results, we propose targeted templates which systematically test the different aspects necessary for cr.
+
+This analysis shows that while some type of cr such as pleonastic and event cr are handled well, nmt does not solve the task in an abstract sense.
+
+We also propose a data augmentation approach which substantially improves performance on some metrics, but it does not change the general conclusions we infer from the templates.
+
+Future work should be evaluated on our adversarial attacks and Contracat, which we publicly release, to realistically estimate the ability of nmt to robustly do cr.
+
+We use OpenSubtitles20182  (Lison and Tiedemann, 2016) as training data.
+
+We tokenize the dataset using the Moses scripts3  (Koehn et al., 2006).
+
+We BPE-split the data by jointly computing them on English and German using 32K merge operations.
+
+We remove all samples where the main sentence exceeds 100 tokens on the BPE-level or the concatenated sample contains more than 200 tokens.
+
+ContraPro is built using OpenSubtitles and contains samples from it.
+
+As a result, we remove the entire documents from which the ContraPro samples originate from in order to remove any exact duplicates from ContraPro or similar contexts which may lead to unfair advantages for the models.
+
+This still leaves some exact duplicates between our training data and ContraPro which we also remove.
+
+The model is finally trained on ≈16.7M samples.
+
+We train the transformer models with a batch size of 4096.
+
+We use an initial learning rate of 10 -4 and we lower it by a factor of 0.7 if there are no improvements on the validation perplexity for 8 checkpoints.
+
+We save a checkpoint every 4000 updates.
+
+The transformer models we use are a 6 layer encoder/decoder with 8 attention heads.
+
+The model size is 512 and the size of the feed-forward layers is 2048.
+
+We tie the source, target and output embeddings.
+
+We use label smoothing with 0.1 and dropout in the transformer of 0.1.
+
+Models are trained on 2 GTX 1080 GPUs with 8GB RAM.
+
+The final model is an average of the 8 best checkpoints based on validation perplexity.
+
+The models we train are implemented in Sockeye (Hieber et al., 2017).
+
+As a reference to the scores shown in Table 4, our model has a score of 0.754 on unmodified ContraPro.
+
+C is the original context sentence from ContraPro.
+
+These were applied to 3,838 ContraPro examples.
+
+As a reference to scores shown in
+
+Our templates draw from the sets of entities shown in Table 6 andTable 7.
+
+The translations in German are shown in brackets.
+
+We note that all entities appear in the training dataset we use to train our models.
+
+The least frequent entity ("kangaroo") appears 134 times.
+
+We also use four event-and pleonastic-it phrases which are used as the main sentence in the templates and referred to later.
+
+Event: It came as a surprise (Es kam überraschend), It actually happened (Es ist tatsächlich passiert), It resulted in chaos (Es führte zu Chaos), It was a funny situation (Es war eine lustige Situation)
+
+Pleonastic: It was raining (Es regnete), It is a shame (Es ist eine Schande), It seemed this was unnecessary (Es schien, dass dies unnötig war), It is hard to believe this is true (Es ist schwer zu glauben , dass das wahr ist) article "the" ( "der/die/das" in German).
+
+On the German side, we underline the options that we give the model for the three German genders.
+
+English As the goal with the augmentations is to remove the strong bias towards neuter, we only evaluate the different LR models on the "er", "sie" and "es" accuracy on ContraPro.
+
+Performance on "er" and "sie" improves in all experiments, but it improves by far the most using a LR of 2 * 10 -7 .
+
+Performance on "es" gets worse as the LR increases.
+
+However, very low LR also does not provide for large improvements on "er" and "sie".
+
+We show that the LR is an important hyper-parameter in order to balance the performance on all pronouns.
+
+Admittedly, one may opt for a lower learning rate because, as the training data shows, "it" tends to be translated to "es", so it is undesirable to significantly drop performance on "es" because in practice these errors will be more visible.

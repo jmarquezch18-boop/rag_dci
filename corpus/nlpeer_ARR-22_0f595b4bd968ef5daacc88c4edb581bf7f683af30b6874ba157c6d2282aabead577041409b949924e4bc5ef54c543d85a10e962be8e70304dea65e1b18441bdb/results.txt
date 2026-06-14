@@ -1,0 +1,113 @@
+A common issue occurs that can potentially impact the validity of results is filtering the set of systems to be evaluated via automatic metric scores.
+
+Since metric scores are known to be a poor substitute for human assessment, this only results in the possibility that the best system according to human judges is inadvertently filtered out at this stage.
+
+For example, ConvAI2 (Dinan et al., 2019) ranked models firstly using automatic metrics before top models according to metric scores were assessed by crowd-sourced workers on Mechanical Turk, while similarly in the sixth Dialog System Technology Challenge (DSTC6) systems were filtered according to metric scores prior to human evaluation.
+
+In terms of the live evaluation, competitions such as ConvAI2 report such evaluations as highly challenging, with many of the resulting dialogues reported to be senseless, offensive, or simply not in line with instructions and ultimately live evaluation results have been discarded.
+
+Despite challenges, competitions that operate in the public domain, making data and evaluation techniques available to researchers (such as ourselves) should be applauded for such efforts.
+
+On the other hand, competitions that (for one reason or another) do not release data and evaluation techniques into the public domain have reported relative success in terms of human evaluation.
+
+However until such methods can be accessed and independently verified through replication studies, they will unfortunately have little impact .
+
+The first Amazon Alexa Socialbot Grand Challenge required human assessors to score how coherent and engaging conversations were on a 1-5 rating scale by two distinct groups: volunteer Amazon employees (experts), and general Alexa users (crowds) (Ram et al., 2018), are reported to achieve a correlation of overall scores for the two types of human assessors at 0.93.
+
+The absolute average rating across all chatbots was reported to be 20% lower for experts compared to general users.
+
+In an additional effort to evaluate models, conversational user experience, coherence, engagement, domain coverage, topical diversity, and conversational depth were assessed (1-5 scale), with combined scores reported to correlate with those of general users at r = 0.66.
+
+In addition to methods and data not being publicly available, correlations are difficult to interpret since no detail is provided about the number of judgments on which the correlation is calculated for example.
+
+In addition to competitions that generally aim to include human evaluation of systems, automatic metrics are often proposed for dialogue evaluation, themselves requiring a human evaluation data set on which to evaluate the proposed metric.
+
+However, inappropriate statistics are often applied.
+
+For example, Pang et al. (2020) propose a holistic metric to automatically evaluate four distinct aspects of dialogue, and a human evaluation experiment is deployed on Mechanical Turk using a 1-5 rating scale.
+
+The mean correlation between human assessors is reported as r = 0.61.
+
+However, mean correlations are unfortunately difficult to interpret, since correlation coefficients are not additive , averages calculated in the usual way cannot be assumed to reflect central tendency, and unfortunately, the distribution of correlations is not reported (Alexander, 1990).
+
+Mehri and Eskenazi (2020b) propose USR (Un-Supervised and Reference-free), an unsupervised model that predicts the quality of dialog for a range of criteria using various rating scales: understandable (0-1 rating scale), natural (1-3), maintains context (1)(2)(3), interesting (1)(2)(3), uses knowledge (0-1); overall quality (1)(2)(3)(4)(5).
+
+Despite human evaluation being carried out by experts inter-annotator agreement levels varied depending on criteria being measured, ranging from as low as 0.298.
+
+Additionally, although correlations between human assessments are reported as significant at p < 0.01, despite such statistics often being reported for correlations, they are unfortunately not very meaningful in terms of their impact on correlation interpretation and can be somewhat misleading.
+
+Contrary to common expectations, even small effect sizes (low r) can produce very low p-values (strong significance) in such tests.
+
+Aiming to achieve a significant correlation is an extremely low bar to reach in terms of consistency, since a low p-value in this case simply rejects the null hypothesis that the correlation is zero.
+
+In addition to the above issues, human evaluation of dialogue systems rarely take into account the fact that differences in performance can occur simply by chance.
+
+The method of human evaluation we propose provides a means of applying standard tests for statistical significance to avoid concluding differences that are highly likely to have occurred simply by chance.
+
+In order to assess the reliability of the proposed method of human evaluation, we carry out a metaevaluation in which we firstly examine individual human assessor consistency, before conducting a self-replication experiment.
+
+A number of models are required to function as a sample set of test systems, and for this purpose we employ available pre-trained models from ParlAI: 4 Poly-Encoder Transformer (Humeau et al., 2019), Bi-Encoder Transformer (Dinan et al., 2018), Sequence to Sequence (Sutskever et al., 2014), Key-Value Memory Networks (Miller et al., 2016), and a LSTMbased Model (Hochreiter and Schmidhuber, 1997).
+
+Within the evaluation setting of ConvAI2, each model is with a persona consisting of approximately five textual statements to emulate a personality.
+
+However, to increase the number of models and to provide an interesting comparison, we additionally include a version of each of the above models without any persona, resulting in 10 competing models.
+
+Hits were posted on the crowd-sourcing platform Amazon Mechanical Turk. 5 Firstly, and in order to evaluate the open-domain models in as realistic a setting as possible, we allow workers to choose the topic of conversation and input their chosen topic in a text field.
+
+The open nature of conversations should be noted however as something that influences the difficulty of producing consistent results  1: Numbers of workers who took part in human evaluation of models, average time taken per dialogue in minutes (min), and total number of dialogues assessed before and after quality control in which workers freely chose the topic (Free run 1); precisely the same experiment set-up was repeated (Free run 2); where the topic was prescribed via an ice-breaker statement (Ice-breaker) selected directly from the persona of the model.
+
+in our self-replication experiment.
+
+The fact that we allow human assessors to freely choose the topic of conversation means that differences in ratings could result from legitimate differences in performance when different topics are chosen by human assessors.
+
+We nonetheless test our evaluation allowing the user to choose the topic as this is part of our core aim for developing evaluation of dialogue truly in the open domain.
+
+Besides choosing a topic, we additionally asked workers to input their opinion of the topic they chose to discuss with models, categorizing the topic as either liked, ambivalent about it, or disliked.
+
+For example, if the topic they chose to discuss was dogs, we were curious to know if this was motivated by the fact that the worker liked or disliked dogs or indeed that they had chosen to discuss something they had no particular feeling about.
+
+Table 2 shows subsequent proportions (%) of workers, and the detailed instructions are introduced in Figure 5 in Appendix A.4.
+
+Perhaps unsurprisingly, the vast majority of workers chose to discuss something they liked (84% for workers who passed quality control).
+
+Nonetheless 7% of good workers were ambivalent about the topic they chose and 9% chose a topic they reported as disliking.
+
+Free  Table 1 shows the number of workers who participated in the initial data collection run who freely chose the topic of conversation with models (Free run 1), amounting to 1,525 dialogues × 7 criteria = 10,675 human ratings.
+
+The details of payment to each worker and the total experiment cost are provided in Appendix A.2.
+
+Table 1 also shows the proportion of workers who passed quality checks, numbers of dialogues assessed in total before and after quality filtering, as well as the average time taken for workers to complete a hit and average time taken to assess dialogues.
+
+As mentioned previously, we carry out a second data collection run with precisely the same settings (Free run 2) to measure the reliability of results and Table 1 shows equivalent statistics with respect to Free run 2 in which a total of 1,480 dialogues × 7 ratings = 10,360 human ratings were collected in total.
+
+In this experiment, we employed four prevailing word-overlap-based metrics as described in the following, whose scores are computed on the Con-vAI2 test set.
+
+BLEU BLEU (Bilingual Evaluation Understudy) evaluate the quality of a system output by computing the n-gram precision according to humangenerated references (Papineni et al., 2002).
+
+It also uses the brevity penalty to penalize short outputs.
+
+ROUGE-L ROUGE (Recall-Oriented Understudy for Gisting Evaluation) is a recall-adaptation of BLEU, whose wildly-applied variant is ROUGE-L (Lin and Hovy, 2003).
+
+It computes the precision and recall using longest common subsequence (LSC) instead of n-gram, and the F1 score of precision and recall is reported as the final score.
+
+METEOR METEOR (Metric for Evaluation of Translation with Explicit ORdering) was firstly proposed to overcome flaws of BLEU, like no usage of recall (Denkowski and Lavie, 2011).
+
+It computes the unigram precision and recall, and have a different mechanism of choosing the brevity penalty.
+
+GLEU GLEU (Google-BLEU) is a variety of BLEU (Wu et al., 2016) which computes the ngram precision and recall instead of the standalone precision.
+
+The minimum of precision and recall is reported as the final GLEU score.
+
+Metric r
+
+BLEU-4 -0.883 BLEU-1 -0.707 ROUGE-L -0.799 METEOR -0.321 GLEU -0.816
+
+We compute the correlation between commonly applied automatic metrics and our human evaluation methods, including word-overlap-based metrics and reference-free metrics, as shown in Tables 5 and6 respectively.
+
+As can be seen from Table 5, unfortunately no word-overlap metric achieves a strong positive correlation with human assessment, confirming once again that the invalidity of system rankings cur-rently produced by automatic metric scores.
+
+In terms of reference-free metrics, results correspond better and are more encouraging.
+
+FED has the ability of distinguishing "repetitive" models, but for other criteria, it correlates weakly or even negatively with human.
+
+Meanwhile, despite USR only correlating marginally with human in terms of consistency and topic loyalty, USR-DR(f) correlates closest to human among the three sub-metrics, while it performs best on evaluating consistency and topic loyalty.

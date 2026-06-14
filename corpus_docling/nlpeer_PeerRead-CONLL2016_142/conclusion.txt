@@ -1,0 +1,21 @@
+This work explored new probabilistic models for machine translation QE that allow better uncertainty estimates.
+
+We proposed the use of NLPD, which can capture information on the whole predictive distribution, unlike usual point estimatebased metrics.
+
+By assessing models using NLPD we can make better informed decisions about which model to employ for different settings.
+
+Furthermore, we showed how information in the predictive distribution can be used in asymmetric loss scenarios and how the proposed models can be beneficial in these settings.
+
+Uncertainty estimates can be useful in many other settings beyond the ones explored in this work.
+
+Active Learning can benefit from variance information in their query methods and it has shown to be useful for QE (Beck et al., 2013).
+
+Exploratory analysis is another avenue for future work, where error bars can provide further insights about the task, as shown in recent work (Nguyen and O'Connor, 2015).
+
+This kind of analysis can be useful for tracking post-editor behaviour and assessing cost estimates for translation projects, for instance.
+
+Our main goal in this paper was to raise awareness about how different modelling aspects should be taken into account when building QE models.
+
+Decision making can be risky using simple point estimates and we believe that uncertainty information can be beneficial in such scenarios by providing more informed solutions.
+
+These ideas are not restricted to QE and we hope to see similar studies in other natural language applications in the future.

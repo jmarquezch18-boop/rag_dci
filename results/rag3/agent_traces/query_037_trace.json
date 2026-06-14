@@ -1,0 +1,172 @@
+{
+  "query_id": "1aa55ba3f2f47947ad4df928f35cfc4c7d7035ec",
+  "query": "What is the focus of this paper: question answering, intent classification, entity classification, or translation?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "question answering"
+      },
+      "result_preview": "Search results for 'question answering' (14 matches):\n[paper_id=nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5 | section=introduction | line=1] Accompanying the revolution of pre-trained models in many NL",
+      "elapsed_s": 4.99
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+        "section": "introduction",
+        "start": 1,
+        "end": 5
+      },
+      "result_preview": "[nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5 / introduction — líneas 1-10 de 63]\nAccompanying the revolution of pre-trained models in many NLP applications, such as sentiment analysis (Xu et al., 2019a",
+      "elapsed_s": 11.96
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+        "section": "introduction",
+        "start": 1,
+        "end": 10
+      },
+      "result_preview": "[nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5 / introduction — líneas 1-15 de 63]\nAccompanying the revolution of pre-trained models in many NLP applications, such as sentiment analysis (Xu et al., 2019a",
+      "elapsed_s": 16.14
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+        "section": "introduction",
+        "start": 1,
+        "end": 15
+      },
+      "result_preview": "[nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5 / introduction — líneas 1-20 de 63]\nAccompanying the revolution of pre-trained models in many NLP applications, such as sentiment analysis (Xu et al., 2019a",
+      "elapsed_s": 9.1
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+        "section": "introduction",
+        "start": 1,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5 / introduction — líneas 1-25 de 63]\nAccompanying the revolution of pre-trained models in many NLP applications, such as sentiment analysis (Xu et al., 2019a",
+      "elapsed_s": 12.06
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Accompanying the revolution of pre-trained models in many NLP applications, such as sentiment analysis (Xu et al., 2019a), question answering (Yang et al., 2019b), information retrieval (Yang et al., 2019c), and text generation (Raffel et al., 2020), many related technologies have been deployed on the cloud to process user data from personal customers, small businesses, and large enterprises by industrial service providers.\n\nHowever, the convenience of the on-cloud pretraining technology also comes with a series of Contribution during internship at MSRA.\n\nu The corresponding author is Jianxin Li <lijx@buaa.edu.cn>. privacy challenges due to the sensitive nature of user data.\n\nFor example, the input text or even text vector representations in user requests can leak private information, which may cause the specific user to be identified (Schwartz and Solove, 2011;Zhu and Han, 2020).\n\nThis lack of privacy guarantees may impede privacy-conscious users from releasing their data to service providers.",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "score": 1.0
+    },
+    {
+      "text": "Accompanying the revolution of pre-trained models in many NLP applications, such as sentiment analysis (Xu et al., 2019a), question answering (Yang et al., 2019b), information retrieval (Yang et al., 2019c), and text generation (Raffel et al., 2020), many related technologies have been deployed on the cloud to process user data from personal customers, small businesses, and large enterprises by industrial service providers.\n\nHowever, the convenience of the on-cloud pretraining technology also comes with a series of Contribution during internship at MSRA.\n\nu The corresponding author is Jianxin Li <lijx@buaa.edu.cn>. privacy challenges due to the sensitive nature of user data.\n\nFor example, the input text or even text vector representations in user requests can leak private information, which may cause the specific user to be identified (Schwartz and Solove, 2011;Zhu and Han, 2020).\n\nThis lack of privacy guarantees may impede privacy-conscious users from releasing their data to service providers.\n\nThus, service providers may suffer from the deficiency of evolving models with user data.\n\nBesides, unintended data disclosure and other privacy breaches may result in litigation, fines, and reputation damages for service providers.\n\nThese concerns spark our proposal of THE-X, to enable privacy-preserving inference of transformer.",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_introduction_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "score": 1.0
+    },
+    {
+      "text": "Accompanying the revolution of pre-trained models in many NLP applications, such as sentiment analysis (Xu et al., 2019a), question answering (Yang et al., 2019b), information retrieval (Yang et al., 2019c), and text generation (Raffel et al., 2020), many related technologies have been deployed on the cloud to process user data from personal customers, small businesses, and large enterprises by industrial service providers.\n\nHowever, the convenience of the on-cloud pretraining technology also comes with a series of Contribution during internship at MSRA.\n\nu The corresponding author is Jianxin Li <lijx@buaa.edu.cn>. privacy challenges due to the sensitive nature of user data.\n\nFor example, the input text or even text vector representations in user requests can leak private information, which may cause the specific user to be identified (Schwartz and Solove, 2011;Zhu and Han, 2020).\n\nThis lack of privacy guarantees may impede privacy-conscious users from releasing their data to service providers.\n\nThus, service providers may suffer from the deficiency of evolving models with user data.\n\nBesides, unintended data disclosure and other privacy breaches may result in litigation, fines, and reputation damages for service providers.\n\nThese concerns spark our proposal of THE-X, to enable privacy-preserving inference of transformer.\n\nSpecifically, we identify two challenges for the privacy-preserving inference of pre-trained models.\n\nThe first challenge is how to protect users' plain text data from access by third-party service providers. (e.g., the clinic record or shopping history).",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_introduction_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "score": 1.0
+    },
+    {
+      "text": "Accompanying the revolution of pre-trained models in many NLP applications, such as sentiment analysis (Xu et al., 2019a), question answering (Yang et al., 2019b), information retrieval (Yang et al., 2019c), and text generation (Raffel et al., 2020), many related technologies have been deployed on the cloud to process user data from personal customers, small businesses, and large enterprises by industrial service providers.\n\nHowever, the convenience of the on-cloud pretraining technology also comes with a series of Contribution during internship at MSRA.\n\nu The corresponding author is Jianxin Li <lijx@buaa.edu.cn>. privacy challenges due to the sensitive nature of user data.\n\nFor example, the input text or even text vector representations in user requests can leak private information, which may cause the specific user to be identified (Schwartz and Solove, 2011;Zhu and Han, 2020).\n\nThis lack of privacy guarantees may impede privacy-conscious users from releasing their data to service providers.\n\nThus, service providers may suffer from the deficiency of evolving models with user data.\n\nBesides, unintended data disclosure and other privacy breaches may result in litigation, fines, and reputation damages for service providers.\n\nThese concerns spark our proposal of THE-X, to enable privacy-preserving inference of transformer.\n\nSpecifically, we identify two challenges for the privacy-preserving inference of pre-trained models.\n\nThe first challenge is how to protect users' plain text data from access by third-party service providers. (e.g., the clinic record or shopping history).\n\nPrior work has applied Differential Privacy (DP) (Dwork et al., 2006) and its variants to address similar privatization issues -originally for statistical databases and more recently for DL (Abadi et al., 2016) and NLP (Qu et al., 2021;Basu et al., 2021b;Fernandes et al., 2019;Lyu et al., 2020;Basu et al., 2021a).\n\nHowever, this solution may suffer from eavesdropping attackers.\n\nA handful of research (Zhu and Han, 2020;Zhao et al., 2020) demonstrated it possible to recover raw data from gradient leakage.",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_introduction_0003",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_5",
+    "nlpeer/ARR-22/21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_11"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_introduction_0000",
+      "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_introduction_0001",
+      "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_introduction_0002",
+      "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_introduction_0003"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_introduction_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_introduction_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_introduction_0003",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.0425531914893617,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

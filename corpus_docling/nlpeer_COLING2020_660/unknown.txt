@@ -1,0 +1,297 @@
+A Straightforward Approach To Narratologically Grounded Character Identification
+
+Abstract
+
+Introduction
+
+Core Concept Of Character
+
+All prior work that tackles the character identification task is unified by it's lack of a clear, operationalized definition of character.
+
+So far the work that reports the best performance is by (Valls-Vargas et al., 2014), where they give examples of different types of characters such as humans, animals (e.g., a talking mouse), anthropomorphic objects (e.g., a magical oven, a talking river), fantastical creatures (e.g., goblins), and folkloristic characters (e.g., the Russian characters Morozko and Baba Yaga).
+
+Despite this relatively comprehensive list of character examples, they did not provide a procedure for reliably distinguishing characters from other animate entities in a narrative.
+
+Consider the following example. Let's assume we have a story about Mary, a little girl, and her dog named Fido.
+
+Mary plays with Fido when she feels lonely.
+
+Also, Fido helps Mary in her daily chores and brings letters to Mary from the post office.
+
+One day Mary and Fido are walking through town observing the local color. They see a crowd gathered around a fruit vendor; an ugly man crosses the path in front of them; and another dog barks at Fido.
+
+Many narratologists and lay people would agree that the story has at least two characters, Mary and Fido.
+
+Depending on how the story is told, either Mary or Fido may be the protagonist. But what about the other entities mentioned in the story? What about the unnamed man who crosses their path? Is he a character? What about the faceless crowd? Is the crowd itself a character, or perhaps its constituent people? What about the fruit vendor, who is hawking his wares? And what about the barking dog? Where do we draw the line?
+
+We noted these problems in prior work, and proposed a preliminary definition of character grounded in narrative theory that addressed these questions (Jahan and Finlayson, 2019).
+
+We began by studying different books and literature reviews on narratology that provided different definitions of character.
+
+Helpfully, Seymour Chatman, in his classic book "Story and Discourse: Narrative Structure in Fiction and Film" (1980), collected a number of views on character across multiple narratological traditions.
+
+Several of the definitions were complex and would be quite difficult to model computationally.
+
+Others were too vague to inform computational approaches.
+
+However, one definition provided a reasonable target:
+
+The view of the Formalists and (some) structuralists resemble Aristotle's in a striking way. They too argue that characters are products of plots, that their status is "functional," that they are, in short, participants or actants rather than personnages, that it is erroneous to consider them as real beings.
+
+Narrative theory, they say, must avoid psychological essences; aspects of character can only be "functions." They wish to analyze only what characters do in a story, not what they are-that is, "are" by some outside psychological or moral measure.
+
+Further, they maintain that the "spheres of action" in which a character moves are "comparatively small in number, typical and classable." (Chatman, 1980, p.111) Here, an actant is something that plays (i.e., acts in) any of a set of active roles in a narrative, and plot denotes the main events of a story.
+
+This definition, then, though presented via somewhat obscure narratological terminology, gives a fairly conceptually concise definition of a character: a character is an animate being that is important to the plot.
+
+By this measure then, we are justified in identifying Mary and Fido as characters, but not the various entities they casually encounter in their stroll through town.
+
+What Makes An Entity Important?
+
+Our definition considers animate beings who can contribute to the plot as characters.
+
+But this definition leads to another problem, namely, how can we measure the importance of the characters? How much of a contribution is enough to be a character?
+
+Unfortunately, narratologists' answers are not especially clear, and indeed very few narratologists have attacked this question directly.
+
+As Chatman writes, "It is remarkable how little has been said about the theory of character in literary history and criticism." (1980, p.107).
+
+According to the famous cultural theorist and narratologist, Mieke Bal, it is difficult to explain the ideas of character because a character so closely resembles a human being.
+
+She writes ". . .
+
+no satisfying, coherent theory of character is available is due to this anthropomorphic aspect.
+
+The character is not a human being, but it resembles one." (Bal and Van Boheemen, 2009, p.113).
+
+Despite this, for the purposes of reliable inter-annotator agreement to support training and testing effective computational approaches, it is critical for us to define specific tests by which we can decide if an animate being is a character or not.
+
+Chatman points out the importance of the functionality of a character with regard to the plot.
+
+We formulated our test by starting with the original theoretical work that led to the development of the theory of functionality and actants, namely Vladimir Propp's Morphology of the Folktale (1968).
+
+In that theory, Propp describes the concept of a function, which is an action or event that drives the plot forward, and is intimately interwoven with the main characters (i.e., the dramatis personae).
+
+For example, the Villain of a story may cause harm or injury to some member of the Hero's family: Propp names this plot function Villainy and assigns it the symbol A. He defined 31 such functions.
+
+Prior work on annotating Propp's morphology has shown that the main characters can be reliably identified (Yarlott and Finlayson, 2016), and so those characters which are directly and unambiguously involved in the forwarding of the plot are generally not difficult to identify.
+
+These main characters have numerous mentions, close involvement in the main events, and highly distinctive character traits. What about, however, edge cases-potential minor characters-such as the examples in the Mary and Fido above? Minor characters have many fewer mentions, little involvement with main events, and often no uniquely distinguishing traits.
+
+To illustrate the difficulty consider the following example from Propp's data, namely the story Vasilisa the Beautiful, which is found in one of our corpora, the extended ProppLearner corpus (Finlayson, 2017).
+
+In this story, the heroine is Vasilisa, whose mother dies right after giving birth to her.
+
+Before dying, the mother gave Vasilisa a doll, and the rest of the story concerns how Vasilisa survives the predations of her stepmother with the help of that doll.
+
+There is no doubt that Vasilisa is a main character of this storyshe is the Heroine-but there is some question about her birth mother.
+
+Does the birth mother count as a character, albeit a minor one? We can apply our test of functionality by asking whether the mother's actions or presence are critical to the progression of plot.
+
+In particular, the mother gives Vasilisa a critical magical artifact (the doll, which itself become a major character) without which Vasilisa would have been unable to effect much of the action of the story.
+
+Because of the mother's involvement, indirect though it may be, in key events of the plot, we can reasonably consider the birth mother a minor character.
+
+In addition to the extended ProppLearn corpus, we also annotated texts from OntoNotes 5.0 (Weischedel et al., 2013) which presented many interesting edge cases.
+
+As an example, OntoNotes contains many short news texts, one consisting only of 13 lines about a day in the life of Bill Clinton just before the U.S. election of 2000.
+
+In that article "all Americans" is mentioned: "The day got worse when he urged all Americans to vote on November 2.".
+
+It is clear that Bill Clinton is a character of this news article because the whole story is about him, but what about the referent "all Americans"? Do they contribute to the "plot" of the article, such as it is? Do they support the development of the main character?
+
+In this case, "all Americans" neither effect any functional action in the plot of the article, nor do they contribute anything necessary to the progression of the plot.
+
+Indeed, if the reference to "all Americans" was struck from the text, the plot would remain essentially unchanged.
+
+Based on this judgement, we do not consider "all Americans" to be a character, even a minor one.
+
+Based on these examples, we can propose a rule for assessing the importance of an entity: if an animate entity is mentioned numerous times, has clear and close involvement in the main events of the plot, and has highly distinguishing character traits, then it is almost certainly a main character.
+
+For other animate entities that are mentioned less often, have more tangential connection to the plot, and perhaps lack distinguishing traits, the key test is whether that entity critically contributes to the plot either by directly participating in a important plot event, or enabling the participation of other characters in the plot.
+
+In our annotation, we observed that the difficulty of distinguishing characters from non-characters depends strongly on the length of a story.
+
+The shorter the text, the harder it is to identify the characters, primarily because there is much less opportunity for entities to present distinct characteristics and contribute clearly to the development of the plot.
+
+As a case in point, identifying characters in our third corpus, the Corpus of English Novels (Weischedel et al., 2013), where the chapters are quite long, was easier than identifying characters in the Propp's folktales, and substantially easier than in the short OntoNotes news texts.
+
+Other Aspects Of Characters
+
+With a operationalized definition of character now in hand, one might ask whether characters can be further characterized along different dimensions.
+
+For example, Ismail Talib (2010) described a number of different possible dimensions of characters: protagonist vs. antagonist, flat vs. round, static vs. developing, and so forth.
+
+Propp described seven different types of dramatis personae: Hero, Villain, Princess, Helper, Donor, Dispatcher, and False Hero.
+
+While these are interesting directions to explore, in this work we did not seek to categorize entities in any way other than character or not.
+
+Data And Annotation
+
+We annotated characters on 170 texts across three corpora, one with 46 texts (the extended ProppLearner corpus), the second with 94 texts (a subset of the OntoNotes corpus), and the third with 30 texts (a subset of The Corpus of English Novels).
+
+Table 1 shows the counts of various items of interest across the data.
+
+We manually annotated these corpora as to whether each coreference chain acted as a character in the story.
+
+Gold coreference chains were already marked on the ProppLearner corpus and OntoNotes, while the coreference chains were automatically computed for the Corpus of English Novel.
+
+According to the definition mentioned above, we marked a chain as a character if it is animate and is important to the plot of the story.
+
+First, we read the story and find the events important to the plot, there was no agreement across the annotators what the events important to the plot are. Then we assessed the animate objects directly or indirectly involved those events to determine if they were characters or not.
+
+As our supervised model is highly dependent on the annotation, therefore, if there are more than one plot, or if the plot is highly subjective, then it should be reflected by the annotators.
+
+The first two authors double annotated this corpus at the coreference chain level for character, achieving an agreement of 0.78 Cohen's kappa (κ).
+
+This level of agreement represents substantial overall agreement (Landis and Koch, 1977).
+
+The authors discussed any disagreements and corrected them to generate
+
+Character Singleton
+
+There was the apple tree. "Apple tree, apple tree, little mother, hide me !" she begged. "If you eat my wild apple.
+
+She ate it quickly.
+
+The apple tree covered her with branches and leaves; the geese flew by.
+
+Figure 2: Sample text fragment of PL corpus a gold-standard annotation.
+
+Our high agreement measures are in accordance with prior work that has shown that dramatis personae (i.e., main characters) can be annotated with high reliability.
+
+In particular, Yarlott and Finlayson (2016) showed that dramatics personae can be annotated with agreements of F 1 > 0.8 and κ > 0.6.
+
+Because of the high agreement for this annotation task, we single-annotated the remaining two corpora for the sake of efficiency.
+
+OntoNotes (Weischedel et al., 2013) is a large corpus containing a variety of genres, including news, conversational telephone speech, broadcast news transcripts, talk show transcripts, among others, in English, Chinese, and Arabic.
+
+We extracted 94 English broadcast news transcripts that had gold-standard coreference chain annotations.
+
+The first author annotated the coreference chains as to character.
+
+Despite having clear narrative elements, including characters and events, the news texts have very different goals and textual properties.
+
+For example, the plot is only partially represented in a news text, while we have a full plot in many narrative texts.
+
+George W. Bush wants to modernize Social Security, as he puts it, by allowing workers to take a small share of their Social Security, payroll tax, to increase themselves.
+
+The Corpus of English Novels (CEN) (De Smet, 2008) contains 292 English novels written between 1881 and 1922, comprising various genres, including drama, romance, fantasy, adventure, etc.
+
+We selected 30 novels and from each extracted a single chapter that contained a significant number of characters.
+
+We computed coreference chains using Stanford CoreNLP (Manning et al., 2014), and the first author annotated those chains as to character.
+
+We annotated only one chapter per novel due to time constraints; we are aware that in a full novel, the picture might be very different than in a single chapter.
+
+Approach
+
+Step 1: Animacy Detection
+
+According to our definition of character, it must be an animate object that is important to the plot.
+
+Thus one first step to identifying characters is to identify the animate entities.
+
+We used an existing animacy classifier for coreference chains (Jahan et al., 2018), and tried two of their best-performing models, both of which achieved state-of-the-art performance; one is a hybrid model incorporating supervised machine learning and hand-built rules, and the other is a rule-based model consisting of hand-built rules only.
+
+As we have gold standard animacy annotation in the extended ProppLearner corpus that allows training the supervised portion of the hybrid model, we trained and ran the hybrid model on this data.
+
+For OntoNotes and the Corpus of English Novels, we ran the rule-based model, which did not require gold-standard animacy markings for training, to detect animacy.
+
+Step 2: Character Classification
+
+Features
+
+We explored seven different integer and binary features to train the character identification model.
+
+As we have mentioned earlier, not all animate entities are characters, but all characters are animate entities.
+
+Therefore, we incorporated the animacy features while adding additional features for character, and so most of the features are designed to interrogate whether an animate entity acts as a semantic subject of an event or has person-like characteristics.
+
+Some of the features are drawn or inspired by prior work.
+
+1. Coreference Chain Length (CL): We computed the length of a coreference chain and then normalized the numeric length feature by z score = (x -µ)/σ, where x is the raw chain length, µ is the chain length mean, and σ is the chain length standard deviation.
+
+This feature explicitly captures the tendency of the long chains to be characters, as discussed in prior work (Eisenberg and Finlayson, 2017).
+
+2. Semantic Subject (SS): We also computed whether or not the head of a coreference chain appeared as a semantic subject (ARG0) to a verb, and encoded this as a boolean feature.
+
+We used the semantic role labeler associated with the Story Workbench annotation tool (Finlayson, 2008;Finlayson, 2011) to compute semantic roles for all the verbs in the stories.
+
+Semantics roles have been previously used for Named Entity Recognition (NER) as seen in (Pang and Fan, 2009) 3.
+
+Named Entity (NE): We checked whether or not the head of a coreference chain was a named entity with the category PERSON, and encoded this as a boolean feature.
+
+The named entities were computed using the standard API of the Stanford dependency parse (Manning et al., 2014, v3.7.0).
+
+Wordnet (Wn):
+
+We detected if the head of a coreference chain is a descendant of Person in WordNet, and encoded this as a boolean feature.
+
+5. Dependency Link (DP): We computed whether or not the head of a coreference chain appeared as a dependent of nsubj dependency link among the enhanced-plus-plus-dependencies of a sentence.
+
+The dependencies were extracted using the standard API of the Stanford dependency parse (Manning et al., 2014, v3.7.0) we have used for Named Entity feature.
+
+Similar dependencies were used as features elsewhere (Valls-Vargas et al., 2014).
+
+6.
+
+Triple (TP): We computed if the head of a coreference chain matches the subject position of any triple and encoded this information as a boolean feature.
+
+The triples were extracted from Stanford OpenIE associated with the classic API of the Stanford CoreNLP toolkit (Manning et al., 2014, v3.7.0).
+
+(Goh et al., 2012a) used a similar extraction of an S-V-O triplet.
+
+7. ConceptNet Feature (CN): We checked if the head of a coreference chain has any edge that related to Person in the ConceptNet semantic network (Speer et al., 2017) and encoded this information as a boolean feature.
+
+Features extracted from ConceptNet have also been used as features elsewhere (Calix et al., 2013;Valls-Vargas et al., 2014).
+
+Model
+
+Results & Discussion
+
+Generalizability Experiments
+
+Error Analysis
+
+Related Work
+
+Contributions
+
+This paper makes three contributions.
+
+First, we proposed a more appropriate definition of character, contrasting with prior computational works which did not provide a theoretically grounded definition.
+
+Additionally, we reported our findings of a review of the literature that is helpful to delineate and define the concept of character.
+
+Second, we double annotated 46 Russian folktales and singly annotated 94 OntoNotes news texts and 30 English novels (one chapter per novel) for character, generating data that will be useful for the community 5 .
+
+Finally, we have demonstrated a straightforward supervised machine learning classifier for identifying characters, achieving weighted average of 0.90 F 1 , establishing a new standard for this task.
+
+Figure 1: Mentions vs. chain length: PL corpus
+
+Figure 3: Mentions vs. chain length: ON corpus
+
+Figure 5: Mentions vs. chain: CEN corpus
+
+Figure 7: F 1 vs. chain length of the character identification model on OntoNotes for both manually corrected and automatically computer animacy markings.
+
+Counts of various text types in the corpus.
+
+The extended ProppLearner (Finlayson, 2017) contains gold-standard annotations for referring expressions, coreference chains, and animacy.
+
+It comprises 46 Russian folktales originally collected in Russia in the late 1800s but translated into English within the past 70 years.
+
+Performance of different features sets for identifying characters.
+
+MFC = most frequent class.
+
+κ = Cohen's kappa
+
+extended ProppLearner Over Duplicated 532 character chains Over & Under Duplicated 532 character chains, removed 266 non-character chains OntoNotes Over Duplicated 347 character chains Over & Under Duplicated 225 character chains, removed 225 non-character chains Corpus of English Novels Over Duplicated 2,927 character chains Over & Under Duplicated 6,104 character chains, removed 10,275 non-character chains
+
+Different settings for Over & Under Sampling.
+
+Performance of character model for different training and testing setups.
+
+κ = Cohen's kappa

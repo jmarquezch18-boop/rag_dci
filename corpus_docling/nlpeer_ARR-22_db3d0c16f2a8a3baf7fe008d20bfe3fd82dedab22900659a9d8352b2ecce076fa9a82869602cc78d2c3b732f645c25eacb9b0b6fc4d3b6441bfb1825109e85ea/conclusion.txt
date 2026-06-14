@@ -1,0 +1,105 @@
+This work addresses hierarchical modeling for extractive text summarization by explicitly leveraging hierarchical structure information, including section titles, as well as hierarchical position information of the sentences.
+
+We propose an intuitive and interpretable approach to formulate, extract, encode and inject the hierarchical structure information into an extractive summarization model.
+
+The proposed HiStruct+ models are systematically evaluated on CNN/DailyMail, PubMed, and arXiv.
+
+On PubMed, our model increases the former SOTA ROUGEs for extractive summarization by 1.2/0.02/1.12.
+
+On arXiv, the new SOTA results for extractive summarization are set to 45.22/17.67/40.16.
+
+Our ablation studies suggest that the SOTA performance are mostly gained by providing the hierarchical position information of sentences to the summarization model.
+
+When comparing the HiStruct+ models with the baselines that are unaware of the HiStruct information, improvements are consistently observed on all three datasets under various experimental settings, indicating the effectiveness of the proposed method.
+
+Moreover, our experiments show that the more conspicuous hierarchical structure the dataset has, the larger the improvements of our method are.
+
+The proposed metrics of hi-depth and hi-width determine whether it is worth using our method by comparing the metrics of any dataset to those of the three involved datasets.
+
+Utilizing the HiStruct information also for abstractive summarization is subject of future work.
+
+Similarly, we see great potential in an encoderdecoder architecture with the proposed HiStruct injection components.
+
+The CNN/DailyMail2 , PubMed and arXiv3 datasets are used in experiments.
+
+We use the original splits provided by See et al. (2017) and Cohan et al. (2018) for training, validation and testing.
+
+The pre-defined dictionaries of the typical section title classes and the corresponding in-class section titles are released in our GitHub project (see Section 1).
+
+There are 164,195 unique section titles in PubMed, and 500,015 in arXiv, which are encoded as section title embeddings (STE) respectively using the proposed encoding method.
+
+For PubMed, we define 8 section title classes: introduction, background (i. e., background, review and related work), case (i. e., case reports), method, result, discussion, conclusion and additional information (i. e., additional information such as conflicts of interest, financial support and acknowledgments).
+
+For arXiv, we define 10 classes: introduction, background, case, theory (i. e., problem formulation and proof of theorem), method, result, discussion, conclusion, reference and additional information.
+
+Classified STEs are prepared accordingly by replacing the original STEs of the intraclass section titles with the encoding of the section title class.
+
+The learning rate schedule follows Liu and Lapata (2019) with warm-up.
+
+On CNN/DailyMail, we train the HiStruct+ models and the Trans-formerETS baselines 50,000 steps with 10,000 warm-up steps.
+
+On PubMed and arXiv, the models are trained 70,000 steps with 10,000 warm-up steps when taking 15,000 tokens as input.
+
+When training models on arXiv with 28,000 input tokens, we train 100,000 steps with 10,000 warm-up steps.
+
+The number of the extracted sentences depends on the dataset.
+
+On CNN/DailyMail, we follow Liu and Lapata (2019) to select 3 sentences for each document as its extractive summary and apply Trigram Blocking (Paulus et al., 2018) to reduce the redundancy of the selected sentences.
+
+On PubMed and arXiv, 7 sentences are extracted without Trigram Blocking.
+
+The length limit of the original TLM is overcome by adding extra token linear position embeddings (tPE) to cover the desired length.
+
+The additional tPE are then trained with the whole summarization model.
+
+Instead of initializing them randomly, we copy the original tPE of the TLM multiple times until the desired length is covered.
+
+The HiStruct+ models and the TransformerETS baselines are trained on 3 GPUs (NVIDIA® Quadro RTX™ 6000 GPUs with 24GB memory) with gradient accumulation every two steps.
+
+Checkpoints are saved and evaluated on the validation set every 1,000 steps.
+
+The top-3 checkpoints based on the validation loss are kept.
+
+The batch size varies with the base TLM and the input length.
+
+On CNN/DailyMail, the base TLM is fine-tuned with the whole summarization model.
+
+Due to resource limitation, the TLM (i. e., Longformer) is not finetuned when training the summarization model on PubMed and arXiv with longer inputs.
+
+The detailed model architectures and experimental settings for the models trained on CNN/DailyMail, PubMed and arXiv are summarized in The effect of token-level hierarchical position embeddings is investigated in experiments.
+
+The hierarchical position embeddings of tokens are generated as followings: Given the t-th token within the document, its hierarchical position is represented by Equation 7:
+
+T SV t = (a t , b t , c t )(7)
+
+where a t represents the linear position of the section which contains the token, b t is the sentence's position within the section and c t is the linear position of the token within the sentence.
+
+Given the t-th token and the desired size of the output embeddings d, its token hierarchical position embeddings (tHE) is encoded by Equations 8, 9, 10, using different combination modes.
+
+Initial experiments are conducted to assess the summarization performance of the HiStruct+ models with or without the tHE.
+
+For this purpose, we compare a HiStruct+ model merely injecting sentence hierarchical position embeddings (i. e., sHE) with a HiStruct+ model with both sentence and token hierarchical position embeddings (i. e., sHE& tHE).
+
+That is, it adds the corresponding tHEs to the input embeddings at each input position, which are fed into the TLM.
+
+It also injects sHEs into the output sentence representations.
+
+Table 8 summarizes the evaluation results of three groups of HiStruct+ models based on different TLM with various input lengths.
+
+In each group, all experimental settings and parameters are the same, except for the injection setting of tHE.
+
+The experimental results suggest that the HiStruct+ models with merely sHE consistently outperform the HiStruct+ models with both sHE & tHE under various circumstances.
+
+The reason might be that we directly fine-tune the TLM on the extractive summarization task.
+
+When adding extra tHE to the input embeddings to the TLM, we do not pre-train the TLM with the adjusted inputs.
+
+It is reasonable that the TLM has difficulties in understanding of the new inputs based on the knowledge learned from the original format of encoding.
+
+Previous works, such as LayoutLM (Xu et al., 2020), LamBERT (Garncarek et al., 2020) and HIBERT (Zhang et al., 2019), which adjust the input embeddings or the encoder architecture of the pre-trained TLM, continue to pre-train the TLM on their own data.
+
+Continuing pre-training of the language models is a core part of these works and leads to significant improvements on downstream tasks.
+
+Due to lack of computing resources, we are not able to pre-train the language models.
+
+Furthermore, the key goal of our work is

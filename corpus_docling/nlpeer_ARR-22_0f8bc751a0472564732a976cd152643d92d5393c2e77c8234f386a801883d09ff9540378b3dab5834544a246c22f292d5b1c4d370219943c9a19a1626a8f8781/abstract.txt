@@ -1,0 +1,13 @@
+We introduce a method for unsupervised parsing that relies on bootstrapping classifiers to identify if a node dominates a specific span in a sentence.
+
+There are two types of classifiers, an inside classifier that acts on a span, and an outside classifier that acts on everything outside of a given span.
+
+Through self-training and co-training with the two classifiers, we show that the interplay between them helps improve the accuracy of both, and as a result, effectively parse.
+
+A seed bootstrapping technique prepares the data to train these classifiers.
+
+Our analyses further validate that such an approach in conjunction with weak supervision using prior branching knowledge of a known language (left/right-branching) and minimal heuristics injects strong inductive bias into the parser, achieving 63.1 F 1 on the English (PTB) test set.
+
+In addition, we show the effectiveness of our architecture by evaluating on treebanks for Chinese (CTB) and Japanese (KTB) and achieve new state-of-the-art results.
+
+1

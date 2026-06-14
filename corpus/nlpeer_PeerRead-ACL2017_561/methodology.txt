@@ -1,0 +1,73 @@
+Our baseline sequence tagging model is a hierarchical neural tagging model, closely following a number of recent studies (Ma and Hovy, 2016;Lample et al., 2016;Yang et al., 2017;Chiu and Nichols, 2016) (left side of Figure 2).
+
+Given a sentence of tokens (t 1 , t 2 , . . . , t N ) it first forms a representation, x k , for each token by concatenating a character based representation c k with a token embedding w k :
+
+c k = C(t k ; θ c ) w k = E(t k ; θ w ) x k = [c k ; w k ](1)
+
+The character representation c k captures morphological information and is either a convolutional neural network (CNN) (Ma and Hovy, 2016;Chiu and Nichols, 2016) or RNN (Yang et al., 2017;Lample et al., 2016).
+
+It is parameterized by C(•, θ c ) with parameters θ c .
+
+The token embeddings, w k , are obtained as a lookup E(•, θ w ), initialized using pre-trained word embeddings, and fine tuned during training (Collobert et al., 2011).
+
+To learn a context sensitive representation, we employ multiple layers of bidirectional RNNs.
+
+For each token position, k, the hidden state h k,i of RNN layer i is formed by concatenating the hidden states from the forward ( -→ h k,i ) and backward ( ←h k,i ) RNNs.
+
+As a result, the bidirectional RNN is able to use both past and future information to make a prediction at token k. More formally, for the first RNN layer that operates on
+
+x k to output h k,1 : - → h k,1 = - → R 1 (x k , - → h k-1,1 ; θ-→ R 1 ) ← - h k,1 = ← - R 1 (x k , ← - h k+1,1 ; θ← - R 1 ) h k,1 = [ - → h k,1 ; ← - h k,1 ](2)
+
+Step 2: Prepare word embedding and LM embedding for each token in the input sequence.
+
+Two representations of the word "York"
+
+Step 3: Use both word embeddings and LM embeddings in the sequence tagging model.
+
+New York is located …
+
+Figure 1: The main components in TagLM, our language-model-augmented sequence tagging system.
+
+The language model component (in orange) is used to augment the input token representation in a traditional sequence tagging models (in grey).
+
+The second RNN layer is similar and uses h k,1 to output h k,2 .
+
+In this paper, we use L = 2 layers of RNNs in all experiments and parameterize R i as either Gated Recurrent Units (GRU) (Cho et al., 2014) or Long Short-Term Memory units (LSTM) (Hochreiter and Schmidhuber, 1997) depending on the task.
+
+Finally, the output of the final RNN layer h k,L is used to predict a score for each possible tag using a single dense layer.
+
+Due to the dependencies between successive tags in our sequence labeling tasks (e.g. using the BIOES labeling scheme, it is not possible for I-PER to follow B-LOC), it is beneficial to model and decode each sentence jointly instead of independently predicting the label for each token.
+
+Accordingly, we add another layer with parameters for each label bigram, computing the sentence conditional random field (CRF) loss (Lafferty et al., 2001)
+
+New York is located ...
+
+Token representation h 1,1 h 2 LM h 2,1 h 1,2 h 2,2
+
+Figure 2: Overview of TagLM, our language model augmented sequence tagging architecture.
+
+The top level embeddings from a pre-trained bidirectional LM are inserted in a stacked bidirectional RNN sequence tagging model.
+
+See text for details.
+
+Our combined system, TagLM, uses the LM embeddings as additional inputs to the sequence tagging model.
+
+In particular, we concatenate the LM embeddings h LM with the output from one of the bidirectional RNN layers in the sequence model.
+
+In our experiments, we found that introducing the LM embeddings at the output of the first layer performed the best.
+
+More formally, we simply replace (2) with
+
+h k,1 = [ - → h k,1 ; ← - h k,1 ; h LM k ].(3)
+
+There are alternate possibilities for adding the LM embeddings to the sequence model.
+
+One pos-sibility adds a non-linear mapping after the concatenation and before the second RNN (e.g. replacing (3) with f ([
+
+- → h k,1 ; ← - h k,1 ; h LM k ])
+
+where f is a non-linear function).
+
+Another possibility introduces an attention-like mechanism that weights the all LM embeddings in a sentence before including them in the sequence model.
+
+Our initial results with the simple concatenation were encouraging so we did not explore these alternatives in this study, preferring to leave them for future work.

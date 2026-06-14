@@ -1,0 +1,43 @@
+We have presented a new corpus for writing comparison research.
+
+Currently the corpus focuses on essay revisions made by both native and L2 college students.
+
+In addition to three drafts of essays, we have analyzed the drafts to align semantically similar sentences and to assign revision purposes for each revised aligned sentence pair.
+
+We have also conducted two studies to demonstrate the use of the corpus for revision behavior analysis and for automatic revision purpose classification.
+
+While in this paper we explored language as one factor influencing rewriting behavior, our corpus also contains information about other potential factors such as gender and education level which we plan to investigate in the future.
+
+We also plan to augment the corpus to support additional types of research on revision analysis.
+
+Some potential augmentations include more fine-grained revision categories, revision properties such as statement strength (Tan and Lee, 2014) and quality evaluations, and sub-sentential revision scopes.
+
+A Questions of the pre-study survey 1. Is English your native language?
+
+2. (only L2 participants) What is your native language?
+
+3. What is your major?
+
+Please select the closest discipline to your major.
+
+• Natural sciences B Questions of the post-study survey 1.
+
+The system allows me to have a better understanding of my previous revision efforts.
+
+2. It is convenient to view my previous revisions with the system.
+
+3.
+
+The system helps me to recognize the weakness of my essay.
+
+4.
+
+The system encourages me to make more revisions than I usually make.
+
+5.
+
+The system encourages me to think more about making more meaningful changes.
+
+6.
+
+Overall the system is helpful to my writing.

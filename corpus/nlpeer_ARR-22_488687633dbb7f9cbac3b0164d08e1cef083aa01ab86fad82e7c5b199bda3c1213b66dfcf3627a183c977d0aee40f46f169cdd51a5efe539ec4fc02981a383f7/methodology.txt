@@ -1,0 +1,51 @@
+We first describe the ESE methods we evaluate.
+
+Following prior work (Shen et al., 2018;Zhang et al., 2020a), we use AutoPhrase (Shang et al., 2018) to generate candidate entity lists from the corpus of a given domain.
+
+We then use the following representative publicly available ESE methods from different paradigms to expand the seed set3 .
+
+SetExpan.
+
+SetExpan (Shen et al., 2017) is a SOTA corpus-based method that iteratively ranks entity candidates by filtering out noisy skip-gram features.
+
+It incorporates other context features such as POS tags and syntactic head tokens in ranking.
+
+Embedding baseline (Emb-Base).
+
+In order to make use for more robust context embeddings, we develop a simple baseline that uses a pre-trained language model (LM) to derive context embeddings of entity candidates.
+
+To derive an entity embedding, we average context embedding of the sentences that mention the entity using BERT (Devlin et al., 2018).
+
+We compute concept embeddings by averaging embeddings of its seed entities, and rank entity candidates based on the cosine similarity of concept and entity embeddings.
+
+CGExpan.
+
+CGExpan (Zhang et al., 2020b) is a SOTA LM-based method that iteratively uses Hearst patterns (Hearst, 1992) as prompts to obtain scores for ranking candidates.
+
+In addition, it considers how a candidate in turn ranks the target concept name to improve the quality of rankings.
+
+LM Probing Baseline (LM-Base).
+
+We develop a simpler baseline that also uses Hearst patterns to prompt LMs and obtain scores for entity candidates.
+
+However, it does not include any other mechanisms such as concept name guidance and iterative expansion like CGExpan.
+
+Ensemble Methods.
+
+We use mean reciprocal rank (MRR) as the representative for ensemble methods since it does not require any additional training data.
+
+Given the rankings from multiple methods, we compute MRR score of each entity: e) , where n is the number of methods combined, and r i (e) is the ranking of entity e under method i. We then re-rank all entities based on their MRR score.
+
+In this work, we study combinations of two ESE methods leading to 6 ensembles.
+
+We study 4 settings that offer interesting combinations across different paradigms:
+
+M RR(e) = 1 n n i=1 1 r i (
+
+• MRR-Baseline: Emb-Base + LM-Base.
+
+• MRR-SOTA: SetExpan + CGExpan.
+
+• MRR-Corpus: SetExpan + Emb-Base.
+
+• MRR-LM-Probe: CGExpan + LM-Base.

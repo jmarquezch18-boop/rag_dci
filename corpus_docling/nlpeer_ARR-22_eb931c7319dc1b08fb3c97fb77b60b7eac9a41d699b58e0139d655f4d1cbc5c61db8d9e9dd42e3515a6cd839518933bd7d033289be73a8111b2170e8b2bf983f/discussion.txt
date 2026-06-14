@@ -1,0 +1,23 @@
+In this paper, we studied what kind of structural properties in pretraining data is useful to train encoders for natural language tasks.
+
+We have found that to achieve decent results, L1 needs at least statistical dependency in a sentence ( §4), and having the head-to-tail dependency with the nesting structure is further beneficial ( §4 and §5).
+
+The probing experiment in §6 suggests that the encoders trained with languages with the above characteristics are good at capturing the positions and identities of the context words.
+
+From these observations, we suggest a tentative answer to the initial research question: what knowledge in pretrained encoders are transferred across different languages?
+
+That is position-aware context dependence of language, in other words, "tokens in a sequence can be characterized by its neighbor tokens at specific positions".
+
+We think that it can explain the success of transferring the encoder across languages to some extent.
+
+To solve natural language tasks, it is often useful to characterize words in a sentence by the words around them.
+
+For example, to understand the semantics of a sentence, it would be useful to look for the subject by looking for a noun that precedes the word is; to parse a sentence, a word can be identified as a noun because it follows the article the. If the encoder computes the output representation of a word in a sentence by aggregating the information from its surrounding words, that should be a useful inductive bias to solve most NLP tasks in any language.
+
+Also, it is easy to imagine that the knowledge of position-aware context dependence gives a reasonable prior for solving sequence modeling problems in other domains, which may explain the success of cross-modality transfer of language models (Lu et al., 2021;Reid et al., 2022).
+
+Of course, we do not expect that the knowledge of position-aware context dependence explains every aspect of the success of cross-lingual transfer.
+
+As future work, we need further investigation for a more fine-grained view of the transferred knowledge.
+
+Important questions include how much the model size affects the transferability of the encoder or if there is any difference in the knowledge transferred among different downstream tasks.

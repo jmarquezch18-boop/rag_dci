@@ -1,0 +1,163 @@
+{
+  "query_id": "cf66689ffef1b230b7bab23901a8bf528a8e97f8",
+  "query": "How does the paper incorporate section titles into the BOS representation?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "BOS representation"
+      },
+      "result_preview": "No matches found for 'BOS representation'",
+      "elapsed_s": 5.08
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "section titles"
+      },
+      "result_preview": "Search results for 'section titles' (6 matches):\n[paper_id=nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea | section=results | line=33] One of the reasons might be that we merely inject the hierarchical po",
+      "elapsed_s": 7.12
+    },
+    {
+      "iteration": 2,
+      "tool": "read_file",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+        "section": "introduction"
+      },
+      "result_preview": "[nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea / introduction]\nTexts, especially long documents, contain internal hierarchical structure like sections, paragraphs, sentences, and tokens.\n\nWhen we manuall",
+      "elapsed_s": 9.11
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "hierarchical position"
+      },
+      "result_preview": "Search results for 'hierarchical position' (11 matches):\n[paper_id=nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea | section=results | line=29] Regardless the base TLM and input length, our HiStruct+ model",
+      "elapsed_s": 19.35
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+        "section": "results",
+        "start": 70,
+        "end": 80
+      },
+      "result_preview": "[nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea / results — líneas 65-85 de 163]\nThe LEAD-n baselines do not produce competitive results on PubMed.\n\nIt indicates that the first sentences in PubMed are not",
+      "elapsed_s": 10.84
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Texts, especially long documents, contain internal hierarchical structure like sections, paragraphs, sentences, and tokens. When we manually summarize a text, the hierarchical text structure usually plays a key role. Taking a scientific paper as an example, we might focus more on the sections with the titles of \"methodology\", \"discussion\", and \"conclusion\" while paying less attention to the sections like \"background\". Furthermore, the sentences within one section could have closer relationship with each other, than the ones outside this section. Understanding not only the sequential relations between the sentences but also the internal hierarchical text structure helps us better determine the important sentences within a document. Similarly, a neural summarization model could benefit from these hierarchical structure information. In this paper, we focus on extractive text summarization of single documents, which is the task of binary sentence classification with labels indicating whether a sentence should be included in a summary. Recently, pre-trained language models based on Transformer (Vaswani et al., 2017), such as BERT (Devlin et al., 2019), have been widely used to extract contextual representations from texts. The pre-trained Transformer language models (TLMs) can be easily reused for finetuning on the downstream tasks, so that the representations already learned from the large pretraining corpora are preserved. Liu and Lapata (2019) have achieved the state-of-the-art (SOTA) performance by fine-tuning BERT for extractive summarization on short document datasets including CNN/DailyMail. However, the TLMs consider merely the sequential-context-dependency by adding a linear positional encoding to each input token embeddings. The hierarchical text structure information is not taken into account explicitly. We propose a novel approach to formulate, extract, encode and inject the hierarchical structure (HiStruct) information explicitly into an extractive summarization model (HiStruct+ model), which consists of a TLM for sentence encoding and two stacked inter-sentence Transformer layers for hierarchical learning and extractive",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "score": 1.0
+    },
+    {
+      "text": "information is not taken into account explicitly. We propose a novel approach to formulate, extract, encode and inject the hierarchical structure (HiStruct) information explicitly into an extractive summarization model (HiStruct+ model), which consists of a TLM for sentence encoding and two stacked inter-sentence Transformer layers for hierarchical learning and extractive summarization (see Figure 1). We experiment with BERT (Devlin et al., 2019), RoBERTa (Liu et al., 2019), and Longformer (Beltagy et al., 2020) as underlying TLMs. The HiStruct information utilized in our work includes the section titles and the hierarchical positions of sentences, which are encoded using our proposed novel methods. The resulting embeddings can be injected into the TLM sentence representations to provide the HiStruct information for the summarization task. Sentence Scores y1 y2 y3 Gold Labels Section Title Embeddings [BOS] 1st sent. [EOS] [BOS] 2nd sent. [EOS] [BOS] 3rd sent. [EOS] The HiStruct+ models are evaluated on short documents (i. e., CNN/DailyMail (See et al., 2017)) and long documents (i. e., PubMed and arXiv (Cohan et al., 2018)) with various hierarchical characteristics. Our models produce competitive results on CNN/DailyMail and set the SOTA ROUGEs for extractive summarization on PubMed and arXiv to a new level. We also compare the HiStruct+ models with the corresponding strong baselines, which differ from our models only in that the HiStruct information is not injected. Using various experimental settings, our models collectively outperform the baselines on the three datasets, indicating the effectiveness of the proposed HiStruct encoding methods. The improvements are especially substantial on PubMed and arXiv, which contain longer scientific papers with conspicuous hierarchical structures. Ablation studies suggest that the performance gains are mainly contributed by the hierarchical position information of sentences. Our contributions in this work are four-folds: (1) We conceptualize novel measures to compare the internal hierarchical structure of the",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "score": 1.0
+    },
+    {
+      "text": "on PubMed and arXiv, which contain longer scientific papers with conspicuous hierarchical structures. Ablation studies suggest that the performance gains are mainly contributed by the hierarchical position information of sentences. Our contributions in this work are four-folds: (1) We conceptualize novel measures to compare the internal hierarchical structure of the datasets. (2) We propose novel methods to formulate the HiStruct information and implement data preprocessing to extract them from the raw datasets. (3) We propose novel methods to encode and inject the HiStruct information into an extractive summarization model explicitly. The effects of different encoding settings and injection settings are systematically investigated. (4) The data containing the extracted HiStruct information, the best HiStruct+ models, as well as the scripts for preprocessing, training and evaluation are available on GitHub1 .",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "score": 1.0
+    },
+    {
+      "text": "The LEAD-n baselines do not produce competitive results on PubMed.\n\nIt indicates that the first sentences in PubMed are not so informative as those in CNN/DailyMail.\n\nThe last two TransformerETS models in the block are the comparison baselines that are unaware of HiStruct.\n\nThe last block in Table 2 presents the results of two groups of HiStruct+ models, grouped by the base TLM used in the summarization model.\n\nIn PubMed, we can choose to inject the sentence hierarchical position embeddings (sHEs) with or without the section title embeddings (STEs).\n\nSTEs can be replaced by classified STEs.\n\nThis can result in three different injection settings for a model group, namely sHE, sHE+STE, and sHE+STE(classified).\n\nFor each model setting, we report the results of the best-performed checkpoint.\n\nOur best HiStruct+ model on PubMed is a model based on Longformer-base taking 15,000 input tokens, which injects the sHEs and the classified STEs into the extractive model.\n\nIt achieves ROUGE results of 46.59/20.39/42.11, which beat the SOTA extractive model ExtSum-LG+MMR-Select+ collectively on all three ROUGE metrics with improvements of 1.2/0.02/1.12.\n\nTaking the SOTA abstractive and hybrid approaches into account, our results are still very competitive.",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0003",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_118"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 1.0,
+    "recall_at_3": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "recall_at_20": 1.0,
+    "precision_at_5": 0.75,
+    "ndcg_at_5": 0.9674679834891693,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0000",
+      "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0001",
+      "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0002",
+      "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0003"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_introduction_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea_results_0003",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.05882352941176471,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

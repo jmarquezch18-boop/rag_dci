@@ -1,0 +1,33 @@
+Modern deep learning techniques typically require a lot of labeled data (Bowman et al., 2015;Conneau et al., 2017).
+
+However, in real-world applications, such large labeled data sets are not always available.
+
+This is especially true in some specific domains, such as the biomedical and materials science domain, where annotating data requires expert knowledge and is usually time-consuming (Karimi et al., 2015;Friedrich et al., 2020).
+
+Different approaches have been investigated to solve this low-resource problem.
+
+For example, transfer learning pretrains language representations on self-supervised or rich-resource source tasks and then adapts these representations to the target task (Ruder, 2019;Gururangan et al., 2020).
+
+Data augmentation expands the training set by applying transformations to training instances without changing their labels (Wang and Perez, 2017).
+
+Recently, there is an increased interest on applying data augmentation techniques on sentence-level and sentence-pair natural language processing (NLP) tasks, such as text classification (Wei and Zou, 2019;Xie et al., 2019), natural language inference (Min et al., 2020) and machine translation (Wang et al., 2018).
+
+Augmentation methods explored for these tasks either create augmented instances by manipulating a few words in the original instance, such as word replacement (Zhang et al., 2015;Wang and Yang, 2015;Cai et al., 2020), random deletion (Wei and Zou, 2019), or word position swap (S ¸ahin and Steedman, 2018;Min et al., 2020); or create entirely artificial instances via generative models, such as variational auto encoders (Yoo et al., 2019;Mesbah et al., 2019) or back-translation models (Yu et al., 2018;Iyyer et al., 2018).
+
+Different from these sentence-level NLP tasks, named entity recognition (NER) does predictions on the token level.
+
+That is, for each token in the sentence, NER models predict a label indicating whether the token belongs to a mention and which entity type the mention has.
+
+Therefore, applying transformations to tokens may also change their labels.
+
+Due to this difficulty, data augmentation for NER is comparatively less studied.
+
+In this work, we fill this research gap by exploring data augmentation techniques for NER, a token-level sequence labeling problem.
+
+Our contributions can be summarized as follows:
+
+1. We survey previously used data augmentation techniques for sentence-level and sentence-pair NLP tasks and adapt some of them for the NER task.
+
+2. We conduct empirical comparisons of different data augmentations using two English domainspecific data sets: MaSciP (Mysore et al., 2019) and i2b2-2010 (Uzuner et al., 2011).
+
+Results show that simple augmentation can even improve over a strong baseline with large-scale pretrained transformers.

@@ -1,0 +1,157 @@
+{
+  "query_id": "d8ac040e919b01e19818a6416896dd66bd58e69d",
+  "query": "What factors were responsible for the success of the path-based model?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "success"
+      },
+      "result_preview": "Search results for 'success' (21 matches):\n[paper_id=nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea | section=results | line=119] It indicates that by injecting HiStruct information explicitly using our m",
+      "elapsed_s": 4.53
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+        "section": "discussion",
+        "start": 3,
+        "end": 3
+      },
+      "result_preview": "[nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34 / discussion — líneas 1-8 de 133]\nWe presented an algorithm for decoding in text generation with two main components: best-first search to more efficiently ",
+      "elapsed_s": 10.85
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+        "section": "discussion",
+        "start": 9,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34 / discussion — líneas 4-25 de 133]\n\nThere are a few limitations of our method.\n\nFirst, we currently benchmark these techniques using number of nodes expande",
+      "elapsed_s": 11.46
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_699",
+        "section": "methodology",
+        "start": 3,
+        "end": 15
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_699 / methodology — líneas 1-20 de 51]\nThe RNN Encoder-Decoder model (which is also referred as sequence-to-sequence Learning) is an end-to-end approach.\n\nIt was first introduced by Cho et al. (2014) and Sutskever et al. (2014) to solve translation problems.\n\nAs it provides ",
+      "elapsed_s": 15.67
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "contributed"
+      },
+      "result_preview": "Search results for 'contributed' (11 matches):\n[paper_id=nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea | section=results | line=95] Ablation studies on PubMed suggest that the largest improvement of our ",
+      "elapsed_s": 8.13
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "We presented an algorithm for decoding in text generation with two main components: best-first search to more efficiently structure exploration of the space and hypothesis recombination to encode summaries in a lattice structure.\n\nWe showed that across summarization and machine translation, these lattices successfully encode large numbers of high-quality generation options.\n\nThere are a few limitations of our method.\n\nFirst, we currently benchmark these techniques using number of nodes expanded, not wall clock time.",
+      "section": "discussion",
+      "paper_id": "nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+      "chunk_id": "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_discussion_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+      "score": 1.0
+    },
+    {
+      "text": "There are a few limitations of our method.\n\nFirst, we currently benchmark these techniques using number of nodes expanded, not wall clock time.\n\nThere are strategies for parallelizing the BFS expansion (Shu and Nakayama, 2018), but it remains to be seen how this parallelism compares to the parallelism achieved by beam search.\n\nRegardless, the dramatically larger number of hypotheses we return outweighs efficiency differences for now.\n\nSecond, we focus on auto-regressive methods in this paper.\n\nHowever, we believe our framework could also be applied and adopted to non auto-regressive generation models (Song et al., 2021)\n\nIn spite of the issues with beam search that we describe in the main text, perhaps beam search could still be viable with larger beam sizes if more computational resources are available.\n\nWe experiment with beam sizes of 2 {4,5,6,7} and see how diversity scales with beam size.\n\nIn Figure 4, we found that an exponential increase of beam size does not lead to a strong increase of number of novel bigram in beam search.\n\nIn DBS, the diversity does ramp up, but the quality of the generated text decreases substantially.\n\nFor BS and DBS, increasing beam size is not an effective solution for better diversity.",
+      "section": "discussion",
+      "paper_id": "nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+      "chunk_id": "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_discussion_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+      "score": 1.0
+    },
+    {
+      "text": "The RNN Encoder-Decoder model (which is also referred as sequence-to-sequence Learning) is an end-to-end approach.\n\nIt was first introduced by Cho et al. (2014) and Sutskever et al. (2014) to solve translation problems.\n\nAs it provides a powerful tool for modeling variable-length sequences in an end-to-end fashion, it fits many natural language processing tasks and can rapidly achieve great successes (Rush et al., 2015;Vinyals et al., 2015;Serban et al., 2016).\n\nDifferent strategies have been explored to improve the performance of the Encoder-Decoder model.\n\nThe attention mechanism (Bahdanau et al., 2014) is a soft alignment approach that allows the model to automatically locate the relevant input components.\n\nIn order to make use of the important information in the source text, some studies sought ways to copy certain parts of content from the source text and paste them into the target text (Allamanis et al., 2016;Gu et al., 2016;Zeng et al., 2016).\n\nA discrepancy exists between the optimizing objective during training and the metrics during evaluation.\n\nA few studies attempted to eliminate this discrepancy by incorporating new training algorithms (Marc 'Aurelio Ranzato et al., 2016) or by modifying the optimizing objectives (Shen et al., 2016).\n\nThis section will introduce our proposed deep keyphrase generation method in detail.\n\nFirst, the task of keyphrase generation is defined, followed by an overview of how we apply the RNN Encoder-Decoder model.",
+      "section": "methodology",
+      "paper_id": "nlpeer_PeerRead-ACL2017_699",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_699_methodology_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_699",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/COLING2020/939_48",
+    "nlpeer/COLING2020/939_53",
+    "nlpeer/COLING2020/939_54",
+    "nlpeer/COLING2020/939_55",
+    "nlpeer/COLING2020/939_56"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.3333333333333333,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.2,
+    "recall_at_5": 0.2,
+    "recall_at_10": 0.2,
+    "recall_at_20": 0.2,
+    "precision_at_5": 0.3333333333333333,
+    "ndcg_at_5": 0.5,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_discussion_0000",
+      "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_discussion_0001",
+      "dci_nlpeer_PeerRead-ACL2017_699_methodology_0002"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_discussion_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_discussion_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_699_methodology_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.04054054054054055,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

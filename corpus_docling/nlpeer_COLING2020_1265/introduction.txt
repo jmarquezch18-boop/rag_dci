@@ -1,0 +1,31 @@
+Pre-trained language models have received great interest in the natural language processing (NLP) community in the last recent years (Dai and Le, 2015;Radford, 2018;Howard and Ruder, 2018;Baevski et al., 2019;Dong et al., 2019).
+
+These models are trained in a semi-supervised fashion to learn a general language model, for example, by predicting the next word of a sentence (Radford, 2018).
+
+Then, transfer learning (Pan and Yang, 2010;Ruder et al., 2019;Moeed et al., 2020) can be used to leverage the learned knowledge for a down-stream task, such as text-classification (Do and Ng, 2006;Aggarwal and Zhai, 2012;Reimers et al., 2019;Sun et al., 2019b).
+
+Devlin et al. (2019) introduced the "Bidirectional Encoder Representations from Transformers" (BERT), a pre-trained language model based on the Transformer architecture (Vaswani et al., 2017).
+
+BERT is a deeply bidirectional model that was pre-trained using a huge amount of text with a masked language model objective where the goal is to predict randomly masked words from their context (Taylor, 1953).
+
+The fact is, BERT has achieved state of the art results on the "General Language Understanding Evaluation" (GLUE) benchmark (Wang et al., 2018) by only training a single, task-specific layer at the output and fine-tuning the base model for each task.
+
+Furthermore, BERT demonstrated its applicability to many other natural language tasks since then including but not limited to sentiment analysis (Sun et al., 2019a;Xu et al., 2019;Li et al., 2019), relation extraction (Baldini Soares et al., 2019;Huang et al., 2019b) and word sense disambiguation (Huang et al., 2019a;Hadiwinoto et al., 2019;Huang et al., 2019a), as well as its adaptability to languages other than English (Martin et al., 2020;Antoun et al., 2020;Agerri et al., 2020).
+
+However, the fine-tuning data set often contains thousands of labeled data points.
+
+This plethora of training data is often not available in real world scenarios (Tan and Zhang, 2008;Wan, 2008;Salameh et al., 2015;Fang and Cohn, 2017).
+
+In this paper, we focus on the low-resource setting with less than 1,000 training data points.
+
+Our research attempts to answer the question if pool-based active learning can be used to increase the performance of a text classifier based on a Transformer architecture such as BERT.
+
+That leads to the next question: How can layer freezing techniques (Yosinski et al., 2014;Howard and Ruder, 2018;Peters et al., 2019), i.e. reducing the parameter space, impact model training convergence with fewer data points?
+
+To answer these questions, we explore the use of recently introduced Bayesian approximations of model uncertainty (Gal and Ghahramani, 2016) for data selection that potentially leads to faster convergence during fine-tuning by only introducing new data points that maximize the knowledge gain of the model.
+
+To the best of our knowledge, the work presented in this paper is the first demonstration of combining modern transfer learning using pre-trained Transformer-based language model such as the BERT model with active learning to improve performance in low-resource scenarios.
+
+Furthermore, we explore the effect of trainable parameters reduction on model performance and training stability by analyzing the layer-wise change of model parameters to reason about the selection of layers excluded from training.
+
+The main findings of our work are summarized as follows: a) we found that the model's classification uncertainty on unseen data can be approximated by using Bayesian approximations and therefore, used to efficiently select data for manual labeling in an active learning setting; b) by analyzing layer-wise change of model parameters, we found that the active learning strategy specifically selects data points that train the first and thus more general natural language understanding layers of the BERT model rather than the later and thus more task-specific layers.

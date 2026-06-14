@@ -1,0 +1,67 @@
+Confidence estimation has become increasingly critical with the widespread deployment of deep neural networks in practice (Amodei et al., 2016).
+
+It aims to measure the model's confidence in the prediction, showing when it probably fails.
+
+A calibrated confidence estimate can accurately identify * Work done while the author was an intern at Tencent.
+
+† Corresponding author.
+
+1 https://github.com/yulu-dada/Learned-conf-NMT failure, further measuring the potential risk induced by noisy samples and out-of-distribution data prevalent in real scenarios (Nguyen and O'Connor, 2015;Snoek et al., 2019).
+
+Unfortunately, neural machine translation (NMT) is reported to yield poor-calibrated confidence estimate (Kumar and Sarawagi, 2019;Wang et al., 2020), which is common in the application of modern neural networks (Guo et al., 2017).
+
+It implies that the probability a model assigns to a prediction is not reflective of its correctness.
+
+Even worse, the model often fails silently by providing high-probability predictions while being woefully mistaken (Hendrycks and Gimpel, 2017).
+
+We take Figure 1 as an example.
+
+The mistranslations are produced with high probabilities (dark green blocks in the dashed box), making it problematic to assess the quality based on prediction probability when having no access to references.
+
+The confidence estimation on classification tasks is well-studied in the literature (Platt, 1999;Guo et al., 2017).
+
+Yet, researches on structured generation tasks like NMT is scarce.
+
+Existing researches only study the phenomenon that the generated probability in NMT cannot reflect the accuracy (Müller et al., 2019;Wang et al., 2020), while little is known about how to establish a well-calibrated confidence estimate to describe the predictive un-certainty of the NMT model accurately.
+
+To deal with this issue, we aim to learn the confidence estimate jointly with the training process in an unsupervised manner.
+
+Inspired by Ask For Hints (DeVries and Taylor, 2018), we explain confidence as how many hints the NMT model needs to make a correct prediction.
+
+Specifically, we design a scenario where ground truth is available for the NMT model as hints to deal with tricky translations.
+
+But each hint is given at the price of some penalty.
+
+Under this setting, the NMT model is encouraged to translate independently in most cases to avoid penalties but ask for hints to ensure a loss reduction when uncertain about the decision.
+
+More hints mean low confidence and vice versa.
+
+In practice, we design a confidence network, taking multi-layer hidden states of the decoder as inputs to predict the confidence estimate.
+
+Based on this, we further propose a novel confidence-based label smoothing approach, in which the translation more challenging to predict has more smoothing to its labels.
+
+Recall the example in Figure 1.
+
+The first phrase "a figure who loves to play" is incorrect, resulting in a low confidence level under our estimation.
+
+We notice that the NMT model is also uncertain about the second expression "a national class actor", which is semantically related but has inaccurate wording.
+
+The translation accuracy largely agrees with our learned confidence rather than model probabilities.
+
+We verify our confidence estimate as a wellcalibrated metric on extensive sentence/word-level quality estimation tasks, which is proven to be more representative in predicting translation accuracy than existing unsupervised metrics (Fomicheva et al., 2020).
+
+Further analyses confirm that our confidence estimate can precisely detect potential risk caused by the distributional shift in two real-world settings: separating noisy samples and identifying out-of-domain data.
+
+The model needs more hints to predict fake or tricky translations in these cases, thus assigning them low confidence.
+
+Additionally, experimental results show the superiority of our confidence-based label smoothing over the standard label smoothing technique on different-scale translation tasks (WMT14 En⇒De, NIST Zh⇒En, WMT16 Ro⇒En, and IWSLT14 De⇒En).
+
+The contributions of this paper are three-fold:
+
+• We propose the learned confidence estimate to predict the confidence of the NMT output, which is simple to implement without any degradation on the translation performance.
+
+• We prove our learned confidence estimate as a better indicator of translation accuracy on sentence/word-level quality estimation tasks.
+
+Furthermore, it enables precise assessment of risk when given noisy data with varying noise degrees and diverse out-of-domain datasets.
+
+• We design a novel confidence-based label smoothing method to adaptively tune the mass of smoothing based on the learned confidence level, which is experimentally proven to surpass the standard label smoothing technique.

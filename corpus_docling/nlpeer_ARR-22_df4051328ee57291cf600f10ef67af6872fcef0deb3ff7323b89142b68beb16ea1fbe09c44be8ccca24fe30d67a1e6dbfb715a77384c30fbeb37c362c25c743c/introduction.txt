@@ -1,0 +1,47 @@
+The vast majority of modern Hebrew texts are written in a letter-only version of the Hebrew script, one which omits the diacritics present in the full diacritized, or dotted variant.
+
+1 Since most vowels are encoded via diacritics, the pronunciation of words in the text is left underspecified, and a considerable mass of tokens becomes ambiguous.
+
+This ambiguity forces readers and learners to infer the intended reading using syntactic and semantic context, as well as common sense (Bentin and Frost, 1987;Abu-Rabia, 2001).
+
+In NLP systems, recovering such signals is difficult, and indeed their performance on Hebrew tasks is adversely affected by the presence of undotted text (Shacham and Wintner, 2007;Goldberg and Elhadad, 2010;Tsarfaty et al., 2019).
+
+As an example, the sentence in Table 1 (a) will be resolved by a typical reader as (b) in most reasonable contexts, knowing that the word "softly" may characterize landings.
+
+In contrast, an automatic system processing Hebrew text may not be as sensitive to this kind of grammatical knowledge and instead interpret the undotted token as the more 'The plane landed congratulations' Table 1: An example of an undotted Hebrew text (a) (written right to left) which can be interpreted in at least two different ways (b,c), dotted and pronounced differently, but only (b) makes grammatical sense.
+
+frequent word in (c), harming downstream performance.
+
+One possible way to overcome this problem is by adding diacritics to undotted text, or dotting, implemented using data-driven algorithms trained on dotted text.
+
+Obtaining such data is not trivial, even given correct pronunciation: the standard Tiberian diacritic system contains several sets of identicallyvocalized forms, so while most Hebrew speakers easily read dotted text, they are unable to produce it.
+
+Moreover, the process of manually adding diacritics in either handwritten script or through digital input devices is mechanically cumbersome.
+
+Thus, the overwhelming majority of modern Hebrew text is undotted, and manually dotting it requires expertise.
+
+The resulting scarcity of available dotted text in modern Hebrew contrasts with Biblical and Rabbinical texts which, while dotted, manifest a very different language register.
+
+This state of affairs allows individuals and companies to offer dotting as paid services, either by experts or automatically, e.g. the Morfix engine by Melingo. 2 Such usage practices also force a disconnect in the NLP pipeline, requiring an API call into an external service whose parameters cannot be updated.
+
+Existing computational approaches to dotting are manifested as complex, multi-resourced systems which perform morphological analysis on the undotted text and look undotted words up in handcrafted dictionaries as part of the dotting process.
+
+Dicta's Nakdan (Shmidman et al., 2020), the current state-of-the-art, applies such methods in addition to applying multiple neural networks over different levels of the text, requiring manual annotation not only for dotting but also for morphology.
+
+Among the resources it uses are a diacritized corpus of 3M tokens and a POS-tagged corpus of 300K tokens.
+
+Training the model takes several weeks.
+
+3In this work, we set out to simplify the dotting task as much as possible to standard modules.
+
+We introduce a large corpus of semi-automatically dotted Hebrew, collected from various sources, and use it to train an RNN-based model.
+
+Our system, NAKDIMON, accepts the undotted character sequence as its input, consults no external resources or lexical components, and produces diacritics for each character, resulting in dotted text whose quality is comparable to that of the commercial Morfix, on both character-level and word-level accuracy.
+
+Our model is easy to integrate within larger systems that perform end-to-end Hebrew processing tasks, as opposed to the existing proprietary dotters.
+
+To our knowledge, this is the first attempt at a "light" model for Hebrew dotting since early HMM-based systems (Kontorovich, 2001;Gal, 2002).
+
+We introduce a novel test set for Modern Hebrew dotting, derived from larger and more diverse sources than existing datasets.
+
+In experiments over our dataset, we show that our system is particularly useful in the main use case of modern dotting, which is to convey the desired pronunciation to a reader, and that the errors it makes should be more easily detectable by non-professionals than Dicta's.4 2 Task and Datasets

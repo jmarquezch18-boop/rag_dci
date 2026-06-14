@@ -1,0 +1,297 @@
+Neural Pipeline For Zero-Shot Data-To-Text Generation
+
+Abstract
+
+Introduction
+
+Method
+
+Transforming Triples To Facts
+
+The first step in our pipeline involves transforming each of the input triples x i P X into a fact f i P F using a transformation T : X Ñ F .
+
+We define a fact f i as a single sentence in natural language describing x i .
+
+The transformation serves two purposes: (a) preparing the data for the subsequent text-to-text operations, (b) introducing in-domain knowledge about the semantics of individual predicates.
+
+This step can be realized e.g. using a simple template for each predicate (cf.
+
+§5.1).
+
+Ordering The Facts
+
+We assume that the default order of triples X is random and the same applies for the respective facts F .
+
+Note, however, that that F is a indeed set of meaningful sentences.
+
+We can use this to our advantage and apply a sentence ordering model to maximize the coherency of the paragraph resulting from their concatenation.
+
+An example outcome of such operation may be grouping together facts mentioning birth date and birth place of a person, followed by their occupation (see Figure 1).
+
+The ordering module allows downstream modules to only focus on operations over neighboring sentences.
+
+Formally, we apply the ordering model OpF q to get an ordered sequence of facts: F o " tf o 1 , . . . , f on u, where o 1:n is a permutation of indices.
+
+We describe our ordering model in §5.2.
+
+Aggregating The Facts
+
+Some facts will be typically mentioned together in a single sentence.
+
+Considering the previous example, occupation is likely to be mentioned separately, while birth date and birth place are likely to be mentioned together.
+
+Using an ordered sequence of facts as input, we can apply an aggregation model to decide which facts should be merged into a single sentence.
+
+Formally, the aggregation model takes a sequence of ordered facts F o as input and produces a sequence of sentence delimiters ApF o q " tδ o 1 , δ o 2 , . . . , δ o n´1 u; δ i P t0, 1u.
+
+The output δ i " 1 means that the neighboring facts should be mentioned separately, i.e. the neighboring sentences should not be fused.
+
+Conversely, δ i " 0 means that the facts should be aggregated and their corresponding sentences should be fused.
+
+We describe our aggregation model in §5.3.
+
+Paragraph Compression
+
+The paragraph compression (PC) model is a generative model which outputs the final text description.
+
+It has two main objectives: (a) fusing related sentences, i.e., sentences i and j in between which δ i " 0, and (b) rephrasing the text to improve its fluency, e.g. fixing disfluencies in the templates, replacing noun phrases with refering expressions, etc.
+
+The goal of the task is to preserve the semantics of the text which is an already ordered sequence of sentences, so the edits will typically be minor.
+
+Formally, the model takes as input the ordered sequence of facts with delimiters
+
+F a " tf o 1 , δ o 1 , f o 2 , . . . , δ o n´1 ,
+
+f on u and produces the final text Y .
+
+We describe our PC model in §5.4.
+
+Wikifluent Corpus
+
+Here we descibe the process of building a largescale synthetic corpus WIKIFLUENT.
+
+The corpus provides training data for the neural models which we use in our implementation of the ordering, aggregation, and paragraph compression modules (cf.
+
+§5).
+
+Our goal is to cover a broad range of domains while capturing the sentence style in D2T generation with respect to both the input facts and the target descriptions.
+
+In other words, we aim to build a corpus in which (1) the input is a set of simple, template-like sentences, (2) the output is a fluent text in natural language preserving the semantics of the input.
+
+As we describe below in detail, we achieve that by using human-written paragraphs in English Wikipedia and applying split-and-rephrase and coreference resolution models to obtain synthetic source texts.
+
+The process is illustrated in Figure 2; corpus statistics are included in Appendix A.
+
+Data Source
+
+For building the WIKIFLUENT corpus, we extracted 934k first paragraphs of articles from a Wikipedia dump 3 using WikiExtractor (Attardi, 2015).
+
+Wikipedia is commonly used for large-scale pretraining of D2T generation models (Jin et al., 2020;Chen et al., 2020a).
+
+Although it is not biasfree, it provides more balanced sample of natural language use than typical D2T generation datasets.
+
+We used the first paragraphs of Wikipedia entries, which contain mostly concise, fact-based descriptions.
+
+We selected paragraphs with length between 3
+
+The Westmeath Examiner is a weekly newspaper in Westmeath, Ireland.
+
+It is located in Westmeath, Ireland.
+
+The Westmeath Examiner is a weekly newspaper.
+
+The Westmeath Examiner is a weekly newspaper.
+
+It was founded in 1882.
+
+The Westmeath Examiner is located in Westmeath, Ireland.
+
+The Westmeath Examiner was founded in 1882.
+
+The building process of the WIKIFLUENT corpus.
+
+We apply a split-and-rephrase model on each sentence in the paragraph and resolve coreferences in the split sentences.
+
+The result is a set of simple sentences which together convey the same meaning as the original paragraph.
+
+The synthesized sentences are used as input into our models, the original human-written texts are used as ground truth.
+
+30-430 characters; filtering out lists, disambiguations, and repeated and malformed paragraphs.
+
+To balance the length of inputs, we selected 250k examples each from 4 equally sized length ranges (30-130 characters, etc.).
+
+Split-And-Rephrase
+
+To generate a set of simple sentences, we divide each paragraph into sentences using NLTK (Bird, 2006) and apply a split-and-rephrase model on each sentence.
+
+Split-and-rephrase is a task of splitting a complex sentence into a meaning preserving sequence of shorter sentences (Narayan et al., 2017).
+
+The process is illustrated in the upper part of Figure 2.
+
+We train our split-and-rephrase model on the large-scale WikiSplit corpus by Botha et al. (2018), containing human-made sentence splits from Wikipedia edit history.
+
+Following the same setup as for a paragraph compression model ( §3.4), we train BART-base (Lewis et al., 2020) on the WikiSplit dataset in a sequence-to-sequence setting.
+
+Next, we apply the trained split-and-rephrase model on each sentence in our Wikipedia-based corpus, uniformly randomly choosing between 0-2 recursive calls to ensure that the splits are not deterministic.
+
+If the sentence cannot be meaningfully split, the model tends to duplicate the sentence on the output; in that case, we use only the original sentence and do not proceed with the splitting.
+
+Coreference Replacement
+
+As the next step, we concatenate the split sentences and apply a coreference resolution model (Gardner et al., 2018;Lee et al., 2018) in order to replace referring expressions with their antencendents (e.g., pronouns with noun phrases).
+
+The motivation for this step is to match the style of the facts (see §3.1), which do not use pronouns since each fact describes a single triple only.
+
+Note that this procedure replaces the referring expressions only in the synthesized sentences (which are used as input) and keeps them in the original paragraphs (which are used as ground truth).
+
+As a consequence, the paragraph compression module is implicitly trained to generate referring expressions in the final description.
+
+Filtering
+
+To ensure that the generated sentences convey the same semantics as the original paragraph, we use a pretrained RoBERTa model4  (Liu et al., 2019) trained on the MultiNLI dataset (Williams et al., 2018) for checking the semantic accuracy of the generated text.
+
+Following Dušek and Kasner (2020), we test if the original paragraph entails each of the synthesized sentences (checking for omissions), and if the set of concatenated synthesized sentences entails the original paragraph (checking for hallucinations).
+
+In a filtered version of the WIKIFLUENT corpus, we include only the examples without omissions or hallucinations (as computed by the model), reducing it to 714k examples (approximately 75% of the original size).
+
+Implementation
+
+In this section, we describe how we implement our pipeline modules ( §3) using simple template transformations ( §5.1) and neural models trained on the WIKIFLUENT dataset ( §5.2-5.4).5
+
+Templates
+
+We transform triples into facts ( §3.1) using a singletriple template t i for each predicate.
+
+For example, if p i " instrument, then T pp i q " "s i plays o i " (cf.
+
+Table 1).
+
+We follow previous work in which simple hand-crafted templates have been used as an efficient way of introducing domain knowledge (Kale and Rastogi, 2020a;Kasner and Dušek, 2020a) template generation engines (Laha et al., 2019;Heidari et al., 2021;Mehta et al., 2021), the approach may produce less fluent outputs, but it minimizes manual workload and makes it easier to control the quality of the input for the subsequent steps.
+
+Ordering Model
+
+Aggregation Model
+
+Paragraph Compression Model
+
+Experiments
+
+Evaluation And Discussion
+
+Automatic Metrics
+
+Following prior work, we use BLEU (Papineni et al., 2002) and METEOR (Banerjee and Lavie, 2005) to evaluate the outputs against the human references.
+
+8 We also evaluate the number of omission and hallucination errors (i.e., facts missing or added, respectively) using a metric from Dušek and Kasner (2020) based on a RoBERTa model (Liu et al., 2019) pretrained on natural language inference (NLI).
+
+9We include a diverse set of baselines for comparison.
+
+For WebNLG (see Table 3), we compare our systems with the results of:
+
+• UPF-FORGe and MELBOURNE -systems (grammar-based and supervised, respectively) from the first run of WebNLG Challenge (Gardent et al., 2017), • Ke et al. ( 2021) -a state-of-the-art system with a structure-aware encoder and task-specific pretraining, • Laha et al. (2019) -the only other (to our knowledge) zero-shot D2T generation system applied to WebNLG.
+
+For E2E (see Table 4), we compare our systems with the results of:
+
+• TGEN (Dušek and Jurčíček, 2015) -the baseline system for the E2E Challenge (Dušek et al., 2020), • Harkous et al. (2020) -a state-of-the-art supervised system on cleaned E2E data.
+
+For both datasets, COPY denotes the baseline of copying the facts without further processing.
+
+The automatic evaluation shows that our systems consistently outperform the COPY baseline (e.g., "12 BLEU points for E2E), which is already strong thanks to our manually curated set of templates.10 Automatic scores also suggest that our systems are comparable with some older supervised systems.
+
+Nevertheless, our systems still underperform the state-of-the-art supervised systems.
+
+For this reason, we further focus on manual error analysis in §7.2 to pinpoint the current shortcomings of our approach.
+
+The 2-STAGE system is generally on par with the 3-STAGE system or better, which indicates that explicit aggregation using the AGG model may not be necessary.
+
+However, an advantage of having a separate aggregation module is the possibility to control the aggregation step explicitly.
+
+The models using the filtered version of the corpus generally produce better results, although they also bring in a larger number of omissions.
+
+Manual Error Analysis
+
+Intrinsic Evaluation
+
+Future Work
+
+Conclusion
+
+Limitations And Broader Impact
+
+Figure 1: A scheme of our pipeline for zero-shot datato-text generation from RDF triples: (1) ordering, (2) aggregation, (3) paragraph compression.
+
+Individual pipeline modules are trained on a large general-domain text corpus and operate over text in natural language.
+
+In-domain knowledge is included only in the simple hand-crafted templates for each predicate.
+
+Figure2: The building process of the WIKIFLUENT corpus.
+
+We apply a split-and-rephrase model on each sentence in the paragraph and resolve coreferences in the split sentences.
+
+The result is a set of simple sentences which together convey the same meaning as the original paragraph.
+
+The synthesized sentences are used as input into our models, the original human-written texts are used as ground truth.
+
+Figure 3: An example illustrating how the individual modules are trained and subsequently applied as the parts of the pipeline.
+
+See §5.2 for description of the ordering model (ORD), §5.3 for the aggregation model (AGG), and §5.4 and §6 for the paragraph compression model (PC, PC+AGG, PC+ORD+AGG).
+
+STAGE -a full version of the pipeline consisting of the ordering model (ORD), the aggregation model (AGG) and the PC model (following the full pipeline from §3), • 2-STAGE -a pipeline consisting of the ORD model and the PC+AGG model, • 1-STAGE -a single stage consisting of the PC+ORD+AGG model.
+
+. Compared to more complex rule-based Examples of templates for predicates in the WebNLG and E2E datasets with placeholders for the subject (<s>) and the object (<o>).
+
+Input (Allen Forrest; background; solo singer), (Allen Forrest; genre; Pop music), (Allen Forrest; birthPlace; Dothan, Alabama) Templ.
+
+Allen Forrest is a solo singer.
+
+Allen Forrest performs Pop music.
+
+Allen Forrest was born in Dothan, Alabama. Model Allen Forrest is a solo singer who performs Pop music.
+
+He was born in Dothan, Alabama. Human Born in Dothan, Alabama, Allen Forrest has a background as a solo singer and was a pop artist.
+
+Input name[Wildwood], eatType[restaurant], food[French], area[riverside], near[Raja Indian Cuisine] Templ.
+
+Wildwood is a restaurant.
+
+Wildwood serves French food.
+
+Wildwood is in the riverside.
+
+Wildwood is near Raja Indian Cuisine.
+
+ModelWildwood is a restaurant serving French food.
+
+It is in the riverside near Raja Indian Cuisine.
+
+Human A amazing French restaurant is called the Wildwood.
+
+The restaurant is near the Raja Indian Cuisine in riverside.
+
+They love kids.
+
+Example outputs of our model (3-STAGE, filtered).
+
+See Appendix E for more examples.
+
+Automatic metrics on WebNLG.
+
+B = BLEU, M = METEOR, O = omissions / # facts, H = hallucinations / # examples.
+
+The systems marked with asterisk (*) are trained on the WebNLG dataset.
+
+Results for the systems marked with : are taken from the respective works.
+
+Automatic metrics on E2E.
+
+B = BLEU, M = METEOR, O = omissions / # facts, H = hallucinations / # examples.
+
+The systems marked with asterisk (*) are trained on the E2E dataset.
+
+The results for Harkous et al. (2020) are taken from their work.
+
+Result of individual pipeline modules on the WIKIFLUENT test sets (full / filtered).
+
+The metrics correspond to the metrics used for evaluating the modules for D2T generation.
+
+#train#dev #test tok/src tok/tgt sent/src sent/tgt #temp.

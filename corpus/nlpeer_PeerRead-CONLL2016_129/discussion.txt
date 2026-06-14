@@ -1,0 +1,23 @@
+Why do semi-supervised convolutional neural networks perform so well for data selection? We think there are two main reasons.
+
+The first one is that convolution captures the important domain information of the words in the window, and the max-pooling operation combines the vectors which, as a result, focuses on the most important "features" in the sentence.
+
+Even a highly domainspecific sentence normally contains both domainspecific words and general-domain words.
+
+For example, in "I have a Dell desktop and a Macbook laptop", the words "Dell, laptop, Macbook, laptop" are from the computer domain, while the words "I, have, a, and" are general.
+
+However, the topic of this sentence is decided by the domain specific words, not the general-domain words.
+
+If the properties of the words "Dell, laptop, Macbook, laptop" are kept and highlighted, classification will be more accurate for this sentence.
+
+The second reason is the use of word embedding learned from the whole general-domain data.
+
+A very important advantage of word embedding is that words that have similar meaning will tend to be grouped together in the vector space.
+
+If the word "Lenovo" in the test sentence is not seen in the labeled data, it would be difficult for LMbased models to classify sentences like "I prefer choosing a Lenovo machine" as computer-domain sentence.
+
+However, the word embeddings learned from much larger unlabeled data ensure that the word embedding of "Lenovo" is close to that of "Dell".
+
+According to the domain of its neighbor words, the CNN model can still label this sentence as belonging to the computer domain.
+
+This property is particularly useful for fast or fine grained adaptation, where obtaining large amount of indomain samples may be slow or too expensive.

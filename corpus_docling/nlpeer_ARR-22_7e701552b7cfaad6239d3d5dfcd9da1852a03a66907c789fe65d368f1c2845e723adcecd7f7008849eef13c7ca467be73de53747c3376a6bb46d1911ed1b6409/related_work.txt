@@ -1,0 +1,33 @@
+While research into automatic cloze test generation is vast (Mostow et al., 2017;Kurdi et al., 2020;Yang et al., 2021), work on open cloze tests for language learning is scarce.
+
+Pino et al. (2008) generate open cloze questions using sample sentences from a learners' dictionary based on four linguistic criteria: (grammatical) complexity, welldefined context (collocations), grammaticality and length.
+
+A later version of their system adds hints for gapped words (Pino and Eskenazi, 2009).
+
+Exercise Maker (Malafeev, 2014) is a rule-based open source system that attempts to emulate exercises in Cambridge English examinations based on the most frequently tested words.
+
+Most of the gaps it proposes were found to be useful and the automated exercises were hard to differentiate from authentic tests.
+
+Chinkina et al. (2017) generate open cloze exercises for phrasal verbs by extracting sentences from news articles and generating a pair of questions and answers where the identified particle verbs are gapped.
+
+Similarly, Soonklang et al. (2017) gap words in sentences according to their part of speech in order to practise articles, prepositions, etc.
+
+Finally, Marrese-Taylor et al. (2018) use LSTMs to build sequence labelling and classification models that decide where to insert a single gap in a single sentence.
+
+Automatic evaluation against goldstandard gaps showed the method was effective.
+
+Other work has focused on creating automated cloze tests by controlling aspects of the proposed gaps so that they correlate with a target proficiency level.
+
+Lee et al. (2019), for example, manipulate the difficulty of C-tests (open cloze tests with hints, Grotjahn et al. (2002)) by varying the position and word length of the gaps.
+
+A similar concept is presented by Settles et al. (2020) and McCarthy et al. (2021), although difficulty is predicted using a machine-learning model that correlates with CEFR levels.
+
+In these cases, tests are dynamically adapted to the examinee's proficiency level during the test session.
+
+From a different perspective, Felice and Buttery (2019) show that controlling gap entropy can be useful for designing open cloze tests at different CEFR levels.
+
+The work we present in this paper, however, aims to model the more complex task of predicting a full set of gaps at the paragraph level that comply with design and testing principles and is, to the best of our knowledge, the first to employ and adapt transformer-based models for this task.
+
+System evaluation is also challenging, since there is usually more than one potential word in the text that could constitute a good gap.
+
+While previous work often made a choice between automatic (Marrese-Taylor et al., 2018) or human evaluation (Malafeev, 2014;Das and Majumder, 2017) for their experiments, we perform both: automatic evaluation to identify the best models during development and human evaluation to measure test quality in the final output.

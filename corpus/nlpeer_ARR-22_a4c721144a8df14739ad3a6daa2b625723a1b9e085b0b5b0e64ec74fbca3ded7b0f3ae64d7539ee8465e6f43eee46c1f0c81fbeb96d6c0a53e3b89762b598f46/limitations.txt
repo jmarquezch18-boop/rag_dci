@@ -1,0 +1,11 @@
+The major limitation of our approach is that for each downstream task it requires approximately 10x more training time for the hyper-parameter search compared to the conventional approach.
+
+Although the cost is arguably manageable in practice, i.e. typically 2 or 3 days per task on a single Nvidia Tesla V100 GPU, the excessive computation load should not be overlooked.
+
+Another limitation is that although the overall computation overhead is reduced, the serving latency of our model deteriorates as the number of tasks grows, and may eventually be worse than that of the single task baseline.
+
+This is due to the fact that during inference one cannot get the output of any one task until the model has finished computing for all tasks.
+
+In this regard, our approach may not be appropriate for those applications that demand exceptionally low serving latency, e.g. below 10 ms.
+
+Nevertheless, we report in Appendix E an industrial use case where our multi-task model serves 21 tasks while achieving a latency as low as 32 ms (99th percentile).

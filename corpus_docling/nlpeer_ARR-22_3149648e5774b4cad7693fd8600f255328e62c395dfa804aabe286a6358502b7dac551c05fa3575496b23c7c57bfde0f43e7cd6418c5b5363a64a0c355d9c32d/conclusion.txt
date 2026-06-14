@@ -1,0 +1,7 @@
+In this paper, we propose several improvements on the basis of BMRC for ASTE task, which can effectively deal with the complex correspondence among aspect, opinion and sentiment.
+
+In order to deal with the problems of the original BMRC, we add exclusive classifiers and three strategies, including word segmentation, span matching and probability generation.
+
+The proposed method is expected to handle complex ASTE task more efficiently.
+
+Extensive experiments are conducted to demonstrate the advantages of our improvements.

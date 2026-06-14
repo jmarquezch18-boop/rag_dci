@@ -1,0 +1,75 @@
+The goal of our experiments is to demonstrate the usefulness of the proposed framework for empirical exploration of the language-typological space beyond simple implications and Boolean variables.
+
+The framework is to serve as a methodological tool and should ultimately be complemented with a theoretically motivated agenda for exploring systematic correlations among underexplored properties of grammatical systems.
+
+To establish how the framework can be used we proceed in three steps: First, we re-evaluate some famous universals of Greenberg (1963) and discuss the interpretations of varying truth values and standard deviations (Sec. 3.1).
+
+In the second step, we demonstrate a scenario for testing unexplored candidates for typological universals (which can consist of arbitrary formulae from propositional logic) against the full spectrum of treebanks, taking into variability with respect to each property in the real-valued logic.
+
+We work with a simple procedure of generating candidate formulae: taking over the shape of potentially relevant logical combinations from established universals and replacing the properties they include with new ones.
+
+A framework is useful for empirical exploration if its diagnostics are robust: a statement capturing a systematic relationship should generalize from one sufficiently large sample of languages to another.
+
+We test this by splitting the set of treebanks in an estimation set and a held-out set (Sec. 3.2).
+
+Finally, we enumerate implications of two variables from a selected set of single-link properties and discuss the top-scoring formulae, also in comparison to the findings from previous work on binary properties (Sec. 3.3).
+
+The framework can be used to evaluate universals proposed in typological literature.
+
+The most important example are the 45 universals by Greenberg (1963).
+
+14 of them can be expressed with the UD variables s σ φ Greenberg 1.00 0.01 verb-nsubj:noun-obj:noun ⇒ case:adp-noun #3 0.99 0.02 verb-nsubj:noun-obj:noun ⇒ (verb-nsubj:noun-obj:noun + nsubj:noun-verb-obj:noun) #6 0.99 0.02 verb-nsubj:noun-obj:noun ⇒ noun-amod:adj #17 0.99 0.02 acl:verb-noun ⇒ (noun-case:adp ∨ amod:adj-noun) #24 0.96 0.12 nsubj:noun-obj:noun-verb ⇒ noun-case:adp #4 0.94 0.14 (nsubj:noun-obj:noun-verb ∧ noun-nmod:noun) ⇒ noun-amod:adj #5 0.91 0.13 verb-obj:pron ⇒ verb-obj:noun #25 0.91 0.14 adj-advmod:adv ⇒ (noun-amod:adj ∧ verb-obj:noun) #21 0.91 0.16 nsubj:noun-obj:noun-verb ⇒ advmod:adv-verb #7 0.91 0.12 amod:adj-noun ⇒ (det:pron-noun ∧ nummod:num-noun) #18 0.90 0.16 verb-nsubj:noun-obj:noun + nsubj:noun-verb-obj:noun + nsubj:noun-obj:noun-verb #1 0.82 0.30 (verb-nsubj:noun-obj:noun ⇒ aux:aux-verb) ∧ (nsubj:noun-obj:noun-verb ⇒ verb-aux:aux) #16 0.81 0.31 case:adp-noun ⇔ noun-nmod:noun #2 0.77 0.31 obj:noun-verb ⇒ xcomp:verb-verb #13
+
+Table 1: Scores and standard deviations for Greenberg's universals.
+
+7 from section 2.1.
+
+Most of these universals shown in Table 1 are implications, except for #1 (absolute) and #2 (equivalence).
+
+The most complex formula in the list is #16 which is composed of four variables.
+
+The formulae are ranked by framework score, i.e. the weighted average truth value.
+
+11 of the formulae score 0.90 or higher, i.e. they could be classified as "very true".
+
+#2 is an equivalence and #16 is a quasiequivalence which are generally harder to fulfil than one-way implications (in fuzzy logic, the truth value of an equivalence is defined as the minimum of the truth values of the two composed implications).
+
+The formula with the lowest score, #13, is an example for two conflicting universal tendencies, namely 1) the tendency to order subordinate clause and main verb the same as object and verb (this is predicted by different linguistic theories, e.g. the head-dependent theory), and 2) the tendency to put clauses after their single-word siblings (e.g. Dryer (2003)).
+
+One can reformulate #13 to take both tendencies into account by flipping the word orders on both sides of the implication or, equivalently, reversing the direction of the implication.
+
+This yields s = 0.95 (σ = 0.09).
+
+σ denotes the (weighted) standard deviation which ranges between 0 and 0.5.
+
+A value of 0 means that the formula is equally true for all languages; a value of 0.5 means that the formula is absolutely true for half of the languages and absolutely false for the other half.
+
+Compare e.g. #3 (VSO ⇒ prepositions) and #4 (SOV ⇒ postpositions) -and the respective Figures 2 (a) and (b) -which have similar values for s but different values for σ.
+
+Most of the 90 languages in the treebanks show (near) 0% VSO order or 100% prepositions and therefore get a truth value of 1 for #3.
+
+Only some languages (at the bottom-left corner of Figure 2 (a)) get lower truth values for #3 which raises the standard deviation to 0.01.
+
+Regarding #4, there are more languages showing mid-range values for SOV order and postpositons, and therefore also mid-range truth values for #4.
+
+Since most languages still have a high truth value for #4, the score remains at 0.96 but the standard deviation of 0.12 signals a greater number of languages with truth values diverging from that score.
+
+7 Addition is not a logical connective but used here to calculate the value of properties which cannot be directly extracted from the UD treebanks.
+
+For example, the degree to which a language has S-O order is the percentage occupied by V-S-O, S-V-O and S-O-V constructions.
+
+Thus, the value v nsubj:noun-obj:noun can be calculated as v verb-nsubj:noun-obj:noun + v nsubj:noun-verb-obj:noun + v nsubj:noun-obj:noun-verb .
+
+Addition is restricted to variables that are mutually exclusive, i.e. that are calculated with the same denominator (compare eq. ( 7)).
+
+That said, (out-of-logic) addition in our framework is comparable to addition of probabilities of disjoint events in probability theory; it is not as powerful and does not serve the same purpose as (in-logic) addition ("strong disjunction") in certain real-valued logics, e.g. Łukasiewicz logic (Łukasiewicz and Tarski (1930); cf.
+
+Bergmann (2008, p. 179)), where it is possible to add arbitrary variables.
+
+The result of an addition thus expresses the truth value for any (combination) of several alternative constructions being present in a language.
+
+Greenberg (1963), as others, uses the terms "dominant" and "alternative" to indicate two degrees of relative frequency of word orders.
+
+This binary distinction cannot be directly expressed with UD variables because they already express infinitely many degrees of relative frequency.
+
+We denote "p is a dominant word order in " as v p and "p is an alternative word order of q in " as v p + v q , since we think that these are the most appropriate real-valued equivalents.

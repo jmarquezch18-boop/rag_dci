@@ -1,0 +1,15 @@
+We obtain all the models and certain baseline decoding methods from the Transformers library (Wolf et al., 2020).
+
+Since our methods are inference techniques without learned components, we do not re-train any models.
+
+For summarization, we use XSum (Narayan et al., 2018), a popular English news summarization dataset.
+
+We sample 100 examples from the validation set.
+
+The base model we use is BART-large-XSum (Lewis et al., 2020).
+
+For machine translation, we study our models on the English-French (en-fr) pairs from WMT 2014 (Bojar et al., 2014) and Chinese-to-English (zhen) pair from WMT 2019 (Barrault et al., 2019).
+
+We use mBART (Liu et al., 2020), a state-of-the-art neural machine translation model.
+
+We set the max decoding length to be twice the input length, so it varies per example.

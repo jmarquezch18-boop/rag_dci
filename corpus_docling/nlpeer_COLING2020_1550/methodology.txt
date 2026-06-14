@@ -1,0 +1,57 @@
+Representation learning can be seen as one of the crucial success factors of large pretrained models such as BERT or XLNet that yield outstanding performances on a variety of NLP tasks.
+
+With the introduction of BERT (Devlin et al., 2019) -short for Bidirectional Encoder Representations from Transformersthe possibility of simultaneously learning left and right word context was introduced.
+
+Up to this point, considering bidirectionality was only possible by modeling two separate networks for each direction that would later be combined (Peters et al., 2018).
+
+After learning deep bidirectional representations from unlabeled text, BERT can be used for either finetuning or feature extraction.
+
+The model is pretrained on the combined objective of masked language modeling (MLM) and next-sentence prediction.
+
+The main premise of RoBERTa (Liu et al., 2019) is the assumption that BERT was seriously undertrained during pretraining.
+
+RoBERTa is thus trained on larger batches of longer sequences from a larger per-training corpus for a longer time.
+
+In addition, Liu et al. (2019) argue that the second task of the next-sentence prediction does not improve BERT's performance in a way worth mentioning and therefore remove the task from the training objective.
+
+While RoBERTa focuses on improving pretraining, DistilBERT (Sanh et al., 2019) and ALBERT (Lan et al., 2019) were introduced as lighter versions of BERT applying parameter reduction techniques in order to be usable under constrained computational training and inference budgets.
+
+Sanh et al. (2019) criticize the idea of simply enlarging data sets and running more and more exhaustive pretraining since this does not consider computational costs, memory requirements and even environmental aspects that are often neglected for the sake of further enhancing performance (Strubell et al., 2019;Hao, 2019;Peng, 2019).
+
+DistilBERT ends up diminishing BERT's architecture by around 40% while retaining around 97% of its language understanding capabilities and being 60% faster by using a distinct knowledge distillation approach (Hinton et al., 2015), while ALBERT relies on factorized embedding parameterization and cross-layer parameter sharing.
+
+Lan et al. (2019) specifically point out that simply enlarging model architectures by using bigger hidden size dimensions or more layers can lead to unexpected model degradation2 .
+
+While RoBERTa, DistilBERT and ALBERT focus on either improving or reducing the size of BERT, the overall bidirectional encoder architecture with the MLM objective remains the same.
+
+With XLNet, Yang et al. (2019) propose an alternative approach that works in an auto-regressive manner.
+
+Since BERT's objective is to reconstruct a corrupted input, it can be described as a denoising autoencoder (DAE) approach.
+
+In contrast to the denoising autoencoder, auto-regressive (AR) language modeling uses a sequential token prediction that can only condition on either left or right context.
+
+XLNet combines the advantages of both approaches, namely the bidirectionality while capturing dependency structures among tokens better by employing a so called permutation language modeling objective (PLM).
+
+The pretrained models are all implemented in PyTorch (Paszke et al., 2019) using the huggingface transformers library (Wolf et al., 2019) that makes a large variety of the SOTA models in NLP available and ready to use.
+
+Architecture-wise, the base-cased implementations with the suitable head for sequence classification (i.e. <model name>ForSequenceClassification) are used.
+
+For DistilBERT and XLNet the weights of the pooling layers are randomly initialized, while BERT, RoBERTa and ALBERT rely on pretrained pooler layers.
+
+The weights for the softmax classification layer are randomly initialized for all five models.
+
+For DistilBERT a model version that is distilled from the RoBERTa base model was chosen.
+
+All models are finetuned using an Ubuntu 18.04.3 LTS OS image with 40 CPUs (Intel Xeon, 2.4 GHz clock speed), 736 GB of RAM and a maximum of two Tesla V100-PCIE-16GB GPUs.
+
+All models were finetuned using the Adam algorithm with default values for its hyperparameters as indicated by Kingma and Ba (2014).
+
+As warmup ratio, we chose a value of 0.06 complemented by a more extensive evaluation when it comes to the learning rate schedule, where we conduct small grid search experiments later on.
+
+In order to avoid gradient explosion, the norm of all gradients is clipped with a maximum value of 1.
+
+Gradients are not accumulated.
+
+For all models, the pretrained weights of the specified huggingface version are loaded once.
+
+The experiments and grid search steps thus use the same randomly initialized weights for the finetuning layers per model3 .

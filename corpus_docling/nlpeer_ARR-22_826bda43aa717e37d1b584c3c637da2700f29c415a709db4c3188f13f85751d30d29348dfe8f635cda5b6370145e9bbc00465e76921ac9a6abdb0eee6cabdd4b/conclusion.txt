@@ -1,0 +1,151 @@
+In this paper, we presented the CLEAR method that learns a cross-lingual and environment-agnostic representation.
+
+We demonstrated that our crosslingual language representation captures more visual semantics and our environment-agnostic representation generalizes better to unseen environments.
+
+Our experiments on Room-Across-Room dataset suggest that our CLEAR method improved the performance in all evaluation metrics over a strong baseline.
+
+Furthermore, we qualitatively and quantitatively analyze the effectiveness of every component of our CLEAR approach and its generalizability to other tasks and base VLN agents.
+
+Our navigation agent follows the decoder structure as Tan et al. ( 2019).
+
+At each time step t, the agent perceives a panoramic view of the current location.
+
+The panoramic view is discretized into 36 single views {o t,m } 36 m=1 (12 angles and 3 camera poses per angle).
+
+Given the visual representation for each view v t,m , we concatenate it with the orientation feature to get the view features {f t,m } 36 m=1 :
+
+f t,m = [ v t,m ; (cos θ t,m , sin θ t,m , cos ϕ t,m , sin ϕ t,m )](11)
+
+where θ t,m and ϕ t,m the heading and elevation of view o t,m .
+
+As a reaction to the input, the agent needs to select one of the K navigable locations as an action.
+
+The action is represented as the orientation features (heading and elevation) between the current viewpoint and the chosen navigable viewpoint.
+
+The navigation decoder takes the attended visual feature f t of the current viewpoint and the previous action embedding a t-1 as input, and updates its environment-aware context vector h t :
+
+γ t,m = Softmax m (f T t,m W f h t-1 )(12)
+
+f t = m γ t,m f t,m(13)
+
+h t = LSTM([ f t ; a t-1 ], h t-1 )(14)
+
+where a t-1 is represented as the orientation features (cos θ t-1,k ⋆ , sin θ t-1,k ⋆ , cos ϕ t-1,k ⋆ , sin ϕ t-1,k ⋆ ) of the chosen navigable viewpoint k ⋆ at time step t -1, and h t-1 is the instruction-aware context vector that incorporates the attended instruction information.
+
+The navigator calculates the probability of moving to the k-th navigable location based on the alignment between the visual feature g t,k of that navigable location and the instruction-aware context vector h t :
+
+ρ t,j = Softmax j ( w T j W l h t )(15)
+
+u t = j ρ t,j w j (16)
+
+h t = tanh(W m [u t ; h t ]) (17) p(a t = k) = Softmax k (g T t,k W a h t )(18)
+
+where g t,k is constructed similarly as f t,i in Eqn.
+
+11, and w j is the language representation.
+
+Our CLEAR agent has two stages of learning: representation learning and navigation learning.
+
+In the representation learning stage, given a pair of instructions that correspond to the same navigation path, we train the shared multilingual encoder to generate representations of paired instructions close to each other by optimizing a contrastive loss L lang .
+
+Furthermore, we train the visual encoder to learn the connections between paths with similar instructions by optimizing the contrastive loss L visual .
+
+The representation learning process transfers the language representation to domain-specific language representation and adapts the visual representation to learn the correlation underlying the navigation environments.
+
+In the navigation learning stage, we use a mixture of imitation learning and reinforcement learning to train the agent on the navigation task as in Tan et al. (2019).
+
+In imitation learning, we use teacher-forcing to determine the next navigable viewpoint.
+
+Different from previous methods (Hong et al., 2021;Tan et al., 2019;Huang et al., 2019b) that takes the shortest path as the teacher action, our teacher action a ⋆ t at each time step t is picked based on the given ground truth path between the start point and target point.
+
+The agent tries to imitate the teacher action a ⋆ t by minimizing the negative log probability:
+
+L IL = t -a ⋆ t log p t(19)
+
+We combine reinforcement learning with imitation learning to learn a more generalizable agent.
+
+At each time step t, the agent samples an action a t from the predicted distribution p t (a t ).
+
+We follow (Hong et al., 2021) to do the reward shaping.
+
+The immediate reward at each time step t consists of three parts.
+
+First, if the agent moves closer to the target viewpoint, a positive reward +1 is given, otherwise the agent receives a negative reward -1.
+
+Second, to encourage instruction following, we include normalized Dynamic Time Warping (nDTW) score in the reward.
+
+The agent gets a positive reward if the nDTW score for the navigated path increases.
+
+Lastly, the agent receives a negative reward if it misses the target.
+
+When the agent predicts the "STOP" action, the agent will receive a +3/-3 reward based on whether the agent is within 3 meters from the target viewpoint.
+
+We use Advantage Actor-Critic (Mnih et al., 2016) to train the agent.
+
+The navigation loss L nav is a weighted combination of imitation learning loss and reinforcement learning loss.
+
+L nav = L RL + λL IL(20)
+
+We evaluate our agent on the Room-Across-Room (RxR) dataset (Ku et al., 2020).
+
+The dataset is built on the Matterport3D simulator (Anderson et al., 2018b)
+
+To evaluate the performance of our model, we follow the metrics used in the Room-Across-Room paper (Ku et al., 2020).
+
+The metrics include: (1) Success Rate (SR): We consider a success for navigation if the agent stops less than 3m from the target location.
+
+(2) Success rate weighted by Path Length (SPL) (Anderson et al., 2018a): This metric penalizes the navigation with long paths (i.e., when both navigations reach the target, the navigation with shorter path length has a higher SPL score).
+
+(
+
+In our experiments, we learn the shared multilingual representation based on cased multilingual BERT BASE .
+
+The instruction is truncated from the end with a maximum sequence length of 160.
+
+For the pre-trained vision model, we compare performance between image features extracted from ImageNet-pre-trained (Russakovsky et al., 2015) ResNet-152 (He et al., 2016) and CLIP-pre-trained (Radford et al., 2021)
+
+Our visual representation learning optimizes the similarity between panoramic views at each step of the semantically-aligned path pairs.
+
+Since paths are not fully-aligned, we use object-matching as a constraints to filter out panoramic view pairs that don't contain same objects.
+
+As shown in Table 7, the visual representation trained with fixed object classes as constraints ('-sample') improve the nDTW score (the main metric for RxR dataset) by 0.6% com-pared with the visual representation trained without object-matching constraints ('-object'), suggesting that using object-matching as constraints help learn a better visual representation.
+
+Besides, the sampling strategy (i.e., randomly sample 10 object classes from 27 object classes during each iteration) also helps the visual representation learning ('+visual'), further improving the nDTW score by 0.7% compared with the visual representation learned with fixed 27 object classes ('-sample').
+
+In total, our object-matching constraints and sampling strategy ('+visual') improves the performance by 1.3% in nDTW score compared with learning without object constraints ('-object').
+
+We demonstrate that our CLEAR approach could decrease the performance variance (i.e., performance's standard deviation) among different environments.
+
+Intuitively, we hope the agent to perform equally well in different environments instead of getting high performance by only learning to navigate through several easy environments.
+
+We show the results for 11 environments in validation unseen set in Table 8.
+
+Our CLEAR approach ('+both' as in Table 2 in the main paper) outperforms the baseline model ('ResNet' as in Table 2 in the main paper) in most of the environments.
+
+Moreover, the weighted standard deviation (weighted by # Data in Table 8) of our CLEAR approach is lower than the baseline model.
+
+Specifically, the standard deviation of nDTW score for our CLEAR approach is 9.24 while the standard deviation of nDTW score for the baseline model is 10.01, suggesting that our CLEAR approach decreases the performance variance between different environments.
+
+The visual semantics are injected during learning the cross-lingual language representation by maximizing the similarity between full instruction sentences (representation of 'CLS' token).
+
+However, it's unclear that whether the word-level representation also learned such visual information.
+
+In this section, we investigate whether the learning encodes spatially close words/objects closer to each other.
+
+As shown in  lary of 2754 English tokens.
+
+We see that our crosslingual representation puts words that appear spatially near each other close (e.g. 'kitchen' and 'island'/'dinning', 'fire' and 'chair'/'fireplace') while m-BERT representation fails (e.g. 'kitchen' and 'room'/'house', 'fire' and 'family'/'study').
+
+The Room-Across-Room dataset provides groundtruth alignment between instructions and navigation paths.
+
+To demonstrate that our CLEAR approach learns a good alignment between instructions and paths, we not only compare our CLEAR approach with the baseline approach, but also compare it with the ground truth alignment provided in the RxR dataset.
+
+The attention weights for grounded instruction for CLEAR, Baseline, and Ground Truth are shown in Figure 4.
+
+We observe that our CLEAR model successfully attends to sub-instructions "turn right", "move towards the open door to your right and exit the room through the door", "slightly turn left", "move towards and stand in front of the sofa" sequentially.
+
+Although the baseline model also successfully executes the first two sub-instructions "turn right" and "move towards the open door", yet the baseline agent gets lost in the later navigation.
+
+Furthermore, the alignment learned by our CLEAR approach matches better with the ground truth alignment provided in the RxR dataset.
+
+We investigate whether filtering out low-quality path pairs during visual representation learning

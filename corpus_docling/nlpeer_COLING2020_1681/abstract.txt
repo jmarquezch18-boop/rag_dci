@@ -1,0 +1,17 @@
+Recent high scores on pronoun translation using context-aware neural machine translation have suggested that current approaches work well.
+
+ContraPro is a notable example of a contrastive challenge set for English→German pronoun translation.
+
+The high scores achieved by transformer models may suggest that they are able to effectively model the complicated set of inferences required to carry out pronoun translation.
+
+This entails the ability to determine which entities could be referred to, identify which entity a sourcelanguage pronoun refers to (if any), and access the target-language grammatical gender for that entity.
+
+We first show through a series of targeted adversarial attacks that in fact current approaches are not able to model all of this information well.
+
+Inserting small amounts of distracting information is enough to strongly reduce scores, which should not be the case.
+
+We then create a new template test set Contracat, designed to individually assess the ability to handle the specific steps necessary for successful pronoun translation.
+
+Our analyses show that current approaches to context-aware nmt rely on a set of surface heuristics, which break down when translations require real reasoning.
+
+We also propose an approach for augmenting the training data, with some improvements.

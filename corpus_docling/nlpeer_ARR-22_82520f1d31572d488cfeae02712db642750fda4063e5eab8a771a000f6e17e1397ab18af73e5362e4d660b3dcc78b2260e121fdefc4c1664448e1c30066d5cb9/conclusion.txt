@@ -1,0 +1,17 @@
+In this paper, we described an approach to use multi-task learning to automatically score essays and their traits.
+
+We achieve this by concatenating a representation of the essay with the trait scores -predicted as an auxiliary task.
+
+We compared our results with single-task learning models as well.
+
+We found out that the MTL system with the Bi-Directional LSTM outperforms the STL-based systems and has results comparable with a baseline BERT-STL system.
+
+We then ran an ablation test and found out which essay trait was important for the corresponding essay sets.
+
+We also report our system's performance, which shows a 2.30 to 3.70 speed-up of using the multi-task learning system, compared to using a single task learning system.
+
+An exciting avenue of future work is using trait scoring to aid in providing text feedback to the writer, like showing where the low score for the trait originates, similar to Hellman et al. (2020) (for content scoring), rather than a trait-specific score only.
+
+We also plan to investigate using ALBERT (Lan et al., 2020), in lieu of the essay stack, to grade essays and their traits simultaneously.
+
+We also plan to explore how to extend our approach in generalizing our system, training it on essays written in response to one set of source prompts, and tested it on essays written for another prompt.

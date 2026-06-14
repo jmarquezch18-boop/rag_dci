@@ -1,0 +1,7 @@
+In this paper, we propose to learn confidence estimates for NMT jointly with the training process.
+
+We demonstrate that learned confidence can better indicate translation accuracy on extensive sentence/word-level QE tasks and precisely measures potential risk induced by noisy samples or out-of-domain data.
+
+We further extend the learned confidence estimate to improve smoothing, outper-forming the standard label smoothing technique.
+
+As our confidence estimate outlines how much the model knows, we plan to apply our work to design a more suitable curriculum during training and post-edit low-confidence translations in the future.

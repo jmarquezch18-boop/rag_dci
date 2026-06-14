@@ -1,0 +1,25 @@
+Factor Graph Construction: We first need to pick a set of frames and objects to determine our set of random variables.
+
+The frames are simply the subset of the frames that were crowdsourced in the given configuration (e.g., seed + dev), with "soft 1" unary seed factors (the gold label indexed row of the binary factor matrix) given only to those in the seed set.
+
+The same selection criteria and seed factors are applied to the crowdsourced object pairs.
+
+For lexical similarity factors (ψ v , ψ o ), we pick connections based on the cosine similarity scores of GloVe vectors thresholded above a value chosen based on development set performance.
+
+Attribute similarity factors (ψ a ) are chosen based on sets of frames that reach largely the same decisions on the seed data (95%).
+
+Frame similarity factors (ψ f ) are added to pairs of frames with linguistically similar constructions.
+
+Finally, selectional preference For each task, we consider the set of factors to include in each model a hyperparameter, which is also tuned on the development set.
+
+Baselines: Baselines include making a RAN-DOM choice, picking between >, <, and ), picking the MAJORITY label, and a maximum entropy classifier based on the embedding representations (EMB-MAXENT) defined in Section 4.6.
+
+Inferring Knowledge of Actions: Our first experiment is to predict knowledge implied by new frames.
+
+In this task, 5% of the frames are available as seed knowledge.
+
+We experiment with two different sets of seed knowledge for the object pair data: OUR MODEL (A) uses only 5% of the object pair data as seed, and OUR MODEL (B) uses 20%.
+
+The full results for the baseline methods and our model are given in the upper half of Table 2.
+
+Our model outperforms the baselines on all attributes except for the speed, which has a highly skewed label distribution to allow the majority baseline to

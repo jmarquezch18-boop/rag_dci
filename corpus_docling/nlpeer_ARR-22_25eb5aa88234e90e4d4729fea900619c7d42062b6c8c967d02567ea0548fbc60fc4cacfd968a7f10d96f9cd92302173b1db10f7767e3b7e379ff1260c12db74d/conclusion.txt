@@ -1,0 +1,33 @@
+In this work, we carry out the first large-scale human evaluation on conversational QA systems.
+
+We show that current standard automatic evaluation with gold history cannot reflect models' performance in human evaluation, and that humanmachine conversations have a large distribution shift from static conversational QA datasets of human-human conversations.
+
+To tackle these problems, we propose to use predicted history with rewriting invalid questions for evaluation, which reduces the gap between automatic evaluations and real-world human evaluation.
+
+Based on the insights from the human evaluation results, we also nalyze current conversational QA systems and identify promising directions for future development.
+
+In question rewriting, we use F1 instead of exact match to check whether two entites are the same.
+
+The reason is that sometimes the prediction may mention the same entity as the gold answer does, but with different names.
+
+Figure 8 gives an example.
+
+Thus to avoid the false positive of detecting invalid questions, we take the F1 metric.
+
+B Quality of Rewriting Questions Detection.
+
+After manually checking 100 conversations of ExCorD from the QuAC development set, we find that Auto-Rewrite can detect invalid questions with a precision of 72% and a recall of 72%.
+
+We notice that the coreference model sometimes detects the pronoun of the main character in the passage as insolvable, although it almost shows up in every question.
+
+This issue causes the low precision but is not a serious problem in our case -whether rewriting the pronoun of the main character does not affect models' prediction much, because the model always sees the passage and knows who the main character is.
+
+Rewriting.
+
+Among all correctly detected invalid questions, we further check the quality of rewriting, and in 68% of the times Auto-Rewrite gives a correct context-independent questions.
+
+The most common error is being ungrammatical.
+
+For example, using the gold history of "... Dee Dee claimed that Spector once pulled a gun on him", the original question "Did they arrest him for doing this?" was rewritten to "Did they arrest Phillip Harvey Spector for doing pulled?" While this creates a distribution shift on question formats, it is still better than putting an invalid question in the flow.
+
+Figure 9 shows an example where extra information in context-independent questions confuses the model and leads to incorrect prediction.

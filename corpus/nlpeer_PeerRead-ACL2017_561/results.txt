@@ -1,0 +1,89 @@
+We evaluate our approach on two well benchmarked sequence tagging tasks, the CoNLL 2003 NER task (Sang and Meulder, 2003) and the CoNLL 2000 Chunking task (Sang and Buchholz, 2000).
+
+We report the official evaluation metric (micro-averaged F 1 ).
+
+In both cases, we use the BIOES labeling scheme for the output tags, following previous work which showed it outperforms other options (e.g., Ratinov and Roth, 2009).
+
+Following Chiu and Nichols (2016), we use the Senna word embeddings (Collobert et al., 2011) and pre-processed the text by lowercasing all tokens and replacing all digits with 0.
+
+CoNLL 2003 NER.
+
+The CoNLL 2003 NER task consists of newswire from the Reuters RCV1 corpus tagged with four different entity types (PER, LOC, ORG, MISC).
+
+It includes standard train, development and test sets.
+
+Following previous work (Yang et al., 2017;Chiu and Nichols, 2016) we trained on both the train and development sets after tuning hyperparameters on the development set.
+
+The hyperparameters for our baseline model are similar to Yang et al. (2017).
+
+We use two bidirectional GRUs with 80 hidden units and 25 dimensional character embeddings for the token character encoder.
+
+The sequence layer uses two bidirectional GRUs with 300 hidden units each.
+
+For regularization, we add 25% dropout to the input of each GRU, but not to the recurrent connections.
+
+The baseline sequence tagger uses 30 dimensional character embeddings and a CNN with 30 filters of width 3 characters followed by a tanh non-linearity for the token character encoder.
+
+The sequence layer uses two bidirectional LSTMs with 200 hidden units.
+
+Following Ma and Hovy (2016) we added 50% dropout to the character embeddings, the input to each LSTM layer (but not recurrent connections) and to the output of the final LSTM layer.
+
+Pre-trained language models.
+
+The primary bidirectional LMs we used in this study were trained on the 1B Word Benchmark (Chelba et al., 2014), a publicly available benchmark for largescale language modeling.
+
+The training split has approximately 800 million tokens, about a 4000X increase over the number training tokens in the CoNLL datasets.
+
+Józefowicz et al. (2016) explored several model architectures and released their best single model and training recipes.
+
+Following Sak et al. (2014), they used linear projection layers at the output of each LSTM layer to reduce the computation time but still maintain a large LSTM state.
+
+Their single best model took three weeks to train on 32 GPUs and achieved 30.0 test perplexity.
+
+It uses a character CNN with 4096 filters for input, followed by two stacked LSTMs, each with 8192 hidden units and a 1024 dimensional projection layer.
+
+We use CNN-BIG-LSTM to refer to this language model in our results.
+
+In addition to CNN-BIG-LSTM from Józefowicz et al. ( 2016),1 we used the same corpus to train two additional language models with fewer parameters: forward LSTM-2048-512 and backward LSTM-2048-512.
+
+Both language models use token embeddings as input to a single layer LSTM with 2048 units and a 512 dimension projection layer.
+
+We closely followed the procedure outlined in Józefowicz et al. (2016) Training.
+
+All experiments use the Adam optimizer (Kingma and Ba, 2015) with gradient norms clipped at 5.0.
+
+In all experiments, we fine tune the pre-trained Senna word embeddings but fix all weights in the pre-trained language models.
+
+In addition to explicit dropout regularization, we also use early stopping to prevent over-fitting and use the following process to determine when to stop training.
+
+We first train with a constant learning rate α = 0.001 on the training data and monitor the development set performance at each epoch.
+
+Then, at the epoch with the highest development performance, we start a simple learning rate annealing schedule: decrease α an order of magnitude (i.e., divide by ten), train for five epochs, decrease α an order of magnitude again, train for five more epochs and stop.
+
+Following Chiu and Nichols (2016), we train each final model configuration ten times with different random seeds and report the mean and standard deviation F 1 .
+
+It is important to estimate the variance of model performance since the test data sets are relatively small.
+
+Tables 1 and 2 compare results from TagLM with previously published state of the art results without additional labeled data or task specific gazetteers.
+
+Tables 3 and4 compare results of TagLM to other systems that include additional labeled data or gazetteers.
+
+In both tasks, TagLM establishes a new state of the art using bidirectional LMs (the forward CNN-BIG-LSTM and the backward LSTM-2048-512).
+
+In the CoNLL 2003 NER task, our model scores 91.93 mean F 1 , which is a statistically significant increase over the previous best result of 91.62 ±0.33 from Chiu and Nichols (2016) that used gazetteers (at 95%, two-sided Welch t-test, p = 0.021).
+
+In the CoNLL 2000 Chunking task, TagLM achieves 96.37 mean F 1 , exceeding all previously published results without additional labeled data by more then 1% absolute F 1 .
+
+The improvement over the previous best result of 95.77 in Hashimoto et al. (2016) that jointly trains with Penn Treebank (PTB) POS tags is statistically significant at 95% (p < 0.001 assuming standard deviation of 0.1).
+
+Importantly, the LM embeddings amounts to an average absolute improvement of 1.06 and 1.37 F 1 in the NER and Chunking tasks, respectively.
+
+Adding external resources.
+
+Although we do not use external labeled data or gazetteers, we found that TagLM outperforms previous state of the art results in both tasks when external resources (labeled data or task specific gazetteers) are available.
+
+Furthermore, Tables 3 and4 show that, in most cases, the improvements we obtain by adding LM embeddings are larger then the improvements previously obtained by adding other forms of transfer or joint learning.
+
+For example, Yang et al. (2017) noted an improvement of only 0.06 F 1 in the NER task when transfer learning from both CoNLL 2000 chunks and PTB POS tags and Chiu and Nichols (2016) reported an increase of 0.71 F 1 when adding gazetteers to their baseline.
+
+In the Chunking task, previous work has reported from 0.28 to 0.75 improvement in F 1 when including supervised labels from the PTB POS tags or CoNLL 2003 entities (Yang et al., 2017;Søgaard and Goldberg, 2016;Hashimoto et al., 2016).

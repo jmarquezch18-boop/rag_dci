@@ -1,0 +1,11 @@
+The results from the Dionisos model are organized two fold in the following section.
+
+First, transgression and regression timings for each scenario are described.
+
+Second, in order to better visualize the differences between the sea level scenarios adopted, three synthetic wells were created along a crossplatform profile within the baseline model output.
+
+The first (Well A) is located just before the continental-shelf break, the "Full" represents an early LIG peak in sea level that is driven by simultaneous melting of GrIS and AIS, contributing 2 and 5 m, respectively. "Baseline" is the background GIA signal during the LIG, where ice sheets are kept to modern geometries throughout the LIG. "G2A5" is a two-step LIG scenario where GrIS melt adds 2 m to sea level at 125 ka followed by a brief plateau before AIS melt contributes 5 m at 118 ka.
+
+second (Well B) is within the reef, and the third (Well C) is located in the intertidal.
+
+Well locations can be seen in Fig. 6.

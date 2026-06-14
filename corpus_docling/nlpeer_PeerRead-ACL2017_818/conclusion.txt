@@ -1,0 +1,3 @@
+We presented a novel take on verb-centric frame semantics to learn implied physical knowledge latent in verbs.
+
+Empirical results confirm that by modeling changes in physical attributes entailed by verbs together with objects that exhibit these properties, we are able to better infer new knowledge in both domains.

@@ -1,0 +1,23 @@
+In what follows, we denote by T the set of all target tasks.
+
+We always use the 12-layer uncased version of BERT as the pre-trained language model1 .
+
+The proposed framework features a pipeline (Fig. 1) that consists of three steps: 1) Single task partial fine-tuning; 2) Single task knowledge distillation; 3) Model merging.
+
+We give details of these steps below.
+
+In the final step, we merge the single-task student models into one multi-task model (Fig. 1(c)) so that the parameters and computations carried out in the frozen layers can be shared.
+
+To achieve this, it suffices to load weights from multiple model checkpoints into one computation graph.
+
+The adaptor-based approaches (Houlsby et al., 2019;Pfeiffer et al., 2020) belong to another category of fine-tuning approaches that are also parameter-efficient.
+
+Basically, the adaptor-based approaches introduce one trainable task-specific "adaptor" module for each downstream task.
+
+This module is generally lightweight, containing only a few parameters and is inserted between (or within) layers of the backbone model (e.g. BERT).
+
+However, even though the parameters of the backbone model can be shared across the tasks, the computation for inference cannot due to the fact that the internal data flow in each task model is modified by the task-specific adaptor.
+
+Therefore, the adaptorbased approaches are not computationally efficient and one needs to perform a separate full forward pass for each task.
+
+Since both parameter and computation efficiency are what we aim to achieve, the adaptor-based approaches are not comparable to our method.

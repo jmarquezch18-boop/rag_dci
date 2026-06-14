@@ -1,0 +1,45 @@
+A detailed error analysis of the results revealed problems for the character identification model that depend mainly on the external tools we have used and the quality of the data.
+
+First, the character model uses the output of the animacy detector and so if a character was not marked animate, the character model also missed it.
+
+Conversely, sometimes inanimate chains are incorrectly marked animate, providing an additional opportunity for the character model to err.
+
+Thus, the character model's performance is bounded by that of the animacy model.
+
+This dependency is shown in Figure 7, where the character model performed better when we used the human-annotated animacy labels.
+
+Second, the quality of coreference chains is critical for the character model.
+
+We can see from Table 2 that in the initial experiments, our model achieved excellent results for the extended ProppLearner (F 1 of 0.81) data because of its clean and hand-corrected coreference chains.
+
+On the other hand, the character model achieved a notably lower performance (F 1 of 0.66 and F 1 of 0.73) on the Ontonotes and CEN corpus, primarily because we have used the automatically generated conference chains for CEN corpus produced by Stanford CoreNLP.
+
+This was demonstrated by a random sampling evaluation to manually correct sample of CEN data, after which the model achieved a significantly improved F 1 of 1.0.
+
+We need better systems for automatically generating coreference chains to solve this problem.
+
+Third, identifying the character information of short chains is a challenging task because chain length is one of the most effective features of our character model.
+
+In the case of short chains, the model only depends on the chain heads, and if a chain head does not carry much meaningful information, then the model can classify that chain incorrectly.
+
+We can see the performance improvement of the character model with increasing chain length from Figure 7.
+
+Solving this problem is critical, but adding more features that carry semantic information of a chain could be helpful.
+
+Fourth, the data should be balanced to obtain good performance, which is a common requirement for any machine learning model.
+
+The performance improvement is shown in Table 2 for the three datasets after applying under-and over-sampling.
+
+The character model achieved the best performance when we applied over-and under-sampling together to ProppLearner (F 1 of 0.88).
+
+For OntoNotes, our model reached the best performance when oversampling is applied (F 1 of 0.92).
+
+Similarly, our model's performance significantly improved when over and under sampling are applied together to CEN (F 1 of 0.90).
+
+Finally, one minor source of error for our model is limited foreign words, which is a data specific problem.
+
+The extended ProppLearner data contains numerous Russian character names (e.g., Parakha, Gornya, Shabarsha, etc.) that are not commonly found in English training data for NER systems or linguistic resources (WordNet, ConceptNet).
+
+As a result, our system was sometimes not able to identify these chains as a person, and that affects the model's performance.
+
+To address this problem, we could, for example, improve coverage of the NER gazetteers.

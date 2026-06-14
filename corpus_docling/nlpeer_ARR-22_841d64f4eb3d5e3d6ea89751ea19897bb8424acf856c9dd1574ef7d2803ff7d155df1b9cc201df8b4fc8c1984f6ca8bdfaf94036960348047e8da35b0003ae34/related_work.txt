@@ -1,0 +1,13 @@
+The techniques used in this work partially reflect an outgrowth of a few lines of literature: understanding the behavior of text generation models (Xu et al., 2020;Xu and Durrett, 2021;Zhong et al., 2021), investigations into beam search (Stahlberg and Byrne, 2019;Meister et al., 2020a), and studies of diversity in generation.
+
+In terms of search strategies, best-first beam search (Meister et al., 2020b) is a method integrat-ing best-first search with beam search.
+
+Some other variants of search have also been studied in previous work (Meister et al., 2021b,a).
+
+Beam search has been critically examined in some recent work (Huang et al., 2017;Stahlberg and Byrne, 2019), but largely of focused on specific challenges in MT.
+
+As for diverse generation, neural text degeneration has been discussed in Radford et al. (2019); Holtzman et al. (2020); Welleck et al. (2020), which led to an interest in diverse generation models.
+
+Diverse text generation has been studied in previous work (Yu et al., 2017), including in dialogue (Li et al., 2016), story generation (Fan et al., 2019), and particularly paraphrasing (Iyyer et al., 2018;Goyal and Durrett, 2020).
+
+Our method can also diversify content coverage (Gehrmann et al., 2018) and word choice (Cao and Wang, 2021).

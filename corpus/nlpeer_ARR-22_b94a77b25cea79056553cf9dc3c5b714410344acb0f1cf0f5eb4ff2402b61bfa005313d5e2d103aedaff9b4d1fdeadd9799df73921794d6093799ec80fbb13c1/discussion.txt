@@ -1,0 +1,13 @@
+It is noteworthy that dictionary supervision almost deterministically ensures that the input word types will occur in the segmented output.
+
+For instance, 96% of the words in the Mboshi supervision dictionary are found in the output of the d.mix+2gram method, whereas we only find 44% with fully unsupervised learning.
+
+Similar trends are observed for Japhug.
+
+Some remaining errors are, however, observed: in the example of Figure 3, the word 'bana' belongs to the supervision dictionary but remains attached to the following word 'ba'.
+
+Additional examples are in appendix A.2.
+
+This may be because both words 'bana' and 'ba' often occur together, a cooccurrence that can not be captured by our unigram model (Goldwater et al., 2009).
+
+reference bana ba adi otEE imbva unsupervised banaba adio tEE imbva supervised banaba adi otEEimbva

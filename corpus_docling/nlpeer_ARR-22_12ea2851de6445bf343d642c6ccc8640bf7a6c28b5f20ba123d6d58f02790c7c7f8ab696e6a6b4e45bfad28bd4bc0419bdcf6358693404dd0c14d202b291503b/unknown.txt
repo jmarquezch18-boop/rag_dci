@@ -1,0 +1,281 @@
+Why Don'T People Use Character-Level Machine Translation?
+
+Abstract
+
+Introduction
+
+Character-Level Neural Mt
+
+Character-level processing was hardly possible within the statistical MT paradigm that assumed the existence of phrases consisting of semantically rich tokens that roughly correspond to words.
+
+Neural sequence-to-sequence models (Sutskever et al., 2014;Bahdanau et al., 2015;Vaswani et al., 2017) do not explicitly work with this assumption.
+
+In theory, they can learn to transform any sequence into any sequence.
+
+The original sequence-to-sequence models used word-based vocabularies of a limited size and which led to a relatively frequent occurrence of out-of-vocabulary tokens.
+
+A typical solution to that problem is subword segmentation (Sennrich et al., 2016;Kudo and Richardson, 2018), which keeps frequent tokens intact and splits less frequent ones into smaller units.
+
+Modeling language on the character level is attractive because it can help overcome several problems of subword models.
+
+One-hot representations of words or subwords do not reflect systematic character-level relations between words, potentially harming morphologically rich languages.
+
+With subwords, minor typos on the source side lead to radically different input representations resulting in low robustness towards source-side noise (Provilkov et al., 2020;Libovický and Fraser, 2020).
+
+Models using recurrent neural networks (RNNs) showed early success with character-level segmentation on the decoder side (Chung et al., 2016).
+
+Using character-level processing on the encoder side proved harder which was attributed to the features of the attention mechanism which can presumably benefit from semantically rich units (such as subwords) in the encoder.
+
+Following this line of thinking, Lee et al. (2017) introduced 1D convolutions with max-pooling that pre-process the character sequence into a sequence of latent wordlike states.
+
+Coupled with a character-level decoder, they claimed to match the state-of-the-art subwordbased models.
+
+Even though this architecture works well on the character level, it does not generalize further to the byte level (Costa-jussà et al., 2017).
+
+Hybrid approaches combining tokenization into words with the computation of character-based word representations were successfully used with RNNs (Luong and Manning, 2016;Grönroos et al., 2017;Ataman et al., 2019).
+
+Later, Cherry et al. (2018) showed that RNNs perform on par with subword models without changing the model architecture if the models are sufficiently large.
+
+Kreutzer and Sokolov (2018) support this by showing that RNN models which learn segmentation jointly with the rest of the model are close to character-level.
+
+Character-level modeling with Transformers appears to be more difficult.
+
+Gupta et al. (2019) used Transparent Attention (Bapna et al., 2018) to train deep character-level models and needed up to 32 layers to close the gap between the BPE and character models, which makes the model too large for practical use.
+
+Libovický and Fraser (2020) narrowed the gap between subword and character modeling using curriculum learning by finetuning subword models to character-level.
+
+Gao et al. (2020) proposed adding a convolutional sub-layer in the Transformer layers.
+
+At the cost of a 30% increase in parameter count, they managed to narrow the gap between subword-and character-based models by half.
+
+Banar et al. (2020) reused the convolutional preprocessing layer with constant-size segments of Lee et al. (2017)  Transformer model for translation into English. Without changing the decoder, they reached comparable, but usually slightly worse, translation quality compared to BPE-based models.
+
+Shaham and Levy (2021a) revisited characterand byte-level MT on rather small IWSLT datasets.
+
+Their results show that character-level and bytelevel models are usually worse than BPE models, but byte-based models without embedding layers often outperform BPE-based models in the out-of-English direction.
+
+Using similarly small datasets, Li et al. (2021) claim that character-level modeling outperforms BPE when translating into fusional, agglutinative, and introflexive languages.
+
+Nikolov et al. (2018) experimented with character-level models for romanized Chinese.
+
+These models performed comparable to models using logographic signs, but significantly worse than models using subwords.
+
+Zhang and Komachi (2018) argued that signs in logographic languages carry too much information and were able to improve the translation quality by segmenting Chinese and Japanese into sub-character units while keeping subword segmentation on the English side.
+
+Little is known about other properties of character-level MT beyond the overall translation quality.
+
+Sennrich (2017) prepared a set of contrastive English-German sentence pairs and tested them using shallow RNN-based models.
+
+They observed that character-based models transliterated better, but captured morphosyntactic agreement worse.
+
+Libovický and Fraser (2020) evaluated Transformer-based character-level models using MorphEval and came to mixed conclusions.
+
+Gupta et al. (2019) and Libovický and Fraser (2020) make claims about the noise robustness of the character-level models using synthetic noise.
+
+Li et al. (2021) evaluated domain robustness by training models on small domain-specific datasets and evaluating them on unrelated domains, claim-ing the superiority of character-level models in this setup.
+
+On the other hand, Gupta et al. (2019) evaluated the domain robustness in a more natural setup and did not observe higher robustness when evaluating general domain models on domain-specific tests compared to BPE.
+
+Another consideration is longer training and inference times.
+
+Character-level systems are significantly slower due to the increased sequence length.
+
+Libovický and Fraser (2020) reported a 5.6-fold slowdown at training time and a 4.7-fold slowdown at inference time compared to subword models.
+
+Recent research on character-level modeling goes beyond MT.
+
+Pre-trained multilingual representations are a particularly active area.
+
+Clark et al. (2021) propose CANINE.
+
+The model shrinks character sequences into fewer hidden states (similar to Lee et al., 2017).
+
+They use local self-attention and strided convolutions (instead of highway layers and max-pooling as in Lee's work).
+
+Their model is either trained using the masked-language-modeling objective (Devlin et al., 2019) with subword supervision, or in an encoder-decoder setup similar to Raffel et al. (2020).
+
+Both methods reach a representation quality comparable to similar subword models.
+
+ByT5 (Xue et al., 2021a) and Charformer (Tay et al., 2021) are based on the mT5 model (Xue et al., 2021b) which uses sequence-to-sequence denoising pre-training.
+
+Whereas byT5 only uses byte sequences instead of subwords and differs in hyperparameters, Charformer uses convolution and combines character blocks to obtain latent subword representations.
+
+These models mostly reach similar results to sub-word models, occasionally outperforming a few of them, in the case of Charformer without a significant slowdown.
+
+Wmt Submissions
+
+The Conference on Machine Translation (WMT) organizes annual shared tasks in various use cases of MT.
+
+The shared task submissions focus on translation quality rather than the novelty of presented ideas, as most other research papers do.
+
+Therefore, we assume that, if character-level models were a fully-fledged alternative to subword models, at least some systems submitted to the shared tasks would use character-level models.
+
+We annotated recent system description papers with the input and output segmentation method they used.
+
+We focused on information about exper- iments with character-level models.
+
+Since we are primarily interested in the Transformer architecture that became the standard after 2017, we only included system description papers from 2018-2020 (Bojar et al., 2018;Barrault et al., 2019Barrault et al., , 2020)).
+
+Transformers were used in 81%, 87%, and 97% of the systems in the respective years.
+
+We included the main task on WMT, news translation, and two minor tasks where character-level methods might help: translation robustness (Li et al., 2019;Specia et al., 2020) and translation between similar languages (ibid.).
+
+Almost all systems use a subword-based vocabulary (BPE: 81%, 71%, 66% in the respective years; SentencePiece: None in 2018, 9% and 25% in the following ones).
+
+Purely word-based (none in 2018, 2% and 3% in the later years) or morphological segmentation (4%, 2%, 3% in the respective years) are rarely used.
+
+The average vocabulary size decreases over time (see Figure 2) with a median size remaining at 32k in the last two years.
+
+The reason for the decreasing average is probably a higher proportion of systems for low-resource languages, where a smaller vocabulary leads to better translation quality (Sennrich and Zhang, 2019).
+
+Among the 145 annotated system description papers, there were only two that used characterlevel segmentation.
+
+Mahata et al. (2018) used a character-level model for Finnish-to-English translation.
+
+This system, however, makes many suboptimal design choices and ended up as the last one in the manual evaluation.
+
+Scherrer et al. (2019) experimented with character-level systems for similar language translation and observed that characters outperform other segmentations for Spanish-Portuguese translation, but not for Czech-Polish.
+
+Knowles et al. (2020) experimented with different subword vocabulary sizes for English-Inuktikut translation and reached the best results using a subword vocabulary of size 1k, which makes it close to the character level.
+
+Most of the papers do not even mention character-level segmentation as a viable alternative they would like to pursue in future work (7% in 2018, 2% in 2019, none in 2020).
+
+Character-level methods were more frequently used in WMT17 with RNN-based systems, especially for translation of Finnish (Escolano et al., 2017;Östling et al., 2017) and less successfully for Chinese (Holtz et al., 2017) and the automatic post-editing task (Variš and Bojar, 2017).
+
+On the other hand, Figure 1 shows that the research interest in character-level methods remains approximately the same, or may have slightly increased.
+
+For practical solutions in WMT systems, we clearly show that system designers in the WMT community have avoided character-level models.
+
+We speculate that the main reasons for not considering character-level modeling are its lower efficiency and the fact that the literature shows no clear improvement of translation quality.
+
+Most of the submissions use back-translation (85%, 82%, and 94% in the respective years), often iterated several times (11%, 20%, 16%), which requires both training and inference on large datasets.
+
+With the approximately 5-fold slowdown, WMT-scale experiments on character models are not easily tractable.
+
+Evaluated Models
+
+Experiments On Small Data
+
+Experimental Setup
+
+Translation Quality
+
+We evaluate the translation quality using the BLEU score (Papineni et al., 2002), the chrF score (Popović, 2015) (as implemented in SacreBLEU; Post, 2018),3 and the COMET score (Rei et al., 2020).
+
+We run each experiment 4 times and report the mean value and standard deviation.
+
+The results are presented in Table 1.
+
+Except for translation into Arabic, where character methods outperform BPEs (which is consistent with the findings of Shaham andLevy, 2021a andLi et al., 2021), subword methods are always better than characters.
+
+The Lee-style encoder outperforms the two more recent methods and the method of using the character embeddings directly.
+
+Charformer performs similarly to using character embeddings directly, .520
+
+±-.099
+
+.044
+
+±-.181
+
+Table 1: Translation quality of the models on the IWSLT data.
+
+The fourth column shows the size of the characterprocessing layers expressed as the vocabulary size of Transformer Base having the same number of parameters in the embeddings.
+
+CANINE is significantly worse.
+
+The results are mostly consistent across the language pairs.
+
+Increasing the downsampling rate from 3 to 5 degrades the translation quality for all architectures.
+
+Employing the two-step decoder matches the decoding speed of subword models.
+
+However, the overall translation quality is much worse.
+
+The three metrics that we use give consistent results in most cases.
+
+Often, relatively small differences in BLEU and chrF scores correspond to much bigger differences in the COMET score.
+
+Inference
+
+Inference algorithms for neural MT have been discussed extensively (Meister et al., 2020;Massarelli et al., 2020;Shi et al., 2020;Shaham and Levy, 2021b) for the subword models.
+
+Subword translation quality quickly degrades beyond a certain beam width unless heuristically defined length normalization is applied.
+
+As an alternative, Eikema and Aziz (2020) recently proposed Minimum Bayes Risk (MBR; Goel and Byrne 2000) estimation as an alternative.
+
+Assuming that similar sentences should be similarly probable, they propose repeatedly sampling from the model and selecting a sentence that is most similar to other samples.
+
+With subword models, MBR performs comparably to beam search.
+
+Intuitive arguments about the inference algorithms are often based on the properties of the subword output distribution.
+
+On average, character models will produce distributions with lower perplexity and thus likely suffer more from the exposure bias which might harm sampling from the model.
+
+Therefore, there is a risk that these empirical findings do not apply to character-level models.
+
+We explore what decoding strategies are best suited for the character-level models.
+
+We compare the translation quality of beam search decoding with different degrees of length normalization.
+
+4 Further, we compare length-normalized beam search decoding with MBR (with 100 samples), greedy decoding, and random sampling.
+
+We use the chrF as a comparison metric which allows pre-computing the character n-grams and thus faster sentence pair comparison than the originally proposed METEOR (Denkowski and Lavie, 2011).
+
+Figure 4 shows the translation quality of the selected models for different beam sizes.
+
+The dotted lines denoting the translation quality without length normalization show that the quality of the subword models quickly deteriorates without length normalization, whereas vanilla and Lee-style characterlevel models do not seem to suffer from this problem.
+
+Table 2 presents the translation quality for different decoding methods.
+
+In all cases, beam search  is the best strategy.
+
+Sampling from character-level models leads to very poor translation quality that in turn also influences the MBR decoding leading to much worse results than beam search.
+
+Our experiments show that beam search with length normalization is the best inference algorithm for character-level models.
+
+They also seem to be more resilient towards the beam search curse compared to subword models.
+
+Experiments On Wmt Data
+
+Experimental Setup
+
+Results
+
+Conclusions
+
+Figure 1: A timeline of research interest in characterlevel MT.
+
+Months of arXiv pre-print publication of the papers cited in Sections 2 and 3.
+
+Transformer repr. means pre-trained general-purpose sentence representation, not MT models.
+
+Figure 2: A boxplot of vocabulary sizes of WMT systems from 2018-2020, the median is denoted with the orange line.
+
+Figure 3: Encoder-decoder architecture with characterprocessing layers and a two-step decoder with lightweight LSTM for output coherence.
+
+Results of the WMT-scale experiments.
+
+IWSLT data statistics in terms of number of parallel sentences and number of characters.
+
+Training time (hours), inference time on the validation set (seconds) and translation quality in terms of BLUE and chrF scores on the validation data.
+
+Translation quality on the validation data and the value of length normalization that led to the best quality.
+
+Detailed MorphEval results for English-Czech translation.
+
+Detailed MorphEval results for English-German translation.
+
+±0.2 .436 ±.002 -.863 ±.010 BPE to char 14.4 ±0.2 .436 ±.001 -.836 ±.009 Vanilla char.
+
+19.5 ±0.2 .493 ±.001 -.307 ±.009 Lee-style enc.
+
+20.2 ±0.2 .497 ±.001 -.308 ±.009 ±0.2 .464 ±.002 -1.127 ±.012 BPE to char 15.5 ±0.2 .465 ±.001 -1.112 ±.008 Vanilla char.
+
+18.5 ±0.1 .504 ±.001 -.742 ±.013 Lee-style enc.
+
+19.6 ±0.1 .515 ±.001 -.743 ±.014
+
+Detailed results on the datasets with generated noise.
+
+Average and standard deviation for 20 evaluations.

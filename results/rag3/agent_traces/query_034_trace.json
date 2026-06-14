@@ -1,0 +1,97 @@
+{
+  "query_id": "ea4e2096f3a9ef7b21a3493d39e4869a823162e3",
+  "query": "Do the vocabulary items of the templates used in the paper have adequate representation in the training data?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "adequate representation training data vocabulary"
+      },
+      "result_preview": "No matches found for 'adequate representation training data vocabulary'",
+      "elapsed_s": 4.24
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "sufficient coverage training data vocabulary"
+      },
+      "result_preview": "No matches found for 'sufficient coverage training data vocabulary'",
+      "elapsed_s": 5.29
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "vocabulary coverage training data"
+      },
+      "result_preview": "No matches found for 'vocabulary coverage training data'",
+      "elapsed_s": 4.57
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "training data adequacy"
+      },
+      "result_preview": "No matches found for 'training data adequacy'",
+      "elapsed_s": 7.56
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "training data evaluation"
+      },
+      "result_preview": "No matches found for 'training data evaluation'",
+      "elapsed_s": 8.38
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/COLING2020/1681_334",
+    "nlpeer/COLING2020/1681_335"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [],
+    "approved_by_oracle": [],
+    "oracle_decisions": []
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.1111111111111111,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

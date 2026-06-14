@@ -1,0 +1,139 @@
+Glaciers are sensitive indicators of climate change through time because glacier extent is dependent on climate variables including precipitation, temperature, insolation, and cloudiness (e.g., Braithwaite et al., 2003;Wagnon et al., 2003;Kessler et al., 2006;Rupper and Roe, 2008;Anders et al., 2010).
+
+The sensitivity of glaciers to climate has been used to interpret past changes and predict future changes in glacier extent as a response to, and record of, temporal changes in climate (Oerlemans et al., 1998;Roe, 2011).
+
+However, climate not only varies in time but also in space.
+
+Spatial variability in precipitation due to topographic forcing (i.e., a rain shadow) is a well-documented and generally wellunderstood example of a robust spatial gradient in climate (Roe, 2005).
+
+How does glacier extent vary across a mountain range with a significant rain shadow?
+
+We consider this question for the Olympic Mountains of Washington state, USA (Fig. 1a andb).
+
+This mountain range on the Pacific Northwest coast has small modern glaciers and evidence of extensive glaciation during the Pleistocene (Thackray, 2001).
+
+We begin by assessing the possibility of significant changes in the rain shadow strength during glacial conditions relative to the present.
+
+Having established that spatial gradients in precipitation are likely a robust feature of the climate of the Olympic Mountains, we simulate the evolution of glaciers on the windward and leeward side of the range to examine the impact of the rain shadow on the size of glaciers.
+
+Modern precipitation across the Olympic Mountains is characterized by a steep precipitation gradient (e.g., Hobbs, 1978;Anders et al., 2007;Cao et al., 2018).
+
+Annual precipitation varies from ∼ 6500 mm w.e. (water equivalent) at high elevations on the western side of the range to ∼ 500 mm w.e.
+
+on the northeastern lowlands (Fig. 1c).
+
+On the Pacific coast, monthly precipitation totals during the drier warm season (May-September) vary from ∼ 50 to 150 mm per month.
+
+In contrast, the average monthly totals exceed 400 mm during November, December, and January (Minder et al., 2008).
+
+More than 80 % of the annual precipitation on the Olympic Peninsula falls between October and April (Cao et al., 2018).
+
+At elevations of at and above 1500 m a.s.l. (above sea level), snow accounts for 55 % to 86 % of the water equivalent precipitation (Rasmussen et al., 2000;Baccus, 2018).
+
+Large cool-season precipitation totals are due to the range lying in the path of the wintertime midlatitude storm tracks extending from the Pacific Ocean, which produce stratiform precipitation during stable lifting (Houze et al., 2017;Purnell and Kirshbaum, 2018).
+
+Winds from the west cause the air to lift and cool upwind of the topography.
+
+Cloud droplets condense and coalesce to form falling hydrometeors that tend to reach the land surface on the windward side of the range, causing large precipitation totals at high elevations along the southwestern side of the range.
+
+After passing over the crest of the Olympic Mountains, the air descends and warms, causing the evaporation of hydrome-teors and cloud water droplets.
+
+A significant fraction of the moisture has been removed from the air mass, leaving little potential for precipitation on the eastern side of the range (Zagrodnik et al., 2019).
+
+The paleoclimate of the Olympic Mountains can be inferred through pollen data from a mire at Humptulips in the southwest of the Olympic Peninsula.
+
+The pollen data constrain past vegetation and climate for approximately 35 ka (Heusser et al., 1999).
+
+The ecosystem during the time of the pollen deposition is interpreted as being a coastal tundra dominated by pines.
+
+Summer sea surface temperatures were more than 5 • C lower than the present, with precipitation close to 1000 mm yr -1 , compared to approximately 3000 mm yr -1 today at the Black Knob, automated weather station, located about 30 km northwest of the Humptulips mire (Western Regional Climate Center, 2023).
+
+We use these paleoclimate estimates of temperature and drying (relative to the modern values) as a constraint on the climates we simulate in our glacier models.
+
+Large glaciers descended the western valleys multiple times, most recently during the Early Wisconsin glaciation ∼ 40 ka.
+
+This contributed to the erosion of U-shaped valleys with steep walls and formed terminal moraines beyond the range front on the coastal plains (Thackray, 2001;Marshall, 2013;Stacey, 2015).
+
+In contrast, there is no clear evidence of alpine glaciation at low elevations in the Elwha valley on the lee side of the Olympic Mountains.
+
+Surficial geologic mapping approximately 60 km below the headwaters of the basin did not recognize alpine till from an Elwha valley glacier (Polenz et al., 2004).
+
+Therefore, alpine ice in the Elwha valley was most likely quite restricted relative to the west-side valleys (Hoh, Queets, and Quinault).
+
+During the most recent glaciation, continental ice of the Puget Lobe of the Cordilleran Ice Sheet advanced into the Strait of Juan de Fuca (17-14 ka), damming the mouth of the Elwha valley (Easterbrook, 1986;Duda et al., 2011).
+
+This event could have obscured the geomorphic and surficial geologic record of earlier extensive alpine glaciation of the Elwha valley, allowing for some possibility of unrecognized extensive alpine glaciation in the basin.
+
+Modern glaciers and perennial snowfields in the Elwha and Quinault valleys are small, with total areas of ∼ 2 km 2 in the Elwha valley and < 1 km 2 in the Quinault valley, spread over scores of small ice bodies (Riedel et al., 2015;Fountain et al., 2022;GLIMS Glacier Database, 2023).
+
+The largest glacier in the Quinault valley was ∼ 0.4 km 2 in 2017 (GLIMS Glacier Database, 2023).
+
+In the Elwha valley, the largest glaciers (the Carrie Glacier is ∼ 0.4 km 2 as of 2017 and the Fairchild Glacier is ∼ 0.25 km 2 as of 2017) are hosted on the northern and eastern sides of Mount Carrie in the Bailey Range, about 30 km north of the headwaters and along the western edge of the Elwha valley (GLIMS Glacier Database, 2023).
+
+Very small glaciers such as these are strongly influenced by local topographic and climatic conditions that favor enhanced mass addition by wind re-  (Marshall, 2013;Staley, 2015).
+
+Radiosondes are routinely launched from the black star at Quillayute (Rutledge and Ciesielski, 2016).
+
+Humptulips (black star) is the location of the paleoclimate record we use.
+
+We define the Elwha and Quinault basins (outlined in yellow) as the regions upstream of USGS stream gauges, which are shown as yellow stars.
+
+Panel (c) shows the annual climatological precipitation from the PRISM model (Daly et al., 2008).
+
+Panel (d) shows the total modeled precipitation during the OLYMPEX campaign in the winter of 2015-2016 (Skamarock et al., 2008).
+
+distribution or decreased melt due to topographic shielding (DeBeer and Sharp, 2009;Fountain et al., 2022).
+
+The modern glaciers in these valleys are situated in positions that receive greater than average precipitation.
+
+Glaciers in the Olympic Mountains are generally shrinking, with a loss of about half of glacier area between 1900 and 2015 (Fountain et al., 2022).
+
+Glacier loss is attributed to warming winter temperatures and the increasing dominance of rain instead of snow (Fountain et al., 2022).
+
+The tectonic setting of the Olympic Mountains is an accretionary prism at a convergent plate boundary.
+
+The oceanic Juan de Fuca Plate is subducting below the continental North American Plate.
+
+Sediments once deposited on the ocean floor or in the subduction trench of the Juan de Fuca Plate accumulated and were deformed during subduction into a thick wedge known as an accretionary prism (Tabor and Cady, 1978).
+
+The Olympic Mountains are the emergent portion of this accretionary prism.
+
+Subduction and deformation of the accretionary prism is ongoing.
+
+Thermochronology suggests that the rate and pattern of rock uplift in the Olympic Mountains has been consistent since ca.
+
+14 Ma and has an average uplift rate of ∼ 0.28 km Myr -1 (Brandon et al., 1998).
+
+Exhumation of the Olympic Mountains varies in space from approximately zero at the coast to ∼ 0.9 km Myr -1 in the core of the range in a bull's eye pattern (Michel et al., 2018).
+
+The Olympic Mountains are hypothesized to be both in a flux steady state and in a topographic steady state because rates and spatial patterns of erosion appear to match the longterm rock uplift rates (Pazzaglia and Brandon, 2001).
+
+Specifically, a flux steady state requires that the material flux into the range (uplift) is balanced by a material flux out of the range (exhumation) so that the volume of the range is fixed in time (e.g., Willett, 1999;Adams and Ehlers, 2018).
+
+A topographic steady state is more restrictive and requires that the average cross-sectional shape of the range and therefore the average topographic cross section is also fixed in time.
+
+The evidence for a topographic steady state comes from the close correspondence of fluvial incision rates inferred from river terraces on the west side of the Olympic Mountains in the Clearwater Valley, with long-term exhumation rates derived from fission track apatite ages in the same region (Pazzaglia and Brandon, 2001).
+
+The matching rates and spatial patterns of erosion at the timescale of tens of thousands of years, with exhumation at the timescale of a few million years, supports the hypothesis that the topography has remained consistent as the material moved through the accretionary prism.
+
+However, fluvial processes have not been the rule in the past million years.
+
+The Clearwater Valley is in the only substantial valley on the west side that was not glaciated during the Wisconsin glaciation and therefore did not experience conditions typical of the range for the last several tens of thousands of years.
+
+A greater understanding of glacier extent and erosion could provide additional data to test the hypothesis of the topographic steady state.
+
+To summarize, there is a well-documented modern climate gradient across the Olympic Peninsula, and there is also good evidence for asymmetry in the past glacier extent, with large glaciers present on the windward side of the range but not on the lee side during the most recent glaciation.
+
+We hypothesize that past spatial variability in precipitation was similar to the modern and controlled past glacier extent.
+
+This points us to two questions.
+
+First, was the spatial variability in the precipitation in the past analogous to the modern variability?
+
+Second, does the precipitation gradient explain the asymmetry in the size of glaciers on either side of the mountain range?
+
+To answer these questions, we analyze the modern climate across short-and long-term timescales to see how variable the modern precipitation gradient is.
+
+We use this analysis of modern variability to assess the likelihood of substantially different past precipitation gradients.
+
+After establishing the likely strength of the past precipitation gradient, we use a one-dimensional flowline model to predict the extent of glaciation in the Quinault and Elwha valleys.

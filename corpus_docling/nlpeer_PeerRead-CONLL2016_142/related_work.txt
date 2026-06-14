@@ -1,0 +1,21 @@
+Quality Estimation is generally framed as text regression task, similarly to many other applications such as movie revenue forecasting based on reviews (Joshi et al., 2010;Bitvai and Cohn, 2015) and detection of emotion strength in news headlines (Strapparava and Mihalcea, 2008;Beck et al., 2014a) and song lyrics (Mihalcea and Strapparava, 2012).
+
+In general, these applications are evaluated in terms of their point estimate predictions, arguably because not all of them employ probabilistic models.
+
+The NLPD is common and established metric used in the GP literature to evaluate new approaches.
+
+Examples include the original work on Warped GPs (Snelson et al., 2004), but also others like Lázaro-Gredilla (2012) and Chalupka et al. (2013).
+
+It has also been used to evaluate recent work on uncertainty propagation methods for neural networks (Hernández-Lobato and Adams, 2015).
+
+Asymmetric loss functions are common in the econometrics literature and were studied by Zellner (1986) and Koenker (2005), among others.
+
+Besides the AL and the linex, another well studied loss is the asymmetric quadratic, which in turn relates to the concept of expectiles (Newey and Powell, 1987).
+
+This loss generalises the commonly used squared error loss.
+
+In terms of applications, Cain and Janssen (1995) gives an example in real estate assessment, where the consequences of under-and over-assessment are usually different depending on the specific scenario.
+
+An engineering example is given by Zellner (1986) in the context of dam construction, where an underestimate of peak water level is much more serious than an overestimate.
+
+Such real-world applications guided many developments in this field: we believe that translation and other language processing scenarios which rely on NLP technologies can heavily benefit from these advancements.

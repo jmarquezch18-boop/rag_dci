@@ -1,0 +1,63 @@
+This section elaborates on the conducted experiments.
+
+First, we compare our approach to state-ofart systems on dataset ACE, after which we report experiments on ACE ++ , where we contrast variations of our model to gain insights about the impact of the utilized feature classes.
+
+We conclude this section with an error analysis.
+
+We now look at several aspects of the model performance to gain further insights about it's behavior.
+
+Table 4 shows the impact of increasing the amount of training data (ACE → ACE ++ ).
+
+This increase (rows 1, 3) leads to a boost in recall, from 75.16% to 83.21%, at the cost of a small decrease in precision.
+
+This indicates that the model can generalize much better using this additional training data.
+
+Looking into the use of the alternative clustering strategy BestLink recommended by Liu et al. (2014), we can make the expected observation of a precision improvement (row 1 vs. 2; row 3 vs. 4), due to fewer positive links being used before the transitive-closure clustering takes place.
+
+This is however outweighed by a large decline in recall, resulting in a lower F1 score (73.31 → 72.19; 76.90 → 71.09).
+
+The better performance of BestLink in Liu et al.'s model suggests that our model already weeds out many low confidence links in the classification step, which makes a downstream filtering unnecessary in terms of precision, and even counter-productive in terms of recall.
+
+Baselines The result of applying three naive baselines to ACE ++ is shown in Table 6.
+
+The all singletons/one instance baselines predict every input link to be negative/positive, respectively.
+
+In particular the all-singletons baseline performs well, due to the large fraction of singleton event mentions in the dataset.
+
+The third baseline, same type, predicts a positive link whenever there is agreement on the event type, namely, it ignores the possibility that there could be multiple event mentions of the same type in a document which do not refer to the same real-world event, e.g., referring to different terrorist attacks.
+
+This baseline also performs quite well, in particular in terms of recall, but shows low precision.
+
+Error analysis We manually investigated a sample of 100 false positives and 100 false negatives from ACE ++ in order to get an understanding of system errors.
+
+It turns out that a significant portion of the false negatives would involve the resolution of a pronoun to a previous event mention, a very hard and yet unsolved problem.
+
+Consider the following examples:
+
+• "It's crazy that we're bombing Iraq.
+
+It sickens me."
+
+• "Some of the slogans sought to rebut war supporters' arguments that the protests are unpatriotic.
+
+[...] Nobody questions whether this is right or not.
+
+In both examples, the event mentions (trigger words in bold font) are gold-annotated as coreferential, but our model failed to recognize this.
+
+Another observation is that for 17 false negatives, we found analogous cases among the sampled false positives where annotators made a different annotation decision.
+
+Consider these examples:
+
+• The 1860 Presidential Election. [...] Lincoln won a plurality with about 40% of the vote.
+
+• She lost her seat in the 1997 election.
+
+Each bullet point has two event mentions (in bold font) taken from the same document and referring to the same event type, i.e., Personnel.E
+
+Elect.
+
+While in the first example, the annotators identified the mentions as coreferential, the second pair of mentions is not annotated as such.
+
+Analogously, 22 out of the 100 analyzed false positives were cases where the misclassification of the system was plausible to a human rater.
+
+This exemplifies that this task has many boundary cases were a positive/negative decision is hard to make even for expert annotators, thus putting the overall performance of all models in Table 3 in perspective.

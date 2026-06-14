@@ -1,0 +1,101 @@
+ISAM simulations, particularly numerical experiments examining the effects of temperature, [CO 2 ], nitrogen fertilization, and irrigation, revealed some intriguing features of India's spring wheat agroecosystem.
+
+All the fluxes follow a similar pattern of a high rise from the 1980s to the 1990s, a slight increase from the 1990s to the 2000s, and a steep rise from the 2000s to the 2010s (Fig. 5b).
+
+The [CO 2 ] and nitrogen fertilization increased throughout the study, whereas temperature and irrigation varied irregularly (Fig. S4).
+
+The impact of [CO 2 ] as measured by the difference between S CON and S CO 2 highlighted that with higher [CO 2 ], the carbon taken up by wheat increases, and the overall ecosystem exchange from croplands is more significant than in the low [CO 2 ] case.
+
+The findings from the spring wheat agroecosystem align with studies such as Yoshimoto et al. (2005) and Saha et al. (2020), who studied broader ecosystems.
+
+During the 2000s, there was a sudden drop in fluxes (Fig. 5a), which coincided with the higher temperature anomaly of 1.43 • C (Fig. S4a).
+
+Patel et al. (2021) also found a negative relationship between NEP and temperature, owing to higher respiratory losses at higher temperatures.
+
+Sonkar et al. (2019) and Koehler et al. (2013) reported similar behavior of spring wheat in warmer temperatures.
+
+However, the added water during the 2000s mitigated the negative impact of higher temperatures, as evidenced by the positive impact of water observed during this decade (Fig. 7a-d).
+
+The positive impact of water in the 2000s is more significant than in the 1990s, despite the temperature anomaly in the 2000s being 1.43 • C compared to 0.67 • C in the 1990s.
+
+Therefore, the study suggests that providing adequate water through irrigation can mitigate the adverse effects of high temperatures.
+
+Our spatial variation analysis of carbon fluxes and the impact of climate variables and management practices shows that the most significant carbon uptake by spring wheat is from the IGP and the northwestern regions.
+
+This is because these regions are highly cultivated and irrigated, and they are the major wheat producers of India.
+
+Interestingly, the effect of nitrogen fertilization on carbon fluxes was high among all the variables considered.
+
+Irrigation was another critical factor affecting crop growth and carbon fluxes.
+
+The experiments with detrended temperature (S Temp ) revealed that the crops' sowing date and growing lengths are affected by temperature variation (Figs. S6 andS7).
+
+The growing season is shorter by nearly a week to 2 weeks in S CON , reducing the carbon fluxes during the growing season (Fig. 8).
+
+The dynamic sowing date does an excellent job of adjusting to the changes in climatic variables like temperature and precipitation (Figs. S3 and S5a,d).
+
+The drivers for decision-making in the sowing of crops by the farmers in India are mainly temperature and rainfall.
+
+Therefore, building a model replicating human decisions will play a crucial role in analyzing the impacts of future climate on spring wheat.
+
+The simulated carbon fluxes are comparable to published values.
+
+The cumulative GPP and NEP for the wheatgrowing season observed at the Saharanpur site are 621 and 192 gC m -2 (Patel et al., 2021).
+
+The GPP and NEP values simulated at the IARI site are 729.9 and 523.3 gC m -2 .
+
+Although the GPP is comparable with Patel et al. (2021), NEP values simulated by ISAM are not in the same range.
+
+The higher NEP is because the ratio of R a to GPP is low in our case compared to many studies on spring wheat.
+
+Amthor and Baldocchi (2001) reported a R a GPP -1 range of ∼ 0.3-0.6 for crops like wheat.
+
+Our value of 0.26 is slightly lower than that.
+
+Many studies (Table S2) report an R a value of ∼ 0.5 GPP.
+
+These are all winter wheat with a vernalization period and a growing length of more than 200 d; in our case, it hardly exceeds 150 d. Interestingly, Zhang et al. (2020), who reported R a values like ours, also consider full irrigation like our study, while the other studies do not consider irrigation.
+
+Comparing the R a GPP -1 from S Water we observed that the value is 0.3 and in the range proposed by Amthor and Baldocchi (2001).
+
+Therefore, our findings prove that highly irrigated fields will have lower respiration losses.
+
+Additional research is needed to address some of the study's limitations.
+
+The model evaluation is very important for studies like this.
+
+Multiyear data from multiple stations across the study domain should be used for evaluation.
+
+We built a dataset for spring wheat consisting of crop phenology and yield for nine sites and 26 growing seasons.
+
+The crop phenology and yield data are used to evaluate the model.
+
+However, carbon flux observations from cropland in India are not publicly available.
+
+We evaluated the carbon fluxes simulated by ISAM using data from three experimental agricultural sites in northern India.
+
+Even though the model evaluation was suboptimal regarding carbon fluxes, this study is a step in the right direction because it is the first to use site-scale observations to evaluate all terrestrial carbon fluxes simulated by a process-based model.
+
+Second, we estimated the effect of water availability on carbon fluxes by comparing the control simulation S CON , where the crops do not experience any water stress, with the S Water simulation, where no irrigation is applied.
+
+The best way to understand the effect of irrigation would be to conduct simulations driven by actual irrigation data.
+
+For this purpose, we need a gridded irrigation time series dataset.
+
+Unfortunately, such data do not exist (Gahlot et al., 2020) or are unrealistic in magnitude and timing (Mathur and AchutaRao, 2020).
+
+Many studies show that using different cultivars can change spring wheat yield, but there are no studies on the effects on carbon fluxes.
+
+Thus, studying the impact of cultivars on carbon fluxes is an exciting and open question.
+
+This effect was not incorporated into our study.
+
+The spatiotemporal maps of cultivar use and site-scale carbon flux and phenology data for various cultivars will take a lot of work to develop.
+
+The community should strive to create such datasets to better understand and simulate different cultivars' effects.
+
+Finally, our simulations were run with a land model driven by externally imposed forcings.
+
+We ignored the feedback between the land surface and the atmosphere, which can be significant, especially for natural drivers like [CO 2 ] and temperature.
+
+The next step would be to use a coupled landatmosphere model that includes feedback between the terrestrial and atmospheric components of the carbon cycle.

@@ -1,0 +1,105 @@
+Statistical machine translation (SMT) systems are trained on bilingual parallel and monolingual data.
+
+The training corpora typically come from different sources, and vary across topics, genres, dialects, authors' written styles, etc., which are usually referred as "general domain" training data.
+
+Here the word "domain" is often used to indicate some combination of all above and other possible hidden factors (Chen et al., 2013).
+
+At run time, the content to be translated may come from a different domain.
+
+Due to the mismatch in "domains", it is possible to achieve better performance by adapting the SMT system to the test domain (in-domain).
+
+However, manually creating training data to match the test domain is not a preferred solution, because 1) sometimes the test domain is not known when training the model, and it could change from sentence to sentence; 2) even if the test domain is pre-determined, the resources required and slow turnaround in data collection process will still delay the system development process.
+
+Therefore, training data selection is widely used for domain adaptation in statistical machine translation (Zhao et al., 2004;Lü et al., 2007;Yasuda et al., 2008;Moore and Lewis, 2010;Axelrod et al., 2011;Duh et al., 2013;Axelrod et al., 2015).
+
+Data selection techniques select monolingual or bilingual data that are similar to the indomain seed data based on some criteria, which are incorporated into the training data.
+
+The most successful data selection approaches (Moore and Lewis, 2010;Axelrod et al., 2011) train n-gram language models on in-domain text to select similar sentences from the large general-domain corpora according to the cross entropy.
+
+Furthermore, (Duh et al., 2013) obtained some gains by extending these approaches from n-gram models to recurrent neural network language models (Mikolov et al., 2010).
+
+To train the in-domain language model, a reasonable size in-domain data set, which typically includes several thousands of sentences, is required.
+
+In (Axelrod et al., 2011;Duh et al., 2013), the sizes of the in-domain data sets are 30K and over 100K sentences respectively.
+
+However, we do not always have access to large or even medium amounts of in-domain data.
+
+With the growth of social media, new domains have emerged which need machine translation but which have very limited in-domain data, maybe just a few hundred sentence pairs.
+
+What's more, if one wishes to build a large scale topic-specific MT system with hundreds of topics, it is prohibitively expensive to collect tens of thousands of in-domain sentences for each topic.
+
+In this paper, we try to address this challenge, i.e., domain adaptation with very limited amounts of in-domain data.
+
+Inspired by the success of convolutional neural networks applied to image and text classification (Krizhevsky et al., 2012;Kim, 2014;Johnson and Zhang, 2015a;Johnson and Zhang, 2015b), we propose to use CNN to classify training sentence pairs as in-domain or outof-domain sentences.
+
+To overcome the problem of limited in-domain data, we propose to augment the original model with semi-supervised convolutional neural networks for domain classification.
+
+Convolutional neural networks (LeCun and Bengio, 1998) are feed-forward neural networks that exploit the internal structure of data through convolution layers; each computation unit processes a small region of the input data.
+
+CNN has been very successful on image classification.
+
+When applying it to text input, the convolution layers process small regions of a document, i.e., a sequence of sentences or words.
+
+CNN has been gaining attention, and is now used in many text classification tasks (Kalchbrenner et al., 2014;Zeng et al., 2014;Johnson and Zhang, 2015b;Yin and Schütze, 2015;Wang et al., 2015).
+
+In many of these studies, the first layer of the network converts words to word embeddings using table lookup.
+
+The word embeddings are either trained as part of CNN training, or pre-trained (thus fixed during model training time) on an additional unlabled corpus.
+
+The later is termed semi-supervised CNN.
+
+Given tiny amounts of indomain data, the information learned in these pretrained word embeddings is very helpful.
+
+We use a small amount of in-domain data, such as the development set, as the positive sample and randomly select the same number of sentences from the general-domain training data as the negative sample to form the training sample for training the CNN classification model.
+
+This is a typical supervised learning setting.
+
+To compensate the limit of in-domain data size, we use word2vec (Mikolov et al., 2013) to learn the word embedding from a large amount of general-domain data.
+
+Together with the labeled data, these word embed-dings are fed to the convolution layer as additional input to train the final classification model.
+
+This is a semi-supervised framework.
+
+The learned models are then used to classify each sentence in the general-domain training data based on their domain relevance score.
+
+The top N sentence pairs are selected to train the SMT system.
+
+We carry out experiments on 4 different language directions with 9-15M sentence pairs in each direction.
+
+The test domains include short message (sms), tweets, and Facebook posts.
+
+The experimental results show that our method is able to select a small amount of training data that is used to create a system which outperforms baseline systems trained with all the general-domain data.
+
+For example, we obtain over 3.1 BLEU improvement on the Chinese-to-English sms task with around 3% of the whole training data.
+
+Experiments also show that we can reduce the size of the in-domain sample to around 100 sentences and still obtain a 2.1 BLEU improvement.
+
+Self-training (Ueffing and Ney, 2007;Schwenk, 2008;Bertoldi and Federico, 2009) uses generaldomain bilingual parallel data and in-domain monolingual data.
+
+An MT system is first trained on bilingual general-domain data, then it is used to translate in-domain monolingual data.
+
+The resulting target sentences or bilingual sentence pairs are then used as additional training data for language model or translation model training.
+
+Some early data selection approaches (Zhao et al., 2004;Lü et al., 2007;Moore and Lewis, 2010) use in-domain monolingual data to select monolingual or bilingual data that are similar to the in-domain data according to some criterion.
+
+The state-of-the-art data selection approaches (Axelrod et al., 2011;Duh et al., 2013;Axelrod et al., 2015) search for bilingual parallel sentences using the difference in language model perplexity between two language models trained on in-domain and out-domain data, respectively.
+
+Data weighting approaches weight each data item according to its relevance to the in-domain data.
+
+Mixture model adaptation (Foster and Kuhn, 2007;Foster et al., 2010;Sennrich, 2012;Foster et al., 2013) assumes that the general-domain data can be clustered to several sub-corpora, with some parts that are not too far from test domain.
+
+It combines sub-models trained on different sub-corpus data sets linearly or log-linearly with different weights.
+
+Vector space model adaptation (Chen et al., 2013) has the same assumption, and it weights each phrase pair based on vector space model (VSM).
+
+(Chen et al., 2014) improved the VSM adaptation by extending it to distributed VSM and grouped VSM.
+
+Instance weighting adopts a rich set of features to compute weights for each instance in the training data; it can be applied to sentence pairs (Matsoukas et al., 2009) or phrase pairs (Foster et al., 2010).
+
+If in-domain comparable data are available, (Daume III and Jagarlamudi, 2011;Irvine et al., 2013) propose mining translations from the comparable data to translate out-of-vocabulary (OOV) words and capture new senses for the new test domains.
+
+(Dou and Knight, 2012;Zhang and Zong, 2013) learn bilingual lexical or phrase tables from in-domain monolingual data with a decipherment method, then incorporate them into the SMT system.
+
+All the above approaches assume that either there is an in-domain (mono-lingual, parallel, or comparable) data set with a reasonable size available, or that some sub-corpora are closer to the test domain than others.
+
+There is no previous work considering the scenario where only a tiny amount of in-domain data is available: this is the scenario we address in this paper.

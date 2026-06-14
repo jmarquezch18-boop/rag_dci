@@ -1,0 +1,150 @@
+{
+  "query_id": "30a9852ea31b01d3d12aaa8769ad0acd7c0b8162",
+  "query": "Can a zero-shot transfer be performed from RXR to R2R?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "zero-shot transfer"
+      },
+      "result_preview": "Search results for 'zero-shot transfer' (2 matches):\n[paper_id=nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a | section=introduction | line=11] Therefore, we can use cross-lingual methods to zero-shot tra",
+      "elapsed_s": 4.76
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a",
+        "section": "introduction",
+        "start": 10,
+        "end": 12
+      },
+      "result_preview": "[nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a / introduction — líneas 5-17 de 31]\nWe focus on task-oriented XNLU that comprises two correlated objectives: i) Intent Classification, which identifies the ",
+      "elapsed_s": 9.69
+    },
+    {
+      "iteration": 2,
+      "tool": "read_file",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a",
+        "section": "methodology"
+      },
+      "result_preview": "[nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a / methodology]\nCrossAligner The focus of our primary method was to improve slot filling as the model must classify dozens of entity types in each dataset an",
+      "elapsed_s": 10.49
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "effectiveness"
+      },
+      "result_preview": "Search results for 'effectiveness' (21 matches):\n[paper_id=nlpeer_ARR-22_db3d0c16f2a8a3baf7fe008d20bfe3fd82dedab22900659a9d8352b2ecce076fa9a82869602cc78d2c3b732f645c25eacb9b0b6fc4d3b6441bfb1825109e85ea | section=methodology | line=35] The effectiveness of injecting HiStruct information using the pro",
+      "elapsed_s": 7.71
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "zero-shot"
+      },
+      "result_preview": "Search results for 'zero-shot' (21 matches):\n[paper_id=nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7 | section=introduction | line=7] The task is made particularly challenging in zero-shot settings, wher",
+      "elapsed_s": 6.09
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "We focus on task-oriented XNLU that comprises two correlated objectives: i) Intent Classification, which identifies the type of user command, e.g. 'edit_reminder', 'send_message' or 'play_music' and ii) Entity/Slot Recognition, which identifies relevant entities in the utterance including their types such as dates, messages, music tracks, locations, etc.\n\nIn a modular dialogue system, this information is used by the dialogue manager to decide how to respond to the user (Casanueva et al., 2017;Gritta et al., 2021).\n\nFor neural XNLU systems, the limited availability of annotated data is a significant barrier to scaling dialogue systems to more users (Razumovskaia et al., 2021).\n\nTherefore, we can use cross-lingual methods to zero-shot transfer the knowledge learnt in a high-resource language such as English to the target language of choice (Artetxe et al., 2020;Siddhant et al., 2020).\n\nTo this end, we introduce a variety of alignment methods for zero-shot cross-lingual transfer, most notably CrossAligner.\n\nOur methods leverage unlabelled parallel data and can be easily integrated on top of a pretrained language model, referred to as XLM1 , such as XLM-RoBERTa (Conneau et al., 2020).\n\nOur methods help the XLM align its cross-lingual representations while optimising the primary XNLU tasks, which are learned only in the source language and transferred zero-shot to the target language.",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a",
+      "chunk_id": "dci_nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a",
+      "score": 1.0
+    },
+    {
+      "text": "CrossAligner The focus of our primary method was to improve slot filling as the model must classify dozens of entity types in each dataset and to that end, it is an effective approach. CrossAligner exceeds the F-Score of the Previous SOTA by 2.7 points (82.5 versus 79.8). This is 1.4 points higher than XeroAlign IO and 6 points higher than Zero-Shot. than XeroAlign IO , 94.7 is still 0.4 higher than Target Language. CrossAligner's overall score is 0.6 higher than previous SOTA, which outperformed the common 'translate-train' models, including entity projection and word alignment. In order to demonstrate the necessity and specificity of the proposed architecture, we tested mean-pooled token embeddings as well as a CLS embedding as the input to CrossAligner instead of the entity classifier logits. The scores declined from 94.7/82.5 (88.6 Overall) to 92.3/80 (86.2 Overall) with a CLS sentence representation and 82.1/78.7 (80.4 Overall) for mean-pooled embeddings. Future applications of our method to other NLP tasks must note that CrossAligner is most effective for tasks with a complex entity tag set where the presence of entities in a sentence is informative, i.e. a higher complexity and slot density should lead to a higher performance. In addition, CrossAligner combines well with other losses as we show in Section 5.2. Translate-Intent Our alternative to the common 'translate-train' baseline is not only conceptually simpler (no explicit slot recognition training), it also outperforms the previous Translate-Train SOTA scores (78.5 vs 76.6 F-Score, 95.9 vs 95.1 accuracy and 87.2 vs 85.9 Overall). Translate-Intent does not require error-prone preprocessing such as word/label alignment and can therefore be readily used as a default 'translate-train' baseline in future work. Note that using mean-pooled token embeddings as sentence representations is not recommended for Translate-Intent as this causes the F-Score to decline sharply (-25 points). Contrastive",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a",
+      "chunk_id": "dci_nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_methodology_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a",
+      "score": 1.0
+    },
+    {
+      "text": "Overall). Translate-Intent does not require error-prone preprocessing such as word/label alignment and can therefore be readily used as a default 'translate-train' baseline in future work. Note that using mean-pooled token embeddings as sentence representations is not recommended for Translate-Intent as this causes the F-Score to decline sharply (-25 points). Contrastive Alignment Despite orders of magnitude less data than used in related work (Section 2), our Contrastive Alignment showed a marginal improvement over the previous SOTA on intent classification (96.3 vs 96.1) thus by 0.1 Overall. That said, even though the contrastive loss pushes negative sentence embeddings away from the positives, this does not seem to confer a strong advantage over the previous SOTA, which only used positive examples. We have also evaluated an implementation of Contrastive Alignment using mean-pooled token embeddings as sentence representations, however, the Overall score declined to 86.8 (versus 88.1 with a standard CLS embedding). XeroAlign IO Our implementation of the previous SOTA with an additional post-processing step (described in 3.1) increased the F-Score by 1. Other models also benefit from IO-only training, for example, the Zero-Shot model gains 2.6 points (73.9 up to 76.5 F-Score). One theoretical limitation of IO-only training is that given a sequence of 'B-LOC I-LOC B-LOC', the IO-only models would incorrectly classify this as a single entity. However, in practice, this is rare and not something we have seen during preprocessing or error analysis.",
+      "section": "methodology",
+      "paper_id": "nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a",
+      "chunk_id": "dci_nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_methodology_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_230",
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_231",
+    "nlpeer/ARR-22/826bda43aa717e37d1b584c3c637da2700f29c415a709db4c3188f13f85751d30d29348dfe8f635cda5b6370145e9bbc00465e76921ac9a6abdb0eee6cabdd4b_365"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 0.3333333333333333,
+    "recall_at_3": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "recall_at_20": 1.0,
+    "precision_at_5": 1.0,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_introduction_0000",
+      "dci_nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_methodology_0001",
+      "dci_nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_methodology_0002"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_methodology_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_21dd1d5e232c7abf421302a95ef2c9ef44c7bad069da7ca4129a8cf1bfbd6f660afee123144ebcbd8da698aed212e2ca1151a13bca7aaef50ce59d27d23aa83a_methodology_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.014814814814814815,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

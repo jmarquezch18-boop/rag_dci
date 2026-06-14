@@ -1,0 +1,23 @@
+Our experiments outline several possible future research directions.
+
+Automatic generation of facts without using hand-crafted templates (cf.
+
+§5.1) could allow applying zero-shot generation systems to datasets with a large number of predicates, such as ToTTo (Parikh et al., 2020).
+
+The task of paragraph compression could be used as a task-specific pretraining (Gururangan et al., 2020) for more efficient finetuning of D2T models, e.g., with a small amount of clean data.
+
+Consistency checks may be introduced in the pipeline to control the output from the modules, and individual modules may be improved by using more efficient model architectures.
+
+More research is also needed regarding the main shortcoming of our approach, i.e., the semantic errors stemming from merging of facts in improper ways.
+
+As we suggested in §7.2, explicitly controlling the semantics of sentence fusion could help to mitigate this issue, while still keeping the advantages of a zero-shot approach.
+
+We presented an approach for zero-shot D2T generation.
+
+The approach uses a pipeline of PLMs trained on general-domain lexical operations over natural language.
+
+The pipeline builds upon traditional approaches and consists of three interpretable intermediate steps.
+
+By avoiding noisy human-written references from the D2T datasets, our models produce more semantically consitent output.
+
+We believe that training models for zeroshot D2T generation using large cross-domain corpora will help to build D2T generation systems with good performance across various domains.

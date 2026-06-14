@@ -1,0 +1,99 @@
+{
+  "query_id": "8952c8598f43e3e36131d56d62db44fded0352d3",
+  "query": "What factors contribute to the improved performance of the lm-base model compared to the cgexpan model on user-generated datasets?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "performance comparison"
+      },
+      "result_preview": "No matches found for 'performance comparison'",
+      "elapsed_s": 3.56
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "lm-base vs cgexpan performance"
+      },
+      "result_preview": "No matches found for 'lm-base vs cgexpan performance'",
+      "elapsed_s": 6.43
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "computational efficiency"
+      },
+      "result_preview": "No matches found for 'computational efficiency'",
+      "elapsed_s": 4.25
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "lm-base architecture"
+      },
+      "result_preview": "No matches found for 'lm-base architecture'",
+      "elapsed_s": 6.59
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "lm-base training data"
+      },
+      "result_preview": "No matches found for 'lm-base training data'",
+      "elapsed_s": 4.16
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_184",
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_185",
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_194",
+    "nlpeer/ARR-22/488687633dbb7f9cbac3b0164d08e1cef083aa01ab86fad82e7c5b199bda3c1213b66dfcf3627a183c977d0aee40f46f169cdd51a5efe539ec4fc02981a383f7_195"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [],
+    "approved_by_oracle": [],
+    "oracle_decisions": []
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.06837606837606837,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

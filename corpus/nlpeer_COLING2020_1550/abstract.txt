@@ -1,0 +1,9 @@
+Our goal is to evaluate the usefulness of unsupervised representation learning techniques for detecting stances of Fake News.
+
+Therefore we examine several pretrained language models with respect to their performance on two Fake News related data sets, both consisting of instances with a headline, an associated news article and the stance of the article towards the respective headline.
+
+Specifically, the aim is to understand how much hyperparameter tuning is necessary when finetuning the pretrained architectures, how well transfer learning works in this specific case of stance detection and how sensitive the models are to changes in hyperparameters such as batch size, learning rate (schedule), sequence length as well as the freezing technique.
+
+The results indicate that the computationally more expensive autoregression approach of XLNet (Yang et al., 2019) is outperformed by BERT-based models, notably by RoBERTa (Liu et al., 2019).
+
+While the learning rate seems to be the most important hyperparameter, experiments with different freezing techniques indicate that all evaluated architectures had already learned powerful language representations that pose a good starting point for finetuning them.

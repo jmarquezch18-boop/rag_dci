@@ -1,0 +1,125 @@
+To study the behavior of language models, several studies have employed a specific type of artificial language: artificial variants of natural languages.
+
+A typical experimental framework is as follows:
+
+(1) create an artificial language that differs from a natural language in one linguistic property, such as word orders (Sinha et al., 2021b;Dufter and Schütze, 2020;Sinha et al., 2021a), scripts (Karthikeyan K and Roth, 2020;Dufter and Schütze, 2020;Conneau et al., 2020b), or morphology (Ravfogel et al., 2019); (2) train or evaluate the natural/artificial language models and compare the performance to analyze the model's sensitivity to the linguistic property.
+
+However, this methodology is limited to studying linguistic properties that are easily editable to create artificial variants and also offers limited control over the experiments.
+
+To overcome this problem, White and Cotterell (2021) created artificial languages by defining their own probabilistic context-free grammars (PCFG).
+
+As the concurrent work, Chiang and yi Lee (2022) trained Transformer encoders on artificial data with token dependencies in the sequences and showed that they perform reasonably well on the GLUE benchmark (Wang et al., 2019).
+
+In this research, we design artificial languages with certain structural properties from scratch to study knowledge transferable to natural language.
+
+We first describe the experimental framework used throughout this paper, the Test for Inductive Bias via Language Model Transfer (TILT) introduced by Papadimitriou and Jurafsky (2020).
+
+TILT consists of pretraining and transfer steps:
+
+1.
+
+Pretrain an encoder with a pretraining task in the source language (L1).
+
+We explore pretraining with causal language modeling in §4 and masked language modeling in §5.
+
+2. Transfer the encoder to the target language (L2) in a downstream task.
+
+As we are inter-ested in structural prior knowledge learned in the encoder, we discard the learned L1 word embeddings and initialize the embedding layer with the L2 vocabulary.
+
+We then train the model with the encoder parameters frozen and evaluate the task performance.
+
+TILT reveals how transferrable the computation induced to solve the L1 pretraining task is to processing L2.
+
+In this study, we are interested in the transferability of certain types of structures to natural language, and thus we primarily use handdesigned artificial languages with the structural properties as L1 and natural language as L2.
+
+Words in natural language are distributed in nontrivial fashions.
+
+We will study whether prior knowledge of token distribution facilitates learning from natural language.
+
+We first present the simplest artificial language that serves as a baseline.
+
+Uniform language samples each token in a sentence independently and uniformly.
+
+Specifically, the probability of a token w being sampled is
+
+p(w) = 1 |V| .(1)
+
+However, this deviates from the token distribution of natural language.
+
+Natural language is empirically known to follow the Zipf's law (Zipf, 1949), i.e., the relation between the frequency of a word and its rank is given by frequency(w) ∝ rank(w) -α .
+
+The coefficient α is typically around 1, although the coefficient shows some variation according to the corpus domain (Zanette and Montemurro, 2005).
+
+Zipf language captures this property and samples each token w from the following probability distribution assuming α = 1:
+
+p(w) ∝ 1 rank(w)
+
+.
+
+(2)
+
+The two languages introduced so far generate tokens in a sentence independently.
+
+However, words within a sentence of natural language are known to have statistical dependencies, i.e., specific cooccurrence patterns (Church and Hanks, 1989).
+
+Consider the sentence "The cat and dog are fighting over food." The words the and cat would cooccur much more often than by chance because cat (noun) is dependent on the (determinant); so would dog and cat because they are topically related.
+
+The words in a sentence are usually coherent according to some syntactic and semantic dependencies.
+
+Log-linear language is designed to capture this property.
+
+Inspired by the log-linear model in Arora et al. (2016), tokens in a sentence s are drawn from the following probability distribution:
+
+p(w|s) ∝ exp(⃗ c s • ⃗ v w ),(3)
+
+where ⃗ c s is the discourse vector of the sentence and ⃗ v w is the word vector of the token w. Intuitively, we can imagine that the discourse vector represents the topic of the sentence and determines the unigram distribution over the vocabulary (Blei et al., 2003).
+
+Sampling tokens this way, non-trivial cooccurrence patterns within sentences emerge in the language.
+
+We speculate that pretraining with the Log-linear language will endow the model with an inductive bias to aggregate the context in a sentence to predict the identity or property of tokens, which is likely to benefit natural language processing.
+
+In the experiments, the word vectors ⃗ v w are initialized with the normal distribution, and the discourse vector ⃗ c s is also drawn from the normal distribution each time we generate a sentence.
+
+We set the dimension of the word and discourse vector to 10 as we empirically find that this makes the entire token distribution close to the Zipfian distribution.
+
+Sentences in natural language are known to have latent structures, which are often described in the form of trees (Chomsky, 1957) or dependency graphs (Mel'čuk, 1988).
+
+Now we consider how to endow the sampled tokens with such structures.
+
+In this study, we adopt a dependency-based latent structure.
+
+Words in sentences of natural language often have dependency relations and the existence of a certain word can be predictive of another word (e.g., the verb am always cooccurs with I).
+
+We hypothesize that, pretrained on such data, language models may acquire inductive bias towards finding relations between tokens in the input, which is presumably important in processing natural language.
+
+Inspired by Papadimitriou and Jurafsky (2020), we design algorithms that generate structured sentences given a set of tokens sampled with any of the strategies described in §3.2.2.
+
+The general idea is that half of the tokens (heads) in the vocabulary are all paired with another half of tokens (tails).
+
+A pair of head and tail can be represented in right and left brackets with the same integer (e.g., "<123", "123>").
+
+The pairs always appear together in a sentence and express simple dependency relations.
+
+After determining the sentence length l ∼ f (l), we first sample l 2 (rounded to an integer) pairs of head and tail and then arrange them with one of the following structures.
+
+Flat Dependency structure simply arranges the tokens randomly while keeping the right order of the brackets (e.g., ["<5", "<84", "5>", "<123", "123>", "84>"]).
+
+The dependency arcs are allowed to be crossed and thus often result in a nonprojective dependency structure.
+
+Nesting Dependency language, by contrast, does not allow any dependency arcs to be crossed, and the brackets are nested hierarchically (e.g., ["<5", "<84", "84>", "5>", "<123", "123>"]).
+
+The sentences are generated from the stack-based algorithm described in Appendix A.
+
+These structures are similar to the Parenthesis languages used to study the inductive bias of language models in Papadimitriou and Jurafsky (2020).
+
+However, our Dependency languages differ from them in how to represent the head and tail tokens.
+
+In the Parenthesis language, the head and tail are represented with the same token (e.g., ["5", "84", "84", "5", "123", "123"]), which we argue deviates from the dependency structure in natural language, because in natural language, dependency relations usually hold between different words (e.g., I and am).
+
+We will show that this difference is in fact crucial and draw a different conclusion from Papadimitriou and Jurafsky (2020) on the importance of the nested structure ( §4.2).
+
+In this section, we complement the study of Papadimitriou and Jurafsky (2020).
+
+While they studied the inductive bias learned in LSTM encoders with some artificial languages, here we provide additional studies with the newly introduced Loglinear and Dependency artificial languages, and the Transformer encoder.
+
+We proceed to investigate transfer learning from artificial languages in one of the most successful pretraining paradigms, masked language modeling (MLM) (Devlin et al., 2019) to see if we can observe similar trends to what we see in the CLM experiment ( §4).

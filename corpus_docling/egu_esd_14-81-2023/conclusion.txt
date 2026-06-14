@@ -1,0 +1,79 @@
+We demonstrated the detection and emergence of forced change in mean and extreme precipitation beyond internal variability using a recently introduced detection method based on regularised linear regression.
+
+We generate regression models for the detection of forced change based on climate simulations, consisting of physically interpretable fingerprints that optimise the signal-to-noise ratio.
+
+We detect forced trends in both mean and extreme precipitation that lie outside the piControl range of unforced variability in three different observational datasets.
+
+The unequivocalness of the detection of forced change is further demonstrated by the sustained detection from the spatial pattern of precipitation alone, after subtracting the global mean trend from the data.
+
+A similar result was shown earlier for mean precipitation (Barnes et al., 2019) and is extended here to extreme precipitation.
+
+This finding also reinforces confidence in the abil- ity of CMIP6 models to represent processes that govern the (large-scale) spatial distribution of precipitation.
+
+Simultaneous emergence of the forced signal from internal variability in both PRCPTOT and Rx1d demonstrates the value of RRbased fingerprint construction for a high signal-to-noise ratio estimation of forced responses.
+
+Despite the robustness of the results, the relative magnitude of forced trends in observations and models depends on the period over which trends are calculated as well as on the observational dataset.
+
+We show in Sect.
+
+S2.3 that the dependency of trend magnitudes on trend period and dataset remains when we use different metrics of precipitation, such as percentage change per degree of warming.
+
+These sensitivities emphasise the difficulty associated with quantitative assessment of observed changes in precipitation, as demonstrated by apparent contradictions in recent studies on whether models under-or overestimate the observed changes.
+
+Figure S14 contains an overview of D&A studies on mean and extreme precipitation, showing the lack of consensus on observed forced trend strength across studies.
+
+This overview reveals that, in line with our study, model and observational uncertainties, changing observation station densities, internal variability, and structural differences between model simulations and observational data lead to different results, even when similar time periods and precipitation metrics are considered.
+
+Against the backdrop of such uncertainty, further development of methods such as ours that optimise for high SNR and support intuitive physical interpretation of results can be of great value.
+
+It is important to note that the influence of Northern Hemisphere (NH) precipitation is disproportionately strong in this analysis.
+
+Part of this larger NH contribution may be due to stronger or earlier emergence of a forced response, which has been found in other studies (King et al., 2015).
+
+However, the uneven distribution of measurement stations over the global land plays a large role as well.
+
+Therefore, the global detection found in this study may not be representative of smaller sub-regions, especially outside of the NH.
+
+Furthermore, preliminary results suggest that detection is sensitive to seasonal process specifics -we find that forced change is not detected in June-July-August (NH summer), on both global and NHspecific scales (see Fig. S21).
+
+This is potentially related to the convective nature of precipitation in NH summer.
+
+We provide a preliminary application of the method to regional and seasonal scales in Sect.
+
+S3.
+
+Extending the approach to D&A of precipitation changes on regional and seasonal spatiotemporal timescales is of great importance to increase practical relevance of the results for risk assessment and adaptation.
+
+In this study we do not explicitly separate the effects of different forcings (GHG, aerosols, natural).
+
+We assume, however, that the analysis primarily pertains to GHG forcing since the RR fingerprint is based on historical-SSP245 projections through 2100, when GHG forcing dominates (Chen et al., 2021).
+
+Nonetheless, an extension of the present study explicitly separating different forcings would be insightful to further characterise the effects of different forcing agents in the real climate and potentially identify sources of disagreement between models and observations.
+
+This is important as Wu et al. (2013) shows that different models may agree on the simulated response to all forcings combined, while they differ greatly on separate responses to GHG and aerosol forcings alone.
+
+Correct simulation of the relative effects of different forcing agents is important for scenario development and climate action targets, meaning further investigation of these model discrepancies is imperative.
+
+RR-based analyses may enable the establishment of observational constraints on the precipitation response to different drivers, which can help constrain projections of near-term changes in mean and extreme precipitation.
+
+Erich Fischer, Nicolai Meinshausen, and Joel Zeder for helpful and stimulating discussions.
+
+We thank Urs Beyerle, Lukas Brunner and Ruth Lorenz for the preparation and maintenance of CMIP6 data.
+
+We acknowledge the World Climate Research Programme's Working Group on Coupled Modelling, which is responsible for CMIP, and we thank the climate modelling groups for producing and making available the model output.
+
+For CMIP, the U.S. Department of Energy's Program for Climate Model Diagnosis and Intercomparison provides coordinating support and led development of software infrastructure in partnership with the Global Organization for Earth System Science Portals.
+
+We acknowledge the Climdex website https://www.climdex.org (last access: April 2021) for making available observational climate indices used in this study.
+
+Financial support.
+
+This research has been supported by the Swiss National Science Foundation within the project "Combining theory with Big Data?
+
+The case of uncertainty in prediction of trends in extreme weather and impacts" (grant no. 167215) (Iris Elisabeth de Vries and Sebastian Sippel).
+
+Sebastian Sippel received additional funding from the Swiss Data Science Centre within the project "Data Science-informed attribution of changes in the Hydrological cycle" (DASH; C17-01) and within the European Union H2020 project "Artificial intelligence for detection and attribution" (XAIDA; grant no. 101003469).
+
+Angeline Greene Pendergrass was supported by the U.S. Department of Energy, Office Review statement.
+
+This paper was edited by Gabriele Messori and reviewed by two anonymous referees.

@@ -1,0 +1,201 @@
+CryoGrid is a simulation toolbox for ground thermal simulations that can be applied to a wide range of modelling tasks in the terrestrial cryosphere thanks to its modular structure (see  Westermann et al., 2022, for details).
+
+It is mainly applied in permafrost environments, using the finite-difference method to transiently simulate ground temperatures.
+
+We use a onedimensional model column with a domain depth of 100 m (e.g. Westermann et al., 2016;Schmidt et al., 2021) and grid cell sizes increasing with depth (Fig. 2).
+
+The lower boundary condition is provided by a constant geothermal heat flux.
+
+The upper boundary results from solving the surface energy balance, including both radiative and turbulent heat fluxes, as well as the heat flux in the ground.
+
+In order to compute the surface energy balance, atmospheric forcing data are required (Sect. 3.2).
+
+To calculate ground temperatures, both conductive heat transfer following Fourier's law and advection of heat with vertically moving water is taken into account (Westermann et al., 2022).
+
+The freezing characteristic of subsurface water/ice depends on the soil type, either following Painter and Karra (2014) for sediments or set to free water (water changes state at 0 • C; Westermann et al., 2022) for subsurface material with large pores/voids, such as blocky terrain.
+
+To define the properties of the subsurface material, a stratigraphy of volumetric mineral, organic, water and ice contents and the field capacity (the ability to hold water against gravity) must be provided (Westermann et al., 2022).
+
+For soil hydrology, a gravity-driven bucket scheme is used (Westermann et al., 2022).
+
+Rainfall provided by the model forcing is added to the uppermost grid cell, while evaporation is determined by the surface energy balance calculations (note that we consider unvegetated surfaces and thus do not account for transpiration).
+
+Water that is in excess of the field capacity infiltrates downwards until either the water table or a non-permeable layer, such as a frozen grid cell, is reached.
+
+If all grid cells are saturated, excess water is removed as surface runoff.
+
+We use a one-dimensional model set-up but simulate lateral drainage of water by introducing a seepage face, i.e. a lateral boundary condition for water fluxes representing flow between the saturated grid cells of the model domain and a stream channel (or the atmosphere) to which the water can freely flow out from the subsurface (e.g. Scudeler et al., 2017).
+
+Using the elevation of the water table, z wt (computed as the elevation of the uppermost saturated grid cell), lateral water fluxes F lat i are derived for all saturated unfrozen grid cells i below the water table (i.e. at elevations z i < z wt ) as
+
+F lat i = -K H z wt -z i d lat ,(1)
+
+where K H is the saturated hydraulic conductivity, d lat is the lateral distance to the seepage face, and the flux is determined by the difference between the hydrostatic potential (proportional to z wt ) of the water column and the gravitational potential of free water at the elevation of each cell (proportional to z i ).
+
+Note that Eq. ( 1) is an approximation for small changes in the water table and small outflow fluxes for which the potential in the saturated zone can be approximated by the hydrostatic potential.
+
+The parameter d lat is used to control the strength of the drainage, with small distances resulting in a well-drained column, while high values lead to suppressed drainage.
+
+In this study, we consider the two confining cases with a small and large value of d lat , respectively (Sect.
+
+3.3).
+
+In the former, water from rain or ground ice melt is removed rapidly, effectively preventing the soil water from pooling up, while drainage is negligible in the former, so that the set-up corresponds to a classic one-dimensional model scheme.
+
+The snow model used in this study was introduced by Zweigel et al. (2021) and is based on the Crocus snow scheme (Vionnet et al., 2012), which accounts for snow microphysics and is designed to reproduce a realistic snowpack structure (see Vionnet et al., 2012, for defining equations andZweigel et al., 2021, for implementation in CryoGrid).
+
+Snowfall is added with density and microphysical properties derived from model forcing data, in particular air temperature and wind speed.
+
+The snow density evolves due to compaction by the overburden pressure of overlying snow layers, as well as wind compaction and refreezing of meltand rainwater (Vionnet et al., 2012).
+
+The amount of snowfall from the forcing data can be adjusted by a so-called snowfall factor (sf), with which the snowfall rate from the model forcing is multiplied.
+
+With this, the effects of wind-induced snow redistribution on ground temperatures can be represented at least phenomenologically (Martin et al., 2019), using sf < 1 for areas with net snow ablation and sf > 1 for areas with net deposition.
+
+The meteorological data used to force the CryoGrid model were generated by applying TopoSCALE, a topographybased downscaling routine (Fiddes and Gruber, 2014), to ERA5 reanalysis data (Hersbach et al., 2020).
+
+TopoSCALE is employed in cryosphere applications in complex terrain, including estimating mountain permafrost distribution (Fiddes et al., 2015), snow data assimilation (Aalstad et al., 2018;Fiddes et al., 2019) and downscaling regional climate model output (Fiddes et al., 2022).
+
+ERA5 output is provided as interpolated point values on a regular latitude-longitude grid at a resolution of 0.25 • at an hourly frequency, both at the surface level, corresponding to Earth's surface as represented in the reanalysis, and at 37 pressure levels in the atmosphere from 1000 to 1 hPa.
+
+We obtained data for the entire reanalysis period, from 1951 to 2019, and converted this into a moving 3-hourly average, which is the temporal resolution that the model is run at.
+
+As input to TopoSCALE, we obtained from the surface level 2 m air and dew point temperature, 10 m meridional (northward) and zonal (eastward) wind velocity components, surface pressure, constant surface geopotential, incoming long-wave radiation, incoming short-wave radiation, and total precipitation.
+
+From the pressure levels we acquired air temperature, specific humidity, zonal and meridional wind velocity components, and dynamic geopotential.
+
+For Juvvasshøe we used all levels in the range of 900 to 700 hPa, while for the lower-elevation Ivarsfjorden rock glacier we used all levels between 900 and 1000 hPa.
+
+To account for terrain shading in the downscaling routine, a digital elevation model (DEM) is required, for which we use the mosaic version of the ArcticDEM with a resolution of 32 m (Porter et al., 2018) at both sites.
+
+TopoSCALE delivered all meteorological forcing data required to run CryoGrid: nearsurface air temperature, specific humidity, wind speed, incoming long-wave radiation, incoming short-wave radiation, and snowfall and rainfall.
+
+Three idealized ground stratigraphies are set up in order to investigate the effect of water drainage on the ground thermal regime and ground ice dynamics in blocky terrain.
+
+These are referred to as the blocks only, blocks with sediment and sediment only stratigraphies (Table 1) in the following.
+
+The blocks only stratigraphy consists of a coarse block layer with 50 % porosity and air-filled voids which is assigned a low field capacity of 1 % (Table 1); i.e. the surfaces of the coarse blocks retain only little water.
+
+This idealized stratigraphy is designed to represent an active rock glacier where finer sediments resulting from weathering and erosion processes are transported towards the tongue of the rock glacier.
+
+Furthermore, Dahl (1966) observed that blockfields on slopes more often do not contain a fine sediment fraction between the blocks in northern Norway so that the blocks only stratigra- phy can also represent active blockfields.
+
+The second stratigraphy, blocks with sediment, is designed to represent blocky terrain where the voids are filled by finer sediments.
+
+This is often observed in blockfields on more flat surfaces, which are more likely to retain finer sediment within their pores (as in Isaksen et al., 2003;Dahl, 1966).
+
+We again consider coarse blocks with 50 % porosity (as for the blocks only stratigraphy), but as the voids are filled with fine sediments (which again are assumed to have 50 % porosity), the overall porosity is only 25 %.
+
+Furthermore, a significantly higher field capacity than for the blocks only stratigraphy is assigned as more water can be held in the finer pores of the sediment fraction.
+
+Finally, the sediment only stratigraphy serves as a control scenario for soil without blocks.
+
+It contains sediment with 50 % porosity and a high field capacity due to the water holding capacity of the fine-grained sediment material.
+
+For all stratigraphies, bedrock (3 % porosity and saturated conditions; e.g. Hipp et al., 2012;Farbrot et al., 2011) is assumed below 5 m depth, which is in line with observations from Isaksen et al. (2003) at Juvvasshøe.
+
+Finally, none of the stratigraphies contain soil organic matter.
+
+We emphasize that the stratigraphies are in qualitative agreement with field observations of air-and sediment-filled block layers in Norway, but the assumed porosities of 50 % for both the block layer and the sediments represent idealized scenarios.
+
+However, we perform a sensitivity analysis for different porosity values (Table S1 in the Supplement) to investigate the impact of this parameter on the simulation results.
+
+For the geothermal-heat-flux lower boundary condition, a value of 0.05 W m -2 is used, which is a typical value for Norway used in previous modelling studies (Westermann et al., 2013).
+
+To investigate the effect of subsurface drainage on ground temperatures and ground ice conditions, we distinguish undrained and drained scenarios by using two different values of d lat (Eq. 1) for the idealized stratigraphies.
+
+A d lat value of 10 4 m is used for undrained cases, which emulates conditions at a flat surface, resulting in a good approximation of one-dimensional water balance, where only surface water is removed.
+
+For the drained cases, a d lat value of 1 m is used, which results in well-drained conditions, which are typical in sloping terrain.
+
+For the saturated hydraulic conductivity K H , a fixed value of 10 -5 m s -1 is used for all stratigraphies, although the true hydraulic conductivities almost certainly differ between stratigraphies.
+
+However, the key parameter controlling lateral water fluxes in Eq. ( 1) is in reality the "drainage timescale" K H /d lat (s -1 ), which is varied by 4 orders of magnitude between K H /d lat = 10 -5 s -1 (d lat = 1 m, well-drained conditions) and K H /d lat = 10 -9 s -1 (d lat = 10 4 m, undrained conditions).
+
+As the study set-up is designed to analyse these two "confining cases", it is sufficient to only vary d lat and leave K H constant for simplicity.
+
+Further sensitivity tests for d lat and K H are provided in Table S2.
+
+With the exception of the snowfall factor (see , the parameters in the snow model are kept constant in all model runs, using a surface emissivity of 0.99, a roughness length of 10 -3 m, a saturated hydraulic conductivity of 10 -4 m s -1 and a field capacity of 0.05 (Westermann et al., 2022).
+
+For the ground surface, we used an albedo of 0.15, emissivity of 0.99 and a roughness length of 10 -3 m.
+
+We perform three types of model simulations which differ in their overall purpose.
+
+For validation runs (Sect. 3.3.1), we adjust subsurface stratigraphy and snowfall factor in order to compare model results with the available field measurements from the two study sites.
+
+Equilibrium runs (Sect. 3.3.2) and transient runs (Sect. 3.3.3) are designed to explore the sensitivity of the simulated ground thermal regime towards the three idealized stratigraphies (Table 1) and the two drainage cases.
+
+An overview of the basic settings of the different simulation types is provided in Table 2.
+
+In this study, CryoGrid has been applied at two permafrost sites in Norwegian mountain environments.
+
+At both sites, we set up validation runs to benchmark the performance of the model system against measurements of ground (Juvvasshøe) and ground surface (Ivarsfjorden) temperatures.
+
+At Juvvasshøe, the model can largely reproduce the annual cycle of measured ground temperatures at the PACE borehole, when the snowfall is reduced to account for the generally shallow snow cover at the site.
+
+At Ivarsfjorden, simulations with full snowfall yielded a similar performance for the ground surface temperature, approximately reproducing the mean of measurements at 11 sites.
+
+A statistical evaluation at both sites indicated a cold bias of the model of approximately -0.5 • C, which we considered acceptable, considering the spatial variability in the ground thermal regime at both sites (see Gisnås et al., 2014, for Juvvasshøe).
+
+At Ivarsfjorden, the transient simulations are in broad agreement with observations at the rock glacier, which indicate that permafrost has been present in the recent past (Lilleøren et al., 2022).
+
+Permafrost conditions are simulated for all stratigraphies during model spin-up using the cold period 1962-1971, for which temperatures are closest to Little Ice Age conditions, when the rock glacier was likely active.
+
+Within the model set-up, in particular the exact ground stratigraphy and other poorly constrained parameters, such as the albedo, give rise to uncertainties.
+
+While the real porosity of the ground is unknown, sensitivity tests show a maximum of 0.4 • C differences in simulated ground temperatures between the highest and lowest porosity values tested (Table S1).
+
+Only at Juvvasshøe has the stratigraphy been described from the borehole (Isaksen et al., 2003), while no thorough evaluation of the subsurface stratigraphy is available for Ivarsfjorden.
+
+Lilleøren et al. (2022) described the site as a complex creeping system with inhomogeneous subsurface properties.
+
+Most of the rock glacier surface is described as "relict" (Lilleøren et al., 2022) with sand and gravel in between blocks.
+
+For these relict areas, the simulations for the blocks with sediment stratigraphy, in which near-surface permafrost fully or partially degrades, could indeed represent the thermal state adequately.
+
+This is supported by the validation run with the blocks with sediment stratigraphy which yielded a good fit with ground surface temperature measurements at sites largely located on this relict surface (Lilleøren et al., 2022).
+
+Two areas are described as "fresh", which could indicate lateral movements due to the presence of ground ice.
+
+These contain larger blocks and could thus be better described by the blocks only stratigraphy for which permafrost and ground ice still persist at the end of the simulations.
+
+However, also in these fresh areas, the amount of finer sediment is unclear, in particular in deeper layers.
+
+In our simulations, we have only considered a single, homogeneous layer in the uppermost 5 m in order to compare the thermal regime and ground ice dynamics for idealized stratigraphies.
+
+In reality, ground stratigraphies in blocky terrain can feature aspects of all scenarios, for example a blocky layer with air-filled voids on top, followed by blocks filled with sediments and a sediment only layer in the bottom.
+
+For the cooling effect described in this study, it is critical that the blocky top layer is deep enough so that a ground ice table from which water can drain can form within.
+
+Therefore, it is likely that also shal-lower blocky layers with air-filled voids can lead to lower ground temperatures, depending on the climatic conditions which determine the depth of the ground ice table.
+
+We emphasize that a consistent model set-up was selected for all scenarios so that uncertainties caused by other parts of the model system influence them all in a similar, consistent way.
+
+In particular, none of the convective processes summarized by Harris and Pedersen (1998) that cause a negative thermal anomaly in blocky terrain are considered in the model set-up.
+
+The same applies to the effect of rocks protruding into and through the snow cover, as was described by Juliussen and Humlum (2008), which could potentially be included in CryoGrid by laterally coupled simulations (e.g. Zweigel et al., 2021) with snow redistribution between tiles representing blocks of different heights.
+
+Considering air convection in future simulations (e.g. Wicky and Hauck, 2017) should become a priority for model development as this is likely to interact with the ground ice mass balance for the blocky drained scenario and could thus exacerbate the thermal anomaly.
+
+Further uncertainties are related to the model forcing data.
+
+The ERA5 reanalysis data are a global product with coarse horizontal resolution, so that the TopoSCALE downscaling routine (Fiddes and Gruber, 2014) is applied to obtain more representative meteorological forcing.
+
+Nonetheless, as mentioned in Fiddes and Gruber (2014) and Fiddes et al. (2019Fiddes et al. ( , 2022)), there are limitations to this scheme, in particular the primitive downscaling scheme for precipitation, which only interpolates between ERA5 grid points and thus misses the effects of local orography.
+
+The same is true for the effects of local cloud build-up around slopes and mountains, which affects the radiation budget.
+
+While these uncertainties could affect the comparison of model results to field measurements (Sect. 4.1), the model forcing data can certainly capture the regional-scale climate characteristics of the two study sites, e.g. the significant differences in MAAT between the two sites.
+
+The thermal anomaly of the blocks only, drained scenario consistently occurs for both sites and thus over a significant range of climate conditions so that the effect is likely robust despite the uncertainties in the model forcing data.
+
+The same is true for the uncertainty caused by the Crocus-based snow scheme (Vionnet et al., 2012;Zweigel et al., 2021).
+
+In this study, we have performed a sensitivity study with respect to the amount of snow (by modifying the snowfall factor, Sect.
+
+4.2), but simply scaling snowfall cannot represent the true time evolution of the snow cover due to wind redistribution (e.g. Liston and Sturm, 1998;Martin et al., 2019), possibly resulting in differences between observed and simulated temperatures.
+
+Nevertheless, it seems unlikely that the exact time dynamics of snow ablation and/or deposition events strongly affect the dependence of the thermal anomaly in the blocks only, drained scenario on overall winter snow depths.
+
+We therefore conclude that the significant negative thermal anomaly for the blocks only, drained scenario is likely robust in light of the model uncertainty.

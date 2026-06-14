@@ -1,0 +1,98 @@
+{
+  "query_id": "721388955b97db097e963c4b221fe9af9e2da4ae",
+  "query": "What does it mean when the absolute accuracy numbers are higher than the F1 scores?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "F1 score"
+      },
+      "result_preview": "Search results for 'F1 score' (19 matches):\n[paper_id=nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5 | section=results | line=63] The replacement of GELU with ReLU even improves the performance of the F1 ",
+      "elapsed_s": 8.4
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "accuracy higher than F1"
+      },
+      "result_preview": "No matches found for 'accuracy higher than F1'",
+      "elapsed_s": 12.41
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "accuracy higher than F1"
+      },
+      "result_preview": "No matches found for 'accuracy higher than F1'",
+      "elapsed_s": 7.8
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "accuracy higher than F1"
+      },
+      "result_preview": "No matches found for 'accuracy higher than F1'",
+      "elapsed_s": 8.62
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "accuracy F1 score discrepancy"
+      },
+      "result_preview": "No matches found for 'accuracy F1 score discrepancy'",
+      "elapsed_s": 11.11
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d_198",
+    "nlpeer/ARR-22/25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d_199",
+    "nlpeer/ARR-22/25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d_200"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [],
+    "approved_by_oracle": [],
+    "oracle_decisions": []
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.08333333333333333,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

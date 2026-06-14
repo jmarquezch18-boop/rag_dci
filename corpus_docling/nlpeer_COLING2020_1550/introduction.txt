@@ -1,0 +1,51 @@
+With the rise of social media, exchange of opinions and news happens faster than ever.
+
+News circulation is therefore less and less bound to traditional print journalism that usually requires extensive research, fact checking and accurate coverage in order to be a reliable news resource.
+
+It is relatively easy to share opinions that are either not supported by researched facts or simply wrong.
+
+In the worst case a large amount of people can be targeted by propaganda in order to shift societal discussions in favor of a wanted agenda.
+
+Human resources are limited to identify such Fake News, since they cover a wide range of topics and linguistic writing styles (Shu et al., 2017, p.2).
+
+Automated Fake News detection (FND) has therefore proven to be an important challenge for NLP researchers in recent years.
+
+To this day, a variety of approaches dealing with FND exists (Khan et al., 2019).
+
+In 2017, the Fake News Challenge Stage 1 was introduced which tackles FND as a stance detection task (Pomerleau and Rao, 2017), where the idea is to determine the stance of a news article to a given headline (Hanselowski et al., 2018, p.1).
+
+We now evaluate the five models BERT (Devlin et al., 2019), RoBERTa (Liu et al., 2019), DistilBERT (Sanh et al., 2019), ALBERT (Lan et al., 2019) and XLNet (Yang et al., 2019) which were developed and enhanced recently.
+
+All architectures were pretrained on large unlabeled corpora using a self-supervised objective and can be finetuned on a desired task at hand.
+
+Our main focus is to evaluate the necessity of hyperparameter tuning as well as the general performance.
+
+1 Besides this, it is of special interest to examine the differences between auto-encoding (BERT-based models) and auto-regressive architectures (XLNet).
+
+In this context, the term Fake News is defined as a text piece that is verifiably wrong and spread with a malicious intention.
+
+In doing so, other media sources such as video, images or audio are excluded.
+
+Since the intention has to be malicious all sorts of entertainment related false news such as hoaxes and april fools are excluded.
+
+The definition is similar to the narrow definition that Shu et al. (2017) undertake.
+
+2 The Fake News Challenge (FNC-1)
+
+In 2017, the Fake News Challenge Stage 1 (FNC-1) was published.
+
+Organizers from industry and academia created an online challenge accessible via http://www.fakenewschallenge.org/ (Pomerleau and Rao, 2017).
+
+The FNC-1 is conceptualized as an important pre-step in identifying Fake News and exploring how artificial intelligence tools can be leveraged in combatting them.
+
+Given a certain claim about a topic, what are different news agencies reporting about this claim? If most news agencies agree with a claim, this can be interpreted as an indicator of the truthfulness of the claim.
+
+On the contrary, if a lot of news disagree with the claim, the claim is likely Fake News.
+
+Statistically speaking this idea is translated into a stance detection task with the claim being treated as a headline and the stance of the article body being either Agree, Disagree, Discuss or Unrelated.
+
+FND is thus treated as a classification task with four categories which are interpreted as the stance of an article body towards a given headline claim.
+
+Along with a baseline model, a training and test set was published.
+
+According to Hanselowski et al. (2018), 50 teams participated in the challenge.

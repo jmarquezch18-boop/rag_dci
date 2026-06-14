@@ -1,0 +1,13 @@
+We propose a language-independent model for cross-lingual NER building on a cross-lingual wikifier.
+
+This model works on all languages in Wikipedia and the only requirement is a Wikipedia dump.
+
+We study a wide range of languages in both the monolingual and the cross-lingual settings, and show significant improvements over strong baselines.
+
+An analysis shows that the quality of the wikifier features depends on the Wikipedia size of the test language.
+
+This work shows that if we can disambiguate words and phrases to the English Wikipedia, the typing information from Wikipedia categories and FreeBase are useful language-independent features for NER.
+
+However, there is additional information in Wikipedia that could be helpful and which we do not use, including words in the documents and relations between titles; this would require additional research.
+
+In the future, we would like to experiment with combining our method with other techniques for multilingual NER (Section 2), including parallel projection and the automatic generation of training data from Wikipedia.

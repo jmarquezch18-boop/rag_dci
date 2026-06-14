@@ -1,0 +1,35 @@
+Overall Observation Figure 6 visualizes the number of training elements in T grouped by their label c after each acquisition iteration of picking 100 elements from U .
+
+As the labels in the data sets and thus the subset U are equally distributed, we expect the same equal distribution when sampling randomly from the pool elements, which is apparent in the lower row of Figure 6 where the training data was actually randomly chosen from the pool of data.
+
+In contrast, we observed that when using the BALD acquisition with non-deterministic forward passes, the distribution shows a stronger bias to a particular class.
+
+This bias increases when sampling more pool data, whereas the difference between the biggest and smallest class in T stays constant during random acquisition (see table 3).
+
+Furthermore, when randomly sampling, the class with the most or least training elements (arg min c |T c |, arg max c |T c |) is changing in many iterations, whereas in the case where active learning is used, this is constant for the most part and changing, if any, only in the first iterations.
+
+Which Class? As the goal of active learning is to maximize the knowledge gain of the model with minimum cost, the choice of data the acquisition strategy selects from U may give further insight into the models understanding of the input data.
+
+One characteristic when applying active learning on the MNLI data set, that is apparent in Figure 6, is that samples from the neutral class are queried the most.
+
+It might indicate that the model is most confused about the samples from this class.
+
+This observation may be justified by the fact that the hypothesis stated in that datum may be unrelated to the associated premise, confusing the model.
+
+Another observation is that the model queries data points from the contradiction class more often than data points from the entailment class at the beginning of the training, while at the end number of queries from the different classes is almost equal.
+
+This indicates that, at the start of training, the model is more confused about contradictions, which may be explained by the fact that a contradiction can differ from an entailment only by a single negation at the correct place in the input, making it harder to differentiate from an entailment.
+
+An example of negated statements in a contradiction can be seen in the last row of Table 4 which also shows that the model indeed gave this example a high BALD score.
+
+Table 4 shows some of the examples of the MNLI dataset with their calculated BALD scores in the middle of the training after 5 acquisition iterations.
+
+These examples show another noteworthy behaviour of the active learner.
+
+Samples from the entailment class where many words in the two input sentences match or and have a similar wording in general, get a low BALD score, indicating that the model is already confident that it is able to correctly classify those examples.
+
+The same is true for input pairs that differ in wording and contradict themselves.
+
+However, entailing pairs where the wording is mostly different between the two inputs, as well as contradicting pairs with similar phrasing get a much higher BALD score and thus are more likely to be sampled during the acquisition phase.
+
+The model at this point in training thus seems to already have learned to perform its task confidently on the simpler examples and can thus concentrate more on the non-trivial data-points.

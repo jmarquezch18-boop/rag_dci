@@ -1,0 +1,297 @@
+Ditch The Gold Standard: Re-Evaluating Conversational Question Answering
+
+Abstract
+
+Introduction
+
+Preliminary
+
+2.1 Evaluation of conversational QA Evaluation of conversational QA in real-world consists of three components: an evidence passage P , a (human) questioner H that has no access to P , 2 and a model M that has access to P .
+
+The questioner asks questions about P and the model answers them based on P and the conversational history thus far (see an example in Figure 1(a)).
+
+Formally, for the i-th turn, the human asks a ques-2 Existing conversational QA datasets make different assumptions: For example, QuAC (Choi et al., 2018) assumes no access but CoQA assumes the questioner to have access.
+
+tion based on the previous conversation,
+
+Q i ∼ H(Q 1 , A 1 , ..., Q i-1 , A i-1 ),(1)
+
+and then the model answers it based on both the history and the passage,
+
+A i ∼ M(P, Q 1 , A 1 , ..., Q i-1 , A i-1 , Q i ),(2)
+
+where Q i and A i represent the question and the answer at the i-th turn.
+
+If the question is unanswerable from P , we simply denote A i as CANNOT ANSWER.
+
+The model M is then evaluated by the correctness of answers.
+
+Evaluating conversational QA systems requires human in the loop and is hence expensive.
+
+Instead, current benchmarks use automatic evaluation with gold history (Auto-Gold) and collect a set of humanhuman conversations for automatic evaluation.
+
+For each passage, one annotator asks questions without seeing the passage, while the other annotator provides the answers.
+
+Denote the collected questions and answers as Q * i and A * i .
+
+In gold-history evaluation, the model is inquired with pre-collected questions Q * i and the gold answers as history:
+
+A i ∼ M(P, Q * 1 , A * 1 , ..., Q * i-1 , A * i-1 , Q * i ),(3)
+
+and we evaluate the model by comparing A i to A * i (measured by word-level F1).
+
+This process does not require human effort but cannot truly reflect the distribution of human-machine conversations, because unlike human questioners who may ask different questions based on different model predictions, this static process ignores model predictions and always asks the pre-collected question.
+
+In this work, we choose the QuAC dataset (Choi et al., 2018) as our primary evaluation because it is closer to real-world information-seeking conversations, where the questioner cannot see the evidence passage during the dataset collection.
+
+It prevents the questioner asking questions that simply overlaps with the passage and encourages unanswerable questions.
+
+QuAC also adopts extractive question answering that restricts the answer as a span of text, which is generally considered easier to evaluate.
+
+Models
+
+Conversation Collection
+
+In this section, we carry out a large-scale human evaluation with the four models discussed above.
+
+We collect human-machine conversations using 100 passages from the QuAC development set on Amazon Mechanical Turk.
+
+4 We also design a set of qualification questions to make sure that the annotators fully understand our annotation guideline.
+
+For each model and each passage, we collect three conversations from three different annotators.
+
+We collect each conversation in two steps:
+
+(1) The annotator has no access to the passage and asks questions.
+
+The model extracts the answer span from the passage or returns CANNOT ANSWER in a human-machine conversation interface.
+
+5 We provide the title, the section title, the background of the passage, and the first question from QuAC as a prompt to annotators.
+
+Annotators are required to ask at least 8 and at most 12 questions.
+
+We encourage context-dependent questions, but also allow open questions like "What else is interesting?" if asking a follow-up question is difficult.
+
+(2) After the conversation ends, the annotator is shown the passage and asked to check whether the model predictions are correct or not.
+
+We noticed that the annotators are biased when evaluating the correctness of answers.
+
+For questions to which the model answered CANNOT ANSWER, annotators tend to mark the answer as incorrect without checking if the question is answerable.
+
+Additionally, for answers with the correct types (e.g. a date as an answer to "When was it?"), annotators tend to mark it as correct without verifying it from the passage.
+
+Therefore, we asked another group of annotators to verify question answerability and answer correctness.
+
+Answer Validation
+
+For each collected conversation, we ask two additional annotators to validate the annotations.
+
+First, each annotator reads the passage before seeing the conversation.
+
+Then, the annotator sees the question (and question only) and selects whether the question is (a) ungrammatical, (b) unanswerable, or (c) answerable.
+
+If the annotator chooses "answerable", the interface then reveals the answer and asks about its correctness.
+
+If the answer is "incorrect", the annotator selects the correct answer span from the passage.
+
+We discard all questions that both annotators find "ungrammatical" and the correctness is taken as the majority of the 3 annotations.
+
+Annotation Statistics
+
+In total, we collected 1,446 human-machine conversations and 15,059 question-answer pairs.
+
+We release this collection as an important source that Deciding the correctness of answers is challenging even for humans in some cases, especially when questions are short and ambiguous.
+
+We measure annotators' agreement and calculate the Fleiss' Kappa (Fleiss, 1971) on the agreement between annotators in the validation phase.
+
+We achieve κ = 0.598 (moderate agreement) of overall annotation agreement.
+
+Focusing on answerability annotation, we have κ = 0.679 (substantial agreement).
+
+Disagreements Between Human And Gold-History Evaluation
+
+Strategies For Automatic Evaluation
+
+Predicted History Invalidates Questions
+
+We examined 100 QuAC conversations with the best-performing model (ExCorD) and identified three categories of invalid questions caused by predicted history.
+
+We find that 23% of the questions become invalid after using the predicted history.
+
+We summarize the types of invalid questions as follows (see detailed examples in Figure 3):
+
+• Unresolved coreference (44.0%).
+
+The question becomes invalid for containing either a pronoun or a definite noun phrase that refers to an entity unresolvable without the gold history.
+
+• Incoherence (39.1%).
+
+The question is incoherent with the conversation flow (e.g., mentioning an entity non-existent in predicted history).
+
+While humans may still answer the question using the passage, this leads to an unnatural conversation and a train-test discrepancy for models.
+
+• Correct answer changed (16.9%).
+
+The answer to this question with the predicted history changes from when it is based on the gold history.
+
+We further analyze the reasons for the biggest "unresolved coreference" category and find that the model either gives an incorrect answer to the previous question ("incorrect prediction", 39.8%), or the model predicts a different (yet correct) answer to What was the band's first success album at the international level?
+
+Became the band's last American hit.
+
+Coreference resolution Gold answer: "Parade" from 1984.
+
+They achieved platinum status .
+
+Coreference results using predicted and gold history do not match.
+
+What songs were in "Parade"
+
+Rewritten by gold history coreference results.
+
+First single "Only When You Leave" .
+
+Gold answer: "Only When You Leave" .
+
+How did it do on the charts?  an open question ("open question", 37.0%), or the model returns CANNOT ANSWER incorrectly ("no prediction", 9.5%), or the gold answer is longer than prediction and the next question depends on the extra part ("extra gold information", 13.6%).
+
+Invalid questions result in compounding errors, which may further affect how the model interprets the following questions.
+
+Evaluation With Question Substitution
+
+Automatic Vs Human Evaluation
+
+Agreement Metrics
+
+Model performance and rankings.
+
+We first consider using model performance reported by different evaluation methods.
+
+Considering numbers of automatic and human evaluations are not directly comparable, we also calculate models' rankings and compare whether the rankings are consistent between automatic and human evaluations.
+
+Model performance is reported in Table 2.
+
+In human evaluation, GraphFlow < BERT < HAM ≈ ExCorD; in Auto-Gold, BERT < GraphFlow < HAM < Ex-CorD; in other automatic evaluations, GraphFlow < BERT < HAM < ExCorD.  Statistics of unanswerable questions.
+
+Percentage of unanswerable questions is an important aspect in conversations.
+
+Automatic evaluations using static datasets have a fixed number of unanswerable questions, while in human evaluation, the percentage of unanswerable questions asked by human annotators varies with different models.
+
+The statistics of unanswerable questions is shown in Table 3.
+
+Pairwise agreement.
+
+For a more fine-grained evaluation, we perform a passage-level comparison for every pair of models.
+
+More specifically, for every single passage we use one automatic metric to decide whether model A outperforms model B (or vice versa) and examine the percentage of passages that the automatic metric agrees with human evaluation.
+
+For example, if the pairwise agreement of BERT/ExCorD between human evaluation and Auto-Gold is 52%, it means that Auto-Gold and human evaluation agree on 52% passages in terms of which model is better.
+
+Higher agreement means the automatic evaluation is closer to human evaluation.
+
+Figure 5 shows the results of pairwise agreement.
+
+Automatic Evaluations Have A Significant Distribution Shift From Human Evaluation
+
+Auto-Rewrite Is Closer To Human Evaluation
+
+Towards Better Conversational Qa
+
+With insights drawn from human evaluation and comparison with automatic evaluations, we discuss the impact of different modeling strategies, as well as future directions towards building better conversational question answering systems.
+
+Modeling question dependencies on conversational context.
+
+When we focus on answerable questions (Table 2), we notice that GraphFlow, HAM and ExCorD perform much better than BERT.
+
+We compare the modeling differences of the four systems in Figure 6, and identify that all the three better systems explicitly model the question dependencies on the conversation history and the passage: both GraphFlow and HAM highlight repeated mentions in questions and conversation history by special embeddings (turn marker and PosHAE) and use attention mechanism to select the most relevant part from the context; ExCorD adopts a question rewriting module that generates context-independent questions given the history and passage.
+
+All those designs help models better understand the question in a conversational context.
+
+Figure 7 gives an example where GraphFlow, HAM and ExCorD resolved the question from long conversation history while BERT failed.
+
+Unanswerable question detection.
+
+Table 4 demonstrates models' performance in detecting unanswerable questions.
+
+We notice that Graph-Flow predicts much fewer unanswerable questions than the other three models, and has a high precision and a low recall in unanswerable detection.
+
+This is because GraphFlow uses a separate network for predicting unanswerable questions, which is harder to calibrate, while the other models jointly predict unanswerable questions and answer spans.
+
+This behavior has two effects: (a) GraphFlow's overall performance is dragged down by its poor unanswerable detection result (Table 2).
+
+(b) In human evaluation, annotators ask fewer unanswerable questions with GraphFlow (Table 3)-when the model outputs more, regardless of correctness, the human questioner has a higher chance to ask passage-related followup questions.
+
+Both suggest that how well the model detects unanswerable questions significantly affects its performance and the flow in human-machine conversations.
+
+Optimizing towards the new testing protocols.
+
+Most existing works on conversational QA modeling focus on optimizing towards Auto-Gold evaluation.
+
+Since Auto-Gold has a large gap from the real-world evaluation, more efforts are needed in optimizing towards the human evaluation, or Auto-Rewrite, which better reflects human evaluation.
+
+One potential direction is to improve models' robustness given noisy conversation history, which simulates the inaccurate history in real world that consists of models' own predictions.
+
+In fact, prior works (Mandya et al., 2020;Siblini et al., 2021) that used predicted history in training showed that it benefits the models in predicted-history evaluation.
+
+Related Work
+
+Conclusion
+
+Figure 1: Examples of human and automatic evaluations with gold or predicted history.
+
+The model answers the first question incorrectly.
+
+(a) A human questioner asks the next question based on current predictions.
+
+(b) Automatic evaluation with gold history poses pre-collected questions with gold answers as conversational history, regardless of model predictions.
+
+(c) Using predicted history in automatic evaluation makes the next question invalid.
+
+Figure 2: Model performance of human evaluation (accuracy, left) and Auto-Gold (F1, right).
+
+Scales for accuracy and F1 are different.
+
+Human evaluation and Auto-Gold rank BERT and GraphFlow differently.
+
+Figure4: An example of question rewriting.
+
+We rewrite the second question with referent in the gold history, because predicted and gold history have different coreference results.
+
+We do not rewrite the third question as coreference results are the same.
+
+Figure 5: Pairwise agreement of different model pairs comparing automatic evaluations to human evaluation.
+
+B: BERT; G: GraphFlow; H: HAM; E: ExCorD.
+
+Figure 7: An example of BERT failing to resolve the festival in Q *4 , while all other models with explicit dependency modelings succeeded.
+
+); Ye et al. (2021) evaluate the coherence of the dialogue systems; Gupta et al. (2019) explore to use multiple references for evaluation; Mehri and Eskenazi (2020) propose an unsupervised and reference-free evaluation; Lowe et al. (2017); Tao et al. (2018);
+
+Ghazarian et al. (2019); Shimanaka et al. (2019); Sai et al. (
+
+Figure 8: An example that the prediction may mention the same entity as the gold answer does with slightly different names.
+
+Figure 9: The context-independent question Q P by Auto-Replace contains extra information that confuses the model.
+
+The rewritten question Q W did not change the original question and led to a correct answer.
+
+Number of conversations (# C) and questions (# Q) collected in human evaluation, using 100 passages from the QuAC development set.
+
+We also add QuAC development set for reference.
+
+GF: GraphFlow. complements existing conversational QA datasets.
+
+Numbers of conversations and question-answer pairs collected for each model are shown in Table1.
+
+The data distribution of this collection is very different from the original QuAC dataset (human-human
+
+Steve Di Giorgio returned to the band... A 1 : ... bassist Greg Christian had left Testament again...
+
+Model performance in automatic and human evaluations.
+
+We report overall performance on all questions and also performance on answerable questions only.where BG is the background, S * i and S i denote the inputs for gold and predicted history.
+
+After the coreference model returns entity cluster information given S * i and S i , we extract a list of entities E
+
+The percentage of models' predicted unanswerable questions, and the precision and recall for detecting unanswerable questions in different evaluations.
+
+B: BERT; G: GraphFlow; H: HAM; E: ExCorD.

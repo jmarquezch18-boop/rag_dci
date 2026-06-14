@@ -1,0 +1,61 @@
+The aim of this study was to systematically examine feature-based SRF models, fleshing out what features make the models work best.
+
+By evaluating different feature sets of the computational SRF studies from a linguistic perspective, we tried to build a bridge between the features employed by computational models and the linguistic explanations behind those features.
+
+Based on the results of the two feature selection experiments conducted on seven feature sets, and the approach outlined in section 4.5.2, we composed a consensus set consisting of six features from 4 classes: animacy and plurality [Inherent features of a referent], grammatical role of the current mention, form of the antecedent, and categorical distance in number of sentences [recency].
+
+Comparing the consensus set with the previously proposed feature sets has interesting implications for both feature-based SRF research and linguistics.
+
+Implications for feature-based SRF studies: We found that by using a smaller set of features, models can often achieve nearly identical performance.
+
+For example, as shown in Table 9, the performance of the Kibrik model using 17 features is 0.793, but we can achieve an accuracy of 0.776 using only 6 features.
+
+Furthermore, using the largest number of features does not guarantee the best possible performance: the results in Table 9 show that the performance of a subset is often similar to that of a superset.
+
+In the case of 2 feature sets, OSU and IS-G, the performance of one of the subsets was even better than the original.
+
+We saw in Table 5 that all systems except ICSI encode recency in one way or the other.
+
+Some encode recency in terms of "lower-level" units such as counting words, NPs and markables; others focus on "higher-level" units such as sentences and paragraphs.
+
+The two experiments show the higher-level metrics are always ranked more highly than the lower-level ones.
+
+Clearly, features encoding similar concepts (e.g. distance to the antecedent) do not always contribute equally to a model.
+
+The same holds for referential status, where sentence-level features play a much more important role than the others.
+
+Implications for linguistics: In section 3.1, we grouped the features that were used by the systems that we studied into 9 broad categories.
+
+The 6 features that we chose (above) as our consensus set are all from only 4 of these 9, namely grammatical role, inherent features of the referent, antecedent form and recency.
+
+• Inherent features: We showed that two inherent features of a referent, namely animacy and plurality, i.e. whether the referent is plural or singular, play major roles in predicting the referential choice.
+
+Given the linguistics literature, the importance of animacy is no great surprise; for example, Fukumura and van Gompel (2011) reported that pronouns were more frequent for referring to animate than inanimate referents.
+
+More of a surprise is the role of plurality for SRF which has attracted less attention.
+
+The psycholinguistics literature suggests that when conjoined noun phrases are introduced into the discourse, they are treated as a group, and the group is in focus, which makes it prominent (Patson and Warren, 2011).
+
+According to Gordon et al. (1999)'s repeated name penalty, referring to a prominent referent with a proper name instead of a pronoun increases the processing time.
+
+An implication of this is the possibility that including the plurality feature in a prediction task might facilitate the pronoun detection.
+
+• Grammatical role: Various studies, including centering-based research, tend to emphasize that referents in subject position have a higher tendency to be pronominalized in the subsequent sentence (Brennan et al., 1987;Brennan, 1995;Kaiser, 2010).
+
+The focus of previous research has usually been on the subjecthood of the antecedent, and less so on the subjecthood of the current mention.
+
+Our analysis suggests that the grammatical role of the current mention is more important than that of the antecedent in predicting the choice of referential form.
+
+• Antecedent form: In this case, our findings match those in the linguistic tradition (Gundel and Hedberg, 2008).
+
+This factor could be important either because people tend to avoid consecutive uses of the same expression (Bohnet, 2008), or because having a pronominal antecedent enhances the prominence of the referent (Kaiser, 2003).
+
+• Recency: Recency, in the linguistic tradition, has often been emphasized, but often without a clear definition.
+
+Our study suggests that recency is best defined in terms of the number of sentences that intervene between the antecedent and the current mention; next best is recency metric defined in terms of the number of paragraphs.
+
+This finding is in line with the linguistic tradition, which tend to focus on "higher level" measures (Fox, 1987;Tomlin, 1987;McCoy and Strube, 1999;Henschel et al., 2000;Arnold et al., 2009).
+
+This concludes our comparison of different feature-based computational studies of referential choice.
+
+In view of the above observations, we hope that computational and theoretical studies of language will continue to provide inspiration to each other.

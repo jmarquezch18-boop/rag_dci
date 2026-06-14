@@ -1,0 +1,33 @@
+Since automatic performance metrics do not provide insights into specific weaknesses of the system (van Miltenburg et al., 2021), we manually examined 100 outputs of the models.
+
+We counted the number of errors: factual (hallucinations, omissions, incorrect fact merging, redundancies) and grammatical.
+
+The results are summarized in Table 5.
+
+The 1-STAGE model (which has to order the facts implicitly) tends to repeat the facts in the text (especially in E2E) and produces frequent hallucinations.
+
+These problems are largely eliminated with the 2-STAGE and 3-STAGE models, which produce   almost no hallucinations or omissions.
+
+However, the outputs on WebNLG for all systems suffer from semantic errors resulting from merging of unrelated facts.
+
+This mostly happens with unrelated predicates connected to the same subject/object (e.g. "X was born in Y", "X worked as Z" expressed as "X worked as Z in Y"; see Appendix E for examples).
+
+This behavior is the main obstacle to ensure factual consistency of the output.
+
+As a possible remedy, we propose explicitly controlling the semantics of sentence fusion (Ben-David et al., 2020), e.g. using a variant of constrained decoding (Balakrishnan et al., 2019;Wang et al., 2021).
+
+On the E2E data, which has a simpler triple structure (all predicates share the same subject), the outputs are generally consistent and the 2-STAGE and 3-STAGE models exhibit almost no semantic errors.
+
+Grammar errors and disfluencies stem mainly from over-eager paragraph compression or from artifacts in our templates and are relatively minor (e.g., missing "is" in "serves French food and  We also evaluate the accuracy of our aggregation model, using triples ordered according to the plans from Ferreira et al. (2018) as input.
+
+The accuracy is 0.33 per example and 0.62 per sentence boundary (random baseline is 0.23 and 0.50, respectively).
+
+The results show that although our approach is better than the random baseline, there is still room for improvement.
+
+Finally, we manually evaluate how the PC model follows the content plan (i.e., keeping the predefined order and aggregating the sentences according to the delimiters) using 100 randomly chosen examples with more than 1 triple on WebNLG and E2E.
+
+We find that the model follows the content plan in 95% and 100% of cases, respectively.
+
+The incorrect cases include a fact not properly mentioned or an extra boundary between sentences without a separator.
+
+We can thus conclude that the pretraining task successfully teaches the PC model to follow a given content plan.

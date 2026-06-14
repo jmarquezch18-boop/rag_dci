@@ -1,0 +1,61 @@
+Prior work on automatic character identification has relied heavily on statistical techniques and linguistic grammar-based techniques.
+
+Our work is mainly inspired by Calix et al. (2013) who used a Support Vector Machine (SVM) classifier to detect sentient actors in spoken stories.
+
+The model compares four different ML classifiers with 83 features (including knowledge features extracted from ConceptNet) and reports an F 1 of 0.86.
+
+It was found that certain speech features enhanced the results for non-named entities.
+
+However, the model focuses on animacy detection rather than character identification.
+
+A similar line of work by Valls-Vargas et al. ( 2014) implemented a case-based approach using the Voz system.
+
+Apart from linguistic features, the most important features were extracted from WordNet and ConceptNet.
+
+Although they reported a 93.49% accuracy for a subset of the Proppian Folktales, it does not give a concrete definition of a character.
+
+They also proposed a similarity measure (Continuous Jaccard) that compares the entities from the text and case-base of the Voz system.
+
+Valls-Vargas (2015) further incorporated a feedback loop into Voz; this iterative approach improves co-reference grouping, but there isn't an improvement in character identification.
+
+The most recent work on character identification took a supervised ML approach to classify nouns as characters using 24 different linguistic features, including capitalization and possession-based on Freeling and JavaRAP (Barros et al., 2019).
+
+Out of the different classifiers, ClassificationViaRegression, achieved an F 1 of 0.84; however, it only worked for nouns and ignored pronouns.
+
+Other approaches have used NER systems and domain-specific gazetteers in addition to other techniques such as graphs and verb analysis.
+
+Vala et al. (2015) proposed an eight-stage pipeline for identifying characters by building a graph where each name is represented as a node, and the nodes representing the same character are connected with edges.
+
+NER and co-reference resolution are used to populate the graph and connect nodes co-occurring in a chain, respectively.
+
+The main heuristics used distinguish between distinct characteristics compares genders (by looking at honorifics) and names.
+
+The model achieves an average F 1 of 0.58 on two datasets; however, it is limited to a corpus with characters that can be easily recognized by NER.
+
+Goh et al. (2012a) proposed a NER-based approach to identify the protagonists in fairy tales using WordNet and verb features.
+
+They used the Stanford parser to extract NE candidates, which is then filtered by verb analysis.
+
+They reported an F 1 of 0.67.
+
+In further work, Goh et al. (2013) identified the dominant character in fables using the VAHA (Verbs Associated with Human Activity) architecture (Goh et al., 2012b) and taking into account quoted speech, achieving an F 1 of 0.76.
+
+The same architecture, when applied to news articles, achieves an F 1 of 0.88 (Goh et al., 2015).
+
+Vani and Antonucci (2019) has described a modular tool called NOVEL2GRAPH, which generates visual summaries of narrative text.
+
+As part of the first module, characters are detected using Stanford's NER, which are further filtered using part-of-speech tagging.
+
+Character aliases are grouped using the DBSCAN clustering algorithm and stored in a dictionary.
+
+They did not report the performance of their approach.
+
+Lastly, Declerck et al. ( 2012) demonstrated an ontology-based approach for automated character identification in folktales.
+
+They compared indefinite noun phrases with ontology labels, and used the matches to propose potential characters.
+
+Finally, they applied inference rules, and all occurrences of a particular ontology label were marked as references to the same character.
+
+The study reports an F 1 of 0.80.
+
+Although this approach has the closest implicit definition of a character to ours, the ontology is domain-based and is unlikely to generalize well to other domains.

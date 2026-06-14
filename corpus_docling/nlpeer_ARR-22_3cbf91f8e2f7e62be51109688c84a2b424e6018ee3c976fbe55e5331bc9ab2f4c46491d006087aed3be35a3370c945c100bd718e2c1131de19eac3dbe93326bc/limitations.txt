@@ -1,0 +1,13 @@
+We study zero-shot D2T generation with the focus on generating descriptions for RDF triples.
+
+Although the task of D2T generation has numerous applications, using neural models for D2T generation (especially in the zero-shot context) is still limited to experimental settings (Dale, 2020).
+
+Similarly to other recent approaches for D2T generation, our approach relies on PLMs, which are known to reflect the biases in their pretraining corpus (Bender et al., 2021;Rogers, 2021).
+
+Our system may therefore rely on spurious correlations for verbalizing e.g. gender or occupation of the entities.
+
+Since we cannot guarantee the factual correctness of the outputs of our system, the outputs should be used with caution.
+
+On the flip side, our approach helps to reduce the number of omissions and hallucinations stemming from noise in human-written references.
+
+Our work thus contributes to the general aim of D2T generation in conveying the data semantics accurately and without relying on implicit world knowledge.

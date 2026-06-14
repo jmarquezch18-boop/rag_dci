@@ -1,0 +1,133 @@
+Given a set of different probabilistic QE models, we are interested in evaluating the performance of these models, while also taking their uncertainty into account, particularly to distinguish among models with seemingly same or similar performance.
+
+A straightforward way to measure the performance of a probabilistic model is to inspect its negative (log) marginal likelihood.
+
+This measure, however, does not capture if a model overfit the training data.
+
+We can have a better generalisation measure by calculating the likelihood on test data instead. This was proposed in previous work and it is called Negative Log Predictive Density (NLPD) (Quiñonero-Candela et al., 2006):
+
+NLPD(ŷ, y) = - 1 n n i=1 log p(ŷ i = y i |x i ).
+
+where ŷ is a set of test predictions, y is the set of true labels and n is the test set size.
+
+This metric has since been largely adopted by the ML community when evaluating GPs and other probabilistic models for regression (see Section 5 for some examples).
+
+As with other error metrics, lower values are better.
+
+Intuitively, if two models produce equally incorrect predictions but they have different uncertainty estimates, NLPD will penalise the overconfident model more than the underconfident one.
+
+On the other hand, if predictions are close to the true value then NLPD will penalise the underconfident model instead.
+
+In our first set of experiments we evaluate models proposed in Section 2 according to their negative log likelihood (NLL) and the NLPD on test data.
+
+We also report two point estimate metrics on test data: Mean Absolute Error (MAE), the most commonly used evaluation metric in QE, and Pearson's r, which has recently proposed by Graham (2015) as a more robust alternative.
+
+Our experiments comprise datasets containing three different language pairs, where the label to predict is post-editing time:
+
+English-Spanish (en-es) This dataset was used in the WMT14 QE shared task (Bojar et al., 2014).
+
+It contains 858 sentences translated by one MT system and post-edited by a professional translator.
+
+French-English (fr-en) Described in (Specia, 2011), this dataset contains 2, 525 sentences translated by one MT system and post-edited by a professional translator.
+
+English-German (en-de) This dataset is part of the WMT16 QE shared task2 .
+
+It was translated by one MT system for consistency we use a subset of 2, 828 instances post-edited by a single professional translator.
+
+As part of the process of creating these datasets, post-editing time was logged on an sentence basis for all datasets.
+
+Following common practice, we normalise the post-editing time by the length of the machine translated sentence to obtain postediting rates and use these as our response variables.
+
+Technically our approach could be used with any other numeric quality labels from the literature, including the commonly used Human Translation Error Rate (HTER) (Snover et al., 2006).
+
+Our decision to focus on post-editing time was based on the fact that time is a more complete measure of post-editing effort, capturing not only technical effort like HTER, but also cognitive effort (Koponen et al., 2012).
+
+Additionally, time is more directly applicable in real translation environments -where uncertainty estimates could be useful, as it relates directly to productivity measures.
+
+For model building, we use a standard set of 17 features from the QuEst framework (Specia et al., 2015).
+
+These features are used in the strong baseline models provided by the WMT QE shared tasks.
+
+While the best performing systems in the shared tasks use larger feature sets, these are mostly resource-intensive and languagedependent, and therefore not equally applicable to all our language pairs.
+
+Moreover, our goal is to compare probabilistic QE models through the predictive uncertainty perspective, rather than improving the state-of-the-art in terms of point predictions.
+
+We perform 10-fold cross validation instead of using a single train/test splits and report averaged metric scores.
+
+The model hyperparameters were optimised by maximising the likelihood on the training data.
+
+We perform a two-pass procedure similar to that in (Cohn and Specia, 2013): first we employ an isotropic kernel and optimise all hyperparameters using 10 random restarts; then we move to an ARD equivalent kernel and perform a final optimisation step to fine tune feature lengthscales.
+
+Point predictions were fixed as the median of the distribution.
+
+Table 1 shows the results obtained for all datasets.
+
+The first two columns shows an interesting finding in terms of model learning: using a warping function drastically decreases both NLL and NLPD.
+
+The main reason behind this is that standard GPs distribute probability mass over negative values, while the warped models do not.
+
+For the fr-en and en-de datasets, NLL and NLPD follow similar trends.
+
+This means that we can trust NLL as a measure of uncertainty for these datasets.
+
+However, this is not observed in the en-es dataset.
+
+Since this dataset is considerably smaller than the others, we believe this is evidence of overfitting, thus showing that NLL is not a reliable metric for small datasets.
+
+In terms of different warping functions, using the parametric tanh function with 3 terms performs better than the log for the fr-en and en-de datasets.
+
+This is not the case of the en-es dataset, where the log function tends to perform better.
+
+We believe that this is again due to the smaller dataset size.
+
+The gains from using a Matèrn kernel over EQ are less conclusive.
+
+While they tend to perform better for fr-en, there does not seem to be any difference in the other datasets.
+
+Different kernels can be more appropriate depending on the language pair, but more experiments are needed to verify this, which we leave for future work.
+
+The differences in uncertainty modelling are by and large not captured by the point estimate metrics.
+
+While MAE does show gains from standard to Warped GPs, it does not reflect the difference found between warping functions for fr-en.
+
+Pearson's r is also quite inconclusive in this sense, except for some observed gains for en-es.
+
+This shows that NLPD indeed should be preferred as a evaluation metric when proper prediction uncertainty estimates are required by a QE model.
+
+Here we assess the models and datasets used in Section 3.1 in terms of their performance in the asymmetric setting.
+
+Following the explanation in the previous Section, we do not perform any retraining: we collect the predictions obtained using the 10-fold cross-validation protocol and apply different Bayes estimators corresponding to the asymmetric losses.
+
+Evaluation is performed using the same loss employed in the estimator (for instance, when using the linex estimator with w = 0.75 we report the results using the linex loss with same w) and averaged over the 10 folds.
+
+To simulate both pessimistic and optimistic scenarios, we use w ∈ {3, 1/3} for the AL loss and w ∈ {-0.75, 0.75} for the linex loss.
+
+The only exception is the en-de dataset, where we report results for w ∈ -0.25, 0.75 for linex3 .
+
+We also report results only for models using the Matèrn52 kernel.
+
+While we did experiment with different kernels and weighting schemes4 our findings showed similar trends so we omit them for the sake of clarity.
+
+Results are shown on Table 2.
+
+In the optimistic scenario the tanh-based warped GP models give consistently better results than standard GPs.
+
+The log-based models also gives good results for AL but for linex the results are mixed except for en-es.
+
+This is probably again related to the larger sizes of the fr-en and en-de datasets, which allows the tanh-based models to learn richer representations.
+
+The pessimistic setting uses w = 3 for AL and w = -0.75 for linex, except for English-German, where w = -0.25.
+
+The pessimistic scenario shows interesting trends.
+
+While the results for AL follow a similar pattern when compared to the optimistic setting, the results for linex are consistently worse than the standard GP baseline.
+
+A key difference between AL and linex is that the latter depends on the variance of the predictive distribution.
+
+Since the warped models tend to have less variance, we believe the estimator is not being "pushed" towards the positive tails as much as in the standard GPs.
+
+This turns the resulting predictions not conservative enough (i.e. the post-editing time predictions are lower) and this is heavily (exponentially) pe-nalised by the loss.
+
+This might be a case where a standard GP is preferred but can also indicate that this loss is biased towards models with high variance, even if it does that by assigning probability mass to nonsensical values (like negative time).
+
+We leave further investigation of this phenomenon for future work.

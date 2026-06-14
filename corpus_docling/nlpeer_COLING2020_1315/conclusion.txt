@@ -1,0 +1,33 @@
+In this study we examined patterns of correlation-to-causation exaggeration in press releases.
+
+We developed a new corpus with 16,431 pairs of observational study papers and associated press releases, and a prediction model for identifying cases of correlation-to-causation exaggeration in press releases.
+
+Applying the prediction model to the new corpus, we found that among all observational study papers that made correlational claims only, 22% of the associated press releases made exaggerated causal claims.
+
+Furthermore, universities made more exaggerated claims than journal publishers by a 1.5 to 1 ratio.
+
+The good news is the exaggeration rate has slightly decreased in the past ten years, despite the increase in the total number of press releases.
+
+More research is needed to understand the cause of the decreasing pattern.
+
+This study has a few limitations which we plan to improve in future work: First, the current exaggeration detection method relies on the structured abstract of a research paper to identify its main claims from the conclusion subsection.
+
+This restriction limits our data set size since only about one third of papers have a structured abstract.
+
+In future work we will design an algorithm that can automatically identify the conclusion sentences from unstructured abstracts.
+
+Second, the current approach uses the doi links provided by EurekAlert! and ScienceDaily to link research papers and press releases; however, these manually-added links cover less than 50% of EurekAlert!
+
+press releases.
+
+In future work we would like to develop a content-based matching system to link press releases to scientific literature.
+
+Third, the current approach matches the main claims in research papers and press releases at article level, by utilizing the inverted-pyramid structure in press release.
+
+This approach works well for press releases, but might not be suitable for identifying exaggeration in other genres.
+
+For example, inverted-pyramid structure is not common in online discussion forums (e.g. Reddit (Zhou and Yu, 2020)) and social media posts.
+
+Some news articles may also cite findings from multiple scientific studies.
+
+In future work we would like to develop a sentence-level approach for pairing claims in research papers and their paraphrased versions in news and social media.

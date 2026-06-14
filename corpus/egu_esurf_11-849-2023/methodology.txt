@@ -1,0 +1,285 @@
+We characterize the spatial variability in precipitation across the Olympic Peninsula by comparing the amounts of precipitation in the Quinault and Elwha basins.
+
+We define a rain shadow index (R) in Eq. (1) as follows:
+
+R = P e P q ,(1)
+
+where P e is the spatially averaged precipitation rate in the Elwha basin, and P q is the spatially averaged precipitation rate in the Quinault basin.
+
+We compute R over different timescales using three datasets, namely climatologies based on the spatial interpolation of 30 years of observations, annual precipitation totals inferred from 100 years of river discharge measurements, and 6 h modeled precipitation outputs from a numerical weather forecast model (the Weather Research and Forecasting, WRF, model).
+
+By examining the variability in the rain shadow in time, we can compare it to factors that might influence the precipitation processes in this region.
+
+Specifically, we compare 6 h measures of R with wind speed, wind direction, temperature, and atmospheric stability across different precipitation events to assess the extent to which different types of precipitation events (e.g., cold vs. warm fronts) exhibit different characteristic rain shadow strengths.
+
+At the annual timescale, we compare the annual time series of R derived from river discharge with climate indexes to see if a strong or weak rain shadow correlates with different regional climate states.
+
+Overall, our goal is to constrain the variability in the rain shadow over long and short timescales in the modern climate to understand causes of particularly strong and weak rain shadows.
+
+We leverage these data to constrain the rain shadow strength during periods of intense glaciation of the Olympic Mountains.
+
+We use archived Weather Research Forecasting (WRF; Skamarock et al., 2008) from the Olympic Mountains Ground Validation Experiment (OLYMPEX; Houze et al., 2017) to estimate the strength of the rain shadow at short timescales (Fig. 1d).
+
+OLYMPEX was a meteorological field campaign in the winter of 2015-2016 and was designed to validate Global Precipitation Measurement satellites and investigate Pacific midlatitude storms as they travel over the Olympic Mountains (Houze et al., 2017).
+
+The WRF model was initialized using meteorological fields from the Global Forecast System and was run during the OLYMPEX campaign (1 November 2015 to 1 February 2016).
+
+The WRF parameterization and model setup are as described in Conrick and Mass (2019a, b).
+
+We evaluate the variable RAINNC code, which is the cumulative total accumulation of ice and liquid precipitation at the ground surface since the start of the model run.
+
+Specifically, 24 h long simulations at 1.33 km resolution were initialized at 00:00 and 12:00 UTC daily, with model output saved every 6 h. We create a time series of precipitation based on accumulation during the first 12 h of each model run.
+
+The first saved value of RAINNC provides a record of the 6 h accumulated precipitation during the first 6 h. To ob-tain accumulated precipitation during the second 6 h of each model run, we subtract the value of RAINNC recorded after 12 model hours from the value recorded after 6 model hours.
+
+We treat this time series as precipitation data, without attempting to quantify model errors.
+
+We define a rain shadow index, R WRF , as the ratio of the spatially averaged WRF output for each basin (P e and P q ).
+
+We calculate an R WRF value for the whole accumulated precipitation during the OLYM-PEX campaign.
+
+In order to characterize its variability in time, we also calculated R WRF for every 6 h period for which P e and P q both exceeded 5 mm.
+
+The time series of 6 h R WRF is compared to wind speed, wind direction, and temperature measurements collected by weather balloon radiosondes during the OLYMPEX campaign, with the goal of identifying relationships between the rain shadow strength and atmospheric conditions.
+
+Radiosonde data were taken at Quillayute Airport (KUIL), located in Quillayute, WA (Fig. 1b).
+
+There were 162 soundings from 29 October 2015 to 16 January 2016.
+
+Data collected there were used to investigate relationships between rain shadow strength and atmospheric conditions.
+
+Soundings were collected at variable heights, and we interpolated these to a defined spacing of 250 m, using linear interpolation.
+
+We averaged the temperature, wind speed, and wind direction over an arbitrary 1 km vertical distance near the surface from 750 to 1750 m for each sounding.
+
+These average values were interpolated from the times of observation to 6 h time intervals of the WRF model using linear interpolation.
+
+We use a flowline model based on that of Oerlemans (1997), adapted from Roe and O'Neal (2009), to approximate the dynamics of glaciers in the Quinault and Elwha valleys.
+
+The model is one-dimensional but includes the effect of changes in the valley width when considering mass conservation along the flowline.
+
+We follow the work of Roe and O'Neal (2009) by calculating the mass balance along the flowline as a function of precipitation and temperature instead of imposing a specified vertical mass balance gradient.
+
+Inputs to the model include valley geometry, initial ice thickness, sea level temperature, atmospheric lapse rate, and precipitation rate.
+
+The horizontal grid spacing in the model is 500 m. Valley geometry is idealized as a long profile with a valley floor of a defined width and valley sidewalls sloping outward at a fixed angle above the valley floor.
+
+The Quinault and Elwha valleys have different morphology and hypsometry (Fig. 5), which is likely to affect glacier dynamics.
+
+For simplicity, the geometry of each valley was idealized using three segments with uniform width and the valley angles for each segment, with the valley floor elevation defined by the elevation of the lowest part of the valley extracted from a 30 m digital elevation model (Table 3).
+
+We make no attempt to remove glacial and post-glacial sediment from the valleys be-  fore extracting the long profile.
+
+Where the valleys are wide, the valley side walls are assumed to be vertical.
+
+Within narrow sections, we define the angle at which valley walls slope outward.
+
+Both valleys start with a wide contributing area in the high headwaters.
+
+In the middle of each basin, there is a narrow notch.
+
+Below the notches, the basins open into expansive coastal plains.
+
+Basin widths were chosen to approximate the upstream area accumulation along the long profile.
+
+The mass balance of the glacier varies along its length as a function of spatially variable precipitation and summer mean temperature.
+
+Summer temperature (T ) varies along the length of the flowline (x) and is a function of elevation of the ice surface and an imposed sea level temperature, T SL , as follows:
+
+T (x) = T SL + γ (zb(x) + h(x)), (3
+
+)
+
+where γ is the atmospheric lapse rate, here chosen as -8.5× 10 -3• C km -1 , zb(x) is the elevation of the bed, and h(x) is the thickness of the ice.
+
+Precipitation decreases down-valley in both basins and is generally lower in the Elwha basin (Fig. 5).
+
+We idealize this variability by setting a precipitation rate at the top of the basin and imposing a fixed fractional decrease in the precipitation from the top to the bottom of each valley.
+
+For the Elwha valley, we assume that the precipitation at the valley mouth is 27 % of that of the valley top.
+
+For the Quinault valley, we assume that the precipitation at the valley mouth is 44 % of that at the valley top.
+
+These fractions were chosen to approximate the modern spatial pattern in precipitation (Fig. 5).
+
+To simulate a glacial climate, we make the climate drier than modern by imposing a glacial drying factor (GDF) of less than 1.
+
+The idealized modern precipitation gradient is multiplied by the GDF to model a drier climate that maintains the down-valley precipitation gradient Modeled temperature and precipitation are used to calculate the mass balance along the flowline.
+
+Precipitation is assumed to be adding mass throughout time and across the entire glacier surface.
+
+Temperature-dependent melting is assumed to be the only loss of mass and is calculated as
+
+melt(x) = maximum(0, µT (x)), (4
+
+)
+
+where µ is a constant melt factor set to 0.65 m yr -1 • C -1 , following the work by Roe and O'Neal (2009) on Mount Baker in the neighboring Cascade Range.
+
+From this, we calculate a spatially variable mass balance, b(x) (in m yr -1 ), as b(x) = P (x) -melt(x).
+
+(5)
+
+With the mass balance calculated, we follow the method of Oerlemans (1997), as implemented by Roe and O'Neal (2009) and Stuart-Smith et al. (2021), to solve the nonlinear diffusion equation governing the height of the ice over time.
+
+We choose a fixed value of 1.9 × 10 -24 Pa -3 s -1 as the parameter controlling the internal deformation and 5.7 × 10 -20 Pa -3 m 2 s -1 as the sliding parameter, based on values used in Oerlemans (1997), which are based on Budd et al. (1979).
+
+The model requires ice to be present at the beginning of simulations.
+
+Therefore, we start with glaciers of the expected scale and use a large glacier near the terminal moraine for the initial condition for the Quinault valley and use a small initial glacier limited to the headwaters in the Elwha valley.
+
+The model is implemented in MATLAB, and the model code and basin geometry in-A. A. Margason et al.: Orographic precipitation and asymmetric paleo-glacier extent put files are publicly available at https://doi.org/10.4211/hs.
+
+fe28143081434b0d90f8cffc88e1bfff (Margason, 2023a).
+
+We begin by finding the range of climate conditions that produce a modeled Quinault glacier in equilibrium at the observed Early Wisconsin maximum extent (Fig. 1b).
+
+Using a trial-and-error approach, we identify pairs of T SL and glacial drying factor (GDF) that produce an equilibrium glacier at the terminal moraine.
+
+T SL and GDF linearly trade-off (GDF = 0.10 T SL -0.55) within the range of sea level temperatures between 7 and 11 • C supported by paleoclimate reconstructions (Heusser et al., 1999).
+
+For a chosen value of T SL , we can find the percentage of precipitation (GDF) that forces the glacier to stay in equilibrium near its terminal moraines over a 5000-year period.
+
+Encouragingly, the corresponding GDF values (∼ 0.15-0.55) are similar to the required drying of at least 0.33 implied by the paleoclimate record.
+
+Having found equilibria for the Quinault glacier, we use the same climate T SL and GDF pairs to simulate the evolution of the Elwha glacier.
+
+Pairs of climate variables that produced nearly identical equilibrium glaciers in the Quinault led to enormously different glaciers in the Elwha valley.
+
+At the hotter end of the climate range at 10.5 • C, the Elwha glacier reaches a steady state with a high-elevation terminus consistent with the most likely true behavior of the Elwha glacier during the most recent glaciation.
+
+However, for a cooler climate at 9.5 • C, the Elwha glacier advances far down-valley onto the coastal plain (Fig. 6).
+
+The Elwha glacier advances from the headwaters into the narrower portion of the valley, which is about 25 km from the divide.
+
+The glacier thickens due to the abrupt change in cross-sectional area.
+
+The thickening causes the surface of the ice to be at higher elevations.
+
+This increases the accumulation area of the glacier.
+
+A larger accumulation area causes glacier growth and further increases in glacier elevation.
+
+The sensitivity of the feedback loop between ice elevation and glacier growth to climate conditions is pronounced for the Elwha glacier, despite the range of climate conditions being similar to those that result in little change to the Quinault glacier.
+
+As a result, even slight alterations in climate conditions can produce significant contrasts in the behavior of the Elwha glacier in comparison to the Quinault glacier.
+
+Our findings indicate that the Elwha glacier model experiences an ice elevation feedback that is associated with the geometry of the basin.
+
+The initiation of the feedback occurs when the glacier advances into the narrow section of the valley (notch), where it begins to thicken (Fig. 6).
+
+The Quinault valley also has a narrow segment in the middle of the basin; therefore, we expect to see the occurrence of a similar ice elevation feedback in this valley.
+
+To investigate this possibility, we ran a set of models with an initially small Quinault glacier.
+
+In some simulations, this glacier grew large enough to advance through the narrowing of the valley.
+
+It thickened and extended, demonstrating an ice elevation feedback that is similar to what we observed in the Elwha simulations.
+
+The geometry of the basins is not the only control on the glacier extent.
+
+We ran a set of simulations switching the basin geometry.
+
+That is, we ran the Quinault climate over the Elwha valley geometry, and vice versa.
+
+The Elwha glacier was consistently large when given Quinault precipitation rates.
+
+The Quinault glacier ablated away or grew large when given the Elwha precipitation rates.
+
+This indicates that the contrast in precipitation amount, rather that the valley morphology, is the main cause of the different extent of the Quinault glacier and Elwha glacier in our models.
+
+This finding also suggests that if precipitation gradients were weaker in the past, then they would not be sufficient to explain the observed difference in glacier extent.
+
+Assuming that the geologic mapping of the Elwha valley has correctly identified the limited extent of recent glaciation, we can interpret our results as demonstrating that precipitation gradients are sufficient to explain differences in glacier extent if the past climate was at the warm and wet end of the range of paleoclimate estimates.
+
+However, the valley geometry and sensitivity of the Elwha glacier to climate variability within a plausible range suggests that the possibility of the large-scale glaciation of the valley during the Quaternary should be considered.
+
+In our model, we have neglected other spatially variable surface processes that could have influenced the extent of the Elwha glacier.
+
+Specifically, we did not account for the separate influences that precipitation type, cloudiness, humidity, and sublimation would have on glacier accumulation and melt.
+
+In the model, we did not discriminate between different types of precipitation.
+
+All precipitation was considered snow.
+
+Rain will not contribute to glacier mass gain.
+
+If a significant portion of the precipitation falls as rain, then we are overestimating accumulation.
+
+We expect that the majority of the precipitation during the Early Wisconsin is snow because we expect a seasonal shift in temperature that is similar to the present, which brings winter temperatures at sea level to within a few degrees of freezing, and about 80 % of modern precipitation is during the cool season.
+
+However, at the lowest elevations and during the warm season, rain likely occurred during the Early Wisconsin glacial advance.
+
+The larger precipitation totals in the Quinault suggest that this effect could be more important for this glacier than for the Elwha.
+
+Cloudiness modulates the amount of solar radiation that reaches a glacier's surface.
+
+We expect that the same physics that creates the rain shadow should produce coherent spatial patterns in cloudiness in the Olympic Mountains.
+
+Clouds form on the windward side of the range due to orographic lifting and then dissipate when they descend on the leeward side of the mountain range (Roe, 2005).
+
+During some precip-Figure 6.
+
+The temporal evolution of the Elwha glacier terminus and ice thickness for T SL = 9.5 • and GDF = 0.44.
+
+These climate factors yield an equilibrium Quinault glacier at its terminal moraine position.
+
+As the Elwha glacier terminus (gray line) advances into the narrow section of the valley (distance of approximately 23 to 56 km, as shown on the left axis) just before 3000 years into the simulation, the ice thickness (black line) increases rapidly, initiating an ice elevation feedback.
+
+Upon reaching the other side of the valley notch, the glacier reaches a state of equilibrium, where the rates of accumulation and ablation are roughly equal.
+
+It is important to note that this ice elevation feedback is not observed in all climate simulations but is more likely to occur in cooler and drier conditions and in basins with valley geometries similar to that of Elwha.
+
+itation events, clouds are observed to decrease in elevation and water content rapidly near the divide between the Quinault and Elwha valleys (Zagrodnik et al., 2019).
+
+If the Elwha valley is less cloudy than the Quinault valley, then we expect that more solar radiation would increase local air temperatures and enhance glacier melt (Huss et al., 2009).
+
+Additionally, there could be spatial patterns in humidity that influence glacier mass balance.
+
+If the Elwha valley is systematically less humid, we expect that the lapse rate should be larger than in the wetter Quinault valley.
+
+Descending airflow in the lee of the mountain range could decrease humidity and increase lapse rate in the Elwha valley relative to the Quinault.
+
+We conducted a small number of experiments to determine the sensitivity of the modeled Elwha glacier to our choice for the melt factor.
+
+For the simulation shown in Fig. 6, if we increase the melt factor slightly from 0.65 to 0.75 m yr -1 • C -1 , then the Elwha glacier remains small.
+
+The melt factor for the Blue Glacier, on the west side of the Olympic Mountains, was estimated using the glacier area change and PRISMbased temperature and precipitation data (Fountain et al., 2022).
+
+Field measurements could constrain the melt factor in the eastern Olympic Mountains to assess the potential for enhanced melt in the Elwha basin relative to the Quinault.
+
+Future work could establish if climatological variabil-ity in cloudiness is equivalent to this degree of difference in the melt factor relative to the Quinault basin.
+
+The role of lapse rate variability could also be explored.
+
+Additionally, a more sophisticated glacier model could be used for twodimensional simulations that would depict the valley geometry more specifically and include two-dimensional spatial variability in precipitation and aspect-related melting.
+
+Our flowline model captures the variability in the direction of the steepest precipitation gradients but neglects variability across the valleys that may be important, especially for spatially variable drivers of ablation, such as topographic shading.
+
+Although we defend our analysis of the modern climate and our reasonable assumption that the past spatial gradient in precipitation in the Olympic Mountains was similar to that observed today, it is important to acknowledge that precipitation events during the last glacial period may not have any modern climate analogues.
+
+One way to assess this possibility would be to use a forecasting model like WRF, with boundary conditions pulled from global circulation models of the Early Wisconsin.
+
+These simulations could reveal different mechanisms of precipitation variability than those that operate today.
+
+Any assessment of erosion by glaciers on the Olympic Peninsula requires a clear picture of the glacier extent through time.
+
+To model glacial erosion in the Quinault valley, we should simulate the advance and retreat of the Quinault glacier through a glacial cycle and integrating basal sliding.
+
+The spatial pattern of glacier sliding within the Quinault valley could be compared to gradients in exhumation across the range and fluvial erosion within the Clearwater Valley.
+
+Glacial erosion of the Elwha valley depends on the extent of ice.
+
+If the Elwha glacier remained small during the last glacial episode, then glacial erosion was limited, and perhaps fluvial erosion was a stronger control on landscape-scale erosion on the lee side of the range.
+
+However, if an expansive and thick glacier ever occupied the Elwha valley, then our models suggest that it was very fast flowing and erosivemore so than the Quinault glacier.
+
+Future fieldwork could improve our understanding of the past extent of the Elwha glacier.
+
+One target would be to find terminal moraines associated with the Elwha valley glacier during the most recent glaciation, presumably located upvalley from the mapped quadrangles near the valley mouth.
+
+If these are above the notch, then they would improve our confidence in the model simulations.
+
+In the lower Elwha valley, drill cores could be recovered and analyzed to identify the extent of locally derived (alpine) till.
+
+It is possible that alpine till from previous glaciations could be identified from the mineralogy and chemistry, allowing us to constrain the past glacier extent.

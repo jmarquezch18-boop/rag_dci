@@ -1,0 +1,117 @@
+{
+  "query_id": "54c1740d649ea5d594afbf47e72c3f52b3fcb129",
+  "query": "Have the authors tried other strategies such as initializing the student like in pkd-bert and determining the number of layers by total budgets (e.g. with a hard overhead budget for all sub-tasks)?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "pkd-bert"
+      },
+      "result_preview": "No matches found for 'pkd-bert'",
+      "elapsed_s": 4.4
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "student model initialization"
+      },
+      "result_preview": "No matches found for 'student model initialization'",
+      "elapsed_s": 8.73
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "model initialization techniques"
+      },
+      "result_preview": "No matches found for 'model initialization techniques'",
+      "elapsed_s": 6.42
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "training procedure"
+      },
+      "result_preview": "Search results for 'training procedure' (5 matches):\n[paper_id=nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7 | section=introduction | line=15] In this work, we present a new objective and training proced",
+      "elapsed_s": 3.61
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7",
+        "section": "introduction",
+        "start": 10,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7 / introduction — líneas 5-25 de 41]\nGrounded entity mentions are beneficial for tasks such as question-answering (Das et al., 2019), semantic search (Leaman",
+      "elapsed_s": 9.8
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Grounded entity mentions are beneficial for tasks such as question-answering (Das et al., 2019), semantic search (Leaman and Lu, 2016), recommendation ranking (Noia et al., 2016), and KB construction (Ling et al., 2015).\n\nThe task is made particularly challenging in zero-shot settings, where not every entity has labeled training data (Lin et al., 2017;Logeswaran et al., 2019).\n\nIn such settings, a common approach is to make use of entity descriptions, types, and aliases to form entity representations, which can then be used for making predictions.\n\nLearned vector representations of entity mentions are an integral part of modern linking systems (Gillick et al., 2019;Wu et al., 2020, inter alia).\n\nThese representations are used for (a) retrieving a short-list of entity candidates for a mention to use with a re-ranker (Wu et al., 2020), (b) making linking predictions directly (Zhang et al., 2021;Liu et al., 2020;Sung et al., 2020), and (c) performing coreference by clustering mentions to form entities (Logan IV et al., 2020).\n\nIn this work, we present a new objective and training procedure for learning mention and entity representations that explicitly model mention coreference relationships.\n\nOur proposed method uses a supervised clustering training objective based on forming a directed minimum spanning tree, or arborescence, over mentions and entities.\n\nWe hypothesize that such coreference links provide a useful inductive bias because the two tasks are inherently related (Angell et al., 2021;FitzGerald et al., 2021).\n\nWe thoroughly analyze the performance of the proposed procedure in each of the aforementioned use cases on MedMentions (Mohan and Li, 2019) and ZeShEL (Logeswaran et al., 2019), two challenging datasets that require zero-shot generalization at inference.\n\nWe illustrate that our approach yields mention and entity representations useful for candidate retrieval.\n\nWe show improvements over baselines that use similarly parameterized models, achieving gains of at least 7.94 and 0.93 points in recall@64 over two standard dualencoder training procedures on MedMentions and ZeShEL, respectively.",
+      "section": "introduction",
+      "paper_id": "nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7",
+      "chunk_id": "dci_nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/a4c721144a8df14739ad3a6daa2b625723a1b9e085b0b5b0e64ec74fbca3ded7b0f3ae64d7539ee8465e6f43eee46c1f0c81fbeb96d6c0a53e3b89762b598f46_96"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 1.0,
+    "recall_at_3": 1.0,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "recall_at_20": 1.0,
+    "precision_at_5": 1.0,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7_introduction_0000"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.11428571428571427,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

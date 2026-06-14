@@ -1,0 +1,7 @@
+Confidence estimation is particularly critical in realworld deployment, where noisy samples and out-ofdistribution data are prevalent (Snoek et al., 2019).
+
+Given those abnormal inputs, neural network models are prone to be highly confident in misclassification (Nguyen et al., 2015).
+
+Thus, we need an accurate confidence estimate to detect potential failures caused by odd inputs by assigning them low confidence.
+
+This section explores whether our confidence estimate can accurately measure risk under those two conditions.

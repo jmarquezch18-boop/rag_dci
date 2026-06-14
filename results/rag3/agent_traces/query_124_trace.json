@@ -1,0 +1,149 @@
+{
+  "query_id": "e7cb5933a3df86f543cb36cb77b3f41cd7ad4021",
+  "query": "What advantages does a rule-based approach have over statistical or neural methods when working with small corpora for indigenous languages?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "rule-based approach"
+      },
+      "result_preview": "Search results for 'rule-based approach' (1 matches):\n[paper_id=nlpeer_PeerRead-ACL2017_169 | section=results | line=25] Ultimately however, we believe the high scores awarded by the raters validates the efficacy of our rule-based approach.",
+      "elapsed_s": 4.32
+    },
+    {
+      "iteration": 1,
+      "tool": "list_sections",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_169"
+      },
+      "result_preview": "Secciones de 'nlpeer_PeerRead-ACL2017_169':\nabstract\ndiscussion\nintroduction\nmethodology\nresults",
+      "elapsed_s": 7.88
+    },
+    {
+      "iteration": 2,
+      "tool": "read_file",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_169",
+        "section": "results"
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_169 / results]\nAs our new error scheme is based solely on automatically obtained properties of the data, there are no gold standard labels against which to evaluate classifier performance.\n\nFor this reason, we instead carried out a small-scale manual evaluation, where we sim",
+      "elapsed_s": 6.73
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "rule-based effectiveness"
+      },
+      "result_preview": "No matches found for 'rule-based effectiveness'",
+      "elapsed_s": 13.32
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_169",
+        "section": "results",
+        "start": 20,
+        "end": 30
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_169 / results — líneas 15-25 de 25]\nThe results from this evaluation are shown in Table 3.\n\nSignificantly, all 5 raters considered at least 95% of the predicted error types to be either \"Good\" or \"Acceptable\", despite the degree of noise introduced by automatic edit extracti",
+      "elapsed_s": 8.55
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "As our new error scheme is based solely on automatically obtained properties of the data, there are no gold standard labels against which to evaluate classifier performance. For this reason, we instead carried out a small-scale manual evaluation, where we simply asked 5 GEC researchers to rate the appropriateness of the predicted error types for 200 randomly chosen edits in context (100 from FCE-test and 100 from CoNLL-2014) as \"Good\", \"Acceptable\" or \"Bad\". \"Good' meant the chosen type was the most appropriate for the given edit, \"Acceptable\" meant the chosen type was appropriate, but probably not optimum, while \"Bad\" meant the chosen type was not appropriate for the edit. Raters were warned that the edit boundaries had been determined automatically and hence might be unusual, but that they should focus on the appropriateness of the error type regardless of whether they agreed with the boundary or not. It is worth stating that the main purpose of this evaluation was not to evaluate the specific strengths and weaknesses of the classifier, but rather ascertain how well humans believed the predicted error types characterised each edit. GEC is known to be a highly subjective task ( Table 3: The percent distribution for how each expert rated the appropriateness of the predicted error types. E.g. Rater 3 considered 83% of all predicted types to be \"Good\". Ng, 2015) and so we were more interested in overall judgements than specific disagreements. The results from this evaluation are shown in Table 3. Significantly, all 5 raters considered at least 95% of the predicted error types to be either \"Good\" or \"Acceptable\", despite the degree of noise introduced by automatic edit extraction. Furthermore, whenever raters judged an edit as \"Bad\", this could usually be traced back to a POS or parse error; e.g. [ring → rings]",
+      "section": "results",
+      "paper_id": "nlpeer_PeerRead-ACL2017_169",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_results_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_169",
+      "score": 1.0
+    },
+    {
+      "text": "raters considered at least 95% of the predicted error types to be either \"Good\" or \"Acceptable\", despite the degree of noise introduced by automatic edit extraction. Furthermore, whenever raters judged an edit as \"Bad\", this could usually be traced back to a POS or parse error; e.g. [ring → rings] might be considered a NOUN:NUM or VERB:SVA error depending on whether the POS tagger considered both sides of the edit nouns or verbs. Interannotator agreement was also good at 0.724 κ f ree (Randolph, 2005). In contrast, although incomparable on account of the different metric and error scheme, the best results using machine learning were between 50-70% F 1 (Felice et al., 2016). Ultimately however, we believe the high scores awarded by the raters validates the efficacy of our rule-based approach.",
+      "section": "results",
+      "paper_id": "nlpeer_PeerRead-ACL2017_169",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_results_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_169",
+      "score": 1.0
+    },
+    {
+      "text": "The results from this evaluation are shown in Table 3.\n\nSignificantly, all 5 raters considered at least 95% of the predicted error types to be either \"Good\" or \"Acceptable\", despite the degree of noise introduced by automatic edit extraction.\n\nFurthermore, whenever raters judged an edit as \"Bad\", this could usually be traced back to a POS or parse error; e.g. [ring → rings] might be considered a NOUN:NUM or VERB:SVA error depending on whether the POS tagger considered both sides of the edit nouns or verbs.\n\nInterannotator agreement was also good at 0.724 κ f ree (Randolph, 2005).\n\nIn contrast, although incomparable on account of the different metric and error scheme, the best results using machine learning were between 50-70% F 1 (Felice et al., 2016).\n\nUltimately however, we believe the high scores awarded by the raters validates the efficacy of our rule-based approach.",
+      "section": "results",
+      "paper_id": "nlpeer_PeerRead-ACL2017_169",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_results_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_169",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/COLING2020/1367_59",
+    "nlpeer/COLING2020/1367_60"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_PeerRead-ACL2017_169_results_0000",
+      "dci_nlpeer_PeerRead-ACL2017_169_results_0001",
+      "dci_nlpeer_PeerRead-ACL2017_169_results_0002"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_results_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_results_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_169_results_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.0975609756097561,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

@@ -1,0 +1,17 @@
+Various NLP data augmentation techniques have been proposed and they are mainly divided into two categories: one is to modify raw input directly, and the other interferes with the embedding (Miyato et al., 2016;Zhu et al., 2019).
+
+The most commonly used method to modify the raw input is the token replacement: randomly select tokens in a sentence and replace them with semantically similar tokens to synthesize a new sentence.
+
+(Wei and Zou, 2019) directly uses the synonym table WordNet (Miller, 1998) for replacement.
+
+(Kobayashi, 2018) proposes contextual augmentation to predict the probability distribution of replacement tokens with two causal language models.
+
+(Wu et al., 2019a) extends contextual augmentation with BERT's masked language modeling (MLM) to consider bi-directional context.
+
+(Gao et al., 2019) softly augments a randomly chosen token in a sentence by replacing its one-hot representation with the distribution of the vocabulary provided by the causal language model in machine translation.
+
+Unlike (Gao et al., 2019), we use MLM to generate smoothed representation, which considers the deep bi-directional context more adequately. And our method has better parallelism, which can efficiently obtain the smoothed representation of the entire sentence in one forward process.
+
+Moreover, we propose to constrain smoothed representation more controllable through interpolation for classification tasks.
+
+3 Our Method

@@ -1,0 +1,303 @@
+The Indigenous Languages Technology Project At Nrc Canada: An Empowerment-Oriented Approach To Developing Language Software
+
+Abstract
+
+Introduction
+
+Sociolinguistic Background
+
+Polysynthetic Verb Conjugation
+
+Background
+
+Wordweaver
+
+Since many Indigenous languages have rich inflectional morphology, we decided to carry out Owennatékha's request by building a software tool that could be extended beyond Kanyen'kéha to other languages.
+
+The structure of the WordWeaver ecosystem consists of two main parts: a front-end interface (WordWeaver UI) implemented in Angular, and a back-end database and API implemented in Python (Fastapi & CouchDB).
+
+Initially, WordWeaver was tightly coupled to the instance's language model, specifically Foma (Hulden, 2009).
+
+However, all data is now stored in a database.
+
+This architecture allows verb conjugators to be made without requiring knowledge about FSTs.
+
+Wordweaver Instances
+
+The first instance of WordWeaver, Kawennón:nis, models the Western dialect of Kanyen'kéha that is taught at the Onkwawenna Kentyohkwa school.
+
+Kawennón:nis means "It Makes Words" in the language.
+
+We have since also created an instance for the Eastern dialect, spoken in the Kahnawà:ke community in Quebec.
+
+To design rules for the first Kawennón:nis FST, we relied on a textbook that describes the Western dialect (Maracle, 2017), along with writings on other Kanyen'kéha dialects and the related language Oneida.
+
+The NRC team benefited from a close relationship with the staff of the school, who added hundreds of new verbs to the system through a collaborative development process whereby new verb stems are entered in a spreadsheet and are then compiled into an FST lexicon formalism (lexc).
+
+Quality control for this Western version of Kawennón:nis was done by teachers at the school and by members of the research team.
+
+Team members made several in-person visits to the school to participate in multi-day collaborative sessions to design, evaluate, and improve the user interface (UI).
+
+Creation of the Eastern (Kahnawà:ke) version relied heavily on the expertise of Akwiratékha' Martin, who is familiar with that dialect.
+
+The Western version of Kawennón:nis contains over 250 verb stems while the Eastern version has approximately 600.
+
+Both versions contain all bound pronouns and 12 tense/aspect combinations (command, habitual forms, perfective forms and punctual forms including the definite past, conditional and future forms) and are capable of generating over 100,000 conjugated forms.
+
+Wordweaver User Interface (Ui)
+
+The UI is of prime importance, if WordWeaver is to be useful to students.
+
+The process for prototyping, designing, and evaluating the WordWeaver UI involved multiple in-person visits for defining the requirements, hiring in-community designers, and extensive user interface and user experience (UI/UX) review.
+
+The resulting UI is interactive, highly theme-able, translated into English, French and Kanyen'kéha, available on the web and mobile as a progressive web application, and available offline.
+
+There are two main views within the application, the 'Wordmaker' and the 'Tableviewer'.
+
+The 'Wordmaker' is the simplest view and guides the user linearly through three questions to create a single conjugation, what the action is, who is doing it, and when it's happening.
+
+It is assumed that each conjugation will minimally require a root and some sort of pronominal inflection.
+
+The third category is the most open and could be used for other 'options' beyond the temporal options currently suggested by WordWeaver.
+
+The 'Tableviewer' is the more advanced view.
+
+It allows users to create paradigm tables of conjugations instead of single output forms.
+
+Here users can select multiple options from the three categories to create a query for many conjugated forms.
+
+The user can then either interact with the conjugations in a tabular grid format (see Figure 2, left) or in a 'tree' format (see Figure 2, right).
+
+Users can also download the conjugations as a Microsoft Word Document, CSV file, or a formatted L A T E X file.
+
+This functionality allows users to create and print out tables for making their own flashcards or study tools.
+
+Work On Michif
+
+The work on a verb conjugator for Michif began after the NRC team was asked by Heather Souter of the Prairies to Woodlands Indigenous Language Revitalization Circle (P2WILRC), whether they could implement a system like Kawennón:nis for Michif.
+
+Michif is a mixed, highly polysynthetic language which arose during the 19 th century from the intermarriage between French fur traders and Cree and Ojibwe women (Rosen and Souter, 2009).
+
+Their descendants are the Métis people, whose official language is Michif.
+
+Michif takes most of its nominal patterns from French, and its verbal patterns from Cree.
+
+There is a high degree of regional variation (Sammons, 2019).
+
+As is the case for many Indigenous languages, there is a shortage of data and formal documentation for the language.
+
+With Ms. Souter's help, the NRC team has been building Li Verb kaa-Ooshitahk di Michif (Davis and Santos, under review), a finite-state transducer (FST) which models the verbal morphology of Michif according to the lexc formalism (Beesley and Karttunen, 2003).
+
+The current implementation allows for the conjugation of 22 verb stems, which generates 6791 possible verb forms.
+
+Though Li Verb kaa-Ooshitahk di Michif relies on FSTs, just as Kawennón:nis does, it is not yet integrated into the WordWeaver code base; we have started working on this integration.
+
+The Li Verb kaa-Ooshitahk di Michif FST serves as the back-end to an app that will allow users to conjugate verbs in Michif without having any previous training relating to FSTs or linguistics.
+
+The app contains a simple interface that walks a user through building a verb conjugation in Michif.
+
+This interface will be available for both Android and iOS, and as a web application.
+
+The application will be available for use offline (after initial download) and deliberately avoids the use of over-technical linguistic terminology, to make it easier for learners to ask about the language directly from speakers in informal Métis community settings.
+
+Corpus And Tools For Inuktut (Including Machine Translation)
+
+Inuit languages, which are polysynthetic, are spoken across Arctic Canada.
+
+The Government of Nunavut uses the term Inuktut to represent all of the Inuit language varieties spoken in Nunavut.
+
+With help from the Government of Nunavut and the Pirurvik Centre, the NRC project team created and released the sentence-aligned Inuktut-English "Nunavut Hansard" corpus based on the proceedings of the Legislative Assembly of Nunavut from April 1999 to June 2017.
+
+We believe this to be the largest parallel corpus for an Indigenous language of the Americas or a polysynthetic language released to date (1.3 million aligned sentence pairs).
+
+The corpus is available at the NRC Digital Repository3 under the CC-BY-4.0 license; creation of the corpus and preliminary machine translation experiments are described in Joanis et al. (2020).
+
+4 The existence of the Nunavut Hansard has made possible a shared task for the Inuktut-English language pair in the 2020 Workshop for Machine Translation.
+
+5Several years ago, researchers at NRC built a search engine for English-to-Inuktut translators, WeBInuk (Désilets et al., 2008).
+
+Given an English word or phrase, it would return matching Inuktut-English sentence pairs from a parallel corpus (the portion of the Nunavut Hansard that was then available).
+
+This online service lapsed for several years.
+
+One of the goals of the ILT project was to create a new bidirectional version of WeBInuk-i.e., to allow users to enter Inuktut search terms as well as English ones.
+
+We also aimed at providing other tools for Inuktut: a dictionary, a gister (i.e. a service that provides rough English renderings of the component morphemes of an Inuktut word), a spell checker, etc.
+
+Inuktut words resemble short phrases in English. They are composed by stringing together: a root (about 2000 possibilities) and a fairly long sequence of morphemes (typically 4-5 morphemes, but potentially up to 9) taken from a set of roughly 450 affixes (verbs, adjectives, etc.), 1300 verb endings, and 320 noun endings.
+
+Unlike Kanyen'kéha, where the surface forms of morphemes are usually invariant, many Inuktut morphemes have surface forms that change in different contexts.
+
+The same surface form may correspond to different morphemes.
+
+Many, perhaps most, Inuktut words in a given text will not have occurred before.
+
+Thus, building a word-based dictionary with good coverage is unrealistic.
+
+However, one can decompose the Inuktut word into a sequence of morphemes, then look up the meanings of the morphemes.
+
+Similarly, one could easily build a version of WeBInuk that would allow users to look up whole Inuktut words, but it would not have high coverage; users would often enter words for which exact matches cannot be found in the parallel corpus.
+
+It would be more helpful to supply them with Inuktut words in the corpus that share the root and a few other morphemes with the word they are interested in.
+
+Nevertheless, by building on a morphological analyzer created earlier (Farley, 2012), Benoît Farley of the Pirurvik Centre and Alain Désilets of NRC were able to create five prototype apps: 1. a "morpheme example search" app that, given a morpheme, shows examples of its use; 2. a gister that, given Inuktut text, returns not only the meanings of the morphemes in the words composing it, but also sentence pairs that may have related meanings; 3. a search tool for Inuktut-English sentence pairs similar to WeBInuk (but bidirectional); 4. an Inuktut spell checker that, if it can't find a word, returns the most similar words which are known to be correctly spelled and the longest correctly spelled head and tail in the word; and 5.
+
+a morphological search engine that, given an Inuktut word, searches for its five most frequent morphological variants.
+
+These tools are being tested and improved; they will soon be released.
+
+Predictive Text
+
+Writers in majority languages benefit from predictive text suggestions on their smartphone keyboards.
+
+Predictive text requires data-typically mined from large text corpora-to generate an n-gram language model (van Esch et al., 2019); however, many Indigenous language communities either do not have extensive text corpora, or have data too culturally sensitive to share outside their community.
+
+We have collaborated with Keyman (keyman.com), an open-source keyboard creation platform, to add a predictive text platform to their suite of smartphone keyboards and their keyboard development tool.
+
+We have "decentralized" the creation of predictive text models, by making it possible for Indigenous language activists, using a spreadsheet of words in their language, to provide predictive text suggestions for their community.
+
+Thus, the language activists are in charge of their own data, and can choose how they share their predictive text keyboard.
+
+This contrasts with Gboard (van Esch et al., 2019) where a centralized entity mines text corpora and creates a language-specific model.
+
+Since we expect data to be sparse, the language models our software generates are word-level unigrams.
+
+We have implemented predictive text for one language so far, SENĆOŦEN.
+
+Members of that community report that it makes typing in their language, which has an unusual orthography, dramatically easier.
+
+We are working to make the software easier to use, so that communities can implement predictive text for their own languages.
+
+Speech-Based Subprojects
+
+Traditionally, Indigenous languages in Canada were spoken,6 not written.
+
+Thus, several ILT subprojects focused on applications of speech technology.
+
+Work At Crim On Audio Segmentation And Speech Recognition
+
+Transcription and further annotation of speech recordings are the biggest part of the workload in most language documentation and conservation projects.
+
+The pace at which speech is being recorded in Indigenous languages in Canada and indeed, in minority languages across the world, greatly outstrips the pace at which field linguists and Indigenous language activists can transcribe these recordings.
+
+This is the "transcription bottleneck" (Cox et al., 2019).
+
+NRC provided funding to the Centre de recherche informatique de Montréal (CRIM) to develop tools based on automatic speech recognition (ASR) to relieve both this bottleneck, and a related one that could be termed the "indexation bottleneck".
+
+Some communities have thousands of hours of recordings of speech in their languages made years earlier, with no means of searching through them for relevant words or phrases.
+
+Though it may be impractical to transcribe all that speech now, ASR-based audio indexation might make search possible.
+
+This subproject faced two main challenges.
+
+First, very little data for training ASR systems for Indigenous languages in Canada was available.
+
+Second, ASR research has focused on languages that are in the low to medium range of morphological complexity.
+
+Most Indigenous languages in Canada are in the high range.
+
+Inuktut is known to be particularly morphologically complex, as measured by mean distance to novel type (Schwartz et al., 2020).
+
+To address these issues, this subproject had three themes: data collection and transcription, creation of tools to facilitate transcription, and ASR experiments.
+
+Data Collection And Transcription
+
+Four transcription activities were carried out -see Table 1 (details in Kuhn et al. (2020)).
+
+Audio Segmentation
+
+This theme yielded a set of tools to make the early stages of processing recorded speech easier, prior to transcription.
+
+These were packaged as Web services on CRIM's VESTA platform,7 and are available on the platform or through an ELAN extension.
+
+8 We have already received reports of significant productivity improvements due to their use in speech preprocessing in the field.
+
+The services include: DNN-VAD: deep neural net (DNN) voice activity detection, which extracts segments containing speech (versus silence, noise, etc.); Diarization: identifies who spoke when in a recording; Language Retrieval: finds
+
+Automatic Speech Recognition (Asr)
+
+ASR experiments at CRIM have focused on Inuktut and East Cree. They have highlighted differences between these two polysynthetic languages (Gupta and Boulianne (2020a), Gupta and Boulianne (2020b)).
+
+Inuktut is highly polysynthetic, causing a word-based language model (LM) to be ineffective.
+
+Even with a dictionary containing 300,000 words (from 6 million words of the Nunavut Hansard), 60% of the words in an unseen story text were out of vocabulary (OOV).
+
+So the CRIM experimenters tried syllables and morphemes as sub-word units and found that syllables gave the lowest word error rate (WER).
+
+The WER for the reconstituted words obtained from different sub-word units is shown in Table 2 (for acoustic models trained on 40 hours of transcribed Inuktut speech).
+
+B_ and _E markers are used to show boundaries for morphemes and syllables; experiments with boundaries chosen by deep neural nets (DNNs) were also carried out.
+
+The LM predicts the start or end of the words through these markers so that syllable or morpheme sequences can be converted back to word sequences.
+
+When training data is increased from 40 hours to 80 hours, the speaker independent (SI) WER decreases from 74.3% to 72.3%.
+
+For East Cree, a word-based LM with a 30,000 word dictionary obtains a much lower OOV rate.
+
+Training a word-based LM for Cree from much less text data than for Inuktut (260,000 words of text from Cree organisation reports scriptures) yields only 25% OOV rate on video stories and 9% OOV rate on scriptures.
+
+Video stories differ from the LM text, and thus have a higher OOV rate than the scriptures development text.
+
+Decoding Cree speech using this LM yields a 69.0% WER on video stories (speaker independent = SI WER) and 24.6% on scriptures (speaker dependent = SD WER).
+
+Note that SI WER is lower for Cree than for Inuktut, even when Inuktut benefits from twice as much acoustic training data (80 hours instead of 40 hours) and far more LM training data: 69.0% WER for Cree vs 72.3% for Inuktut.
+
+The speaker-dependent (SD) ASR result for East Cree above is good news: with a few hours of transcribed audio from a single speaker, the WER on new data from the same speaker was 24.6%.
+
+Phoneme error rate (PER) in this SD condition was 8.7%.
+
+This is well below the 30% PER considered good enough to significantly speed up the manual transcription process (if transcription is done by a non-native speaker, as is often the case in field linguistics) (Adams et al., 2018).
+
+It took only 3 hours of transcribed audio to achieve this result.
+
+A similar SD experiment was run with Inuktut, with 3 hours of training from one speaker, and the same syllable LM as for the SI case.
+
+This resulted in 67.3% WER and 18.4% PER.
+
+So even for the SD case, Inuktut has higher WER and PER than East Cree.
+
+Experiments on other Indigenous polysynthetic languages are needed to see where they fall along the East Cree to Inuktut spectrum, in terms of SI and SD ASR difficulty.
+
+Field linguists often record many hours of speech from each of a very small number of fluent speakers: the Elders of an Indigenous community.
+
+If it turns out that good SD ASR is possible for several Indigenous languages, one could imagine a common mode of work in which an SD system is trained on the first few hours of speech from an Elder, then used to produce a first-draft transcription of the remaining hours.
+
+Read-Along Audiobooks
+
+A subproject on software that supports "read-along/sing-along" activities was inspired by the East Cree online activities pioneered at Carleton University (see eastcree.org).
+
+Interactive read-along/sing-along audiobooks that highlight words as they are spoken and allow students to click on words to hear them aloud are well liked by both students and teachers, but their creation has been labour intensive, requiring expertise with specialized software like ELAN or Audacity.
+
+A collaboration between Carleton University, NRC, and David Huggins-Daines (Nuance Communications Montreal) seeks to make the creation of such activities quick and easy, without requiring the creator to manually align each word.
+
+Fortunately, text/audio alignment (also called "forced alignment") is feasible to perform in a "zeroshot" scenario (that is, where there is no data available in the language in question).
+
+One constructs an approximate mapping between target language phonemes and phonemes in a high-resource "donor" language (in our case, English), converts the target document into phones in the donor language, and trains an acoustic model on the donor language to recognize when each word is spoken.
+
+This is the assumed default when working with a new language in the Festival toolkit (Black et al., 1998).
+
+Based on this concept, our ReadAlong Studio9 combines a custom G2P engine, the PanPhon (Mortensen et al., 2016) phonetic distance library, and the lightweight PocketSphinx (Huggins-Daines et al., 2006) speech recognition library to allow a non-expert user to create a text/speech alignment system for a new language.
+
+ReadAlong Studio currently supports 22 languages; among Indigenous languages spoken in Canada it supports Anishinaabemowin (Ojibway), Atikamekw, Dakelh, East Cree, Gitxsan, Heiltsuk, Inuktut, Kanyen'kéha, Kwak'wala, SENĆOŦEN, Seneca, Tagish, Tŝilhqot'in, and Tsuut'ina (the other eight are not spoken in Canada).
+
+Adding a new language is the work of only a few hours, depending on the complexity of the language's orthography.
+
+ReadAlong Studio can already create high-quality interactive webpages (see Figure 3), MP4 movies, and EPUB documents, and can export in ELAN, TextGrid (PRAAT), and subtitle formats.
+
+A user-friendly interface is currently in development.
+
+Other Subprojects
+
+Space is lacking to describe several other subprojects of the NRC project (for these, see Kuhn et al. (2020)).
+
+They include subprojects carried out by external organizations (mostly Indigenous-run) but funded by NRC, such as enhancement of online language courses for East Cree and Innu previously developed at Carleton University, development of online courses for Plains Cree, Kwak'wala, Michif, and Naskapi, improvements to a role-playing game with Swampy Cree content, two subprojects for training Indigenous language activists in data collection methodologies, and data collection efforts for Plains Cree, Kanyen'kéha, Kwak'wala, Michif, Nsyilxcn, SENĆOŦEN, Tŝilhqot'in, and Tsuut'ina.
+
+Conclusions And Future Work
+
+Figure 1: Number of speakers of Indigenous languages spoken in Canada, according to the 2016 census (From Statistics Canada (2017))
+
+Figure 2: Tabular grid view (left) and 'Tree' view (right) of the Kawennón:nis Tablemaker
+
+Figure 3: The ReadAlong Web Component displaying the Atikamekw story 'Nikikw'
+
+Weighted OOV rate and SI WER on Inuktut; acoustic model trained on 40 hours of audio.

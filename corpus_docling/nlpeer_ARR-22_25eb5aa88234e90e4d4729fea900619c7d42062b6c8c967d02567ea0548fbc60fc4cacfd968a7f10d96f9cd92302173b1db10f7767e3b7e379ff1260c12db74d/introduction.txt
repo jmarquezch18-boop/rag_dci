@@ -1,0 +1,67 @@
+Conversational question answering aims to build machines to answer questions in conversations and has the promise to revolutionize the way humans interact with machines for information seeking.
+
+With recent development of large-scale datasets (Choi et al., 2018;Saeidi et al., 2018;Reddy et al., 2019;Campos et al., 2020), rapid progress has been made in better modeling of conversational QA systems.
+
+Current conversational QA datasets are collected by crowdsourcing human-human conversations, where the questioner asks questions about a specific topic, and the answerer provides answers based on an evidence passage and the conversational history.
+
+When evaluating conversational QA systems, a set of held-out conversations are used for asking models questions in turn.
+
+Since the evaluation builds on pre-collected conversations, the gold history of the conversation is always provided, regardless of models' actual predictions (Figure 1(b)).
+
+Although current systems achieve near-human F1 scores on this static evaluation, it is questionable whether this can faithfully reflect models' true performance in real-world applications.
+
+To what extent do humanmachine conversations deviate from human-human conversations? What will happen if models have no access to ground-truth answers in a conversation?
+
+To answer these questions and better understand the performance of conversational QA systems, we carry out the first large-scale human evaluation with four state-of-the-art models on the QuAC dataset (Choi et al., 2018) by having human evaluators converse with the models and judge the correctness of their answers.
+
+We collected 1,446 human-machine conversations in total, with 15,059 question-answer pairs.
+
+Through careful analysis, we notice a significant distribution shift from human-human conversations and identify a clear inconsistency of model performance between current evaluation protocol and human judgements.
+
+This finding motivates us to improve automatic evaluation such that it is better aligned with human evaluation.
+
+Mandya et al. (2020); Siblini et al. (2021) identify a similar issue in gold-history evaluation and propose to use models' own predictions for automatic evaluation.
+
+However, predictedhistory evaluation poses another challenge: since all the questions have been collected beforehand, using predicted history will invalidate some of the questions because of changes in the conversational history (see Figure 1(c) for an example).
+
+Following this intuition, we propose a question Topic: Spandau Ballet (English pop band)
+
+What was the band's first success album at the international level?
+
+They achieved platinum status.
+
+1985.
+
+What year did this happen?
+
+What was the band's first success album at the international level?
+
+They achieved platinum status.
+
+"Only When You Leave".
+
+What songs were in it?
+
+Gold answer: "Parade" from 1984.
+
+What was the band's first success album at the international level?
+
+They achieved platinum status.
+
+???
+
+(a) Human evaluation (b) Automatic evaluation w/ What songs were in it?
+
+(c) Automatic evaluation w/ predicted history gold history rewriting mechanism, which automatically detects and rewrites invalid questions with predicted history (Figure 4).
+
+We use a coreference resolution model (Lee et al., 2018) to detect inconsistency of conference in question text conditioned on predicted history and gold history, and then rewrite those questions by substituting with correct mentions, so that the questions are resolvable in the predicted context.
+
+Compared to predicted-history evaluation, we find that incorporating this rewriting mechanism aligns better with human evaluation.
+
+Finally, we also investigate the impact of different modeling strategies based on human evaluation.
+
+We find that both accurately detecting unanswerable questions and explicitly modeling question dependencies in conversations are crucial for model performance.
+
+Equipped with all the insights, we discuss directions for conversational QA modeling.
+
+We release our human evaluation dataset and hope that our findings can shed light on future development of better conversational QA systems.

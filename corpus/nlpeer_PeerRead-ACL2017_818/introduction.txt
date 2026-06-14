@@ -1,0 +1,65 @@
+Reading and reasoning about natural language text often requires trivial knowledge about everyday physical actions and objects.
+
+For example, given a sentence "Shanice could fit the trophy into the suitcase," we can trivially infer that the trophy must be smaller than the suitcase even though it is not stated explicitly.
+
+This reasoning requires knowledge about the action "fit"-in particular, typical preconditions that need to be satisfied in order to perform the action.
+
+In addition, reasoning x is smaller than y
+
+x is lighter than y
+
+x is faster than y
+
+x is less rigid than y Figure 1: An overview of our approach.
+
+A verb's usage in language (top) implies physical relations between objects it takes as arguments.
+
+This allows us to reason about properties of specific objects (middle), as well as the knowledge implied by the verb itself (bottom).
+
+about the applicability of various physical actions in a given situation often requires background knowledge about objects in the world, for example, that people are usually smaller than houses, that cars generally move faster than humans walk, or that a brick probably is heavier than a feather.
+
+In fact, the potential use of such knowledge about everyday actions and objects can go beyond language understanding and reasoning.
+
+Many open challenges in computer vision and robotics may also benefit from such knowledge, as shown in recent work that requires visual reasoning and entailment (Izadinia et al., 2015;Zhu et al., 2014).
+
+Ideally, an AI system should acquire such knowledge through direct physical interactions with the world.
+
+However, such a physically interactive system does not seem feasible in the foreseeable future.
+
+In this paper, we present an approach to acquire trivial physical knowledge from unstructured natural language text as an alternative knowledge source.
+
+In particular, we focus on acquiring relative physical knowledge of actions and objects organized along five dimensions: size, weight, strength, rigidness, and speed.
+
+Figure 1 illustrates example knowledge of (1) relative physical relations of object pairs and (2) physical implications of actions when applied to those object pairs.
+
+While natural language text is a rich source to obtain broad knowledge about the world, compiling trivial commonsense knowledge from unstructured text is a nontrivial feat.
+
+The central challenge lies in reporting bias: people rarely states the obvious (Gordon and Van Durme, 2013;Sorower et al., 2011;Misra et al., 2016;Zhang et al., 2017), since it goes against Grice's conversational maxim on the quantity of information (Grice, 1975).
+
+In this work, we demonstrate that it is possible to overcome reporting bias and still extract the unspoken knowledge from language.
+
+The key insight is this: there is consistency in the way people describe how they interact with the world, which provides vital clues to reverse engineer the common knowledge shared among people.
+
+More concretely, we frame knowledge acquisition as joint inference over two closely related puzzles: inferring relative physical knowledge about object pairs while simultaneously reasoning about physical implications of actions.
+
+Importantly, four of five dimensions of knowledge in our study-weight, strength, rigidness, and speed-are either not visual or not easily recognizable by image recognition using currently available computer vision techniques.
+
+Thus, our work provides unique value to complement recent attempts to acquire commonsense knowledge from web images (Izadinia et al., 2015;Bagherinezhad et al., 2016;Sadeghi et al., 2015).
+
+In sum, our contributions are threefold:
+
+• We introduce a new task in the domain of commonsense knowledge extraction from language, focusing on the physical implica-tions of actions and the relative physical relations among objects, organized along five dimensions.
+
+• We propose a model that can infer relations over grounded object pairs together with first order relations implied by physical verbs.
+
+• We develop a new dataset VERBPHYSICS that compiles crowdsourced knowledge of actions and objects.1
+
+The rest of the paper is organized as follows.
+
+We first provide the formal definition of knowledge we aim to learn in Section 2.
+
+We then describe our data collection in Section 3 and present our inference model in Section 4.
+
+Empirical results are given in Section 5 and discussed in Section 6.
+
+We review related work in Section 7 and conclude in Section 8.

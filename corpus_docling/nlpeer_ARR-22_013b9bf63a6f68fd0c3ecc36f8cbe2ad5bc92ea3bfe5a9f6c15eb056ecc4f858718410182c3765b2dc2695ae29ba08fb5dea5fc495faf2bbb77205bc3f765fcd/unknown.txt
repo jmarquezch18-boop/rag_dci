@@ -1,0 +1,359 @@
+Challenges And Strategies In Cross-Cultural Nlp
+
+Abstract
+
+A Framework For Cultural Awareness
+
+Linguistic Form And Style
+
+Linguistic form refers to non-semantic questions of how to formulate an utterance.
+
+Most work on crosslingual NLP has focused on how linguistic form varies between languages.
+
+However, the impact of social and cultural factors on linguistic form and stylistic variations is rarely discussed (Hovy and Yang, 2021).
+
+Variation within language.
+
+How to circumscribe and define a particular language is a difficult problem (Eberhard et al., 2021).
+
+A language spoken in different countries often becomes standardized in slightly different ways (e.g., German in Austria and Germany).
+
+Geo-cultural variation within a language also gives rise to dialects (Zampieri et al., 2020;Wolfram and Friday, 1997;Brown et al., 2020), which in turn operate as an important sign of cultural identity (Falck et al., 2012).
+
+In addition, sociolects vary across social groups, which can include subcultures (McCormack et al., 2011).
+
+Due to these variations, treating "a language" as a homogeneous mass limits cultural adaptation, and runs the risk of privileging certain cultures over others.
+
+Zhang et al. (2021) find that pretrained language models (PLMs; see §6) reflect certain sociolects more than others.
+
+For example, there are considerable morphosyntactic variations between Spanish spoken in Spain and Argentina (Bentivoglio and Sedano, 2011), but they are not considered separately in a Spanish PLM (Cañete et al., 2020).
+
+A PLM specific to the Algerian di-alect of Arabic performs better than a multilingual or general Arabic one (Antoun et al., 2020) in sentiment classification (Abdaoui et al., 2021).
+
+Stylistic variation.
+
+Factors such as directness and formality are often associated with different communicative styles across cultures.
+
+For example, the level of politeness and thus also how offensive something is perceived depends very much on communicative norms (Gao, 2005;Larina, 2015).
+
+Misunderstandings that arise from different communicative styles can occur in any interaction between people of different cultural backgrounds.
+
+Thomas (1983) refers to this as pragmatic failure, namely the "inability to understand 'what is meant by what is said"', due to how it is being said.
+
+Comparative stylistics (Vinay and Darbelnet, 1995) aims to characterise these differences.
+
+The same intention (e.g., to be polite) can lead to different forms in different cultures.
+
+For example, an offer of help can be made in an imperative form in Polish, while in English speaking Anglo-Saxon cultures, this form would be considered rude and so an interrogative form would be used instead (Wierzbicka, 2009).
+
+Similarly, German native speakers tend to use a high level of directness, which would be considered offensive in English (House and Kasper, 2011).
+
+Based on the observation that such differences exist, Ringel et al. (2019) applied distant supervision by inducing labels for English formality and sarcasm detection based on language-in this case German and Japanese, respectively.
+
+The expression and perception of emotion also varies across cultures, both in text (Kirmayer et al., 2001;Ryder et al., 2008) and in face-to-face communication (Hareli et al., 2015).
+
+These differences are critical for cross-cultural sentiment analysis (Bautin et al., 2008) and for text-based recognition of medical conditions such as depression.
+
+For example, Loveys et al. (2018) find clear differences in linguistic form across English speakers of different ethnic identities with self-reported depression (e.g., the ratio of positive to negative emotion expression).
+
+Not understanding cross-cultural variation could lead to misclassification of movies, or worse, mis-diagnosing people.
+
+Common Ground
+
+A culture is in part defined by a shared common ground: the shared body of knowledge that can be talked about and that can be assumed as known by others.
+
+This common ground varies from culture to culture, and thus cross-cultural language use has to take into account shifts in common ground.
+
+These cross-cultural shifts, often correlating with cross-lingual shifts, are neglected in NLP.
+
+An underlying assumption in many approaches to multilingual NLP is that "different languages share a similar semantic structure" (Miceli Barone, 2016).
+
+However, the assumption that there is a crosslingual, cross-culturally common semantics to preserve fails when the common grounding does not match between cultures.
+
+Two relevant aspects here are the set of relevant concepts, closely identified with problems of lexicalisation, and common sense, i.e., the relevant propositional knowledge used in reasoning and entailment.
+
+Conceptualisation.
+
+People carve up the world using conceptual categories (Margolis and Laurence, 2021).
+
+While some general or even universal patterns exist (Wierzbicka, 1996), these categories can and do differ between languages and cultures: the domain of colour is a famous example (Berlin and Kay, 1969), but cross-cultural differences are also reflected in kinship systems (the lexicalization of family structures Murdock, 1970), spatial relations (Bowerman and Choi, 2001) and basic objects (e.g., where to draw the distinction between a 'cup' and a 'mug', or the 'hand' and the 'arm'; Majid et al., 2015).
+
+Translating between languages thus entails translating between conceptualisations, which can be impossible if the conceptual grounding is not available (is this Danish "kop" an English 'cup' or a 'mug?')-this is the motivation behind multimodal, i.e., visually grounded, translation (Specia et al., 2016).
+
+Data collected from a single culture may contain concepts that do not easily map across cultures, as for example seen in the recent MarVL dataset (Liu et al., 2021), in which about a quarter of concepts from a sample of non-Western cultures did not map to English concepts (as represented by WordNet).
+
+Commonsense knowledge. "Common sense" is the knowledge that is held in common by a community and culture, the communal knowledge bank that can be presumed to be known by everyone.
+
+Common sense thus covers a diverse set of knowledge types, from physical and temporal reasoning to psychological, social and moral judgements (Sap et al., 2020).
+
+Some aspects of common sense are fairly universal, in particular those that arise from inhabiting a grounded human body on earth (dropping a glass of juice onto a hard surface is likely to cause a mess; the baby might be crying because it's hungry).
+
+On the other hand, axioms of social and moral common sense, for example the how and why of rituals such as marriages, vary between cultures (Acharya et al., 2021).
+
+Moving between different banks of common sense can involve different strategies to either provide missing background/common knowledge, or to transfer the content to a target-culture appropriate setting (see §6.3).
+
+Aboutness
+
+Cultures promote different topics and issues (Seibert et al., 2002), sometimes by necessity, sometimes by accident.1 Some of the domains commonly considered in (English-speaking, Anglo-western) NLP are irrelevant to some cultures, while others mean different things to different cultures, i.e., they involve completely different practices.
+
+An example of the former is beer reviews, a go-to domain in sentiment analysis (Zeng et al., 2019;Ji et al., 2020;Paranjape et al., 2020).
+
+Beer reviews are hardly meaningful in cultures with no beer consumption.
+
+An example of the latter, i.e., a domain that is used differently across cultures and social groups, is Twitter (Hine, 2020).
+
+As an example of multi-domain sentiment analysis, Liu et al. (2018) consider cameras, laptops, restaurants, and movies, within the context of data from U.S. American websites.
+
+These domains, however, apply differently in other cultures: restaurants are more important in some cultures (e.g., Copenhagen hipsters) than others (e.g., Sámi); similarly, laptops have not penetrated cultures equally and have in fact been found to change culture (Hansen et al., 2014).
+
+Beyond conceptualisation differences (see §3), Liu et al. (2021) point out how the visual concepts at the core of many multimodal NLP tasks reflect a Northern American and Western European bias in the underlying data sources, from which images were scraped.
+
+As an alternative, in their new dataset (MarVL), they let the selection of both concepts and images be entirely driven by native speakers.
+
+This corrects for some existing asymmetries in what our evaluation data tends to be about.
+
+For example, Althoff et al. (2014) created a dataset entirely devoted to pizzas; in Liu et al. (2021), models' ability to recognise vadas, an Indian food, is evaluated.
+
+People describe the same events differently across cultures.
+
+News reports emphasise different goals, motivations, methods and content in different parts of the world (Bandura, 1986;Li, 1997;Loo, 2019).
+
+However, many news resources used in NLP research reflect only some cultures (Breed, 1955;Galtung and Ruge, 1965;Marcus et al., 1993).
+
+As NLP technologies have been widely adopted to build multilingual news generators (Zhang et al., 2016;Xu et al., 2020;Jin et al., 2020), it is important that these differences are taken into account in language generation.
+
+Objectives And Values
+
+Common objectives in NLP include progress, accuracy, fairness, robustness and interpretability.
+
+They are driven by the research community, and reflect the values of this community: novelty, for example, is highly esteemed, which is not a value held by more conservative, tradition-valuing cultures.
+
+Grounding these objectives explicitly in ethical values and norms, and acknowledging that these may differ across cultures, is essential for crosscultural NLP.
+
+Jiang et al. (2021), for example, introduce COMMONSENSE NORM BANK and Delphi, a moral reasoning resource and model, respectively, reflecting "English-speaking cultures of the United States in the 21st century".
+
+However, researchers, practitioners, regulators and users may belong to different cultures and have different objectives and values (Talat et al., 2021).
+
+Another common goal in the NLP community is the eventual expansion of all NLP technologies to low-resource languages.
+
+However, as Bird (2020) points out, this goal must not overshadow, or be placed above, the specific desires and needs of a given language community, as every community will have their own objectives for what they do and do not want for their language with regards to technology.
+
+Without building relationships with the communities for which we aim to develop NLP, there is a serious risk for imposing our own objectives on the community.
+
+Importantly, entire categories of applications and tasks may be driven by cultural assumptions.
+
+For example, the main objective of text summarisation is brevity (Jørgensen and Søgaard, 2021).
+
+Likewise, while fluency is a common objective of machine translation, it may in fact, be less important than comprehensibility for users (Castilho et al., 2018).
+
+Values differ across cultures.
+
+Values are an important part of non-materialistic culture, as these values define what a specific culture deems to be good or valuable, as opposed to bad and undesirable (Kendall et al., 2005).
+
+Accordingly, these values help inform what is accepted as normal and ethical behaviour, and shape common cultural attitudes.
+
+Aspects that clash against a culture's values, norms, and ethics, may often be taboo or even illegal.
+
+As cultures around the world hold different values, their norms and ethics are inevitably different, too (Schäfer et al., 2015;Hanel et al., 2018).
+
+For example, in some cultures, alcohol consumption is prohibited for religious reasons, and thus may not be normal or acceptable behaviour; meanwhile drinking alcohol can be seen as normal behaviour by some cultures without this shared value.
+
+For this reason, beer reviews in an application, for example, may be seen not only as irrelevant (see §4), but even as offensive.
+
+While these values can and do change greatly from culture to culture, end-users of NLP systems deserve technologies that are suitable to the culture that they belong to.
+
+To this end, the preservation of cultural values, norms, and ethics in models intended for users from different cultures, is another important aspect of cross-cultural NLP (Solaiman and Dennison, 2021).
+
+Fairness and combating biases.
+
+Many recent studies in NLP have explored strategies to counteract unwanted biases (according to the community's values, see above) in models, resulting from prejudices present in society.
+
+These biases are implicit in the data used to train our models, and become baked into the models themselves (Bolukbasi et al., 2016;Sap et al., 2019;Sun et al., 2019;Blodgett et al., 2020;Bender et al., 2021).
+
+Because NLP datasets are composed of utterances from members of a larger culture, the resulting biases constitute a partial reflection of that culture's values, norms, and ethics.
+
+For example, work in NLP on gender bias demonstrate that there is a pervasive problem with sexism in models (a direct result of sexist attitudes present in society), and explore ways to remedy this (Friedman et al., 2019;Zhao et al., 2019;Webster et al., 2021;Baker Gillis, 2021).
+
+Accordingly, just as members of any culture deserve language technology that truly serves them, members of vulnerable groups and marginalised members in larger cultures deserve such as well.
+
+Current research in addressing fairness and combating biases in models demonstrates how NLP can be used to tackle the challenge of inequitable cultural attitudes.
+
+In other words, the goal of countering bias in NLP can be seen as shifting existing cultures into hopefully more equitable ones.
+
+Conflicting objectives.
+
+With regards to cultural values, cross-cultural NLP lies at the intersection of the two important, but potentially conflicting, crossroads of multicultural pluralism and societal equity: cultures will have different values, which should be respected and represented for end-users; meanwhile, cultures will also have some inequitable attitudes that hurt different end-users, and NLP should be part of the solution.
+
+Together, these conflicting aspects land cross-cultural NLP in the impossible position of needing to both preserve cultural values, while also minimising harmful cultural biases.
+
+We acknowledge that these issues become increasingly difficult to disentangle, especially for more difficult or taboo aspects of culture.
+
+On the one hand, it is dangerous for members of one culture to impose values onto the others (i.e. this would, in fact, contribute to NLP colonisation-see §7), and on the other hand, it is dangerous to leave marginalised groups vulnerable, when we can diminish bias against them.
+
+While none of the strategies we discuss in §6 offers a simple solution to this challenge, our goal is to bring this important conundrum in cross-cultural NLP to the community's attention.
+
+To help navigate this convoluted space, and thus ensure end-users have access to relevant NLP systems, we encourage people working in this space to collaborate with members of the culture relevant to their work, as they are the best equipped to judge what cultural aspects can appropriately be challenged.
+
+Additionally, new works in AI ethics should also be considered (Nanayakkara et al., 2021;Hagendorff, 2020;Prunkl et al., 2021;Pitta et al., 1999;Mohamed et al., 2020).
+
+An international regulatory instrument is essential for the responsible development of AI, a task that UN-ESCO is in the process of undertaking.2
+
+Strategies
+
+We have identified several challenges along four dimensions of culture.
+
+Here, we highlight general strategies for cross-cultural NLP.
+
+We identify three main areas where we could direct efforts towards mitigating cross-cultural disparities: data collection, model training, and translation.
+
+Data is the backbone of NLP and any efforts towards cross-cultural NLP needs to consider the strategies involved in collecting and annotating it.
+
+Transfer learning is central to cross-lingual NLP and can serve an important role in cross-cultural NLP.
+
+Finally, translation is used to communicate between languages and will often be necessary when communicating between cultures.
+
+We explain what can be done within each of these areas each in turn.
+
+Data Collection
+
+The most fundamental issue is the representation disparity in our data, i.e., not all cultures are (equally) represented.
+
+While the volume of multilingual datasets increases and multilingual NLU benchmarks are becoming available (Hu et al., 2020;Liang et al., 2020;Ruder et al., 2021), this does not guarantee cross-cultural representation.
+
+There are two main factors: source of data (e.g., media outlet) and origin of annotations (e.g., automatic vs human-generated).
+
+To have truly diverse datasets, we should both ensure that they not only represent diverse sources, but also multiple perspectives in terms of annotations, when applicable.
+
+Data selection and curation.
+
+Relevant to the impact of the source of data, Dodge et al. (2021) discuss how the Colossal Clean Crawled Corpus (C4; Raffel et al., 2020), an English web-based corpus, is skewed in favour of US governmental institutions and main-stream US media, while data filtering, which tries to remove slurs, or obscene words, disproportionately removes text from and about minorities (e.g., African American and LGBTQ+).
+
+Similarly, data from Wikipedia is heavily used in multilingual NLP even though it has been shown to be culturally biased (Callahan and Herring, 2011).
+
+To mitigate the risks associated with using culturally biased data, data selection or curation methods should strive to use data sources that are appropriate for the target culture of downstream NLP applications.
+
+Large, general-purpose datasets should be curated so as to be as unbiased as possible, and carefully documented (Jo and Gebru, 2020;Bender et al., 2021).
+
+As examples of culturally diverse data collection, Liu et al. (2021) and Yin et al. ( 2021) recruit geodiverse annotators from Africa, Asia and the Americas who are tasked with also providing the data (the images) along with the annotations (image descriptions).
+
+However, these dataset are small and thus limited to evaluation only; the cost and effort associated with collecting sufficient data to train modern NLP models means that finding culture-specific data to cover the enormous diversity of cultures represented on earth remains a formidable challenge.
+
+A diverse and open community, however, facilitates scalability in this regard.
+
+Examples for such communities include Universal Dependencies, dedicated to manual annotation of morphosyntactic datasets for over one hundred languages, covering the highest typological diversity to date among such datasets (Nivre et al., 2020).
+
+As another example, the Masakhane community aims to strengthen NLP research for African languages.
+
+It has created MasakhaNER (Adelani et al., 2021), a Named Entity Recognition dataset for 10 African languages, collected by native speakers of these languages.
+
+Data annotation.
+
+With respect to annotation practices, a diverse pool of annotators reduces the risk of cultural bias.
+
+In the case of subjective tasks such as detecting affect, aggression, and hate speech, annotators may systematically disagree with one another due to cultural differences that are often reflected by their biases and values (Davani et al., 2021).
+
+Annotator disagreements may capture important nuances in such tasks that are often ignored while aggregating annotations to a single (possibly hegemonic) ground truth.
+
+Release of all annotations with each dataset, even disagreeing ones, allows training models that generalise better (Plank et al., 2014;Pavlick and Kwiatkowski, 2019;Prabhakaran et al., 2021;Gordon et al., 2022).
+
+Careful documentation of the annotation process also plays an important role.
+
+In a recent survey of machine learning papers (including NLP ones), Geiger et al. (2020) reported a wide divergence in the level of documentation about methodological practices in human annotation.
+
+They advocate for the importance of human annotation within the research process, arguing that it ought to be given as much attention, care, and concern as is currently placed on performance based metrics.
+
+When arguing for an increasingly diverse 'participatory design' (Bodker et al., 2009), however, it is important to consider the values, ideologies, codes, narratives, and power relations which govern the interaction between the assemblies of actors involved in data collection and annotation.
+
+This is the perspective of social-cultural studies and other critical viewpoints from the humanities (Mainsah and Morrison, 2014;Gray and Suri, 2019).
+
+Annotation projection.
+
+Of course, data collection for many languages and cultures can be costly.
+
+Using parallel data and a word alignment tool, annotation (for example a syntactic tree) in a source language can be transferred to a target language without extra annotation (Yarowsky et al., 2001;Hwa et al., 2005).
+
+A related method to create multilingual datasets is translating a dataset (typically in English) into other languages (often using machine translation).
+
+While not usually called annotation projection, it can be considered a variation of this method, since the source annotation is ported to the translated data.
+
+For example, in XNLI (Conneau et al., 2018), the premise and hypothesis pair is translated from English to other languages and the label is reused for the translated pair.
+
+These methods help leverage data from high-resource languages to create more data for low-resource languages (Agić, 2017).
+
+However, these methods risk ignoring target culture complexity or forcing the source culture concepts on the target culture.
+
+For example, English common sense datasets (Singh et al., 2021) include culture-specific concepts such as food ingredients,3 rituals and celebrations,4 and societal expectations.
+
+5 Translating this dataset into other languages will require making decisions about how, and whether, to modify these items to make them more intelligible in the target culture.
+
+Lin et al. (2021a) use machine translation to translate two common-sense reasoning datasets from English into 14 other languages.
+
+They attempt to deal with difficult cases by automatically flagging and removing examples which contain 'social keywords' from the dataset, or that are (again, automatically) labeled as containing non-neutral sentiment.
+
+However, these methods are unlikely to capture all examples of social behaviour and cannot identify examples of cultural over-specificity (sports teams, jalapeños).
+
+Automatically translated training data can lead to worse performance than native target language data (Liu et al., 2021).
+
+However, if evaluation data is automatically translated too, we have no trivial way of exposing cultural biases introduced by the projection process.
+
+Culturallyaware evaluation thus necessitates data annotated directly in the target language, or at least culturallysensitive human translations.
+
+Ponti et al. ( 2020) point out that literal translation of datasets is sometimes impossible or undesirable due to culture-specific concepts in the source that may be missing or unnatural in the target.
+
+In their multilingual extension of the English Choice of Plausible Alternatives (COPA; Roemmele et al., 2011) dataset, they therefore asked "carefully chosen" human translators to perform culturally-sensitive translation, and either paraphrase, substitute the original concepts with similar ones that exist in the target language, or leverage phonetically transcribed loan words.
+
+Human translation, or original data from the target culture, is clearly the expensive option, but will often be the only way to avoid cultural bias.
+
+Only translating/generating high-quality evaluation data is becoming an attractive middle ground option (Liu et al., 2021;Ponti et al., 2020;Yin et al., 2021) that at least allows us to judge the success of crosslingual transfer in a culturally appropriate way.
+
+Model Training
+
+Translation
+
+Beyond NLP for various cultures, cross-cultural NLP can be used for bridging between cultures, investigating cross-cultural communication.
+
+The classic example is machine translation (MT) between languages.
+
+In MT, semantic divergences are usually treated as noise, or in any case, as imperfect translations (Briakou and Carpuat, 2021).
+
+A commonly accepted criterion for translation adequacy is that the semantics of the source are preserved in the output (Carl, 1998;Sulem et al., 2015).
+
+However, when applied for translation across cultures, translation may have different objectives.
+
+The same meaning may be inappropriate in the target culture, regardless of fluency, and require adjustments: this is referred to as adaptation in the translation field (Vinay and Darbelnet, 1995).
+
+Peskov et al. (2021) observed that translated sentences are often opaque without cultural context (e.g., "I saw Merkel eating a Berliner from Dietsch on the ICE"), and propose adapting entities to the target culture by substituting them with their approximate counterparts.
+
+As an alternative strategy, adding explanations, for example in the form of appositives (Kementchedjhieva et al., 2020), can elucidate entities that are known in the source culture but not in the target culture.
+
+These are examples of cross-cultural translation (Sperber et al., 1994).
+
+This kind of adaptation can also be helpful in culturally-situated dialogue, where some users may be less familiar with the common ground of a particular culture; in such cases, Abou-Khalil et al. (2018) propose to explain by analogy to concepts from the user's home culture.
+
+Cross-cultural translation is not necessarily always between languages, but could take the form of style transfer within a language (Shen et al., 2017;Prabhumoye et al., 2018).
+
+For example, Jhamtani et al. (2017) transform text from modern English to Shakespearean English.
+
+Roy et al. (2015) approach personalised marketing by adapting the style of marketing messages for specific audience segments, defined by geographic location and occupation.
+
+Evaluation of cross-cultural translation is challenging, as the task is not always well-defined.
+
+In particular, for style transfer, human evaluation is more reliable than automatic evaluation, but still suffers from non-standard evaluation protocols (Briakou et al., 2021a,b).
+
+Reference-based automatic evaluation methods are particularly unreliable in this case, as the assumption that there is just one (or a few) correct translations is ostensibly violated (Song et al., 2013;Reiter, 2018).
+
+This stresses the need for culture-sensitive human evaluation.
+
+Conclusion
+
+Ethical Aspects And Broader Impact
+
+As discussed in §5, norms and ethics are culturedependent, and in some cases there is a conflict between maintaining researchers' and practitioners' ethical values (such as social equity) and multicultural acceptance.
+
+It is not our place to settle this conflict or to provide answers, but we stress that asking the question, of which values should prevail in each case, is essential for cross-cultural NLP.
+
+Furthermore, language technology for local communities must involve the members of those communities in an active, participatory manner, in order to decolonise language technology and respect the sovereignty of local people over their data (Bird, 2020;Mukhija et al., 2021).
+
+Linguistic Form and Style ⛰ Common Ground 💙 Aboutness 🧭 Objectives and Values
+
+Figure 1: The role of culture in NLP, illustrated by four dimensions along which cultures vary, and for which NLP can be culturally biased: linguistic form and style, common ground, aboutness, and objectives (values).

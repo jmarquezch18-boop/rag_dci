@@ -1,0 +1,101 @@
+Pretraining With Artificial Language: Studying Transferable Knowledge In Language Models
+
+Abstract
+
+Introduction
+
+Transferable Structural Knowledge In Pretrained Encoders
+
+Multilingual language models trained with masked language modeling objective (Devlin et al., 2019;Doddapaneni et al., 2021) have demonstrated a surprisingly strong cross-lingual transfer capability (Liu et al., 2020), given the model is only trained with a mix of monolingual corpora.
+
+This leads to several studies investigating the source of the cross-lingual capability of multilingual models.
+
+An early common hypothesis was that the models take advantage of a common word-piece vocabulary across languages (Wu and Dredze, 2019;Pires et al., 2019), which provides cross-lingual alignment signals to learn useful multilingual representations.
+
+However, this hypothesis has been questioned by recent studies (Karthikeyan K and Roth, 2020;Conneau et al., 2020b) which show that shared word-pieces only play a minor role in the performance.
+
+These studies suggest that the model can exploit abstract structures of languages to learn shared multilingual representations.
+
+Another line of research suggests that the learning of transferable knowledge happens even in monolingual pretraining.
+
+Artetxe et al. (2020) showed that a Transformer encoder pretrained only on L1 exhibits strong cross-lingual transfer performance simply by aligning the L2 embeddings to the encoder.
+
+Papadimitriou and Jurafsky (2020) pretrained LSTM encoders with natural languages and non-linguistic data (e.g., code, music, and artificial data) to demonstrate that the encoders achieve reasonable performance in Spanish language modeling.
+
+These studies provide additional evidence for the existence of transferable linguistic knowledge learned in the model.
+
+Then what is such knowledge?
+
+Probing studies (Hupkes and Zuidema, 2018;Conneau et al., 2018) have revealed that the model captures languageindependent structures such as universal dependency relations (Chi et al., 2020) and subjecthood (Papadimitriou et al., 2021).
+
+However, the probing methodology does not answer whether such linguistic knowledge contributes to the performance in cross-lingual transfer.
+
+In this study, we shed light on this question by studying transfer learning from artificial language with the Test for Inductive Bias via Language Model Transfer (TILT) (Papadimitriou and Jurafsky, 2020).
+
+This framework enables us to assess if abstract features generalizable to L2 (natural language) are encoded in L1.
+
+Here we explicitly design artificial languages with some structural properties as L1 to investigate their transferability.
+
+Studying Language Models With Artificial Language
+
+Approach
+
+Experimental Framework
+
+Designing Artificial Languages
+
+Artificial languages are designed to mimic a certain property of natural language.
+
+After providing a formal definition of artificial language, we introduce several languages used in this paper.
+
+Formulation Of Artificial Language
+
+A artificial language refers to a set of a vocabulary and algorithms to generate sequential data for pretraining.
+
+Each language has a sentence-length distribution p len (l), token vocabulary {w|w ∈ V}, and sentence-sampling function f (l) : l → V l .
+
+The training data is generated sentence by sentence as follows: we first sample a sentence length (l ∼ p len (l)) and then sample a sequence of tokens of that length ([w 1 , ..., w l ] ∼ f (l)).
+
+In this study, the token vocabulary V simply consists of integers (or integers with a special symbol) and is not intended to correspond to a vocabulary of any natural language.
+
+Also the sentence-length distribution p len (l) is fitted with a baseline dataset in each experiment.
+
+The focus is how to design the sentence-sampling function f (l).
+
+This determines what kind of characteristics we want to encode in the artificial dataset.
+
+Modeling Word Distribution
+
+Modeling Latent Dependency Structure
+
+Causal Language Model Pretraining With Artificial Language
+
+Experimental Setups
+
+Results
+
+Masked Language Model Pretraining With Artificial Language
+
+Experimental Setups
+
+Results
+
+Experimental Setups
+
+Results
+
+Discussion And Future Work
+
+Comparison of token distributions. (b) Comparison of dependency structures.
+
+(c) Comparison of natural languages.
+
+Figure 2: The perplexity scores (the lower the better) on the sentence-level causal language modeling task with the English Penn Treebank dataset.
+
+The two baselines (From scratch and Random weights) are not pretrained, and the others are the results of pretrained encoders.
+
+Figure 3: The downstream performance on two syntactic tasks with the English EWT dataset.
+
+The two baselines (From scratch and Random weights) are not pretrained, and the others are the results of encoders pretrained with masked language modeling.
+
+Figure 4: The accuracy of the task of recovering the contextual words from the encoder output of target words.

@@ -1,0 +1,131 @@
+To evaluate the proposed methods, we conduct experiments on abstractive text summarization and machine translation.
+
+Our evaluation focuses on two questions: (1) how large and diverse are our lattices? ( 2) are the candidates encoded in the lattices high quality and grammatical?
+
+We describe our metrics to evaluate both quality and diversity.
+
+Several of our methods build on ROUGE (including R1, R2, RL) (Lin, 2004) and BLEU (Papineni et al., 2002;Post, 2018) comparing the generated text to references.
+
+We evaluate the diversity of generated texts with the following metrics.
+
+(1) |path| is the average number of unique paths in the produced lattice.
+
+5   We use ↑, ↓ and ≥ to denote the desired trend, the higher the better, the lower the better, or good if it passes some threshold.
+
+Among the methods with path recombination excluding BFSZIP, we highlight the best , second and third best , and the worst one.
+
+unique n-grams encoded in the lattice; this captures a different type of diversity than the number of paths, since there could be many paths reusing the same words.
+
+N1 and N2 are average number of novel unigrams and bigrams in the graph.
+
+(3) SBL is the average self-BLEU among m samples (Zhu et al., 2018).
+
+The samples are drawn from a uniform random walk from n sos .
+
+The range of SBL is [0, 100]. (4) ED is the average edit-distance among m samples.
+
+We set m = 5 in our experiment.
+
+Quality: Grammaticality We adopt GECToR a neural grammatical error correction model (Omelianchuk et al., 2020) to automatically assess the grammaticality of generated texts.
+
+We report GRMERR(%), the average number of grammar errors per token, for all English-output experiments.
+
+Quality: Oracle Reference Match Given the reference, we find the path with highest ROUGE or BLEU over all found paths.
+
+Oracle ROUGE is defined as OR(Y, y * ) = max y∈Y (R2(y, y * )).
+
+This metric captures both quality and diversity: the algorithm needs to find something close to the reference, but a diverse lattice will have a higher chance of exhibiting a good candidate all else being equal.
+
+Quality: Average Reference Match Although our method focuses on deriving diverse text summaries or translations, we aim to guarantee that the generated text is highly relevant to the generation target and is of high quality in general.
+
+We sample 1,000 paths from the lattice with replacement and evaluate the average ROUGE or BLEU compared to the reference.
+
+We denote this metric as SP.
+
+Text Summarization We present the experimental results on the dev set of XSum in Table 2.
+
+Full results are kept in Table 4 for reference.
+
+Among non-recombination methods, BS and DBS are the least diverse methods.
+
+Sampling based methods including TEMP are generally more diverse, but the oracle ROUGE is lower than that of BFS.
+
+Given the sacrificed text quality (lower sample ROUGE and more grammar errors) of sampling based methods, we argue that modified best-first search is a strong decoding strategy even without path recombination.
+
+The bottom half shows all methods with path recombination techniques.
+
+Recombination significantly improves the diversity of generated outputs, with a much higher number of paths.
+
+The SBL of the recombination variants are lower than their non-recombination counterparts.
+
+In terms of search quality, the proposed BFSRCB and BFSZIP methods obtain significantly higher oracle ROUGE compared to all other methods.
+
+We show these results later in Figure 9: our approach can find much better oracle solutions, even compared with beam search method with quadruple the amount of computational resources.
+
+The design of the oracle ROUGE metric is also motivated by a real use case: if you want a specific summary (e.g., a summary covering a specific entity or topic), does it exist in the search graph?
+
+Higher oracle ROUGE indicates a closer match, meaning a strategy using some kind of reranking model could help find the user's preferred outputs.
+
+Comparison: RCB & ZIP The ZIP method yields even more diverse output at the cost of text quality.
+
+There are a few reasons for this: 1) recombination of more nodes makes the lattice denser, increasing the number of paths but also potential errors; 2) elimination of unexplored children from merged branch reduces the waste of exploration which means ZIP can explore more hypotheses than RCB.
+
+With the same amount of computational resources, ZIP explores a larger search space while RCB explores a smaller collection more reliably.
+
+ZIP exploits the efficiency of ZIP to achieve high diversity, and by searching through fewer states, it manages to achieve higher quality as well.
+
+We show the result on machine translation in Table 3 and6.
+
+Results on translation tasks show the consistent gains of diversity from path recombination models.
+
+In Table 3, we show two translation tasks where the target language is English.
+
+BFSRCB works better than BFSZIP because it disables some aggressive and bad merges which explores bad hypotheses.
+
+Compared to summarization, we found the search space in MT to be more constrained, so there was less room for aggressive merging and exploration to improve over RCB.
+
+Our lower-resource method, BFSZIP approach, actually performs quite well on most metrics with only 25% of search budget.
+
+It has better diversity performance than any nonrecombination methods, and comes with quality better than most of the recombination methods.
+
+The usage of BFS and path recombination methods like BFSRCB and BFSZIP is promising for being able to find a better cost-diversity tradeoff in MT.
+
+Validating the Merging Criterion Our merging criterion is fundamentally an approximation of the equivalence criteria described in Section 5.
+
+Our question is: what fraction of nodes merged by our merging criterion satisfy the weak equivalence assumption? We conduct an experiment to verify this on XSum.
+
+We compute the greedy completion for L timesteps and check whether the continuation of the base candidates would be the same.
+
+In Figure 7, we show the fraction of merged pairs for which the generations match exactly un- We experiment with n = {2, 4, 6} for n-gram suffix matching.
+
+We sample 1,000 recombinations from BFSRCB and BFSZIP respectively, and run greedy inference based on merged hypotheses.
+
+We use Exact Match (EM) to measure how often two merged hypotheses give the same greedy future generations considering the next L tokens after the merge.
+
+der three values of the recombination criterion.
+
+For BFSRCB, when using n = 4 the greedy continuation over 4 timesteps is the same 71.2% of the time.
+
+For BFSZIP it is the same 62.5% of the time.
+
+Following the weak equivalence criterion is a strong indication that these hypotheses can admit many of the same continuations.
+
+RCB is more reliable than ZIP, but both methods show moderate adherence to the equivalence criterion.
+
+In Figure 8  We manually examine the output and found a few common types of errors introduced by our algorithm.
+
+( 1) Factual errors at high entropy nodes.
+
+Our approach assumes that high-scoring candidates under the model are good quality, but this assumption is violated in certain cases, like when the model attempts to hallucinate information.
+
+For example, the prefix "The company, founded in" will cause the model to guess answers like "1989" or "1999".
+
+Encoding all of these in the lattice is incorrect.
+
+However, we did not see significant factual errors introduced by merging specifically. (2) Aggressive bad merges.
+
+In the upper example in Figure 8, the cluster of "GPs", "nurses", "paramedics" is an example case.
+
+The lattice encodes paths like "GPs, nurses and nurses should ...".
+
+This could be fixed by heuristics or rules in future work.

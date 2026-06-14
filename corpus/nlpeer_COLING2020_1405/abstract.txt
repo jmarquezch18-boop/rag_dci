@@ -1,0 +1,5 @@
+Simple yet effective data augmentation techniques have been proposed for sentence-level and sentence-pair natural language processing tasks.
+
+Inspired by these efforts, we design and compare data augmentation for named entity recognition, which is usually modeled as a token-level sequence labeling problem.
+
+Through experiments on two data sets from the biomedical and materials science domains (i2b2-2010 and MaSciP), we show that simple augmentation can boost performance for both recurrent and transformer-based models, especially for small training sets.

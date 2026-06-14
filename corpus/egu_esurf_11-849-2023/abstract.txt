@@ -1,0 +1,37 @@
+Glaciers are sensitive to temporal climate variability.
+
+Glacier sensitivity to spatial variability in climate has been much less studied.
+
+The Olympic Mountains of Washington state, USA, experience a pronounced orographic precipitation gradient, with modern annual precipitation ranging between ∼ 6500 and ∼ 500 mm water equivalent.
+
+In the Quinault valley, on the wet side of the range, a glacier extended onto the coastal plain, reaching a maximum position during the Early Wisconsin glaciation.
+
+On the dry side of the range, in the Elwha valley, there is no evidence of a large paleo-glacier during the Wisconsin glaciation.
+
+We hypothesize that asymmetry in the past glacier extent was driven by spatial variability in precipitation.
+
+To evaluate this hypothesis, we constrain the past precipitation gradient and model the glacier extent.
+
+We explore variability in observed and modeled precipitation gradients over timescales from 6 h to ∼ 100 yr.
+
+Across three datasets, basin-averaged precipitation in the Elwha is 54 % of that in the Quinault.
+
+Our analysis overwhelmingly indicates spatially coherent variability in precipitation across the peninsula.
+
+We conclude that the past precipitation gradient was likely similar to the modern gradient.
+
+We use a one-dimensional glacier flowline model, driven by sea level summer temperature and annual precipitation to approximate the glacier extent in the Quinault and Elwha valleys.
+
+We find several equilibrium states for the Quinault glacier at the mapped maximum position within paleoclimate constraints for cooling and drying, relative to present-day conditions.
+
+Assuming stable precipitation gradients, we model the Elwha glacier extent for the climates of these equilibria.
+
+At the warm end of the paleoclimate constraint (July average sea level temperature of 10.5 • C), a small valley glacier occurs in the high headwaters of the Elwha valley.
+
+Yet, for the cooler end of the allowable paleoclimate (July average sea level temperature of 7 • C), the Elwha glacier advances to a narrow notch in the valley, thickens, and rapidly extends far beyond the likely true maximum extent.
+
+Therefore, we suggest that the Early Wisconsin period was more likely to have been relatively warm because our models of the glacial extent are consistent with the past record of glaciation in both the Quinault valley and Elwha valley for warm conditions but inconsistent for cooler conditions.
+
+Alternatively, spatially variable drivers of ablation, including differences in cloudiness, could have contributed to past asymmetry in the glacier extent.
+
+Future research to constrain past precipitation gradients and evaluate their impact on glacier dynamics is needed to better interpret the climatic significance of past glaciation and to predict the future response of glaciers to climate change.

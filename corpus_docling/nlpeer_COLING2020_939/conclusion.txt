@@ -1,0 +1,27 @@
+In this paper we have considered the hypernym prediction task, the task of identifying the correct direct hypernym in a taxonomy of a synset given its embedding.
+
+In terms of evaluation, we have focused on both "exact match" (H@1) and "ballpark match" (WuP) metrics, and we have for the first time provided a comparison of existing models that had not previously been evaluated with the same metrics or on the same datasets.
+
+We have introduced two simple encoder-decoder based models for hypernym prediction that make use of information in the full taxonomy paths, finding that in particular hypo2path rev shows state-of-the-art performance on the WN18RR-hp dataset.
+
+For nouns, it achieves improvements of 5.17 test H@1 over the best benchmark model.
+
+For verbs, we find that no model achieves a high performance.
+
+Instance nouns, on the other hand, are the easiest to predict.
+
+Encouragingly, we find that "ballpark match" (WuP) for instance nouns is at over 87 points.
+
+There are several directions for future work.
+
+Encoding lemmas separately and with attention, rather than with a single embedding, could allow the attention mechanism to assign lower weights to less informative, misleading, or polysemous lemma names (which were related to over a third of all errors).
+
+One potential way to handle polysemy could involve encoding both synsets and glosses, using either classical word embeddings or contextualized word embeddings.
+
+Another extension of this work is to use multi-task learning with multiple decoders and different tasks, similar to Luong et al. (2016).
+
+For example, in addition to learning to decode a path of hypernyms leading to a given synset, a model could also generate the synset's co-hyponyms or its hypernym's lexname 19 .
+
+Our results suggest that hypernym prediction is challenging for words which occur less frequently in the corpus used to compute embeddings.
+
+Methods are needed which can learn more effectively from low-frequency data, where the "unknown word" does not appear very often (Herbelot and Baroni, 2017;Kabbach et al., 2019).

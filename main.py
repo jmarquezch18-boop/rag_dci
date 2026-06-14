@@ -33,6 +33,20 @@ Modos de ejecución:
   python main.py --pipeline rag2 --mode visualize
       Lee JSONs de RAG 2 y genera figuras. NUNCA carga modelos.
 
+  python main.py --pipeline rag3 --mode ingest
+      Descarga PeerQA desde HuggingFace, construye corpus/ de texto plano por sección,
+      guarda checkpoints/rag3_dci_qa_pairs.json y checkpoints/rag3_dci_corpus_map.json.
+      Requiere que Ollama esté corriendo: ollama serve &
+
+  python main.py --pipeline rag3 --mode evaluate
+      Corre el pipeline DCI completo: DeepSeek-R1 busca en corpus/ → SAIL-RAG oracle
+      → Groq generación. Guarda metrics_dci.json y agent_traces/ en results/rag3/.
+      REQUIERE haber corrido --mode ingest primero.
+
+  python main.py --pipeline rag3 --mode visualize
+      Lee results/rag3/metrics_dci.json y genera figuras DCI. NUNCA carga modelos.
+      Si existen JSONs de RAG 1 y RAG 2, genera también final_comparison_rag1_rag2_rag3.png.
+
 El .env se busca primero en el directorio padre de este archivo (juancho/.env),
 luego en el CWD como fallback para entornos de desarrollo alternativos.
 """
@@ -75,7 +89,7 @@ def main() -> None:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
-        "--pipeline", choices=["rag1", "rag2", "rag3"], required=True,
+        "--pipeline", choices=["rag1", "rag2", "rag2_1", "rag2_3", "rag3", "rag3_1", "rag3_2"], required=True,
         help="Pipeline a ejecutar",
     )
     parser.add_argument(
@@ -116,8 +130,8 @@ def main() -> None:
         return
 
     if args.mode == "visualize" and args.pipeline == "rag3":
-        from src.evaluation.visualizer_rag3 import RAG3Visualizer
-        RAG3Visualizer(config["paths"]["results"]).visualize_all()
+        from src.evaluation.visualizer_rag3_dci import RAG3DCIVisualizer
+        RAG3DCIVisualizer(config["paths"]["results"]).visualize_all()
         return
 
     if args.mode == "visualize" and args.pipeline == "rag2":
@@ -189,15 +203,75 @@ def main() -> None:
             )
 
 
-    # ── RAG 3 ────────────────────────────────────────────────────────────────
-    elif args.pipeline == "rag3":
+    # ── RAG 2.1 — Oracle only (sin reranker) ────────────────────────────────
+    elif args.pipeline == "rag2_1":
+        from src.pipelines.rag2_1_oracle_only import RAG21Pipeline
         if args.mode == "evaluate":
-            from src.pipelines.rag3_curation_only import RAG3Pipeline
-            RAG3Pipeline(config).evaluate()
+            RAG21Pipeline(config).evaluate()
+        else:
+            logger.error(
+                "Modo '{}' no válido para --pipeline rag2_1. "
+                "Modos disponibles: evaluate",
+                args.mode,
+            )
+
+    # ── RAG 2.3 — Reranker only (sin oracle) ────────────────────────────────
+    elif args.pipeline == "rag2_3":
+        from src.pipelines.rag2_3_reranker_only import RAG23Pipeline
+        if args.mode == "evaluate":
+            RAG23Pipeline(config).evaluate()
+        else:
+            logger.error(
+                "Modo '{}' no válido para --pipeline rag2_3. "
+                "Modos disponibles: evaluate",
+                args.mode,
+            )
+
+    # ── RAG 3.1 — DCI + Docling corpus + IBM Granite 3.2 ────────────────────
+    elif args.pipeline == "rag3_1":
+        from src.pipelines.rag3_1_granite_docling import RAG31Pipeline
+        pipeline31 = RAG31Pipeline(config)
+        if args.mode == "ingest":
+            pipeline31.ingest()
+        elif args.mode == "evaluate":
+            pipeline31.evaluate()
+        else:
+            logger.error(
+                "Modo '{}' no válido para --pipeline rag3_1. "
+                "Modos disponibles: ingest, evaluate",
+                args.mode,
+            )
+
+    # ── RAG 3.2 — DCI + Docling corpus + DeepSeek-R1 14B ────────────────────
+    elif args.pipeline == "rag3_2":
+        from src.pipelines.rag3_2_deepseek_docling import RAG32Pipeline
+        pipeline32 = RAG32Pipeline(config)
+        if args.mode == "ingest":
+            pipeline32.ingest()
+        elif args.mode == "evaluate":
+            pipeline32.evaluate()
+        else:
+            logger.error(
+                "Modo '{}' no válido para --pipeline rag3_2. "
+                "Modos disponibles: ingest, evaluate",
+                args.mode,
+            )
+
+    # ── RAG 3 — DCI + SAIL-RAG ───────────────────────────────────────────────
+    elif args.pipeline == "rag3":
+        from src.pipelines.rag3_dci_sail import RAG3DCIPipeline
+        pipeline_dci = RAG3DCIPipeline(config)
+
+        if args.mode == "ingest":
+            pipeline_dci.ingest()
+
+        elif args.mode == "evaluate":
+            pipeline_dci.evaluate()
+
         else:
             logger.error(
                 "Modo '{}' no válido para --pipeline rag3. "
-                "Modos disponibles: evaluate, visualize",
+                "Modos disponibles: ingest, evaluate, visualize",
                 args.mode,
             )
 

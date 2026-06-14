@@ -1,0 +1,43 @@
+Here, we describe the implementation details of our method and how they are adapted to each task.
+
+For knowledge generation, we use GPT-3 (Brown et al., 2020) as the underlying language model, where our few-shot prompting method is most effective.
+
+We generate M = 20 knowledge statements for each question with nucleus sampling p = 0.5 (Holtzman et al., 2019), and discard repetitions and empty strings.
+
+Generation is terminated when it exceeds 64 tokens or hits the \n token.
+
+1For inference, we use off-the-shelf T5 (Raffel et al., 2019) and GPT-3, as well as finetuned models that are state-of-the-art on each dataset, including UnifiedQA (UQA) (Khashabi et al., 2020) and Unicorn (Lourie et al., 2021).
+
+See details in the task setup below.
+
+As we will show, our generated knowledge prompting method sets new state-of-the-art results on most datasets we evaluate on, and works well under both zero-shot and finetuned settings.
+
+In particular, our knowledge generation outperforms naive baselines as well as template-based knowledge generation, and is on-par with retrieval-based systems.
+
+We conduct a human evaluation on NumerSense and QASC to study the quality of generated knowledge and the interpretability of its impact on task performance.
+
+Evaluation.
+
+We report the quality of knowledge statements along four axes: (1) Grammaticality: whether it is grammatical; (2) Relevance: whether it is relevant to the topic or concepts mentioned on the question; (3) Factuality: whether it is (mostly) factually correct; and (4) Helpfulness: whether it helps answering the question in an either direct or indirect way, and may fall into one of the three categories: helpful (i.e. supports the correct answer), harmful (i.e. negates the correct answer or supports an incorrect answer), or neutral (neither helpful nor harmful).
+
+These metrics are adapted from Shwartz et al. (2020) and are defined in Appendix A.3.
+
+From each dataset, we sample up to 50 selected knowledge ( §2.2) that change the correctness of T5-11b's prediction (i.e. rectifies model prediction from wrong to right, or misleads model prediction from right to wrong).
+
+The knowledge are labeled by two NLP experts and a moderate level of agreement was reached (Fleiss Kappa κ = 0.57 (Landis and Koch, 1977)).
+
+To ensure objectivity, it is not revealed to the annotators whether the knowledge rectifies or misleads the model prediction.
+
+Results.
+
+Figure 5 summarizes the results.
+
+The vast majority of selected knowledge are grammatical and relevant to the question, and 83% of them are factually correct.
+
+72% are seen as being helpful for answering the question according the human evaluators, whereas 13% are harmful.
+
+Out of the knowledge statements that rectify the model predictions, 93% are labeled as helpful by the human evaluators; in contrast, when the knowledge statement misleads the model, only 21% are labeled as helpful, and 39% harmful.
+
+Of the knowledge deemed helpful by human and rectifies model prediction, 95% are factual, while of those deemed harmful by human and misleads model prediction, 86% are non-factual, suggesting that improving knowledge factuality is a promising path towards more helpful knowledge.
+
+We also analyzed the nonselected knowledge and found that these statements have slightly lower factuality and helpfulness than the selected knowledge.

@@ -1,0 +1,37 @@
+Hypernymy, or the IS-A relation, is one of the most important lexical relations.
+
+It is used to create taxonomies of terms and it is the main organizational criterion of nouns and verbs in WordNet (Fellbaum, 1998).
+
+Learning hypernymy is also important in practice, as knowing a word's hypernyms gives an approximation of its meaning, and enables inferences in downstream tasks such as question answering and reading comprehension.
+
+Predicting hypernymy is still a challenging task for word embeddings (Pinter and Eisenstein, 2018;Bernier-Colborne and Barriere, 2018;Nickel and Kiela, 2018) and previous studies have shown that it is more difficult to predict hypernymy than other lexical relations (Balažević et al., 2019;Allen et al., 2019).
+
+Hypernymy prediction is often evaluated against a given taxonomy, typically WordNet (Fellbaum, 1998).
+
+The main hypothesis that we pursue in this paper is that knowledge of this taxonomy, in particular of taxonomy paths, will be helpful for hypernymy prediction.
+
+So we introduce two simple encoderdecoder based models for hypernym prediction that make use of information in the full taxonomy paths.
+
+There has been much recent work on modeling lexical relations based on distributed representations (Pinter and Eisenstein, 2018;Bernier-Colborne and Barriere, 2018;Nickel and Kiela, 2018).
+
+However, the task formulations and evaluation datasets have differed widely, making it hard to compare different approaches.
+
+We focus on evaluating on hypernymy, rather than jointly on many relations, which can mask strong performance differences across relations.
+
+We evaluate our encoder-decoder models against several previous models that have not been evaluated in the same setting before.
+
+Like many other approaches, we use WordNet as the basis for our experiments.
+
+We formulate the task as the task of finding the correct point to attach a new node (synset) to the WordNet taxonomy.
+
+We build on the existing WN18RR dataset (Dettmers et al., 2018), but filter its hypernymy pairs to produce WN18RR-hp, a subset that is leak-free with respect to approaches that use taxonomy paths during training, as we do.
+
+We find that one of our new models, hyper2path, achieves state-of-the-art performance on hypernym prediction on WN18RR-hp, exceeding the best performance of benchmark models by 4.11 points in accuracy of the highest-ranked prediction (hit-at-one, H@1).
+
+In particular, we observe the greatest performance gain in noun hypernym prediction, where it improves over the best benchmark by 5.17 H@1 points.
+
+1: We frame hypernym prediction as a sequence generation problem.
+
+Given a query hyponym (e.g., pizza.n.01), the hypo2path rev model generates its taxonomy path, from its direct hypernym (dish.n.02) to the root node (entity.n.01). and indicate a correct and an incorrect prediction, respectively.
+
+In each example, an underlined synset corresponds to what the model predicted as a direct hypernym.

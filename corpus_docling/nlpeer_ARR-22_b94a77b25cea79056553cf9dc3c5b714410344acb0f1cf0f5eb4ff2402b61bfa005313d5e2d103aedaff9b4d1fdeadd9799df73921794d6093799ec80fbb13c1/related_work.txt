@@ -1,0 +1,111 @@
+Going from audio recordings to fully annotated transcripts implies two successive segmentation steps: the first segments words and happens during the production of phonemic or orthographic transcripts; the second further splits words into morphs, which are then annotated with syntactic information and glosses.
+
+We mostly focus on the former task, assuming a two-step process: first, the computation of a phonemic transcript that we assume is given; then the segmentation into words for which we consider two settings: batch and online learning.
+
+The word and morpheme segmentation tasks are closely related and rely on similar tools: using the Japhug corpus, which contains both levels of segmentations, we also study the implications of using lists of words vs morphemes as weak supervision.
+
+In its baseline form, the word segmentation process is fully unsupervised, and the only training material is a set of transcribed sentences (see Fig. 1).
+
+We rely on Bayesian non-parametric approaches to word segmentation (see (Cohen, 2016) for a thorough exposition), and our baselines are the unigram version of the dpseg model (Goldwater et al., 2009) and a variant where the underlying Dirichlet Process is replaced by a Pitman-Yor Process as in (Neubig, 2014).
+
+We selected unigram models for their simplicity, which (a) makes them amenable to the processing of very small sets of sentences; (b) makes the online learning setting tractable.
+
+While using higher-order models or more sophisticated models of the same family (Teh, 2006b;Mochihashi et al., 2009) may improve the performance (see (Godard et al., 2016) for an experimental comparison), we believe that in our low-resource conditions, these variations would be small2 and would not change our main conclusions.
+
+Word segmentation models fundamentally rely on probabilistic models for word sequences defining P (w = w 1 . . .
+
+w T ); word sequences can also be viewed as segmented sequences of characters y = y 1 . . .
+
+y L , so that the same model can be used for the joint probability of (y, b), with b = b 1 . . .
+
+b L representing the vector of boundary locations where value b t = 1 (resp.
+
+b t = 0) denotes a boundary (resp.
+
+no boundary) after symbol y t .
+
+In an unsupervised setting, these boundaries are hidden and are latent variables in the model.
+
+Such models lend themselves well to Gibbs sampling, which repeatedly produces samples of each boundary given all the other boundaries in the corpus.
+
+In dpseg, the underlying sequence model is a unigram model: P (w 1 . . .
+
+w T ) = T t=1 P (w t ).
+
+The probability of individual words corresponds to a Dirichlet Process with parameters α, the concentration parameter, and P 0 , the base distribution, and yields the following formulation for the conditional probability of w t given the past words w <t :
+
+P (w t = w|w <t ) = n w (w <t ) + αP 0 (w) t + α -1 ,(1)
+
+where n w (w <t ) counts the number of times w has occurred in the past.
+
+With lower values of α, the most frequent words tend to be generated more (hence, concentration), while with higher values, the words are more smoothly distributed.
+
+P 0 , the base distribution, assigns scores to arbitrary character strings; Goldwater et al. (2009) use a length model and a uniform character model.
+
+For word w made of characters y 1 , ..., y m , P 0 is computed as:
+
+P 0 (w) = p # (1 -p # ) m-1 length model m j=1 P (y j ) character model (2)
+
+where p # is the probability to end the word.
+
+For this model, Gibbs sampling compares at each position t two sequences of words w t=0 (no boundary at position t) and w t=1 (a boundary is inserted).
+
+As these sequences only differ minimally, terms such as P (b t = 0|y, b -t ) are readily derived (see e.g. (Goldwater et al., 2009)).
+
+Gibbs sampling is performed for a number of iterations that are sufficient to reach convergence, and we use the last iteration to uncover the resulting segmentation.
+
+To speed up mixing, Goldwater et al. (2009) also use annealing, so that a larger search space is explored.
+
+An extension of dpseg, denoted pypseg, uses a Pitman-Yor Process (PYP) instead of the Dirichlet Process and generalises equation (1) with an additional discount parameter, which enables to better control the generation of new words.
+
+PYPs are introduced in (Teh, 2006b;Mochihashi et al., 2009); a fast implementation is in (Neubig, 2014).
+
+For our experiments, both models have y = b 1 á 2 a 3 á 4 m 5 i 6 k 7 ú 8 n 9 d 10 á 11 p 12 o 13 o 14 y 15 á 16 k 17 a 18 l 19 a 20 b = 0 0 1 0 0 0 0 0 0 0 1 0 0 1 0 1 0 0 0 1 w 6=0 báa ámikúndá poo yá kala b = 0 0 1 0 0 1 0 0 0 0 1 0 0 1 0 1 0 0 0 1 w 6=1 báa ámi kúndá poo yá kala
+
+Figure 1: The sentence segmentation task illustrated with a sentence from the Mboshi corpus: 'báa ámikúndá poo yá kala' ('they found the old village').
+
+The two possible segmentations only differ in one boundary at position t = 6, one (w 6=0 ) where 'ámikúndá' is one single unit and one (w 6=1 ) where it is split in two.
+
+been re-implemented in Python.
+
+This implementation is available at https://github.com/ shuokabe/pyseg.
+
+Unsupervised segmentation is a generic NLP task that can be performed at multiple levels of analysis: a document segmented in sections, a speech segmented in utterances, an utterance segmented in words, a word segmented in morphemes, syllables or phonemes.
+
+It has been studied in multiple ways, and we report here recent work related to word discovery for language documentation, noting that the same methods also apply to the unsupervised segmentation of continuous speech into 'words' (de Marcken, 1996) which has given rise to a vast literature on language acquisition.
+
+Recently, this task has become central in preprocessing pipelines, with new implementations of simple models (Sennrich et al., 2016;Kudo and Richardson, 2018).
+
+Linear segmentation models in the Bayesian realm can be traced back to (Goldwater et al., 2006(Goldwater et al., , 2009)).
+
+They were extended with nesting in (Mochihashi et al., 2009), where the base distribution of the Dirichlet Process is a char-based nonparametric model; and in (Uchiumi et al., 2015;Löser and Allauzen, 2016), who consider hidden state variables in the word generation process.
+
+This extension enables, for instance, to jointly learn segmentation and PoS tagging or to introduce some morphotactics in the model.
+
+Other sources of weak supervisions along these lines concern the use of higher-order n-grams and of prosodic cues (Doyle and Levy, 2013).
+
+Finally, (Börschinger and Johnson, 2012) (with particle filtering techniques) and (Neubig, 2014) (with block sampling) study ways to speed up inference.
+
+The unsupervised techniques exposed in Section 2 only depend on the design of a probabilistic word generation process.
+
+This means that they are also readily applicable when this process is conditioned to some input, for instance, when a translation is available as an additional information source.
+
+This setup is notably studied in (Neubig et al., 2011;Stahlberg et al., 2012), and also considered, with radically different tools, in (Anastasopoulos and Chiang, 2017;Godard et al., 2018c).
+
+A somewhat richer trend of works aimed at informing word segmentation relies on the model of adaptor grammars (AG) of Johnson et al. (2007), applied to the segmentation task as early as (Johnson, 2008).
+
+AGs generalise finite-state models such as dpseg and pypseg by modelling trees and subtrees, rather than mere strings.
+
+Their use necessitates a context-free description of the language, which enables to integrate information regarding word and syllable structures.
+
+Even generic descriptions can be useful, but finding the most appropriate and effective one is challenging (Johnson and Goldwater, 2009;Eskander et al., 2016).
+
+This formalism has also been used to introduce syntactic information (Johnson et al., 2014), prosodic information (Börschinger and Johnson, 2014), and partial annotations (Sirts and Goldwater, 2013).
+
+Recent software packages for AGs are presented in (Bernard et al., 2020) and (Eskander et al., 2020).
+
+Using AGs comes, however, with a high computational price, as the Gibbs sampling process typically requires repeated parses of the corpus, even though cheaper estimation techniques may also be considered (Cohen et al., 2010).
+
+As our goal is to integrate learning techniques in interactive annotation tools, AGs were not deemed appropriate, and we explored simpler alternatives.
+
+Similar arguments apply to the use of neural networks, which have attracted a growing interest even for very low-resource languages, combining supervised segmentation methods (Moeng et al., 2021;Liu et al., 2021) with cross-lingual transfer or data augmentation techniques (Silfverberg et al., 2017;Kann et al., 2018;Lane and Bird, 2020).

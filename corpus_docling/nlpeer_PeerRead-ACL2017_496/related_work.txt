@@ -1,0 +1,29 @@
+Analysis of neural models The opacity of neural networks has motivated researchers to analyze such models in different ways.
+
+One line of work visualizes hidden unit activations in recurrent neural networks that are trained for a given task (Elman, 1991;Karpathy et al., 2015;Kádár et al., 2016;Qian et al., 2016a).
+
+While such visualizations illuminate the inner workings of the network, they are often qualitative in nature and somewhat anecdotal.
+
+A different approach tries to provide a quantitative analysis by correlating parts of the neural network with linguistic properties, for example by training a classifier to predict features of interest.
+
+Different units have been used, from word embeddings (Köhn, 2015;Qian et al., 2016b), through LSTM gates or states (Qian et al., 2016a), to sentence embeddings (Adi et al., 2016).
+
+Our work is most similar to Shi et al. (2016), who use hidden vectors from a neural MT encoder to predict syntactic properties on the English source side.
+
+In contrast, we focus on representations in morphologically-rich languages and evaluate both source and target sides across several criteria.
+
+Vylomova et al. ( 2016) also analyze different representations for morphologically-rich languages in MT, but do not directly measure the quality of the learned representations.
+
+Word representations in MT Machine translation systems that deal with morphologically-rich languages resort to various techniques for representing morphological knowledge, such as word segmentation (Nieflen and Ney, 2000  Knight, 2003;Badr et al., 2008) and factored translation and reordering models (Koehn and Hoang, 2007;Durrani et al., 2014).
+
+Characters and other sub-word units have become increasingly popular in neural MT, although they had also been used in phrase-based MT for handling morphologically-rich (Luong et al., 2010) or closely related language pairs (Durrani et al., 2010;Nakov and Tiedemann, 2012).
+
+In neural MT, such units are obtained in a pre-processing step-e.g.
+
+by byte-pair encoding (Sennrich et al., 2016) or the word-piece model (Wu et al., 2016)or learned during training using a character-based convolutional/recurrent sub-network (Costa-jussà and Fonollosa, 2016;Luong and Manning, 2016;Vylomova et al., 2016).
+
+The latter approach has the advantage of keeping the original word boundaries without requiring pre-and post-processing.
+
+Here we focus on a character CNN which has been used in language modeling and machine translation (Kim et al., 2015;Belinkov and Glass, 2016;Costa-jussà and Fonollosa, 2016;Jozefowicz et al., 2016;Sajjad et al., 2017).
+
+We evaluate the quality of different representations learned by an MT system augmented with a character CNN in terms of POS and morphological tagging, and contrast them with a purely word-based system.

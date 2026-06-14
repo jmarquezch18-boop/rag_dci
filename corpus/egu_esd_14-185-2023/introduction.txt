@@ -1,0 +1,77 @@
+Anthropogenic emissions are rapidly increasing the global atmospheric CO 2 concentration.
+
+In the last decade (2011 to 2020), global fossil CO 2 emissions averaged ∼ 9.49 PgC yr -1 (equivalent ∼ 34.8 Pg CO 2 yr -1 ) with a growth rate of 0.4 % yr -1 (Friedlingstein et al., 2021).
+
+In 2019, CO 2 emissions reached a record high of 9.71 ± 0.49 PgC yr -1 (equivalent 35.6±1.8 Pg CO 2 yr -1 ), and there is no sign of a peak (Edo et al., 2019;Friedlingstein et al., 2021).
+
+The slow speed of emission reductions until now makes it difficult to reach the promised climate goals to keep global warming within the guardrail of 2 • C (Peters et al., 2013), much less the recent agreement to seriously consider an even more ambitious 1.5 • C goal (UNFCCC, 2015).
+
+In addition to mitigation efforts to reduce greenhouse gas (GHG) emissions, it is increasingly realized that carbon dioxide removal (CDR), sometimes also called negative emissions technologies (NETs), will likely be a necessary step to achieve the targets of the Paris Agreement (Minx et al., 2017;Rogelj et al., 2018).
+
+CDR aims to remove CO 2 from the atmosphere and to store it, ideally permanently, in either the terrestrial, marine or geological carbon reservoirs, thereby mitigating global warming (Glaser, 2010).
+
+Due to the limited remaining emission budget (650 ± 130 Pg CO 2 to 1.5 • C and 1300 ± 130 Pg CO 2 to 2 • C), deployment of CDR is required in most pathways studied in the scientific literature to achieve these ambitious targets (Lawrence et al., 2018;IPCC, 2018).
+
+As the second-largest inorganic carbon reservoir on the planet, the ocean plays a pivotal role in naturally regulating the atmospheric CO 2 concentration.
+
+Since the beginning of the industrial era, the ocean has taken up more than 560 Pg CO 2 , about 25 % of the anthropogenic CO 2 emissions (∼ 2030 Pg CO 2 ; Gruber et al., 2019;Ciais et al., 2013;Heinze et al., 2015).
+
+Its high carbon storage capacity could theoretically match or exceed fossil fuel resources (Scott et al., 2015).
+
+Thus, a variety of ocean-based CDR methods have been proposed to take advantage of this potential storage capacity.
+
+The proposed ocean-based CDR approaches aim to increase the rate of oceanic CO 2 uptake and storage by either enhancing abiotic processes (i.e., chemical or physical, e.g., ocean alkalinization; Keller et al., 2014;Taylor et al., 2016;Köhler et al., 2013;Albright et al., 2016) or biotic processes (e.g., ocean fertilization; Keller et al., 2014;Smetacek et al., 2012;Oschlies et al., 2010b;Matear and Elliott, 2004;Robinson et al., 2014).
+
+Some technologies also seek to remove CO 2 directly from seawater and to store it in some other reservoir, e.g., a geological one (Eisaman et al., 2012).
+
+Macroalgae species (also known as "seaweed" or "kelp") are highly efficient carbon fixers with a high C : N ratio (Atkinson and Smith, 1983;Fernand et al., 2017) and observed net primary production (NPP) rates of 91-522 gC m 2 yr -1 .
+
+In the 1970's, the concept of ocean farming using macroalgae for marine carbon sink and bioenergy production was studied with an actual small test farm established off the coast of southern California.
+
+These research activities were abandoned due to the damage of the test farm by winter storms and for several technical and economic reasons (Ritschard, 1992).
+
+Utilizing macroalgae for biological ocean-based CDR has recently received renewed interest (Duarte et al., 2017;Chung et al., 2011;Gao et al., 2020;Fernand et al., 2017;Raven, 2018).
+
+The macroalgae aquaculture industry is well established globally, with an annual harvest of over 30 million t wet weight (WW, FAO, 2018).
+
+Thus, some proposals have focused on using harvested macroalgae for producing biochar (Roberts et al., 2015;Bird et al., 2011) or bio-energy combined with carbon capture and storage (BECCS, Chung et al., 2011;Buschmann et al., 2017;Gao and McKinley, 1994;Chen et al., 2015;Fernand et al., 2017).
+
+However, as current macroalgae aquaculture facilities are mainly located in coastal regions, the scope to expand macroalgae aquaculture is limited by the shortage of suitable coastal areas due to nutrient availability and shifting temperature regimes (Duarte et al., 2017;Oyinlola et al., 2020).
+
+To address these issues, several offshore macroalgae aquaculture facilities have been designed and evaluated (e.g., the SeaweedPaddock by Sherman et al. (2019), the offshore ring by Buck and Buchholz (2004) and the depth-cycling strategy by Navarrete et al. (2021), in which macroalgae are physically towed into the deep nutrient-rich water at night).
+
+Moreover, the Advanced Research Projects Agency-Energy (ARPA-E) of the US Department of Energy (DOE) has committed more than 60 million dollars on the Macroalgae Research Inspiring Novel Energy Resources (MARINER) program to develop the technologies for macroalgal biomass production, including integrated ocean cultivation and harvesting systems (APAR-e, 2021).
+
+Thus, the ideas of expanding macroalgae cultivation to the open oceans (mariculture) are ambitious but no longer fictional, and they provide a theoretical possibility to expand macroalgae aquaculture to the open ocean for CDR.
+
+In this study, we evaluate "macroalgae open-ocean mariculture and sinking (MOS)" as an ocean-based CDR method that is designed to artificially enhance the macroalgae-based carbon dioxide removal.
+
+The aim of this study is to investigate (1) the maximum physical and biogeochemical CDR potential of MOS, (2) the side effects of such large-scale deployment, and (3) to understand where offshore macroalgae farming would be viable if done at a large scale.
+
+This information is needed to help prioritize further research into CDR, to understand if there are potential MOS side effects that become evident only at a large scale and to provide information on the viability of large-scale offshore macroalgae farming in different regions over time by accounting for the implications of nutrient utilization and climate change.
+
+To do this, simulated macroalgae are seeded and cultivated on offshore floating platforms that are moored to the seabed (e.g., see platform designs in Buck and Buchholz, 2004).
+
+The platforms are also assumed to float below the open-ocean surface (at 5 m depth) to avoid storm damages.
+
+At the end of an annual cycle, platforms with matured macroalgae are rapidly sunk to the seafloor and unload the biomass there. This can be thought of as a short circuiting of the biological pump by bringing marine biomass directly to the seafloor without having it remineralized along the way.
+
+Afterwards, the sunken biomass is assumed to continue remineralization at the seafloor, consuming oxygen and releasing dissolved inorganic carbon (C), nitrogen (N) and phosphate (P) into the deep ocean where it ideally remains for centuries to millennia (Fig. 1).
+
+The macroalgae used here is an idealized genus.
+
+The assumed constant C : N : P ratio is 400 : 20 : 1, which is higher than the stoichiometric ratio of the general phytoplankton in the University of Victoria Earth system climate model (UVic ESCM; C : N : P = 106 : 16 : 1, the Redfield ratio).
+
+In practice, some of the biomass may also be permanently buried in sediments (Luo et al., 2019;Sichert et al., 2020), and we will explore the extreme case of zero remineralization in the water column in a sensitivity experiment.
+
+In another sensitivity experiment, we investigate combining MOS with artificial upwelling (AU) to alleviate nutrient limitation in the open-ocean surface (Duarte et al., 2017;Kim et al., 2019;Laurens et al., 2020).
+
+To investigate the biogeochemical and climatic implications of MOS, we use an Earth system model of intermediate complexity.
+
+Though the idea of massive macroalgae cultivation and biomass offsetting for CDR has been assessed in some earlier publications (Orr and Sarmiento, 1992;Gao and McKinley, 1994;Froehlich et al., 2019;Lehahn et al., 2016), as far as we are aware it has not been evaluated using an Earth system model (ESM).
+
+ESM-based assessments are required for studying the response of the global carbon cycle to such perturbations and for estimating the efficacy of such methods in a global carbon cycle context (with regards to atmospheric CO 2 removal).
+
+Furthermore, such models can dynamically simulate macroalgae growth and the permanence of carbon storage (i.e., the fate of sunken biomass on the seafloor), as well as their interactions with global marine biogeochemistry.
+
+It is essential to clarify these issues before any decisions about eventual implementation of MOS can be made.

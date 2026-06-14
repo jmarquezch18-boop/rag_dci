@@ -1,0 +1,45 @@
+In this section, we describe our experimental setup: the data we use, the exact details of the experimental use of our approach to unsupervised parsing, and our evaluation methodology.
+
+We report the F 1 score with reference to gold trees in the PTB test set (section 23).
+
+Following prior work (Kim et al., 2019a;Shen et al., 2018Shen et al., , 2019;;Cao et al., 2020), we remove punctuation and collapse unary chains before evaluation, and calculate F 1 ignoring trivial spans, i.e., single-word spans and whole-sentence spans, and we perform the averaging at sentence-level (macro average) rather than span-level (micro average), which means that we compute F 1 for each sentence and later average over all sentences.
+
+We also mention the oracle upper bound, which is the highest possible score with binarized trees since we compare them against PRPN (Shen et al., 2018) 30.4 31.5 ON (Shen et al., 2019) 25.4 25.7 Neural PCFG (Kim et al., 2019a) 25.7 29.5 Compound PCFG (Kim et al., 2019a) 36 non-binarized gold trees according to the convention, as most unsupervised parsing methods output fully binary trees.
+
+We additionally use the standard PARSEVAL metric computed by the evalb program.
+
+3 Although evalb calculates the micro average F 1 score, it differs from our micro average metric in the sense that it counts the whole sentence spans, and calculates duplicated spans instead of removing them.
+
+Following the recommendations put forth by previous work that has done a comprehensive empirical evaluation on this topic (Li et al., 2020b), we report results on both length ≤ 10 as well as all-length test data.
+
+Table 1 shows the unlabeled F 1 scores for our model compared to existing unsupervised parsers on PTB.
+
+The vanilla inside model is in itself competitive and is already in the range of previous best models like DIORA (Drozdov et al., 2019), Compound PCFG (Kim et al., 2019a).
+
+4 See Appendix A.5 to assess our model's performance on unsupervised labeled parsing.
+
+We further evaluate how our method works for languages with different branching types -Chinese 3 https://nlp.cs.nyu.edu/evalb 4 We do not include the results of Shi et al. (2021) in our analysis because their boost in the performance is contingent on the nature of the supervision data (especially the QA-SRL dataset) rather than on the actual learning process itself.
+
+Furthermore, the authors mention that a vast amount of hyperlinks match syntactic constituents, hence restricting the scope for the actual algorithm to derive meaningful trees.
+
+Table 3: Evalb F 1 on the full (F 1 -all) and length ≤ 10 (F 1 -10) sentences of the KTB test set discarding punctuation corresponding to KTB-40 and KTB-10, respectively.
+
+We take the baseline numbers of models from Li et al. (2020b).
+
+See Table 7 to view the hyperparameters used for evalb.
+
+(right-branching) and Japanese (left-branching).
+
+We use Transformer models for the representations of the spans for both Chinese and Japanese.
+
+See Section A.1 in the Appendix for training details.
+
+Tables 2 and 3 shows the results for CTB and KTB respectively.
+
+Moreover, we do not include a few models chosen previously for PTB during our analysis, as extending those models for CTB or KTB is non-trivial due to several reasons: such as lack of domain-related datasets (as DIORA uses SNLI and MultiNLI for training), and lack of linguistic knowledge expertise (not easily cross-lingual transferable notion for designing constituency tests).
+
+Figure 8 in the Appendix shows step-wise qualitative analysis for a sample sentence taken from the PTB training set.
+
+See Figures 9 and 10 in Appendix to see the visualization for an example tree at every stage of the pipeline for CTB and KTB respectively.
+
+As we can observe from all the example tree outputs, the parser using the inside and outside models after the co-training stage produces fewer crossing brackets than the vanilla inside model.

@@ -1,0 +1,15 @@
+In this paper, we described ERRANT, a grammatical ERRor ANnotation Toolkit designed to au-tomatically annotate parallel error correction data with explicit edit spans and error type information.
+
+ERRANT can be used to not only facilitate a detailed error type evaluation in GEC, but also to standardise existing error correction corpora and reduce annotator workload.
+
+We release ERRANT with this paper.
+
+Our approach makes use of previous work to align sentences based on linguistic intuition and then introduces a new rule-based framework to classify edits.
+
+This framework is entirely dataset independent, and relies only on automatically obtained information such as POS tags and lemmas.
+
+A small-scale evaluation of our classifier found that each rater considered >95% of the predicted error types as either "Good" (85%) or "Acceptable" (10%).
+
+We demonstrated the value of ERRANT by carrying out a detailed evaluation of system error type performance for all teams in the CoNLL-2014 shared task on Grammatical Error Correction.
+
+We found that different systems had different strengths and weaknesses which we hope researchers can exploit to further improve general performance.

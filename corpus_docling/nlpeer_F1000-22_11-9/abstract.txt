@@ -1,0 +1,21 @@
+Background: SARS-CoV-2 virus is a highly transmissible pathogen that causes COVID-19.
+
+The outbreak originated in Wuhan, China in December 2019.
+
+A number of nonsynonymous mutations located at different SARS-CoV-2 proteins have been reported by multiple studies.
+
+However, there are limited computational studies on the biological impacts of these mutations on the structure and function of the proteins.
+
+Methods: In our study nonsynonymous mutations of the SARS-CoV-2 genome and their frequencies were identified from 30,229 sequences.
+
+Subsequently, the effects of the top 10 highest frequency nonsynonymous mutations of different SARS-CoV-2 proteins were analyzed using bioinformatics tools including co-mutation analysis, prediction of the protein structure stability and flexibility analysis, and prediction of the protein functions.
+
+Results: A total of 231 nonsynonymous mutations were identified from 30,229 SARS-CoV-2 genome sequences.
+
+The top 10 nonsynonymous mutations affecting nine amino acid residues were ORF1a nsp5 P108S, ORF1b nsp12 P323L and A423V, S protein N501Y and D614G, ORF3a Q57H, N protein P151L, R203K and G204R.
+
+Many nonsynonymous mutations showed a high concurrence ratio, suggesting these mutations may evolve together and interact functionally.
+
+Our result showed that ORF1a nsp5 P108S, ORF3a Q57H and N protein P151L mutations may be deleterious to the function of SARS-CoV-2 proteins.
+
+In addition, ORF1a nsp5 P108S and S protein D614G may destabilize the protein structures while S protein D614G may have a more open conformation compared to the wild type.

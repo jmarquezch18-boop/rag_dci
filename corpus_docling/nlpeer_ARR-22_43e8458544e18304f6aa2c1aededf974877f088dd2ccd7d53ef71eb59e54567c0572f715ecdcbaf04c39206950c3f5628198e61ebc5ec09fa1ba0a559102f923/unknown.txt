@@ -1,0 +1,27 @@
+Using Nlp To Quantify The Environmental Cost And Diversity Benefits Of In-Person Nlp Conferences
+
+Abstract
+
+Introduction
+
+Related Work
+
+Methods
+
+Results
+
+Discussion
+
+Figure 1: Visualisation of estimated journeys to the ACL annual meetings over 40 years.
+
+Maps for all major NLP conferences are included in the supplementary material.
+
+Figure 2: Distribution of NLP publications between affiliation locations (countries) in each year with the diversity index (white line, right axis).
+
+Figure 4: Average emissions per publication at local, regional and international conferences between 1965 and 2019
+
+Figure7: Relative travel length (mean distance of travels made divided by mean distance of travels expected in random venue choice) for countries with at least 15 publications with respect to their continent and GDP per capita.
+
+Figure8: NLP events plotted with respect to the diversity of participation (Y axis), mean travel distance (X axis) and number of publications (disc size).
+
+Comparisons of recent annual conference emissions to familiar scenarios both within and outside of NLP.

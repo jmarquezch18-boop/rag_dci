@@ -1,0 +1,281 @@
+Verb Physics: Relative Physical Knowledge Of Actions And Objects
+
+Abstract
+
+Introduction
+
+Representation Of Relative Physical Knowledge
+
+Knowledge Dimensions
+
+We consider five dimensions of relative physical knowledge in this work: size, weight, strength, rigidness, and speed. "Strength" in our work refers to the physical durability of an object (e.g., "diamond" is stronger than "glass"), while "rigidness" refers to the physical flexibility of an object (e.g., "glass" is more rigid than a "wire").
+
+x is smaller than y
+
+x is lighter than y
+
+x is weaker than y
+
+I theme,goal
+
+x is less rigid than y
+
+x is slower than y with uncertainties involved in knowledge acquisition.
+
+Therefore, we assume each piece of knowledge is associated with a probability distribution.
+
+More formally, given objects x and y, we define a random variable O a x,y whose range is {>, <, } with respect to a knowledge dimension a ∈ {SIZE,WEIGHT,STRENGTH,RIGIDNESS,SPEED} so that:
+
+P(O a
+
+x,y = r), r ∈ {>, <, }.
+
+This immediately provides two simple properties:
+
+P(O x,y = >) = P(O y,x = <) P(O x,x = ) = 1
+
+Physical Implications Of Verbs
+
+Next we consider representing relative physical implications of actions applied over two objects.
+
+For example, consider an action frame "x threw y." In general, following implications are likely to be true: "x threw y" =⇒ x > size y "x threw y" =⇒ x > weight y "x threw y" =⇒ x < speed y Again, in order to cope with exceptions and uncertainties, we assume a probability distribution associated with each implication.
+
+More formally, we define a random variable F a v to denote the implication of the action verb v when applied over its arguments x and y with respect to a knowledge dimension a so that: P(F size threw = >) := P("x threw y" ⇒ x > size y) P(F wgt threw = >) := P("x threw y" ⇒ x > wgt y) where the range of F size threw is {>, <, }.
+
+Intuitively, F size threw represents the likely first order relation implied by "throw" over ungrounded (i.e., variable) object pairs.
+
+The above definition assumes that there is only a single implication relation for any given verb with respect to a specific knowledge dimension.
+
+This is generally not true, since a verb, especially a common action verb, can often invoke a number of different frames according to frame semantics (Fillmore, 1976).
+
+Thus, given a number of different frame relations v 1 ...v T associated with a verb v, we define random variables F with respect to a specific frame relation v t , i.e., F a vt .
+
+We use this notation going forward.
+
+Frame Perspective on Verb Implications: Figure 2 illustrates the frame-centric view of physical implication knowledge we aim to learn.
+
+Importantly, the key insight of our work is inspired by Fillmore's original manuscript on frame semantics (Fillmore, 1976).
+
+Fillmore has argued that "frames"-the contexts in which utterances are situated-should be considered as a third primitive of describing a language, along with a grammar and lexicon.
+
+While existing frame annotations such as FrameNet (Baker et al., 1998), PropBank (Palmer et al., 2005), and VerbNet (Kipper et al., 2000) provide rich frame knowledge associated with a predicate, none of them provide the exact kind of physical implications we consider in our paper.
+
+Thus, our work can potentially contribute to these resources by investigating new approaches to automatically recover richer frame knowledge from language.
+
+In addition, our work is motivated by the formal semantics of Dowty (1991), as the task of learning verb implications is essentially that of extracting lexical entailments for verbs.
+
+Data And Crowdsourced Knowledge
+
+Action Verbs: We pick 50 classes of Levin verbs from both "alternation classes" and "verb classes" (Levin, 1993), which corresponds to about 1100 unique verbs.
+
+We sort this list by frequency of occurrence in our frame patterns in the Google Syntax Ngrams corpus (Goldberg and Orwant, 2013) and pick the top 100 verbs.
+
+Action Frames: Figure 2 illustrates examples of action frame relations.
+
+Because we consider implications over pairwise argument relations for each frame, there are sometimes multiple frame relations we consider for a single frame.
+
+To enumerate action frame relations for each verb, we use syntactic patterns based on dependency parse by extracting the core components (subject, verb, direct object, prepositional object) of an action, then map the subject to an agent, the direct object to a theme, and the prepositional object to a goal.
+
+3 For those frames that involve an argument in a prepositional phrase, we create a separate frame for each preposition based on the statistics observed in the Google Syntax Ngram corpus.
+
+Because the syntax ngram corpus provides only tree snippets without context, this way of enumerating potential frame patterns tend to overgenerate.
+
+Thus we refine our prepositions for each frame by taking either the intersection or union with the top 5 Google Surface Ngrams (Michel et al., 2011), depending on whether the frame was under-or over-generating.
+
+We also add an additional crowdsourcing step where we ask crowd workers to judge whether a frame pattern with a particular verb and preposition could plausibly be found in a sentence.
+
+This process results in 813 frame templates, an average of 8.13 per verb.
+
+Object Pairs: To provide a source of ground truth relations between objects, we select the object pairs that occur in the 813 frame templates with positive pointwise mutual information (PMI) across the Google Syntax Ngram corpus.
+
+After replacing a small set of "human" nouns with a generic HUMAN object, filtering out nouns labeled as abstract by WordNet (Miller, 1995), and distilling all surface forms to their lemmas (also with WordNet), the result is 3656 object pairs.
+
+Crowdsourcing Knowledge
+
+We collect human judgements of the frame knowledge implications to use as a small set of seed knowledge (5%), a development set (45%), and a test set (50%).
+
+Crowd workers are given with a frame template such as "x threw y," and then asked to list a few plausible objects (including people and animals) for the missing slots (e.g., x and y).
+
+4We then ask them to rate the general relationship that the arguments of the frame exhibit with respect to all knowledge dimensions (size, weight, etc.).
+
+For each knowledge dimension, or attribute, a, workers select an answer from (1) x > a y, (2)
+
+x < a y, (3) x a y, or (4) no general relation.
+
+We conduct a similar crowdsourcing step for the set of object pairs.
+
+We ask crowd workers to compare each of the 3656 object pairs along the five knowledge dimensions we consider, selecting an answer from the same options above as with frames.
+
+We reserve 50% of the data as a test set, and split the remainder up either 5% / 45% or 20% / 30% (seed / development) to investigate the effects of different seed knowledge sizes on the model.
+
+Statistics for the dataset are provided in Table 1.
+
+About 90% of the frames as well as object pairs had 2/3 agreement between workers.
+
+After removing frame/attribute combinations and object pairs that received less than 2/3 agreement, or were selected by at least 2/3 workers to have no relation, we end up with roughly 400-600 usable frames and 2100-2500 usable object pairs per attribute.
+
+Model
+
+Nodes
+
+The factor graph contains two types of nodes in order to capture two classes of knowledge.
+
+The first type of nodes are object pair nodes.
+
+Each object pair node is a random variable O a
+
+x,y which captures the relative strength of an attribute a between objects x and y.
+
+The second type of nodes are frame nodes.
+
+Each frame node is a random variable F a vt .
+
+This corresponds to the verb v used in a particular type of frame t, and captures the implied knowledge the frame v t holds along an attribute a.
+
+All random variables take on the values {>, <, }.
+
+For an object pair node O a
+
+x,y , the value represents the belief about the relation between x and y along the attribute a. For a frame node F a vt , the value represents the belief about the relation along the attribute a between any two objects that might be used in the frame v t .
+
+We denote the sets of all object pair and frame random variables O and F, respectively.
+
+Action-Object Compatibility
+
+The key aspect of our work is to reason about two types of knowledge simultaneously: relative knowledge of grounded object pairs, and implications of actions related to those objects.
+
+Thus we connect the verb subgraphs and object subgraphs through selectional preference factors ψ s between two such nodes O a
+
+x,y and F a vt if we find evidence from text that suggests objects x and y are used in the frame v t .
+
+These factors encourage both random variables to agree on the same value.
+
+As an example, consider a node O size p,b which represents the relative size of a person and a basketball, and a node F size threw dobj which represents the relative size implied by an "x threw y" frame. If we find significant evidence in text that "[person] threw [basketball]" occurs, we would add a selectional preference factor to connect O size p,b with F size threw dobj and encourage them towards the same value.
+
+This means that if it is discovered that people are larger than basketballs (the value >), then we would expect the frame "x threw y" to entail x > size y (also the value >).
+
+Semantic Similarities
+
+Some frames have relatively sparse text evidences to support their corresponding knowledge acquisition.
+
+Thus, we include several types of factors based on semantic similarities as described below.
+
+Cross-Verb Frame Similarity: We add a group of factors ψ v between two verbs v and u (to connect a specific frame of v with a corresponding frame of u) based on the verb-level similarities.
+
+Within-Verb Frame Similarity: Within each verb v, which consists of a set of frame relations v 1 , ...v T , we also include frame-level similarity factors ψ f between v i and v j .
+
+This gives us more evidence over a broader range of frames when textual evidence might be sparse.
+
+Object Similarity: As with verbs, we add factors ψ o that encourage similar pairs of objects to take the same value.
+
+Given that each node represents a pair of objects, finding that x and y are similar yields two main cases in how to add factors (aside from the trivial case where the variable O a x,y is given a unary factor to encourage the value ).
+
+1.
+
+If nodes O x,z and O y,z exist, we expect objects x and y to both have a similar relation to z. We add a factor that encourages O x,z and O y,z to take the same value.
+
+The same is true if nodes O z,x and O z,y exist.
+
+2. On the other hand, if nodes O x,z and O z,y exist, we expect these two nodes to reach the opposite decision.
+
+In this case, we add a factor that encourages one node to take the value > if the other prefers the value <, and vice versa. (For the case of , if one prefers that value, then both should.)
+
+Cross-Knowledge Correlation
+
+Some knowledge dimensions, such as size and weight, have a significant correlation in their implied relations.
+
+For two such attributes a and b, if the same frame F a v i and F b v i exists in both graphs, we add a factor ψ a between them to push them towards taking the same value.
+
+Seed Knowledge
+
+In order to kick off learning, we provide a small set of seed knowledge among the random variables in {O, F} with seed factors ψ seed .
+
+These unary seed factors push the belief for its associated random variable strongly towards the seed label.
+
+Potential Functions
+
+Unary Factors: For all frame and object pair random variables in the training set, we train a maximum entropy classifier to predict the value of the variable.
+
+We then use the probabilities of the classifier as potentials for seed factors given to all random variables in their class (frame or object pair).
+
+Each log-linear classifier is trained separately per attribute on a featurized vector of the variable:
+
+P(r|X a ) ∝ e wa•f (X a )
+
+The feature function is defined differently according to the node type: Table 2: Accuracy of baselines and our model on both tasks.
+
+Top: frame prediction task; bottom: object pair prediction task.
+
+In both tasks 5% of in-domain data (frames or object pairs, respectively) are available as seed data.
+
+We compare providing the other type of data (object pairs or frames, respectively) as seed knowledge, trying 5% (OUR MODEL (A)) and 20% (OUR MODEL (B)).
+
+f (O a p,q ) := g(p), g(q) f (F a vt ) := h(t), g(v), g(t)
+
+Here g(x) is the GloVe word embedding (Pennington et al., 2014) for the word x (t is the frame relation's preposition, and g(t) is simply set to the zero vector if there is no preposition) and h(t) is a one-hot vector of the frame relation type.
+
+We use GloVe vectors of 100 dimensions for verbs and 50 dimensions for objects and prepositions (the dimensions picked based on development set).
+
+Binary Factors: In the case of all other factors, we use a "soft 1" agreement matrix with strong signal down the diagonals:
+
+  > < > 0.7 0.1 0.2 0.15 0.7 0.15 < 0.2 0.1 0.7  
+
+Inference
+
+After our full graph is constructed, we use belief propagation to infer the assignments of frames and object pairs not in our training data.
+
+Each message µ is a vector where each element is the probability that a random variable takes on each value x ∈ {>, <, }.
+
+A message passed from a random variable v to a neighboring factor f about the value x is the product of the messages from its other neighboring factors about x:
+
+µ v→f (x) ∝ f ∈N (v)\{f } µ f →v (x)
+
+A message passed from a factor f with potential ψ to a random variable v about its value x is a marginalized belief about v taking value x from the other neighboring random variables combined with its potential:
+
+µ f →v (x) ∝ x:x[v]=x ψ(x) v ∈N (f )\{v} µ v →f (x[v ])
+
+After stopping belief propagation, the marginals for a node can be computed and used as a decision for that random variable.
+
+The marginal for v taking value x is the product of its surrounding factors' messages:
+
+v(x) ∝ f ∈N (v) µ f →v (x)
+
+Experimental Results
+
+Discussion
+
+Related Work
+
+Conclusion
+
+agent,goal "He threw the ball" I agent,theme x threw y x is larger than y x is heavier than y x is slower than y "We walked into the house" x walked into y x is smaller than y x is lighter than y x is faster than y I agent,goal "I squashed the bug with my boot" squashed x with y
+
+Figure 2: Example physical implications represented as frame relations between a pair of arguments.
+
+Figure 3: High level view of the factor graph model.
+
+Performance on both learning relative knowledge about objects (right), as well as entailed knowledge from verbs (center) via realized frames (left), is improved by modeling their interplay (orange).
+
+Unary seed (ψ seed ) and embedding (ψ emb ) factors are omitted for clarity.
+
+Figure 4: Example model predictions on dev set frames.
+
+The model's confidence is shown by the bars on the right.
+
+The correct relation is highlighted in orange (6-10 are failure cases for the model).
+
+If there are two blanks, the relation is between them. If there is only one blank, the relation is between PERSON and the blank.
+
+Note that receives miniscule weight because it is never the correct value for frames in the seed set.
+
+Statistics of crowdsourced knowledge.
+
+Ablation results on size attribute for the frame prediction task on the development dataset for OUR MODEL (A) (5% of the object pairs as seed data).
+
+We find that different graph configurations improve performance for different tasks and data amounts.
+
+In this setting, frame and attribute similarity factors hindered performance.
+
+perform well.
+
+Ablations are given in Table3, and sample correct predictions from the development set are shown in examples 1-5 of Figure4.

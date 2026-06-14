@@ -1,0 +1,47 @@
+Pre-trained language models (PLMs) have become a standard tool in the Natural Language Processing (NLP) toolkit, offering the benefits of learning from large amounts of unlabeled data while providing modular function in many NLP tasks that require supervision.
+
+Recent work has shown that PLMs capture different types of linguistic regularities and information, for instance, the lower layers capture phrase-level information which becomes less prominent in the upper layers (Jawahar et al., 2019), span representations constructed from these models can encode rich syntactic phenomena, like the ability to track subject-verb agreement (Goldberg, 2019), dependency trees can be embedded Figure 1: A depiction of a syntax tree, with the inside string as depicted by the sequence x i • • • x j and the outside string as depicted by the sequence
+
+(x 1 • • • x i-1 , x j+1 • • • x n
+
+) that provides external context for the inside representations.
+
+within the geometry of BERT's hidden states (Hewitt and Manning, 2019), and most relevantly to this paper, syntactic information via self-attention mechanisms (Wang et al., 2019;Kim et al., 2020).
+
+We offer another perspective on the way PLMs represent syntactic information.
+
+We demonstrate the usability of PLMs to capture syntactic information by developing an unsupervised parsing model that makes heavy use of PLMs.
+
+The learning algorithm is light in the injection of hard bias to parse text, emphasizing the role of PLMs in capturing syntactic information.
+
+Our approach to unsupervised parsing is inspired by recent work in the area of spectral learning for parsing (Cohen et al., 2014(Cohen et al., , 2013) ) and unsupervised estimation of probabilistic context-free grammars (PCFGs; Clark and Fijalkow, 2020).
+
+At its core, our learning algorithm views the presence or absence of a node dominating a substring in the final parse tree as a latent variable, where patterns of co-occurrence of the string that the node dominates (the "inside" string) and the rest of the sentence (the "outside" string) dictate whether the node is present or not.
+
+With spectral learning for latent-variable PCFGs (L-PCFGs; Cohen et al., 2014;Cohen and Collins, 2014) the notion of inside trees versus out-side trees is important, but in our case, given that the trees are not present during learning, we have to further specialize it to extract information only from the strings.
+
+Consider the diagram of a syntax tree in Figure 1, decomposed into two parts.
+
+Following the main notion in spectral learning, each of these parts (the orange part and the blue part) is a "view" of the whole tree that provides information on the identity of the node that spans the words x i • • • x j .
+
+In the case of the tree being unobserved during training, we have to rely only on the substrings that are spanned by the blue part or the orange part, to hypothesize whether indeed a node exists there.
+
+To represent the inside and outside views, we make use of PLMs.
+
+We encode these substrings, and then bootstrap a classifier that determines whether a given span is a constituent or not.
+
+The bootstrapping process alternates between the two views, and at each point adds predictions on the training set that it is confident about to train a new classifier.
+
+This can be thought of as a form of co-training (Yarowsky, 1995;Blum and Mitchell, 1998), a training technique that relies on multiple views of training instances.
+
+We formulate the task of identifying constituents and distituents (referring to spans that are not constituents) in a sentence as a binary classification task by devising a strategy to convert the unlabeled data into a classification task.
+
+Firstly, we build a sequence classification model by fine-tuning a Transformer-based PLM on the unlabeled training sentences to distinguish between the true and false inside strings of constituents.
+
+Secondly, we use the highly-confident inside strings to produce the outside strings.
+
+Additionally, through the use of semi-supervised learning techniques, we jointly use both the inside and outside passes to enrich the model's ability to determine the breakpoints in a sentence.
+
+Our final model achieves 63.1 sentence F 1 averaged over multiple runs with random seed on the Penn Treebank test set.
+
+We also report strong results for the Japanese and Chinese treebanks.

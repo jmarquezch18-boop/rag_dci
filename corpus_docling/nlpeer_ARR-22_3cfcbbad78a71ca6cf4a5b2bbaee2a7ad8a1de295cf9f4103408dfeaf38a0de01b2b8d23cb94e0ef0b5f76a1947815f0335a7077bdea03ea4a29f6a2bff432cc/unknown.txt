@@ -1,0 +1,239 @@
+Hue: Pretrained Model And Dataset For Understanding Hanja Documents Of Ancient Korea
+
+Abstract
+
+Introduction
+
+Background
+
+Hanja
+
+Hanja, the writing system based on ancient Chinese characters, was the main writing system in Korea before the 20 th century, while Hangul, the unique Korean alphabet, has been the main writing system in Korea from the last century.
+
+Formal records from the Joseon dynasty (1392-1897) are written in Hanja, while spoken language and some written documents were in Hangul, developed in the 15th century.
+
+This co-existence of the written and colloquial languages has led Hanja to evolve to have the basic syntax of classical Chinese, mixing with the lexical, semantic, and syntactic characteristics of colloquial Korean.
+
+Hanja is significantly different from both modern Korean and modern Chinese.
+
+Modern Korean uses a different alphabet and structure, and traditional Chinese shares some characters with Hanja, while the lexicon has evolved greatly to reflect the temporal, geographical, and cultural differences between the Joseon dynasty and modern-day China.
+
+Simplified Chinese, the current written language in China has diverged more because of the simplification of the characters.
+
+These differences between Hanja and other related languages would lead to suboptimal performance when adopting the current Chinese language models to NLU tasks for the Korean historical Hanja documents.
+
+Dataset
+
+We describe the three corpora of records written in Hanja during the Joseon dynasty, whose contents and additional information such as topic and named entities are provided by historians in IKTC3 .
+
+Table 2 shows the list of the Hanja corpora used.
+
+Annals of the Joseon Dynasty (AJD) also called Veritable Records of the Joseon Dynasty, is a corpus of 27 sets of chronological records, and each set covers one ruler's reign.
+
+AJD has been translated into Korean from 1968 to 1993 and includes relevant tags such as the named entities and dates of the documents4 .
+
+We use AJD for both training our Hanja language models and building the HUE dataset of NLP tasks.
+
+Diaries of the Royal Secretariat (DRS) is a corpus of detailed records of daily events and official schedules of the court from the first King Taejo to the last (27 th ) Sunjong.
+
+Many of the earlier records were lost, and we use the extant records starting from the 16 th King Injo.
+
+DRS is known to hold the largest amount of authentic historic records and state secrets of the Joseon Dynasty5 .
+
+We use DRS to continue pretraining the language models.
+
+Daily Records of the Royal Court and Important Officials (DRRI) is a corpus of journals written from the 21 st King Yeongjo to the last Emperor Sungjong and presumably initiated from the diaries of the crown prince who became the 22 nd King Jeongjo after he was enthroned.
+
+DRRI has official daily records from both the central and the local governments, so encompasses all events in the country and reports to the king with summaries.
+
+DRRI is known to include details and events of
+
+Hue Dataset
+
+The HUE (Hanja Understanding Evaluation) dataset is built to assist history scholars to understand Korean historical records written in Hanja.
+
+HUE consists of chronological attribution, topic classification, named entity recognition, and summary retrieval, which are tasks that can provide helpful information for studying the documents.
+
+We expect that the language models based on HUE will ultimately help historians to interpret unseen historical documents and public to grasp basic concept of those documents.
+
+We describe each task in detail below.
+
+Task Description
+
+Chronological Attribution (CA) is a classification task predicting the ruling king when the document was written.
+
+When given a Hanja document from AJD, a classifier outputs one of the 27 kings of the Joseon dynasty.
+
+Chronological attribution of the undiscovered document is the first step in anthology to interpret and translate it.
+
+Korean historians mostly divide the history of the Joseon Dynasty based on the reigning king, so that we treat chronological attribution as a classification task.
+
+Topic Classification (TC) is a multi-class and multi-label classification task to find the topics of the given document.
+
+For TC, we use Hanja document from AJD.
+
+We suggest two levels of topics, namely major and minor categories.
+
+The major categories consist of 4 broad topics: politics, economy, society, and culture.
+
+The minor categories go with 106 sub-topics such as diplomacy, agriculture, and science.
+
+Named Entity Recognition (NER) is a sequence tagging task, identifying the two types of named entities, person and location, from the Hanja document from AJD.
+
+We divide train, validation, and test sets such that there are no overlapping entities across the sets.
+
+Summary Retrieval (SR) is a task to find the most relevant summary that matches the content among the summary candidates.
+
+For this task, we use DRRI, in which each document is a pair of summary (gang) and detailed content (mok).
+
+Among 426k articles, 265k articles in DRRI dataset contain both gamg and mok.
+
+Also, we exclude those with gang longer than mok, in which gang is not the summary of mok.
+
+The final dataset contains 213K pairs of content and the corresponding summaries.
+
+We describe more details of the preprocessing in the Appendix.
+
+Hanja Pretrained Model
+
+Experiment
+
+Experimental Settings
+
+Overall Results
+
+Effect Of Entity And Document Age On Language Model
+
+Zero-Shot Experiment
+
+Do Historical Events Affect Language
+
+Models?
+
+To figure out the effect of historical events on models' prediction, we analyzed the output of language models on CA.
+
+Figure 2  The results of the last two Emperors, Gojong and Sunjong, are remarkable in that the model rarely gets confused with those two labels to others and tends not to fail, showing notable difference on Figure 2 (a) and significantly low mean absolute error on Figure 2 (b).
+
+We believe that this is because our model learns the difference between those two records and the others in the historical view and get cues to distinguish them.
+
+The last two records are not treated as AJD in general, since those records were inspected and produced by the  Office of Governer-General during the Japanese colonial period with the view of Empire of Japan who ruled Korea6 .
+
+The mean absolute error of the predicted order of each king achieved the difference around one, except for the first King Taejo and the second King Jeongjong, whose errors are almost doubled.
+
+We hypothesize that this is mainly because there are too small number of examples in those classes.
+
+A similar tendency where the more samples are, the less mean absolute error be has been observed in other classes.
+
+Also, the writing style of AJD had settled down from the third King Taejong, and those noisy records might confuse models to predict the exact dates.
+
+Do Time Changes Affect Written Texts?
+
+It stands to reason that AJD written in five centuries reveal the features of the language changes.
+
+In this section, we investigate the hypothesis above with respect to the named entities and n-grams.
+
+Words Change over Time We analyze how frequently words change over time.
+
+For each king, we plot how many trigrams overlap by each king era in the order.
+
+Figure 3 shows overlapped trigrams in the 1st, 9th, 17th, and 25th king and the detailed results with all kings are described in Appendix.
+
+It is consistently observed that the closer the king era is, the more trigrams are overlapped.
+
+These changes result from not named entity but lexical choices, considering that person and location enti- ties account for 6.38% and 2.05% in the characters of AJD, respectively.
+
+It verifies that words used in Joseon dynasty had changed over time gradually, and it enables the language models to capture those features.
+
+Named Entity Changes over Time We investigate how the named entities had been used over time.
+
+In particular, we show frequency rates of top-10 frequently-used named entities by each king era and how they change over time in Figure 4.
+
+It implies a strong correlation between person entity and the passage of time, while there is no explicit correlation to location entity.
+
+Most person entities include officials of the time or the previous kings, relevant to the time.
+
+In contrast, most location entities include neighboring countries or place names in the Joseon, which are less dependent on the time.
+
+The examples of frequently appeared named entities are described in Appendix.
+
+Related Work
+
+Conclusion
+
+Figure 1: ROC Curve and AUC for Topic Classification.
+
+Each value in the legend indicates the AUC score.
+
+(a) shows a log-scale confusion matrix of AnchiBERT continued pretraining on AJD and DRS, and Figure 2 (b) indicates the mean absolute error between the predicted king order and the ground truth per each King.
+
+The x-axis in the Figure 2 (b) means the changes of time by the king reign period.
+
+Each bar in Figure 2 (b) indicates the mean absolute error between the order of ground truth king and the one of predicted, and the line graph means the number of samples in the test set.
+
+Figure 2: Chronological attribution results with AnchiB-ERT + AJD/DRS.
+
+Figure (a) shows the confusion matrix.
+
+In Figure (b), each bar indicates the mean absolute error and the line indicates the number of samples for each king.
+
+Figure 3: Number of overlapped trigrams per king era.
+
+It shows the changes of trigrams over kings whose xaxis shows the kings and the y-axis shows the number of overlapped trigrams.
+
+Figure 4: Relative frequency change of top-10 named entities per king.
+
+Each line indicates the change of the relative frequency of one entity over time, and the color of the line indicates the king era in which the entity is contained in the top-10 entities.
+
+The x-axis represents the time (the kings in the order) and the y-axis represents the relative frequency in each king era.
+
+Example sentence in AJD
+
+Unknown token ratio of each model in test set for CA, TC, and NER task in HUE.
+
+The first row indicates the results of the original PLMs without any additional pretraining, and the second row indicates those with continued pretraining on AJD and DRS.
+
+Evaluation results of PLMs on HUE dataset priate in this case to provide all plausible topics roughly rather than suggesting the one only with high certainty.
+
+Named Entity Recognition (NER) NER also indicates similar trends to the overall benchmark tasks, but with a small gap among models including BERT without pretraining.
+
+It implies that NER in Hanja documents is a comparably easy task.
+
+This might result from certain patterns in named entities in Hanja.
+
+Most of the person entities are 3 letters starting with the common characters (family name), and most of the location entities end with the common characters meaning locations or buildings.
+
+All models tend to predict person entities better than location entities.
+
+F1 scores on Chronological Attribution given named entities masked.
+
+The value inside parenthesis indicates the increase in performance after masking the named entities.
+
+F1 scores on topic classification and named entity recognition given document age.
+
+The value inside parenthesis indicates the difference on performance after providing document age.
+
+F1 scores of chronological attribution and named entity recognition task on DRRI in zero-shot settings
+
+Data split in HUE dataset
+
+Table10shows good and bad example in DRRI to use as summary retrieval dataset.
+
+Bad examples mostly written from the 21 st King Yeongjo to early in the 22 nd King Jungjo describe daily lifes of the crown prince who is King Jeongjo.
+
+The bad example in Table10is depicting his study.
+
+Table11shows top-5 person and location named entities in three King reigns.
+
+All person entities except King Sejong, the most frequent entity in Munjong, are officials in the reign periods, which is different by time changes.
+
+In contary, all location entities are the name of place, palace or site, showing some entities overlap among kings.
+
+Good and bad examples in DRRI
+
+Top-5 named entities in 5 th , 14 th , and 23 rd kings
+
+Evaluation results for our PLMs on chronological attribution
+
+.78 79.59 77.60 87.78 73.64 32.85 70.01 62.17 90.84 54.28 AnchiBERT + AJD/DRS 70.48 88.33 86.61 92.71 84.80 31.77 72.07 64.87 91.24 52.25 mBERT + AJD/DRS 69.15 87.13 85.48 91.36 83.81 33.96 71.28 63.50 91.56 55.91 Evaluation results for our PLMs on topic classification .30 90.98 89.62 93.13 94.47 91.83 87.91 88.08 87.75 mBERT 98.52 88.57 89.52 87.64 91.63 93.60 89.74 86.02 86.18 85.85 AnchiBERT + AJD/DRS 98.76 90.42 91.31 89.55 93.28 94.77 91.84 88.01 88.43 87.59 mBERT + AJD/DRS 98.69 90.16 90.36 89.95 92.83 93.51 92.17 87.90 87.74 88.06
+
+Evaluation results for our PLMs on named entity recognition

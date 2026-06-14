@@ -1,0 +1,29 @@
+We used ISAM equipped with a spring wheat module to study the carbon fluxes in spring wheat agroecosystems across the wheat-growing regions of India for the last 4 decades.
+
+The ISAM spring wheat module ISAM dyn_wheat simulated the temporal patterns of GPP, TER, and NEP at the site scale for the IARI experimental wheat farm.
+
+The main conclusions from this study are as follows.
+
+-Carbon fluxes in spring wheat agroecosystems varied widely across the country due to divergent climatic conditions and management practices, primarily due to differences in planting dates.
+
+While the central and eastern parts of the spring wheat-growing regions showed high carbon fluxes during January, the northern parts exhibited their maximum carbon flux values during March.
+
+-The effects of increasing [CO 2 ], nitrogen fertilization, and irrigation led to positive trends in carbon fluxes in the last 4 decades.
+
+Nitrogen fertilization had the strongest effects, followed by [CO 2 ] and water availability.
+
+Providing sufficient fertilizers and water through irrigation may counteract the adverse effects of high temperatures.
+
+-The limitation on water available through irrigation in the future in regions like Punjab and Haryana might adversely affect the spring wheat growth and, as a result, the carbon fluxes from this agroecosystem.
+
+Understanding the variability in terrestrial carbon fluxes is essential for understanding the carbon cycle.
+
+Agroecosystems cover large parts of the terrestrial biosphere, with the spring wheat agroecosystem being one of India's most extensive land use types.
+
+This paper is one of the first longterm regional-scale studies to examine carbon dynamics in an Indian agroecosystem.
+
+After appropriate calibration, the model developed in this study can also be used to study other agroecosystems.
+
+Very importantly, it can serve as a tool to conduct numerical experiments to study future scenarios and the effects of external drivers.
+
+Thus, this study will likely be crucial in advancing our understanding of terrestrial carbon dynamics and our ability to simulate their behavior.

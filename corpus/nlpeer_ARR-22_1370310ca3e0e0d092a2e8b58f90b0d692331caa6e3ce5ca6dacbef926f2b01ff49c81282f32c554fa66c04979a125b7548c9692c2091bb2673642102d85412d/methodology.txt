@@ -1,0 +1,63 @@
+Cognitive Models Church and Liberman (2021) discuss how NLP has historically benefited from rationalist and empiricist methodologies, something that holds for cognitive modeling in general.
+
+The vast majority of application-oriented work in NLP today relies on pre-trained language models or other largescale data-driven models, but in cognitive modeling, most approaches remain heuristic and rulebased, or hybrid, e.g., relying on probabilistic language models to quantify surprisal (Rayner and Reichle, 2010;Milledge and Blythe, 2019).
+
+This is for good reasons: Cognitive modeling values interpretability (even) more, often suffers from data scarcity, and is less concerned with model reusability across different contexts.
+
+This paper presents a head-to-head comparison of the E-Z Reader and pre-trained Transformerbased language models.
+
+We are not the first to evaluate pre-trained language models and largescale data-driven models as if they were cognitive models.
+
+Chrupała and Alishahi (2019), for example, use representational similarity analysis to correlate sentence encodings in pre-trained language models with fMRI signals; Abdou et al. (2019) correlate sentence encodings with gaze-derived representations.
+
+More generally, it has been argued that cognitive evaluations are in some cases practically superior to standard evaluation methodologies in NLP (Søgaard, 2016;Hollenstein et al., 2019).
+
+We return to this in the Discussion and Conclusion §6.
+
+Commonly, pre-trained language models are disregarded as cognitive models, since they are most often implemented as computationally demanding batch learning algorithms, processing data "at once".
+
+Günther et al. (2019) points out that this is an artefact of their implementation, and online learning of pre-trained language models is possible, yet impractical.
+
+Generally, several researchers have argued for taking pre-trained language models seriously as cognitive models (Rogers and Wolmetz, 2016;Mandera et al., 2017;Günther et al., 2019).
+
+In the last section, §6, we discuss some of the implications of comparisons of pre-trained language models and cognitive models -for cognitive modeling, as well as for NLP.
+
+In our experiments, we focus on Transformer architectures that are currently the dominating pre-trained language models and a de facto baseline for modern NLP research.
+
+Below we briefly describe our used models and refer to Appendix A for more details.
+
+Transformers The superior performance of Transformer architectures across broad sets of NLP tasks raises the question of how task-related attention patterns really are.
+
+In our experiments, we focus on comparing task-modulated human fixations to attention patterns extracted from the following commonly used models: (a) We use both pre-trained uncased BERT-base and large models (Devlin et al., 2019) as well as fine-tuned BERT models on the respective tasks.
+
+BERT was originally pre-trained on the English Wikipedia and the BookCorpus.
+
+(b) The RoBERTa model has the same architecture as BERT and demonstrates better performance on downstream tasks using an improved pre-training scheme and the use of additional news article data (Liu et al., 2019).
+
+(c) The Text-to-Text Transfer Transformer (T5) uses an encoder-decoder structure to enable parallel tasktraining and has demonstrated state-of-the-art performance over several transfer tasks including sentiment analysis and natural language inference (Raffel et al., 2020).
+
+We evaluate different ways of extracting tokenlevel importance scores: We collect attention representations and compute the mean attention vector over the final layer heads to capture the mixing of information in Transformer self-attention modules as in Hollenstein and Beinborn (2021) and present this as mean for all aforementioned Transformers.
+
+To capture the layer-wise structure of deep Transformer models we compute attention flow (Abnar and Zuidema, 2020).
+
+This approach considers the attention matrices as a graph, where tokens are represented as nodes and attention scores as edges between consecutive layers.
+
+The edge values define the maximal flow possible between a pair of nodes.
+
+Flow between edges is thus (i) limited to the maximal attention between any two consecutive layers for this token and (ii) conserved such that the sum of incoming flow must be equal to the sum of outgoing flow.
+
+We denote the attention flow propagated back from layer L as flow L.
+
+We ground our analysis on Transformers by comparing them to relatively shallow models that were trained from-scratch and evaluate how well they coincide with human fixation.
+
+We train a standard CNN (Kim, 2014) network with multiple filter sizes on pre-trained GloVe embeddings (Pennington et al., 2014).
+
+Importance scores over tokens are extracted using Layerwise Relevance Propagation (LRP) (Arras et al., 2016(Arras et al., , 2017) ) which has been demonstrated to produce robust explanations by iterating over layers and redistributing relevance from outer layers towards the input (Bach et al., 2015;Samek et al., 2021).
+
+In parallel, we use a shallow multi-head self-attention network (Lin et al., 2017) on GloVe vectors with a linear read-out layer for which we compute token relevance scores using LRP.
+
+As a cognitive model for human reading, we compute task-neutral fixation times using the E-Z Reader (Reichle et al., 1998) model.
+
+The E-Z Reader is a multi-stage, hybrid model, which relies on an n-gram model and several heuristics, based, for example, on theoretical assumptions about the role of predictability and average saccade length.
+
+Additionally, we compare to a frequency baseline using word statistics of the BNC (British National Corpus, Kilgarriff (1995))1 as proposed by Barrett et al. (2018).

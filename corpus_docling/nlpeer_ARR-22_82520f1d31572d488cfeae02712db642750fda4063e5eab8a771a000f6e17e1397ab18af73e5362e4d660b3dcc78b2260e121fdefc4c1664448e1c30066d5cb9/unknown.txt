@@ -1,0 +1,269 @@
+Many Hands Make Light Work: Using Essay Traits To Automatically Score Essays
+
+Abstract
+
+Introduction
+
+Motivation
+
+Most of the work done in the area of automatic essay grading is in the area of holistic AEG -where we provide a single score for the entire essay based on its quality.
+
+However, for writers of an essay, a holistic score alone would not be enough.
+
+Providing trait-specific scores will tell the writer which aspects of the essay need improvement.
+
+In our dataset, we observe that writers of good essays usually have a lot of content, appropriate word choice, very few errors, etc.
+
+Essays that are poorly written often lack one or more of these qualities (i.e. they are either too short, have lots of errors, etc.).
+
+We, therefore, observe a high correlation between individual trait scores and the overall essay score (Pearson correlation trait scores and overall essay score > 0.7 across all essay sets in our dataset).
+
+Hence, we believe that using essay trait scores will benefit in scoring the essay holistically, as their scores will provide more relevant information to the AEG system.
+
+3 Related Work
+
+Holistic Essay Grading
+
+Holistic essay grading involves assigning an overall score for an essay (Mathias and Bhattacharyya, 2020).
+
+The first AEG system was designed by Page (1966).
+
+In the decade of the 2000s there were a lot of AEG systems which were developed commercially (see Shermis and Burstein (2013) for more details).
+
+After the release of Kaggle's Automatic Student Assessment Prize's (ASAP) Automatic Essay Grading (AEG) dataset in 20122 , there has been a lot of research on holistic essay grading.
+
+Initial approaches, such as those of Phandi et al. (2015) and Zesch et al. (2015) used feature engineering techniques and domain adaptation in scoring the essays.
+
+More recent papers look at using a number of deep learning approaches, such as LSTMs (Taghipour and Ng, 2016;Tay et al., 2018) and CNNs (Dong and Zhang, 2016) or both (Dong et al., 2017;Zhang andLitman, 2018, 2020).
+
+Zhang and Litman (2020) describe a way to extract important information, called topical components, from a source-dependent response3 .
+
+Trait-Specific Essay Grading
+
+In the last decade or so, there has been some work done in scoring essay traits such as sentence fluency (Chae and Nenkova, 2009), organization (Persing et al., 2010;Taghipour, 2017;Mathias et al., 2018;Song et al., 2020), thesis clarity (Persing and Ng, 2013;Ke et al., 2019) coherence (Somasundaran et al., 2014;Mathias et al., 2018), prompt adherence (Persing and Ng, 2014), argument strength (Persing and Ng, 2015;Taghipour, 2017), stance (Persing and Ng, 2016), style (Mathias and Bhattacharyya, 2018b) and narrative quality (Somasundaran et al., 2018).
+
+None of the above work, however, uses trait information to score the essay holistically.
+
+There has also been work on scoring multiple essay traits (Taghipour, 2017;Mathias andBhattacharyya, 2018a, 2020). (Rama and Vajjala, 2021) discuss solutions across multiple languages (German, Czech and Italian).
+
+Mathias and Bhattacharyya (2020) describes work on the use of neural networks for scoring essay traits.
+
+Our work combines the scores of essay traits for holistic essay grading.
+
+We focus on using trait-specific essay grading to improve the performance of an automatic essay grading system.
+
+We also show how using multi-task learning -simultaneously scoring both the essay and its traits -we are able to speed up the training of our system without too much of a loss in scoring the essay traits. (Ridley et al., 2021) describe a multi-task learning approach to grade essays and their traits using a neural network.
+
+Our system differs from theirs with respect to the shared layers and trait-specific layers.
+
+While Ridley et al. (2021) share the embedding and word-specific layers (to get sentence representations), we share only the embedding layer.
+
+Multi-Task Learning
+
+Multitask Learning was proposed by Caruana (1997) where the argument was that training signals from related tasks could help in a better generalization of the model.
+
+Collobert et al. (2011) successfully demonstrated how tasks like Part-of-Speech tagging, chunking and Named Entity Recognition can help each other when trained jointly using deep neural networks.
+
+Song et al. (2020) described a multi-task learning approach to score organization in essays, where the auxiliary tasks were classifying the sentences and paragraphs, and the primary task was scoring the essay's organization.
+
+Cao et al. (2020) also use a domain adaptive MTL approach to grade essays, where their auxiliary tasks are sentence reordering, noise identification, as well as domain adversarial training.
+
+However, they also use all the other essay sets as part of their training, whereas we use only the essays present in the respective essay set for training.
+
+4 System Architecture
+
+Stl Essay Grading Stack
+
+For scoring the essays, we use essay grading stacks.
+
+Each stack is used for scoring a single essay trait.
+
+The architecture of the stack is based on the architecture of the holistic essay grading system proposed by Dong et al. (2017).
+
+The essay grading stack takes the essay as input (split into tokens and sentences) and returns the score of the essay / essay trait as the output.
+
+Figure 1 shows the architecture for the essay grading stack.
+
+For each essay, we first split the essay into tokens and sentences.
+
+This is given as an input to the essay grading stack.
+
+In the word embedding layer, we look up the word embeddings of each token.
+
+Just like Taghipour and Ng (2016), Dong et al. (2017), Tay et al. (2018), Mathias and Bhattacharyya (2020) and Mathias et al. (2020), we use the most frequent 4000 words of the training data as the vocabulary with all other words mapping to a special unknown token.
+
+This is done mainly to capture out-of-vocabulary words, as well words that generally don't belong in the topic4 .
+
+If the vocabulary size is too small, then a number of words will be marked as spelling errors.
+
+On the other hand, if the vocabulary size is too large, a lot of spurious words would also be learnt as important ones.
+
+This sequence of word embeddings is then sent to the next layer -the 1 dimension CNN layerto get local information from nearby words.
+
+The output of this layer is aggregated using attention pooling to get the sentence representation of the sentence.
+
+This is done for all sentences in the essay.
+
+Each of the sentence representations are then sent through a recurrent layer.
+
+We experiment on two different types of recurrent layers -a unidirectional LSTM (Hochreiter and Schmidhuber, 1997) and bidirectional LSTM (BiLSTM) -as the recurrent layer.
+
+The outputs of the recurrent layer are pooled using attention pooling to get the representation for the essay.
+
+This essay representation is then sent through a fully-connected Dense layer with a sigmoid activation function to score the essay either holistically or a particular essay trait.
+
+For our experiments, we minimize the mean squared error loss.
+
+Prior to input, we scale the scores to the range of [0, 1] using min-max normalization.
+
+The output of the sigmoid function is a scalar in the range of [0, 1] which is rescaled back up to a score in the original score range and rounded off to get the score for the essay.
+
+This essay stack is used for the scoring of the single-task learning (STL) models.
+
+Mtl Model
+
+Dataset Used
+
+For our experiments, we use the Automated Student's Assessment Prize (ASAP) Automatic Essay Grading (AEG) dataset.
+
+The dataset has a total of 8 essay sets -where each essay set has a number of essays written in response to the same essay prompt.
+
+In total, there are nearly 13,000 English essays in the dataset, written by American high school students from classes 7 to 10.
+
+Table 1 gives the properties of each of the essay sets in our dataset.
+
+It reports the overall essay scoring range, traits scoring, average word count, number of traits, number of essays and essay type.
+
+We use the overall scores directly from the ASAP AEG dataset.
+
+Since the original dataset only provided trait-specific scores for Prompts 7  & 8, we use the trait-specific scores provided by Mathias and Bhattacharyya (2018a).
+
+Depending on the type of prompt for the essay set, each essay set has a different set of traits.
+
+Argumentative / Persuasive essays are essays which the writer is prompted to take a stand on a topic and argue for their stance.
+
+These essay sets have traits like content, organization, word choice, sentence fluency, and conventions.
+
+Source-dependent responses (Zhang and Litman, 2018) are essays where the writer reads a piece of text and answers a question based on the text that they just read 5 .
+
+These essay sets have traits like content, prompt adherence (Persing and Ng, 2014), language and 5 A sample prompt is "Based on the excerpt, describe the obstacles the builders of the Empire State Building faced in attempting to allow dirigibles to dock there.
+
+Support your answer with relevant and specific information from the excerpt." It involves the writer reading the excerpt from The Empire State Building by Marcia Amidon Lusted before writing the essay.
+
+narrativity (Somasundaran et al., 2018).
+
+Narrative / Descriptive essays are essays where the writer has to narrate a story or incident or anecdote.
+
+They have traits like content, organization, style, conventions, voice, word choice, and sentence fluency6 .
+
+Table 2 lists the different essay traits for each essay set.
+
+Experiments
+
+Evaluation Metric
+
+Evaluation Method
+
+Experiment Configuration
+
+Results And Analysis
+
+Performance On Holistic Essay Scoring
+
+Table 4 gives the QWK scores of each of our systems as they score each essay set holistically.
+
+The different systems used are the Single Task Learning (STL) (only scoring the essay overall) and Multitask Learning (MTL) (scoring the essay and the traits simultaneously).
+
+The first column lists out the different essay sets (Prompts 1 to 8).
+
+The next three columns report results for STL using both LSTM and BiLSTM, as well as results using the string kernel-based approach of Cozma et al. (2018).
+
+The next two columns report results for the MTL systems using both LSTM and BiLSTM.
+
+The last column shows the results using the baseline BERT-STL system.
+
+From the table, we see that the MTL-BiLSTM performs the best of all the non-transformer systems (almost as good as the results of our BERT-STL system).
+
+In order to see if the improvements observed are statistically significant, we run the Paired T-Test for each of the essay sets and compare the results using a p-value of p < 0.05.
+
+Performance On Scoring Essay Traits
+
+We also look at how our system performs in the auxiliary tasks -namely scoring the different essay traits.
+
+Figure 3 gives the results of our experiments in scoring the essay traits, using the String Kernel (HISK) (Cozma et al., 2018), CNN-LSTM (STL) (Dong et al., 2017), and Our Systems (MTL and MTL*).
+
+We use the same evaluation method, which we used for scoring essay traits, with the same data splits.
+
+For the STL systems, we train them for every essay trait individually.
+
+MTL* is the results of using our system to score essay trait as the primary task, and score the other traits and the essay overall as auxiliary tasks.
+
+We compare the results with that of our MTL-BiLSTM system, which was trained to score the essay traits as auxiliary tasks.
+
+Figure 3 gives the  (Cozma et al., 2018), LSTM-CNN Single-task Learning System (STL) (Dong et al., 2017), our system (MTL) where the traits are auxiliary tasks, and our system (MTL*) where the traits are the primary task.
+
+NOTE that the y-axis starts from a QWK of 0.45.
+
+This was done to highlight the difference in the performance of each system for each trait.
+
+results of our experiments.
+
+From the figure, we see that, while the STL-LSTM system is able to outperform our MTL-BiLSTM system, the MTL* system (where the traits are primary tasks) outperforms the STL-LSTM system.
+
+While the STL system optimizes for scoring only a trait, the MTL* system learns information from other traits to score the given essay trait.
+
+One of the reasons for the different trait performance depends on how easy (or difficult) it is to score the individual trait, as well which all essay traits have the particular trait.
+
+For example, prompt adherence has a higher average QWK than the other traits because it is present mainly in the source-dependent essays (which have a mean QWK over 1% higher than the mean QWK across all essay sets).
+
+Similarly, Voice has the lowest QWK mainly because it is present only in Prompt # 8, which has a very low holistic QWK.
+
+Scoring Traits As The Primary Task
+
+An interesting question for analysis is "What if we score the traits as the primary task?" In order to do that, we changed our system to make scoring one of the trait as the primary task, and scoring the rest of the traits as well as the essay overall, as auxiliary tasks.
+
+The comparison of these results are shown in Figure 3 (in the MTL* column).
+
+We see that our MTL* system outperforms the STL-based system on scoring individual traits, although it would take a lot longer time to train (as it would be equivalent to running the MTL system between 4 to 6 times).
+
+Ablation Tests
+
+Error Analysis
+
+Runtime Analysis
+
+Comparison With Transformer Models
+
+Conclusion And Future Work
+
+Figure 1: Essay stack architecture.
+
+This is the architecture for the Single-Task Learning systems.
+
+Figure 2: Architecture of our MTL system showing an input essay with M traits being scored, with the overall score and each trait's essay grading stack.
+
+Figure 3: Results of the performance of scoring traits for different systems.
+
+The different systems are Histogram Intersection String Kernel (HISK) using ν support vector regressor
+
+Essay Set Score Range Trait Sc. Range Word Count No. of Traits No. of Essays Properties of the different essay sets in the ASAP AEG dataset we used in our experiments.
+
+Average word count numbers are rounded up to the nearest multiple of 25.
+
+Results of our experiments for scoring the essays holistically.
+
+Figures in boldface represent the best results
+
+Results of the ablation tests.
+
+The numbers show the drop in performance when we ablate each of the essay traits from each of the essay sets (Prompt 1 to 8).
+
+The most important features in each essay set are written in boldface and underlined.
+
+Cells with a -in them mean that the essay trait was not present in that essay set.
+
+Total training time for each system for all prompts, traits and folds, using our neural network systems.
+
+Average and range of training parameters per essay set for each system.
+
+All our experiments were run on an Nvidia GeForce GTX 1080 Ti Graphics Card with 12GB of GPU memory, using Python version 3.5.2, Keras version 2.2.4 and Tensorflow version 1.14 8 .

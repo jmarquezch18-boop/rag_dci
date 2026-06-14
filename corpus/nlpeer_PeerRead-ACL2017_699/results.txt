@@ -1,0 +1,11 @@
+This section begins by discussing how we designed our evaluation experiments, followed by the description of training and testing datasets.
+
+Then, we introduce our evaluation metrics and baselines.
+
+Three evaluation metrics, the macro-averaged precision, recall and F-measure (F 1 ) are employed for measuring the algorithm's performance.
+
+Following the standard definition, precision is defined as the number of correctly-predicted keyphrases over the number of all predicted keyphrases, and recall is computed by the number of correctlypredicted keyphrases over the total number of data records.
+
+Note that, when determining the match of two keyphrases, we use Porter Stemmer for preprocessing.
+
+We conduct an empirical study on three different tasks to evaluate our model.

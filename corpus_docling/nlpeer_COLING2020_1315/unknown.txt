@@ -1,0 +1,319 @@
+Measuring Correlation-To-Causation Exaggeration In Press Releases
+
+Abstract
+
+Introduction
+
+Related Work
+
+Corpus Construction
+
+Collecting Press Releases
+
+The press releases used in this study were downloaded from EurekAlert!. Since 1996 EurekAlert! has been the major platform for more than 3,000 scientific journals, research institutes, and government agencies to distribute press releases to journalists and the public.
+
+To date, EurekAlert! includes about 137,000 health and medicine research-related press releases2 .
+
+From 2015 EurekAlert! started to add a section named related journal article onto their webpage that has a doi link to the original research paper.
+
+Currently, about 34,000 health and medicine-related press releases contain links to the original papers.
+
+However, the press releases with doi links account for less than 25% of research-related ones in EurekAlert!.
+
+To link more press releases to the associated journal articles, especially those published before 2015, We used ScienceDaily as an additional data source.
+
+ScienceDaily is an independent website that reposts press releases.
+
+The editors manually added doi links dated back to 2008.
+
+However, we can not adopt the press releases directly from ScienceDaily because its editors sometimes modify the headline and the beginning part of a press release.
+
+Given that we need to use the original press releases posted by press officers rather than the edited ones, we borrowed the doi links from ScienceDaily to help fill the missing links between the EurekAlert! press releases and the associated papers.
+
+The basic idea is: for each EurekAlert! press release, find a best match from ScienceDaily; if the best match has a doi link, pair the EurekAlert! item with the doi link.
+
+To implement this idea, we created a simple search engine using Elasticsearch3 , a popular search engine that is based on the open-source Apache Lucene library.
+
+Elasticsearch supports a type of decay function that can decay relevance score depending on how far a value is from a given origin.
+
+We used this function to match publication dates between EurekAlert! and ScienceDaily press releases, which should be as close as possible.
+
+For each press release from EurekAlert! and ScienceDaily, we extracted its metadata such as publication date and headline, and computed 150 TF-IDF weighted keywords from its full text.
+
+A query was formed based on the metadata and keywords for each EurekAlert! item.
+
+Given the query, the Elasticsearch returned a ScienceDaily item with the highest relevance score.
+
+If the score is higher than a threshold, a match between EurekAlert! and ScienceDaily is found.
+
+We set the threshold to a value such that Elasticsearch achieved an accuracy of 99.5% and a recall of 90% when evaluated on the 34,000 EurekAlert! items that already have associated doi links.
+
+Using this method we found doi links for an additional 30,000 EurekAlert! press releases.
+
+In the end, our final corpus consists of 64,177 press releases, spanning from 2008 to October 2020.
+
+They are associated with 62,317 journal publications -some collaborative work were reported by two or more press releases from different research institutions-for which we downloaded their titles and abstracts from PubMed.
+
+Locating Claim Statements
+
+For a press release, we assume that its main claim statements are presented in the headline or the first two sentences, here referred to as the "three-sentence opening section".
+
+According to Sumner et al. (2014), these sentences are usually the main statements, since nearly all press releases and news stories follow the "inverted pyramid" structure of stating their main claims first (Pöttker, 2003).
+
+To verify the above assumption, we randomly sampled 100 press releases, and checked how many press releases violated the assumption.
+
+The result shows only two press releases put the main statements outside the three-sentence opening section.
+
+Hence, the assumption holds well for our data.
+
+For an academic paper, its main claim statements or findings are usually presented in its conclusion sections.
+
+However, the conclusion sections often include not only the main findings but also statements on limitations and future work.
+
+In comparison, the abstracts of biomedical and health research papers often have a structure that usually includes subsections of introduction, method, result, and conclusion.
+
+For simplicity, we focused on those papers with a structured abstract, and extracted the conclusion subsections as the main statements.
+
+This reduces our data to 20,683 research papers and 21,342 associated press releases.
+
+Observational Study Classification
+
+Our next subtask is to identify the paper-press pairs that report on observational studies.
+
+Since PubMed has made a significant effort to identify the study designs in biomedical and health literature, we developed our identification method by expanding on PubMed's existing data.
+
+In 2014, the PubMed staff introduced the tag observational study to their list of publication types, a metadata item for annotating study designs, such as observational studies and clinical trials4 .
+
+To date they have manually annotated more than 60,000 research papers as observational studies.
+
+PubMed also established a category of clinical trial in 2008, and has since annotated over 861,000 papers as clinical trials.
+
+We sampled 50,000 PubMed-annotated articles as training data, including 25,000 observational studies and 25,000 clinical trials.
+
+Since the fulltext of a article is often not available, our data are in the format of abstracts; specifically, our training data consist only of those articles with structured abstract because in this study, as we explained above, the claim statements of a research paper are identified from the conclusion subsection in the structured abstract.
+
+LightGBM5 , a decision tree-based gradient boosting algorithm, is chosen to train the observational study classifier based on paper titles and abstracts.
+
+Using 80% of them for training, and 20% for testing,
+
+Type Description Language Cue
+
+Example Sentence Correlational The statement describes the association between variables, but causation cannot be explicitly stated.
+
+association, associated with, predictor, at high risk of Suicide risk greater for people living at higher elevations.
+
+The statement shows that one variable directly changes the other.
+
+However, the relation carries an element of doubt in it, which is normally via hedges or modalities.
+
+increase, decrease, lead to, effect on, contribute to, result in (Cues indicating doubt: may, might, appear to, probably)
+
+Being overweight or obese during middle age may increase the risk of certain dementias.
+
+The statement says that the independent variable directly alters the dependent variable.
+
+increase, decrease, lead to, effective in, contribute to, reduce, can
+
+Traffic noise increases the risk of having a stroke.
+
+The statement is not for current study findings or no correlation/causation relationship is mentioned in the statement.
+
+Many rheumatoid arthritis patients not getting recommended drugs.
+
+we trained a LightGBM model with an F1 score of 0.95.
+
+Applying this classifier to the 20,683 research papers, we identified a total of 15,962 observational studies, associated with 16,431 press releases.
+
+The corpus construction procedure described above is also illustrated in Figure 1.
+
+Annotating A Training Corpus
+
+Following the coding schema in (Yu et al., 2019), which itself is a simplified version of the taxonomies defined in previous studies (Kilicoglu et al., 2015;Sumner et al., 2014), we annotated the following four claim types: correlational, conditional causal, direct causal, and not claim.
+
+Table 1 lists the category definitions and some common language cues used to identify the relation type for each category.
+
+Example sentences of different claim types are also shown in the table.
+
+We randomly sampled 700 press releases from our corpus for manual annotation.
+
+They consist of 2,100 sentences in the three-sentence opening sections.
+
+Occasionally, a statement could have more than one claim type.
+
+These mixed-type statements were excluded, resulting in 2,076 sentences in the final training data set.
+
+Table 2 shows the claim type distribution of single-type sentences in the training corpus.
+
+A sample of 200 sentences were randomly selected for conducting the inter-coder reliability test.
+
+Two annotators labeled the claim type for each sentence.
+
+The overall Cohen's Kappa agreement (Cohen, 1960) was 0.95, indicating a near-perfect inter-coder agreement (McHugh, 2012).
+
+The two annotators then annotated the rest of the data.
+
+All disagreements during the annotation were later resolved by the team through discussion.
+
+Sentence-Level Claim Type Classification
+
+Due to the significant difference in writing styles between academic papers and press releases, we chose to train separate prediction models, one for each genre.
+
+For academic papers, we adopted the classification model developed by Yu et al. (2019) that has achieved a performance of 0.88 macro-F1 and 0.90 accuracy.
+
+For press releases, we trained a new prediction model using the press release corpus that we constructed as described above.
+
+Prediction Model
+
+Error Analysis
+
+Exaggeration In Press Releases
+
+Strategy For Identifying Exaggeration
+
+Our prediction model operates at sentence level, so each press release will receive three predictions for its three-sentence opening section, and each paper will receive one or more predictions depending on the number of sentences in the conclusion subsection.
+
+However, exaggeration is determined at article level, i.e. whether a press release made exaggeration or not.
+
+Hence, a strategy is needed to determine article-level exaggeration by aggregating sentence level predictions.
+
+Since the study goal is to detect the correlation-to-causation type of exaggeration, we focused on the research papers that made correlational claims only.
+
+A research paper's finding is regarded as "correlational" if at least one sentence in the conclusion subsection uses correlational language and no sentence uses direct or conditional causal language.
+
+In addition, we only considered the direct causal claims from correlational findings as exaggerations, since sometimes researchers would also speculate a conditional causal claim from a correlational finding, which often serves as the goal of future investigation.
+
+We then designed a strategy for identifying exaggeration at article level by considering the characteristics of press release as a news genre.
+
+First, headlines serve the role of attracting readers to the story; therefore exaggeration is more likely to occur in headlines, and can be more impactful than those in content.
+
+Hence, predictions of causal claims in headlines should carry more weight than those from first and second sentences.
+
+Second, most, but not all headlines contain main claims.
+
+In our annotated corpus, 15.6% headlines were annotated as "not claim".
+
+An examination of these cases showed that the main claims were significantly shortened or paraphrased.
+
+An extremely short headline is "Brain Power".
+
+In these cases, the first and second sentences are more likely to contain the main claims.
+
+Third, a small number of first and second sentences used causal language to describe research background instead of findings.
+
+Error analysis in the previous section has shown that our prediction model has difficulty in distinguishing them from real causal findings.
+
+Therefore, when one sentence is predicted as "causal" while the other as "correlational", it may or may not be a case of exaggeration.
+
+Considering the above concerns, we designed a conservative strategy for identifying exaggeration in all paper-press pair with the paper's finding predicted as "correlational", as illustrated in Figure 2.
+
+Input: Three sentence predictions on headline, 1st sentence, and 2nd sentence of a press release Output: Did the press release exaggerate correlational findings as causal? (Yes or No) Process: If headline prediction is direct causal, exaggeration=Yes Else if headline prediction is "not claim", check predictions for 1st and 2nd sentences: If both predictions are "direct causal", exaggeration=Yes Else if one prediction is "direct causal" and the other "not claim", exaggeration=Yes Else exaggeration=No Else exaggeration=No Figure 2: Claim aggregation algorithm for press releases that correspond to papers identified as correlational.
+
+Overall Exaggeration In Press Releases
+
+After applying the exaggeration identification strategy to our corpus of 16,431 paper-press pairs, out of 6,244 cases in which the original research papers drew correlational conclusions, we found 1,391 (22%) cases of exaggeration.
+
+This exaggeration rate is in a similar range to previous studies; however, our exaggeration identification strategies differ.
+
+Sumner et al. (2014) reported an exaggeration rate of 33% by manual analysis of 462 press releases issued by 20 leading UK universities in 2011.
+
+They used seven scales to measure the claim strength: no statement, explicit statement of no relation, correlational, ambiguous (e.g. 'linked to"), conditional causal (e.g. "may" and "might"), "can" causal, and unconditionally causal.
+
+An exaggeration was reported when the press release used stronger claims than those present in the associated research paper.
+
+Later, the same research team re-analyzed the data using a five-scale measure by merging the correlational, ambiguous, and conditional causal categories, in order to focus on the types of exaggeration that have a more significant impact on readers' understanding.
+
+The new analysis resulted in a lower rate of 19%, since the nuanced exaggeration cases were no longer counted (Adams et al., 2017).
+
+Compared to (Sumner et al., 2014) and(Adams et al., 2017), our schema includes four categories: the "direct causal" category equates to the combined categories of "can" causal and unconditional causal defined in (Sumner et al., 2014); the "conditional causal" category is equivalent to the category with the same name in (Sumner et al., 2014); the "correlational" category corresponds to the combined categories of "correlational" and "ambiguous" in (Sumner et al., 2014); the "not claim" is similar to the "no statement" category in (Sumner et al., 2014).
+
+We did not use the "statement of no relation" category, which refers to the statements of negative findings, because our annotations are based on correlational vs. causal language use.
+
+A negative finding on correlation would still use correlational language, and thus be annotated as correlation.
+
+Similarly, a negative finding on causal relation are annotated as causal.
+
+In comparison, our exaggeration identification strategy is even more conservative than (Adams et al., 2017), in that we only considered the most significant cases of exaggeration, in which the research papers' conclusions used correlational language only, whereas the associated press releases used direct causal claims.
+
+We did not count minor exaggeration cases, such as those with conditional causal claims in research papers and direct causal in press releases.
+
+Figure 3(b) shows the total number of observational studies each year, and among them the total number that used correlational language only.
+
+These numbers provide more data context for better understanding the trend.
+
+The sharp increase of observational studies in 2014 is caused by a big jump in the total number of health-related press releases in EurekAlert!. The dip in 2018 is a result of ScienceDaily starting to block robot access that year.
+
+However, ScienceDaily is less likely to be needed in the future since EurekAlert! has been adding more doi links since 2015.
+
+For 2020, we collected only 10 months of data to date.
+
+Trend Of Exaggeration In Press Releases
+
+More research is needed to understand the cause of the decrease in exaggeration rate.
+
+Bratton et al. (2020) hypothesized that warnings within the science community might be impactful, after observing a drastic reduction of exaggeration rate (by half) in the UK's press releases six months after the publication of (Sumner et al., 2014).
+
+However, confounding factors cannot be ruled out without further evidence.
+
+Our result did not replicate the pattern of sharp decrease in 2014 or 2015.
+
+Instead, it shows that the exaggeration rate was mildly decreased globally.
+
+Comparing Academic Institutions And Journal Publishers
+
+To investigate whether universities exaggerated more than journal publishers, Sumner et al. (2016) compared press releases from these two sources, and found a higher exaggeration rate in university press releases, exceeding the journals' by 33% to 21%, or a ratio of 1.6 to 1.
+
+Adams et al. ( 2017) re-analyzed the data in (Sumner et al., 2016) based on a simplified, 5-scale claim strength schema, and reported a similar ratio (1.5 to 1, or 19% to 13%).
+
+Here we examine whether their findings still hold for our corpus.
+
+To identify the source type of a press release, we used two Eu-rekAlert! metadata items: the media contact person's email address and the name of the source institution.
+
+Specifically, if the domain name contains .edu or .ac, or the institution name contains the word "University", the source is categorized as a university.
+
+If the email address matches with a list of well-known publisher domain names such as bmj.com and plos.org, or the institution name contains the word "Publisher" or "Press", the source is categorized as a journal publisher.
+
+With this method, out of 6,244 research papers with correlational findings, we found 3,021 press releases from universities and 1,534 from journal publishers.
+
+Figure 4 shows that the exaggeration rate of university press releases is 25.3%, higher than the 16.7% of journal publishers, by a ratio of 1.5 to 1.
+
+This result is consistent with the ratios reported in (Sumner et al., 2016) and (Adams et al., 2017).
+
+Conclusion And Future Work
+
+Figure 1: Collecting press releases and associated journal papers that report on observational studies.
+
+Figure 3: (a) Trend of exaggeration: there is an overall decreasing trend of exaggeration since 2010. (b) Number of press releases that are used as the basis for calculating the exaggeration rate in (a).
+
+Figure 3(a) plots the trend of exaggeration rate over the past decade.
+
+This result shows a slight but significant decreasing trend since 2010, with a Spearman rank correlation coefficient of -0.88 (p-value<0.001).
+
+Note the years 2008 and 2009 were excluded from this analysis due to insufficient data, as shown in Figure 3(b).Figure3(b) shows the total number of observational studies each year, and among them the total number that used correlational language only.
+
+These numbers provide more data context for better understanding the trend.
+
+The sharp increase of observational studies in 2014 is caused by a big jump in the total number of health-related press releases in EurekAlert!. The dip in 2018 is a result of ScienceDaily starting to block robot access that year.
+
+However, ScienceDaily is less likely to be needed in the future since EurekAlert! has been adding more doi links since 2015.
+
+For 2020, we collected only 10 months of data to date.
+
+More research is needed to understand the cause of the decrease in exaggeration rate.
+
+Figure 4: University press releases have higher exaggeration rate than journal's.
+
+ScienceDaily.com also has doi links to original papers since 2008. But there is an issue: their press release headlines are often edited by ScienceDaily staff.
+
+Find more EurekAlert press releases that have paper references through matching EurekAlert with ScienceDaily on their date, headline, and fulltext content.
+
+About 137,000 health and medicine research-related press releases have been posted on EurekAlert since 1995.
+
+About 34,000 press releases have doi links to their original papers since 2015.
+
+A taxonomy of claim types and examples of commonly used language cues.
+
+Sentence type distribution.
+
+Table 3(b), the data augmentation approach can boost performance from 0.868 to 0.892.
+
+Performance of BioBERT on each type of press release sentences.

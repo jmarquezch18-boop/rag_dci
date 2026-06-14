@@ -1,0 +1,15 @@
+Entity Linking Entity linking has been widely studied (Milne and Witten, 2008;Cucerzan, 2007;Lazic et al., 2015b;Gupta et al., 2017;Raiman and Raiman, 2018;Kolitsas et al., 2018;Cao et al., 2021, inter alia).
+
+Dutta and Weikum (2015) combine clustering-based cross-document coreference decisions and linking around sparse bag-of-word representations not well suited for the embeddingbased representations used in this work.
+
+Other works use global or collective models (Kulkarni et al., 2009;Hoffart et al., 2011;Cheng and Roth, 2013;Ganea and Hofmann, 2017;Le and Titov, 2018, inter alia), which consider the compatibility of entity linking decisions made in the same document(s) rather than making independent predictions.
+
+Zhang and Stratos (2021) use noise contrastive estimation to mine hard negatives for the linking task.
+
+Cross-document Coreference Several previous works have developed models for the crossdocument coreference setting where no entity KB is known in advance (Bagga and Baldwin, 1998;Gooi and Allan, 2004;Singh et al., 2011;Barhom et al., 2019;Cattan et al., 2020;Caciularu et al., 2021;Ravenscroft et al., 2021;Logan IV et al., inter alia).
+
+Alternatives to Cross-Encoders Our work demonstrates how clustering-based training improves dual-and cross-encoder models for linking and discovery.
+
+If prediction efficiency, and not training efficiency, was the only concern, one could also use model distillation to improve dualencoder performance (Hinton et al., 2015;Izacard and Grave, 2021, inter alia).
+
+We could also consider models such as poly-encoders as alternatives to dual-encoders (Humeau et al., 2020).

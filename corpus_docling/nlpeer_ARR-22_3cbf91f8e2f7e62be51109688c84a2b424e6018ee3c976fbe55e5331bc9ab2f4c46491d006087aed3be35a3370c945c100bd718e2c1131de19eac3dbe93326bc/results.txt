@@ -1,0 +1,43 @@
+We train our pipeline modules on the WIKIFLU-ENT corpus as described in §5.
+
+Next, we use these modules without finetuning for generating descriptions for RDF triples on two English D2T datasets, WebNLG and E2E.
+
+Datasets The datasets differ in domain, size, textual style, and number of predicates (see Appendix A for details):
+
+• WebNLG (Gardent et al., 2017;Ferreira et al., 2020) contains RDF triples from DBPedia (Auer et al., 2007) and their crowdsourced descriptions.
+
+We use version 1.4 of the dataset for comparison to prior work.
+
+We hand-crafted templates for all 354 predicates, including unseen predicates in the test set.7 • E2E (Novikova et al., 2017;Dušek et al., 2020) contains restaurant recommendations in the form of attribute-value pairs.
+
+We use the cleaned version of the dataset (Dušek et al., 2019).
+
+Following previous work, we transform the attribute-value pairs into RDF triples (using the restaurant name as a subject) and then apply the same setup as for WebNLG.
+
+We created a template for each of the 8 attributes manually.
+
+In order to evaluate individual components of our pipeline, we train three versions of the paragraph compression model (see §5.4).
+
+The models share the same architecture and targets, but differ in their inputs:
+
+• PC -the model takes as an input ordered facts with delimiters (as described in §3.4), • PC+AGG -the model takes as an input ordered facts without delimiters (i.e., the aggregation is left implicitly to the model), • PC+ORD+AGG -the model takes as an input facts in random order and without delimiters (i.e., both ordering and aggregation are left implicitly to the model).
+
+Correspondingly, we test three versions of the pipeline in our ablation study (see Figure 3): We evaluate all versions of the pipeline with PC models trained on the full and filtered versions of the WIKIFLUENT dataset (see §4).
+
+Our main aim is the evaluation of our pipeline on the downstream task of D2T generation.
+
+We evaluate outputs from the {1,2,3}-STAGE variants of our pipeline using automatic metrics ( §7.1), and we perform a detailed manual error analysis of the model outputs ( §7.2).
+
+We also evaluate the performance of the content planning modules and the ability of the PC module to follow the content plan ( §7.3).
+
+In §7.4, we include an intrinsic evaluation of our modules on the WIKIFLUENT test set.
+
+Aside from the main D2T generation results, we also provide an intrinsic evaluation of our pipeline modules on the WIKIFLUENT test sets.
+
+We evaluated the ordering, aggregation, and paragraph compression modules trained on the full WIKIFLUENT corpus.
+
+The results for both full and filtered test sets are summarized in Table 7.
+
+The PC model achieves high scores, which follows from the fact that we provide it with ground truth content plans (i.e., the ordering and aggregation plan corresponding to the original paragraph).
+
+Accuracy of the ordering and aggregation modules is comparable to their performance on D2T datasets.

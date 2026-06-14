@@ -1,0 +1,121 @@
+{
+  "query_id": "f93968140cd136a68ce07f696c16560746f63a87",
+  "query": "What is the conclusion reached regarding the comparison of words and morphemes?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "comparison of words and morphemes"
+      },
+      "result_preview": "No matches found for 'comparison of words and morphemes'",
+      "elapsed_s": 3.93
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "linguistic analysis"
+      },
+      "result_preview": "Search results for 'linguistic analysis' (1 matches):\n[paper_id=nlpeer_COLING2020_1570 | section=introduction | line=1] Research on object naming (Ordonez et al., 2016;Graf et al., 2016;Eisape et al., 2020), such as the linguistic analysis of the naming behavior of humans and computational models, r",
+      "elapsed_s": 10.95
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_COLING2020_1570",
+        "section": "introduction",
+        "start": 1,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_COLING2020_1570 / introduction — líneas 1-25 de 51]\nResearch on object naming (Ordonez et al., 2016;Graf et al., 2016;Eisape et al., 2020), such as the linguistic analysis of the naming behavior of humans and computational models, requires natural and reliable object naming data.\n\nSuch data ",
+      "elapsed_s": 5.69
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "morpheme analysis"
+      },
+      "result_preview": "No matches found for 'morpheme analysis'",
+      "elapsed_s": 7.18
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_COLING2020_1570",
+        "section": "introduction",
+        "start": 1,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_COLING2020_1570 / introduction — líneas 1-25 de 51]\nResearch on object naming (Ordonez et al., 2016;Graf et al., 2016;Eisape et al., 2020), such as the linguistic analysis of the naming behavior of humans and computational models, requires natural and reliable object naming data.\n\nSuch data ",
+      "elapsed_s": 10.56
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Research on object naming (Ordonez et al., 2016;Graf et al., 2016;Eisape et al., 2020), such as the linguistic analysis of the naming behavior of humans and computational models, requires natural and reliable object naming data.\n\nSuch data should contain naturally occurring naming variation, i.e., that the same object can very often be called by different names.\n\nFor instance, a duck can be called duck, bird, animal, etc.\n\nAt the same time, in cases where a naming dataset provides multiple names for a given object, it is important to verify that this apparent naming variation is not a mere consequence of, for instance, lexical errors or different people naming different objects in the same scene.\n\nIn this work, we assess the factors that affect the collection of object naming data in the typical Language & Vision (L&V) setup, and test whether these factors impact the accuracy or apparent accuracy of a L&V object labeling model.\n\nExisting work in L&V has relied on data collection methods that prompt natural language users to freely talk about or refer to particular objects in an image (Kazemzadeh et al., 2014;Yu et al., 2016;Silberer et al., 2020).\n\nCommon to these methods is the use of images as a proxy for the actual context of language use (i.e., the real world), and the use of bounding boxes drawn onto the image to indicate the target object that is to be named.\n\nThese two common aspects, essentially simulating real-world linguistic reference, have enabled large-scale data collection leveraging existing Computer Vision datasets.\n\nHowever, both aspects also introduce potential confounding factors, such as referential uncertainty, where a bounding box may fail to uniquely identify the target object, or visual uncertainty, i.e., an object may be more difficult to recognize from a still image than in a real-world scenario.\n\nIn this work we analyze, after expansion with new meta-annotations, an existing dataset that was created using the method just described, namely ManyNames (Silberer et al., 2020).\n\n1 It builds upon object annotations in Visual Genome (Krishna et al., 2016), and provides up to 36 name annotations for each of 25K objects in images, where the objects belong to 7 different domains (e.g., animals, people, food).\n\nTo crowdsource the names, Silberer et al. presented subjects with an image and asked them to freely name the target object that was marked by a bounding box.\n\nThe resulting dataset appeared to exhibit naming variation, with an average of roughly 3 distinct names per object, but, as mentioned in Silberer et al., the presence of naming errors in the data prevent one from drawing conclusions about naming behavior, in humans and in computational models.",
+      "section": "introduction",
+      "paper_id": "nlpeer_COLING2020_1570",
+      "chunk_id": "dci_nlpeer_COLING2020_1570_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_COLING2020_1570",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/b94a77b25cea79056553cf9dc3c5b714410344acb0f1cf0f5eb4ff2402b61bfa005313d5e2d103aedaff9b4d1fdeadd9799df73921794d6093799ec80fbb13c1_192",
+    "nlpeer/ARR-22/b94a77b25cea79056553cf9dc3c5b714410344acb0f1cf0f5eb4ff2402b61bfa005313d5e2d103aedaff9b4d1fdeadd9799df73921794d6093799ec80fbb13c1_193"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 1.0,
+    "recall_at_1": 0.5,
+    "recall_at_3": 0.5,
+    "recall_at_5": 0.5,
+    "recall_at_10": 0.5,
+    "recall_at_20": 0.5,
+    "precision_at_5": 1.0,
+    "ndcg_at_5": 1.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_COLING2020_1570_introduction_0000"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_COLING2020_1570_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.12307692307692308,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

@@ -1,0 +1,17 @@
+In this paper, we proposed an RNN-based generative model for predicting keyphrases in scientific text.
+
+To the best of our knowledge, this is the first application of the encoder-decoder model to a keyphrase prediction task.
+
+Our model summarizes phrases based the deep semantic meaning of the text, and is able to handle rarely-occurred phrases by incorporating a copying mechanism.
+
+Comprehensive empirical studies demonstrate the effectiveness of our proposed model for generating both present and absent keyphrases for different types of text.
+
+Our future work may include the following two directions.
+
+-In this work, we only evaluated the performance of the proposed model by conducting off-line experiments.
+
+In the future, we are interested in comparing the model to human annotators and using human judges to evaluate the quality of predicted phrases.
+
+-Our current model does not fully consider correlation among target keyphrases.
+
+It would also be interesting to explore the multiple-output optimization aspects of our model.

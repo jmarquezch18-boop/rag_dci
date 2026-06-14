@@ -1,0 +1,245 @@
+Co-Training An Unsupervised Constituency Parser With Weak Supervision
+
+Abstract
+
+Introduction
+
+Problem Formulation And Inference
+
+We give a treatment to the problem of unsupervised constituency parsing.
+
+In that setup, the training algorithm is given an unlabeled corpus (set of sentences) and its goal is to learn a function mapping a sentence x to an unlabeled phrase-structure tree y that indicates the constituents in x. In previous work with models such as the Constituent-Context Model (CCM; Klein and Manning 2002), the Dependency Model with Valence (DMV; Klein and Manning 2005), and Unsupervised Maximum Likelihood estimator for Data-Oriented Parsing (UML-DOP; Bod 2006), the parts of speech (POS) of the words in x are also given as input both during inference and during training, but we do not make use of such POS tags.
+
+Inference While our learning algorithm is grammarless, for inference we make use of a dynamic programming algorithm, akin to CYK, to predict the parse tree.
+
+Inference assumes that each possible span in the tree was scored with a score function s(i, j) where i and j are endpoints in the sentence.
+
+The score function is learned through our algorithm.
+
+We then proceed by finding the tree t * such that:
+
+t * = arg max t∈T (i,j)∈t s(i, j),
+
+where T is the set of possible binary trees over the sentence and (i, j) ∈ t, with a slight abuse of notation, denotes that the span (i, j) appears in t.
+
+When s(i, j) is the probability of a span (i, j) being in the correct tree, this formulation gives the tree with the highest expected number of correct constituents (Goodman, 1996).
+
+This formulation has been used recently by several unsupervised constituency parsing algorithms (Kim et al., 2019b,a;Cao et al., 2020;Li et al., 2020a).
+
+Training Algorithm
+
+At the core of our approach lies the notion of inside and outside strings.
+
+For a given sentence x = x 1 • • • x n and a span (i, j), the inside string of span (i, j) is the sequence
+
+x i • • • x j while the outside string is the pair (x 1 • • • x i-1 , x j+1 • • • x n ).
+
+We denote by h in (i, j) representations for inside strings and h out (i, j) representations for outside strings.
+
+Both are vectors derived from a PLM (RoBERTa; Liu et al. 2019, as we see later).
+
+These two types of strings provide two views of a given possible splitting point in the syntax tree.
+
+We offer three ways, with increasing complexity, to bootstrap a score function that helps identify whether a node should dominate a given span.
+
+The main idea behind this bootstrapping is to start with a small seed set of training examples (x, i, j, b) where (i, j) is a span in a sentence x and b ∈ {0, 1}, depending on whether the span (i, j) is dominated by a node in the syntactic tree or not.
+
+Bootstrapping the seed set is dependent only on either the inside string or the outside string, and the corresponding classifier built from this bootstrapped seed set returns a probability p(b | x, i, j).
+
+Once a classifier is learned using the bootstrapping seed set, the classifier is applied on the training set, and the seed set is added to more examples where the classifier is confident of the label b. This is also known as self-training (McClosky et al., 2006(McClosky et al., , 2008)).
+
+In the next three sections, we present three learning algorithms of increasing complexity in their use of inside and outside strings.
+
+Modeling Using Inside Strings
+
+Modeling Using Inside And Outside Strings
+
+An Iterative Co-Training Algorithm
+
+Co-training (Blum and Mitchell, 1998) is a classic multi-view training method, which trains a classifier by exploiting two (or more) views of the training instances.
+
+Our final learning algorithm is indeed inspired by it, where we consider the inside and the outside strings to be the two views.
+
+Once we have the inside m in and the outside classifiers m out that are trained on their respective conditionally independent inside h in (i, j) and outside h out (i, j) feature sets, we can make use of an iterative approach.
+
+At each iteration, only the inside strings Î that are confident to be likely the insides of constituents and distituents according to the outside model are moved to the labeled training set of the inside model I. Thus, the outside model (teacher) provides the labels to the inside strings on which the inside model (student) is uncertain.
+
+Similarly, only the outside strings Ô that are confident to be the likely outsides of constituents and distituents according to the inside model are moved to the labeled training set of the outside model O.
+
+Thus, the inside model provides the labels to the outside strings on which the outside model is uncertain.
+
+We describe the steps in Figure 3.
+
+Finally, we combine the scores obtained by the inside and the outside model to get the score s(i, j) for each span:
+
+s(i, j) = s in (i, j) • s out (i, j).
+
+Co-training requires the two views to be independent of each other conditioned on the label of the Output: Two models min, mout, that predict the inside and outside scores for unlabeled sentences.
+
+We combine these predictions by multiplying together and optionally re-normalizing their class probability scores.
+
+training instance.
+
+This is the type of assumption that, for example, PCFGs satisfy, when breaking a tree into an outside and inside tree: the two trees are conditionally independent given the nonterminal that connects them.
+
+In our case, we satisfy this assumption by creating inside and outside string representations separately, as we see later in Section 4.
+
+Figure 4 illustrates the underlying pipeline of our weakly supervised parsing framework in an end-to-end fashion.
+
+Experimental Setup
+
+Data
+
+We evaluate our methodology on the Penn Treebank (PTB; Marcus et al. 1993) with the standard splits (2-21 for training, 22 for validation, 23 for test).
+
+For preprocessing, we keep all punctuation and remove any trailing punctuation.
+
+To maintain the unsupervised nature of our experiments, we avoid the common practice of using gold parses of the validation set for either early stopping (Shen et al., 2018(Shen et al., , 2019;;Drozdov et al., 2019) or hyperparameter tuning (Kim et al., 2019a).
+
+Addition-ally, we experiment on Chinese with version 5.1 of the Chinese Penn Treebank (CTB; Xue et al. 2005) with the same splits as in Chen and Manning (2014), and the Japanese Keyaki Treebank (KTB; Butler et al. 2012).
+
+For KTB, we shuffle the corpus and use 80% of the sentences for training, 10% for validation, and 10% for testing.
+
+Multi-View Learning
+
+In this section, we devise the task of identifying constituents in a sentence by training two models with different views of the data.
+
+Ideally, these views complement each other and help each model improve the performance of the other.
+
+Seed Bootstrapping
+
+We treat identifying constituents from unlabeled sentences as a sequence classification task.
+
+To generate the constituent class, we take the complete sentence (start:end), as a sentence in itself is a constituent, and also the largest among all of its other constituents.
+
+To generate the distituent class, we take (start:end-1), • • • , (start:end-6) slices, where start and end denote the 0 th and N th position (sentence length) respectively.
+
+We select the distituents in this manner because the longer the sentence, there would be a significantly unlikely chance that the span of the constituents extends till the very end of the sentence.
+
+Additionally, we make use of casing-specific information by adding contiguous title-case words while allowing only the apostrophe mark.
+
+Since all of the sentences for the constituent class start with capital letters, we identify the most common first word and generate lower-case equivalents of contiguous title-case words, which starts with it to account for bias due to the casing of spans.
+
+While we do use a fixed template to perform the seed bootstrapping process, this is part of the inductive bias of the algorithm, and is relatively easy to acquire.
+
+In our analysis, we assume the language is already known before and thereby its structure (left/right-branching), a form of weak supervision.
+
+For CTB, we follow the exact same process as PTB for preparing the input data for the firstlevel sequence classifier, but we do not rely on case-specific information and perform no postprocessing.
+
+Meanwhile, since KTB is a treebank of a strongly left-branching language, we design our modeling approach slightly differently compared to before, although along the same style.
+
+To prepare the data for the sequence classifier, we choose
+
+(0, 1) (0, 2) (0, 3) (0, 4) (0, 5) (1, 2) (1, 3) (1, 4) (1, 5) (2, 3) (2, 4) (2, 5) (3, 4) (3, 5) (4, 5)
+
+(S (S (S the) (S boy)) (S (S ate) (S (S the) (S apple))))
+
+Figure 4: Block diagram detailing our approach.
+
+We perform the self-training procedure for five iterations which follow multiple steps; (I): Fine-tune a RoBERTa BASE model (teacher) on a downstream task using a cross-entropy loss after seed bootstrapping; (II): Synthetically annotate this data using the teacher model and select top K samples corresponding to each class to form the final synthetic dataset; We fine-tune a RoBERTa BASE model (student) on this dataset using hard labels and retrieve the outside strings from the most confident insides; (III): Train the outside classifier on these outside strings; We perform the co-training procedure for two iterations which follow a two-fold optimizing step; (IV): Retrieve the inside strings from the most confident outsides and train the inside classifier; (V): Retrieve the outside strings from the most confident insides and train the outside classifier.
+
+the slice (start:end) in the sentence to label the constituent class, whereas, (start+1:end), • • • , (start+4:end) slices are chosen to label the distituent class.
+
+We also split the sentences on " * " mark and treat the resulting fragmented parts as constituents too.
+
+Our training does not depend on the development set with the gold-standard annotated trees since we base the necessary string slicing decision on the feedback from the validation split after the bootstrapping procedure in an iterative fashion (increment/decrement the value of slice counter by 1) until we see a degradation in performance (measured using F 1 score) on the synthetic set of seed constituents and distituents.
+
+Inside Model
+
+Outside Model
+
+Jointly Learning With Inside And Outside Models
+
+Evaluation
+
+Results And Discussion
+
+Effect Of Self-Training
+
+PLMs that possess rich contextualized textual representations can assist parsing when we have a large volume of unlabeled data.
+
+For this reason, we might expect that self-training in combination with pre-training adds no extra information to the finetuned parser.
+
+However, we find that self-training improves the performance of the parser by about 9.8%, demonstrating that self-training provides advantages complementary to the pre-trained contextualized embeddings (see a more detailed analysis at different stages).
+
+Effect Of Co-Training
+
+The question of how to integrate multi-view information is important.
+
+One of the options would be to concatenate both the inside and outside vectors while performing training and inference.
+
+With this experiment setting, we see negligible improvement as it only scores 13.2 F 1 on the PTB test (without self-training).
+
+The whole idea of separating the two models for co-training is to learn constituent boundaries to identify the splitting points in a sentence through independent views of data.
+
+This corroborates the effectiveness of co-training compared with concatenation: the simple concatenation strategy cannot fully harvest the information corresponding to each view and indeed render the optimization intractable.
+
+After co-training, the parser achieves 63.1 F 1 averaged over four runs, outperforming the previous best-published result (see Table 6 in Appendix to view the improvement at each step).
+
+Figure 6 in Appendix compares the performance of different models over varying sentence length (see Figure 5 in Appendix to understand the extent to which bootstrapping helps compared to the vanilla inside model).
+
+Effect Of Distituent Selection
+
+To understand the extent to which the type of the disitituent selection impacts the performance, we assess two settings on the PTB -random and leftbranching bias.
+
+In the random setting, we select distituents from the slice (start:r), where r is a random number generated between start+1 and end-1, both inclusive.
+
+This produces 19.3 F 1 for the inside model.
+
+Whereas, in the left-branching bias setting, we prepare the seed bootstrapping process as explained in the Section 4.2.1 similar to KTB (a left-branching treebank).
+
+This results in 11.2 F 1 score for the inside model.
+
+Hence, the manner in which we perform the initial classification has a strong impact on the final tree structures.
+
+Linguistic Error Analysis
+
+Related Work
+
+Conclusion
+
+Figure 2: Our self-training algorithm.
+
+Inputs: I is the set of labeled inside sentences; O is the set of labeled outside sentences; U is a set of unlabeled sentences.
+
+Algorithm: Loop for K iterations: • Choose c pseudo-constituents and d pseudo-distituents from the most confidently predicted outside strings ŷout from U based on τ • Extract the inside strings Î corresponding to the c pseudo-constituents and d pseudo-distituents of outside • I = I ∪ Î • Train the inside model min based on hin(i, j) derived from I • Choose c pseudo-constituents and d pseudo-distituents from the most confidently predicted inside strings ŷin from U based on τ • Extract the outside strings Ô corresponding to the c pseudo-constituents and d pseudo-distituents of inside • O = O ∪ Ô • Train the outside model mout based on hout(i, j) derived from O
+
+Figure 3: Our co-training algorithm.
+
+Figure7: Alignment between induced and gold labels of the top-performing clusters.
+
+We cluster the constituent inside vectors derived from the ground truth parse (without labels) using the K-Means algorithm and assign each constituent with the most common label within its cluster.
+
+Accuracy is the probability of correctly predicting the most common label.
+
+Figure9: Example tree taken from the CTB training set.
+
+After the co-training procedure (b), the parser correctly identifies constituents "十四点四一亿元", "新增贷款十四点四一亿元", and "去年新增贷款十四点四一亿元" compared to the previous step using the inside model (a).
+
+It only makes 3 errors due to crossing brackets at "贷款 十四点四一亿元", "年增加八亿多元", and "上年增加八亿多元".
+
+Figure10: Example tree taken from the KTB training set.
+
+After the co-training procedure (b), the parser correctly identifies constituents "そんな に", "私 を", "*hearer* そんな に 私 を *を* 信じ られ ない ならば", "*pro* よろしい", "この 市", and "この 市 に", while incorrectly tagging "セリヌンティウス という 石工 が" as a distituent compared to the previous step using the inside model (a).
+
+Unlabeled sentence-level F 1 on the full as well as sentences of length ≤ 10 of the PTB test set without punctuation or unary chains.
+
+We evaluate each model using the evaluation script provided byKim et al.
+
+Unlabeled sentence-level F 1 on the CTB test set.
+
+We evaluate each model using the evaluation script provided byKim et al. (2019a)  and take the baseline numbers also fromKim et al. (2019a).
+
+Table 5 in Appendix for Average recall per constituent category (i.e. label recall) in (%).
+
+The results of PRPN, ON, URNNG, and Compound PCFG are taken fromKim et al. (2019a), S-DIORA from
+
+Unlabeled sentence-level F 1 on the full PTB test set after applying the iterative Self-training algorithm on the Inside model.
+
+Unlabeled sentence-level F 1 on the full PTB test set after applying the iterative Co-training algorithm on the joint Inside and Outside model.
+
+The hyperparameters used for evalb
+
+Investigation of phrase clusters that shows several syntactic properties.
+
+Clearly, there are patterns surrounding identification of people/organization names, time-related signals, quantities etc.

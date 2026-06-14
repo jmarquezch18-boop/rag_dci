@@ -1,0 +1,27 @@
+Given a source sentence s = {w 1 , w 2 , ..., w N } and a target sentence t = {u 1 , u 2 , ..., u M }, we first generate a vector representation for the source sentence using an encoder (Eqn. 1) and then map this vector to the target sentence using a decoder (Eqn. 2) (Sutskever et al., 2014):
+
+ENC : s = {w 1 , w 2 , ..., w N } 7 ! s 2 R k (1) DEC : s 2 R k 7 ! t = {u 1 , u 2 , ..., u M }(2)
+
+In this work, we use long short-term memory (LSTM) (Hochreiter and Schmidhuber, 1997) encoder-decoders with attention (Bahdanau et al., 2014), which we train on parallel data.
+
+After training the NMT system, we freeze the parameters of the encoder and use ENC as a feature extractor to generate vectors representing words in the sentence.
+
+Let ENC i (s) denote the encoded representation of word w i .
+
+For example, this may be the output of the LSTM after word w i .
+
+We feed ENC i (s) to a neural classifier that is trained to predict POS or morphological tags and evaluate the quality of the representation based on our ability to train a good classifier.
+
+By comparing the performance of classifiers trained with features from different instantiations of ENC, we can evaluate what MT encoders learn about word structure.
+
+Figure 1 illustrates this process.
+
+We follow a similar procedure for analyzing representation learning in DEC.
+
+The classifier itself can be modeled in different ways.
+
+For example, it may be an LSTM over outputs of the encoder.
+
+However, as we are interested in assessing the quality of the representations learned by the MT system, we choose to model the classifier as a simple feed-forward neural network with one hidden layer and a ReLU non-linearity.
+
+Arguably, if the learned representations are good, then a non-linear classifier should be able to extract useful information from them.

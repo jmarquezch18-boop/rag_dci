@@ -1,0 +1,245 @@
+Exploring Prediction Uncertainty In Machine Translation Quality Estimation
+
+Abstract
+
+Introduction
+
+Probabilistic Models For Qe
+
+Gaussian Process Regression
+
+Here we follow closely the definition of GPs given by Rasmussen and Williams (2006).
+
+Let X = {(x 1 , y 1 ), (x 2 , y 2 ), . . . , (x n , y n )} be our data, where each x ∈ R D is a D-dimensional input and y is its corresponding response variable.
+
+A GP is defined as a stochastic model over the latent function f that generates the data X :
+
+f (x) ∼ GP(m(x), k(x, x )),
+
+where m(x) is the mean function, which is usually the 0 constant, and k(x, x ) is the kernel or covariance function, which describes the covariance between values of f at the different locations of x and x .
+
+The prior is combined with a likelihood via Bayes' rule to obtain a posterior over the latent function:
+
+p(f |X ) = p(y|X, f )p(f ) p(y|X) ,
+
+where X and y are the training inputs and response variables, respectively.
+
+For regression, we assume that each y i = f (x i ) + η, where η ∼ N (0, σ 2 n ) is added white noise.
+
+Having a Gaussian likelihood results in a closed form solution for the posterior.
+
+Training a GP involves the optimisation of model hyperparameters, which is done by maximising the marginal likelihood p(y|X) via gradient ascent.
+
+Predictive posteriors for unseen x * are obtained by integrating over the latent function evaluations at x * .
+
+GPs can be extended in many different ways by applying different kernels, likelihoods and modifying the posterior, for instance.
+
+In the next Sections, we explain in detail some sensible modelling choices in applying GPs for QE.
+
+Matèrn Kernels
+
+Choosing an appropriate kernel is a crucial step in defining a GP model (and any other kernel method).
+
+A common choice is to employ the exponentiated quadratic (EQ) kernel 1 :
+
+k EQ (x, x ) = σ v exp(- r 2 2 ) ,
+
+where
+
+r 2 = D i=1 (x i -x i ) 2 l 2 i
+
+is the scaled distance between the two inputs, σ v is a scale hyperparameter and l is a vector of lengthscales.
+
+Most kernel methods tie all lengthscale to a single value, resulting in an isotropic kernel.
+
+However, since in GPs hyperparameter optimisation can be done efficiently, it is common to employ one lengthscale per feature, a method called Automatic Relevance Determination (ARD).
+
+The EQ kernel allows the modelling of nonlinearities between the inputs and the response variables but it makes a strong assumption: it generates smooth, infinitely differentiable functions.
+
+This assumption can be too strong for noisy data.
+
+An alternative is the Matèrn class of kernels, which relax the smoothness assumption by modelling functions which are ν-times differentiable only.
+
+Common values for ν are the half-integers 3/2 and 5/2, resulting in the following Matèrn kernels:
+
+k M32 = σ v (1 + √ 3r 2 ) exp(- √ 3r 2 ) k M52 = σ v 1 + √ 5r 2 + 5r 2 3 exp(- √ 5r 2 ) ,
+
+where we have omitted the dependence of k M32 and k M52 on the inputs (x, x ) for brevity.
+
+Higher values for ν are usually not very useful since the resulting behaviour is hard to distinguish from limit case ν → ∞, which retrieves the EQ kernel (Rasmussen and Williams, 2006, Sec. 4.2).
+
+The relaxed smoothness assumptions from the Matèrn kernels makes them promising candidates for QE datasets, which tend to be very noisy.
+
+We expect that employing them will result in a better models for this application.
+
+Warped Gaussian Processes
+
+The Gaussian likelihood of standard GPs has support over the entire real number line.
+
+However, common quality scores are strictly positive values, which means that the Gaussian assumption 1 Also known as Radial Basis Function (RBF) kernel.
+
+is not ideal.
+
+A usual way to deal with this problem is model the logarithm of the response variables, since this transformation maps strictly positive values to the real line.
+
+However, there is no reason to believe this is the best possible mapping: a better idea would be to learn it from the data.
+
+Warped GPs (Snelson et al., 2004) are an extension of GPs that allows the learning of arbitrary mappings.
+
+It does that by placing a monotonic warping function over the observations and modelling the warped values inside a standard GP.
+
+The posterior distribution is obtained by applying a change of variables:
+
+p(y * |x * ) = f (y * ) 2πσ 2 * exp f (y * ) -µ * 2σ * ,
+
+where µ * and σ * are the mean and standard deviation of the latent (warped) response variable and f and f are the warping function and its derivative.
+
+Point predictions from this model depend on the loss function to be minimised.
+
+For absolute error, the median is the optimal value while for squared error it is the mean of the posterior.
+
+In standard GPs, since the posterior is Gaussian the median and mean coincide but this in general is not the case for a Warped GP posterior.
+
+The median can be easily obtained by applying the inverse warping function to the latent median:
+
+y med * = f -1 (µ * ).
+
+While the inverse of the warping function is usually not available in closed form, we can use its gradient to have a numerical estimate.
+
+The mean is obtained by integrating y * over the latent density:
+
+E[y * ] = f -1 (z)N z (µ * , σ 2 * )dz,
+
+where z is the latent variable.
+
+This can be easily approximated using Gauss-Hermite quadrature since it is a one dimensional integral over a Gaussian density.
+
+The warping function should be flexible enough to allow the learning of complex mappings, but it needs to be monotonic.
+
+Snelson et al. (2004) proposes a parametric form composed of a sum of tanh functions, similar to a neural network layer:
+
+f (y) = y + I i=1 a i tanh(b i (y + c i )),
+
+where I is the number of tanh terms and a, b and c are treated as model hyperparameters and optimised jointly with the kernel and likelihood hyperparameters.
+
+Large values for I allow more complex mappings to be learned but raise the risk of overfitting.
+
+Warped GPs provide an easy and elegant way to model response variables with non-Gaussian behaviour within the GP framework.
+
+In our experiments we explore models employing warping functions with up to 3 terms, which is the value recommended by Snelson et al. (2004).
+
+We also report results using the f (y) = log(y) warping function.
+
+Intrinsic Uncertainty Evaluation
+
+Experimental Settings
+
+Results And Discussion
+
+Qualitative Analysis
+
+Asymmetric Risk Scenarios
+
+Evaluation metrics for QE, including those used in the WMT QE shared tasks, are assumed to be symmetric, i.e., they penalise over and underestimates equally.
+
+This assumption is however too simplistic for many possible applications of QE.
+
+For example:
+
+• In a post-editing scenario, a project manager may have translators with limited expertise in post-editing.
+
+In this case, automatic translations should not be provided to the translator unless they are highly likely to have very good quality.
+
+This can be enforced this by increasing the penalisation weight for underestimates.
+
+We call this the pessimistic scenario.
+
+• In a gisting scenario, a company wants to automatically translate their product reviews so that they can be published in a foreign language without human intervention.
+
+The company would prefer to publish only the reviews translated well enough, but having more reviews published will increase the chances of selling products.
+
+In this case, having better recall is more important and thus only reviews with very poor translation quality should be discarded.
+
+We can accomplish this by heavier penalisation on overestimates, a scenario we call optimistic.
+
+In this Section we show how these scenarios can be addressed by well-calibrated predictive distributions and by employing asymmetric loss functions.
+
+An example of such a function is the asymmetric linear (henceforth, AL) loss, which is a generalisation of the absolute error:
+
+L(ŷ, y) = w(ŷ -y) if ŷ > y y -ŷ if ŷ ≤ y,
+
+where w > 0 is the weight given to overestimates.
+
+If w > 1 we have the pessimistic scenario, and the optimistic one can be obtained using 0 < w < 1.
+
+For w = 1 we retrieve the original absolute error loss.
+
+Another asymmetric loss is the linear exponential or linex loss (Zellner, 1986):
+
+L(ŷ, y) = exp[w(ŷ -y)] -(ŷ -y) -1
+
+where w ∈ R is the weight.
+
+This loss attempts to keep a linear penalty in lesser risk regions, while imposing an exponential penalty in the higher risk ones.
+
+Negative values for w will result in a pessimistic setting, while positive values will result in the optimistic one.
+
+For w = 0, the loss approximates a squared error loss.
+
+Usual values for w tend to be close to 1 or -1 since for higher weights the loss can quickly reach very large scores.
+
+Both losses are shown on Figure 3.
+
+Figure 3: Asymmetric losses.
+
+These curves correspond to the pessimistic scenario since they impose larger penalties when the prediction is lower than the true label.
+
+In the optimistic scenario the curves would be reflected with respect to the vertical axis.
+
+Bayes Risk For Asymmetric Losses
+
+The losses introduced above can be incorporated directly into learning algorithms to obtain models for a given scenario.
+
+In the context of the AL loss this is called quantile regression (Koenker, 2005), since optimal estimators for this loss are posterior quantiles.
+
+However, in a production environment the loss can change over time.
+
+For instance, in the gisting scenario discussed above the parameter w could be changed based on feedback from indicators of sales revenue or user experience.
+
+If the loss is attached to the underlying learning algorithms, a change in w would require full model retraining, which can be costly.
+
+Instead of retraining the model every time there is a different loss, we can train a single probabilistic model and derive Bayes risk estimators for the loss we are interested in.
+
+This allows estimates to be obtained without having to retrain models when the loss changes.
+
+Additionally, this allows different losses/scenarios to be employed at the same time using the same model.
+
+Minimum Bayes risk estimators for asymmetric losses were proposed by Christoffersen and Diebold (1997) and we follow their derivations in our experiments.
+
+The best estimator for the AL loss is equivalent to the w w+1 quantile of the predictive distribution.
+
+Note that we retrieve the median when w = 1, as expected.
+
+The best estimator for the linex loss can be easily derived and results in:
+
+ŷ = µ y - wσ 2 y 2
+
+where µ y and σ 2 y are the mean and the variance of the predictive posterior.
+
+Experimental Settings
+
+Results And Discussion
+
+Related Work
+
+Conclusions
+
+Figure 1: Predictive distributions for two fr-en instances under a Standard GP and a Warped GP.
+
+The top two plots correspond to a prediction with low absolute error, while the bottom two plots show the behaviour when the absolute error is high.
+
+Figure 2: Warping function instances from the three datasets.
+
+The vertical axis correspond to the latent warped values.
+
+The horizontal axis show the observed response variables, which are always positive in our case since they are post-editing times.

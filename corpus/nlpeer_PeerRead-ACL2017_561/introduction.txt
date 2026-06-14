@@ -1,0 +1,29 @@
+Due to their simplicity and efficacy, pre-trained word embedding have become ubiquitous in NLP systems.
+
+Many prior studies have shown that they capture useful semantic and syntactic information (Mikolov et al., 2013;Pennington et al., 2014) and including them in NLP systems has been shown to be enormously helpful for a variety of downstream tasks (Collobert et al., 2011).
+
+However, in many NLP tasks it is essential to represent not just the meaning of a word, but also the word in context.
+
+For example, in the two phrases "A Central Bank spokesman" and "The Central African Republic", the word 'Central' is used as part of both an Organization and Location.
+
+Accordingly, current state of the art sequence tagging models typically include a bidirectional re-current neural network (RNN) that encodes token sequences into a context sensitive representation before making token specific predictions (Yang et al., 2017;Ma and Hovy, 2016;Lample et al., 2016;Hashimoto et al., 2016).
+
+Although the token representation is initialized with pre-trained embeddings, the parameters of the bidirectional RNN are typically learned only on labeled data.
+
+Previous work has explored methods for jointly learning the bidirectional RNN with supplemental labeled data from other tasks (e.g., Søgaard and Goldberg, 2016;Yang et al., 2017).
+
+In this paper, we explore an alternate semisupervised approach which does not require additional labeled data.
+
+We use a neural language model (LM), pre-trained on a large, unlabeled corpus to compute an encoding of the context at each position in the sequence (hereafter an LM embedding) and use it in the supervised sequence tagging model.
+
+Since the LM embeddings are used to compute the probability of future words in a neural LM, they are likely to encode both the semantic and syntactic roles of words in context.
+
+Our main contribution is to show that the context sensitive representation captured in the LM embeddings is useful in the supervised sequence tagging setting. When we include the LM embeddings in our system overall performance increases from 90.87% to 91.93% F 1 for the CoNLL 2003 NER task, a more then 1% absolute F1 increase, and a substantial improvement over the previous state of the art.
+
+We also establish a new state of the art result (96.37% F 1 ) for the CoNLL 2000 Chunking task.
+
+As a secondary contribution, we show that using both forward and backward LM embeddings boosts performance over a forward only LM.
+
+We also demonstrate that domain specific pre-training is not necessary by applying a LM trained in the news domain to scientific papers.
+
+2 Language model augmented sequence taggers (TagLM)

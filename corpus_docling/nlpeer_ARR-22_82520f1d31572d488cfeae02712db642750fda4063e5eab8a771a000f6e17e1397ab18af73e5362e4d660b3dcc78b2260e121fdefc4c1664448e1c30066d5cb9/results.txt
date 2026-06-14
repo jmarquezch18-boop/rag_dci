@@ -1,0 +1,27 @@
+We use Cohen's Kappa with quadratic weights (Cohen, 1968) (QWK) as the evaluation metric.
+
+This is done for the following reasons.
+
+Firstly, the final scores predicted by the system are distinct numbers/grades, rather than continuous values; so we cannot use the Pearson Correlation Coefficient or Mean Squared Error.
+
+Secondly, evaluation metrics  like F-Score and accuracy do not take into account chance agreements.
+
+For example, if we are to grade every essay with the mean score or most frequent score, we would get F-Score and accuracy as high as 60% or more, whereas the Kappa score will be 0! Thirdly, the fact that the scores given are ordered (i.e. 0 < 1 < 2 < 3...) means that we need to use weighted Kappa to capture the distance between the actual and predicted scores.
+
+Between linear weighted Kappa and QWK, we choose QWK because it rewards matches and punishes mismatches more distinctly than linear weighted Kappa.
+
+To evaluate the performance of our systems in scoring the essay overall, we use 4 different configurations -STL-LSTM, STL-BiLSTM, MTL-LSTM, and MTL-BiLSTM.
+
+In addition to the above systems, we also compare our approach with a state-of-the-art string kernel system designed by Cozma et al. (2018), using the same splits for training, testing, and validation7 , as well as a baseline transformer-based implementation (BERT-STL), using the BERT-base-uncased model.
+
+We run this baseline model for 100 epochs and a batch size of 30, all other hyperparameters remaining default.
+
+We also study the effect of using our system to grade an essay trait as the primary task, and score the other traits and the essay overall as auxiliary tasks (MTL*).
+
+In the STL configurations, we train our system to predict a single score at a time-either the overall essay score or the score for any of the essay traits.
+
+In the MTL configurations, our system learns to score the essay and all its traits simultaneously.
+
+The LSTM configurations use only a forward direction LSTM, while the BiLSTM configurations use a bidirectional (i.e. forward and reverse) LSTM.
+
+In this section, we report our results and analyze them for different experiments.

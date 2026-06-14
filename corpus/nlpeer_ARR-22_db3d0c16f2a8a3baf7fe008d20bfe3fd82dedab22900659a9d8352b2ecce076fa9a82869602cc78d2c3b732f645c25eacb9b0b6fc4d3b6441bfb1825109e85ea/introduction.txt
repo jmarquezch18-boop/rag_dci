@@ -1,0 +1,69 @@
+Texts, especially long documents, contain internal hierarchical structure like sections, paragraphs, sentences, and tokens.
+
+When we manually summarize a text, the hierarchical text structure usually plays a key role.
+
+Taking a scientific paper as an example, we might focus more on the sections with the titles of "methodology", "discussion", and "conclusion" while paying less attention to the sections like "background".
+
+Furthermore, the sentences within one section could have closer relationship with each other, than the ones outside this section.
+
+Understanding not only the sequential relations between the sentences but also the internal hierarchical text structure helps us better determine the important sentences within a document.
+
+Similarly, a neural summarization model could benefit from these hierarchical structure information.
+
+In this paper, we focus on extractive text summarization of single documents, which is the task of binary sentence classification with labels indicating whether a sentence should be included in a summary.
+
+Recently, pre-trained language models based on Transformer (Vaswani et al., 2017), such as BERT (Devlin et al., 2019), have been widely used to extract contextual representations from texts.
+
+The pre-trained Transformer language models (TLMs) can be easily reused for finetuning on the downstream tasks, so that the representations already learned from the large pretraining corpora are preserved.
+
+Liu and Lapata (2019) have achieved the state-of-the-art (SOTA) performance by fine-tuning BERT for extractive summarization on short document datasets including CNN/DailyMail.
+
+However, the TLMs consider merely the sequential-context-dependency by adding a linear positional encoding to each input token embeddings.
+
+The hierarchical text structure information is not taken into account explicitly.
+
+We propose a novel approach to formulate, extract, encode and inject the hierarchical structure (HiStruct) information explicitly into an extractive summarization model (HiStruct+ model), which consists of a TLM for sentence encoding and two stacked inter-sentence Transformer layers for hierarchical learning and extractive summarization (see Figure 1).
+
+We experiment with BERT (Devlin et al., 2019), RoBERTa (Liu et al., 2019), and Longformer (Beltagy et al., 2020) as underlying TLMs.
+
+The HiStruct information utilized in our work includes the section titles and the hierarchical positions of sentences, which are encoded using our proposed novel methods.
+
+The resulting embeddings can be injected into the TLM sentence representations to provide the HiStruct information for the summarization task.
+
+Sentence Scores y1 y2 y3
+
+Gold Labels
+
+Section Title Embeddings [BOS] 1st sent.
+
+[EOS]
+
+[BOS] 2nd sent.
+
+[EOS]
+
+[BOS] 3rd sent.
+
+[EOS]  The HiStruct+ models are evaluated on short documents (i. e., CNN/DailyMail (See et al., 2017)) and long documents (i. e., PubMed and arXiv (Cohan et al., 2018)) with various hierarchical characteristics.
+
+Our models produce competitive results on CNN/DailyMail and set the SOTA ROUGEs for extractive summarization on PubMed and arXiv to a new level.
+
+We also compare the HiStruct+ models with the corresponding strong baselines, which differ from our models only in that the HiStruct information is not injected.
+
+Using various experimental settings, our models collectively outperform the baselines on the three datasets, indicating the effectiveness of the proposed HiStruct encoding methods.
+
+The improvements are especially substantial on PubMed and arXiv, which contain longer scientific papers with conspicuous hierarchical structures.
+
+Ablation studies suggest that the performance gains are mainly contributed by the hierarchical position information of sentences.
+
+Our contributions in this work are four-folds:
+
+(1) We conceptualize novel measures to compare the internal hierarchical structure of the datasets.
+
+(2) We propose novel methods to formulate the HiStruct information and implement data preprocessing to extract them from the raw datasets.
+
+(3) We propose novel methods to encode and inject the HiStruct information into an extractive summarization model explicitly.
+
+The effects of different encoding settings and injection settings are systematically investigated.
+
+(4) The data containing the extracted HiStruct information, the best HiStruct+ models, as well as the scripts for preprocessing, training and evaluation are available on GitHub1 .

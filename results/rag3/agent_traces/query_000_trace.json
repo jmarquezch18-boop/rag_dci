@@ -1,0 +1,117 @@
+{
+  "query_id": "e18d2d1a4f63c7f6364e6f075f377f505d382046",
+  "query": "How many words are in the corpus in total?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "corpus size"
+      },
+      "result_preview": "No matches found for 'corpus size'",
+      "elapsed_s": 8.46
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "total words"
+      },
+      "result_preview": "No matches found for 'total words'",
+      "elapsed_s": 3.62
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "statistics"
+      },
+      "result_preview": "Search results for 'statistics' (11 matches):\n[paper_id=nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731 | section=results | line=5] Data statistics of the three datasets are shown in Table 1.\n[paper_id=nlp",
+      "elapsed_s": 7.09
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731",
+        "section": "results",
+        "start": 3,
+        "end": 10
+      },
+      "result_preview": "[nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731 / results — líneas 1-15 de 23]\nOur experiment strictly follows the settings in the (Kumar et al., 2020)    TREC (Li and Roth, 2002) contains six question ty",
+      "elapsed_s": 12.7
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "corpus statistics"
+      },
+      "result_preview": "No matches found for 'corpus statistics'",
+      "elapsed_s": 8.17
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Our experiment strictly follows the settings in the (Kumar et al., 2020)    TREC (Li and Roth, 2002) contains six question types collected from 4,500 English questions.\n\nWe randomly subsample 10 examples per class for each experiment for both training and development set to simulate a low-resource regime.\n\nData statistics of the three datasets are shown in Table 1.\n\nFollowing (Kumar et al., 2020), we replace numeric class labels with their text versions.\n\nWe first compare the effects of text smoothing and baselines data augmentation methods on different datasets in a low-resource regime. Then we further explore the effect of combining text smoothing with each baseline method.\n\nConsidering that the amount of data increases to 2 times after combination, we expand the data used in the baseline experiments to the same amount for the fairness of comparison.\n\nAll experiments are repeated 15 times to account for stochasticity and results are reported as Mean (STD) accuracy on the full test set.\n\nAs shown in Table2, text smoothing brings the largest improvement to the model on the three datasets compared with other data augmentation methods.",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731",
+      "chunk_id": "dci_nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731_results_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/PeerRead-ACL2017/619_131"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731_results_0000"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_026fbeb69144bca95d6df70934fd608871855c30486e1a88714ee1343574663f55216ee356d90a1e5110be0a86ec6b9e1f515149abe73c645caaf05409af7731_results_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.05263157894736842,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

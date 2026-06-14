@@ -1,0 +1,97 @@
+In this paper, we have compared attention and relevance mechanisms of a wide range of models to human gaze patterns when solving sentiment classification on SST movie reviews and relation extraction on Wikipedia articles.
+
+We generally found that Transformer architectures are competitive with the E-Z Reader, but only when computing attention flow scores.
+
+We generally saw weaker correlations for relation extraction on Wikpedia, presumably due to simpler sentence structures and the occurrence of polarity words.
+
+In the following, we discuss implications of our findings on NLP and Cognitive Science in more detail.
+
+Lessons for NLP One implication of the above for NLP follows from the importance of attention flow in our experiments: Using human gaze to regularize or supervise attention weights has proven effective in previous work ( §5), but we observed that correlations with task-specific human attention increase significantly by using layer-dependent attention flow compared to using raw attention weights.
+
+This insight motivates going beyond regularizing raw attention weights or directly injecting human attention vectors during training, to instead optimize for correlation between attention flow and human attention.
+
+Jointly modeling language and human gaze has recently shown to yield competitive performance on paraphrase generation and sentence compression while resulting in more taskspecific attention heads (Sood et al., 2020b).
+
+For this study natural gaze patterns were also simulated using the E-Z Reader.
+
+Another potential implication concerns interpretability.
+
+It remains an open problem how best to interpret self-attention modules (Jain and Wallace, 2019;Wiegreffe and Pinter, 2019), and whether they provide meaningful explanations for model predictions.
+
+Including gradient information to explain Transformers has recently been considered to improve their interpretability (Chefer et al., 2021b,a;Ali et al., 2022).
+
+A successful explanation of a machine learning model should be faithful, human-interpretable and practical to apply (Samek et al., 2021).
+
+Faithfulness and practicality is often evaluated using automated procedures such as input reduction experiments or measuring time and model complexity.
+
+By contrast, judging human-interpretability typically requires costly experiments in well-controlled settings and obtaining human gold-standards for interpretability remain difficult (Miller, 2019;Schmidt and Bießmann, 2019).
+
+Using gaze data to evaluate the faithfulness and trustworthiness of machine learning models is a promising approach to increase model transparency.
+
+Lessons for Cognitive Science Attention flow in Transformers, especially for BERT models, correlates surprisingly well with human task-specific reading, but what does this tell us about the shortcomings of our cognitive models?
+
+We know that word frequency and semantic relationships between words influence word fixation times (Rayner, 1998).
+
+In our experiments, we see relatively high correlation between human fixations and the inverse word probability baseline which raises the question to what extent reading gaze is driven by low-level pat-terns such as word frequency or syntactic structure in contrast to more high-level semantic context or wrap-up effects.
+
+In computer vision, cognitively inspired bottomup models, e.g., using intensity and contrast features, are able to explain at most half of the gaze fixation information in comparison to the human gold standard (Kümmerer et al., 2017).
+
+The robustness of the E-Z Reader on movie reviews is likely due to its explicit modeling of low-level properties such as word frequency or sentence length.
+
+BERT was recently shown to be primarily modeling higherorder word co-occurrence statistics (Sinha et al., 2021).
+
+We argue that while Transformers are limited, e.g., in not capturing the dependency of human gaze on word length (Kliegl et al., 2004), cognitive models seem to underestimate the role of word co-occurrence statistics.
+
+During reading, humans are faced with a tradeoff between the precision of reading comprehension and reading speed, by avoiding unnecessary fixations (Hahn and Keller, 2016).
+
+This trade-off is related to the input reduction experiments performed in Section 4.
+
+Here, we observe that shallow methods score well at being sparse and effective in changing model output towards the correct class, but produce only weak correlation to human reading patterns when compared to layered language models.
+
+In comparison, extracted attention flow from pre-trained Transformer models correlates much better with human attention, but offers less sparse token attention.
+
+In other words, our results show that task-specific reading is sub-optimal relative to solving tasks and heavily regularized by natural reading patterns (see also our comparison of task-specific and natural reading in Section 4).
+
+In our experiments, we first and foremost found that Transformers, and especially BERT models, are competitive to the E-Z Reader in terms of explaining human attention in taskspecific reading.
+
+For this to be the case, computing attention flow scores (rather than raw attention weights) is important.
+
+Even so, the E-Z Reader remains better at hard-to-predict words and is less sensitive to part of speech.
+
+While Transformers thus have some limitations compared to the E-Z Reader, our results indicate that cognitive models have placed too little weight on high-level word cooccurrence statistics.
+
+Generally, Transformers and the E-Z Reader correlate much better with human attention than other, shallow from-scratch trained sequence labeling architectures.
+
+Our input reduction experiments suggest that in a sense, both pretrained language models and humans have suboptimal, i.e., less sparse, task-solving strategies, and are heavily regularized by what is optimal in natural reading contexts.
+
+trained on the 1 billion token dataset (Chelba et al., 2013).
+
+Resulting perplexity on the held-out test set was ppl = 81.9.
+
+Then, word-based total fixation times are computed from the E-Z Readers trace files and averaged over all subjects.
+
+In addition to Spearman correlation over all tokens, we also report Pearson correlation coefficients on a sentence and token-level.
+
+Results are displayed in Table 4.
+
+Compared to Spearman correlation on all tokens, the ranking does hardly change for Pearson or sentence-level correlations.
+
+Absolute correlation coefficients are higher for Spearman compared to Pearson and also are slightly higher on the sentence-level as compared to the tokenlevel analysis.
+
+Biggest changes occur in a drop for BNC when Spearman correlation is calculated on all tokens for relation extraction and an increase for self-attention (LRP) in sentiment reading.
+
+We hypothesize that both effects can be traced back to the level of sparsity and the corresponding ranking for Spearman correlations.
+
+In our entropy analysis we found that, i.e. self-attention shows a sparser representation which was likely caused by the overconfidence of the model, and which could explain the higher rank-based correlation.
+
+Figure 5 shows the full distribution of POS tags of the first tokens flipped.
+
+This extends Figure 4 where we only show the first 3 POS tags.
+
+We compute entropy values for different attention and relevance scores in both task settings.
+
+To compensate for different sentence lengths we perform a stratified analysis such that every sentence length occurs equally often in both tasks.
+
+Sentence lengths which merely occur in one of the two tasks, are excluded from the sampling.
+
+Maximum entropy is reached for uniformly distributed token scores.

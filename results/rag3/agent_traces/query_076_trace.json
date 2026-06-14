@@ -1,0 +1,155 @@
+{
+  "query_id": "7cd7d4d944b16a2603aaaf3ebb5628edd813a346",
+  "query": "What is the criteria for delimiter placement in the sentence aggregation model?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "criteria"
+      },
+      "result_preview": "Search results for 'criteria' (11 matches):\n[paper_id=nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34 | section=discussion | line=71] In ZIP, we will merge node 3 and node 6. If we take a closer look at th",
+      "elapsed_s": 4.47
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+        "section": "discussion",
+        "start": 68,
+        "end": 74
+      },
+      "result_preview": "[nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34 / discussion — líneas 63-79 de 133]\nAny reference to node 7 is routed to node 3, or whatever node 3 is mapped to.\n\nThis procedure is defined and implemented",
+      "elapsed_s": 11.35
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+        "section": "discussion",
+        "start": 63,
+        "end": 79
+      },
+      "result_preview": "[nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34 / discussion — líneas 58-84 de 133]\n\nFor example, in Figure 6, node 6 and 7 are removed in this fashion.\n\nIn general, we handle this by re-mapping the elimi",
+      "elapsed_s": 10.35
+    },
+    {
+      "iteration": 3,
+      "tool": "list_sections",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34"
+      },
+      "result_preview": "Secciones de 'nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34':\nabstract\ndiscussion\nintroduction\nmethodology\nresults",
+      "elapsed_s": 11.26
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+        "section": "results",
+        "start": 80,
+        "end": 100
+      },
+      "result_preview": "[nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34 / results — líneas 75-105 de 131]\nZIP exploits the efficiency of ZIP to achieve high diversity, and by searching through fewer states, it manages to achieve",
+      "elapsed_s": 12.32
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Any reference to node 7 is routed to node 3, or whatever node 3 is mapped to.\n\nThis procedure is defined and implemented as a union-find data structure.\n\nDeduplication of Unexplored Successors After the ZIP procedure, we also remove the unexplored successors of the merged nodes, like node 6, 7, and 8 in Fig. 6.\n\nWe show a more detailed example in Figure 10.\n\nIn ZIP, we will merge node 3 and node 6. If we take a closer look at the successors of these two nodes, the distributions could be similar and in fact are expected to be if the equivalence criteria hold.\n\nWe remove the unexplored direct successors of the merged node as part of the merging process, and the surviving node (node 3) captures these with similar probabilities regardless.\n\nGREEDY is the deterministic greedy decoding method that always selects the highest probability token as prediction.\n\nThe equivalent beam size for this approach is 1 since we only run one pass.\n\nBS & DBS stand for beam search and its variant diverse beam search (Vijayakumar et al., 2018).",
+      "section": "discussion",
+      "paper_id": "nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+      "chunk_id": "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_discussion_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+      "score": 1.0
+    },
+    {
+      "text": "For example, in Figure 6, node 6 and 7 are removed in this fashion.\n\nIn general, we handle this by re-mapping the eliminated node to its surviving counterpart.\n\nAny reference to node 7 is routed to node 3, or whatever node 3 is mapped to.\n\nThis procedure is defined and implemented as a union-find data structure.\n\nDeduplication of Unexplored Successors After the ZIP procedure, we also remove the unexplored successors of the merged nodes, like node 6, 7, and 8 in Fig. 6.\n\nWe show a more detailed example in Figure 10.\n\nIn ZIP, we will merge node 3 and node 6. If we take a closer look at the successors of these two nodes, the distributions could be similar and in fact are expected to be if the equivalence criteria hold.\n\nWe remove the unexplored direct successors of the merged node as part of the merging process, and the surviving node (node 3) captures these with similar probabilities regardless.\n\nGREEDY is the deterministic greedy decoding method that always selects the highest probability token as prediction.\n\nThe equivalent beam size for this approach is 1 since we only run one pass.\n\nBS & DBS stand for beam search and its variant diverse beam search (Vijayakumar et al., 2018).\n\nIn our configuration, we use Hamming distance as the diversity function and set the diversity strength to 1.5, following Vijayakumar et al. (2018).\n\nNCLS is the nucleus sampling method proposed in Holtzman et al. (2020), which encourages quality by truncating the distribution over the vocabulary with a parameter p before sampling.",
+      "section": "discussion",
+      "paper_id": "nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+      "chunk_id": "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_discussion_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+      "score": 1.0
+    },
+    {
+      "text": "ZIP exploits the efficiency of ZIP to achieve high diversity, and by searching through fewer states, it manages to achieve higher quality as well.\n\nWe show the result on machine translation in Table 3 and6.\n\nResults on translation tasks show the consistent gains of diversity from path recombination models.\n\nIn Table 3, we show two translation tasks where the target language is English.\n\nBFSRCB works better than BFSZIP because it disables some aggressive and bad merges which explores bad hypotheses.\n\nCompared to summarization, we found the search space in MT to be more constrained, so there was less room for aggressive merging and exploration to improve over RCB.\n\nOur lower-resource method, BFSZIP approach, actually performs quite well on most metrics with only 25% of search budget.\n\nIt has better diversity performance than any nonrecombination methods, and comes with quality better than most of the recombination methods.\n\nThe usage of BFS and path recombination methods like BFSRCB and BFSZIP is promising for being able to find a better cost-diversity tradeoff in MT.\n\nValidating the Merging Criterion Our merging criterion is fundamentally an approximation of the equivalence criteria described in Section 5.\n\nOur question is: what fraction of nodes merged by our merging criterion satisfy the weak equivalence assumption? We conduct an experiment to verify this on XSum.\n\nWe compute the greedy completion for L timesteps and check whether the continuation of the base candidates would be the same.\n\nIn Figure 7, we show the fraction of merged pairs for which the generations match exactly un- We experiment with n = {2, 4, 6} for n-gram suffix matching.\n\nWe sample 1,000 recombinations from BFSRCB and BFSZIP respectively, and run greedy inference based on merged hypotheses.\n\nWe use Exact Match (EM) to measure how often two merged hypotheses give the same greedy future generations considering the next L tokens after the merge.\n\nder three values of the recombination criterion.",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+      "chunk_id": "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_results_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/3cbf91f8e2f7e62be51109688c84a2b424e6018ee3c976fbe55e5331bc9ab2f4c46491d006087aed3be35a3370c945c100bd718e2c1131de19eac3dbe93326bc_78",
+    "nlpeer/ARR-22/3cbf91f8e2f7e62be51109688c84a2b424e6018ee3c976fbe55e5331bc9ab2f4c46491d006087aed3be35a3370c945c100bd718e2c1131de19eac3dbe93326bc_79",
+    "nlpeer/ARR-22/3cbf91f8e2f7e62be51109688c84a2b424e6018ee3c976fbe55e5331bc9ab2f4c46491d006087aed3be35a3370c945c100bd718e2c1131de19eac3dbe93326bc_164"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_discussion_0000",
+      "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_discussion_0001",
+      "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_results_0002"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_discussion_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_discussion_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_results_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.0425531914893617,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

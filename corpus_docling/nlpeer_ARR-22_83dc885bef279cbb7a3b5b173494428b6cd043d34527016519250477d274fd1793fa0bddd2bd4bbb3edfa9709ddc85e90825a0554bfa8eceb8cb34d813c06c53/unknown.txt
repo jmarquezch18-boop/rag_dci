@@ -1,0 +1,425 @@
+Learning Confidence For Transformer-Based Neural Machine Translation
+
+Abstract
+
+Introduction
+
+Background
+
+Transformer-Based Nmt
+
+The Transformer has a stacked encoder-decoder structure.
+
+When given a pair of parallel sentences x = {x 1 , x 2 , ...x S } and y = {y 1 , y 2 , ...y T }, the encoder first transforms input to a sequence of continuous representations h = h 0 1 , h 0 2 , ...h 0 S , which are then passed to the decoder.
+
+The decoder is composed of a stack of N identical blocks, each of which includes self-attention, cross-lingual attention, and a fully connected feedforward network.
+
+The outputs of l-th block h l t are fed to the successive block.
+
+At the t-th position, the model produces the translation probabilities p t , a vocabulary-sized vector, based on outputs of the N -th layer:
+
+p t = softmax(W h N t + b)(1)
+
+During training, the model is optimized by minimizing the cross entropy loss:
+
+L NMT = T t=1 -y t log(p t )(2)
+
+where {W , b} are trainable parameters and y t is denoted as a one-hot vector.
+
+During inference, we implement beam search by selecting high-probability tokens from generated probability for each step.
+
+Confidence Miscalibration In Nmt
+
+Modern neural networks have been found to yield a miscalibrated confidence estimate (Guo et al.,  2017; Hendrycks and Gimpel, 2017).
+
+It means that the prediction probability, as used at each inference step, is not reflective of its accuracy.
+
+The problem is more complex for structured outputs in NMT.
+
+We cannot judge a translation as an error, even if it differs from the ground truth, as several semantically equivalent translations exist for the same source sentence.
+
+Thus we manually annotate each target word as OK or BAD on 200 Zh⇒En translations.
+
+Only definite mistakes are labeled as BAD, while other uncertain translations are overlooked.
+
+Figure 2 reports the density function of prediction probabilities on OK and BAD translations.
+
+We observe severe miscalibration in NMT: overconfident problems account for 35.8% when the model outputs BAD translations, and 24.9% OK translations are produced with low probabilities.
+
+These issues make it challenging to identify model failure.
+
+It further drives us to establish an estimate to describe model confidence better.
+
+Learning To Estimate Confidence
+
+A well-calibrated confidence estimate should be able to tell when the NMT model probably fails.
+
+Ideally, we would like to learn a measure of confidence for each target-side translation, but this remains a thorny problem in the absence of ground truth for confidence estimate.
+
+Inspired by Ask For Hints (DeVries and Taylor, 2018) on the image classification task, we define confidence as how many hints the NMT model needs to produce the correct translation.
+
+More hints mean low confidence, and that is a high possibility of failure.
+
+Motivation.
+
+We assume that the NMT model can ask for hints (look at ground-truth labels) during training, but each clue comes at the cost of a slight penalty.
+
+Intuitively, a good strategy is to indepen-dently make the predictions that the model is confident about and then ask for clues when the model is uncertain about the decision.
+
+Under this assumption, we approximate the confidence level of each translation by counting the number of hints used.
+
+To enable the NMT model to ask for hints, we add a confidence estimation network (ConNet) in parallel with the original prediction branch, as shown in Figure 3.
+
+The ConNet takes hidden states of the decoder at t-th step (h t ) as inputs and predicts a single scalar between 0 and 1.
+
+c t = σ(W ′ h t + b ′ )(3)
+
+where
+
+θ c = {W ′ , b ′ } are trainable parameters. σ(•)
+
+is the sigmoid function.
+
+If the model is confident that it can translate correctly, it should output c t close to 1.
+
+Conversely, the model should output c t close to 0 for more hints.
+
+To offer the model "hints" during training, we adjust softmax prediction probabilities by interpolating the ground truth probability distribution y t (denoted as a one-hot vector) into the original prediction.
+
+The degree of interpolation is decided by the generated confidence c t :
+
+p ′ t = c t • p t + (1 -c t ) • y t (4)
+
+The translation loss is calculated using modified prediction probabilities.
+
+L NMT = T t=1 -y t log(p ′ t )(5)
+
+To prevent the model from minimizing the loss by always setting c t = 0 (receiving all the ground truth), we add a log penalty to the loss function.
+
+L Conf = T t=1 -log(c t )(6)
+
+The final loss is the sum of the translation loss and the confidence loss, which is weighted by the hyper-parameter λ:
+
+L = L NMT + λL Conf (7)
+
+Under this setting, when c → 1 (the model is quite confident), we can see that p ′ → p and L Conf → 0, which is equal to a standard training procedure.
+
+In the case where c → 0 (the model is quite unconfident), we see that p ′ → y (the model obtains correct labels).
+
+In this scenario, L NMT would approach 0, but L Conf becomes very large.
+
+Thus, the model can reduce the overall loss only when it successfully predicts which outputs are likely to be correct.
+
+Implementation Details.
+
+Due to the complexity of Transformer architecture, it requires several optimizations to prevent the confidence branch from degrading the performance of the translation branch.
+
+Do not provide hints at the initial stage.
+
+The early model is fragile, which lays the groundwork for the following optimization.
+
+We find that affording hints at an early period leads to a significant performance drop.
+
+To this end, we propose to dynamically control the value of λ (as in Equation 7) by the training step (s) as:
+
+λ(s) = λ 0 * e -s/β 0 (8)
+
+where λ 0 and β 0 control the initial value and the declining speed of λ.
+
+We expect the weight of confidence loss to be large at the beginning (c → 1) and give hints during middle and later stages. Do not use high-layer hidden states to predict confidence.
+
+We find that it would add much burden to the highest layer hidden state if used to predict translation and confidence simultaneously.
+
+So we suggest using low-layer hidden states for the confidence branch and leaving the translation branch unchanged (here, the decoder has 6 layers):
+
+h t = AVE(h 1 t + h 2 t + h 3 t ) (9)
+
+where h l t is the l-th layer hidden state in the decoder.
+
+Besides, other combinations of low-layer hidden states are alternative, i.e., h t = AVE(h 1 t + h 3 t ).
+
+Do not let the model lazily learn complex examples.
+
+We encounter the situation where the model frequently requests hints rather than learning from difficulty.
+
+We follow DeVries and Taylor (2018) to give hints with 50% probability.
+
+In practice, we apply Equation 4 to only half of the batch.
+
+Confidence-based Label Smoothing.
+
+Smoothing labels is a typical way to prevent the network from miscalibration (Müller et al., 2019).
+
+It has been used in many state-of-the-art models, which assigns a certain probability mass (ϵ 0 ) to other nonground-truth labels (Szegedy et al., 2016).
+
+Here we attempt to employ our confidence estimate to improve smoothing.
+
+We propose a novel instancespecific confidence-based label smoothing technique, where predictions with greater confidence receive less label smoothing and vice versa.
+
+The amount of label smoothing applied to a prediction (ϵ t ) is proportional to its confidence level.
+
+ϵ t = ϵ 0 * e 1-c t ĉ
+
+where ϵ 0 is the fixed value for vanilla label smoothing, ĉ is the batch-level average confidence level.
+
+Experiments
+
+Confidence-Based Quality Estimation
+
+To evaluate the ability of our confidence estimate on mistake prediction, we experiment on extensive sentence/word-level QE tasks.
+
+Supervised QE task requires large amounts of parallel data annotated with the human evaluation, which is labor-intensive and impractical for low-resource languages.
+
+Here, we propose to address QE in an unsupervised way along with the training of the NMT model.
+
+Sentence-Level Quality Estimation
+
+We experiment on WMT2020 QE shared tasks 2 , including high-resource language pairs (English-German and English-Chinese) and mid-resource language pairs (Estonian-English and Romanian-English).
+
+This task provides source language sentences, corresponding machine translations, and NMT models used to generate translation.
+
+Each translation is annotated with direct assessment (DA) by professional translators, ranging from 0-100, according to the perceived translation quality.
+
+We can evaluate the performance of QE in terms of Pearson's correlation with DA scores.
+
+We compare our confidence estimate with four unsupervised QE metrics (Fomicheva et al., 2020):
+
+• TP: the sentence-level translation probability normalized by length T .
+
+• Softmax-Ent: the average entropy of softmax output distribution at each decoding step.
+
+• Sent-Std: the standard deviation of word-level log-probability p(y 1 ), ..., p(y T ).
+
+• D-TP: the expectation for the set of TP scores by running K stochastic forward passes through the NMT model with model parameters θk perturbed by Monte Carlo (MC) dropout (Gal and Ghahramani, 2016).
+
+We also report two supervised QE models:
+
+• Predictor-Estimator (Kim et al., 2017): a weak neural approach, which is usually set as the baseline system for supervised QE tasks.
+
+• BERT-BiRNN (Kepler et al., 2019b): a strong QE model using a large-scale dataset for pretraining and quality labels for fine-tuning.
+
+We propose four confidence-based metrics: (1) Conf : the sentence-level confidence estimate averaged by length, (2) Sent-Std-Conf : the standard deviation of word-level log-confidence c 1 , ..., c T , (3) D-Conf : similar to D-TP, we compute the expectation of Conf by running K forward passes through the NMT model, and (4) D-Comb: the combination of D-TP and D-Conf:
+
+D-Comb = 1 K K k=1 (Conf θk + TP θk )(10)
+
+Note that our confidence estimate is produced together with translations.
+
+It is hard to let our model generate exact translations as provided by WMT, even with a similar configuration.
+
+Thus, we train our model on parallel sentences as used to train provided NMT models.
+
+Then, we employ force decoding on given translations to obtain existing unsupervised metrics and our estimations.
+
+We do not use any human judgment labels for supervision.
+
+Table 1 shows the Pearson's correlation with DA scores for the above QE indicators.
+
+We find that:
+
+Our confidence-based metrics substantially surpass probability-based metrics (the first three lines in Table 1).
+
+Compared with dropout-based methods (D-TP), our metrics obtain comparable results on mid-resource datasets while yielding better performance on high-resource translation tasks.
+
+We note that the benefits brought from the MC dropout strategy are limited for our metrics, which is significant in probability-based methods.
+
+It also proves the stability of our confidence estimate.
+
+In addition, the predictive power of MC dropout comes at the cost of computation, as performing forward passes through the NMT model is time-consuming and impractical for the large-scale dataset.
+
+Our approach outperforms PredEst, a weak supervised method, on three tasks and further narrows the gap on Ro-En.
+
+Though existing unsupervised QE methods still fall behind with the strong QE model (BERT-BiRNN), the exploration of unsupervised metrics is also meaningful for real-world deployment with the limited annotated dataset.
+
+Word-Level Quality Estimation
+
+We also validate the effectiveness of our confidence estimate on QE tasks from a more finegrained view.
+
+We randomly select 250 sentences from Zh⇒En NIST03 and obtain NMT translations.
+
+Two graduate students are asked to annotate each target word as either OK or BAD.
+
+We assess the performance of failure prediction with standard metrics, which are introduced in Appendix A.  Experimental results are given in Table 3.
+
+We implement competitive failure prediction approaches, including Maximum Softmax Probability (MSP) (Hendrycks and Gimpel, 2017) and Monte Carlo Dropout (MCDropout) (Gal and Ghahramani, 2016).
+
+We find that our learned confidence estimate yields a better separation of OK and BAD translation than MSP.
+
+Compared with MCDropout, our metrics achieve competing performance with significant advantages on computational expenses.
+
+Overall, the learned confidence estimate is a competitive indicator of translation precision compared with other unsupervised QE metrics.
+
+Moreover, the confidence branch added to the NMT system is a light component.
+
+It allows each translation to come with quality measurement without degradation of the translation accuracy.
+
+The performance with the confidence branch is in Appendix B.
+
+Confidence-Based Label Smoothing
+
+We extend our confidence estimate to improve smoothing and experiment on different-scale translation tasks: WMT14 English-to-German (En⇒De), LDC Chinese-to-English (Zh⇒En)3 , WMT16 Romanian-to-English (Ro⇒En), and IWSLT14 German-to-English (De⇒En).
+
+We use the 4-gram BLEU (Papineni et al., 2002) to score the performance.
+
+More details about data processing and experimental settings are in Appendix C.
+
+As shown in Table 2, our confidence-based label smoothing outperforms standard label smoothing by adaptively tuning the amount of each label smoothing.
+
+For Zh⇒En task, our method improves the performance over Transformer w/o LS by 1.05 BLEU, which also exceeds standard label smoothing by 0.72 BLEU.
+
+We find that improvements over standard label smoothing differ in other language pairs (0.35 BLEU in En⇒De, 0.5 BLEU in De⇒En, and 0.79 BLEU in Ro⇒En).
+
+It can be attributed to that the seriousness of miscalibration varies in different language pairs and datasets (Wang et al., 2020).
+
+Experimental results with a larger search space (i.e. beam size=30) are also given in Appendix C to support the above findings.
+
+Analysis
+
+Noisy Label Identification
+
+We expect that the model requires more hints to fit noisy labels by predicting low confidence.
+
+To test this point, we experiment on the IWSLT14 De⇒En dataset containing 160k parallel sentences.
+
+We build several datasets with progressively increasing noisy samples by randomly replacing target-side words with others in the vocabulary.
+
+We train on each dataset with the same configuration and picture the learned confidence estimate in Figure 4.
+
+The learned confidence estimate appears to make Table 5: Comparison of the model probability and our confidence estimate on out-of-domain data detection tasks.
+
+We present the rate of unknown words (UNK) and average length of input sentences for each dataset (the average input length of in-domain dataset is 22.47).
+
+All scores are shown in percentages and the best results are highlighted in bold.
+
+↑ indicates that higher scores are better, while ↓ indicates that lower scores are better.
+
+reasonable assessments.
+
+(1) It predicts low confidence on noisy samples but high confidence on clean ones.
+
+Specifically, the confidence estimate is much lower as a higher pollution degree in one example (darker in color).
+
+( 2) With increasing noises in the dataset, the NMT model becomes more uncertain about its decision accordingly.
+
+Large numbers of noises also raise a challenge for separating clean and noisy samples.
+
+We also compare ours with the model probability by giving the accuracy of separating clean and noisy examples under varying pollution rates.
+
+We set clean data as the positive example and use evaluation metrics listed in Appendix A.
+
+As shown in Table 4, our confidence estimate obtains better results in all cases, especially in a high noise rate.
+
+Our metric improves the area under the precision-recall curve (AUPR) from 64.15% to 76.76% and reduces the detection error (DET) from 13.41% to 8.13% at an 80% noise rate.
+
+It proves that our confidence estimate is more reliable for detecting potential risks induced by noisy data.
+
+Out-Of-Domain Data Detection
+
+For our in-domain examples, we train an NMT model on the 2.1M LDC Zh⇒En news dataset and then sample 1k sentences from NIST2004 as the in-domain testbed.
+
+We select five out-of-domain datasets and extract 1k samples from each.
+
+Most of them are available for download on OPUS, specified in Appendix D. Regarding the unknown words (UNK) rate, the average length of input sentences, and domain diversity, the descending order based on distance with the in-domain dataset is WMTnews > Tanzil > Tico-19 > TED2013 > News-Commentary.
+
+Test sets closer to the in-domain dataset are intuitively harder to tell apart.
+
+We use sentence-level posterior probability and confidence estimate of the translation to separate in-and out-of-domain data.
+
+Evaluation metrics are in Appendix A. Results are given in Table 5.
+
+We find that our approach performs comparably with the probability-based method on datasets with distinct domains (WMT-news and Tanzil). But when cross-domain knowledge is harder to detect (the last three lines in Table 5), our metric yields a better separation of in-and out-of-domain ones.
+
+To better understand the behaviour of our confidence estimates on out-of-domain data, we visualize word clouds of the most confident/uncertain words ranked by model probability and our measurements on a medicine dataset   Our metrics correctly separate in-and out-ofdomain data from two aspects: (1) word frequency: the NMT model is certain about frequent words yet hesitates on rare words as seen in Figure 5(b).
+
+But colors in Figure 5(a) are relatively mixing.
+
+(2) domain relation: the most uncertain words ranked by our confidence estimate are domain-related, like "patho" and "syndrome", while the most confident words are domain-unrelated (e.g., punctuations and prepositions).
+
+This phenomenon cannot be seen in Figure 5(a), showing that probabilities from softmax fall short in representing model uncertainty for domain-shift data.
+
+Related Work
+
+Confidence Estimation For Nmt
+
+Only a few studies have investigated calibration in NMT.
+
+Müller et al. (2019) find that the NMT model is well-calibrated in training, which is proven severely miscalibrated in inference (Wang et al., 2020), especially when predicting the end of a sentence (Kumar and Sarawagi, 2019).
+
+Regarding the complex structures of NMT, the exploration for fixing miscalibration in NMT is scarce.
+
+Wang et al. (2019); Xiao et al. (2020) use Monte Carlo dropout to capture uncertainty in NMT, which is time-consuming and computationally expensive.
+
+Unlike them, we are the first to introduce learned confidence estimate into NMT.
+
+Our method is welldesigned to adapt to Transformer architecture and NMT tasks, which is also simple but effective.
+
+Quality Estimation For Nmt
+
+QE is to predict the quality of the translation provided by an MT system at test time without standard references.
+
+Recent supervised QE models are resource-heavy and require a large mass of annotated quality labels for training (Wang et al., 2018;Kepler et al., 2019a;Lu and Zhang, 2020), which is labor-consuming and unavailable for low-resource languages.
+
+Exploring internal information from the NMT system to indicate translation quality is another alternative.
+
+Fomicheva et al. (2020) find that uncertainty quantification is competitive in predicting the translation quality, which is also complementary to supervised QE model (Wang et al., 2021).
+
+However, they rely on repeated Monte Carlo dropout (Gal and Ghahramani, 2016) to assess uncertainty at the high cost of computation.
+
+Our confidence estimate outperforms existing unsupervised QE metrics, which is also intuitive and easy to implement.
+
+Conclusion
+
+Figure 1: An example of generated probabilities and our learned confidence estimates.
+
+The phrases in red are wrong translations.
+
+The corresponding prediction probabilities and confidence estimates are outlined in dashed boxes.
+
+The dark color indicates a large value under two evaluations.
+
+Figure2: The density function of word probabilities predicted by the NMT model on OK and BAD translations.
+
+We outline the miscalibration with slash mark: over-confident (producing high probabilities for errors) and under-confident (generating low probabilities for right translations).
+
+Figure 3: The overview of the framework.
+
+The NMT model is allowed to ask for hints (ground-truth translation) during training based on the confidence level predicted by the ConNet.
+
+During inference, we use the model prediction p to sample hypotheses.
+
+Each translation word comes with a corresponding confidence estimate.
+
+Figure4: The learned confidence estimate on IWSLT14 De⇒En as varying levels of noisy labels.
+
+The shade of colors denotes how many words are corrupted in a sentence (dark orange means a high pollution rate).
+
+The dashed line shows averaged learned confidence estimate on the whole dataset.
+
+Figure 5: Word clouds of the most confident/uncertain translations in the Tico-19 dataset ranked by (a) prediction probability and (b) learned confidence estimate.
+
+We divide tokens into three categories based on their frequencies.
+
+High: the most 3k frequent words, Medium: the most 3k-12k frequent words, Low: the other tokens.
+
+in Figure 5.
+
+The colors of words indicate their frequencies in the in-domain dataset.
+
+Pearson's correlation between unsupervised QE indicators and DA scores.
+
+K is set following
+
+Translation results (beam size 4) for standard label smoothing and our confidence-based label smoothing on NIST Zh⇒En, WMT14 En⇒De (using case-sensitive BLEU score for evaluation), IWSLT14 De⇒En, and WMT16 Ro⇒En. " * " indicates gains are statistically significant than Transformer w/o LS with p < 0.05.
+
+Word-level QE evaluated by the separation accuracy of OK and BAD translations in the Zh⇒En task.
+
+All values are shown in percentages.
+
+↑ indicates higher scores are better, and ↓ indicates lower is better.
+
+94.92 86.54 / 88.09 14.00 / 10.08 12.04 / 8.29 80% 91.63 / 95.44 64.15 / 76.67 16.06 / 10.13 13.41 / 8.13 Separating clean and noisy data by the model probability and our confidence estimate with varying noisy rates.
+
+↑ indicates that higher scores are better, while ↓ means that lower is better.
+
+All values are percentages.
+
+68.44 59.10 / 66.75 39.22 / 36.22 39.00 / 35.39 News-Commentary 1.00% 23.81 64.14 / 70.10 60.49 / 69.48 39.33 / 35.56 39.11 / 34.22

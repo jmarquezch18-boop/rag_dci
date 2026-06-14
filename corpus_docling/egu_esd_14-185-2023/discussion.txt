@@ -1,0 +1,151 @@
+In this study, we have tested the potential of the "macroalgae open-ocean mariculture and sinking (MOS)" as a carbon dioxide removal method.
+
+Although environmental conditions (e.g., nutrients, temperature) in the open oceans differ considerably from the coastal and/or near-shore regions where macroalgae aquaculture is currently applied in reality, our simulations suggest that, in certain open-ocean regions, macroalgae may successfully grow and sequester carbon (if engineering constraints can be overcome).
+
+Even for continuous deployment at a maximum scale currently deemed possible, MOS alone is not able to reduce the warming to the 2 • C target by the end of the 21st century under the RCP 4.5 moderate-mitigation scenario.
+
+This finding is consistent with conclusions from previous studies that no single carbon dioxide removal (CDR) method alone can ensure that the current climate goals are reached (Keller et al., 2014;Anderson and Peters, 2016;Fuss et al., 2020;IPCC, 2018).
+
+Clearly, emissions reductions must be the primary means of mitigation; a portfolio of CDR options can only complement these other efforts.
+
+In order to estimate the maximum CO 2 removal potential, the possible synergy of MOS with artificial upwelling (AU) has been investigated.
+
+The employed AU concept aims at piping nutrient-rich deep water to the surface to enhance the growth of macroalgae in MOS.
+
+As expected, AU is found to have the potential to successfully enlarge the growing area of MOS and to enhance the CDR capacity of MOS.
+
+In the first 80 years of deployment, the maximum MOS carbon sequestration potential is 3.38 PgC yr -1 for regular MOS, but it can be boosted up to 5.56 PgC yr -1 with assistance from AU.
+
+If deployment is discontinued from year 2100, about 58.6 % to 70.2 % (normal MOS and MOS_AU, respectively) of MOS-sequestered carbon would be retained in the ocean by year 3000.
+
+Several potential side effects have also been revealed and analyzed.
+
+One side effect is the reduction in phytoplankton NPP (PNPP) due to canopy shading and nutrient removal from the sea surface to the bottom by MOS.
+
+The declined PNPP in turn offsets ∼ 37 % of the MOS CDR.
+
+Intriguingly, some areas with enhanced PNPP (PNPP "halo", Sect. 4.3.4) are found surrounding the major areas occupied by MOS, fueled by the residual NO 3 that leaks from MOS areas.
+
+Another strong side effect of large-scaled MOS is the impact on oxygen distributions.
+
+Dissolved-oxygen concentrations increase in near-surface and intermediate waters, as MOS reduces the downward flux of plankton-derived organic matter by restraining the surface PNPP.
+
+On the other hand, the massive amount of sunken biomass from MOS at the ocean bottom and its subsequent remineralization consumes oxygen and can create large benthic OMZs.
+
+An uncertain factor is the fate of the sunken biomass.
+
+It will affect the benthic fauna by depositing large amounts of organic matter, as well as by expanding low-oxygen regions on the seafloor upon oxygen consumption by remineralization.
+
+Therefore, we performed additional sensitivity simulations focusing on the macroalgal biomass remineralization rate.
+
+When macroalgal biomass does not undergo microbial remineralization, the captured CO 2 can be permanently stored without leakage.
+
+This increases the CDR potential of MOS.
+
+The benthic OMZs created by remineralization of sunken biomass would also be avoided, while the shrinking of intermediate water OMZs persists.
+
+However, other side effects cannot be neglected: in zero-remineralization simulations, the constant removal of nutrients in the surface will impede the recovery of PNPP.
+
+This may eventually affect the marine surface ecology and ocean services such as food provision.
+
+These potential side effects are also noteworthy for another macroalgae farming approach, i.e., harvesting the macroalgae biomass for bioenergy with carbon capture or storage (BECCS) or biochar (Sect. 3.2).
+
+The impacts of MOS on oxygen distributions may also influence the oceanic sources of N 2 O, an atmospheric GHG gas and a major ozone-depleting compound (Ravishankara et al., 2009).
+
+The increased and decreased oxygen levels in the middle and bottom layers impact denitrification and may weaken the N 2 O sources in the subsurface but increase those in the deep waters (Bange et al., 2019).
+
+Moreover, attention should also be paid to the calcification by calcareous macroalgae (if cultivated) and/or associated epibionts that grow on macroalgae.
+
+Bach et al. (2021) have suggested that epibionts living on Sargassum offset 16.5 % of the POC fixed by Sargassum and therefore decrease its natural carbon sequestration potential if the biomass was intentionally sunk for CDR purposes.
+
+These calcification rates and the response to ocean acidification of macroalgae are also species specific (Koch et al., 2013).
+
+These factors need to be investigated with further research if macroalgae are to be considered for ocean-based CDR methods.
+
+The production and export of DOC is also an area of further study for large-scale farmed macroalgae for carbon sequestration.
+
+Macroalgae have been reported to release considerable amounts of DOC and to contribute to the global DOC export from coastal to open-ocean waters.
+
+The estimated global DOC release of macroalgae habitats is 355 Tg C yr -1 (Krause-Jensen and Duarte, 2016).
+
+The averaged DOC release rate by macroalgae is of 23.2 ± 12.6 mmol C m -2 d -1 (equivalent to 8.5 ± 4.6 mol C m -2 yr -1 ) but with a wide range of 8.4 to 71.9 mmol C m -2 yr -1 (Barrón et al., 2014).
+
+If we simply multiply this annual-averaged DOC release rate with the MOS-occupied area (S MOS , Table 5), the estimated annual DOC release by MOS would be 7.1 ± 3.8 PgC (MOS) or 12.9±7.0 PgC (MOS_AU).
+
+Although the refractory DOC released by macroalgae could potentially be an additional contribution of carbon sinking by MOS, the available information on the generation and composition of the macroalgae DOC is not enough to parameterize a model of this process, and more research on the topic is needed (Krause-Jensen and Duarte, 2016;Barrón et al., 2014;Barrón and Duarte, 2015).
+
+Another side effect not investigated here is the production and emission of halocarbons from macroalgae farms.
+
+Macroalgae species have been reported to generate halocarbons in polar, temperate and tropical coastal regions, with a highest producing rate of 6000 pmol CHBr 3 gFW -1 h -1 (Leedham et al., 2013;Baker et al., 2001;Carpenter and Liss, 2000;Latumus, 1995).
+
+These volatile low-molecular-weight halocarbon compounds (e.g., CH 3 I, CHBr 3 and CHCl 3 ) are potent greenhouse gases (Meinshausen et al., 2011).
+
+They also influence stratospheric ozone destruction when transported by deep atmospheric convection into the stratosphere (Ziska et al., 2013;Tegtmeier et al., 2012Tegtmeier et al., , 2013)), therefore enhancing radiative forcing (Ramaswamy et al., 1992;Daniel et al., 1995).
+
+Large-scale MOS cultivation might release a significant quantity of halocarbons.
+
+However, as MOS also reduces global phytoplankton NPP, it is likely that the production of halocarbons by phytoplankton decreases.
+
+Further studies are needed to investigate the possible effects of halocarbon emissions from large-scale macroalgae cultivation and how this is offset by a potential decrease in phytoplankton halocarbon production.
+
+Meanwhile, here, we only discuss the CDR potential of the MOS-AU combination under an idealized situation, where the artificial upwelling (AU) upwells nutrients without changing the ambient water temperature on the surface.
+
+The aim of deploying akin AU to MOS is to assess the maximum potential of CDR, as AU can upwell nutrient-rich deeper water.
+
+However, it can be expected that the NPP of MOS will be slower if the ambient water temperature is reduced by the upwelled cold water, which will further limit the CDR potential of MOS_AU.
+
+Moreover, several dominant side effects due to the upwelled cold water in ordinary AU have been revealed, such as the quick rebound or even surpassing of CO 2 concentrations and surface temperatures after the termination of AU (Oschlies et al., 2010b).
+
+If the cold-water upwelling was included, there would be extra analysis on the associated impacts on planetary radiation budget imbalance, marine biogeochemistry and global carbon pool (e.g., the enhanced terrestrial carbon sequestration due to the cold effects by AU), which are beyond the scope of this study.
+
+Thus, we used the hypothetical AU systems excluding thermal exchange to address the nutrients supplementation of AU to MOS and to avoid the unnecessary complexities and side effects in the meantime.
+
+However, further studies are required if ordinary AU should be considered in association with macroalgae farming.
+
+Besides the CDR effect of MOS, in the case of large-scale deployment, the macroalgae farms are likely to increase the albedo of the oceans' surfaces, especially when they occur near the sea surface (Fogarty et al., 2018;Bach et al., 2021).
+
+Meanwhile, we have not considered possible hydrodynamic impacts on ocean circulation, as the thick macroalgae layers and the farming infrastructures may influence the momentum and mixing of the ambient flow fields (Liu and Huguenard, 2020;Nepf, 2012;Thomas and McLelland, 2015).
+
+The MOS model analysis presented here clearly has some limitations that future studies might improve on.
+
+One of the most critical issues is to improve the realism of the model design by including more representative macroalgae species for various regions.
+
+Another aspect is the consideration of dynamic cellular stoichiometry of macroalgae.
+
+With a better simulation of the cellular quota, we could improve our understanding of the relation of nutrient and carbon fluxes to MOS and the environment.
+
+Explicit consideration of the variable morphology of the macroalgae, as well as of the impacts of currents on frond erosion (Broch and Slagstad, 2012), would also improve the representation of macroalgae loss rates in the model.
+
+Further optimization of deployment timing and location for MOS are achievable by evaluating data from field tests or implementations of macroalgae mariculture in the open oceans.
+
+Another aspect that needs improvement is the modeling of benthic macroalgal biomass remineralization.
+
+Here, we treated macroalgal biomass homogeneously as particulate organic matter.
+
+Though the degradation of macroalgal fragments under deep-sea conditions (e.g., low temperature and unique microbial colonies) remains unclear, it might be different from POC in terms of remineralization rate and oxygen consumption.
+
+Tracking of macroalgae-sequestered carbon will be required to record its fate and possible carbon leakage after sinking (e.g., by an eDNA method to trace macroalgae carbon in marine sediments, such as that by D' Auriac et al., 2021).
+
+The economic perspectives of developing and deploying MOS also need to be investigated.
+
+Furthermore, more research on how largescale macroalgae mariculture will impact human activities (e.g., ocean shipping, fisheries) needs to be undertaken.
+
+Associated legal and political issues regarding the usage of international waters for MOS deployment should be considered as well.
+
+Overall, this study adds to the rapidly expanding field of considering macroalgae cultivation for CO 2 removal.
+
+The evidence from this study suggests that macroalgae mariculture and sinking has a considerable CDR potential under these idealized conditions, but it brings about substantial side effects on marine ecosystems and marine biogeochemistry.
+
+Given this, the concept requires further research with less idealized experimental settings to determine if its CDR benefits outweigh the side effects (Dean et al., 2021).
+
+For the convenience of calculation, we assume that, when MOS occupies a surface grid cell, the area is covered by parallel cultivation ropes (lines) with an interval distance of d (see Table 1 and Fig. A1).
+
+The total length of the cultivation lines (L MOS , in meters) of MOS in the grid cell is then
+
+L MOS = S MOS ÷ d,(A1)
+
+where S MOS (m -2 ) is the area of ocean surface occupied by MOS.
+
+Accordingly, the conversion between macroalgal biomass yield on ropes (Y rope in kg DW m -1 ) or in fields (Y field in kg DW m -2 ) can be calculated as follows:
+
+Y rope = Y field × d. (A2)

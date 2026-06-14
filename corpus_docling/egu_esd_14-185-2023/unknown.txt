@@ -1,0 +1,725 @@
+Carbon Dioxide Removal Via Macroalgae Open-Ocean Mariculture And Sinking: An Earth System Modeling Study
+
+Abstract
+
+Introduction
+
+Methods
+
+Model Description
+
+Modeling Mos In The Uvic Escm
+
+Macroalgae Model
+
+Remineralization Of Sunken Macroalgal Biomass
+
+Biomass sinking is simulated by instantly transferring the macroalgal biomass from the surface grid cell to the deepest grid cell at the respective location at the end of each cultivating period.
+
+This assumes that the harvested biomass could be engineered to sink to the seafloor in a rapid and efficient manner with no remineralization along the way.
+
+Afterwards, the next macroalgae generation will start to grow in the surface layer.
+
+Equation ( 16) calculates the temperature-dependent remineralization rate of sunken macroalgal biomass (µ ma ) following the function of remineralization of detritus in the UVic ESCM (described in Schmittner et al., 2008, Eq. A16).
+
+Remineralization consumes oxygen and returns DIC, PO 4 and NO 3 from the sunken macroalgal biomass to the sea water and is described as
+
+µ ma = µ ma 0 exp (T w /T b ) [0.65 + 0.35 tanh (O 2 -6)] ,(16)
+
+where µ ma0 is the remineralization rate of sunken macroalgal biomass at 0 • C. T w and T b represent the sea water temperature and e-folding temperature of biological rates, and O 2 is the dissolved-oxygen concentration in mmol m -3 .
+
+When the dissolved oxygen is insufficient (< 5 mmol m -3 ), aerobic remineralization will be replaced by oxygen-equivalent, but slower, denitrification via reduction of NO 3 (Keller et al., 2012).
+
+Note that remineralization will cease when NO 3 is also completely consumed.
+
+There are considerable uncertainties concerning the fate of sunken macroalgae (Sichert et al., 2020;Krause-Jensen and Duarte, 2016;Luo et al., 2019).
+
+A sensitivity simulation explores the situation where µ ma 0 is set to zero, which would assume permanent deposition of the sunken biomass on (or in) the seafloor without decaying (Sect. 3.2).
+
+Interactions With Pelagic Microbial Ecosystems
+
+Besides the competition for nutrient resources, the macroalgae canopies may also reduce solar irradiance downward ("canopy shading") and thus limit phytoplankton photosynthesis beneath the macroalgae (Jiang et al., 2020).
+
+Equation (17) (modified from Eq. 14, Keller et al., 2012) describes the shortwave radiation attenuation (I phyt ) through the macroalgae layer, as well as through phytoplankton and water (MOS is not deployed in areas covered by sea ice):
+
+I phyt = I s × e -k w Z-Z 0 (P O +P D )k c ×dZ-k ma ×h ma ×Biomass , (17
+
+)
+
+where k ma , the macroalgae light extinction coefficient (m -1 ), is calculated based on the biomass of macroalgae in carbon as follows:
+
+k ma = a ma × Biomass × MR C:N .(18)
+
+Here, a ma is the macroalgae carbon-specific shading area (m 2 kgC -1 ; Trancoso et al., 2005), h ma is the thickness of macroalgae layer, and MR C:N stands for the molar C : N ratio of macroalgal biomass.
+
+The original NPZD model in Keller et al. (2012) is extended by allowing zooplankton to graze on macroalgae.
+
+Our assumption that zooplankton can graze on macroalgae is based on the notion that the marine biogeochemical component of "zooplankton" in UVic ESCM represents all higher trophic levels, including known macroalgae grazers such as amphipods (Jacobucci et al., 2008), gastropods (Chikaraishi et al., 2007;Krumhansl and Scheibling, 2011), sea urchins (e.g., Yatsuya et al., 2020) and fishes (e.g., Peteiro et al., 2014).
+
+Thus, we included this food web pathway to assess the sensitivity of macroalgae to potential grazers in the ocean, assuming that with large macroalgae farms the pelagic larvae of some grazing organisms like fish or urchins would settle within the farms.
+
+The grazing preference for macroalgae (ψ ma ) is set to 1×10 -4 according to observational studies (Trancoso et al., 2005).
+
+Macroalgae thus provide a grazing option for zooplankton in addition to the traditional NPZD-type model food sources (phytoplankton, diazotrophs, detritus and zooplankton via self-grazing).
+
+Therefore, the four original grazing preferences (0.3 on phytoplankton, 0.1 on diazotrophs, 0.3 on detritus and 0.3 on zooplankton; Keller et al., 2012, Table 1) are reduced by 1 4 ψ ma each.
+
+In the areas where MOS is absent (i.e, in the ice-covered ocean surface), the zooplankton grazing will follow the original description in Keller et al.
+
+(2012, Table 1) without the preference for macroalgae.
+
+No CaCO 3 formation by macroalgae is simulated here (Bach et al., 2021;Macreadie et al., 2017Macreadie et al., , 2019)), as calcareous macroalgae species and epibiont calcifiers are not considered.
+
+Therefore, the only alkalinity impact of growing and remineralizing macroalgae comes via changes in nitrate and phosphate.
+
+Mass Conversions
+
+In order to parameterize and validate the model, it is necessary to convert from commonly measured macroalgae variables (often in wet-and dry-weight units) to the model units.
+
+These conversions include the calculation of carbon and CO 2 sequestered in macroalgal biomass (C ma , gram carbon), as well as the conversions of dry weight (DW, gram) and wet weight (WW, gram):
+
+C ma = Biomass × MR C:N × 12.011, (19
+
+) CO 2ma = C ma × 3.67, (20
+
+) DW = C ma ÷ MR C:DW ,(21)
+
+WW = DW × MR DW:WW ,(22)
+
+where 3.67 is the ratio between the atomic mass of CO 2 (44 g mol -1 ) and carbon (12 g mol -1 ), Biomass is in moles of nitrogen, and 12.011 is the relative molecular weight of carbon (g mol -1 ).
+
+Mos Carbon Retained In The Ocean And Outgassing
+
+The DIC from remineralization of sunken biomass will eventually be conveyed back to the ocean surface and may leak back to the atmosphere.
+
+Equation ( 23) calculates the oceanretained fraction (FR, %) of MOS-captured carbon (MOS-C), where the C captured is carbon in the cumulative sunken biomass, C Sunk Biomass is the carbon in sunken macroalgal biomass that still remains on the seafloor.
+
+FR = C retained C captured = (DIC remineralized + C Sunk Biomass ) C captured(23)
+
+In order to track the leakage of MOS-C after remineralization, a tracer of remineralized MOS-C (MOS_DIC) is added to the UVic ESCM in addition to the original DIC tracer.
+
+MOS_DIC participates in the inorganic ocean carbon cycle (Weaver et al., 2001, Sect.
+
+3e).
+
+When reaching the surface, the outgassing of MOS_DIC will follow the air-sea gas exchange process in UVic ESCM, which is given in Weaver et al. (2001, Sect.
+
+3e).
+
+The air-sea exchange flux of MOS-C is also calculated for analyzing the location and quantity of outgassing.
+
+The results of MOS-C outgassing are shown in Sect.
+
+4.6.
+
+Table 1.
+
+Experiment Design
+
+Deployment Strategies Of Mos
+
+The current study focuses on estimating the maximum carbon sequestration potential of MOS and assumes instantaneous seeding on floating infrastructure in the open ocean.
+
+The macroalgae is represented as a biogeochemical tracer (Eq. 1) that is not subject to physical transports and remains fixed in the top (first) ocean layer of the UVic ESCM, which is assumed to be well mixed.
+
+In our idealized experiments, MOS deployment must fulfill the following requirements:
+
+-The water depth must be ≥ 3000 m; according to the assessment by Reith et al. (2016), leakage of dissolved inorganic carbon added to deep waters (in this case from remineralization of sunken macroalgal biomass) is small at such depths compared to shallower ones.
+
+-The ambient surface NO 3 concentration is greater than Seed plus K N (Table 1); this ensures sufficient nutrients for initial growth, as Seed is directly transferred from dissolved NO 3 , and K N is the half-saturation constant for NO 3 uptake.
+
+Note that in this calculation, Seed has been converted from the unit of kgC km -1 in Table 1, the unit of concentration of nitrogen (mmol N m -3 ).
+
+-It must be spatially located between 57 • N and 72 • S to remain in sea-ice-free waters.
+
+Note that the DIC, N and P components of the initial Seed are directly removed from the inorganic-matter pool of the respective grid box in order to maintain model mass balance and to avoid adding extra nutrients and/or carbon to the ocean at the time of seeding.
+
+During the MOS simulations, the seasonality of temperature and of solar radiation is an essential limiting factor of the primary productivity of MOS in various latitudinal regions.
+
+In order to avoid the unnecessary loss of macroalgal biomass during winter periods when solar radiation is insufficient and when the ambient water temperature is low, we partitioned the global ocean surface into three belts (N, M and S) and pragmatically applied farming strategies according to Table 2.
+
+The period between the seeding and sinking of macroalgae is set as 6 months, from May to October in belt N and from November to the next April in belt S. In belt M, the macroalgae is seeded at the beginning of the year, and sinking occurs after 12 months.
+
+The geographical locations of the three belts are shown in Fig. 2.
+
+The maximum yield of Biomass is set to a constant value of Y max (Table 1).
+
+When the biomass reaches Y max in a grid cell, macroalgae will stop growing and wait for sinking.
+
+After an annual cultivation cycle, the macroalgal biomass is instantaneously delivered to the seafloor, except for a small fraction (equivalent to Seed) that remains at the surface for reseeding.
+
+In some regions where conditions are unfavorable and no net macroalgae growth had occurred during the last cultivation period, the total Biomass will be sunk once without any further re-seeding.
+
+In order to prevent MOS from removing too much atmospheric CO 2 in long-term simulations where emissions eventually reach zero, MOS deployment will be terminated once atmospheric CO 2 concentration hits 280 ppm, assuming that there is no need for more CDR once pre-industrial CO 2 values have been reached.
+
+Sensitivity Studies
+
+As test simulations indicated that the CDR potential of MOS is, in many ocean regions, limited by the availability of nutrients in the surface layer, sensitivity simulations were performed with MOS combined with artificial upwelling (AU) that pumps up nutrient-rich deeper waters to the surface and thereby relaxes nutrient stress and enhances the macroalgae growth.
+
+The simulated MOS-AU system is based on Oschlies et al. (2010b) and Keller et al. (2014).
+
+We placed modeled "pipes" that pump deeper water to the ocean surface in areas where MOS is deployed.
+
+The simulated upwelling works by transferring water adiabatically from the grid box at the lower end of the pipe to the surface grid box at a rate of 1 cm d -1 .
+
+These pipes will function continuously until the termination of MOS (in year 2100 or 3000).
+
+However, because these earlier studies have revealed a dominant effect associated with the low temperatures of the upwelled colder waters, we here concentrate on the nutrient aspect and simulate a hypothetical MOS-AU system that keeps temperatures at ambient levels (e.g., via heat exchangers).
+
+In the simulated AU system, water, together with dissolved tracers, is transferred from the grid box at the lower end of the pipes to the surface grid box, resulting in a model grid box-average upwelling rate (w, set to 1 cm d -1 ; Table 1).
+
+The lower end of the pipes is fixed at a depth of 1000 m. Similarly to the normal MOS simulations without AU, the MOS-AU simulations are deployed from year 2020 and then terminated at either year 2100 in a discontinuous run or at year 3000 in a continuous one (Table 3).
+
+The MOS-AU joint system is deployed using the following strategies: AU pipes will be deployed everywhere with depth ≥ 3000 m and start upwelling immediately.
+
+If surface nutrient concentrations are raised to the initial seeding condition (Sect. 3.1) in any grid box, MOS will be deployed, thereby expanding the range where MOS can grow.
+
+Another model parameter selected for sensitivity studies is the remineralization rate of sunken macroalgal biomass (µ ma , Eq. 16).
+
+µ ma is a critical factor impacting the residence time of MOS-captured carbon in the ocean and associated benthic oxygen consumption by remineralization.
+
+Macroalgal biomass has been reported to be recalcitrant to microbial degradation; however, the fate of macroalgal biomass in the deep sea is uncertain (Krause-Jensen and Duarte, 2016;Luo et al., 2019;Sichert et al., 2020).
+
+Thus, an extreme and idealized situation with µ ma set to zero is tested in sensitivity simulations (MOS-NoRe, MOS with zero mineralization of sunk macroalgal biomass).
+
+This can be thought of as a case where all biomass is permanently buried upon reaching the seafloor.
+
+This sensitivity study can also simulate an extreme case of infinitely slow remineralization, which can help in estimating the range of possible fates of remineralized organic matter.
+
+Meanwhile, this sensitivity study also represents a different macroalgae farming approach -that of harvesting the biomass to create bioenergy with carbon capture or storage (BECCS) or biochar (e.g., Kerrison et al., 2015;Laurens et al., 2020;Roberts et al., 2015), with the assumption that all harvested biomass was permanently removed from the ocean.
+
+While this is a very idealized case, it serves the useful purpose of providing information on how marine biogeochemistry is impacted by the permanent removal of fixed C, N and P.
+
+The stoichiometric C : N ratio of macroalgal biomass (MR C:N ) may also influence the CDR capacity of MOS.
+
+In the current study, the MR C:N (400 : 20, Table 1) is set as 20, nearly 2 times higher than the phytoplankton stoichiometric biomass C:N ratio in the UVic ESCM (C : N=106 : 16, the Redfield ratio).
+
+However, the difference between the macroalgae and phytoplankton stoichiometric C : N ratio may have strong influences on the CDR potential of MOS.
+
+For instance, Bach et al. (2021) have indicated that the CDR potential of a floating-macroalgae (Sargassum) belt may be reduced by 7 % to 50 % due to the nutrient reallocation caused by the variation of gaps of C : N between macroalgae and phytoplankton.
+
+Thus, sensitivity experiments of macroalgal C : N ratios (MOS_Conti_CN High and MOS_Conti_CN Low ) have been performed to investigate the impacts of MR C:N on the MOS CDR capacity.
+
+Results
+
+Evaluation Of Mos
+
+Distribution Of Mos
+
+The red contours in Fig. 2a delineate the occupied area that basically follows the pattern of the simulated NO 3 -rich ocean surface (Keller et al., 2012, Fig. 9;Garcia et al., 2010, WOA2009 Dataset) in the northern and the equatorial Eastern Pacific, as well as in the Southern Ocean.
+
+Except for the coastal regions and Arctic areas, which are not considered for MOS here, the distribution pattern of MOS agrees with the other estimation of potential open-ocean macroalgae farming locations (e.g., Lehahn et al., 2016, Fig. 2a;Froehlich et al., 2019, Fig. 1).
+
+Another powerful limiting factor is the ocean surface temperature (Garcia et al., 2010, WOA2009 Dataset) which is too warm for our idealized species in many places, i.e., temperatures are above the T opt (20 • C) and nearly reach
+
+T max (35 • C).
+
+At the beginning of year 2020, a surface area S MOS of 72 × 10 6 km 2 was selected by the MOS algorithm according to the requirements described in Sect.
+
+3. This is equivalent to a total cultivated rope length (L MOS ) of 7.2 × 10 6 km (Eq. A1, Sect.
+
+A1).
+
+When the macroalgae start to grow and to consume nutrients, regions with nutrient levels insufficient for further growth are gradually abandoned.
+
+By the end of year 2024, the MOS coverage has declined by about 3 % to 69.6 × 10 6 km 2 (Table 4).
+
+Despite the similar distribution patterns, MOS-occupied area (69.6 × 10 6 km 2 , ∼ 19.7 % of the world ocean) is larger than the assessments of ∼ 10 % of the world ocean by   2), which are designed to avoid winter periods.
+
+Lehahn et al. (2016) and ∼ 48 × 10 6 km 2 by Froehlich et al. (2019).
+
+Compared to the static estimation based on historical nutrient levels and temperature suitability (Lehahn et al., 2016, Fig. 2a), the dynamic processes redistributing nutrients, as well as the explicit macroalgae growth module in our simulations, contribute to the simulated larger potential area for MOS, especially in the equatorial Eastern Pacific and the Southern Ocean (Table 3).
+
+Besides, the adequate area for macroalgae cultivation was limited to the Economic Zones (EEZs) delineated by Froehlich et al. (2019) due to limitations of cost and political feasibility.
+
+This constraint has been ignored in the current study.
+
+Thus, our simulated MOSadequate area is 45 % larger than the estimation by Froehlich et al. (2019).
+
+Macroalgae Model Validation
+
+Evaluation Of Mos With Artificial Upwelling (Au)
+
+Mos Deployment Until Year 2100
+
+This section showcases the CDR and climate change mitigation capacities of MOS within the 21st century.
+
+Impacts of MOS on marine biogeochemistry (nutrients, dissolved oxygen and pelagic ecosystem) and global carbon cycles will also be examined.
+
+Cdr & Climate Change Mitigation Capacities
+
+Over the 80 years between year 2020 and year 2100, MOS will mainly be deployed in nutrient-rich regions such as the Southern Ocean and the northern and eastern equatorial Pacific (Fig. B1a), although some contraction of initially occupied areas occurred due to the removal of nutrients.
+
+By the year 2100, MOS (MOS_Stop and MOS_Conti) has sequestered 270 PgC (990 Pg CO 2 ; Table 5), representing ∼ 37 % of the cumulative CO 2 emissions in the RCP 4.5 pathway.
+
+Essentially all of MOS-captured carbon is retained in the ocean over this period as either remineralized dissolved inorganic carbon or organic carbon in the sunken biomass.
+
+The CDR capacity of MOS is sensitive to the MR C:N (molar C : N ratio of macroalgal biomass; Table 1).
+
+Compared to MOS_Conti, the carbon captured by MOS (MOS-C) in MOS_Conti_CN High is raised by 22 % (by the year 2100) and by 19 % (by the year 3000) when the MR C:N is increased by 20 %, to 24.
+
+When the MR C:N is 20 % lower than the original value, MOS-C decreases by 13 % (by the year 2100) and by 18 % (by the year 3000).
+
+Our results agree with the range of CDR potential reduction by nutrient reallocation (7 %-50 %) reported in Bach et al. (2021).
+
+In the model, MOS thus gradually reduces atmospheric CO 2 and thereby also limits global warming with respect to the pre-industrial period ( SAT; Fig. 4); i.e., the temperature increase of 2.14 • C by the year 2100 is 0.38 • C lower than SAT of Control_RCP 4.5 but is still missing the 2 • C target.
+
+When AU is deployed in conjunction with MOS, the CDR capacity and mitigation effects of MOS are enhanced (Figs. 4a,c,5).
+
+By the end of year 2100, 446.8 Pg carbon is sequestered by MOS_AU, an increase of 39.5 % relative to normal MOS.
+
+Correspondingly, MOS_AU successfully achieves the 2 • C target of the Paris Agreement by maintaining a SAT at 1.89 • C relative to pre-industrial (Fig. 4c and Table 5).
+
+As in the run without AU, essentially all of the carbon captured via MOS is stored in the ocean until the end of the 21st century (FR, Table 5).
+
+Global Carbon Cycle Impacts
+
+The net effect of the MOS-induced climate-carbon cycle perturbation is an increase of the oceanic carbon reservoir (C oc ) and a decrease of the atmospheric and terrestrial carbon reservoirs (C atm , C ter ).
+
+MOS enhances oceanic carbon uptake by increasing the atmosphere to ocean carbon flux (Fig. B11), which is driven by the DIC removal by MOS in the oceans' surface layers.
+
+However, the terrestrial carbon reservoir declines (relative to Control_RCP 4.5) in all MOS simulations (Table 5).
+
+The atmosphere-to-land carbon flux is reduced in MOS simulations (Fig. B10).
+
+One cause is the photosynthesis that is reduced by lower CO 2 fertilization of land biota (Keller et al., 2018).
+
+This result is in line with other studies showing that CDR can lead to a weakening and even reversal of natural carbon sinks (Keller et al., 2018).
+
+For instance, by the year 2100 (Table 5), due to the declined terrestrial carbon pool (C ter , -29.7 PgC), the reduction in atmo- spheric carbon pool (C oc , -142.6 PgC) is less than the gain in the ocean (C oc , 171.8 PgC).
+
+Besides, it is also worth noting that the increment of C oc in MOS and MOS_AU is 171.8 and 283.9 PgC, which is less than the cumulative amount of carbon sunk out of the surface layer via MOS by year 2100 (Table 5).
+
+One reason is that the reduced oceanic carbon uptake by declined PNPP (phytoplankton net primary produc-  MOS also impacts the distribution of DIC in the ocean.
+
+The DIC profiles in Fig. 6 illustrate that the general effect of MOS is to move more DIC to a greater depth (z ≥ 3000 m).
+
+By the end of year 2100, MOS simulations show an increased total DIC concentration in the deeper oceans when compared to Control_RCP 4.5 (except for the zero-remineralization sensitivity runs discussed below).
+
+For instance, in the deep Southern Ocean, the DIC concentration is, on average, nearly 80 µmol kg -1 higher than the Control_RCP 4.5 in year 2100 (Fig. 6).
+
+The conjunction of MOS with AU increases average deep-ocean DIC even more.
+
+An example is the simulated increase of DIC in the deep Pacific Ocean and Atlantic Ocean basins by MOS_AU in year 2100 (orange line in Fig. 6, DIC panel).
+
+In contrast, DIC concentrations are reduced in shallower waters (depth <1000 m), as the air-sea carbon flux is unable to fully compensate for the carbon removal by MOS.
+
+The current model results provide additional evidence that the CDR potential of MOS is partly offset by its negative impacts on the pelagic biological production and the biological carbon pump.
+
+In an additional model run (not shown) without MOS but with CO 2 emissions reduced by the annual equivalents of the MOS-induced carbon exports, yielding a total amount of 270 PgC by year 2100, the 270 PgC emissions removal yields a reduction of atmospheric CO 2 by 171.5 GtC by year 2100.
+
+This reduction is 20 % higher than the atmospheric CO 2 reduction of 142.6 PgC realized in the original MOS simulation where the MOS-induced shading and removal of nutrients from the surface layers reduce the biological carbon pump and the associated carbon storage in the ocean.
+
+When CO 2 emissions are instead cut by an amount corresponding to 80 % of the MOS-induced carbon export, atmospheric CO 2 concentrations simulated by the MOS-free emission-cut runs agree closely with those of the respective MOS experiments.
+
+That is, each tonne of CO 2 sequestered in the ocean by MOS is, in our model and on a 100-year timescale, equivalent to an emission cut of about 0.8 t of CO 2 .
+
+Impacts On Global Nutrients Distributions
+
+By the year 2100, the deployment of MOS has changed the global patterns of NO 3 and PO 4 .
+
+At the surface, NO 3 and PO 4 concentrations decrease due to MOS nutrient consumption.
+
+In the deep ocean (depth ≥ 3000 m), PO 4 and NO 3 increase due to the remineralization of sunken macroalgal biomass (except for in the MOS_NoRe simulations).
+
+The largest increase in deep-ocean PO 4 appears in the Southern Ocean, while the smallest increase is found in the Indian Ocean (PO 4 yr2100 groups in Fig. 6).
+
+This is caused by the distribution of MOS in the surface layer, which, in our simulations, occupies large areas in the Southern Ocean but only a relatively small region in the Indian Ocean (Fig. 2).
+
+The remineralization of sunken biomass consumes dissolved oxygen and releases NO 3 and PO 4 .
+
+However, lowoxygen environments and the associated switch from aerobic remineralization to denitrification occupy relatively small ar- The oxygen levels are increased in the mid layers due to the declined downward organic-particle flux (Sect. 4.3.4), but they are decreased in the deep ocean as a result of the remineralization of sunken biomass.
+
+These impacts are strengthened when MOS is deployed continuously and/or in conjunction with AU.
+
+eas so that this impact is not easily detectable in global nutrient profiles.
+
+In addition to the localized depletion of nutrients by MOS, the MOS-induced Southern Ocean uptake and transport of N and P to the deep ocean act as a type of "nutrient trapping" (Fig. B2).
+
+These dynamics thereby reduce nutrients and productivity in middle to low latitudes because less N and P are available to be transported out of the Southern Ocean.
+
+A similar dynamic has been seen in modeling studies of ocean iron fertilization (Oschlies et al., 2010a;Keller et al., 2014).
+
+Impacts On Simulated Pelagic Ecosystems And The Organic Particle Export
+
+In our simulations, large-scale deployment of MOS has an impact on pelagic ecosystems, mainly on phytoplankton NPP (PNPP) and biomass.
+
+In the MOS simulations (MOS_Conti/Stop), globally integrated annual PNPP decreases by 20 % (9.5 PgC yr -1 ) by year 2100 (Table 5).
+
+One reason is the canopy shading effect of the floating macroalgae farms, which reduces downward solar radiation available for the phytoplankton community below.
+
+In addition, there is nutrient competition between macroalgae and phytoplankton.
+
+As shown in Fig. 7a, by the end of the 21st century, PNPP will declined in MOS areas, e.g., the northern and eastern equatorial Pacific and the Southern Ocean.
+
+Intriguingly, in a few regions outside the MOS deployment region, PNPP has increased instead.
+
+For instance, a "halo" of enhanced PNPP can be observed surrounding the eastern equatorial Pacific MOS region (Fig. 7a).
+
+Similar circumstances are simulated in the North Pacific, in the Southern Ocean (60 • E:120 • E, 30 • S) and off the equatorial west coast of Africa.
+
+This PNPP enhancement is sustained by the outflow of residual nutrients from MOS deployment regions (see Fig. B9).
+
+One reason is that the macroalgae growth is constrained by the maximum biomass yield, as described in Sect.
+
+2.2.1.
+
+Macroalgae nutrient uptake thus cannot compensate for the loss of nutrient consumption by light-limited PNPP within the MOS region, which results in enhanced surface nutrients compared to the simulation without MOS, especially when AU supplies additional nutrients to the surface.
+
+In the MOS_AU simulations, the PNPP "halo" can be seen in almost the entire MOS-free ocean surface (Fig. 7b).
+
+The AU fertilization effect enhances the nutrient leakage from the MOS area.
+
+This leads to a higher PNPP in MOS_AU than in the normal MOS simulations (Fig. 7c), but one that is still lower than in the Control_RCP 4.5 run (Fig. 9a1).
+
+Changes in the global particulate organic carbon (POC) export flux generally follow the pattern of PNPP changes (Fig. 9b1).
+
+Thus, when MOS is present, the PNPP reduction results in a weakened POC flux.
+
+Figure 8 illustrates the shift of oceanic NPP from PNPP to MOS_NPP.
+
+In regions where MOS is deployed, 70 % of the total NPP is macroalgae NPP.
+
+The macroalgal NPP is thus nearly twice as high as PNPP.
+
+This may lead to additional ecological and biogeochemical issues.
+
+One of them is the decline of zooplankton led by the reduced PNPP in this study.
+
+We performed an additional simulation, in which the zooplankton grazing on MOS is turned off, and the grazing preferences follow the original settings in Keller et al. (2012).
+
+As shown in Fig. B12, the grazing by zooplankton on MOS has no significant effect on either the zooplankton biomass or the MOS_NPP.
+
+As the zooplankton grazing preference for macroalgae is lower than for phytoplankton, the zooplankton community is still mainly fed by phytoplankton.
+
+Therefore, the decline in zooplankton biomass (Fig. B4) follows the declining phytoplankton biomass trend (Fig. B6).
+
+Impacts On Dissolved Oxygen
+
+The two major impacts of MOS on oceanic dissolved oxygen are as follows: (1) increased deoxygenation at the seafloor by the remineralization of sunken macroalgal biomass (except for in MOS_NoRe) and (2) increased dissolved oxygen at middle depths (e.g., 300 m depth) caused by the reduction of the downward POC flux and the associated decline in oxygen consumption by POC remineralization.
+
+In Control_RCP 4.5, the global oceanic dissolved oxygen inventory decreases throughout the simulation.
+
+The two main driving mechanisms are the reduced solubility in the warming ocean and the decelerating overturning circulation.
+
+The long-term decline of oxygen is especially obvious at depth (1200 m), which is induced by increasing deep-water residence times and the accumulation of respiratory oxygen deficits under global warming (Oschlies et al., 2019;Oschlies, 2021).
+
+As a result of reduced respiration in the upper water column, the size of the oxygen-minimum zone (OMZ) in the eastern tropical Pacific (ETP) shrinks substantially, and the volume of water with O 2 <80 mmol m -3 in the North Pacific even disappears.
+
+In the Southern Ocean, dissolved oxygen increases as well (Fig. 10c).
+
+This is more pronounced when AU is applied (Fig. 10e).
+
+The increase in dissolved oxygen is caused by decreased microbial remineralization of POC, a consequence of the reduced downward POC flux resulting from the inhibition of PNPP in the surface layer (Sect. 4.3.4).
+
+Some decrease in oxygen concentrations occurs in the western Pacific and the Indian Ocean (Fig. 10g), where the surface PNPP is enhanced by the surplus nutrients that leaked out from the MOS-occupied area (see Sect.
+
+4.3.4
+
+and
+
+Fig. 7c).
+
+Figure 10d, f and the O 2 yr2100 panel of Fig. 6 illustrate how MOS changes dissolved oxygen in the deep ocean.
+
+Within the normal MOS simulations, the decline of benthic dissolved oxygen has mainly happened in the Southern Ocean by year 2100, with the appearance of a few new areas with oxygen concentrations of less than 80 mmol m -3 (Fig. 10d).
+
+However, when AU is also deployed, the increased macroalgal biomass sinking and remineralization creates even more benthic low-oxygen zones (Fig. 10f) in the ETP and North Pacific Ocean.
+
+These new locations correspond to MOS-occupied surface areas.
+
+Long-Term Effects Of Mos
+
+Here, we will analyze the long-term effects of hypothetical massive MOS deployment beyond the Paris Agreement timeframe on a millennial timescale.
+
+Even after a simulated continuous millennial-scale deployment, the distribution of MOS in year 3000 is nearly identical to the one in year 2100 with only a minimal decrease in biomass (Fig. B1b).
+
+When deployed beyond the year 2100 (MOS_Conti), MOS will continue to sequester carbon and reduce atmospheric CO 2 on millennial timescales or, in our setup, until atmospheric CO 2 falls back to the preindustrial level of 280 ppm.
+
+The MOS_Conti simulation ultimately sequesters 2533 PgC and decreases atmospheric CO 2 to 318.5 ppm CO 2 by the year 3000 but never achieves the pre-industrial CO 2 level.
+
+Notably, atmospheric CO 2 stops decreasing by year 2780 and rebounds afterwards even though MOS continues to sequester carbon.
+
+This can be explained by a recurrent deep convection in the Southern Ocean around year 2800 that accelerates oceanic carbon leakage back to the atmosphere (Martin et al., 2013;Reith et al., 2016;Oschlies, 2021).
+
+Meanwhile, the leakage of MOS-captured carbon eventually offsets the MOS carbon sequestration (Sect. 4.6).
+
+In the sensitivity simulations MOS_Conti_NoRe and MOS_AU_Conti, atmospheric CO 2 reaches 280 ppm by the years 2820 and 2475, respectively.
+
+After reaching 280 ppm, MOS is stopped, and atmospheric CO 2 increases again as remineralized carbon leaks out of the ocean and as the surface ocean adjusts to the no-MOS situation.
+
+The largest increase in CO 2 is found in MOS_AU_Conti.
+
+Meanwhile, when MOS is deployed (uninterruptedly or till the CO 2 280 ppm trigger), the land carbon uptake is constantly lower than the control level owing to the reduced CO 2 fertilization effect.
+
+Due to the permanent storage of MOS-C in sunken biomass, rebounds of atmospheric CO 2 are relatively gentle in MOS_Conti_NoRe (Fig. B11).
+
+Nevertheless, the atmospheric CO 2 levels in continuous MOS simulations are significantly lower (35 % to 50 % of Control_RCP 4.5) by the end of year 3000.
+
+The side effects of MOS also persist and often grow in magnitude with continuous deployment.
+
+Though PNPP is enhanced around MOS areas by means of nutrient leakage (PNPP "halo"; see Sect. 4.3.4), the global reduction of surface nutrients and local canopy shading by MOS leads to continuous but gentle lowering of global PNPP after the sharp decreases in the initial 20 years (Fig. 9a2).
+
+For instance, in MOS_Conti, PNPP drops by ∼ 60 % by the end of year 3000 (Table 5).
+
+Correspondingly, in MOS_Conti POC export eventually declines by 50 % relative to Control_RCP 4.5 (Fig. 9b2).
+
+In sensitivity run MOS_AU_Conti, the nutrient supply by AU, which initially maintains a higher phytoplankton biomass and NPP than in MOS without AU (Sect. 4.3), declines with time as source waters of the upwelling become reduced in nutrients.
+
+Therefore, PNPP and the POC export levels drop after year 2200 (Fig. 9a2,b2).
+
+The redistribution of DIC and nutrients is intensified in the continuous simulations.
+
+As shown in Fig. 6, when remineralization of MOS sunken biomass is turned on, the Pacific deep ocean and the Southern deep ocean show the highest DIC and PO 4 enrichment by year 3000.
+
+The accumulations depend on ocean circulation (e.g., thermohaline circulation) and the distribution of MOS at the surface.
+
+In MOS_Conti_NoRe, the ocean DIC decreases globally relative to Control_RCP 4.5.
+
+This results from the continuous DIC removal into biomass via MOS with no remineralization.
+
+Another cause of the declined global DIC is the declining downward POC flux owing to the PNPP reduction caused by the declining nutrient levels in the surface layer (see Sect. 4.3.4).
+
+NO 3 enrichment in the deep ocean is considerably smaller than that of DIC and PO 4 because of enhanced denitrification in the developing benthic low-oxygen regions (Sect. 4.3.5, Fig. B3).
+
+In the zero-remineralization situations, deep-ocean PO 4 and NO 3 concentrations decrease compared to the control levels due to the reduced remineralization of POM resulting from the weakened downward flux of POM.
+
+As shown in Fig. 11 and the O 2 yr3000 panel of Fig. 6, dissolved oxygen concentrations at middle depth (e.g., 300 m) increased during millennial MOS deployment due to reduced PNPP and associated downward flux and remineralization of POM in the water column.
+
+In benthic waters, regions with very low dissolved oxygen are shown in Fig. 11f, j in the Pacific and Southern oceans.
+
+In contrast, increased oxygen con-centrations are found in MOS_Conti_NoRe (Fig. 11h), especially in the Atlantic, the Indian and the Southern oceans.
+
+Besides the absence of oxygen consumption by macroalgal biomass remineralization, another reason for these oxygen increases lies in the reduction of POC downward flux described in Sect.
+
+4.3.4.
+
+Termination Effects
+
+After termination of MOS_Stop in year 2100, the atmospheric CO 2 concentrations and SAT (surface-averaged temperature) both rise but generally remain lower than those of the Control_RCP 4.5 simulation (Fig. 4b,d).
+
+More than half (FR ranges from 58.6 % to 64.4 %, Table 5, calculated by Eq. 23) of MOS-captured carbon is still stored in the ocean by the end of year 3000.
+
+As shown in Fig. 4b,d, in the termination simulations MOS_Stop and MOS_AU_Stop, CO 2 concentration and SAT gradually converge against the Control_RCP 4.5 run as a result of DIC from remineralized macroalgal biomass being transported to the ocean surface and into the atmosphere (see subsequent Sect.
+
+4.6).
+
+By year 3000, the atmospheric CO 2 in MOS_Stop is only 28.5 PgC less than in Control_RCP 4.5, while SAT rebounds slightly from -0.38 to -0.23 • C. In MOS_AU_Stop, the differences between pCO 2 and SAT are smaller than the normal MOS, as AU has augmented MOS carbon sequestration, and 64.4 % of it is retained in the ocean.
+
+As expected, the idealized nonremineralization condition (MOS_Stop_NoRe) is able to permanently store the sequestered carbon; thus, the rebounds of CO 2 and SAT are less than the normal MOS_Stop.
+
+In all MOS termination simulations, PNPP and POC export rebound abruptly following the cessation of MOS, but they sharply drop over the subsequent decades (Fig. 7a1).
+
+The sharp increase in PNPP and POC export results from the sudden absence of macroalgae as a main competitor for nutrients and light.
+
+The subsequent decline in PNPP and POC export results from the consumption of the surface nutrients and the lack of subsurface nutrients that had previously been exported directly to the seafloor with the sinking of macroal-gae biomass (Fig. B7).
+
+Afterwards, PNPP recovers gradually due to the slow returning of remineralized nutrients to the upper ocean.
+
+By the year 3000, PNPP in MOS_Stop recovers to 97 % of the control level (Table 5), with the only differences being attributable to the slightly different climate state.
+
+In the MOS_NoRe simulation, the PNPP recovery is slower due to the permanent nutrient removal from the upper water column.
+
+In the MOS_AU_Stop simulation, PNPP rebounds to higher levels than the normal MOS but drops to lower levels afterwards.
+
+The amplified oscillation of PNPP results from the simultaneous termination of AU and MOS: when MOS_AU_Stop is suddenly terminated, the canopy shading and nutrient competition by MOS are removed.
+
+Meanwhile, the surplus of nutrients from AU still remains.
+
+This boosts PNPP rapidly.
+
+However, once these nutrients are consumed, the natural nutrient supply to surface waters is insufficient to maintain the high PNPP.
+
+After the termination of MOS, the rate of oceanic carbon uptake falls abruptly (Fig. B11).
+
+After a short peak caused by the abrupt rebound of PNPP, it remains slightly lower than the control level due to the declined PNPP rates and lower atmospheric CO 2 levels.
+
+Oppositely, the MOS-induced reduction in terrestrial carbon uptake starts to rebound after MOS cessation (Fig. B10) due to the rise of atmospheric CO 2 , which tends to enhance the terrestrial photosynthesis.
+
+When MOS deployment is stopped, the elevated (compared to Control_RCP 4.5) dissolved-oxygen concentrations at middle depth generally decline as the downward POC flux recovers (O 2 yr3000 panel in Fig. 6).
+
+The lowered oxygen concentrations in the deep ocean are also reversible after cessation of MOS.
+
+For instance, by year 3000, the benthic dissolved oxygen of MOS_Stop (Fig. 10d) is similar to that of Control_RCP 4.5 (Fig. 10b).
+
+Leakage Of Mos-Sequestered Carbon
+
+The leakage of MOS-sequestered carbon (MOS-C) occurs mostly in the Southern Ocean (Fig. 12,B5).
+
+The explanation lies in the dynamics of Southern Ocean upwelling, where Pacific deep water (PDW), Indian deep water (IDW) and Antarctic deep water (AADW), laden with DIC of remineralized MOS biomass, reach the subantarctic ocean surface (Talley, 2013;Weber and Bianchi, 2020;Anderson and Peters, 2016).
+
+Moreover, the recurrent deep convection (see Sect.
+
+4.4) in the Southern Ocean around year 2600 accelerates the carbon leakage, which can be observed in Fig. 12 as an enhanced outgassing around year 2600.
+
+The outgassing of MOS-C in discontinuous simulations (e.g., MOS_Stop) starts from year 2100, while the continuous ones starts from year 2300 (Fig. 12).
+
+Thus, by the end of the 21st century, nearly all the MOS-C in all MOS simulations is retained in the ocean.
+
+However, by the year 3000, even in the continuous MOS simulation, only about 75 % of MOS-C remains in the ocean, while the accelerated vertical water transport by AU slightly reduces this portion to 73 %.
+
+In run MOS_Stop, 59 % of MOS-C remains in the ocean by year 3000, whereas the additional sunken macroalgal biomass in MOS_AU_Stop results in more MOS-C (64 %) being retained (Table 5).
+
+When sunken biomass is free from remineralization (NoRe runs), the contained carbon is permanently isolated from the atmosphere and stored in the ocean.
+
+Concluding Discussions
+
+Figure 1.
+
+Schematic illustrating the biogeochemical fluxes and physical impacts of MOS on nutrients (NO 3 and PO 4 ), oxygen, dissolved inorganic carbon (DIC), ordinary phytoplankton (P O in green), diazotrophs (P D in pale brown) and zooplankton (Z).
+
+values reported:0.05∼0.2) Aldridge and Trimmer (2009);
+
+Conover et al. (2016); Van Der Molen et al. sunk macroalgal biomass at 0 • C % d -1
+
+Figure 2.
+
+Annual vertically integrated macroalgae biomass of MOS (a) and MOS-AU (b) in year 2024.
+
+Solid red lines outline the MOSoccupied area at year 2024 in both, while dashed red lines outline the initial MOS seeding area at year 2020 in (a).
+
+The simulated MOS area generally covers the NO 3 -rich ocean surface (a) and can be expanded with nutrients supplemented by AU (b), making it larger than the estimated adequate area for macroalgae in previous studies
+
+Figure 3.
+
+Vertically integrated macroalgae NPP simulated by experiment MOS (solid lines) for year 2024 and with representative Areas I (dark blue circle), II (yellow pentagon) and III (cyan rectangle) highlighted by rectangles with corresponding colors in Fig. 2.
+
+The NPP of macroalgae of experiment MOS_AU (dashed) shows an enhancement of NPP as expected.
+
+Figure 4.
+
+Simulations of (a, b) annual global mean atmospheric CO 2 concentration and (c, d) surface-averaged temperature relative to the pre-industrial (average of year 1850 to year 1900) level of 13.18 • C ( SAT).
+
+Under RCP 4.5 scenario, MOS reaches the 2 • C target in conjunction with AU, while the 1.5 • C cannot be met in all MOS simulations.
+
+Note that MOS is terminated whenever preindustrial concentrations of atmospheric CO 2 are reached, as seen for MOS_AU_Conti (solid orange) and MOS_Conti_NoRe (dotted blue) in (b, d).
+
+Both atmospheric CO 2 and SAT remain lower than control after MOS termination.
+
+Figure 5.
+
+Temporal evolution of globally integrated sunken macroalgal biomass on the seafloor.
+
+Biomass generally increases with fertilization by AU.
+
+In the idealized zero-remineralization simulations, all sunken macroalgal biomass remains on the seafloor, and globally integrated sunken macroalgal biomass shows a monotonous increase.
+
+Figure 6.
+
+Global and basin-wide averaged vertical profiles of various model tracers in year 2100 and year 3000 under the RCP 4.5 emission scenario.
+
+In general, MOS (except for the zero-remineralization one) transports DIC and nutrients in the surface layer to the deep ocean.
+
+The oxygen levels are increased in the mid layers due to the declined downward organic-particle flux (Sect. 4.3.4), but they are decreased in the deep ocean as a result of the remineralization of sunken biomass.
+
+These impacts are strengthened when MOS is deployed continuously and/or in conjunction with AU.
+
+Figure 7.
+
+Vertically integrated annual PNPP in year 2100. (a, b) MOS minus Control_RCP 4.5, with red boundaries contouring the MOS-occupied area; (c) Control_RCP 4.5; (a) illustrates a decline in PNPP in MOS-occupied areas accompanied by a "halo" of enhanced PNPP surrounding MOS areas, particularly in the ETP caused by the leakage of residual nutrients (Sect. 4.3.4).
+
+These impacts on PNPP are amplified in MOS_AU (b).
+
+Figure 8.
+
+Proportion of MOS NPP in the global oceanic NPP by year 2100 (MOS_NPP/(MOS_NPP + PNPP) × 100).
+
+Note that the NPP values are converted to carbon using the respective C : N ratio.
+
+The MOS_NPP generally amounts to more than 70 % of total oceanic NPP where MOS is deployed, indicating an obvious NPP shift from phytoplankton PNPP to MOS_NPP.
+
+Figure 9.
+
+Temporal evolution of globally integrated PNPP (a1, a2); downward POC flux at 2 km depth (b1, b2).
+
+The termination runs branch off of the continuous ones in year 2100 and are identical up to that point.
+
+Through the 21st century, MOS reduces PNPP and POC export due to canopy shading and competition for nutrients.
+
+Obvious rebounds followed by quick decline can be observed right after terminations of MOS.
+
+Figure 10.
+
+Dissolved O 2 concentration distribution in year 2100 at 300 m depth (a, c, e) and at the seafloor (b, d, f); lines delineate boundaries of OMZs at any location within the water column with less than 80 mmol m -3 oxygen (dashed white) and less than 20 mmol m -3 oxygen (solid red).
+
+At 300 m depth, elevated dissolved-oxygen levels in MOS simulations are caused by the decline in POC export (c); exceptions are the reduced oxygen concentrations in regions outside the MOS_AU deployment (e).
+
+On the seafloor, remineralization of sunken biomass creates several new low-oxygen areas (d, f).
+
+Figure 11.
+
+Dissolved O 2 concentrations at depth ∼ 300 m (left panel) and the ocean bottom (right panel) in year 3000: contour lines indicate boundaries of OMZs with less than 80 mmol m -3 oxygen (dashed white) and less than 20 mmol m -3 oxygen (solid red).
+
+Continuous MOS deployment further shrinks the OMZ at 300 m depth (e, g, i) but expands them at the bottom (f, j), except for the zero-remineralization one in (h).
+
+Figure 12.
+
+Zonally averaged MOS-captured carbon outgassing in the simulation (a) MOS_Conti and (b) MOS_Stop.
+
+When conveyed back to the surface, the DIC from MOS remineralization participates in the air-sea exchange (Sect. 2.2.5).
+
+MOS-C outgassing starts in year 2100 when MOS is terminated (a) or after year 2300 when MOS is continuously deployed.
+
+The outgassing mainly happens in the Southern Ocean.
+
+The outgassing is strengthened around year 2800 when a Southern Ocean deep-convection event accelerates the upwelling of deep waters with high concentrations of remineralized DIC (Sect. 4.4).
+
+Figure A1.
+
+Sketch of key features of MOS.
+
+Figure A3.
+
+Temperature optimum curve of the macroalgae in MOS.
+
+Figure B3.
+
+Denitrification rate at depth 3000-6000 m in year 3000, where the oxygen level is lower than 5 µmol m -3 , caused by the remineralization of continuously sunken MOS biomass.
+
+Figure B4.
+
+Plot of global averaged biomass of zooplankton.
+
+Figure B5.
+
+Cumulative (year 2020 to 3000) leakage of MOS-captured carbon in the simulation MOS_Stop.
+
+Figure B6.
+
+Plot of global averaged phytoplankton biomass.
+
+Figure B7.
+
+Plot of upper-ocean 0-2000 m averaged detritus remineralization rate.
+
+Figure B8.
+
+Upper-ocean 3000-6000 m averaged dissolved-oxygen concentrations.
+
+Figure B10.
+
+Global averaged carbon flux from atmosphere to land.
+
+Figure B11.
+
+Global averaged carbon flux from atmosphere to ocean.
+
+Latitudinal division of MOS deployment regions.
+
+Description of the model experiments. "Stop" represents the termination of the simulation in year 2100; "Conti" represents the continuous MOS deployment till year 3000; "AU" represents artificial upwelling; NoRe represents zero remineralization of sunken macroalgal biomass; CN represents the molar C : N ratio of macroalgal biomass (MR C:N in Table1).
+
+MOS_AU_StopAs MOS_AU_Conti, but MOS implemented until year 2100 MOS_Conti_CN High As MOS_Conti, but the MR C:N increases by 20 % from 20 to 24 MOS_Conti_CN Low As MOS_Conti, but the MR C:N decreases by 20 % from 20 to 16
+
+Properties of globally implemented MOS.
+
+Selected areas are from data of year 2024, whereas belt areas are values averaged from 2020 to 2024.
+
+Areal NPP rates and "Biomass yield" refer to the respective MOS area.
+
+The observational data come from the references.
+
+Model simulations under the RCP 4.5 emission scenario.
+
+MOS-C represents the carbon sequestered via MOS.
+
+C

@@ -1,0 +1,65 @@
+Named Entity Recognition (NER) is the task of identifying and typing phrases that contain the names of persons, organizations, locations, and so on.
+
+It is an information extraction task that is im-portant for understanding large bodies of text and is considered an essential pre-processing stage in Natural Language Processing (NLP) and Information Retrieval systems.
+
+NER is successful for languages which have a large amount of annotated data, but for languages with little to no annotated data, this task becomes very challenging.
+
+There are two common approaches to address the lack of training data problem.
+
+The first approach is to automatically generate annotated training data in the target language from Wikipedia articles or from parallel corpora.
+
+The performance of this method depends on the quality of the generated data and how well the language-specific features are explored.
+
+The second approach is to train a model on another language which has abundant training data, and then apply the model directly on test documents in the target language.
+
+This direct transfer technique relies on developing language-independent features.
+
+Note that these two approaches are orthogonal and can be used together.
+
+In this paper, we focus on the second, direct transfer setting.
+
+We propose a cross-lingual NER model which is trained on annotated documents in one or multiple source languages, and can be applied to all languages in Wikipedia.
+
+The model depends on a cross-lingual wikifier, which only requires multilingual Wikipedia, no sentencealigned or word-aligned parallel text is needed.
+
+The key contribution of this paper is the development of a method that makes use of crosslingual wikification and entity linking (Tsai and Roth, 2016;Ji et al., 2015;Ji et al., 2016;Moro et al., 2014) to generate language-independent features for NER, and showing how useful this can be for training NER models with no annotation in the target language.
+
+Given a mention (sub-string) from a document written in a foreign language, the goal of cross-lingual wikification is to find the cor- Figure 1: An example of a German sentence.
+
+We ground each word to the English Wikipedia using a cross-lingual wikifier.
+
+A word is not linked if it is a stop word or the wikifier returns NIL.
+
+We can see that the FreeBase types are strong signals to NER even with imperfect disambiguation.
+
+responding title in the English Wikipedia.
+
+Traditionally, wikification has been considered a downstream task of NER.
+
+That is, a named entity recognizer is first applied to identify mentions of interest, and then a wikifier is used to ground the extracted mentions to Wikipedia entries.
+
+In contrast to this traditional pipeline, we show that the ability to ground and disambiguate words is very useful to NER.
+
+By grounding every n-gram to the English Wikipedia, we obtain useful clues to NER, regardless of the target language.
+
+Figure 1 shows an example of a German sentence.
+
+We use a cross-lingual wikifier to ground each word to the English Wikipedia.
+
+We can see that even though the disambiguation is not perfect, the FreeBase types still provide valuable information.
+
+That is, although "Albrecht Lehmann" is not an entry in Wikipedia, the wikifier still links "Albrecht" and "Lehmann" to people.
+
+Since words in any language are grounded to the English Wikipedia, the corresponding Wikipedia categories and Freebase types can be used as language-independent features.
+
+The proposed model significantly outperforms comparable direct transfer methods on the Spanish, Dutch, and German CoNLL data.
+
+We also evaluate the model on five low-resource languages: Turkish, Tagalog, Yoruba, Bengali, and Tamil.
+
+Due to small sizes of Wikipedia, the overall performance is not as good as the CoNLL experiments.
+
+Nevertheless, the wikifier features still give significant improvements, and the proposed direct transfer model outperforms the state of the art, which assumes parallel text and some interaction with a native speaker of the target language.
+
+In addition, we show that the proposed languageindependent features not only perform well on the direct transfer scenario, but also improve monolingual models, which are trained on the target language.
+
+Another advantage of the proposed direct transfer model is that we can train on documents from multiple languages together, and further im-prove the results.

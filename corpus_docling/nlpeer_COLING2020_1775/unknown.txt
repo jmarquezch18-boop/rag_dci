@@ -1,0 +1,167 @@
+A Linguistic Perspective On Reference: Choosing A Feature Set For Generating Referring Expressions In Context
+
+Abstract
+
+Introduction
+
+Related Work
+
+Corpus And Feature Sets Considered
+
+As stated in section 1, we want to evaluate the features used in various ML SRF studies in a systematic way.
+
+So, we need first to select a collection of feature sets.
+
+Subsection 3.1 describes the criteria for the selection procedure, and provides an overview of the chosen sets.
+
+Afterwards, we explain how we applied the selected feature sets to the OntoNotes corpus (subsection 3.2).
+
+Feature Sets
+
+The criteria to select the feature sets were as follows: we looked for studies that (1) had SRF as their main objective , (2) used a ML method, (3) used an English dataset and (4) applied interpretable features.
+
+We first selected all the feature sets used by the SRF algorithms in the GREC challenges.
+
+We excluded the JUNLG set (Gupta and Bandopadhyay, 2009) because their study was rule-based, and the WLV feature set (Orȃsan and Dornescu, 2009) because we were not able to interpret all their features.
+
+Since the GREC challenges were conducted several years ago, we also examined the more recent literature to include later SRF feature sets satisfying our criteria.
+
+We downloaded the full ACL anthology BibTex file from https://www.aclweb.org/anthology/ and used regular expressions to search manually the expressions of Table 1  We excluded several results because they did not meet the criteria defined above (Zarrieß and Kuhn, 2013;Siddharthan et al., 2011;Stent, 2011;Castro Ferreira and Paraboni, 2017).
+
+Based on the result of the manual search, we included feature sets from the papers by Castro Ferreira et al. (2016) and Kibrik et al. (2016), which together with the GREC feature sets form the seven sets we use in the feature selection experiments.
+
+As a naming convention, the GREC feature sets are called with their names from Belz et al. (2010); the other two feature sets are named after the last name of their first authors.
+
+2008) 21
+
+Table 2: The datasets used in this study.
+
+The first two columns show the number and the name with which the datasets will be referred to.
+
+To provide an overview, we grouped the features into 9 broad categories namely Grammatical role, Inherent features, Referential status, Recency, Competition, Antecedent form, Surrounding patterns, Position and Protagonism explained below.
+
+Throughout this article, REF refers to the current referent and ANTE refers to its coreferential antecedent.
+
+In Tables 34567, the first column, Feature, provides the description of each feature.
+
+The column Type indicates whether the value of the feature is numeric (num), categorical (cat), Boolean (bool) or character (char).
+
+Also, the number [N] next to the Type attribute specifies how many distinct features it encodes.
+
+For instance, "Grammatical role of the 2 nd and 3 rd ANTE" with the type attribute cat[2] refers to 2 categorical features namely "Grammatical role of the 2 nd ANTE" and "Grammatical role of the 3 rd ANTE".
+
+The column DT shows which data sets contain the feature.
+
+Grammatical Role This category contains information about the syntactic position of REF and ANTE.
+
+Type
+
+Applying Feature Sets To The Ontonotes Corpus
+
+This section begins by giving a brief overview of OntoNotes, the corpus used in this study.
+
+Afterwards, the referring expression types used in the prediction task will be explained.
+
+We use the Wall Street Journal portion of OntoNotes (Pradhan et al., 2013) in this study.
+
+One of the reasons why we use this data is that it is annotated with structural information (syntax and predicate argument structure) and shallow semantics.
+
+Also, in order to extract paragraph information, we incorporated the information from the PDTB parser (https://github.com/WING-NUS/ pdtb-parser/tree/master/external/aux_data/paragraphs).
+
+Applying the feature sets to the OntoNotes corpus, 65 distinct features were attained1 .
+
+It is noteworthy that applying the features was not always straightforward.
+
+Particular difficulty was posed for instance by recency features.
+
+To find the distance in words between two mentions, two different approaches were possible: either to keep the punctuation in the counting or to ignore it.
+
+The word distance features in this study take punctuation into the consideration.
+
+After excluding the first and second person referents, we ended up using 30500 referring expressions, divided into 70% training and 30% test sets.
+
+For the referential choice prediction task, we took the intersection of the referring expression categories used in Belz et al. (2010), Kibrik et al. (2016) , andCastro Ferreira et al. (2016).
+
+Hence, the task in the current study is to predict the referential form being pronoun, proper name or definite description.
+
+In this section, we described the feature sets which will be used in our feature selection studies, and explained how we applied them to the OntoNotes corpus.
+
+In section 4, we explain the feature selection experiments for the assessment of the features.
+
+Feature Selection Experiments For Assessing The Features
+
+The Classification Algorithm And The Feature Selection Methods Explained
+
+Building Rf Models For Predicting The Referential Choice
+
+Experiment One: Evaluating The Importance Of The Features Using Rfi
+
+Experiment Two: Evaluating The Importance Of The Features Using Sfs
+
+Experiment Three: Exploring Different Feature Subsets Based On Their Importance
+
+Subsets Of Each Feature Set
+
+The first row of Table 9 with the name original reports on the original accuracy of each model.
+
+Rows top1, top2 and top3 report respectively on performing RF on the first, the first two and the first three features of each feature set with the highest permutation importance (according to Figure 1).
+
+For instance, in the case of OSU, the first two features with the highest permutation importance are {anim, bin3 sent}. The top50% row reports on applying the RF to the top 50% features of each feature set.
+
+The dashed line in Figure 1 shows which features are among the top 50%.
+
+For instance, in case of Kibrik, the top 50% features are {ante form, anim, dist sent, plur, dist par, gender}. Finally, the row sfs reports on applying RF to the subsets chosen in the SFS experiment (Figure 2).
+
+In case of UDeL, for instance, the RF is applied to the feature set {gm, gm p1, bin2 sent, ent num}. Surprisingly, in case of IS-G and OSU, the accuracy of the models solely incorporating SFS features are slightly higher than the original algorithms.
+
+1. We first applied RF to the set of those features with the highest permutation importance in the RFI experiment.
+
+According to Figure 1, the set is {gm, anim, dist sent, ante form}. The accuracy of this model is 0.728.
+
+2. This time, we applied RF to the union of the two most important features of each feature set: {gm, bin2 sent, dist sent, bin3 sent, same ante, ante form, same sent, anim}. The accuracy of this model is 0.723.
+
+Against our expectation, the accuracy of this model is lower than the accuracy of the union of the single most important features.
+
+3.
+
+We applied RF to the union of all the SFS feature sets shown in Figure 2.
+
+The set has 19 distinct features, and the accuracy is 0.779. So far, this is the highest accuracy obtained from the subsetting of the features.
+
+4. Since the subset outlined in item 3 led to the highest accuracy compared to the other subsets, we ran SFS on this feature set to end up with a smaller set of features.
+
+The idea here is to reach an optimal compromise between the number of features (which should be small) and the performance (which should be high).
+
+The features selected by SFS are {gm, ante form, bin3 sent, anim, plur, dist par}. The accuracy of the prediction with the selected subset is 0.776.
+
+We used Bayes Factor analysis with a Bernoulli distribution to determine whether there is evidence for a difference in accuracy levels of less than or greater than 0,05 between the best performing model, Kibrik with the accuracy of 0.793, and the new model.
+
+There is very strong evidence of the accuracies being closer than the threshold, hence being evidentially indistinguishable.
+
+Conclusion
+
+Figure 2: SFS optimal features of each feature set
+
+in the title and abstracts of the articles: Terms used to search for SRF studies
+
+Grammatical features encoded in different datasets.
+
+REF and ANTE respectively refers to the current mention and its antecedent.
+
+Inherent features of a referent It contains features marking the inherent properties of the referents such as semantic category or animacy (anim)[datasets 3, 4, 5 & 7], gender (gender)[5]  and plurality (plur), i.e. whether the referent is plural or singular[5].Antecedent form This feature is concerned with the form of ANTE.
+
+As
+
+Positional features of different feature setsRecency This notion refers to the distance between REF and its ANTE.
+
+Recency features of different feature setsCompetition Features in this category encode the competition between other referents and REF.
+
+Competition features of different feature setsReferential status Features such as whether the referent is new in the sentence (same sent) [datasets Surrounding patterns It has information about the lexical and POS tag of the surrounding tokens.
+
+Surrounding pattern features of different feature sets Protagonism Kibrik et al. (2016) used 2 measurements of protagonism.
+
+One measures the ratio of the chain length of REF to the maximal chain length in the text (protagonism1).
+
+The second one measures the chain length of REF to the sum of all markables in the text (protagonism2).
+
+After trying out different subsets of each feature set, we are now going to explore different combinations of all features based on the results of the RFI and SFS experiments.

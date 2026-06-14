@@ -1,0 +1,17 @@
+This paper proposes a framework for the expression of typological statements which uses real-valued logics to capture the empirical truth value of a formula in a given collection of comparable treebanks.
+
+We demonstrate the application of the framework by evaluating established formulae as well as new formulae generated from a search algorithm.
+
+The components of the framework can be customized: users not working with the Universal Dependencies can simply exchange the data component; the weighting approach we provide can also be easily exchanged.
+
+If a user wants to empirically check their own linguistic features, it is straightforward to obtain the relative frequencies from the treebank collection, complementing existing curated databases such as WALS.
+
+Very little manual work is needed.
+
+Both approaches have their pros and cons: typological knowledge bases could be subjective or incomplete, while data from the treebanks are subject to problems such as annotation inconsistencies, genre differences etc.
+
+This paper discussed some experiments which have the purpose of providing an illustration of the expressiveness of the framework, focusing here on word-order variables.
+
+However, other variables could be expressed as well, and the framework also supports inclusion and combination of variables from completely different sources (e.g. phonological properties of a language), as long as the values range between 0 (false) and 1 (true).
+
+This especially allows using variables from corpora and from typological knowledge bases together.

@@ -1,0 +1,43 @@
+Entities are integral to applications that require understanding natural language text such as semantic search (Inan et al., 2021;Lashkari et al., 2019), question answering (Chandrasekaran et al., 2020;Cheng and Erk, 2020) and knowledge base construction (Goel et al., 2021;Al-Moslmi et al., 2020).
+
+To this end, entity set expansion (ESE) is a crucial task that uses a textual corpus to enhance a set of seed entities (e.g., 'mini bar', 'tv unit') with  new entities (e.g., 'coffee', 'clock') that belong to the same semantic concept (e.g., room features).
+
+Since training data in new domains is scarce, many existing ESE methods expand a small seed set by learning to rank new entity candidates with limited supervision.
+
+Broadly speaking, there are two types of such low-resource ESE methods: (a) corpus-based methods (Shen et al., 2018;Huang et al., 2020a;Yu et al., 2019a) that bootstrap the seed set using contextual features and patterns, and (b) language model-based methods (Zhang et al., 2020a) that probe a pre-trained language model with prompts to rank the entity candidates.
+
+Despite the recent progress, reported success of ESE methods is largely limited to benchmarks focusing on named entities (e.g., countries, diseases) and well-written text such as Wikipedia.
+
+Furthermore, the evaluation is limited to top 10-50 predictions regardless of the actual size of the entity set.
+
+As a result, it is unclear whether the reported effectiveness of ESE methods is conditional to datasets, domains, and/or evaluation methods.
+
+In this paper, we conduct a comprehensive study to investigate the generalizability of ESE methods in low-resource settings.
+
+Specifically, we focus on domains with user-generated text such as reviews.
+
+User-generated text data is abundant and is largely unlabeled.
+
+Enabling NLP applications including semantic search and question answering (Li et al., 2019;Bhutani et al., 2020;Dai and Song, 2019) over user-generated text requires entities mined from these largely unlabeled data.
+
+Furthermore, user-generated text has distinctive characteristics than well-written text, making it appropriate for this study.
+
+Due to lack of benchmarks on usergenerated text, we create new benchmarks from three domains -hotels, restaurants and jobs.
+
+We found that these benchmarks exhibit characteristics (illustrated in Figure 1) distinct from existing benchmarks: (a) multifaceted entities (entities that belong to multiple concepts -e.g., 'venice beach' can belong to concepts location and nearby attractions); (b) non-named entities (entities that are typically noun phrases but not proper names -e.g., 'coffee'); and (c) vague entities (human annotators have subjective disagreement on their concept labels -e.g., 'casino' for nearby attraction).
+
+We explain why these characteristics emerge in user-generated text in Section 3.
+
+We found that user-generated text can have up to 10× more multifaceted entities and 2× more nonnamed entities compared to well-curated benchmarks.
+
+Furthermore, concepts that do not have well-defined semantics result in vague entities.
+
+We use these characteristics to profile ESE methods, showing that the performance difference between well-curated and user-generated text can partially be attributed to these characteristics.
+
+Contributions.
+
+To summarize, our key contributions include: a) identifying and verifying several important new characteristics in user-generated text that are not explored in evaluation of existing ESE methods, b) constructing three new usergenerated text benchmarks (we publicly release two 1 ), c) proposing new metrics for evaluating ESE methods, d) deriving insights through a crossdomain (user-generated text vs. well-curated) comparison study on different ESE methods.
+
+Key findings.
+
+Our main findings are listed below:

@@ -1,0 +1,19 @@
+In this paper, we show an approach for training a model in a language for which only 30 minutes of data are available by making use of articulatory features and language agnostic meta learning.
+
+The main takeaways from our work are as follows:
+
+Articulatory Features for TTS Using articulatory features as the input representation to a TTS system enables the use of multilingual data without the need for increased architectural complexity, such as language specific projection spaces.
+
+It is furthermore beneficial to use even in singlelanguage scenarios, since the knowledge sharing between phonemes makes the TTS system converge much earlier to an usable state during training.
+
+MAML on TTS Applying MAML to TTS does not work well. If we however remove the inner loop, we are able to pretrain a low-resource capable checkpoint for TTS.
+
+This modification not only makes it work, it also simplifies the formulation.
+
+Zero-shot capabilities The use of articulatory features enables zero-shot inference on unseen phonemes.
+
+This is further enhanced by the LAML training procedure.
+
+The implications of this are particularly interesting for codeswitching, as Staib et al. (2020); Wells et al. (2021) have pointed out previously.
+
+Using these two techniques in conjunction could be used to reduce the problem of codeswitching to a problem of token-wise language identification.

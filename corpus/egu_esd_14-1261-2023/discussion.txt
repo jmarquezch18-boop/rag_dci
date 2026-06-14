@@ -1,0 +1,47 @@
+Energy input from wind to ocean surface waves is tremendous and exceeds 60 TW (Wang and Huang, 2004).
+
+A large amount of energy dissipates, which implies stirring and mixing processes in the oceanic mixed layer.
+
+A parameterization scheme for surface wave-induced mixing was proposed, and numerical experiments indicate that this parameterization affects the performance and outcome of ocean circulation models (Qiao et al., 2004(Qiao et al., , 2010;;Xia et al., 2006) as well as climate predictions (Song et al., 2007;Huang et al., 2008).
+
+Although field observations suggest that surface waves can generate vertical mixing (Matsuno et al., 2006), it is still difficult to distinguish the mixing originating from the variety of processes that accompanied ocean waves.
+
+Although the problem of wave-induced vertical mixing is of significant importance for physical oceanographers and climatologists, the research on this subject is still in its infancy.
+
+Waveinduced mixing is a very important process from a practical point of view and is a challenging problem for theoretical investigations.
+
+The understanding of wave-induced mixing is of fundamental importance for the modelling and accurate prediction of ocean transport processes and climate changes.
+
+The problem is that the parameterization scheme applied in the modelling and prediction of ocean surface wave-induced mixing is based on drastic simplifications.
+
+Wave models derived using simplifying assumptions cannot be applied to predict ocean surface wave-induced mixing with sufficient accuracy.
+
+The present studies clearly show that it is necessary to apply at least a weakly nonlinear wave theory to obtain reasonable results (no wave-induced mass transport in linear theory means no heat exchange along the direction of wave propagation), while an increased accuracy is possible using advanced nonlinear wave models admitting higher-order ef-fects.
+
+It should also be noted that in the present studies the effects of turbulence and the development of viscous boundary layers are neglected, while these processes may have some impact on larger timescales.
+
+For example, the mass-transport velocity profile changes due to the effects of viscosity near the boundaries (the undulating free surface and the bottom) for a sufficiently long time interval, which was studied theoretically by Longuet-Higgins (1953) and also investigated experimentally in a wave flume (see e.g. Swan, 1990;Grue and Kolaas, 2017).
+
+There is one more critical outcome from the point of view of engineers and scientists working on the modelling of ocean transport processes, wave-induced mixing and climate changes.
+
+Namely, since it is difficult to distinguish the mixing that accompanied ocean waves, the only chance to provide reliable insight into the wave-induced mixing processes is to conduct laboratory experiments in a wave flume.
+
+The repeatable experiments in the well-controlled environment of a wave flume enable us to perform an accurate investigation that is essential in the analysis of the physics of the waveinduced mixing phenomenon.
+
+Moreover, laboratory investigations provide useful data for the analysis of the correlations between spectral and statistical characteristics of wave regimes and wave-induced mixing processes.
+
+Finally, laboratory experiments enable us to avoid various side effects and separate the mixing from other processes that accompanied ocean waves such as wave breaking.
+
+This is of fundamental importance for understanding of mixing and accurate calibration and verification of numerical models.
+
+The problem is that, in addition to progressive laboratory waves, the moving wavemaker represented by the kinematic wavemaker boundary condition enforces the return current that affects transport processes and wave-induced mixing.
+
+It is the idea behind the present study, which employs a numerical wave flume model, to thoroughly analyse waveinduced mixing effects using the derived numerical approach and assist further works on experimental fluid mechanics aiming at better understanding of transport processes in the open ocean.
+
+To the best of the authors' knowledge, the derived wave-induced mixing approach is the only available numerical solution that, in addition to nonlinear free-surface boundary conditions, also satisfies the kinematic wavemaker boundary condition.
+
+Accordingly, the wavemaker model admits a return current and may be applied to quantify and separate the effects of the return flow on wave-induced mixing processes.
+
+The presented results should hopefully improve simple models based on the Stokes drift applicable to random ocean waves (Myrhaug et al., 2018).
+
+As previously mentioned, the derived modelling framework may be modified to cover open-ocean conditions for the periodic domains and quasi-random sea states using other forms of wave excitation (Paprota, 2019).

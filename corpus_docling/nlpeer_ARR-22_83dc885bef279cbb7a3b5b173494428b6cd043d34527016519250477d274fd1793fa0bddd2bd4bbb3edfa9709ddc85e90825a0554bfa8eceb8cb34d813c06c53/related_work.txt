@@ -1,0 +1,7 @@
+In this section, we first briefly introduce a mainstream NMT framework, Transformer (Vaswani et al., 2017), with a focus on how to generate prediction probabilities.
+
+Then we present an analysis of the confidence miscalibration observed in NMT, which motivates our ideas discussed afterward.
+
+The task of confidence estimation is crucial in realworld conditions, which helps failure prediction (Corbière et al., 2019) and out-of-distribution detection (Hendrycks and Gimpel, 2017;Snoek et al., 2019;Lee et al., 2018).
+
+This section reviews recent researches on confidence estimation and related applications on quality estimation for NMT.

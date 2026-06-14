@@ -1,0 +1,51 @@
+Environmental cost of travel and conferences: It is a well established fact that conferences come with a climate cost (Ciers et al., 2019), which has recently become greater (Pierce et al., 2020).
+
+This has led to calls to reduce or cancel the physical academic conference calendar (Johnson et al., 2020;Reay, 2003;Achakulvisut et al., 2020;Jäckle, 2019;Dwyer, 2013).
+
+The scientific discourse has included measuring and quantifying the emissions costs of conferences and the travel associated with them, from specific events (Astudillo and AzariJafari, 2018), to conference series (Neugebauer et al., 2020), or indeed looking at the total emissions of an entire discipline (Waring et al., 2014;Poom et al., 2017).
+
+Travel is not the only cost associated with academic conferences, or research in general, with one PhD accounting for 21.5 tonnes of CO2-equivalent emissions (Achten et al., 2013), of which 35% was attributed to conferences.
+
+Recent work shows that in France, a typical research lab might dispense 64% of its carbon outputs on conference travel, with the remaining 36% made up mostly of commuting and energy usage (Mariette et al., 2021) In response to the pandemic, many conferences have moved temporarily online.
+
+A meta-analysis of these online conferences showed that a major result of online delivery was a reduction in the registration fee, promoting access (Mubin et al., 2021).
+
+Further, online delivery may allay fears of high travel costs (Raby and Madden, 2021) -as is often the case with top-tier conferences.
+
+The main barrier to online participation is a perception of reduced social (rather than academic) opportunities (Raby and Madden, 2021), although this may be overcome through facilitating interpersonal meetings, and social discussion (Achakulvisut et al., 2020).
+
+It should be noted that whilst travel is unnecessary in virtual conferences, there is still a quantifiable carbon cost due to the infrastructure required (Ong et al., 2012(Ong et al., , 2014;;Faber, 2021).
+
+Academic conferences are not without their benefits and a clear advantage of in-person conferences rather than online is the perceived value in social interaction (Raby and Madden, 2021).
+
+This argu-ment is strengthened by the observation that citation rates are higher for work presented across longer distances (Chalvatzis and Ormosi, 2020).
+
+An important benefit of conferences is providing an opportunity for researchers to interact with peers from diverse cultural, linguistic, demographic and academic backgrounds.
+
+This goal is also recognised within the NLP field.
+
+3The high climate cost of academic conferences has led to policy considerations (Bossdorf et al., 2010), including the adoption of carbon offsetting programmes for participants (Holden et al., 2017), wise choices of locations to reduce the average journey distance (Wenner et al., 2019) and mandated reporting of climate costs for conferences (Cugniere et al., 2020).
+
+Moving towards the adoption of any of these policies would help to begin the mitigation of the environmental impact of academic travel.
+
+Similar discussion has already started in computer science conference communities, e.g. ACM (Pierce et al., 2020).
+
+Environmental cost of ML and NLP research: In the field of ML and NLP, there has been an increasing trend towards openness in reporting of the emissions associated with AI research (Schwartz et al., 2020), especially that using deep learning (Henderson et al., 2020).
+
+Work has also been undertaken to estimate the overall cost of training machine learning (ML) models -taking into account not only the training time, but also the age of the hardware and server location (García-Martín et al., 2019;Lacoste et al., 2019).
+
+There have been a few efforts within our own field of NLP to better understand the impact that modern techniques are having on the environment and specifically to quantify the emissions costs of training ever larger neural networks (Strubell et al., 2019).
+
+Benchmarking of NLP systems in terms of their energy consumption is a viable way to better understand the carbon cost of training such a model (Zhou et al., 2020).
+
+Taking into account factors such as resource utilisation can give a more accurate picture of the energy consumption of NLP models (Cao et al., 2020).
+
+A recent trend in NLP is to create low-resource models that provide sufficient performance.
+
+For example, light transformer models are quicker to train and consequently have a lower carbon footprint (Sanh et al., 2019;Anderson and Gómez-Rodríguez, 2020).
+
+Transfer learning presents an opportunity for massive carbon savings.
+
+If a model can be trained that requires only minimal retraining for various other subtasks, then this prevents further carbon expenditure down the line.
+
+Maximising model reusability is a good strategy for reducing carbon emissions (Kocmi and Bojar, 2020).

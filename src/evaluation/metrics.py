@@ -112,7 +112,7 @@ def compute_bertscore_batch(
 
         preds, refs = zip(*valid)
         bs = bertscore.compute(predictions=list(preds), references=list(refs),
-                               lang="en", device="cpu")
+                               lang="en", device="cuda")
         f1_vals = iter(bs["f1"])
 
         results = []

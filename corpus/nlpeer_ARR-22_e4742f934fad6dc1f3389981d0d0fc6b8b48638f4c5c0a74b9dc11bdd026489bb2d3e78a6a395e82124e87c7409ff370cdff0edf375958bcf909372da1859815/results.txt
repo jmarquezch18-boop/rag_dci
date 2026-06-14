@@ -1,0 +1,81 @@
+For answer structure prediction, we use accuracy to evaluate the model performance.
+
+For answer span prediction, we evaluate in terms of exact match and partial match performance.
+
+Exact match An exact match occurs when a prediction fully matches one of the ground-truth answers, and the F1 score is computed by treating the predicted and ground-truth answer spans as a set of spans.
+
+We use micro-averaged precision, recall, and F1 score for evaluation based on the standard formulation of Precision = T P/(T P +F P ), Recall = T P/(T P + F N ), and F1 = 2 * Precision * Recall /(Precision + Recall), where T P (True Positive) is the number of answer spans correctly predicted by the model, F P (False Positive) is the number of spans incorrectly predicted by the model, and F N (False Negative) is the number of answer spans not predicted by the model.
+
+In the case of an unanswerable question with the expanded dataset, we use a virtual span which indicates no answer.
+
+Partial Match To measure the overlap between the predictions and ground truth answers, we propose the partial match precision, recall, and F1 by treating each predicted span or ground-truth answer span as a string.
+
+In detail, for each pair of prediction p i and ground truth answer t j , we define the partial retrieved score and partial relevant score as the length of the longest common substring (LCS) between p i and t j , divided by the length of p i and t j , respectively, as:
+
+s ret ij = len(LCS(p i , t j ))/len(p i )(8)
+
+s rel ij = len(LCS(p i , t j ))/len(t j )
+
+Suppose there are n predictions and m ground truth answers for a question.
+
+Since we do not know the correspondence between predictions and an- swers, we compute the partial retrieved score between a prediction and all answers and keep the highest one as the retrieved score of the prediction.
+
+Similarly, for each ground truth answer, the relevant score is the highest one between it and all predictions.
+
+The precision, recall, and F1 are finally defined as follows:
+
+Precision = n i=1 max j∈[1,m] (s ij ret ) n (10) Recall = m j=1 max i∈[1,n] (s ij rel ) m (11) F1 = 2 * Precision * Recall Precision + Recall(12)
+
+We use micro-averaged scores for all metrics.
+
+Table 4 shows the dev set results on MultiSpanQA, where the left part is results on multi-span questions only (the basic dataset), and the right part is the results on the expanded dataset (including singlespan answers and unanswerable questions).
+
+Single-span model From the table, we see that single-span (v1) gets very low exact match scores but higher partial match scores (compared to exact match), as it is trained to find a single long span that overlaps with all answer spans.
+
+By comparison, single-span (v2) improves the exact match scores on the basic dataset because it is trained on independent single-span answers.
+
+This is also the reason that:
+
+(1) single-span (v1) always gets a lower score in partial match precision and a higher score in partial match recall compared with single model (v2); and (2) after applying the tuned threshold, singlespan (v2) gets a clear boost while single-span (v1) does not exhibit a substantial change in results.
+
+The overall performance of the single-span baselines is relatively low, simply because the models can only predict a single-span answer, which is incompatible with the MultiSpanQA dataset.
+
+Sequence tagging model Compared to the single-span baselines, the sequence tagging models perform much better.
+
+Without changing the encoder, there is an improvement of over 30 absolute points on the exact match metrics, and about 8 for the partial match F1 metric in MultiSpanQA.
+
+Performance is boosted using joint training with span number prediction and answer semantics prediction.
+
+Our proposed model achieves the best F1 score in most settings.
+
+Another interesting finding is that single-span models usually attain higher precision, while sequence tagging models attain higher recall.
+
+This demonstrates that single-span models are more accurate in the single-span answer they predict, while sequence tagging models predictably tend to make more predictions.
+
+Comparing the two datasets Comparing results on the two datasets, we see that single-span baselines are boosted over the expanded dataset (where we add single-span answers and unanswerable questions), as single-span answers are more tractable for these simpler models.
+
+The relative improvements for sequence tagging models are more modest, but they still have a clear advantage over the single-span baselines.
+
+To explore the difficulty of the MultiSpanQA dataset, we report the dev set results categorised by answer type in Table 5 and categorised by the number of spans in Table 6.
+
+From the answer type perspective, the model performs best on HUMAN questions, followed by OTHER ENTITY and LOCATION (largely following the natural distribution of the respective classes in the dataset).
+
+There is quite a drop for the NUMERIC class, and a big drop again for the DESCRIPTION class, which was also the class our annotators found most difficulty with.
+
+From the perspective of the number of spans, the model performs best on questions with many (> 7) answers.
+
+We think this is because the answers are usually a list of spans with similar semantics, often structured as a simple coordination.
+
+The performance drops as the answer number decreases because the syntactic pattern in which answer spans occurs is less predictable.
+
+Answer Semantics From the answer type perspective, LOCATION answers usually have easily predictable structure, while the structure of NU-MERIC answers is the most difficult to predict.
+
+From the perspective of the number of spans, answers consisting of 4-7 spans are relatively easy to predict and there is no significant difference between answers contain few (2 or 3) spans or many (> 7) spans.
+
+Figure 3 shows the confusion matrix of the answer structure predictions.
+
+We can see that our model tends to predict CONJUNCTION and NON-REDUNDANT, and there are no REDUNDANT or SHARE predictions.
+
+The overall answer structure accuracy is 84.38%, which is slightly higher than the proportion of CONJUNCTION (the majority class) in the dataset.
+
+This suggests that directly applying a simple feedforward network to the pooled encoder output is ineffective for answer semantics prediction, and that this should be an area for future model refinement.

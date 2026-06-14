@@ -1,0 +1,69 @@
+Recent studies have found that press releases issued by research institutions are a major source of exaggeration in science communication, which is later spread to mainstream media (Woloshin and Schwartz, 2002;Brechman et al., 2009;Sumner et al., 2014;Sumner et al., 2016).
+
+Exaggeration in press releases threatens to undermine public trust in science, which is a foundation for the scientific research enterprise.
+
+The influence of press releases on science communication has increased since the 1980s.
+
+With the growing competition for reputation and funding, research institutions are increasingly using press releases as a public relations tool for research promotion (Brechman et al., 2009;Sumner et al., 2014).
+
+At the same time, independent journalism faces financial challenges and staff shortage (Galewitz, 2006;Schwitzer, 2008).
+
+Newspapers, especially small newspapers, rely heavily on press release material to write science news stories (De Semir et al., 1998;Schwitzer, 2008;Woloshin et al., 2009;Taylor et al., 2015).
+
+Prior research also shows that high quality press releases seem to improve the quality of associated news stories (Schwartz et al., 2012).
+
+Since press releases are now the dominant link between academia and news media, the information quality of press releases plays a critical role in communicating science research to the public.
+
+The problem of exaggeration in press releases is particularly severe in health research.
+
+For example, a manual analysis of a sample of UK press releases in health research found that over a third of them contained exaggerated advice, causal claims from correlational findings, or inference of animal studies to humans (Sumner et al., 2014).
+
+The errors and inaccuracies in reporting health research findings may also misinform the public about their conditions, diagnosis, and treatments.
+
+On the other hand, medicine and health are the dominant topic in science news articles.
+
+research outside the health domain was much less covered in science news (Suleski and Ibaraki, 2010).
+
+Therefore, studying exaggeration in the health domain is particularly important for both science communication and public health.
+
+Researchers and media watchdogs such as HealthNewsReview have been conducting manual content analysis to estimate and monitor press release quality (Smith et al., 2005;Cassels and Lexchin, 2008;Schwitzer, 2008;Sumner et al., 2014).
+
+Due to the large number of press releases and scarce funding, this labor-intensive approach is difficult to maintain.
+
+In fact, HealthNewsReview stopped operation at the end of 2018 after a nearly 13-year run.
+
+Manual content analysis is also inadequate for answering important research questions that require large-scale, real-time analyses.
+
+For example, has the exaggeration problem worsened or improved over the years? Do some institutions exaggerate more than others? Seeking answers to these research questions requires developing a computational approach to automatically analyze exaggeration in press releases.
+
+In this study we propose an NLP approach for automatically detecting exaggerated causal claims, one of the most common types of exaggeration, by comparing claims in press releases to the corresponding claims in the original research papers.
+
+An exaggerated causal claim is defined as a causal statement in a press release with a correlational counterpart in the corresponding research paper.
+
+Our study consists of several subtasks.
+
+First, we developed a corpus with paper-press pairs.
+
+Press releases were downloaded from EurekAlert!1 , a nonprofit news-release distribution platform operated by the American Association for the Advancement of Science as a resource for journalists and the public.
+
+Doi links were obtained from EurekAlert! and ScienceDaily to associate the press releases with the original research papers in PubMed.
+
+The corpus includes 64,177 press releases with references to 62,317 PubMed-indexed journal papers.
+
+We then trained a classification model to identify research papers on observational studies; they are designed to establish correlational findings, but are often exaggerated as causal (Woloshin et al., 2009;Sumner et al., 2014;Zweig and DeVoto, 2018).
+
+Focusing on research papers with structured abstracts, in which the sentences in the conclusion subsection were used as main statements in research papers, we identified 15,962 observational studies.
+
+The headline and first two sentences of a press release are considered as its main statements, according to the "inverted pyramid" structure commonly used by news stories.
+
+We then paired the conclusion subsections in the research papers with the main statements in the corresponding press releases for exaggeration analysis.
+
+Some research papers were associated with multiple press releases, resulting in 16,431 paper-press pairs dated from 2008 to October 2020 in the final dataset.
+
+Second, we developed BERT-based sentence classifiers to categorize the main statements in press releases and research papers respectively.
+
+The sentences were classified by their strength as either "direct causal", "conditional causal", "correlational", or "not claim".
+
+Third, by applying the sentence classifiers to the 16,431 paper-press pairs, we were then able to identify the press releases that used direct causal claims to describe correlational findings in observational studies.
+
+Then we used the identified exaggeration cases to answer the following questions: (1) What is the trend of correlation-to-causation exaggeration from 2008 to 2020? (2) Did university press releases make more exaggerated claims than journal press releases?

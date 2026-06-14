@@ -1,0 +1,79 @@
+In this section, we design both sequence-level and token-level tasks to evaluate the approximation performance of our THE-X solution.
+
+We also discuss several identified factors which greatly affect approximation workflow.
+
+GLUE (Wang et al., 2019), the General Language Understanding Evaluation benchmark, is a collection of tools for evaluating the performance of models across a diverse set of existing NLU tasks.
+
+We choose a subset of GLUE 1 tasks, which include: MRPC (Dolan and Brockett, 2005), SST-2 (Socher et al., 2013), QQP 2 , STS-B (Cer et al., 2017), MNLI (Williams et al., 2018), QNLI (Rajpurkar et al., 2016), and RTE (Dagan et al., 2005;Haim et al., 2006;Giampiccolo et al., 2007;Bentivogli et al., 2009).
+
+Following previous work (Devlin et al., 2019;Turc et al., 2019), we exclude the WNLI task from the GLUE benchmark.
+
+We also use the famous CoNLL-2003 (Tjong Kim Sang andDe Meulder, 2003) named entity recognition task as our additional token-level evaluation.
+
+In conclusion, we include the most varieties of NLU tasks, covering both sequence-level and sentence-level tasks, in both regression and classification format.
+
+For computation efficiency and energy-saving consideration, we use the released BERT-tiny (Turc   1 CoLA task is not reported because of the limited capacity of BERT-tiny.
+
+2 https://www.quora.com/profile/Ricky-Riche-2/First-Quora-Dataset-Release-Question-Pairs et al., 2019) as our demo model, which is a standard transformer-based language model with only 2 layers and a hidden size of 128.
+
+We provide four settings to evaluate different parts of our approximation components.
+
+• Baseline.
+
+In this setting, we make no replacement or approximation.
+
+We use the raw pretrained checkpoint to fine-tune on downstream tasks.
+
+• ReLU.
+
+We fine-tune the pre-trained model with all GELU activation replaced with ReLU.
+
+• ReLU-S. In addition to ReLU, we fine-tune the model with the softmax operation replaced by the softmax estimation model.
+
+• ReLU-S-L. We implement full approximation including a layer normalization replacement.
+
+• HE.
+
+We convert the fine-tuned checkpoint with HE-transformer and power the inference with SEAL backend.
+
+Implementation.
+
+To reduce the variance of results under different settings, we choose hyperparameters from a fixed set during approximation fine-tuning and HE inference runtime.
+
+• For fine-tuning the approximation components, we choose a batch size from {4, 8, 16, 32, 128} and a learning rate from 1e-4, 3e-4, 3e-5, 5e-5 as mentioned in the initial bert code (Turc et al., 2019).
+
+We use an Adam optimizer with weight decay chosen from {0.05, 0.1, 0.2, 0.4, 0.5}
+
+• For HE evaluation, we use the HE-transformer backend, where two parameters are recommended searching by Intel, the poly modules and coeff-modules.
+
+We choose the poly modules degree from {1024, 2048, 4096, 8192, 16384} and choose the coeff-modules from {20, 30, 60}.
+
+Table 1 shows the results of the baseline and THE-X on the GLUE benchmark.
+
+The averaged performance reduction of THE-X is 1.48% when compared to the baseline model.
+
+We observe the most performance reduction comes from the approximation of layernorm, which incurs a reduction of 1.08%.
+
+The softmax estimation model contributes the least performance drop among the approximation components, for only 0.09% on average, indicating the softmax function could be well imitated by neural networks.
+
+We also find the average performance reduction of HE is quite negligible, where the slight drop may be due to the sequence truncation.
+
+The results of THE-X on token-level NER task are reported in Table 2.
+
+The replacement of GELU with ReLU even improves the performance of the F1 score.
+
+We assume the slight improvement may come from unexpected bias.
+
+However, the layernorm approximation incurs the most performance reduction.
+
+We assume token-level tasks need a more detailed pattern in attention score.
+
+After all, THE-X still works well in the token-level task with a merely F1 reduction of 1.9%.
+
+Across different types of tasks, we find our THE-X yields the best performance on the classification tasks, including paraphrase, sentiment and NLI.
+
+Among the classification tasks, the performance of QNLI drops the least, for only 0.18%.
+
+We also find the performance drops most on the regression tasks, such as the similarity task STS-B, for 4.44% pearson correlation and 2.69% spearman correlation.
+
+We assume the regression task needs a higher numerical precision than the classification task.

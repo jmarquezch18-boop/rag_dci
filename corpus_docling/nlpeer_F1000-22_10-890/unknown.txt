@@ -1,0 +1,227 @@
+Playing Edcraft At Home: Gamified Online Learning For Recycling Intention During Lockdown [Version 2; Peer Review: 2 Approved]
+
+Abstract
+
+Introduction
+
+Youths As Agents Of Change
+
+Youths between the ages of 15 and 24 comprise 17% of the world's population, and they are the critical agents of change for the future, especially on climate change.
+
+7 Youth has been understood as the responsible group to bring the benefits of society in the world, taking its place in attitudes, behaviours, knowledge and skills.
+
+6 Greta Thunberg, a young climate and environmental activist, continues to lead, promote and motivate young people's awareness and behavioural changes towards pro-environmental actions.
+
+She encourages her followers to use digital platforms for pro-environmental awareness and actions.
+
+8,9 Thunberg's actions have also influenced some Malaysian youths to take climate action locally,
+
+This version has been updated slightly on the abstract, specifically the first two sentences.
+
+The Literature review has added a new section on gamification in learning where it gives an introduction to the gamification domain.
+
+Then, in 2.2, Table 1 has been edited, two columns have been added to the table.
+
+The study type is on the methodology, the recommendation is the potential of gamification in waste management and recycling behaviour.
+
+Following is the conceptual framework whereby the explanation has been added for better coherency.
+
+In Methods, the activity EGL has been explained in detail and a new figure, Figure 2  In 3.1 data analysis, the 6 phases of thematic analysis have been added to show the 6 steps of thematic analysis that has been implemented.
+
+All sections starting from 3.1.1, to 5 have been included with each step from the 6-step thematic analysis.
+
+In section 4.1, themes and categories, all subsections have added some info to further explain the analysis of each theme.
+
+Lastly, in section 5 -implication and conclusion, detail like game elements that contributed to the study and led to recycling intention was explained.
+
+Quantitative research that has been reviewed in Table 1 were discussed which has higher potential to explore the effectiveness of recycling behaviour.
+
+Any further responses from the reviewers can be found at the end of the article such as that taken by Klima Action Malaysia (KAMY).
+
+10 The youth-led green and climate movements have created a new revolution for positive environmental change, as evidenced by their influence and leadership on social media.
+
+Youths As Digital Activists For Positive Change
+
+Youth populations are exposed to vast amounts of information, and multimedia and social media are recognised by these "digital natives".
+
+11 The long hours youth spent online surfing the internet, socialising and playing video games in the virtual world during lockdowns due to the pandemic has increased tremendously.
+
+The long period spent by the youths in the virtual world has created an effective platform to influence their peers through video games and social media.
+
+Studies have shown that youths opt to spend time playing video games online to avoid adverse psychological effects while confined at home during the pandemic.
+
+12,13 Young people should be exposed to positive activities to create an impact for any form of good cause, including pro-environmental initiatives.
+
+The initiatives can be done online, as demonstrated by youth leaders such as Thunberg and KAMY.
+
+Recycling And Gamified Learning
+
+Waste separation and recycling are methods to curb problems associated with environmental hazards.
+
+Recycling is also a way to save economic and environmental resources.
+
+Hence, the importance of recycling behaviour has been studied, and it has been found that one of the most critical factors for achieving the effectiveness of recycling programmes is public participation, 3 which was studied by this research as people's intention to participate in recycling.
+
+Recycling is seen as problematic by some, who may perceive it as time-consuming and something that requires considerable effort.
+
+14,15 Germany and Sweden are among the countries that were positively impacted by their recycling programme in educating and engaging the people in waste separation and reached 90% of active participants in waste separation activity.
+
+16,17 Gamified learning is considered to engage people in recycling, and Table 1, below, shows four different gamified environmental education programmes.
+
+From the findings in Table 1, the common traits of gamified environmental awareness learning are that gamification can potentially influence the adoption of a positive recycling intention.
+
+Some people perceive recycling as a time-consuming activity.
+
+This study will make use of gamification to engage the youth involvement in recycling, and change their "always forgot" and "do not care" attitude towards recycling intention.
+
+5
+
+Conceptual Framework
+
+Methods
+
+Thematic Analysis
+
+Prior To Data Analysis
+
+Coding Assessment
+
+To obtain code consensus from the raters, the degree of agreement scores, 0 and 1, were measured by two raters.
+
+Both raters were trained to perform their task by identifying the target behaviour from the transcripts.
+
+24 According to, 25,26 the value of 0.78 in Table 2 shows the kappa statistics of agreement that were analysed by the IBM Statistical Package for ).
+
+An open source alternative to SPSS is GNU PSPP.
+
+The statistics show substantial or very good agreement relative to the kappa statistics.
+
+Results And Discussion
+
+Themes And Categories
+
+In this section, each theme was listed and reviewed based on the participants' FGD responses as the fourth phase of the thematic analysis.
+
+Insights from the interviews were highlighted to create a progressive construct on the conceptual framework to explore the ideas and meaning from the participants.
+
+All the verbatim were directly quoted from their original meaning.
+
+Engagement From Gamified Learning Activities
+
+When the researcher asked about their engagement in gamified learning activities, two participants think that with gamification applied, they get engaged by the competition and do not want to stay behind the rank.
+
+Participant P said it is crucial not to fall behind and feel ashamed.
+
+Therefore, they tend to work harder: "Yeah I think it is very important if not I will also would like you know so like I actually put more effort." Participant R, too, was engaged because of their friend's ranking and they valued the interaction between peers: "Your friend has a higher ranking and … work a little bit harder to get a higher rank...".
+
+Moreover, participant Temphasise the used of gamification in the activities have engaged him to work towards different challenges.
+
+He stated that "We use game to compare...then it will have missions to work on, then it has the leaderboard from it, and reward, all has it in the Edcraft. I think this fulfills the standard of gameful." Participant T had experienced video games and compared the fun of the gamified learning activity to a video game.
+
+Intrinsic Motivation
+
+Participant K made a strong statement about the accomplishment of the EGL activity: "Yes,  participants' emotions.
+
+They immersed themselves in the activity and felt a sense of pleasure.
+
+Participant O was triggered by the activity and enjoyed the process of making a craft out of unused recyclable items: "After participated the Edcraft … it taught me that bottle can turn into other things..."
+
+I
+
+Extrinsic Motivation
+
+Based on the responses, 8 participants stayed motivated to the end of the activity because they were promised a certification and prizes as rewards for completion.
+
+A reward is a form of extrinsic motivation as a temporary driver for them to recycle for participant J, and the external reward is a boost for the participant to achieve his dream as an artist.
+
+Therefore EGL, giving him a significant boost of motivation from the reward: "I am aiming for the certificate … the cert is very important..." Participant Q mentioned motivation from rewards: "I think after organising Edcraft, it will cultivate the awareness of recycling.
+
+Just like vase they need to create by themselves, need to spend money and expensive.
+
+If use plastic, it looks beautiful and quite practical as well.".
+
+This response shows that the participant appreciates their crafting and shaping their confidence to recycle.
+
+Social Influence
+
+Participants are competitive when they try their best to earn a reward within a challenging environment among a group of friends.
+
+16 of the 29 youths from the FGDs have expressed their thought about the importance of social influence.
+
+Peers influenced each other to reach the same goal, and EGL has shown its social influence in competition: "I think it kind of affects in a positive way for youth … you will feel like want to do better than them." Some participants take competition, points and rankings seriously: "I have some friend, first round only got 11 points then second round same points as me 41 points … they are so serious, persist and not giving up."
+
+They showed a solid feeling for overtaking their friends, and for them, the position in the rank is important for them not to stay behind.
+
+This situation has shown the youths' strong purpose to stay on par with their peers.
+
+Recycling Intention Among Youth
+
+Participant A agreed that habit plays a role in recycling. "That is because they just do it all in habit … we do have like a monthly sort of activity in our community." This clearly demonstrates that Participant A has done recycling for some time and is committed to the activity due to habit.
+
+Likewise, Participant D shows the expression of habit, saying, "every year always got talk about environment and the 3R so that's how we all grew that habit of recycling …" There is a participant who believes that recycling is an activity that needs to be cultivated from an early age, following role models such as teachers, parents and friends.
+
+According to Participant F, "what motivates the young people to do recycling mostly comes from family.
+
+If your family practice then the children would probably just follows."
+
+Two participants mentioned that they need to follow teachers' rules or get punished.
+
+Recycling has been an activity for the sake of rules or orders from elders: "teacher will punish the class which is not doing recycling … the person will receive punishment by sending to recycling center to wash recycling item." This statement clearly shows that they recycle not because of its advantages but to avoid getting punished.
+
+Participant K loved the idea of an online EGL recycling activity: "I think after organising Edcraft, it will cultivate the awareness of recycling … If use plastic, it looks beautiful and quite practical as well." By having EGL, recycling awareness awakened participants' thoughts about having fun recycling, and they have never thought that recycling items that many perceived as "trash" could be crafted into various practical and decorative items.
+
+In the beginning, recycling was a school activity, and punishment was imposed on them as enforcement, but after EGL, the purpose of recycling was clear, and they also learnt to repurpose recycling item instead of throwing it as trash.
+
+Factors Influencing Recycling Intention
+
+Five topics from the FGD based on the codes and categories were finalised and defined the four themes, which is the fifth phase of the thematic analysis:
+
+1) Gameful experience,
+
+2) Intrinsic motivation,
+
+3) Extrinsic motivation, and 4) Social influence.
+
+The four main themes are the main factors influencing recycling intention to address RQ 2.
+
+The responses show that participants were engaged with the activity.
+
+They felt the fun of the video game-like experience and were socially influenced by competition among their friends to get into the action of recycling and recycling intention.
+
+The collected data and themes were used to verify, enrich and create the "flow", referring to the conceptual framework in Figure 1 and factors that influence recycling intention from RQ 1 to address RQ 2, as shown in Figure 3.
+
+The following section will be on the sixth phase of the thematic analysis, where the implication and conclusion were discussed and reported from the above thematic analysis.
+
+Implications And Conclusion
+
+also been added to show the flow of EGL activity.
+
+Previous version Figure 2 is now Figure 3.
+
+Figure 1.
+
+The conceptual framework showing four key themes or concepts related to recycling intention.
+
+Figure 2.
+
+Overview of Edcraft Gamified Learning (EGL) activity flow.
+
+Figure 3.
+
+Verified conceptual framework categorised into four themes.
+
+Suggestions for future quantitative study have been added.
+
+Competing Interests:No competing interests were disclosed.
+
+The benefits of publishing with F1000Research:Your article is published within days, with no editorial bias • You can publish traditional articles, null/negative results, case reports, data notes and more •The peer review process is transparent and collaborative • Your article is indexed in PubMed after passing peer review • Dedicated customer support at every stage • For pre-submission enquiries, contact research@f1000.com
+
+Review of studies of gamified learning research in the recycling area.
+
+Kappa statistics of agreement.
+
+Data file 11 (invitation letter for interrater) Data are available under the terms of the Creative Commons Zero "No rights reserved" data waiver (CC0 1.0 Public domain dedication).
+
+This is an open access peer review report distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited.
+
+Innovation, and Digital Humanities Research Unit, School of Multimedia Technology and Innovation, Universiti Utara Malaysia, Sintok, Malaysia

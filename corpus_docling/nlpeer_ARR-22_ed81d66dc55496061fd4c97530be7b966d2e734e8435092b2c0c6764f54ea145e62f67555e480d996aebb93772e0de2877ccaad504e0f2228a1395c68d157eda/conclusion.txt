@@ -1,0 +1,57 @@
+In this work, we pre-trained token-level contextual representations that are useful for downstream fewshot learning.
+
+Our key idea was to use questionanswer pairs to define what information should be encoded in passage representations.
+
+We showed that these representations are useful for a variety of standard NLP tasks in zero-and few-shot settings, including paraphrase detection, named entity recognition, and sentiment analysis, across nine total datasets.
+
+Looking forward, we hope to see more work on designing pre-training objectives that align with downstream needs for few-shot learning.
+
+"be", "to", "of ", "and", "a", "in", "that", "have", and "I".
+
+These were the top ten words listed on https://en.wikipedia.org/wiki/ Most_common_words_in_English.
+
+We only applied calibration for the main QUIP model, as we did not find calibration to improve results for either LM-BFF or the cross-encoder QA student model.
+
+Table 7 shows EM and F1 scores on the 12 development sets from the MRQA 2019 Shared Task (Fisch et al., 2019).
+
+These are divided into 6 in-domain datasets-HotpotQA (Yang et al., 2018), NaturalQuestions (Kwiatkowski et al., 2019), NewsQA (Trischler et al., 2017), SearchQA (Dunn et al., 2017), SQuAD (Rajpurkar et al., 2016), andTriviaQA (Joshi et al., 2017)-for which corresponding training data was used to train the question generation model and teacher, and 6 out-of-domain datasets-BioASQ (Tsatsaronis et al., 2015), DROP (Dua et al., 2019), DuoRC (Saha et al., 2018), RACE (Lai et al., 2017), RelationExtraction (Levy et al., 2017), and TextbookQA (Kembhavi et al., 2017)-for which no training data was used in the QUIP pipeline.
+
+QUIP improves over training the bi-encoder directly on the MRQA data by an average of 4.4 F1 on the in-domain datasets and 12.7 F1 on the outof-domain datasets.
+
+It underperforms the crossencoder teacher by about 5 F1 on both the indomain and out-of-domain datasets on average.
+
+We experimented with some design decisions that did not materially affect our results.
+
+Here, we report these findings as evidence that our basic recipe is stable to many small changes.
+
+First, we concatenated the representations of all passages in the same batch and on the same GPU together (9 passages on average), and trained the model to extract answers from this larger pseudo-document; this effectively adds in-batch negative passages, as in Lee et al. (2021).
+
+Second, we trained the model to match the argmax prediction of the teacher, rather than its soft distribution over start and end indices.
+
+Finally, we used a two-stage beam search to generate questions.
+
+For a given passage, we generated 20 possible answers via beam search, chose 10 of these to maximize answer diversity, then generated one question for each answer with another beam search.
+
+Our goal was to ensure diversity by forcing Label SST-2 Example (rationale in bold) -"for starters , the story is just too slim ." "paid in full is so stale , in fact , that its most vibrant scene is one that uses clips from brian de palma 's scarface ." "( e ) ventually , every idea in this film is flushed down the latrine of heroism ." "corpus collosum -while undeniably interesting -wore out its welcome well before the end credits rolled about 45 minutes in ." "makes for a pretty unpleasant viewing experience ." "while ( hill ) has learned new tricks , the tricks alone are not enough to salvage this lifeless boxing film ." "it 's hampered by a lifetime-channel kind of plot and a lead actress who is out of her depth ." "dull , lifeless , and amateurishly assembled ." "the movie is what happens when you blow up small potatoes to 10 times their natural size , and it ai n't pretty ." "every time you look , sweet home alabama is taking another bummer of a wrong turn ." + "though only 60 minutes long , the film is packed with information and impressions ." "good old-fashioned slash-and-hack is back !" "with tightly organized efficiency , numerous flashbacks and a constant edge of tension , miller 's film is one of 2002 's involvingly adult surprises ." "displaying about equal amounts of naiveté , passion and talent , beneath clouds establishes sen as a filmmaker of considerable potential ." "' easily my choice for one of the year 's best films . '" "a delectable and intriguing thriller filled with surprises , read my lips is an original ." "it is great summer fun to watch arnold and his buddy gerald bounce off a quirky cast of characters ." "the film will play equally well on both the standard and giant screens ." "for this reason and this reason only -the power of its own steadfast , hoity-toity convictions -chelsea walls deserves a medal ." "there 's a wickedly subversive bent to the best parts of birthday girl ."
+
+Table 12: Rationales (in bold) extracted by the zero-shot QUIP sentiment analysis model for SST-2.
+
+We show ten random examples for each label on which the model made the correct prediction.
+
+Label MR Example (rationale in bold) -"strangely comes off as a kingdom more mild than wild ." "feels like the work of someone who may indeed have finally aged past his prime . . . and , perhaps more than he realizes , just wants to be liked by the people who can still give him work ." "watching the powerpuff girls movie , my mind kept returning to one anecdote for comparison : the cartoon in japan that gave people seizures ." "this is a movie so insecure about its capacity to excite that it churns up not one but two flagrantly fake thunderstorms to underscore the action ." "witless , pointless , tasteless and idiotic ." "the next big thing's not-so-big ( and not-so-hot ) directorial debut ." "unfortunately , it's also not very good .
+
+especially compared with the television series that inspired the movie ." "irwin and his director never come up with an adequate reason why we should pay money for what we can get on television for free ." "with this new rollerball , sense and sensibility have been overrun by what can only be characterized as robotic sentiment ." "the video work is so grainy and rough , so dependent on being 'naturalistic' rather than carefully lit and set up , that it's exhausting to watch ." + "the appearance of treebeard and gollum's expanded role will either have you loving what you're seeing , or rolling your eyes .
+
+i loved it ! gollum's 'performance' is incredible !" "droll caper-comedy remake of " big deal on madonna street " that's a sly , amusing , laugh-filled little gem in which the ultimate " bellini " begins to look like a " real kaputschnik . "" "katz uses archival footage , horrifying documents of lynchings , still photographs and charming old reel-to-reel recordings of meeropol entertaining his children to create his song history , but most powerful of all is the song itself " "a thunderous ride at first , quiet cadences of pure finesse are few and far between ; their shortage dilutes the potency of otherwise respectable action .
+
+still , this flick is fun , and host to some truly excellent sequences ." "compellingly watchable ." "an unbelievably fun film just a leading man away from perfection ." "andersson creates a world that's at once surreal and disturbingly familiar ; absurd , yet tremendously sad ." "the invincible werner herzog is alive and well and living in la" "you can feel the heat that ignites this gripping tale , and the humor and humanity that root it in feeling ." "this is a terrific character study , a probe into the life of a complex man ."
+
+Table 13: Rationales (in bold) extracted by the zero-shot QUIP sentiment analysis model for the Movie Reviews (MR) dataset.
+
+We show ten random examples for each label on which the model made the correct prediction.
+
+Label CR Example (rationale in bold) -"i 've tried the belkin fm transmitter unit with it & it worked well when i set it on top of a portable radio , but was awful trying to use in the car which is somewhat of a disappointment ." "but the major problem i had was with the software ." "after a week i tried to load some more songs and delete a few but the auto load didn 't do anything but turn on my player ." "2 . the scroll button is n 't the best , as it sometimes can be hard to select ." "iriver has a better fm receiver built in , but the drawback to iriver products is they are flimsy and poorly constructed ." "i would imagine this is a problem with any camera of a compact nature ." "the pictures are a little dark sometimes ." "the depth adjustment was sloppy ." "the instructions that come with it do n 't explain how to make things simple ." "my " fast forward " button works , but it takes a little extra pressure on it to make it go ." + "i did not conduct a rigorous test , but just took some identical shots in identical lighting with both cameras , and the canon won hands down ." "as a whole , the dvd player has a sleek design and works fine ." "i , as many others , have waited for many years for the convergence of price , features , size and ease of use to hit that happy center point ." "+ i had no problem using musicmatch software already on my computer to load songs and albums onto this unit" "apex is the best cheap quality brand for dvd players ." "i chose this one because from what i read , it was the best deal for the money ." "the two-times optical zoom operates smoothly and quietly , and lo and behold , a two-piece shutter-like cap automatically slides closed over the lens when you turn the camera off ." "this camera is perfect for the person who wants a compact camera that produces excellent photos in just about any situation ." "it was easy enough to remove the front plate , and there was only one way the battery could be inserted ." "i have been very impressed with my purchase of the sd500 i bought it at the beginning of the month as the ultimate pocket camera and have shot 300 images so far with it ."
+
+Table 14: Rationales (in bold) extracted by the zero-shot QUIP sentiment analysis model for the Customer Reviews (CR) dataset.
+
+We show ten random examples for each label on which the model made the correct prediction.

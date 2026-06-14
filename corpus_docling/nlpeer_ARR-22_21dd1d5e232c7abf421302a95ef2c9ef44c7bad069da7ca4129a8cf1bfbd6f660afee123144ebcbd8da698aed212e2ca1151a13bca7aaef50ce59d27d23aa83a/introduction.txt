@@ -1,0 +1,31 @@
+Natural language understanding (NLU) refers to the ability of a system to 'comprehend' the meaning (semantics) and the structure (syntax) of human language (Wang et al., 2019) to enable the interaction with a system or device.
+
+Cross-lingual natural language understanding (XNLU) alludes to a system that is able to handle multiple languages simultaneously (Artetxe and Schwenk, 2019;Hu et al., 2020).
+
+We focus on task-oriented XNLU that comprises two correlated objectives: i) Intent Classification, which identifies the type of user command, e.g. 'edit_reminder', 'send_message' or 'play_music' and ii) Entity/Slot Recognition, which identifies relevant entities in the utterance including their types such as dates, messages, music tracks, locations, etc.
+
+In a modular dialogue system, this information is used by the dialogue manager to decide how to respond to the user (Casanueva et al., 2017;Gritta et al., 2021).
+
+For neural XNLU systems, the limited availability of annotated data is a significant barrier to scaling dialogue systems to more users (Razumovskaia et al., 2021).
+
+Therefore, we can use cross-lingual methods to zero-shot transfer the knowledge learnt in a high-resource language such as English to the target language of choice (Artetxe et al., 2020;Siddhant et al., 2020).
+
+To this end, we introduce a variety of alignment methods for zero-shot cross-lingual transfer, most notably CrossAligner.
+
+Our methods leverage unlabelled parallel data and can be easily integrated on top of a pretrained language model, referred to as XLM1 , such as XLM-RoBERTa (Conneau et al., 2020).
+
+Our methods help the XLM align its cross-lingual representations while optimising the primary XNLU tasks, which are learned only in the source language and transferred zero-shot to the target language.
+
+Finally, we also investigate the effectiveness of simple and weighted combinations of multiple alignment losses, which leads to further model improvements and insights.
+
+Our contributions are summarised as follows:
+
+• We introduce CrossAligner, a cross-lingual transfer method that achieves SOTA performance on three benchmark XNLU datasets.
+
+• We introduce Translate-Intent, a simple and effective baseline, which outperforms its commonly used counterpart 'Translate-Train'.
+
+• We introduce Contrastive Alignment, an auxiliary loss that leverages contrastive learning at a much smaller scale than past work.
+
+• We introduce weighted combinations of the above losses to further improve SOTA scores.
+
+• Qualitative analysis aims to guide future research by examining the remaining errors.

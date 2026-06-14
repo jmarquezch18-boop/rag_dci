@@ -1,0 +1,5 @@
+We formulate the problem of hypernym prediction as a sequence generation task, where the sequences are taxonomy paths in WordNet.
+
+Our experiments with encoder-decoder models show that training to generate taxonomy paths can improve the performance of direct hypernym prediction.
+
+As a simple but powerful model, the hypo2path model achieves state-of-the-art performance, outperforming the best benchmark by 4.11 points in hit-at-one (H@1).

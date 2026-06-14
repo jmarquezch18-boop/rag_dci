@@ -1,0 +1,37 @@
+In order to know which trait is most important for each essay set, we run a series of ablation tests.
+
+For each essay set, we ablate one essay trait at a time before scoring the essay.
+
+Table 5 reports the results of the ablation test.
+
+The values in the table correspond to the drop in performance in scoring the essay holistically.
+
+We find that the Content is the most important essay trait for 3 of the essay sets.
+
+Prompt Adherence and Word Choice are the most important traits for 2 of the essay sets where they are scored.
+
+As we have seen, the MTL model generally helps over the STL model when it comes to holistic essay scoring, especially if there is no well-defined rule (Example: Holistic Score = Sum of trait scores) for scoring the essay holistically.
+
+A possible scenario where STL could help over MTL is if the holistic score is a well-defined function of the trait scores AND the STL system can predict the trait scores with a good deal of accuracy.
+
+The essay sets corresponding to Prompts 7 & 8 are two such essay sets, where the overall score is a function of the individual trait scores.
+
+To verify this, we ran the experiments in a pipelined manner -first scoring the essay traits, then calculating the holistic score using the predicted trait scores and comparing it with the gold standard holistic scores.
+
+We found no difference in QWK for Prompt 7 (a QWK of 0.796 vs. 0.795), but a much lesser performance with Prompt 8 (a QWK of 0.684 vs. 0.699) as compared to our MTL-based system.
+
+One of the main reasons for this is due to the poor performance in predicting the trait scores as single tasks.
+
+We also ran experiments to see how much resources and time our approaches will take.
+
+Table 6 gives the total training time (in hours).
+
+The total training time is the total time taken to train our system to score the essay holistically as well as all the traits in that essay set for all 100 epochs.
+
+We also report the speed-up when using the MTL approach as compared to the STL approach.
+
+From our results, we observe a 2.30 to 3.70 speed-up in using the MTL models as compared to using the STL models.
+
+The BERT-STL experiments ran for about 5 days (113 hours).
+
+We also report the average number of training

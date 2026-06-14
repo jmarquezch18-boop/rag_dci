@@ -1,0 +1,91 @@
+In this paper, we have presented a novel MM-Claims dataset to foster research on multimodal claim analysis.
+
+The dataset has been curated from Twitter data and contains more than 3000 manually annotated tweets for three tasks related to claim detection across three topics, COVID-19, Climate Change, and Technology.
+
+We have evaluated several baseline approaches and compared them against two state-of-the-art fake news detection approaches.
+
+Our experimental results suggest that the fine-tuning of pre-trained multimodal and unimodal architectures such as ALBEF and BERT yield the best performance.
+
+We also observed that the overlaid text in images is important in information dissemination, particularly for claim detection.
+
+To this end, we evaluated a couple of strategies to incorporate OCR text into our models, which yielded a much better trade-off between identifying visuallyrelevant and visually-irrelevant (text-only) claims.
+
+In the future, we will explore other and novel architectures for multimodal representation learning and other information extraction techniques to incorporate individual modalities better.
+
+We also plan to investigate fine-grained overlaps of concepts and meaning in image and text, and expand the dataset to COVID-19 related sub-topics and specific climate change events.
+
+In the following we include additional hyperparameter (A.1) details and experimental results (A.2), additional dataset and annotation process details (A.3), and some annotated tweets for multimodal claim detection (A.4).
+
+For fine-tuning BERT and ALBEF, we use a batch size of 16 and 8 (size constraints), respectively.
+
+We train the models for five epochs and use the best performing model (in terms of accuracy on the validation set) for evaluation.
+
+For BERT, a dropout with the ratio of 0.2 is applied before the classification head.
+
+Further, we use AdamW (Loshchilov and Hutter, 2019) as the optimizer with a learning rate of 3e -5 and a linear warmup schedule.
+
+The learning rate is first linearly increased from 0 to 3e -5 for iterations in the first epoch and then linearly decreased to 0 for the rest of the iterations in 4 epochs.
+
+For ALBEF, we use the recommended fine-tuning hyper-parameters and settings from the publicly available code.
+
+We experiment with CLIP's three variants that use different visual encoder backbones, ResNet-50 (RN50), ResNet-50x4 (RN504) and a vision transformer (ViT-B/16) (Dosovitskiy et al., 2021) with BERT as textual encoder backbone.
+
+We select the models for textual and multimodal SVM experiments based on the performance (higher accuracy) using features from the visual encoders.
+
+Table 5 shows different visual encoders' features (with SVM) performance on binary and tertiary claim detection.
+
+It should be noted that just like ALBEF, CLIP models can be fine-tuned with image-text tweet pairs for binary and tertiary tasks.
+
+However, when we experimented with fine-tuning the last few layers of CLIP with a classification head on top, it always performed worse than using extracted features for classification with SVM.
+
+This phenomenon is probably because of our relatively smaller sized labeled dataset, which is not enough for fine-tuning CLIP for the task.
+
+A.2.2 Results for "without conflicts" (E) Evaluation Split
+
+In Section 4, we show results for tertiary claim detection (TCD) on evaluation splits "with resolved conflicts" (E C ) by training on T and T C .
+
+Here in Table 6, we show the evaluation on "without conflicts" evaluation split (E).
+
+As with evaluation on E C , multimodal models are more sensitive to training on T C where conflict resolution strategy causes the accuracy to drop for all models.
+
+However, CLIP and ALBEF models, in this case, have higher F1-score (as well as accuracy) when trained on T .
+
+Even with less training data, the models perform better and best among all evaluated multimodal models.
+
+In the case of training on T C , BERT performs the best, which is closely followed by ALBEF with OCR text.
+
+As described in section 4.3.1, the evaluation of retrieved visually-relevant and visually-irrelevant claims on E follows the evaluation on E C .
+
+Even though CLIP I and fine-tuned BERT retrieves the most amount of two types of claims, all models do better when trained on T C than on T .
+
+Overall, for a realistic scenario, training on T C gives the best performance trade-off between Acc, F1 and retrieved claims for multimodal models.
+
+Following the results on E C in section 4 for binary and tertiary tasks, we show normalized (by row) confusion matrices based on predictions from the ALBEF ⊕ OCR ⊕ F T model.
+
+Figure 3a is the confusion matrix on E C for binary claim detection (BCD).
+
+Whereas, Figure 3b shows the matrices on E C with training on T C (b.1) and T (b.2).
+
+Although the not-claim's true positives remain the same, confusion for the not-check-worthy and check-worthy class is less severe when trained on T C .
+
+Additional results on evaluation split without conflicts (E).
+
+The underlying models are trained for binary claim detection (BCD).
+
+The labels for visual relevance are only used for retrieval evaluation.
+
+The amount of text that can be detected from an image varies, as it can be seen in Figure 8.
+
+As a consequence, we experimented with the length of OCR text in terms of the number of words for both binary and tertiary claim detection with ALBEF.
+
+We observe (see Figure 5) that 128 words give 0.83 0.17  The following Table 9 shows split-wise distribution of topics and labels in data.
+
+Numbers in red and black are for "with resolved conflicts" and "without conflicts" splits, respectively.
+
+Although we crawl tweets from topic-based corpora, we further filter tweets by manually marking top 300 hashtags (sorted by occurrence) relevant to the topic.
+
+Figure 7 shows top-20 relevant hashtags for each topic.
+
+Figure 7d shows the annotation screen with the image-text pair, claim questions and a text box for feedback on difficult and missing image tweets.
+
+We included multiple annotated samples corresponding to visually-relevant claim (see Figure 8) and not a claim (see Figure 9) classes.

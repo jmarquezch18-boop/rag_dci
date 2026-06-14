@@ -1,0 +1,25 @@
+The progress in natural language processing (NLP) brought by deep learning is often narrated as removing assumptions about the input data and letting the models learn everything end-to-end.
+
+One of the assumptions about input data that seems to resist this trend is (at least partially) linguistically motivated segmentation of input data in machine translation (MT) and NLP in general.
+
+For NMT, several papers have claimed parity of character-based methods with subword models, highlighting advantageous features of such systems.
+
+Very recent examples include Gao et al. (2020);
+
+Banar et al. (2020); Li et al. (2021).
+
+Despite this, character-level methods are rarely used as strong baselines in research papers and shared task submissions, suggesting that character-level models might have drawbacks that are not sufficiently addressed in the literature.
+
+In this paper, we examine what the state of the art in character-level MT really is.
+
+We survey existing methods and conduct a meta-analysis of the input segmentation methods used in WMT shared task submissions.
+
+We then systematically compare the most recent character-processing architectures, some of them taken from general NLP research and used for the first time in MT.
+
+Further, we propose an alternative two-step decoder architecture that unlike standard decoders does not suffer from a slow-down due to the length of character sequences.
+
+Following the recent findings on MT decoding, we evaluate different decoding strategies in the character-level context.
+
+Many previous studies on character-level MT drew their conclusions from experiments on rather small datasets and focused only on quantitatively assessed translation quality without further analysis.
+
+To compensate for this, we revisit and systematically evaluate the state-of-the-art approaches to character-level neural MT and identify their major strengths and weaknesses on large datasets.

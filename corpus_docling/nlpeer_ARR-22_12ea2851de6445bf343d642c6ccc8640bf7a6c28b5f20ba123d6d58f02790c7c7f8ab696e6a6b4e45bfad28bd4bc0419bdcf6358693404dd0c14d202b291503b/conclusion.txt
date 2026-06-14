@@ -1,0 +1,111 @@
+In our extensive literature survey, we found evidence that character-level methods should reach comparative translation quality as subword methods, typically at the expense of much higher computation costs.
+
+We speculate that the computational cost is the reason why virtually none of the recent WMT systems used character-level methods or mentioned them as a reasonable alternative.
+
+Recently, most innovations in character-level modeling were introduced in the context of pretrained representations.
+
+In our comparison of character processing architectures (two of them used for the first time in the context of MT), we showed that 1D convolutions followed by highway layers still deliver the best results for MT.
+
+Character-level systems are still mostly worse than subword systems.
+
+Moreover, the recent character-level architectures do not show advantages over vanilla character models, other than improved speed.
+
+To overcome efficiency issues, we proposed a two-step decoding architecture that matches the speed of subword models, however at the expense of a further drop in translation quality.
+
+Furthermore, we found that conclusions of recent literature on decoding in MT do not generalize for character models.
+
+Character models do not suffer from the beam search curse and decoding methods based on sampling perform poorly, here.
+
+Evaluation on competitively large datasets showed that there is still a small quality gap between character and subword models.
+
+Character models do not show better domain robustness, and only slightly better morphological generalization in German, although this is often mentioned as important motivation for character-level modeling.
+
+The only clear advantage of character models is high robustness towards source-side noise.
+
+In contrast to earlier work on character-level MT, which claimed that decoding is straightforward and which focused on the encoder part of the model, our conclusions are that Lee-style encoding is comparable to subword encoders.
+
+Even now, most modeling innovations focus on encoding.
+
+Character-level decoding which is both accurate and efficient remains an open research question.
+
+Here, we describe details of the architecture of the two step decoder shown in Figure 3.
+
+The input of the decoder are hidden states of the character processing architecture, i.e., for a downsampling factor s, a sequence that is s times shorter than the input sequence.
+
+The output of the Transformer stack is a sequence of the same length.
+
+For each Transformer decoder state h i , the decoder needs to produce s characters.
+
+This is done by a light-weight autoregressive LSTM decoder.
+
+In each step, it has two inputs: the embedding of the previously decoded character and a projection of the decoder state h i .
+
+There are s different linear projections for each of the output character generated from a single Transformer state.
+
+At inference time, the LSTM decoder gets one Transformer state and generates s output characters.
+
+The characters are fed to the character processing architecture, which is in turn used to generate the next Transformer decoder state.
+
+We used the tst2010 part of the dataset for validation and tst2015 for testing and did not use any other test sets.
+
+The data sizes are presented in Table 4.
+
+All models are trained with initial learning rate: 5 • 10 -4 with 4k warmup steps.
+
+The batch size is 20k tokens for both BPE and character experiments with update after 3 batches.
+
+Label smoothing is set to 0.1.
+
+Lee-style.
+
+The character embedding dimension is 64.
+
+The original paper used kernel sizes from 1 to 8.
+
+For ease of implementation, we only use even-sized kernels up to size 9.
+
+The encoder uses 1D convolutions of kernel size 1, 3, 5, 7, 9 with 128, 256, 512, 512, 256 filters.
+
+Their output is concatenated and projected to the model dimension, followed by 2 highway layers and 2 Transformer feed-forward layers.
+
+CANINE.
+
+The local self-attention span in the encoder is 4× the downsampling factor, in the encoder, equal to the downsampling factor.
+
+Two-step decoder.
+
+The decoder uses character embeddings with dimension of 64, which is also the size of the projection of the Transformer decoder state.
+
+The hidden state size of the LSTM is 128.
+
+The validation BLEU and chrF scores and training and inference times are in Table 5.
+
+The training times were measured on machines with GeForce GTX 1080 Ti GPUs and with Intel Xeon E5-2630v4 CPUs (2.20GHz), a single GPU was used.
+
+Note that the experiments on IWSLT were not optimized for speed and are thus not comparable with the times reported on the larger datasets.
+
+We use the Transformer Big architecture as defined FairSeq's standard transformer_wmt_en_de_big_t2t. The Lee-style encoder uses filters sizes 1, 3, 5, 7, 9 of dimensions 256, 512, 1024, 1024, 512.
+
+The other parameters remains the same as in the IWSLT experiments.
+
+We set the beta parameters of the Adam optimizer to 0.9 and 0.998 and gradient clipping to 5.
+
+The learning rate is 5 • 10 -4 with 16k warmup steps.
+
+Early stopping is with respect to negative log likelihood with patience 10.
+
+We save 5 best checkpoints and do checkpoint averaging before evaluation.
+
+The maximum batch size is 1800 tokens for the BPE experiments and 500 for character-level experiments.
+
+We train the models on 4 GPUs, so the effective batch size is 4 times bigger.
+
+During training, we evaluated the models by measuring the cross-entropy on the validation set.
+
+After model training, we use grid search to estimate the best value of length normalization on the validation set.
+
+The translation quality on the validation data is tabulated in Table 6.
+
+The detailed results on the MorphEval benchmark are in Tables 7 (Czech) and 8 (German).
+
+The details of the noise evaluation are in Table 9.

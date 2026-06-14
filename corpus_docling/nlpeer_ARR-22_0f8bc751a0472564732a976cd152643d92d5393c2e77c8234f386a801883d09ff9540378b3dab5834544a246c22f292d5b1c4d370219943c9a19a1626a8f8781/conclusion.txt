@@ -1,0 +1,57 @@
+We propose a simple yet effective method of inducing constituency trees which is the first of its kind in achieving performance comparable to the supervised binary tree RNNG model and setting a new state-of-the-art result for unsupervised parsing using weak supervision.
+
+Our model generalizes to multiple languages of known treebanks.
+
+We have done comprehensive linguistic error analysis showing a step-by-step breakdown of the F 1 performance for the inside model, inside model with self-training, and the inside-outside model with a co-training-based approach.
+
+The effectiveness of our multi-view learning strategy is evident in our experiments.
+
+Future work could aim to augment the parser's capabilities to investigate cross-domain generalization and efficient cross-lingual transfer.
+
+We use the Adam optimizer and, on the bootstrapped dataset, fine-tune roberta-base consisting of default 125M trainable parameters with a learning rate 3e -5, batch size 32, maximum epochs 10, maximum sequence length 256, and gradient checkpointing for all our models.
+
+The values were chosen as default based on sequence classification tasks on the GLUE benchmark5 as mentioned in HuggingFace Transformers.
+
+6 We use a train/validation random split of 80/20 on the bootstrapped dataset which contains 100,000 sentences (50,152 for the distituent class and 49,848 for the constituent class) to monitor the validation loss and perform early stopping.
+
+The average sentence length is about 22 tokens.
+
+Note that the development set of PTB is kept untouched.
+
+We set the patience value at 2.
+
+Model checkpointing, as well as logging, is carried out after every 100 steps.
+
+We use a p3.8xlarge AWS instance with a single GPU having 64 GB memory to conduct all our experiments.
+
+The estimated training time for the inside model is about 0.2h, inside model with self-training (3 iterations) is about 12h, and insideoutside model with co-training (2 iterations) is about 18h.
+
+While the inference time for all the models is roughly 1h.
+
+For the Chinese monolingual experiment, we use bert-base-chinese which is trained on cased Chinese Simplified and Traditional text, and for Japanese monolingual experiment, we use cl-tohoku/bert-base-japanese which is trained on Japanese Wikipedia available at https://huggingface.co/models.
+
+Training Data We tried several strategies to augment the distituent class for our models, but without concrete gains.
+
+Some of those include word deletion (randomly selects tokens in the sentence and replace them by a special token), span deletion (Same as word deletion, but puts more focus on deleting consecutive words), reordering (randomly sample several pairs of span and switch them pairwise) and substitution (sample some words and replace them with synonyms).
+
+-6 7-11 12-16 17-21 22-26 27-31 32-36 37-41 42-46 47-51 52-56
+
+As shown in Figure 5, the final model with cotraining identifies constituents from shorter sentences (WSJ-10) much more precisely compared to the rest of the models.
+
+There is a lower performance in F 1 around sentence length of 50-55 zone, but that improves for longer sentences.7
+
+Self-training boosts the performance of the inside model by 5.5 F 1 points as shown in Table 5.
+
+As can be seen, the effect of the initial set of candidate constituents and distituents on the final performance is 55.9 F 1 which is not insignificant.8
+
+After co-training, the performance of the insideoutside joint model increases by 1.7 F 1 points as shown in Table 6.
+
+Compared to using self-training, one of the reasons the benefit is not significant may be attributed to the fact that the inside vectors (built upon Transformer architecture) inher- according to the majority gold labels in that cluster.
+
+These 14 assigned phrase types correspond with the 14 most frequent labels.
+
+, the parser correctly identifies constituents "the new post" and "of world-wide advanced materials operations" which were earlier identified as by the inside model (a).
+
+It makes two errors due to crossing brackets -namely "of vice president", "the new post of vice president", and "the new post of vice president of world-wide advanced materials operations". , the parser correctly identifies constituents "十四点四一亿元", "新增贷款十四点四一亿元", and "去年新增贷款十四点四一亿元" compared to the previous step using the inside model (a).
+
+It only makes 3 errors due to crossing brackets at "贷款 十四点四一亿元", "年增加八亿多元", and "上年增加八亿多元". , the parser correctly identifies constituents "そんな に", "私 を", "*hearer* そんな に 私 を *を* 信じ られ ない ならば", "*pro* よろしい", "この 市", and "この 市 に", while incorrectly tagging "セリヌンティウス という 石工 が" as a distituent compared to the previous step using the inside model (a).

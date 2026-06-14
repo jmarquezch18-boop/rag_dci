@@ -1,0 +1,3 @@
+Background: Low completion rates of questionnaires in randomised controlled trials can compromise the reliability of the results, so ways to boost questionnaire completion are often implemented.
+
+Although there is evidence to suggest that sending a text message to participants increases completion, there is little evidence around the timing or personalisation of these text messages.

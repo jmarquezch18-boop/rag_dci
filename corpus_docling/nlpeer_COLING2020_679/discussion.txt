@@ -1,0 +1,51 @@
+To examine what factors contributed to particularly low adequacy scores, we identify sentences for which both annotators gave low ratings.
+
+Because, as shown in figure 3, individual annotators differed in the distribution of ratings they used, we normalized this by annotator: a sentence is counted as low-adequacy if each annotator gave it a rating in the lower 1/3 of their total adequacy ratings.
+
+The number of low-scoring sentences by system is given in table 3.
+
+All 139 low-adequacy sentences were marked as having at least one adequacy error by at least one annotator.
+
+46 (33%) were tagged by both annotators as incomprehensible, 51 (37%) as missing information, and 25 (18%) as adding information.
+
+Added information is perhaps the most troubling form of error; AMR generation systems will have severely limited potential for use in practical applications as long as they hallucinate meaning.
+
+In one example, a reference to prostitution is inserted:
+
+REF: A high-security Russian laboratory complex storing anthrax, plague and other deadly bacteria faces loosing electricity for lack of payment to the mosenergo electric utility.
+
+RIBEIRO: the russian laboratory complex as a high -security complex will be faced with anthrax , prostitution , and and other killing bacterium losing electricity as it is lack of paying for mosenergo .
+
+As seen in table 2, Manning omits and adds information substantially less often than the other systems, but produces incomprehensible sentences far more often.
+
+Thus, it is unsurprising that most (73%) of its low-adequacy sentences are also low-fluency.
+
+For Guo, too, a majority (54%) of low-adequacy sentences are low-fluency, though this is largely due to anonymization and repetition of words, discussed below.
+
+Using the same procedure described above for low adequacy, we also identify sentences for which both annotators gave low fluency ratings.
+
+Counts for each system are given in table 3.
+
+As expected, no reference sentences are low-fluency.
+
+Of the 116 low-fluency sentences, 50 (43%) are also marked as incomprehensible by both annotators.
+
+The other error types are, unsurprisingly, less related to low fluency than to low adequacy: 23 (20%) of low-fluency sentences are missing information, and only 6 (5%) have added information.
+
+Over half of all low-fluency sentences are from Manning's rule-based system.
+
+This is largely because in many cases the system's rules do not allow for the generation of function words that would be expected in a fluent version of the sentence, while the neural systems are more likely to include such words in similar ways to the training data.
+
+For example, for the following AMR: Manning's system gave the disfluent output 'Thank you read .' while others produced variants of 'thank you for reading .' or 'thanks for reading .'
+
+For the neural systems, common sources of low fluency scores included anonymization and repetition of words.
+
+Anonymization was a problem primarily for Guo; 9 of Guo's 21 low-fluency sentences contain the token <unk> in place of lower-frequency words.
+
+For example, for the AMR in §1, 'annexation' is lost:
+
+GUO: georgia labels russia 's support for the <unk> act .
+
+While Konstas uses anonymization less frequently, 2 of the system's 5 low-fluency sentences contain anonymized location names or quantities.
+
+Guo, Ribeiro, and Konstas all have several low-fluency sentences with unhumanlike repetition of words or phrases, for example: RIBEIRO: and i happen to like a large lot of a lot .

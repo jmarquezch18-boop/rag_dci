@@ -1,0 +1,189 @@
+A Flexible Multi-Task Model For Bert Serving
+
+Abstract
+
+Introduction
+
+Related Work
+
+Method
+
+Single Task Partial Fine-Tuning
+
+In the first step, we partial fine-tune for each task an independent copy of BERT.
+
+The exact number of layers L to fine-tune is a hyper-parameter and may vary across the tasks.
+
+We propose to experiment for each task with different value of L within range N min L N max , and select the one that gives the best validation performance.
+
+The purpose of imposing the search range [N min , N max ] is to guarantee a minimum degree of parameter sharing.
+
+In the subsequent experiments on GLUE tasks (see Section 4.3), we set N min = 4 and N max = 10.
+
+This step produces a collection of single-task models as depicted in Fig. 1(a).
+
+We shall refer to them as single-task teacher models, as they are to be knowledge distilled to further reduce the memory and computation overhead.
+
+Single Task Knowledge Distillation
+
+Since there is no interaction between the tasks, the process of knowledge distillation (KD) can be carried out separately for each task.
+
+In principle any of the existing KD methods for BERT (Wang et al., 2020;Aguilar et al., 2020;Sun et al., 2019a;Jiao et al., 2020;Xu et al., 2020a) suits our needs.
+
+In preliminary experiments we found out that as long as the student model is properly initialized, the vanilla knowledge distillation (Hinton et al., 2015) can be as performant as those more sophisticated methods.
+
+Assume that the teacher model for task τ ∈ T contains L (τ ) fine-tuned layers at the top and 12 -L (τ ) frozen layers at the bottom.
+
+Our goal is  to compress the former into a smaller l (τ ) -layer module.
+
+The proposed initialization scheme is very simple: we initialize the student model with the weights from the corresponding layers of the teacher.
+
+More precisely, let N s denote the number of layers (including both frozen and task-specific layers) in the student, where N s < 12.
+
+We propose to initialize the student from the bottommost N s layers of the teacher.
+
+Similar approach has also been used in (Sanh et al., 2019), where the student is initialized by taking one layer out of two from the teacher.
+
+The value of l (τ ) , i.e. the number of task-specific layers in the student model for task τ , determines the final memory and computation overhead for that task.
+
+Model Merging
+
+Experiments
+
+Metrics
+
+The performance metrics for GLUE tasks is accuracy except for CoLA and STS-B. We use Matthews correlation for CoLA, and Pearson correlation for STS-B.
+
+To measure the parameter and computational efficiency, we introduce the total number of transformer layers that are needed to perform inference for all eight tasks.
+
+For the models studied in our experiments, the actual memory usage and the computational overhead are approximately linear with respect to this number.
+
+It is named "overhead" in the header of Table 2.
+
+Baselines
+
+The baseline models/methods can be divided into 4 categories:
+
+Single-task without KD.
+
+There is only one method in this category, i.e. the standard practice of single task full fine-tuning that creates a separate model for each task.
+
+Single-task with KD.
+
+The methods in this category create a separate model for each task, but a certain knowledge distillation method is applied to compress each task model into a 6-layer one.
+
+The KD methods include (Hinton et al., 2015;Xu et al., 2020b;Sanh et al., 2019;Turc et al., 2019;Sun et al., 2019b;Jiao et al., 2020;Wang et al., 2020).
+
+Multi-task learning.
+
+This category includes two versions of MT-DNN (Liu et al., 2019b(Liu et al., , 2020)), both of which produce one single multi-task model.
+
+1) MT-DNN (full) is jointly trained for all eight tasks.
+
+(Liu et al., 2020).
+
+Round bracket (x, y) indicates that the underlying task model before merging consists of x frozen layers and y task-specific layers (fine-tuned or knowledge-distilled).
+
+In the "Layers" column, notation 7 + 2 × 8 implies that in the final multi-task model there are 7 shared frozen layers and 2 task-specific layers for each of the 8 task.
+
+It corresponds to the idea scenario where all tasks are known in advance.
+
+2) MT-DNN (LOO), where "LOO" stands for "leave-one-out", corresponds to the scenario where one of the eight tasks is not known in advance.
+
+The model is jointly pre-trained on the 7 available tasks.
+
+Then an output layer for the "unknown" task is trained with the pre-trained weights frozen.
+
+Flexible multi-task.
+
+Our models under various efficiency constraints.
+
+Ours (w/o KD) means that no knowledge distillation is applied to the task models.
+
+The number of fine-tuned layers for each task is selected according to the criterion described in Section 3.1.
+
+Ours (KD-n) means that knowledge distillation is applied such that the student model for each task contains exactly n task-specific layers.
+
+For Ours (mixed), we determine the number of task-specific layers for each task based on the marginal benefit (in terms of task performance metric) of adding more layers to the task.
+
+More precisely, for each task we keep adding task-specific layers as long as the marginal benefit of doing so is no less than a pre-determined threshold c. In Table 2, we report the result for c = 1.0.
+
+Results with other values of c can be found in Appendix D.
+
+Results
+
+Discussions
+
+Advantages
+
+One major advantage of the proposed architecture is its flexibility.
+
+First, different tasks may be fed with representations from different layers of BERT, which encapsulate different levels of linguistic information (Liu et al., 2019a).
+
+This flexibility is beneficial to both task performance and efficiency.
+
+For instance, on QQP we achieve an accuracy of 91.0, outperforming all KD baselines with merely one task-specific layer (connected to the 2nd layer of the frozen backbone model).
+
+Second, our architecture explicitly allows for allocating uneven resources to different tasks.
+
+We have redistributed the resources among the tasks in ours (mixed), resulting in both greater performance and efficiency.
+
+Third, our framework does not compromise the modular design of the system.
+
+The model can be straightforwardly updated on on a per-task basis.
+
+Limitations
+
+Comparison With Adaptor-Based Approaches
+
+Conclusion
+
+Figure1: Pipeline of the proposed method.
+
+(a) For each task we train separately a task-specific model with partial fine-tuning, i.e. only the weights from some topmost layers (blue and red blocks) of the pre-trained model are updated while the rest are kept frozen (gray blocks).
+
+(b) We perform knowledge distillation independently for each task on the task-specific layers of the teacher models.
+
+(c) The student models are merged into one MT model so that the frozen layers of the former can be shared.
+
+Figure2: A comparison of the task performance between vanilla initialization (initialize from pre-trained BERT) and teacher initialization as described in Section 3.2 for n ∈ {1, 2, 3}, where n is the number of task-specific layers in the student model.
+
+Dev results on GLUE datasets obtained with partial fine-tuning.
+
+The parameter L indicates the number of fine-tuned transformer layers.
+
+For each dataset and for each value of L, we always run the experiment 5 times with different initializations and report the maximum dev result obtained.
+
+The best result in each column is highlighted in bold face.
+
+Shaded numbers indicate that they attain 99% of the best result of the col-
+
+A comparison of performance and overhead between our approach and various baselines (see §4.2 for more details).
+
+The performance is evaluated on the dev set.
+
+To obtain the results labeled as "Ours", we always run the experiment 5 times with different initializations and report the maximum.
+
+The best result in each column is highlighted in bold face.
+
+Shaded numbers indicate that they attain 99% of the Full fine-tuning baseline.
+
+Results of
+
+Number of examples for training and development in GLUE datasets.
+
+Results with various values of c. This parameter controls the performance-efficiency trade-off of the overall multi-task model, in the sense that we allow the growth of an existing task module by one more taskspecific layer only if that would bring a performance gain greater than c.
+
+The total computation budget was discussed in Section 5.2.
+
+C2. Did you discuss the experimental setup, including hyperparameter search and best-found hyperparameter values? Yes, it is provided in the Section 4 and Appendix B. C3.
+
+Did you report descriptive statistics about your results (e.g., error bars around results, summary statistics from sets of experiments), and is it transparent whether you are reporting the max, mean, etc. or just a single run? Yes, we explicitly stated in the caption of Table 1 and Table 2 that our results are the maximum over 5 independent runs.
+
+Detailed results are also reported in Appendix C. C4.
+
+If you used existing packages (e.g., for preprocessing, for normalization, or for evaluation), did you report the implementation, model, and parameter settings used (e.g., NLTK, Spacy, ROUGE, etc.)? We did reuse the WordPiece implementation from BERT's repository https: //github.com/google-research/bert for tokenization.
+
+We did not report this as we consider it as a trivial matter.
+
+D. Did you use human annotators (e.g., crowdworkers) or research with human subjects?

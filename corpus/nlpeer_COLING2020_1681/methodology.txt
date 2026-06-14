@@ -1,0 +1,17 @@
+We use a transformer model for all experiments and train a sentence-level model as a baseline.
+
+The context-aware model in our experimental setup is a concatenation model (Tiedemann and Scherrer, 2017) (concat) which is trained on a concatenation of consecutive sentences.
+
+concat is a standard transformer model and it differs from the sentence-level model only in the way that the training data is supplied to it.
+
+The training examples for this model are modified by prepending the previous source and target sentence to the main source and target sentence, respectively.
+
+The previous sentence is separated from the main sentence with a special token <SEP>, on both the source and target side.
+
+This also applies to how we prepare the ContraPro and Contracat data.
+
+We train the concatenation model on OpenSubtitles2018 data prepared in this way.
+
+We remove documents overlapping with ContraPro.
+
+Preprocessing details and model hyper-parameters are presented in the Appendix.

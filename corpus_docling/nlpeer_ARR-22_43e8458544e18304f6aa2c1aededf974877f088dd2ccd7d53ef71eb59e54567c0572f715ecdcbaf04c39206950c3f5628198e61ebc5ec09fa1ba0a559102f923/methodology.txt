@@ -1,0 +1,61 @@
+To be able to answer the questions that motivate this work, we need certain data about the research process, in particular regarding the location of researchers' affiliations and conference venues.
+
+Since no such single source of information existed, we decided to combine publicly available resources to create a new dataset containing the information we required.
+
+The process we used to create this resource is detailed below:
+
+Data structure: A publication is an independent piece of research presented to the community as a journal article or a presentation at a conference.
+
+For the purposes of this work, each publication is described by: (1) an identifier; (2) the first author's affiliation (identified by the domain name in their e-mail address); (3) the location of the first author's affiliation and (4) an event, to which the publication is assigned.
+
+An event could be a track at a conference, a colocated meeting (e.g. a workshop) or a volume of a journal.
+
+It is described by: (1) an identifier; (2) a name and (3) a location -physical place name in case of in-person events or a special tag (@) in case of journals and virtual conferences.
+
+Note that in this model, we always take into account the first author, while in fact one person may attend a conference to present several publications (resulting in less travels) or more than one author may attend to present a single publication (resulting in more travels).
+
+Resolving this issue would require conference registration data, which are not publicly available.
+
+Further, the address of the primary affiliation does not necessarily match the researcher's starting location when travelling to a conference.
+
+Text mining: In the process of gathering the data we rely on the XML version of the ACL Anthology available on GitHub4 (we used the version from 17.02.2021).
+
+From there we obtain the publications (<paper> tag), associated events (<volume> tag) with titles and locations.
+
+The crucial information missing from the XML structure is the author's affiliation and their location.
+
+This information is mined from the publication text: we download the publication PDF and use PyMuPDF5 to convert it to plain text.
+
+Next, we extract the first e-mail domain occurring in text through regular expressions (allowing for the curly brackets notation for account usernames) and treat it as affiliation identifier.
+
+Then, we use spaCy (Honnibal et al., 2020) to process the text with the en_core_web_trf pipeline, based on RoBERTa (Liu et al., 2019).
+
+Among the text spans recognised by the named entity recogniser as belonging to the category GPE (geopolitical entity), the one occurring first after the first author's last name is considered their location.
+
+Entities occurring close to each other are grouped, so that multipart names, such as Cambridge, Massachusetts (USA), are located correctly.
+
+Finally, to interpret the location names for affiliations and events, we use the Geocoding API of the Google Maps API.
+
+This allows us to obtain geographical coordinates (longitude and latitude) and country name for each location.
+
+We obtain continent information using the pycountry-convert Python package.
+
+Missing data: The process described above may leave some of the data fields empty.
+
+This may be caused by information being omitted in the XML (year or location for events) or PDF files (affiliation address not provided) or imperfect named entity recognition.
+
+In the case of events, we fill the missing data based on co-located events and manual investigation.
+
+We also check which of the conferences in 2020 took place as in-person events in the locations advertised.
+
+In the case of affiliations, we look at all other publications with the same affiliation and identify the most common location.
+
+We assume this location may also be used for the publication in question.
+
+Note that some of the PDF files of the oldest publications are based on scanned typescripts.
+
+Extracting information from these would require OCR techniques, but this was not attempted within the described work, resulting in a lower coverage of the earliest publications.
+
+Diversity computation: To quantify the participation diversity, we use the Gini coefficient G. While it was originally proposed for assessing in- come inequality (Gini, 1912), it is widely used as a diversity measure, e.g. of ecosystems (Lexerød and Eid, 2006), research databases (Weidlich and Filippov, 2016) or citation patterns (Leydesdorff et al., 2019).
+
+Since G measures concentration, we define the diversity coefficient as D = 1.0 -G. D takes values between 0.0 (least uniform distribution, i.e. all conferences happening in the same country) and 1.0 (perfectly uniform distribution, i.e. each country hosting the same number of events).

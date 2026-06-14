@@ -1,0 +1,1 @@
+We report the experimental results of eight language understanding tasks in  (LEAM and LSAN) which are also equipped with the label fusion block, LaCon-fusion outperforms them with a large margin, which proves that LaCon can learn more discriminative joint representations for both labels and instances.

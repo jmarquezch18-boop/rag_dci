@@ -1,0 +1,96 @@
+{
+  "query_id": "d3ce17368ff699857360c15972ad48cb235350b8",
+  "query": "Why does setting the vector dimension to 10 cause the conditional token distribution to become close to the Zipfian distribution?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "vector dimension"
+      },
+      "result_preview": "No matches found for 'vector dimension'",
+      "elapsed_s": 6.05
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "vector dimension Zipfian"
+      },
+      "result_preview": "No matches found for 'vector dimension Zipfian'",
+      "elapsed_s": 6.24
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "low-dimensional embedding Zipfian"
+      },
+      "result_preview": "No matches found for 'low-dimensional embedding Zipfian'",
+      "elapsed_s": 8.84
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "low-dimensional embedding power-law"
+      },
+      "result_preview": "No matches found for 'low-dimensional embedding power-law'",
+      "elapsed_s": 7.93
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "dimensionality reduction token distribution"
+      },
+      "result_preview": "No matches found for 'dimensionality reduction token distribution'",
+      "elapsed_s": 7.46
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/eb931c7319dc1b08fb3c97fb77b60b7eac9a41d699b58e0139d655f4d1cbc5c61db8d9e9dd42e3515a6cd839518933bd7d033289be73a8111b2170e8b2bf983f_104"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [],
+    "approved_by_oracle": [],
+    "oracle_decisions": []
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.15,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

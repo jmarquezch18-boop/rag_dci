@@ -1,0 +1,11 @@
+In this section, we describe the features, baseline models, and the comprehensive experiments using our novel dataset.
+
+We test a variety of features and recent multimodal state-of-the-art models.
+
+We report accuracy (Acc) and Macro-F1 (F1) for binary (BCD) and tertiary claim detection (TCD) in Table 3.
+
+We also present the fraction (in %) of visually-relevant and visually-irrelevant (textual only) claims retrieved by each model in Table 4.
+
+Please note that in Table 3 andTable 6, BCD results are shown for only one split (T C → E C ), because there are no conflicts in the labels for binary claim classification.
+
+Although we do not train the models specifically to detect visual claim labels, we analyze the fraction of retrieved samples in order to evaluate the bias of binary classification models towards a modality.

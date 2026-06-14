@@ -1,0 +1,101 @@
+This implementation of Dionisos focuses on two commonly cited scenarios (e.g., Barlow et al., 2018;O'Leary et al., 2013) for GrIS and AIS melt contributions to the LIG by comparing the fringing reef accretion under the respective GIA-derived RSL curves against a reef sequence created using a pure background GIA RSL history.
+
+Our results show distinct differences in nearshore reef accretion during the LIG as well as stark differences in the preservation of LIG in the modern stratigraphy under different ice sheet melt scenarios.
+
+In the following we (1) quantify the differences in accretion, (2) examine preservation shortcomings, and (3) evaluate the applicability towards real-world LIG fossil reef-based studies.
+
+The two main direct consequences of changes in ice sheet melting parameters are changes in the amplitude and duration of maximum inundation.
+
+This has direct influence on the overall accommodation space available for reef development (e.g., Camoin and Webster, 2015).
+
+At Lembetabe, the combined GrIS and AIS melt under the Full scenario produces a 295 % increase in RSL when compared to the Baseline, 8.33 and 2.11 m, respectively.
+
+Under the G2A5 scenario this difference is marginally less at 205 % when comparing the highest experienced sea level, 6.43 and 2.11 m, respectively.
+
+This translates to LIG water depths over the mid-platform (Well B) reaching a maximum of 17 m under Baseline, 18 m under G2A5, and 22 m under the Full scenario.
+
+The rapid flooding of the reef platform at the beginning of the LIG, would have placed the antecedent topography directly in the ideal zone of coral growth (Woodroffe and Webster, 2014).
+
+Sedimentation rates across the LIG from the mid-platform reflect this as well with rates for all scenarios peaking at around 3600 m Myr -1 .
+
+Within the stratigraphy, this is recorded as both vertical accretion as well as progradation as accommodation space decreases driven by both RSL fall and reef growth (e.g., 100 ka in Fig. 6b).
+
+By the end of the LIG, a thick carbonate package covered the platform.
+
+Under baseline conditions, maximum LIG thickness reaches 24.5 m, under the Full scenario the maximum thickness decreases to 24.1 m, and under G2A5 it decreases further to only 13.0 m. This is misleading, however, as the higher overall RSL rise during the two melting scenarios (Full and G2A5) spread accretion across the entire platform as well as further inland.
+
+This significant increase in inundated area led to a 681.5 % increase in carbonate sedimentation under the Full scenario when compared to the Baseline and a 187.5 % increase under the G2A5 scenario compared to the Baseline.
+
+The difference in carbonate package thickness between the Full and G2A5 scenarios is driven by the duration, and corresponding depth, of maximum inundation.
+
+This is most visible at Well C, where a 5 kyr (127-122 ka) continuous occupation of the platform deposits a transgressive to prograding sequence of reef facies (reef crest-forereef-reef crest) under the Full scenario.
+
+This is in contrast to the shal-P. Boyden et al.: Refining patterns of melt with forward stratigraphic models lower reef flat facies that are deposited during intermittent occupations under the G2A5 scenario, 126-124 and 119-117 ka.
+
+The spatial increase in inundation is highlighted in Fig. 7.
+
+Furthermore, comparison between the scenarios at Well C shows a significant difference in facies preservation.
+
+Under the Baseline model, only a small amount of LIG reef is preserved above the basement, and under the G2A5 scenario, there is no LIG reef present (Fig. 8c).
+
+This narrative is reversed under the Full scenario, where the LIG reef comprises an approximately 3 m section of forereef capped off by an approximately 2 m section of reef crest (Fig. 8c).
+
+The limited record of the LIG in the other two scenarios is most likely a reflection of one of two factors: (1) the lower overall RSL would have placed the active reef crest further seaward than Well C or (2) the shorter overall duration of inundation during the second peak of RSL rise under G2A5 conditions would not be enough to accrete significant reef sequences.
+
+For example, at the highest sedimentation rate of 3600 m Myr -1 , the second peak under the G2A5 melt scenario lasts for 2 kyr.
+
+This would equate to a potential 7.5 m maximum accumulation of carbonate, significantly less that the potential accumulation of 32.4 m during the 9 kyr peak of the Full scenario.
+
+As described in Sect. 2.9, erosion and sediment transport within Dionisos is reliant on user-defined maximum values and simplified diffusion equations, respectively.
+
+While we do see preserved exposed fossil MIS 5e reef facies at Lembetabe (e.g., Battistini, 1965;Boyden et al., 2022), the corresponding MIS 5e sequences within produced synthetic well logs are sometimes lacking (Fig. 8c).
+
+This "preservation bias" is especially apparent when following the progression of sedimentation through the LIG.
+
+As pointed out in Sect.
+
+3.1, under each scenario, multi-meter sections of lithology are removed in the intervening millennia between the LIG and modern (Fig. 9c-e).
+
+While each scenario deposits LIG reef facies at Well C, timing and amount vary significantly.
+
+For example, peak sedimentation under the Baseline is reached by 124 ka versus 122 ka under the Full scenario and 116 ka under G2A5.
+
+Of the three scenarios, the highest deposit in elevation is an intertidal facies under the Full scenario at 6.6 m a.m.s.l. (Fig. 9d).
+
+This is then followed by the G2A5 scenario at 116 ka with an intertidal facies at +4.9 m a.m.s.l.
+
+(Fig. 9e).
+
+However, of the three scenarios, only the Full scenario has preserved LIG reef facies above modern sea level (Fig. 8c).
+
+This is further reinforced by the exposure times under each scenario for Well B. Under all three scenarios, the area shoreward of the mid-platform is left exposed for +115 kyr before the final phase of Holocene sedimentation (Fig. 3).
+
+Such a long exposure time would, if maximum weathering rates were maintained, potentially lead to 11.5 m of erosion.
+
+Unlike the previous investigations utilizing the Dionisos model elsewhere (e.g., Montaggioni et al., 2015), a one-toone comparison between the model and the fossil record through the use of borehole and 2D seismic data is not pos-sible.
+
+However, trends within the model output are roughly analogous to observations in the field.
+
+In particular, the presence of significant reef facies 3.5 m a.m.s.l.
+
+under the Full scenario at Well C is in good agreement with recent descriptions of the LIG facies present at Lembetabe (e.g., Fig. 9 and Boyden et al., 2022).
+
+Here, Boyden et al. (2022) describes a fossil reef flat that is exposed at +2.1 m a.m.s.l., which is then covered by a 3.1 m thick unit of intertidal calcarenite.
+
+Out of the three scenarios tested, only the Full scenario has preserved LIG reef facies above modern sea level (forereef and reef crest, Fig. 8) as well as the ability to reproduce the general geomorphology of the modern coastline and the modern fringing reef (Fig. 6).
+
+While Well C under the Full scenario represents a more distal facies as that found exposed at Lembetabe, these minor discrepancies in elevations of such facies are most likely derived from differences in spatial geometry of the antecedent (pre-LIG) coast, variable weathering rates during glacial times, as well as possible vertical land motion in the region.
+
+To this end, the preserved forereef and reef crest produced by the Full scenario provides an upper bound of RSL rise during the LIG.
+
+In fact, in both other scenarios, Baseline and G2A5, the oldest reef facies exposed above modern sea level is a reef flat deposited during the Holocene transgression (10 ka, Fig. 8c).
+
+This would imply that, all other model parameters equal, in order for the G2A5 scenario to produce a preserved LIG reef, either the GrIS and AIS melt contributions would need to increase or there would need to be a further reduction in erosion rates within the model.
+
+Both of these situations would be hard to justify as the eustatic component of RSL is already above the upper bound of Dyer et al. (2021) (6.6 and 5.3 m, respectively) and the marine and subaerial erosion components are already approaching the minimum of accepted weathering rates (e.g., Paulay and McEdward, 1990).
+
+While the application of the model is spatially limited, these insights into the sensitivity of the LIG geological record provide a starting point for further analysis of other, more GIA and tectonically diverse LIG coral-dominated coastlines.
+
+Additional investigation into the interplay between GrIS and AIS contribution magnitude and timing is warranted.
+
+Furthermore, specific effort should be placed in testing locations where previous RSL curves similar in geometry to the G2A5 scenario explored here have been described.

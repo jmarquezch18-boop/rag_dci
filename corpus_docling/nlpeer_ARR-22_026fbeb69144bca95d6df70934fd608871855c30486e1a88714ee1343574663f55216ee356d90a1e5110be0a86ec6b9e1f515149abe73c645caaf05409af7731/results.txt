@@ -1,0 +1,23 @@
+Our experiment strictly follows the settings in the (Kumar et al., 2020)    TREC (Li and Roth, 2002) contains six question types collected from 4,500 English questions.
+
+We randomly subsample 10 examples per class for each experiment for both training and development set to simulate a low-resource regime.
+
+Data statistics of the three datasets are shown in Table 1.
+
+Following (Kumar et al., 2020), we replace numeric class labels with their text versions.
+
+We first compare the effects of text smoothing and baselines data augmentation methods on different datasets in a low-resource regime. Then we further explore the effect of combining text smoothing with each baseline method.
+
+Considering that the amount of data increases to 2 times after combination, we expand the data used in the baseline experiments to the same amount for the fairness of comparison.
+
+All experiments are repeated 15 times to account for stochasticity and results are reported as Mean (STD) accuracy on the full test set.
+
+As shown in Table2, text smoothing brings the largest improvement to the model on the three datasets compared with other data augmentation methods.
+
+The previously best method is BARTspan, which is exceeded by Text smoothing with 1.17% in average.
+
+Moreover, we are pleased to find that text smoothing can be well combined with various data augmentation methods, further improving the baseline data augmentation methods.
+
+As shown in Ta-ble3, text smoothing can bring significant improvements of 5.98%, 2.79%, 2.39%, 2.92%, 2.17%, 6.48%, 3.21%, 3.03% to EDA, BackTrans, CBERT, BERTexpand, BERTprepend, GPT2context, BARTword, and BARTspan, respectively.
+
+To the best of our knowledge, this is the first method to improve a variety of mainstream data augmentation methods.

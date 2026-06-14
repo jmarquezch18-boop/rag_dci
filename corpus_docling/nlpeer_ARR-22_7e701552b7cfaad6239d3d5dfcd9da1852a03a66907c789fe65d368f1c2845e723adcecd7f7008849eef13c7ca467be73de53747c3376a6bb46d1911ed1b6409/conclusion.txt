@@ -1,0 +1,11 @@
+We described the first transformer-based approach to open cloze test generation.
+
+Our ELECTRAbased model is trained on two objectives: token classification (gap/non-gap) and language modelling (for predicting the expected answer).
+
+The model is further improved by manipulating the loss function and post-processing the results.
+
+System accuracy using automatic evaluation is 53.89% while human evaluation ranges between 75% -82%, showing that at least 7 out of 10 gaps predicted are considered useful by experts.
+
+A detailed analysis of results reveals a few structural problems such as gaps in close proximity and inappropriate difficulty, which we plan to address in future work.
+
+Our test data and human annotations are released with this paper.

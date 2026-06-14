@@ -1,0 +1,144 @@
+{
+  "query_id": "7ed6482c76ae428708b4675495718652adfed68d",
+  "query": "Are the annotators of the test sets native English speakers?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "annotator"
+      },
+      "result_preview": "Search results for 'annotator' (21 matches):\n[paper_id=nlpeer_ARR-22_25eb5aa88234e90e4d4729fea900619c7d42062b6c8c967d02567ea0548fbc60fc4cacfd968a7f10d96f9cd92302173b1db10f7767e3b7e379ff1260c12db74d | section=results | line=9] The reason is that, in automatic evaluations, the gold answers cannot capt",
+      "elapsed_s": 8.92
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_COLING2020_1570",
+        "section": "methodology",
+        "start": 1,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_COLING2020_1570 / methodology — líneas 1-13 de 13]\nIn Section 3.4 we obtained ManyNames v2, which provides a reliable categorization of object names: the top name, alternative names for the same object (i.e., in the consistent response set), adequate names for other objects (i.e., outside th",
+      "elapsed_s": 7.19
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_COLING2020_1570",
+        "section": "methodology",
+        "start": 1,
+        "end": 13
+      },
+      "result_preview": "[nlpeer_COLING2020_1570 / methodology — líneas 1-13 de 13]\nIn Section 3.4 we obtained ManyNames v2, which provides a reliable categorization of object names: the top name, alternative names for the same object (i.e., in the consistent response set), adequate names for other objects (i.e., outside th",
+      "elapsed_s": 6.2
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_COLING2020_1570",
+        "section": "methodology",
+        "start": 1,
+        "end": 13
+      },
+      "result_preview": "[nlpeer_COLING2020_1570 / methodology — líneas 1-13 de 13]\nIn Section 3.4 we obtained ManyNames v2, which provides a reliable categorization of object names: the top name, alternative names for the same object (i.e., in the consistent response set), adequate names for other objects (i.e., outside th",
+      "elapsed_s": 5.92
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_COLING2020_1570",
+        "section": "methodology",
+        "start": 1,
+        "end": 13
+      },
+      "result_preview": "[nlpeer_COLING2020_1570 / methodology — líneas 1-13 de 13]\nIn Section 3.4 we obtained ManyNames v2, which provides a reliable categorization of object names: the top name, alternative names for the same object (i.e., in the consistent response set), adequate names for other objects (i.e., outside th",
+      "elapsed_s": 4.54
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "In Section 3.4 we obtained ManyNames v2, which provides a reliable categorization of object names: the top name, alternative names for the same object (i.e., in the consistent response set), adequate names for other objects (i.e., outside the consistent response set), and inadequate names of various types.\n\nWe now use it to define a diagnostic evaluation method for object naming models, one which is more fine-grained than the predominant single-label evaluation.\n\nIt also allows to assess whether models are affected by the same issues as humans, in particular referential and visual uncertainty.\n\nWe apply our evaluation to Bottom-Up (Anderson et al., 2018) as a representative L&V object naming model, which has been widely used for transfer learning in L&V (Lu et al., 2019;Gao et al., 2019;Chen et al., 2019;Cadene et al., 2019;Tan and Bansal, 2019, inter alia).\n\nIn contrast to existing works in Computer Vision research (Hoiem et al., 2012) on diagnosing the effects of object or image characteristics on model performance, ManyNames allows us to compare the model against an upper bound of the human performance in object naming, estimated via the verification annotations.\n\nOur analysis focuses on two questions: First, can an object detector that was trained in a single-label setting (i.e., towards predicting unique ground truth names) account for the naming variation inherent in human object naming behavior?\n\nSecond, does the model exhibit a similar sensitivity as humans to the interaction between domains (humans, clothes, etc.) as well as the visual characteristics of target objects?",
+      "section": "methodology",
+      "paper_id": "nlpeer_COLING2020_1570",
+      "chunk_id": "dci_nlpeer_COLING2020_1570_methodology_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_COLING2020_1570",
+      "score": 1.0
+    },
+    {
+      "text": "In Section 3.4 we obtained ManyNames v2, which provides a reliable categorization of object names: the top name, alternative names for the same object (i.e., in the consistent response set), adequate names for other objects (i.e., outside the consistent response set), and inadequate names of various types.\n\nWe now use it to define a diagnostic evaluation method for object naming models, one which is more fine-grained than the predominant single-label evaluation.\n\nIt also allows to assess whether models are affected by the same issues as humans, in particular referential and visual uncertainty.\n\nWe apply our evaluation to Bottom-Up (Anderson et al., 2018) as a representative L&V object naming model, which has been widely used for transfer learning in L&V (Lu et al., 2019;Gao et al., 2019;Chen et al., 2019;Cadene et al., 2019;Tan and Bansal, 2019, inter alia).\n\nIn contrast to existing works in Computer Vision research (Hoiem et al., 2012) on diagnosing the effects of object or image characteristics on model performance, ManyNames allows us to compare the model against an upper bound of the human performance in object naming, estimated via the verification annotations.\n\nOur analysis focuses on two questions: First, can an object detector that was trained in a single-label setting (i.e., towards predicting unique ground truth names) account for the naming variation inherent in human object naming behavior?\n\nSecond, does the model exhibit a similar sensitivity as humans to the interaction between domains (humans, clothes, etc.) as well as the visual characteristics of target objects?",
+      "section": "methodology",
+      "paper_id": "nlpeer_COLING2020_1570",
+      "chunk_id": "dci_nlpeer_COLING2020_1570_methodology_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_COLING2020_1570",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/COLING2020/679_64",
+    "nlpeer/COLING2020/679_81",
+    "nlpeer/COLING2020/679_82",
+    "nlpeer/COLING2020/679_83"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_COLING2020_1570_methodology_0000",
+      "dci_nlpeer_COLING2020_1570_methodology_0001"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_COLING2020_1570_methodology_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_COLING2020_1570_methodology_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.02127659574468085,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

@@ -1,0 +1,13 @@
+Three models were trained for main statement sentence classification: bag-of-words based Linear SVM, BERT (Devlin et al., 2018), and BioBERT (Lee et al., 2019).
+
+We hypothesized that BioBERT (Lee et al., 2019) would perform the best, since it is a domain specific language representation model that is based on BERT and further trained on large-scale biomedical corpora.
+
+BioBERT has shown to outperform BERT on three representative biomedical text mining tasks, including text classification (Lee et al., 2019).
+
+All models were evaluated on our annotated corpus via 5-fold stratified cross-validation.
+
+As shown in Table 3(a), BioBERT achieved a macro-averaged F1 score of 0.868, outperforming BERT and Lin-earSVM, whose scores are 0.844 and 0.732 respectively.
+
+To further improve performance, we augmented our press release data with the academic paper data (Yu et al., 6 . In our implementation, we set the weight of the data in the academic genre to half of the weight in the press release genre.
+
+As shown in

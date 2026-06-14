@@ -1,0 +1,339 @@
+The-X: Privacy-Preserving Transformer Inference With Homomorphic Encryption
+
+Abstract
+
+Introduction
+
+Security And Privacy Concern Of Pre-Trained Models
+
+Practical Homomorphic Encryption
+
+The classic definition of homomorphic encryption is a form of encryption that permits users to perform computations on its encrypted data without first decrypting it.
+
+These computations results are retained in an encrypted form, which could be decrypted into identical output produced by the same computations on the unencrypted data.
+
+Let F be a function or the entire pre-trained model, E as an encryption function, D as a decryption function.
+
+Then for any allowed plain text input x, we have:
+
+F (x) = D(g(E(x)),(1)
+
+where g is a constructed function to play the same role of function F , except on encrypted data.
+
+Figure 1 shows how a user performs inference using a cloud-deployed pre-trained model which is not trusted.
+
+First, the pre-trained model receives a ciphertext encrypted by the user private key and performs inference function g on the ciphertext.
+
+Then, the server will send an encrypted result to the user, which can only be decrypted by the user key.
+
+At no point does the cloud service provider gain access to the plain text.
+
+The Intel HE transformer for nGraph (Boemer et al., 2019b,a) is a Homomorphic Encryption backend to the deep learning models.
+
+Currently, it supports the CKKS (Cheon et al., 2017) encryption scheme, implemented by the Simple Encrypted Arithmetic Library (SEAL) (SEAL) from Microsoft Research. It is a research tool to demonstrate the feasibility of HE on deep learning.
+
+Challenges Of Transformer Inference With He
+
+Some HE schemes only support a single algebraic operation, such as addition or multiplication.
+
+These are known as "partially homomorphic" schemes (PHE).
+
+Other schemes, called "fully homomorphic"(FHE), support two such as addition and multiplication.
+
+Note that composing addition and multiplication suffices to construct polynomial functions, and hence polynomial approximations to non-polynomial functions such as GELU (Hendrycks and Gimpel, 2016) or Layer-Norm (Xu et al., 2019b).
+
+Notably, this limitation prevents the exact computation of any comparisonbased operations such as Max, Min, as well as common functions such as exponential or sigmoid.
+
+Finally, "leveled homomorphic" schemes (LHE) support addition and multiplication, only up to a fixed computational depth.
+
+The-X: Formal Description
+
+There are two core ideas in THE-X. The first one is to incorporate the user device into the HE inference, and the second is using "simplified computation" to approximate the non-polynomial functions.
+
+In the following, we will describe how to enable homomorphic encryption of transformer-based models with THE-X.
+
+Approximation Workflow
+
+First, we present the approximation workflow of THE-X, which consists of two stages: Standard Finetuning and LN Distill as depicted in Figure 2.
+
+Given a pre-trained model M and corresponding // replace GELU and Softmax 2 while not done do
+
+3 sample batches (x i , y i ) from D, 4 let (x i , y i ) optimize M with S frozen. end 5 M ← M ⊕ Ñ .
+
+// add the layernorm approximation 6 while not done do 7 sample batches
+
+(x i , y i ) from D, 8 freeze the parameters of M except Ñ . 9 compute k-th layernorm output O k , Õk . 10 compute loss k = MSELoss(O k , Õk ). 11 update Ñ with loss L = k k . end 12 M ← M N . // discard the origin layernorm return M.
+
+downstream data, we aim to produce a fully HE supported M which is fine-tuned and ready for deployment.
+
+The two-stage optimization of algorithm 1 aims to find the best approximation checkpoint.
+
+For computation efficiency, pre-trained models can also be fine-tuned together with the layernorm approximation, and it needs only a single optimization loop.
+
+We will discuss the schedule of the different approximation workflow in Sec 4.6.
+
+There are three major non-polynomial functions in the transformer block, where we will study in detail.
+
+Gaussion Error Linear Units (Gleu)
+
+With a computation of Gaussian error, Gaussian Error Linear Units (GLEUs) (Hendrycks and Gimpel, 2016) is not suitable to serve as an active function in HE state.
+
+The Gaussian kernel includes unsupported functions like exponential.
+
+While in the implementation of the transformer, GELU is defined as a fast approximated version, where the tanh function is still non-polynomial, unsupported by HE.
+
+G(x) = 0.5x(1+tanh[ 2/π(x+0.044715x 3 )]).
+
+(2)  We illustrate the numerical comparison between GELU and RELU in Figure 3 , where the outputs of GELU are very close to RELU.
+
+Hence, we propose to replace the GELU layer in the model with a ReLU activation function.
+
+Despite the M ax function in ReLU, other computations are well supported by HE.
+
+To enable the computation of M ax, we implement the first key idea, incorporating the user device into the inference.
+
+The server will convey ciphertext input to the user for local M ax computation.
+
+Once received the connection, a user device decrypts the ciphertext input and calls the local M ax function to get the results and return re-encrypted results to the server.
+
+Despite the communication cost, no plaintext is leaked during the TLS connection and semantic security is guaranteed.
+
+3 2 1 。 -ReLU -GELU -3 -2 -1 。 1 2 3
+
+Softmax
+
+The second non-polynomial function is softmax, which includes the exponential and division computation.
+
+i ) = exp(x i ) j exp(x j )
+
+.
+
+(3)
+
+The first thought to approximate softmax is to find alternatives of softmax operation in transformer, which include Taylor series approximation (Vincent et al., 2015), softmax-free linear attention (Lu et al., 2021).
+
+However, both of them have some limitations.
+
+The Taylor series approximation can only approximate the exponential operation.
+
+Softmax-free linear attention utilizes newtoninverse to approximate division, but the approximation error is unbounded in full-scale attention settings.
+
+For these considerations, we have no choice but to design an estimation network with addition and multiplication.
+
+i ) = x i * T ( j ReLU (((x j )/2 + 1) 3 )). (4)
+
+Equation 4 is the formal description of our softmax estimation network.
+
+Same as the approximation of GELU, ReLU operation here is realized by communication with the client.
+
+Instead of a division operation, we approximate reciprocal operation with a three-layer linear neural network denoted as T .
+
+To get a better estimation of softmax, we randomly generate input tensors whose values are between [-3, 3] and use their softmax scores as MSE targets.
+
+Then we optimize the T for 100k steps with a learning rate of 1e-3 until the MSE loss drop down to 1e-6.
+
+An under-explored problem here is the Infinite value of Masked Attention, where the input of softmax is always the masked attention scores.
+
+To prevent the attention of masked tokens, the origin transformer model fills the masked attention scores with negative infinity before softmax.
+
+When fed with an infinite value, the softmax estimation model may face numerical disaster.
+
+We will discuss this phenomenon and the corresponding solution in Sec 4.5.
+
+Layernorm
+
+Recall that the layer normalization (Ba et al., 2016) in transformer is implemented over a mini-batch of inputs, which could be formulated as:
+
+y = x -E[x] V ar[x] + * γ + β.(5)
+
+The mean and standard deviation are calculated over division operations where the approximation is needed.
+
+γ and β are learnable affine transform parameters.
+
+To avoid the introduction of new parameters, we keep the learnable parameters while leaving the mean and standard deviation achieved by regression.
+
+ŷ = x • γ + β.(6)
+
+The new parameter γ predicts the value of standard deviation by regression from origin γ.
+
+We find the simple linear replacement is enough for values with a small scale of bias.
+
+Here γ, β ∈ R and • denotes the Hadamard product.
+
+The layer normalization will be applied in each multi-head attention block and after the output dense layer.
+
+So the approximation error tends to accumulate when the transformer stacks with too many layers.
+
+We treat the layernorm approximation as an individual stage in Figure 1 as LN-Distill to learn from origin LN layers.
+
+A challenge here is the Attention Overflow, where the input attention score before normalization may have an unbounded scale, leading to numerical problems.
+
+We will discuss the detail of Attention Overflow in Sec 4.5.
+
+Other Practical Replacement
+
+After the approximation workflow, a fine-tuned model consists of only addition and multiplication operations, which is fully compatible with homomorphic encryption.
+
+We power the model by HE transformer backend.
+
+Since the HE transformer backend could only work for TensorFlow checkpoint, any pre-trained transformers inherited from PyTorch building version need to be converted into TensorFlow format first.
+
+There are some other details worth mentioning here.
+
+• For the sof tmax( QK T • We use a fully kernel convolution layer instead of linear projection due to the lack of supported dense operation.
+
+• All matrix multiplication will be converted into the element-wise style.
+
+• We drop the pooler layer for the unsupported operation of tanh.
+
+Privacy-Preserving Inference
+
+In this section, we describe the behavior of HE models during privacy-preserving inference.
+
+Note that inference is completed by the joint effort of the server and the user device.
+
+Algorithm 2: Inference with HE Input: user plain text query P q , private key K generated under server protocol, encrypted server model M. 1 client computes embeddings: E q ← P q .
+
+2 client encrypts query embeddings:
+
+C q ← Encrypt(E q , K).
+
+3 server forwards the model: C i = M(C q ).
+
+4 client handles activation: C a = ReLU (C i ).
+
+5 server continues forwarding: C o = M(C a ).
+
+6 client decrypts results:
+
+P o = Decrypt(C o , K).
+
+In Algorithm 2, notably absent is the support of ReLU operations, where the server exchanges the activation results with the client.
+
+However, all the communication between client and server is in ciphertext, ensuring the privacy of user queries and may prevent eavesdropping attackers from recovering private text data.
+
+Experiments
+
+Evaluation Tasks
+
+Experiment Settings
+
+Approximation Results
+
+Negative Infinity
+
+Recall in Equation 4, we replace softmax with a neural estimation model.
+
+To prevent the attention of masked tokens, the origin transformer model fills the masked attention scores with negative infinity before softmax, where the numerical disaster occurs in our approximation method.
+
+In  attention mask values, the approximation method is extremely sensitive to the numerical changes.
+
+We assume the softmax estimation model fails to deal with large input values and leads to a credible performance drop.
+
+However, when the value of the attention mask becomes too small, it serves as a bias to attention scores, which also leads to a certain performance drop.
+
+We recommend using a moderate mask value between -2 and -5.
+
+Attention Overflow
+
+Another challenge of THE-X is the attention score input of layer normalization.
+
+In most cases, the scale of multi-head attention output is very dense around [-1, 1].
+
+However, before normalization, we also observe the attention scores are scarily sparse, with some extreme values reaching 1e4, which is difficult for our LN-distill stage.
+
+To prevent the overflow attention scores, we use the weight decay of Adam optimizer as regularization.
+
+In Figure 5, we present the attention overflow phenomenon across different tasks.
+
+Without any regularization, our approximation method yields uncontrolled attention scores, leading to poor performance.
+
+As the weight decay increases, the attention scores tend to converge and benefit better approximation results.
+
+We also observe that the larger weight decay may harm the performance on NLI tasks, where the regularization could be seen as trade-off between better approximation results and higher performance upper bound.
+
+For the NER task, larger weight decay may even benefit the performance and also boost our approximation method.
+
+Schedule Of Approximation Workflow
+
+There are still doubts about how to organize the several optimization steps for the best approximation performance.
+
+We investigate four schedule plans:
+
+• Two Stages. Where we freeze the softmax estimation model during standard fine-tuning.
+
+We select the best checkpoint to implement the second stage -distill the layer normalization network.
+
+• Joint FT S. We optimize the softmax estimation model during standard fine-tuning and apply the LN-distillation after.
+
+• Joint FT LN.
+
+We apply one-pass optimization with the softmax estimation model frozen but update the other parameters including layer normalization network.
+
+No further LNdistill will be implemented.
+
+• Joint FT S + LN.
+
+A total one-pass optimization with all approximation parameters updated with the model together.
+
+As illustrated in Figure 6, we observe that finetuning the different approximation components individually (aka. "Two stages") may be a good default to keep the best performance of approximation.
+
+For the regression task STS-B, jointly finetuning the softmax estimation model and approximated layernorm even fails to fulfill the approximation pipeline, pulling the performance down to 0.4%.
+
+We assume fine-tuning different components may fall into a bi-level optimization problem and  it is hard to achieve satisfying results.
+
+In conclusion, the softmax estimation model and the approximated layernorm are both critical components to the performance of THE-X, deserving individual optimization.
+
+Conclusions
+
+Figure 1: An overview of our THE-X. The transformerbased model could inference on encrypted data with our THE-X, enabling theory-guaranteed privacy protection for users.
+
+Approximation Workflow Data: labeled task data D. Input: pre-trained Transformer model M, softmax estimation model S. 1 M ← M (S, ReLU ).
+
+Figure 2: The Approximation Workflow of THE-X. To replace the non-polynomial operations, we split the finetuning stage into several subphases.
+
+Given a pre-trained checkpoint, we drop the pooler of the pre-trained model and replace softmax and GeLU.
+
+Afterward, we follow the standard fine-tuning for classification or regression tasks.
+
+We add LayerNorm approximation into the fine-tuned model and distill knowledge from original LN layers.
+
+After dropping the original LN, we convert the model into fully HE-supported ops with the HE transformer.
+
+Figure 3: The activation results of GELU compared with ReLU.
+
+With an input around zero, the activation results are very close.
+
+With a larger or smaller input value, the activation results tend to converge.
+
+Figure 4, to solve this problem, we give an empirical study of how "negative" the masked attention scores should be.
+
+Despite the indistinguishable F1 score change of raw model fine-tune with different
+
+Figure4: Performance on CONLL2003 task with different mask values.
+
+We find the "Negative Infinity" value of the 0 mask greatly reduces approximation performance.
+
+In THE-X using a mask value in[-3, -5] might be a default choice.
+
+Figure 5: Performance on all tasks with different weight decay values, measured on the development sets.
+
+Metrics are marked on the y-axis and weight decay values are marked on the x-axis.
+
+Figure 6: Performance on all tasks with different organizations of approximation workflow.
+
+Jointly finetuning the softmax estimation model or approximated layernorm leads to a performance drop across all tasks.
+
+Performance on the GLUE 1 tasks for both baseline (standard finetuning) and THE-X with BERT-tiny, measured on the development sets.
+
+We report the best results by hyper-parameter search.
+
+|D| denotes the number of training examples.
+
+THE-X only suffers average utility performance loss: < 1.5% in most tasks.
+
+'P/S corr.' is Pearson/Spearman correlation and 'm/mm' denotes the accuracy scores on matched/mismatched set.
+
+Performance on the CONLL2003 task for both baseline and THE-X with BERT-tiny, measured on the development sets.
+
+We find that the replacement with ReLU has a slight effect on performance and even gets a better F1 score by 0.12 than original GELU activation.

@@ -1,0 +1,9 @@
+We present THE-X, a practical approach to enable pre-trained transformer models to infer under homomorphic encryption.
+
+It requires several approximation components to replace the original operations in the transformer model.
+
+It imposes a slight burden in terms of performance cost but enjoys the full advantage of homomorphic encryption -the theory-guaranteed user privacy.
+
+We see this as a first step in combing homomorphic encryption to address emerging privacy issues in pre-trained models.
+
+We hope our work motivates further research, including better approximation solutions on different NLP applications.

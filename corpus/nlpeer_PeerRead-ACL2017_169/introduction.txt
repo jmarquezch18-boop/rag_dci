@@ -1,0 +1,21 @@
+Grammatical Error Correction (GEC) systems are often only evaluated in terms of overall performance because system hypotheses are not annotated.
+
+This can be misleading however, and a system that performs poorly overall may in fact outperform others at specific error types.
+
+This is significant because a robust specialised system is actually more desirable than a mediocre general system.
+
+Without an error type analysis however, this information is completely unknown.
+
+The main aim of this paper is hence to rectify this situation and provide a method by which parallel error correction data can be automatically annotated with error type information.
+
+This not only facilitates error type evaluation, but can also be used to provide detailed error type feedback to non-native learners.
+
+Given that different corpora are also annotated according to different standards, we also attempted to standardise existing datasets under a common error type framework.
+
+Our approach consists of two main steps.
+
+First, we automatically extract the edits between parallel original and corrected sentences by means of a linguistically-enhanced alignment algorithm (Felice et al., 2016) and second, we classify them according to a new, rule-based framework that relies solely on dataset-agnostic information such as lemma and part-of-speech.
+
+We demonstrate the value of our approach, which we call the ERRor ANnotation Toolkit (ERRANT)1 , by carrying out a detailed error type analysis of each system in the CoNLL-2014 shared task on grammatical error correction (Ng et al., 2014).
+
+It is worth mentioning that despite an increased interest in GEC evaluation in recent years (Dahlmeier and Ng, 2012;Felice and Briscoe, 2015;Bryant and Ng, 2015;Napoles et al., 2015;Grundkiewicz et al., 2015;Sakaguchi et al., 2016), ERRANT is the only toolkit currently capable of producing error types scores.

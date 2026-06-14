@@ -1,0 +1,13 @@
+Press releases have an increasingly strong influence on media coverage of health research; however, they have been found to contain seriously exaggerated claims that can misinform the public and undermine public trust in science.
+
+In this study we propose an NLP approach to identify exaggerated causal claims made in health press releases that report on observational studies, which are designed to establish correlational findings, but are often exaggerated as causal.
+
+We developed a new corpus and trained models that can identify causal claims in the main statements in a press release.
+
+By comparing the claims made in a press release with the corresponding claims in the original research paper, we found that 22% of press releases made exaggerated causal claims from correlational findings in observational studies.
+
+Furthermore, universities exaggerated more often than journal publishers by a ratio of 1.5 to 1.
+
+Encouragingly, the exaggeration rate has slightly decreased over the past 10 years, despite the increase of the total number of press releases.
+
+More research is needed to understand the cause of the decreasing pattern.

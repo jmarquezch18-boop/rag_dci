@@ -1,0 +1,13 @@
+In this paper, we have touched on a number of ways in which cultural knowledge, preferences and values can affect NLP practices.
+
+It is important to acknowledge the breadth of culture in all of these aspects, if we should aspire to a more cross-cultural NLP.
+
+However, we do not pretend to cover all relevant aspects of culture in our taxonomy: many works in sociology posture frameworks to better explain and catalogue the specific elements that compose a culture (Dant, 1999;Hofstede, 2001;Kendall et al., 2005;Woodward, 2007).
+
+We encourage further investigation of their impact on NLP.
+
+Finally, present-day computational science have inherited colonising practices, which in NLP are realised as "homogenisation of perspectives" and "algorithmic monoculture" (Kleinberg and Raghavan, 2021;Bommasani et al., 2021).
+
+While there is general agreement in the NLP community that we need to represent cultures from outside Western, Educated, Industrialised, Rich, and Democratic (WEIRD) societies (Henrich et al., 2010), representation alone is not enough if we do not also allow them to prioritise their goals and values, rather than the goals and values held by the NLP community.
+
+Decolonisation (Bird, 2020;Mohamed et al., 2020;Birhane and Guest, 2021) aims to dismantle harmful power asymmetries and concepts of knowledge, turning us instead towards a "pluriversal epistemology of the future" (Mignolo, 2012) that unlike universalisms, acknowledges and supports a wider radius of socio-political, ecological, cultural, and economic needs (Mohamed et al., 2020).

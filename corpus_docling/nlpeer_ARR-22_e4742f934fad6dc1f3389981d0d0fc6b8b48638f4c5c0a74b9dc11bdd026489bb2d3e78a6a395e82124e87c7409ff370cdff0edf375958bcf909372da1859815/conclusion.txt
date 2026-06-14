@@ -1,0 +1,7 @@
+We present MultiSpanQA, a reading comprehension dataset where answers consist of multiple discrete spans.
+
+As part of this, we proposed a method for classifying the semantic structure of answers, based on the semantic relation between answer spans.
+
+We also provide an expanded version of the dataset which includes unanswerable questions and single-answer questions, to make it both more challenging and more realistic.
+
+We additionally presented a number of models for multi-span QA extraction, and found that the best-performing model was sequence tagging-based, augmented by a span number prediction module and span adjustment module.

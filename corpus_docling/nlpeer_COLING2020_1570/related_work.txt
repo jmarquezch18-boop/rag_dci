@@ -1,0 +1,49 @@
+Object Naming Objects are members of many categories and can be called by many names (e.g., a duck can be called duck, bird, animal, etc.).
+
+The task of object naming-generating a formally correct and also appropriate, natural name for an object-has been studied in psycholinguisticsand L&V research, and is related to object recognition tasks in Computer Vision.
+
+We briefly discuss each area.
+
+Psycholinguistic studies have traditionally focused on object categories instead of individual objects, e.g., the category duck as opposed to a particular duck, and have typically used prototypical or schematic depictions to represent a category (e.g., Rossion and Pourtois, 2004).
+
+Such studies have found that humans, when naturally naming an object, have a preference towards a particular name, defined as the entry-level name (Rosch et al., 1976;Rosch, 1978;Jolicoeur et al., 1984).
+
+In contrast, work in L&V is mostly concerned with naming particular object instances situated in naturalistic images.
+
+In such a setting, naming preferences are more nuanced: humans may prefer different names for instances of the same class (e.g., Fig. 1a-b), and even disagree in their choice for the same instance (Graf et al., 2016;Silberer et al., 2020).
+
+While Graf et al. (2016) modeled object naming in a controlled setting, Ordonez et al. (2016) and Mathews et al. (2015) used ImageNet data (Deng et al., 2009), where images show more realistic, yet still isolated objects annotated with WordNet synsets (Fellbaum, 1998).
+
+Zarrieß and Schlangen (2017) train a classification-based model for names produced in referring expressions in the RefCOCO data (Yu et al., 2016), where objects are situated in complex scenes and names might be affected by context.
+
+In contrast to our work, existing approaches did not have access to name annotations from many different annotators  (as in ManyNames, Silberer et al. 2020) or to the verification data we present here (i.e., ManyNames v2), which enable a more fine-grained evaluation.
+
+Beyond diagnostic testing, clean, natural and variable object naming data could also support model development: e.g., Peterson et al. (2019) suggest that object classifiers trained on distributions over object labels are more robust and generalize better.
+
+Finally, object recognition tasks in Computer Vision have been agnostic about phenomena intrinsic to human object naming, such as naming variation.
+
+In these tasks the goal is usually to assign a single supposed ground-truth label from a pre-defined vocabulary, varying from 20 categories (Everingham et al., 2015) to a few thousand synsets (Russakovsky et al., 2015) or words (Kuznetsova et al., 2020).
+
+Although previous work considered effects of object/image characteristics on model effectiveness (Hoiem et al., 2012), a comparison to a human upper bound of the kind we conduct has thus far been missing.
+
+Uncertainty in Bounding Box Annotations Bounding boxes are by far the most common way to annotate objects in images, despite the fact that they are well-known to cause problems for annotation efficiency and quality (Papadopoulos et al., 2017;Kuznetsova et al., 2018;Hoiem et al., 2012).
+
+In Computer Vision, the standard protocol to obtain box annotations is the one established by Russakovsky et al. (2015), which asks annotators to draw a tight box around each object, namely, the smallest box containing all visible parts of the object.
+
+Kuznetsova et al. (2018) point out, however, that this criterion can still trigger uncertainty (e.g., is water part of a fountain?).
+
+Moreover, the protocol itself has proven difficult to strictly adhere to.
+
+In the collection of Visual Genome (Krishna et al., 2016), annotators produced region descriptions and corresponding bounding boxes for objects.
+
+Even though these boxes were additionally verified and linked in a separate verification round, Silberer et al. (2020) observe that the resulting annotations still do not fully comply with the bounding box annotation protocol (e.g., the same object can have multiple distinct boxes), in some cases leading to referential uncertainty.
+
+Other L&V datasets have relied on predefined box annotations to prompt new annotators or speakers with a specific target (Kazemzadeh et al., 2014;Yu et al., 2016;De Vries et al., 2017).
+
+These approaches assume that verification of the data is ensured by the interactive protocol, in which a second participant is listening and must identify the target object.
+
+However, it does not overcome the problem that the initial speaker may already face referential uncertainty in their box prompt (e.g., water or fountain).
+
+To the best of our knowledge, no prior work in L&V systematically investigates this, as we do here for object naming.
+
+3 Free Object Naming: Verification Collection and Analysis of ManyNames v2

@@ -1,0 +1,59 @@
+Precipitation changes may be among the most important consequences of anthropogenic climate change.
+
+Yet, robust detection and attribution (D&A) of forced change in the water cycle are impaired by low signal-to-noise ratios.
+
+The concept of detection and attribution is to use climate model simulations in which the applied forcings are known and internal variability can be reduced by averaging multiple realisations, to estimate a so-called fingerprint that represents the effect of the applied forcings on climate variables of interest.
+
+Subsequently, the degree to which this fingerprint can be detected in observations is assessed; if the fingerprint signal is significant and in agreement with the models, the forcing signal is said to be detected and attributed to the applied forcings.
+
+The low signal-to-noise ratios of precipitation D&A result from many factors (Balan Sarojini et al., 2016).
+
+First, internal variability of precipitation and related processes is high (Deser et al., 2012;Hoerling et al., 2010;Balan Sarojini et al., 2012).
+
+Second, models show relatively large disagreement in water cycle simulations due to, for example, structural uncertainties such as parameterised convection and differing climate and hydrological sensitivities (Pendergrass, 2020).
+
+There can also be discrepancies between model representations of the water cycle and observations (Mehran et al., 2014;Wehner et al., 2020).
+
+Lastly, signal robustness suffers from limited spatial and temporal coverage of observations, and biases can be introduced by changing coverage and station density over time as well as gridding procedures (Balan Sarojini et al., 2012;Dunn et al., 2020).
+
+Here we present a detection method based on regularised linear regression -ridge regressionthat is suitable to detect forced changes in global metrics of mean and extreme precipitation with a high signal-to-noise ratio, despite the challenges listed.
+
+Models and observations roughly agree on a rate of specific humidity increase with global mean temperature of ≈ 7 % K -1 , following theoretical relationships (Held and Soden, 2006;Dai, 2006).
+
+Extreme precipitation scales approximately with this rate of increased precipitable water and increases over most of the global land, although atmospheric dynamics modulate the increase in some regions (O'Gorman and Schneider, 2009;Fischer and Knutti, 2016;Pfahl et al., 2017).
+
+Changes in global mean precipitation are associated with the atmospheric energy balance, resulting in a smaller increase of ≈ 1 % K -1 -3 % K -1 , with an underlying spatial pattern of hydrological cycle intensification (Allen and Ingram, 2002;Allan et al., 2014;Pendergrass and Hartmann, 2014;Douville et al., 2021).
+
+Changes in mean precipitation over land are not well described by this pattern intensification, though, and are expected to be lower and more complex due to the effects of water availability and relatively higher warming rates over land compared to oceans (Douville et al., 2021;Byrne and O'Gorman, 2015;Roderick et al., 2014).
+
+Besides local climatology, changes in factors such as largescale atmospheric circulation, water availability, and the ver-tical structure of the atmosphere play a role in the local precipitation response to forcing (Byrne and O'Gorman, 2015;O'Gorman and Schneider, 2009;Pfahl et al., 2017).
+
+For mean precipitation, anthropogenically forced changes have been detected and attributed on a global land level and for regions defined by latitude bands (Fischer and Knutti, 2014;Knutson and Zeng, 2018;Noake et al., 2012;Polson et al., 2013;Marvel and Bonfils, 2013).
+
+Anthropogenic aerosols and greenhouse gases (GHGs) have opposing influences on the hydrological cycle (Wu et al., 2013;Bonfils et al., 2020;Salzmann, 2016), implying that continued increase in GHGs and decrease in aerosol emissions will lead to stronger GHG signatures in mean precipitation.
+
+Although studies agree on the presence of a signal in observations, they disagree on the strength.
+
+Models have been suggested to overestimate (Fischer and Knutti, 2014) as well as underestimate (Noake et al., 2012;Wu et al., 2013;Polson et al., 2013;Knutson and Zeng, 2018) observed trends.
+
+For extreme precipitation, optimal fingerprinting methods and spatial aggregation approaches have led to the detection and attribution of anthropogenically forced changes over global land and for distinct Northern Hemispheric regions (e.g. Min et al., 2011;Zhang et al., 2013;Fischer and Knutti, 2014;Paik et al., 2020;Kirchmeier-Young and Zhang, 2020;Sun et al., 2022;Fischer and Knutti, 2016).
+
+However, for extreme precipitation there is also disagreement regarding the strength of the forced signal in observations.
+
+A subset of studies finds Coupled Model Intercomparison Project (CMIP) multi-model ensembles generally underestimate changes compared to observations (Min et al., 2011;Fischer andKnutti, 2014, 2016;Borodina et al., 2017), whereas others find the opposite (Zhang et al., 2013;Paik et al., 2020;Sun et al., 2022).
+
+Hence, the degree to which model simulations accurately represent the responses of precipitation-relevant processes to forcing and thus accurately simulate past and future changes in precipitation remains up for debate.
+
+Knowledge of the severity of current climate change effects on the water cycle as well as the congruence of modelled and observed historical forced changes in the water cycle is important for adaptation policies and improvement of future projections.
+
+Recent studies using data-science methods of varying complexity for the purpose of reducing the signal-obscuring effects of uncertainties and internal variability have detected forced signals in temperature as well as mean and extreme precipitation (Sippel et al., 2020;Barnes et al., 2019Barnes et al., , 2020;;Madakumbura et al., 2021).
+
+Here, we show that regularised linear regression can alleviate some of the difficulties in precipitation D&A by reducing the influence of internal variability and structural model error on detection results.
+
+We use regularised linear regression to construct high signal-to-noise ratio fingerprints for the detection of the forced response in mean and extreme precipitation based on observational coverage and apply these to several station-based observational datasets to assess whether significant forced changes are detected and have emerged from internal variability.
+
+The simultaneous assessment of multiple observational datasets provides an overview of how modelled and observed forced changes compare and sheds light on the aforementioned contradictory findings.
+
+We analyse forced signals in annual precipitation anomalies and also in anomalies from which the global mean trend is removed, relying on spatial pattern information alone.
+
+The latter approach highlights relative regional responses to forcing and tests whether spatial pattern changes in models are in accordance with observations.

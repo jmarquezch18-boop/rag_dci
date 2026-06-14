@@ -1,0 +1,31 @@
+We present HUE (Hanja Understanding Evaluation) dataset and BERT-based pretrained language models for classical Hanja documents.
+
+HUE dataset includes diverse tasks that can support analyzing historical documents written in Hanja which is an extinct language in Korea: Chronological Attribution (CA), Topic Classification (TC), Named Entity Recognition (NER), and Summary Retrieval (SR).
+
+Our models pretrained on Hanja corpora outperform other language models and we observe their performance on zero-shot settings with DRRI which is the dataset never been introduced in NLP community.
+
+The experimental results in king prediction imply that our models capture the historical events or facts disclosed in the texts.
+
+We also explore several methods to support Hanja language models such as masking named entities and giving document age as input sources, based on the analyses on textual features in AJD.
+
+Help of adequate resources in Hanja documents might could fill some caveats in our work which lacks additional experiments and analyses on the records of different genre such as poetry, novel, and humanities resulting from the low resources that we can exploit.
+
+However, we expect that our dataset and accompanying language models might facilitate future works on historical documents written in Hanja by providing fundamental resources to leverage unknown Hanja corpora.
+
+CA 330,469 41,309 41,309 TC 330,424 41,303 41,304 NER 385,915 13,417 13,418 SR 169,840 21,570 21,296  We crawl AJD7 , DRS8 , and DRRI9 from the comprehensive database for Korean classics which are publicly available published by IKTC.
+
+All source corpora are fully tagged with the written ages and named entities, while their entity maps differ to each other.
+
+AJD also provides topics which is tagged by the experts in the translation process.
+
+For CA, we measure the Quadratic Weighted Kappa score (QWK score) as metrics that treat each king label hierarchically.
+
+Since TC is a multi-label classification task whose example might have multiple labels as the answer, we measure Hamming score along with accuracy.
+
+In this case, accuracy is the exact match score, and the hamming score is the accuracy of subset matched, | T ∩ P | / | T ∪ P |, where T is set of true labels and P is set of predicted labels (Godbole and Sarawagi, 2004).
+
+For the evaluation results in Table 13, we find and set the best threshold to each label by Youden's index.
+
+All pretrained models outperform BERT without pretraining, and two LMs re-trained on hanja documents show the best performances.
+
+(Tian et al., 2021) 68.99 85.81 85.24 88.44 83.00 31.47 69.30 61.63 90.26 51.63 mBERT (Devlin et al., 2019) 56

@@ -1,0 +1,151 @@
+We have presented our framework that is designed to provide efficient and flexible BERT-based multitask serving.
+
+We have demonstrated on eight GLUE datasets that the proposed method achieves both strong performance and efficiency.
+
+We release our code 2 and hope that it can facilitate BERT serving in cost-sensitive applications.
+
+The GLUE benchmark includes the following datasets:
+
+• QNLI (Question Natural Language Inference).
+
+The dataset is derived from (Rajpurkar et al., 2016).
+
+This is a binary classification task where an example is of the form (question, sentence) and the goal is to predict whether the sentence contains the correct answer to the question (Wang et al., 2018).
+
+• RTE (Recognizing Textual Entailment).
+
+A binary entailment task similar to MNLI but with much less training data (Bentivogli et al., 2009).
+
+• QQP (Quora Question Pairs) A binary classification task where the goal is to determine if two questions asked on Quora are semantically equivalent (Chen et al., 2018).
+
+• MNLI (Multi-Genre Natural Language Inference).
+
+Given a pair of sentences, the goal is to predict whether the second sentence is an entailment, contradiction or neutral with respect to the first one (Williams et al., 2018).
+
+• SST-2 (The Stanford Sentiment Treebank).
+
+A binary single-sentence classification task where the goal is to predict the sentiment (positive or negative) of the movie reviews (Socher et al., 2013).
+
+• MRPC (Microsoft Research Paraphrase Corpus).
+
+A binary classification task where the goal is to predict whether two sentences are semantically equivalent (Dolan and Brockett, 2005).
+
+• CoLA (The Corpus of Linguistic Acceptability).
+
+A binary single-sentence classification task where the goal is to predict whether an English sentence is linguistically "acceptable" or not (Warstadt et al., 2018).
+
+• STS-B (The Semantic Textual Similarity Benchmark).
+
+A regression task where the goal is to predict whether two sentences are similar in terms of semantic meaning as measured by a score from 1 to 5 (Cer et al., 2017).
+
+• WNLI (Winograd NLI).
+
+The dataset is derived from (Levesque et al., 2012).
+
+We exclude this task in our experiments following the practice of (Devlin et al., 2019;Radford et al., 2018).
+
+Dataset
+
+The approach presented in this work introduces two new hyper-parameters for each task τ ∈ T , namely the number of fine-tuned layers L (τ ) for the teacher and the number of knowledge distilled layer l (τ ) for the student.
+
+If the resources permit, these two hyper-parameters should be tuned separately for each task.
+
+As introduced in Section 3.1, we suggest to constrain L within the range 4 ≤ L (τ ) ≤ 10.
+
+As for l (τ ) which determines the eventual task-specific overhead, we impose l (τ ) ≤ 3. Since we always determines L (τ ) first, we do not need to experiment with every combination of (L (τ ) , l (τ ) ).
+
+Combining these together, our approach requires approximately 10x (7 for L and 3 for l) more training time compared to conventional full fine-tuning approach.
+
+The conventional hyper-parameters (e.g. learning rate, mini-batch size, etc) used in our experiments are summarized in Table 4.
+
+In the box plots of Figure 2 above we report the performance of the student models initialized from pre-trained BERT and from the teacher.
+
+It can be clearly seen that the latter initialization scheme generally outperforms the former.
+
+Besides, we also observe that although increasing the number of task-specific layers improves the performance, the marginal benefit of doing so varies across tasks.
+
+Hyper-parameter value learning rate 2e-5 batch size 32 Epoch 3, 4, 5 Optimizer Adam weight decay rate 0.01 β 1 0.9 β 2 0.999 1e-6
+
+Table 4: Hyper-parameters used in our experiments.
+
+We mainly followed the practice of (Devlin et al., 2019).
+
+Notably, for QQP and STS-B the student models with only one task-specific layer are able to attain 99% of the performance of their teacher.
+
+In Fig 5, we report the performance of our method with various values of c, where c is defined as the minimal marginal benefit (in terms of task performance metric) that every task-specific layer should bring (see Section 4.2).
+
+We have implemented our framework in the application of utterance understanding of XiaoAI, a mono-lingual (Chinese) commercial AI assistant developed by XiaoMi.
+
+Our flexible multi-task model forms the bulk of the utterance understanding system, which processes over 100 million user queries per day with a peak throughput of nearly 4000 queries-per-second (QPS).
+
+For each user query, the utterance understanding system performs various tasks, including emotion recognition, incoherence detection, domain classification, intent classification, named entity recognition, slot filling, etc.
+
+Due to the large workload, these tasks are developed and maintained by a number of different teams.
+
+As the AI assistant itself is under iterative/incremental development, its utterance understanding system undergoes frequent updates3 :
+
+• Update of training corpus, e.g. when new training samples become available or some mislabeled samples are corrected or removed.
+
+• Introduction of new tasks.
+
+This may happen when the AI assistant needs to upgrade its skillsets so as to perform new tasks (e.g. recognize new set of instructions, play verbal games with kids, etc).
+
+• Removal of obsolete tasks.
+
+Sometimes a task is superseded by another task, or simply deprecated due to commercial considerations.
+
+Those tasks need to be removed from the system.
+
+One imperative feature for the system is the modular design, i.e. the tasks should be independent of each other so that any modification made to one task does not affect the other tasks.
+
+Clearly, a conventional multi-task system does not meet our need as multi-task training breaks modularity.
+
+Before the introduction of BERT, our utterance understanding system is based on single-task serving, i.e. a separate model is deployed for each task.
+
+As those models are relatively lightweight (e.g. TextCNN, LSTM), overhead is not an issue.
+
+However, with the introduction of BERT, the cost for single-task serving becomes a valid concern as each task model (a unique 12-layer fine-tuned BERT) requires two Nvidia Tesla V100 GPUs for stable serving that meets the latency requirement.
+
+With the primary objective of reducing cost, we have implemented the proposed flexible multitask model in our utterance understanding system, which provides serving for a total of 21 downstream tasks.
+
+Overall, there are 40 transformer layers of which 8 are shared frozen layers (on average 1.5 task-specific layers per task).
+
+Using only 5 Nvidia Tesla V100 GPUs, we are able to achieve4 a P99 latency of 32 ms under a peak throughput of 4000 QPS.
+
+Compared with single-task serving for 21 tasks which would require 42 GPUs, we estimate that our system reduces the total serving cost by up to 88%.
+
+A. For every submission A1. Did you discuss the limitations of your work? Yes, it is explicitly discussed in Section 5.2.
+
+No, we believe that there is no potential risk.
+
+A3.
+
+Do the abstract and introduction summarize the paper's main claims? Yes, we confirm so.
+
+Yes, we used the GLUE datasets in Section 4.
+
+B1. Did you cite the creators of artifacts you used? Yes, the GLUE paper is cited in Section 4.
+
+The individual datasets in GLUE are cited in Appendix A.
+
+B2. Did you discuss the license or terms for use and/or distribution of any artifacts?
+
+No. Since those artifacts are popular in the NLP community, we merely followed the common practice of using these artifacts.
+
+We do not believe that our usage violate the license for use, or is potentially risky in any ways we can imagine.
+
+B3. Did you discuss if your use of existing artifact(s) was consistent with their intended use, provided that it was specified? For the artifacts you create, do you specify intended use and whether that is compatible with the original access conditions (in particular, derivatives of data accessed for research purposes should not be used outside of research contexts)?
+
+No. The justification is the same that for question B2.
+
+B4. Did you discuss the steps taken to check whether the data that was collected/used con-tains any information that names or uniquely identifies individual people or offensive content, and the steps taken to protect / anonymize it?
+
+No. The justification is the same that for question B2.
+
+B5. Did you provide documentation of the artifacts, e.g., coverage of domains, languages, and linguistic phenomena, demographic groups represented, etc.? Yes, it is provided in Appendix A.
+
+B6. Did you report relevant statistics like the number of examples, details of train/test/dev splits, etc. for the data that you used/created? Yes, it is provided in Appendix A.
+
+Yes, in Section 4.
+
+C1. Did you report the number of parameters in the models used, the total computational budget (e.g., GPU hours), and computing infrastructure used? No, we did not report the number of parameters in the models used as it can be easily inferred from No, we did not use any human annotators, nor did we research with human subjects.

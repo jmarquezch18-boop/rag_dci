@@ -1,0 +1,5 @@
+Table 4 shows that our model achieves strong accuracy while predicting all the phrase types except for the Adjective Phrase (ADJP).
+
+We list some of the most common mistakes our parse makes and suggest likely explanations for each: In the future, we would like to develop error analysis protocols for both CTB and KTB using human-in-the-loop process (leveraging feedback from the respective language experts) and provide an in-depth statistical analysis.
+
+Bracketing

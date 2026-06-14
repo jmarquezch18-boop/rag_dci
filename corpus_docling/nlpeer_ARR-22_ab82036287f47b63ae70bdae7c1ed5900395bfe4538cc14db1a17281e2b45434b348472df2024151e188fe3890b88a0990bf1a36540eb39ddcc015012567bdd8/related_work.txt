@@ -1,0 +1,39 @@
+Readability Assessment has been an active area in educational research for almost a century.
+
+Early research on this topic focused on the creation of readability "formulae", which relied on easy to calculate measures such as word and sentence length, and presence of words from some standard word list (Lively and Pressey, 1923;Flesch, 1948;Stenner, 1996).
+
+More than 200 such formulae were proposed in the past few decades DuBay (2007).
+
+The advent of NLP and machine learning resulted in more data driven research on ARA over the past two decades.
+
+Starting from statistical language models (Si and Callan, 2001), a range of lexical and syntactic features (Heilman et al., 2007;Petersen and Ostendorf, 2009;Ambati et al., 2016) as well as inter-sentential features (Pitler and Nenkova, 2008;Todirascu et al., 2013;Xia et al., 2016) were developed in the past.
+
+Features motivated by related disciplines such as psycholinguistics (Howcroft and Demberg, 2017), second language acquisition (Vajjala and Meurers, 2012) and cognitive science (Feng et al., 2009) were also explored for this task.
+
+In the past few years, ARA research has been primarily focused on textual embeddings and deep learning based architectures.
+
+Word embeddings in combination with other attributes such as domain knowledge or language modeling (Cha et al., 2017;Jiang et al., 2018) and a range of neural architectures, from multi attentive RNN (Azpiazu and Pera, 2019) to deep reinforcement learning (Mohammadi and Khasteh, 2019) were proposed.
+
+Recent research explored combining transformers with linguistic features (Deutsch et al., 2020;Meng et al., 2020;Lee et al., 2021;Imperial, 2021).
+
+Although a lot of this research evolved on English, the past decade saw ARA research in other languages such as German (Hancke et al., 2012), French (François and Fairon, 2012), Italian (Dell'Orletta et al., 2011), Bangla (Sinha et al., 2012) etc., which employed language specific feature sets.
+
+While most ARA research modeled one language at a time, some research created language agnostic feature sets and architectures and experimented with 2 to 7 languages (Shen et al., 2013;Azpiazu and Pera, 2019;Madrazo Azpiazu and Pera, 2020a,b;Martinc et al., 2021;Weiss et al., 2021).
+
+Although only one language is considered per model in all this research, there are two important exceptions.
+
+Madrazo Azpiazu and Pera (2020b) explored whether combining texts from related languages during training improves ARA performance for low resource languages.
+
+Weiss et al. (2021) used a model trained on English texts on German, based on a common, broad set of handcrafted linguistic features.
+
+However, to our knowledge, zero-shot cross lingual transfer of neural network architecture based approaches, without any handcrafted features, was not explored for this task in the past.
+
+ARA is traditionally treated as a classification problem in NLP research, although there are some exceptions.
+
+Heilman et al. (2008) compared linear, ordinal, and logistic regression and concluded that ordinal regression with a combination of lexical and grammatical features worked the best for ARA, although classification approaches still dominated subsequent research on the topic.
+
+There is some past work that considered ARA as a pairwise ranking problem, using SVM/SVM rank and hand crafted linguistic features (Pitler and Nenkova, 2008;Tanaka-Ishii et al., 2010;Ma et al., 2012;Mesgar and Strube, 2015;Ambati et al., 2016;Howcroft and Demberg, 2017).
+
+While Tanaka-Ishii et al. (2010) and Ma et al. (2012) showed that ranking performs better than traditional features and classification/regression respectively, Xia et al. (2016) did not find ranking to be consistently better across the board.
+
+Given this background, we take a fresh look at the application of ranking for ARA, by proposing a new neural pairwise ranking model.

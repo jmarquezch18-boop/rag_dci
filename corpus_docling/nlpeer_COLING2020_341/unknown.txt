@@ -1,0 +1,247 @@
+Real-Valued Logics For Typological Universals: Framework And Application
+
+Abstract
+
+The availability of comparable treebanks -syntactically annotated corpora -for a growing number of typologically distinct languages (most prominently in the collaborative Universal Dependencies project (Nivre et al., 2016)) has led to a recent surge of interest in computational work aiming to detect systematic patterns in the grammatical systems of natural languages and/or to test hypotheses from theoretical work in language typology against empirical evidence.
+
+The treebank-based approach (Liu, 2010;Lochbihler, 2017;Gerdes et al., 2019;Bjerva et al., 2019c;Hahn et al., 2020) adds a more data-driven perspective to a strand of research in computational typology (Daumé and Campbell, 2007;Malaviya et al., 2017;Oncevay et al., 2019;Bjerva et al., 2019a;Bjerva et al., 2019b) that is based on carefully curated typological databases such as WALS 1 (Dryer and Haspelmath, 2013) or URIEL 2 (Littell et al., 2017).
+
+The research strand in computational typology which relies on databases essentially builds on the language features that the long tradition of typological research has identified as most relevant for identifying language universals.
+
+Examples of such features are the relative order of verbs and their objects, and the order of nouns and their dependents such as adjectives, numerals and genitives.
+
+In the computational research relying on typological knowledge bases, the features are typically assumed to be Boolean and universals are formulated as propositional formulae.
+
+A major focus has been on (a) detecting universals that have the form of an implication between two typological variables, and (b) predicting the value of unknown features in typological databases based on systematic patterns in attested grammatical systems.
+
+Graphical models have been widely used to calculate the strength of an implication (Daumé and Campbell, 2007;Lu, 2013;Bjerva et al., 2019b;Bjerva et al., 2019a).
+
+While this approach is suitable if one wants to marginalize out the influence of confounding variables, it also constrains the investigated universals to have the form of an implication consisting of one implicand and usually one (but possibly multiple) implicant(s).
+
+In principle, comparable treebanks can provide the basis for observing the empirical distribution of arbitrary grammatical patterns and thus explore a much larger space of potential candidates for universal typological properties -including combinations of more than two variables that cannot be reduced to logical implication.
+
+However, an integration of such an approach with linguistically grounded hypothesis checking has to address two related challenges: (i) a theoretically guided way of navigating the enormous space of candidate propositions has to be developed, and (ii) a perspicuous framework is required for expressing multi-variable propositions and for evaluating them empirically against a full collection of comparable treebanks -while doing justice to the possibility of language-internal variation and tentative preferences by modeling features as real-valued.
+
+This paper proposes an expressive framework that addresses the latter challenge.
+
+We specify a formalism and its semantics to evaluate typological formulae of arbitrary logical complexity.
+
+The core elements of our framework are customizable which gives prospective users the freedom to use their own implementations.
+
+We also include a method for counteracting the bias in the sample of well-studied languages (which are much more likely to be included among the languages with a treebank), many of which are phylogenetically closely related, while other language families are only very sparsely represented.
+
+To demonstrate its usefulness for empirical hypothesis testing, we run a number of experiments: 1) We re-evaluate established universals to test whether the evidence for universals provided by the framework reflects the broad consent.
+
+2) Universals are always evaluated on a subset of all natural languages.
+
+We investigate how reliable it is to transfer the evaluation result obtained from a subset of languages or language families to unknown languages.
+
+3) We use the framework to search new potential universals.
+
+The framework and our experiments are available at https://github.com/tidoe/ typology-coling.
+
+Framework
+
+Valuation Function
+
+The valuation function V maps formulae to truth values.
+
+The function specifically defines the logical connectives for negation (¬), conjunction (∧), disjunction (∨) etc.
+
+For example, the valuation for conjunction in Boolean logic is defined as
+
+V(φ 1 ∧ . . . ∧ φ n ) := 1 V(φ 1 ) = . . . = V(φ n ) = 1 0 otherwise . (3
+
+)
+
+With the language-property matrix in (1) and the valuation in (3), the formula in (2) evaluates as
+
+V(φ English ) = V(v English SVO ∧ v English Prep. ) = 1 (4) since V(v English SVO ) = V(v English Prep. ) = 1.
+
+Averaging Over Languages
+
+Let V(φ ) be the truth value of the formula φ for the language ∈ L under the valuation V. Then |L| truth values can be calculated for V(φ ), one for every language.
+
+A universal is a statement that is supposed to hold for "all" languages -in the statistical sense rather than the absolute sense -but a universal quantification (i.e. a conjunction of the values) would be misleading since it is not robust to outliers.
+
+The score for a formula is hence calculated as the (weighted) average
+
+s(φ) = ∈L w(φ, ) • V(φ ) ∈L w(φ, )(5)
+
+with w being the weight function.
+
+An unweighted average corresponds to a weighted average with all weights being 1.
+
+Implementation
+
+The framework allows implementing individual definitions for the variable matrix V , the valuation V and the weight function w. We experimented with various implementations for all of those (Dönicke, 2020); this section explains the set-up used for the experiments in section 3.
+
+The UD treebanks v2.5 (Zeman et al., 2019) consist of dependency treebanks for 90 languages from 20 families and 39 subfamilies.
+
+The treebanks have a uniform annotation which allows defining properties based on dependency constructions and extracting statistics for various languages of the world.
+
+This data can be used to investigate syntactic universals.
+
+Variables From Universal Dependencies
+
+We extracted a language-property matrix from the UD treebanks.
+
+The properties are specific constructions and the values are their relative frequencies.
+
+We extracted two types of properties:
+
+• Single-link property: relative frequency of a construction involving one head and one dependent, e.g.
+
+v noun-amod:adj = # NOUN ADJ amod ( ) # ADJ NOUN amod ( ) + # NOUN ADJ amod ( )(6)
+
+• Double-link property: relative frequency of a construction involving one head and two dependents, e.g.
+
+v verb-nsubj:noun-obj:noun = #    VERB NOUN NOUN nsubj obj   ( ) #    VERB NOUN NOUN nsubj obj   ( ) + . . . + #    NOUN NOUN VERB obj nsubj   ( ) six possibilities (7)
+
+Here, #[ * ]( ) returns how often the construction * appears for .
+
+The subscripts of v represent the constructions: hyphens connect words, the head is represented by its part-of-speech tag, and the dependents are represented by their dependency relation and their part-of-speech tag, combined by a colon.
+
+Fuzzy Logic
+
+The relative frequencies are in the interval [ 0, 1 ], hence our valuation function has to define logical connectives for a real-valued logic.
+
+A common example for real-valued logic is fuzzy logic (Zadeh, 1965), which defines negation, conjunction and disjunction as follows:
+
+V(¬φ ) := 1 -V(φ ) (8) V(φ 1 ∧ . . . ∧ φ n ) := min{V(φ 1 ), . . . , V(φ n )} (9) V(φ 1 ∨ . . . ∨ φ n ) := max{V(φ 1 ), . . . , V(φ n )}(10)
+
+Implication and equivalence are shortcuts for combinations of the three previous connectives:
+
+V(φ 1 ⇒ φ 2 ) := V(¬φ 1 ∨ φ 2 ) (11) V(φ 1 ⇔ φ 2 ) := V((φ 1 ⇒ φ 2 ) ∧ (φ 2 ⇒ φ 1 ))(12)
+
+All of these valuation functions are generalizations from Boolean logic.
+
+Other examples for manyvalued logics are described in e.g. Smith (2012) and many other works.
+
+We chose fuzzy logic, in contrast to e.g. probabilistic logic (Mizraji, 1992), because the definitions of the fuzzy connectives do not make any assumption about the dependence of typological properties (cf.
+
+Dubois and Prade (1993)).
+
+Properties like "SVO" and "prepositions" could both be considered a subtype of head-initiality and therefore not be independent under a linguistic point of view.
+
+In probabilistic logic, the truth value of a conjunction is defined as the product of each conjunct's truth value, which assumes the independence of the conjuncts.
+
+Phylogenetic Weighting
+
+To confirm a typological universal, it is not sufficient to validate it on as many languages as possible, it is also necessary to validate it on languages from many language families.
+
+For example, if a candidate for a universal is tested on English, German, French, Italian, Spanish and Japanese and the universal holds for all of them but Japanese, then Japanese is not simply an outlier, it is also possible that the "universal" only holds within the Indo-European languages.
+
+Traditionally, typologists counteract the influence of overrepresented language families through different sampling methods (cf.
+
+Bickel (2011), Song (2018)), e.g. sampling only languages with different values (on the properties of interest) for each family (Dryer, 1989;Bickel, 2008).
+
+This "genealogical sampling", however, requires binary/categorical values and a representative database of the world's languages, and is not applicable in our experiments with the UD treebanks.
+
+Thus, we give each language family equal importance by setting the weight function to
+
+w(φ, ) =    w(φ, parent( )) |siblings( )| + 1 if has a parent 1 otherwise . 4 (13)
+
+The weights for the current example are shown in Figure 1.
+
+This approach does not undersample languages, instead all available data is used.
+
+To the best of our knowledge, this is a novel method that maximizes the usage of all available data while alleviating the sampling bias in the data.
+
+5 We believe its utility is worth further examination, however, in our preliminary experiments, the phylogenetic weighting demonstrates better agreement with the existing universals from the literature than the unweighted average.
+
+As Bickel (2011) and Dryer (2018) point out, geography is also an important factor, i.e. neighboring languages are more likely to have common properties than distant languages.
+
+However, both works agree that measuring geographic distance of languages brings its own complications and therefore it is not taken up in this paper.
+
+Experiments
+
+Evaluation Of Greenberg'S Universals
+
+Universal Prediction
+
+For the second experiment, we generate over 200k formulae from the Greenbergian universals in Table 1 by keeping the structures and varying the variables.
+
+(The aim of keeping the structures is to reduce the search space and to generate only formulae that have the "usual shape" of traditional universals.) Logical tautologies are excluded by prohibiting the variables from appearing more than once within the same formula.
+
+We evaluate these formulae in six runs.
+
+In each run, we randomly split the languages into two disjoint sets for every formula and evaluate it on both sets separately.
+
+The idea is to predict the score for the second set of languages from the score on the first set of languages.
+
+Ideally, the scores from both sets should be identical because this means that the initial score is reliable even for unknown data.
+
+After each run, we take the two values s 1 (φ), s 2 (φ) for every formula φ and calculate the overall root-mean-square error (RMSE):
+
+RM SE = 1 |Φ| • φ∈Φ |s 2 (φ) -s 1 (φ)| 2(14)
+
+This measures how similar our predictions are to the actual values.
+
+Since we are especially interested in high-scoring formulae, we additionally calculate the RMSE on only those value pairs where s 1 (φ) ≥ 90%.
+
+The six runs differ in the split method.
+
+1) The languages are split either on the language, subfamily or family level.
+
+For the latter two, the languages of a (sub)family are either completely in the first or the second set. 2) The languages/subfamilies/families are either split 50%/50% or 20%/80%.
+
+The second percentages are more realistic since there is often data for a few languages/families from which one wants to predict how true a formula is in general.
+
+The results in Table 2 illustrate two things.
+
+The less surprising finding is that evaluations on two balanced sets are more similar than evaluations on imbalanced sets.
+
+Arguably, because an evaluation on 20% of the data is much less representative than an evaluation on 80% of the data, whereas the two sets of a 50/50 split are about equally representative.
+
+Also, splitting on the language level yields more similar evaluation results than evaluating on two sets with completely different (sub)families.
+
+The second finding is that the RMSE is generally lower for formulae that are very true in at least one set of languages.
+
+This is also visible in Figure 3, the data points scatter in the shape of a lens around the identity graph, i.e. formulae that are found to be very true or very false on one set of languages are likely to achieve a similar score on a completely different set of languages.
+
+Formulae with mid-range truth values (0.2-0.8), on the  other hand, exhibit a much larger variance.
+
+This indicates that certain formulae have a higher potential of being universals than others.
+
+For subfamilies and families, the prediction error increases (the appendix contains scatter plots for all six runs).
+
+Search For Universals
+
+Implications between two variables have been investigated in many previous studies.
+
+In the third experiment, we choose ten dependency relations8 and calculate pairwise implications between the corresponding single-link properties.
+
+Since each relation can be left-or right-directed, there are 20 × 20 possible implications (the appendix contains the table with all implications).9 Table 3 ranks the implications by average truth value.
+
+As a matter of fact, the subject precedes its head in the majority of UD languages, resulting in high scores for implications where "HEAD-nsubj" is the antecedent or "nsubj-HEAD" is the consequent (principle of explosion).
+
+Those implications are responsible for about half of the rows in Table 3.
+
+For example, (#19) HEAD-advmod ⇒ nsubj-HEAD and (#20) advmod-HEAD ⇒ nsubj-HEAD are quite uninteresting implications since both achieve a score of 0.92 but have complementary antecedents.
+
+Thus, they only reveal that most languages exhibit subject-verb order, independently from the position of adverbs.
+
+However, there are also some formulae that were already discovered in different works and are also included in the Universals Archive, such as (#22) a. amod-HEAD ⇒ nummod-HEAD b. "IF the descriptive adjective precedes the noun, THEN, with overwhelmingly more than chance frequency, the demonstrative and the numeral do likewise." (Universals Archive, #57), which is part of the 18 th universal of Greenberg, part of the 57 th in the Universals Archive and the 7 th in Daumé and Campbell (2007).  (1983), is listed in the UA but was not detected by the computer-assisted models of Daumé and Campbell (2007) and Bjerva et al. (2019b).
+
+This shows that corpus statistics can gain advantage over knowledge bases in some cases.
+
+Last but not least, universals that, as far as we know, have not been described so far are suggested, e.g. the following four and their composition in (1).
+
+Although the suggested universals are not guaranteed to be linguistically sound or meaningful, it could certainly provide inspiration to typologists for careful examination and interpretation.
+
+Conclusion
+
+Figure 1: Example language family tree with weights.
+
+Figure 2: The properties of Greenberg's universals #3 and #4 for all languages.
+
+Each point is a language and the color shading indicates the truth value of the universal (dark is true; light is false).
+
+Figure 3: Truth values s 1 and s 2 from both sets (languages 50/50 condition) and the identity function.
+
+#13) HEAD-aux ⇒ HEAD-case (#14) HEAD-aux ⇒ nmod-HEAD (#23) HEAD-aux ⇒ det-HEAD (#24) HEAD-aux ⇒ nummod-HEAD (1) a. HEAD-aux ⇒ (HEAD-case ∧ nmod-HEAD ∧ det-HEAD ∧ nummod-HEAD) b. IF the auxiliary follows the verb, THEN the adposition follows the noun AND genitive, article and numeral all precede the noun.
+
+RMSEs for all split conditions, over all formulae and over formulae with a high score on the first set.
+
+Top 30 implications with indices to similar formulae in previous works: UniversalsArchive,  Greenberg (1963),

@@ -1,0 +1,21 @@
+The goal of MAML (Finn et al., 2017) is to find a set of parameters, that work well as initialization point for multiple tasks, including unseen ones.
+
+The procedure consists of an outer loop and an inner loop.
+
+The outer loop starts with a set of parameters, which we will call the Meta Model.
+
+The inner loop trains task specific copies of the Meta Model for a low amount of steps.
+
+Once the inner loop is complete, the loss for each of the models is calculated, summed, and backpropagated to the original Meta Model by unrolling the inner loop.
+
+This includes the very costly calculation of second order derivatives.
+
+The Meta Model is then updated and the inner loop starts again.
+
+This procedure moves the initialization point closer to the optimal configuration for each of the trained tasks, which generalizes to even unseen tasks.
+
+Multiple variants of MAML have been suggested that try to fix the high computational cost of the second order derivatives.
+
+The simplest one is called first-order MAML and simply applies the gradient of the task specific model at the end of the inner loop directly to the Meta Model.
+
+Other variants are described in Antoniou et al. (2019); Rajeswaran et al. (2019).

@@ -1,0 +1,19 @@
+We compare the performance of NAKDIMON on our new test set ( §2.3) against Dicta,9 Snopi,10 and Morfix (Kamir et al., 2002).
+
+as well as a MA-JORITY baseline which returns the most common dotting for each word seen in our full training set.
+
+Metrics We report four metrics: decision accuracy (DEC) is computed over the entire set of individual possible decisions: dagesh/mappiq for letters that allow it, sin/shin dot for the letter ‫,ש‬ and all other diacritics for letters that allow them; character accuracy (CHA) is the portion of characters in the text that end up in their intended final form (which may combine two or three decisions, e.g. dagesh + vowel); word accuracy (WOR) is the portion of words with no mistakes; and vocalization accuracy (VOC) is the portion of words where any dotting errors do not cause incorrect pronunciation among mainstream Israeli Hebrew speakers.
+
+11
+
+We provide document-level macro-averaged accuracy percentage results for a single run over our test set in Table 3.
+
+All systems, except Snopi, substantially outperform the majority-dotting baseline on all metrics.
+
+NAKDIMON outperforms Morfix on character-level metrics but not on word-level metrics, mostly since Morfix ignores certain words altogether, incurring errors on multiple characters.
+
+We note the substantial improvement our model achieves on the metric compared to the WOR metric: 18.43% of word-level errors are attributable to vocalization-agnostic dotting, compared to 13.80% for Dicta and 10.41% for Snopi (but 20.91% for Morfix).
+
+Considering that the central use case for dotting modern Hebrew text is to facilitate pronunciation to learners and for reading, and that undotted homograph ambiguity typically comes with pronunciation differences, we believe this measure to be no less important than WOR.
+
+Results on Dicta's test set (Shmidman et al., 2020) are presented in Appendix C.

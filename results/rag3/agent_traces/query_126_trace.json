@@ -1,0 +1,157 @@
+{
+  "query_id": "413aa7a24c99874e0aae31b569348cc6c4e39b14",
+  "query": "What recommendations can be made based on the views expressed on coordination, preparation, and decision-makers?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "coordination"
+      },
+      "result_preview": "Search results for 'coordination' (4 matches):\n[paper_id=nlpeer_ARR-22_e4742f934fad6dc1f3389981d0d0fc6b8b48638f4c5c0a74b9dc11bdd026489bb2d3e78a6a395e82124e87c7409ff370cdff0edf375958bcf909372da1859815 | section=results | line=67] We think this is because the answers are usually a list of spans with s",
+      "elapsed_s": 5.75
+    },
+    {
+      "iteration": 1,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_193",
+        "section": "introduction",
+        "start": 45,
+        "end": 60
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_193 / introduction — líneas 40-65 de 93]\n\nEdges bear a category, indicating the role of the sub-unit in the parent relation.\n\nFigure 1 presents a few examples.\n\nUCCA is a multi-layered representation, where each layer corresponds to a \"module\" of semantic distinctions.\n\nUCCA",
+      "elapsed_s": 9.98
+    },
+    {
+      "iteration": 2,
+      "tool": "list_sections",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_193"
+      },
+      "result_preview": "Secciones de 'nlpeer_PeerRead-ACL2017_193':\nabstract\nintroduction\nresults",
+      "elapsed_s": 13.98
+    },
+    {
+      "iteration": 3,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_193",
+        "section": "results",
+        "start": 5,
+        "end": 20
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_193 / results — líneas 1-25 de 87]\nData.\n\nWe conduct our experiments on the UCCA Wikipedia corpus (henceforth, Wiki), and use the English part of the UCCA Twenty Thousand Leagues Under the Sea English-French parallel corpus (henceforth, 20K Leagues) as outof-domain data.\n\n6 ",
+      "elapsed_s": 7.06
+    },
+    {
+      "iteration": 4,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "nlpeer_PeerRead-ACL2017_193",
+        "section": "introduction",
+        "start": 26,
+        "end": 50
+      },
+      "result_preview": "[nlpeer_PeerRead-ACL2017_193 / introduction — líneas 21-55 de 93]\nTo assess the ability of existing parsers to tackle the task, we develop a conversion procedure from UCCA to bilexical graphs and trees.\n\nResults show superior performance for TUPA, demonstrating the effectiveness of the presented app",
+      "elapsed_s": 12.43
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Edges bear a category, indicating the role of the sub-unit in the parent relation.\n\nFigure 1 presents a few examples.\n\nUCCA is a multi-layered representation, where each layer corresponds to a \"module\" of semantic distinctions.\n\nUCCA's foundational layer, targeted in this paper, covers the predicate-argument structure evoked by predicates of all grammatical categories (verbal, nominal, adjectival and others), the inter-relations between them, and other major linguistic phenomena such as coordination and multi-word expressions.\n\nThe layer's basic notion is the scene, describing a state, action, movement or some other relation that evolves in time.\n\nEach scene contains one main relation (marked as either a Process or a State), as well as one or more Participants.\n\nFor example, the sentence \"After graduation, John moved to Paris\" (Figure 1a) contains two scenes, whose main relations are \"graduation\" and \"moved\". \"John\" is a Participant in both scenes, while \"Paris\" only in the latter.\n\nFurther categories account for inter-scene relations and the internal structure of complex arguments and relations (e.g. coordination, multi-word expressions and modification).\n\nOne incoming edge for each non-root node is marked as primary, and the rest (mostly used for implicit relations and arguments) as remote edges, a distinction made by the annotator.\n\nThe primary edges thus form a tree structure, whereas the remote edges enable reentrancy, forming a DAG.\n\nWhile parsing technology in general, and transition-based parsing in particular, is wellestablished for syntactic parsing, UCCA has several distinct properties that distinguish it from syntactic representations, mostly UCCA's tendency to abstract away from syntactic detail that do not affect argument structure.\n\nFor instance, consider the following examples where the concept of a scene has a different rationale from the syntactic concept of a clause.\n\nFirst, non-verbal predicates in UCCA are represented like verbal ones, such as when they appear in copula clauses or noun phrases.",
+      "section": "introduction",
+      "paper_id": "nlpeer_PeerRead-ACL2017_193",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_193_introduction_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_193",
+      "score": 1.0
+    },
+    {
+      "text": "Data.\n\nWe conduct our experiments on the UCCA Wikipedia corpus (henceforth, Wiki), and use the English part of the UCCA Twenty Thousand Leagues Under the Sea English-French parallel corpus (henceforth, 20K Leagues) as outof-domain data.\n\n6  UCCA edges can cross sentence boundaries, we adhere to the common practice in semantic parsing and train our parsers on individual sentences, discarding inter-relations between them (0.18% of the edges).\n\nWe also discard linkage nodes and edges (as they often express inter-sentence relations and are thus mostly redundant when applied at the sentence level) as well as implicit nodes.\n\n7 In the out-of-domain experiments, we apply the same parsers (trained on the Wiki training set) to the 20K Leagues corpus without parameter re-tuning.\n\nImplementation.\n\nWe use the DyNet package (Neubig et al., 2017) for implementing the NN classifiers.\n\nUnless otherwise noted, we use the default values provided by the package.\n\nSee Appendix C for the hyperparameter values we found by tuning on the development set.\n\nEvaluation.\n\nWe define a simple measure for comparing UCCA structures G p = (V p , E p , p ) and G g = (V g , E g , g ), the predicted and goldstandard graphs, respectively, over the same sequence of terminals W = {w 1 , . . . , w n }.\n\nFor an edge e = (u, v) in either graph, u being the parent and v the child, its yield y(e) ⊆ W is the set of terminals in W that are descendants of v. Define the set of mutual edges between G p and G g : We report two variants of this measure: one where we consider only primary edges, and another for remote edges (see Section 2).\n\nPerformance on remote edges is of pivotal importance in this investigation, which focuses on extending the class of graphs supported by statistical parsers.",
+      "section": "results",
+      "paper_id": "nlpeer_PeerRead-ACL2017_193",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_193_results_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_193",
+      "score": 1.0
+    },
+    {
+      "text": "To assess the ability of existing parsers to tackle the task, we develop a conversion procedure from UCCA to bilexical graphs and trees.\n\nResults show superior performance for TUPA, demonstrating the effectiveness of the presented approach.\n\n1The rest of the paper is structured as follows:\n\nSection 2 describes UCCA in more detail.\n\nSection 3 introduces TUPA.\n\nSection 4 discusses the data and experimental setup.\n\nSection 5 presents the experimental results.\n\nSection 6 summarizes related work, and Section 7 concludes the paper.\n\n2 The UCCA Scheme UCCA graphs are labeled, directed acyclic graphs (DAGs), whose leaves correspond to the tokens of the text.\n\nA node (or unit) corresponds to a terminal or to several terminals (not necessarily contiguous) viewed as a single entity according to semantic or cognitive considerations.\n\nEdges bear a category, indicating the role of the sub-unit in the parent relation.\n\nFigure 1 presents a few examples.\n\nUCCA is a multi-layered representation, where each layer corresponds to a \"module\" of semantic distinctions.\n\nUCCA's foundational layer, targeted in this paper, covers the predicate-argument structure evoked by predicates of all grammatical categories (verbal, nominal, adjectival and others), the inter-relations between them, and other major linguistic phenomena such as coordination and multi-word expressions.\n\nThe layer's basic notion is the scene, describing a state, action, movement or some other relation that evolves in time.\n\nEach scene contains one main relation (marked as either a Process or a State), as well as one or more Participants.\n\nFor example, the sentence \"After graduation, John moved to Paris\" (Figure 1a) contains two scenes, whose main relations are \"graduation\" and \"moved\". \"John\" is a Participant in both scenes, while \"Paris\" only in the latter.\n\nFurther categories account for inter-scene relations and the internal structure of complex arguments and relations (e.g. coordination, multi-word expressions and modification).",
+      "section": "introduction",
+      "paper_id": "nlpeer_PeerRead-ACL2017_193",
+      "chunk_id": "dci_nlpeer_PeerRead-ACL2017_193_introduction_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_PeerRead-ACL2017_193",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/F1000-22/10-170_129",
+    "nlpeer/F1000-22/10-170_131",
+    "nlpeer/F1000-22/10-170_132",
+    "nlpeer/F1000-22/10-170_134",
+    "nlpeer/F1000-22/10-170_135"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_PeerRead-ACL2017_193_introduction_0000",
+      "dci_nlpeer_PeerRead-ACL2017_193_results_0001",
+      "dci_nlpeer_PeerRead-ACL2017_193_introduction_0002"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_193_introduction_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_193_results_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_PeerRead-ACL2017_193_introduction_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.027777777777777776,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

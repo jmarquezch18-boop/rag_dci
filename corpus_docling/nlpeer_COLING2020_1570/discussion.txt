@@ -1,0 +1,95 @@
+Figure 2a shows the histogram (in 7 bins) of ADEQUACY (mean adequacy scores), each bin further subdivided into top names (n top , orange) and alternative names (n alt , green) for each object.
+
+The figure shows that most names are fully or largely adequate, with 68% of name-object pairs judged as 'perfectly adequate' by all respective annotators (ADEQUACY = 1).
+
+In contrast, only few name-object pairs were judged as 'completely inadequate' by all annotators (0.03% of top names and 2.4% of alternative names).
+
+There is a clear division between the top names n top in orange, which are overwhelmingly perfectly adequate, and the alternative names n alt in green, of which half (52%) are judged as perfectly adequate and the other half spread along the full range of mean adequacy scores.
+
+The former reflects that a name that was produced by many different humans (for 96% of all ManyNames objects, the n top was given by at least 10 people) is very likely to be a perfectly adequate name for the target object.
+
+Overall, most names are fully or largely adequate.
+
+As we will show next, most inadequacies correspond to referential issues.
+
+Mostly Referential Errors We will next show that most inadequacies correspond to referential issues, and that these names, however, have a low response frequency, by looking at both, name-object pair types (as in Fig. 2a) and tokens.
+
+Table 1 (row ManyNames v1) represents our verification annotations for the full ManyNames dataset.
+
+It shows the distribution of inadequacy types across name-object pairs, jointly considering slight and total inadequacies; with an average INADEQUACYTYPE of 21%, most naming issues are indeed referential (i.e., cases where names do not exactly correspond to the object delimited by the bounding box).
+
+However, Table 1 reports name-object pair types; if we consider tokens (individual responses) instead, we find referential errors in 7% of the cases.
+
+That is, names with referential issues have a low response frequency.
+
+A less prominent but still noticeable issue are visual recognition errors (4%), while other errors occur rarely.
+
+We will explain the remaining rows of Table 1 in Section 3.4.
+
+The fact that most INADEQUACYTYPEs are referential has the effect that the most prevalent cause of noise in the data is subjects naming other objects than the one that, according to most annotators, was the one marked by the box.
+
+Figure 2b illustrates this with the SAMEOBJECT scores (i.e., proportion of annotators judging two names to be the same object); it shows the token-based distribution of the SAMEOBJECT scores between all name responses and their corresponding top names n top , divided into 4 (uneven) bins, each bin further subdivided by INADEQUACYTYPE (colors).
+
+We consider name tokens-the name that was given by each individual ManyNames annotator for a given object-, not name types-the name that was given by at least 2 annotators (recall that we discarded names with count 1)-in order to better reflect the distribution of actual naming behavior.
+
+To obtain the token-based distribution, we multiplied the SAMEOBJECT scores by the name counts in the original ManyNames response sets (see Appendix A for details).
+
+Note the strong agreement in the same-object judgments: 91% of all name tokens were judged to name the same object as n top by all our annotators (SAMEOBJECT = 1), and 6% to not (SAMEOBJECT = 0).
+
+Only in 3% of cases (the middle two bins) did our annotators disagree on whether a given token and n top are co-referring.
+
+Also note the expected correspondence between the error types and the SAMEOBJECT judgments: when SAMEOBJECT = 0, most pairs are deemed to be referential errors.
+
+This shows that the task of deciding whether two ManyNames annotators, who entered different names, were likely intending to name the same object elicits robust judgments.
+
+Discussion of Causes We have shown that there is a non-negligible number of cases in which subjects named an object different from the target.
+
+Part of the reason may be annotators not doing their task faithfully; recall that the initial data collection was a generation task in which it is difficult to put quality control mechanisms.
+
+However, the high amount of perfectly adequate names suggests that this is unlikely to be the sole or even main cause, pointing perhaps to the experimental setup itself as a culprit: the realworld context of naming behavior is imperfectly approximated by an image and a potentially ambiguous box.
+
+Qualitative analysis is consistent with this hypothesis.
+
+On the one extreme, we find plain annotator errors, such as ball for a bear in Figure 1c, and on the other, cases of genuine bounding box ambiguity, as in Figure 1d, where it is not possible to determine whether the box marks the table or the food it contains.
+
+6Most cases fall in between these extremes, with effects like object salience clearly playing a role.
+
+For instance, in Figure 1e, the box marks the dog, but the wheel occupies almost the whole box and is more visually salient, even occluding the target object.
+
+Most people correctly identified the dog, but four named the wheel instead.
+
+These effects are partially domain-dependent, as we will discuss in Section 3.5.
+
+The consistent response sets of ManyNames v2 give us a more reliable empirical window on genuine naming variation, i.e., the existence of multiple adequate names for the same object.
+
+(apparent) naming variation in ManyNames v1 and v2, overall and by domain (rows), by listing both the mean number of names per object (columns N ) and the mean percentage of original ManyNames annotators who entered the top name.
+
+The table shows a 25% reduction in mean number of names per object (from 2.9 for ManyNames v1 to 2.2 for ManyNames v2 on average), and an increase in the percentage of entered names being the top name (75% to 80%).
+
+Thus, inevitably, noise in the data led to overestimating naming variation; however, even after noise removal, substantial variation remains.
+
+This suggests that free object naming cannot be adequately modeled with a single-label approach, as is common in Computer Vision-we return to this in Section 4.
+
+ManyNames v1 on its own already suggests that variation is domain-dependent, a picture that is maintained in ManyNames v2: people trigger the most variation (3.3 names on average in ManyNames v2), and animals the least (1.3 names).
+
+Moreover, by comparing across domains also the reduction in variation of ManyNames v2 compared to v1 we can see that the susceptibility to factors that inflate true variation, primarily referential and visual inadequacies, is domain-dependent too.
+
+People, home, and buildings are the most susceptible to these factors (-1 in N for ManyNames v2); vehicles and animals/plants the least (+0.3 and -0.2).
+
+In the former, most discarded items involved referential errors or uncertainty (about 85%, in contrast to, e.g., food with 67%), typical example errors being the confusion of clothes and the wearer of them, a background target with a foreground object (e.g., Fig. 1e), or ambiguous bounding boxes (e.g., Fig. 1d).
+
+In contrast, the animals/plants domain has the most non-referential inadequacies (43.6%; clothing the least with 3.2%), which are predominantly visual errors, likely reflecting the visual similarity of different types of animals, especially as seen on pictures.
+
+In these domains humans seem to have a strong tendency towards the 'basic-level' category (e.g., bear is preferred over the hyponym polar bear and the hypernym animal ), explaining their lower naming variation.
+
+Interestingly, this preference holds even in the face of visual uncertainty, i.e., cases where a hypernym would have been safer, such as animal in the case where two subjects entered goat, one entered horse and another dear (for 'deer').
+
+Finally, we remark that ensuring consistent response sets (filtering incorrect names) proved the most difficult for the food domain.
+
+In ManyNames v2, the food domain has the largest proportion of name tokens (7.6%) for which it is still unclear if they name the same object as the top name (i.e., 0 < SAMEOBJECT < 1), followed by clothing (4.9%).
+
+The associated inadequacies are primarily referential, but also visual (e.g., uncertainty about what the picture is showing) and linguistic (terminology).
+
+The food domain in particular seems to be susceptible to variation between the annotators in categorization/terminology.
+
+For example, bread in Fig. 1h survived into ManyNames v2 as an adequate alternative for cake, even though it was given by only 2 original ManyNames v1 annotators.

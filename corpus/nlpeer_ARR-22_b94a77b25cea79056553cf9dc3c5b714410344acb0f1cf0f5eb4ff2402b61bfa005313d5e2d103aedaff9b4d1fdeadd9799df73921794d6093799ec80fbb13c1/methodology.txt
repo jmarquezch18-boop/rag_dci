@@ -1,0 +1,7 @@
+In our experimental setting, we made sure to also resample the hyperparameter(s) after each iteration, following mostly (Teh, 2006a;Mochihashi et al., 2009): the concentration parameter α has a Gamma posterior distribution, and the discount parameter d a Beta distribution.
+
+The initial values of the hyperparameters were set as in Goldwater et al.'s work on the unigram dpseg: concentration parameter: α = 20, p # = 0.5, discount parameter for pypseg: d = 0.5.
+
+The Gibbs sampler always runs for 20,000 iterations and simulated annealing is implemented as in (Goldwater et al., 2009) with 10 increments of temperature.
+
+All the results are obtained by collecting the predicted boundaries at the end of the last sampling iteration of one single run.

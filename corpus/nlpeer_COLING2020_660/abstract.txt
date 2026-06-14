@@ -1,0 +1,15 @@
+One of the most fundamental elements of narrative is character: if we are to understand a narrative, we must be able to identify the characters of that narrative.
+
+Therefore, character identification is a critical task in narrative natural language understanding.
+
+Most prior work has lacked a narratologically grounded definition of character, instead relying on simplified or implicit definitions that do not capture essential distinctions between characters and other referents in narratives.
+
+In prior work we proposed a preliminary definition of character that was based in clear narratological principles: a character is an animate entity that is important to the plot.
+
+Here we flesh out this concept, demonstrate that it can be reliably annotated (0.78 Cohen's κ), and provide annotations of 170 narrative texts, drawn from 3 different corpora, containing 1,347 character co-reference chains and 21,999 non-character chains that include 3,937 animate chains.
+
+Furthermore, we have shown that a supervised classifier using a simple set of easily computable features can effectively identify these characters (overall F 1 of 0.90).
+
+A detailed error analysis shows that character identification is first and foremost affected by co-reference quality, and further, that the shorter a chain is the harder it is to effectively identify as a character.
+
+We release our code and data for the benefit of other researchers 1 .

@@ -1,0 +1,11 @@
+We release ManyNames v2 (MN v2), a verified version of an object naming dataset that contains dozens of valid names per object for 25K images.
+
+We analyze issues in the data collection method originally employed, standard in Language & Vision (L&V), and find that the main source of noise in the data comes from simulating a naming context solely from an image with a target object marked with a bounding box, which causes subjects to sometimes disagree regarding which object is the target.
+
+We also find that both the degree of this uncertainty in the original data and the amount of true naming variation in MN v2 differs substantially across object domains.
+
+We use MN v2 to analyze a popular L&V model and demonstrate its effectiveness on the task of object naming.
+
+However, our fine-grained analysis reveals that what appears to be human-like model behavior is not stable across domains, e.g., the model confuses people and clothing objects much more frequently than humans do.
+
+We also find that standard evaluations underestimate the actual effectiveness of the naming model: on the single-label names of the original dataset (Visual Genome), it obtains -27% accuracy points than on MN v2, that includes all valid object names.

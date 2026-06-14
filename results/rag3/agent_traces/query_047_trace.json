@@ -1,0 +1,119 @@
+{
+  "query_id": "4a12daa058e224f39629de8997d5de7c8b0c2d3c",
+  "query": "Why not use the complete graph for training instead of pruning it?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "pruning"
+      },
+      "result_preview": "Search results for 'pruning' (1 matches):\n[paper_id=nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34 | section=abstract | line=5] First, we restructure decoding as a best-first search, which explores the sp",
+      "elapsed_s": 4.87
+    },
+    {
+      "iteration": 1,
+      "tool": "read_file",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+        "section": "abstract"
+      },
+      "result_preview": "[nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34 / abstract]\nConditional neural text generation models generate high-quality outputs, but often concentrate around a mode when what we really want is a diver",
+      "elapsed_s": 8.1
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "efficiency"
+      },
+      "result_preview": "Search results for 'efficiency' (18 matches):\n[paper_id=nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5 | section=results | line=15] For computation efficiency and energy-saving consideration, we use the r",
+      "elapsed_s": 3.96
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "training efficiency"
+      },
+      "result_preview": "No matches found for 'training efficiency'",
+      "elapsed_s": 6.75
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "model efficiency"
+      },
+      "result_preview": "No matches found for 'model efficiency'",
+      "elapsed_s": 6.82
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "Conditional neural text generation models generate high-quality outputs, but often concentrate around a mode when what we really want is a diverse set of options.\n\nWe present a search algorithm to construct lattices encoding a massive number of generation options.\n\nFirst, we restructure decoding as a best-first search, which explores the space differently than beam search and improves efficiency by avoiding pruning paths.\n\nSecond, we revisit the idea of hypothesis recombination: we can identify pairs of similar generation candidates during search and merge them as an approximation.\n\nOn both summarization and machine translation, we show that our algorithm encodes thousands of diverse options that remain grammatical and high-quality into one lattice.\n\nThis algorithm provides a foundation for building downstream generation applications on top of massive-scale diverse outputs.\n\n1",
+      "section": "abstract",
+      "paper_id": "nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+      "chunk_id": "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_abstract_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7_16",
+    "nlpeer/ARR-22/c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7_17",
+    "nlpeer/ARR-22/c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7_43",
+    "nlpeer/ARR-22/c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7_44",
+    "nlpeer/ARR-22/c53c0e92d95b1e222ebbecee84efd55c426d3f9916ac9f50280eaebe6640d35f9d395744c228f1f352eb4954a72a42b3886d581396fa3202056879d792fb62b7_45"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_abstract_0000"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_abstract_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.02564102564102564,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

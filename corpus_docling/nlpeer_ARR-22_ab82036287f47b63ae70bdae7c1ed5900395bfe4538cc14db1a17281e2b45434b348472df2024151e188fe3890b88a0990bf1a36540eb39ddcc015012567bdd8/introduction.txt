@@ -1,0 +1,35 @@
+Automatic Readability Assessment is the task of assigning a reading level for a given text.
+
+It is useful in many applications from selecting age appropriate texts in classrooms (Sheehan et al., 2014) to assessment of patient education materials (Sare et al., 2020) and clinical informed consent forms (Perni et al., 2019).
+
+Contemporary NLP approaches treat it primarily as a classification problem which makes it non-transferable to situations where the reading level scale is different from the model.
+
+Applying learning to rank methods has been seen as a potential solution to this problem in the past.
+
+Ranking texts by readability is also useful in a range of application scenarios, from ranking search results based on readability (Kim et al., 2012;Fourney et al., 2018) to controlling the reading level of machine translation output (Agrawal and Carpuat, 2019;Marchisio et al., 2019).
+
+However, exploration of ranking methods has not been a prominent direction for ARA research.
+
+Further, recent developments in neural ranking approaches haven't been explored for this task yet, to our knowledge.
+
+ARA typically relies on the presence of large amounts of data labeled by reading level.
+
+Further, although linguistic features are common in ARA research, it is challenging to calculate them for several languages, due to lack of available software support.
+
+Though there is a lot of recent interest in neural network based cross-lingual transfer learning approaches for various NLP tasks, there hasn't been much research in this direction for ARA yet.
+
+With this context, we address two research questions in this paper:
+
+1. Is neural, pairwise ranking a better approach than classification or regression for ARA?
+
+2. Is zero-shot, cross-lingual transfer possible for ARA models through ranking?
+
+The main contributions of this paper are:
+
+1. A new neural pairwise ranking model with an application to automatic readability assessment.
+
+2. Demonstration of the use pairwise ranking to achieve cross-corpus compatibility in ARA.
+
+3.
+
+First evidence of zero shot, neural crosslingual transfer in ARA.

@@ -1,0 +1,65 @@
+In (Devlin et al., 2019) a simple classification architecture subsequent to the output of the Transformer is used to calculate the cross-entropy of the classifier for a text classification task with C classes.
+
+Specifically, first, a dropout operation (Srivastava et al., 2014) is applied to the Transformer's last layer hidden state of the special [CLS] token that is inserted at the beginning of each document.
+
+The regularized output is then fed into a single fully-connected layer with C output neurons and a softmax activation function to scale the logits of its output to probabilities of class association.
+
+Segment Embeddings In contrast, we use a more complex classification architecture based on a convolutional neural network (CNN) following Kim (2014) 1 .
+
+All hidden states in the last layer of the BERT model are arranged in a 2-dimensional matrix.
+
+Then, convolutional filters of height (3,4,5) and length corresponding to the hidden state size (786) are shifted over the input to calculate 64 1-dimensional feature maps per filter size.
+
+These feature maps are then batch-normalized (Ioffe and Szegedy, 2015), dropout regularized and global max-pooled before they are concatenated and fed into 2 fully-connected layers, each of which applies another dropout operation on its input2 .
+
+Reducing the Number of Trainable Parameters Freezing of parameters can be useful when fine-tuning a complex model, as it effectively lowers the number of parameters that need to be tuned during training (Howard and Ruder, 2018).
+
+This is especially relevant in the low-resource setting with a small amount of training data, since the pre-trained BERT BASE model with ∼ 110M parameters is over-parametrized for such small data sets.
+
+However, since freezing parameters also lowers the adaptability of a model (Peters et al., 2019), it is crucial to determine which parameters are frozen and which can be fine-tuned during training to not negatively affect the model's performance.
+
+To our best knowledge no prior work has considered the training set size as a dependent parameter.
+
+This parameter is especially important in low-resource settings.
+
+Therefore, we will conduct experiments to visualize the model's performance in dependence of training data size with different sets of layers that are frozen during training.
+
+We denote the number of frozen layers with F .
+
+For positive values, the layers in the half-closed integer interval [0 .. F ) are frozen, while negative values represent the interval [12+F .. 12), i.e. the last -F layers of the BERT model.
+
+Layers of the classification architecture are always trainable during training because they are initialized randomly and thus need to be tuned.
+
+We also visualize the change of model parameters in each layer during fine-tuning to reason about the choice of frozen layers.
+
+Results of these experiments are presented in section 4.3.
+
+Analyzing Changes in Layer-Parameters To analyze the changes in model parameters during the finetuning of the BERT model, we capture the initial state of all model parameters before starting the training.
+
+This includes all pre-trained model weights, as well as the randomly initialized parameters of the CNN denoted by θ 0 .
+
+We can then snapshot the same parameters after training for 3 epochs denoted by θ 3 .
+
+The change in the model parameters can thus be described by ∆θ = θ 3 -θ 0 .
+
+Since the number of parameters is very high (7, 087, 872 for every layer of the BERT model while the exact number of parameters of the CNN depends on the output configuration of the model), we aggregate the change of parameters per layer by calculating the mean absolute difference (MAD) of the parameters.
+
+The mean absolute difference in layer x can be described by equation 2 where θ exn is the value of the n-th parameter in layer x after training epoch e.
+
+|∆θ x | = 1 N N i=0 |∆θ xn | = 1 N N i=0 |θ 0xn -θ 3xn | (2)
+
+3 Experiment Setup
+
+Base Model The BERT model, as introduced by Devlin et al. (2019), is used to create contextualized embeddings in all experiments.
+
+Specifically, the pre-trained language model BERT BASE3 with 12 layers, 768 hidden states and 12 self-attention heads made available online by the authors is used.
+
+Data Sets Similar to the experiments presented by Devlin et al. (2019), we use the "GLUE Multi-Task Benchmark" (Wang et al., 2018) consisting of multiple NLP classification tasks including sentiment analysis and textual entailment to evaluate the performance of the different model configurations.
+
+Contrary to (Devlin et al., 2019), we report the average accuracy of N = 3 runs instead of the maximum achieved value for each setting.
+
+By doing so, we are able to analyze training stability by comparing the distribution of the results over different runs.
+
+Low-Resource Scenarios To simulate the low-resource setting in the GLUE tasks, we repeatedly evaluate the model's performance after training for 3 epochs on a subset of the available data.
+
+Since data points in the training set provided by the GLUE Benchmark are already shuffled, the subset S x simply contains the first x data points (S x = {s 1 , s 2 , . . . , s x }) to ensure the same data selection between experiments.

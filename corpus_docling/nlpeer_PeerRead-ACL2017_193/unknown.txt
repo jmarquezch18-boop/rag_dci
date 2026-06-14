@@ -1,0 +1,171 @@
+A Transition-Based Directed Acyclic Graph Parser For Ucca
+
+Abstract
+
+Introduction
+
+Transition-Based Ucca Parsing
+
+We now turn to presenting TUPA.
+
+Building on previous work on parsing reentrancies, discontinuities and non-terminal nodes, we define an extended set of transitions and features that supports the conjunction of these properties.
+
+Transition-based parsers (Nivre, 2003) scan the text from start to end, and create the parse incrementally by applying a transition at each step to the parser's state, defined using three data structures: a buffer B of tokens and nodes to be processed, a stack S of nodes currently being processed, and a graph G = (V, E, ) of constructed nodes and edges, where V is the set of nodes, E is the set of edges, and : E → L is the label function, L being the set of possible labels.
+
+Some states are marked as terminal, meaning that G is the final output.
+
+A classifier is used at each step to select the next transition based on features encoding the parser's current state.
+
+During training, an oracle creates training instances for the classifier, based on gold-standard annotations.
+
+Transition Set.
+
+Given a sequence of tokens w 1 , . . . , w n , we predict a UCCA graph G over the sequence.
+
+Parsing starts with a single node on the stack (an artificial root node), and the input tokens in the buffer.
+
+Figure 2 shows the transition set.
+
+In addition to the standard SHIFT and RE-DUCE operations, we follow previous work in transition-based constituency parsing (Sagae and Lavie, 2005), adding the NODE transition for creating new non-terminal nodes.
+
+For every X ∈ L, NODE X creates a new node on the buffer as a par-ent of the first element on the stack, with an Xlabeled edge.
+
+LEFT-EDGE X and RIGHT-EDGE X create a new primary X-labeled edge between the first two elements on the stack, where the parent is the left or the right node, respectively.
+
+As a UCCA node may only have one incoming primary edge, EDGE transitions are disallowed if the child node already has an incoming primary edge.
+
+LEFT-REMOTE X and RIGHT-REMOTE X do not have this restriction, and the created edge is additionally marked as remote.
+
+We distinguish between these two pairs of transitions to allow the parser to create remote edges without the possibility of producing invalid graphs.
+
+To support the prediction of multiple parents, node and edge transitions leave the stack unchanged, as in other work on transition-based dependency graph parsing (Sagae and Tsujii, 2008;Ribeyre et al., 2014;Tokgöz and Eryigit, 2015).
+
+REDUCE pops the stack, to allow removing a node once all its edges have been created.
+
+To handle discontinuous nodes, SWAP pops the second node on the stack and adds it to the top of the buffer, as with the similarly named transition in previous work (Nivre, 2009;Maier, 2015).
+
+Finally, FINISH pops the root node and marks the state as terminal.
+
+Classifier.
+
+The choice of classifier and feature representation has been shown to play an important role in transition-based parsing (Chen and Manning, 2014;Andor et al., 2016;Kiperwasser and Goldberg, 2016).
+
+To investigate the impact of the type of transition classifier in UCCA parsing, we experiment with three different models.
+
+1.
+
+Starting with a simple and common choice (e.g., Maier and Lichte, 2016), TUPA Sparse uses a linear classifier with sparse features, trained with the averaged structured perceptron algorithm (Collins and Roark, 2004)
+
+S x | B V E SHIFT S | x B V E - S | x B V E REDUCE S B V E - S | x B V E NODE X S | x y | B V ∪ {y} E ∪ {(y, x) X } - x = root S | y, x B V E LEFT-EDGE X S | y, x B V E ∪ {(x, y) X } -    x ∈ w 1:n , y = root, y ; G x S | x, y B V E RIGHT-EDGE X S | x, y B V E ∪ {(x, y) X } - S | y, x B V E LEFT-REMOTE X S | y, x B V E ∪ {(x, y) * X } - S | x, y B V E RIGHT-REMOTE X S | x, y B V E ∪ {(x, y) * X } - S | x, y B V E SWAP S | y x | B V E - i(x) < i(y) [root] ∅ V E FINISH ∅ ∅ V E + Figure 2:
+
+The transition set of TUPA.
+
+We write the stack with its top to the right and the buffer with its head to the left. (•, •)X denotes a primary X-labeled edge, and (•, •) * X a remote X-labeled edge.
+
+i(x) is a running index for the created nodes.
+
+In addition to the specified conditions, the prospective child in an EDGE transition must not already have a primary parent.
+
+instead of one layer with cube activation.
+
+The embeddings and classifier are trained jointly.
+
+3.
+
+Finally, TUPA BiLSTM uses a bidirectional LSTM for feature representation, on top of the dense embedding features, an architecture similar to Kiperwasser and Goldberg (2016).
+
+The BiLSTM runs on the input tokens in forward and backward directions, yielding a vector representation that is then concatenated with dense features representing the parser state (e.g., existing edge labels and previous parser actions; see below).
+
+This representation is then fed into a feedforward network similar to TUPA MLP .
+
+The feedforward layers, BiLSTM and embeddings are all trained jointly.
+
+For all classifiers, inference is performed greedily, i.e., without beam search.
+
+Hyperparameters are tuned on the development set (see Section 4).
+
+Features.
+
+TUPA Sparse uses binary indicator features representing the words, POS tags, syntactic dependency labels and existing edge labels related to the top four stack elements and the next three buffer elements, in addition to their children and grandchildren in the graph.
+
+We also use bi-and trigram features based on these values (Zhang and Clark, 2009;Zhu et al., 2013), features related to discontinuous nodes (Maier, 2015, including separating punctuation and gap type), features representing existing edges and the number of parents and children, as well as the past actions taken by the parser.
+
+In addition, we use use a novel, UCCAspecific feature: number of remote children.
+
+3  For TUPA MLP and TUPA BiLSTM , we replace all indicator features by a concatenation of the vector embeddings of all represented elements: words, 3 See Appendix A for a full list of used feature templates.
+
+POS tags, syntactic dependency labels, edge labels, punctuation, gap type and parser actions.
+
+These embeddings are initialized randomly.
+
+We additionally use external word embeddings initialized with pre-trained word2vec vectors (Mikolov et al., 2013),4 updated during training.
+
+In addition to dropout between NN layers, we apply word dropout (Kiperwasser and Goldberg, 2016): with a certain probability, the embedding for a word is replaced with a zero vector.
+
+We do not apply word dropout to the external word embeddings.
+
+Finally, for all classifiers we add a novel realvalued feature to the input vector, ratio, corresponding to the ratio between the number of terminals to number of nodes in the graph G. This feature serves as a regularizer for the creation of new nodes, and should be beneficial for other transition-based constituency parsers too.
+
+Training.
+
+For training the transition classifiers, we use a dynamic oracle (Goldberg and Nivre, 2012), i.e., an oracle that outputs a set of optimal transitions: when applied to the current parser state, the gold standard graph is reachable from the resulting state.
+
+For example, the oracle would predict a NODE transition if the stack has on its top a parent in the gold graph that has not been created, but would predict a RIGHT-EDGE transition if the second stack element is a parent of the first element according to the gold graph and the edge between them has not been created.
+
+The transition predicted by the classifier is deemed correct and is applied to the parser state to reach the subsequent state, if the transition is included in the set of optimal transitions.
+
+Otherwise, a random optimal transition is applied, and for the perceptronbased parser, the classifier's weights are updated according to the perceptron update rule.
+
+POS tags and syntactic dependency labels are extracted using spaCy (Honnibal and Johnson, 2015).
+
+5 We use the categorical cross-entropy objective function and optimize the NN classifiers with the Adam optimizer (Kingma and Ba, 2014).
+
+Experimental Setup
+
+Results
+
+Related Work
+
+Conclusion
+
+Figure1: UCCA structures demonstrating three structural properties exhibited by the scheme.
+
+(a) includes a remote edge (dashed), resulting in "John" having two parents.
+
+(b) includes a discontinuous unit ("gave ... up").
+
+(c) includes a coordination construction ("John and Mary").
+
+Pre-terminal nodes are omitted for brevity.
+
+Right: legend of edge labels.
+
+Figure 3: Illustration of the TUPA model.
+
+Top: parser state (stack, buffer and intermediate graph).
+
+Bottom: TUPABiLTSM architecture.
+
+Vector representation for the input tokens is computed by two layers of bidirectional LSTMs.
+
+The vectors for specific tokens are concatenated with embedding and numeric features from the parser state (for existing edge labels, number of children, etc.), and fed into the MLP for selecting the next transition.
+
+Figure 4: Bilexical graph approximation (dependency graph) for the sentences in Figure 1.
+
+Figure5: Tree approximation (constituency) for the sentence in Figure1a(top), and bilexical tree approximation (dependency) for the same sentence (bottom).
+
+These are identical to the original graphs, apart from the removal of remote edges.
+
+Table 1 presents some statistics for the two corpora.
+
+We use passages of indices up to 676 of the Wiki corpus as our training set, passages 688-808 as development set, and passages 942-1028 as in-domain test set.
+
+While 5 https://spacy.io 6 http://cs.huji.ac.il/ ˜oabend/ucca.html Statistics of the Wiki and 20K Leagues UCCA corpora.
+
+All counts exclude the root node, implicit nodes, and linkage nodes and edges.
+
+TUPA BiLSTM74.4 72.7 73.5 47.4 51.6 49.4 68.7 68.5 68.6 38.6 18.8 25.3    Experimental results, in percents, on the Wiki test set (left) and the 20K Leagues set (right).
+
+Columns correspond to labeled precision, recall and F-score, for both primary and remote edges.
+
+F-score upper bounds are reported for the conversions.

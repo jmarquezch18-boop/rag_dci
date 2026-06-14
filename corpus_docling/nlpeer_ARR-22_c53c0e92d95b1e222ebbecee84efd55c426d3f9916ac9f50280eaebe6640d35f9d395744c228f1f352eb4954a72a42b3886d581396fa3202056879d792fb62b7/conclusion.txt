@@ -1,0 +1,7 @@
+We present a novel approach for learning mention and entity representations for use in entity linking candidate generation and prediction, as well as in the discovery of new entities.
+
+Our method uses an objective that explicitly incorporates mention-tomention coreference relationships.
+
+We demonstrate its empirical effectiveness through analysis on two datasets -MedMentions and the Zero-Shot Entity Linking dataset.
+
+As future work, we hope to further analyze these objectives with the lens of efficiency, distillation, and domain transfer.

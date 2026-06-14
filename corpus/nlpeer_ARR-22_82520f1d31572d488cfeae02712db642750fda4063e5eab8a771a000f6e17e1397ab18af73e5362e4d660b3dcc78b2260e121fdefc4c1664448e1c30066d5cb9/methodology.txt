@@ -1,0 +1,35 @@
+The architecture of our MTL model for an essay of M traits is shown in Figure 2.
+
+Here, the word embedding layer is shared across all the tasks.
+
+In the multi-task learning framework, each stack is used to learn an essay representation for each essay trait.
+
+In a similar manner, the essay representation for the overall score is learnt and it is concatenated with the predicted trait scores before being sent to a Dense layer with a sigmoid activation function to score the essay holistically.
+
+For calculating each score -both overall and trait scores -we use the mean squared error loss function.
+
+We experimented with multiple weights for the loss function for the essay trait scoring task, but settled on uniform weights for all the traits and the overall scoring task.
+
+This is done because we want to get accurate predictions of the traits scores which are used for predicting the overall score.
+
+We evaluate our experiments using five-fold cross validation.
+
+We use the same data splits as used by Taghipour and Ng (2016).
+
+To avoid overfitting, we choose the model which gives the best result on the validation set for evaluating on the test set, and we report the mean value of all 5 folds.
+
+per essay set. * represents a statistically significant improvement using the MTL systems over the STL-LSTM system.
+
+⋆ represents a statistically significant improvement of using the MTL-BiLSTM system over the MTL-LSTM system.
+
+Most modern NLP systems have started to use attention-based transformer networks and large pretrained language models.
+
+Yang et al. (2020), Cao et al. (2020), andUto et al. (2020) use the BERT-8 We have uploaded the rest of the requirements along with the code base-uncased (Devlin et al., 2019) pre-trained language model to perofrm automatic essay grading achieving QWKs in the range of 0.79 to 0.805.
+
+However, BERT has about 110 million parameters (compared to our largest model with just under 2 million parameters).
+
+Another limiting factor with using BERT is the fact that we can only input 512 tokens.
+
+This is a problem, especially for Prompt 8, where the average essay length is about 650 words.
+
+Mayfield and Black (2020) describe some of the other limitations of using BERT for scoring essays.

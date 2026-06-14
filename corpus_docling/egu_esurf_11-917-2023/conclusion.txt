@@ -1,0 +1,29 @@
+In tropical and sub-tropical regions, field evidence-based constraints of LIG eustatic sea level often rely upon incomplete, temporally limited preservation of fossil coral reef facies.
+
+This, in turn, leaves the derivation of LIG sea level patterns up to interpretation and "expert judgment".
+
+Here, we apply a suite of GIA models to a fringing reef system offshore southwestern Madagascar within the Dionisos forward stratigraphic model environment.
+
+The resulting stratigraphic   sequences of two distinct GrIS and AIS melting scenarios during the LIG are then evaluated against the observed lithostratigraphy and a baseline pure GIA signal.
+
+By creating fictitious stratigraphic sequences based on physical principles, we are able to conclude that (1) changes in the timing of GrIS and AIS melting produce substantial visible changes in the stratigraphic record, (2) preservation within the coastal environment heavily influences the interpretation of the fossil reef and the derived paleo relative sea level, and (3) adoption of this methodology, while not a one-to-one comparison, would allow for a more objective evaluation of outcrop interpretation.
+
+We further conclude that based on these initial results, there is a compelling need for stability within the LIG, which is underlined by the lack of reef facies preserved under a two-peak sea level scenario.
+
+While significant sedimentation takes place during the LIG under a two-peak scenario, the intermittent sub-aerial exposure of the freshly deposited reef drastically decreases the robustness of the LIG record, bringing into question the possibility of observing such relative sea level fluctuations in the fossil record.
+
+Acknowledgements.
+
+We would like to thank Beicip-Franlab for providing an academic license to OpenFlow Suite and Dionisos.
+
+Finally, we would like to thank Georgia Grant and Gino de Gelder for their constructive comments and reviews that helped improve the article.
+
+Financial support.
+
+This research was funded by the Deutsche Forschungsgemeinschaft Excellence Cluster "EXC 2077: The Ocean Floor -Earth's Uncharted Interface" (grant no. 390741603) and the European Research Council under the European Union's Horizon 2020 research and innovation program (grant no. 802414).
+
+The article processing charges for this open-access publication were covered by the University of Bremen.
+
+Review statement.
+
+This paper was edited by Orencio Duran Vinent and reviewed by Gino de Gelder and Georgia Grant.

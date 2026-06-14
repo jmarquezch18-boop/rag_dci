@@ -1,0 +1,245 @@
+Spatially Coherent Variability In Modern Orographic Precipitation Produces Asymmetric Paleo-Glacier Extents In Flowline Models: Olympic Mountains, Usa
+
+Abstract
+
+Introduction
+
+Spatial Variability In Precipitation
+
+Methods
+
+Rain Shadow Strength Derived From Spatially Interpolated Climatologies
+
+The Parameter-elevation Regressions on Independent Slopes Model (PRISM) uses observations from atmospheric monitoring sites to interpolate climate variables across the United States (Daly et al., 2008).
+
+The model divides the terrain into topographic facets defined by slope and elevation.
+
+We use PRISM at a 4 km resolution normalized over a 30-year period from 1981 to 2010 (Fig. 1c).
+
+We average the PRISM estimate of precipitation across each basin to calculate P e and P q and define a rain shadow index, R PRISM , as the ratio of the P e and P q .
+
+Rain Shadow Strength Derived From Weather Forecast Models
+
+Rain Shadow Strength Derived From River Discharge Records
+
+River discharge data collected at gauges in the Quinault and Elwha rivers (Fig. 1b) were obtained from the USGS (2022a, b).
+
+Discharge data were given as monthly averages measured in cubic feet per second.
+
+Complete data from both basins were available from 1919 to 2019.
+
+We use river discharge data to approximate the rain shadow strength at two timescales, namely the entire period of record and each water year (October to September).
+
+The choice to evaluate R GAUGE in a water year was made to account for the delayed melting of winter snowpack influencing stream discharge at long timescales relative to precipitation events.
+
+We define E run as the total runoff (i.e., discharge) divided by the area of the Elwha basin and report the result (in mm) to compare with our precipitation estimates.
+
+Q run is the same metric for the Quinault basin.
+
+We then have a gauge-based estimate of the rain shadow index as follows:
+
+R GAUGE = E run Q run . (2
+
+)
+
+For each of the 101 water years in the record, we calculate water year averages of E run , Q run , and R GAUGE .
+
+We compared E run , Q run , and R gauge to the climate indices.
+
+Monthly climate indices came from Climate Ex-plorer (2022) and characterize the recurring patterns of atmospheric circulation.
+
+These patterns influence the formation of midlatitude storms and are also associated with significant temperature anomalies (e.g., Robertson and Metz, 1990;Michelangeli et al., 1995).
+
+Siler et al. (2012) found significant interannual variability in the strength of the rain shadow correlated with the El Niño-Southern Oscillation (ENSO) in Washington state's Cascade Range, which is to the east of our study area.
+
+Specifically, they found a significant correlation of a weaker wintertime rain shadow during El Niño conditions and a stronger rain shadow during La Niña conditions (Siler et al., 2012).
+
+The indices used here are derived from measurements of interannual sea surface temperatures in the Pacific Ocean.
+
+We included four indices, namely the El Niño-Southern Oscillation (2022, available from 1854-2021), the Pacific Decadal Oscillation (2022, available from 1900-2021), the Pacific North American Pattern (2022, available from 1950-2020), and the tropical Northern Hemisphere Pattern (2022, available from 1950-2020).
+
+Each index was included because of its influence on the Northern Hemisphere extratropics and the Pacific Northwest in particular (Barnston and Livezey, 1987).
+
+These indices were averaged over December, January, and February (DJF), which is the period of greatest snowpack accumulation (Serreze et al., 1999;Robertson and Ghil, 1999).
+
+We normalize the time series of E run , Q run , and R GAUGE by their standard deviations and calculate Pearson's correlation coefficients (r) between these time series.
+
+Rain Shadow Results
+
+Long-Term Measurements Of Rain Shadow Strength
+
+The PRISM climatology (Fig. 1c) yields R PRISM = 0.54 (Table 1) or approximately 85 % more precipitation in the Quinault basin than the Elwha.
+
+We expect that there are significant local uncertainties in the PRISM climatology, as it depends on the quality and spatial density of gauges used in the regression (Cao et al., 2018).
+
+The PRISM climatology across the ∼ 3700 km 2 Olympic Peninsula is derived using data from 37 weather stations, and only 3 sites of the 37 stations have an elevation above 500 m. Conversely, in the Coweeta basin of the southern Appalachian Mountains, local annual mean errors in PRISM errors are estimated at 16 %, given 25 observation stations within the ∼ 20 km 2 basin (Daly et al., 2017).
+
+In comparison, the lack of measurements of precipitation, especially at high elevations, in the Olympic Mountains suggests that there could be a higher amount of uncertainty in the PRISM climatology compared to the 16 % error of that in the Coweeta basin.
+
+Specifically, the lack of gauges in the Elwha headwaters means that PRISM does not measure spillover precipitation that crosses the divide to fall in the upper Elwha basin.
+
+R WRF for the entire OLYMPEX campaign equals 0.72 (Table 1; Eq. 3; Fig. 2).
+
+An R value closer to one means precipi-  tation is more similar in the Quinault and Elwha.
+
+WRF forecasts predicted significantly larger amounts of spillover precipitation in the Elwha basin than the PRISM dataset.
+
+However, the WRF forecasts are imperfect.
+
+WRF underestimated the precipitation by up to 100 mm at OLYMPEX gauge locations around the Quinault basin during larger storms (Conrick and Mass, 2019b).
+
+Additionally, the OLYMPEX campaign only studied a single wet season, which may not have been representative of longer-term average precipitation.
+
+A 101-year river discharge of the Elwha and Quinault basins yielded R GAUGE = 0.54 (Eq. 5; Table 1), which is in agreement with R PRISM .
+
+Uncertainty in the discharge measurements and hence R GAUGE can stem from several sources.
+
+For example, there is uncertainty in the measurements of the cross-sectional area of the flow and in the stage-discharge relationship.
+
+Additionally, river discharge represents water flowing off the land surface, neglecting the possibility of the evapotranspiration of precipitation.
+
+This could result in an underestimation of the actual amount of precipitation that contributes to the river discharge measurements.
+
+The cool, wet climate of the Olympic Peninsula makes this error likely to be relatively small, but there could be systematic differences between the Quinault and Elwha in the conversion of precipitation to river discharge.
+
+Temporal Variability In Rain Shadow Strength
+
+In addition to the average rain shadow indices estimated using these three independent datasets, we also considered the variability in the rain shadow index at timescales of hours and seasons.
+
+The 6 h R WRF values have a mean of 0.80 and standard deviation of 0.36 (Table 1).
+
+The mean rain shadow index measured in this way is larger than the OLYMPEX total R WRF (= 0.72), meaning that the 6 h forecast precipitation is more uniform across the mountain range than other datasets.
+
+We note that at a 6 h resolution, it is possible that the measured rain shadow index could reflect differences in the timing of precipitation in the two basins.
+
+For example, if the heaviest precipitation in the Elwha occurs after it happens in the Quinault, then the rain shadow index might be larger in one 6 h period and smaller in the subsequent 6 h period, with neither measure reflecting the storm event.
+
+Therefore, we averaged WRF forecasts over longer time periods to produce time series of R over a range of timescales.
+
+Over longer time periods, the mean value for R and the standard deviation of R becomes smaller up to 48 h (Table 2).
+
+For the longest time period examined, 72 h, the standard deviation increases relative to 48 h, possibly reflecting less coherence in the conditions at these longest timescales.
+
+For all timescales examined, however, R derived from WRF forecasts during OLYMPEX is larger than in other datasets.
+
+The larger R may reflect a tendency of WRF to overpredict spillover precipitation in the Elwha basin.
+
+However, we do not have sufficient data to conclude that this is necessarily the case.
+
+Moreover, PRISM is not informed by data collected near the drainage divide and so is not necessarily reliable.
+
+Similarly, R estimated from differences in river discharge is complicated by the existence of the difference in evapotranspiration between the basins, if this is the case.
+
+Finally, it is possible that the OLYM-PEX period was anomalous when compared with longerterm records.
+
+What causes the time variability in the 6 h R WRF ?
+
+Figure 2 compares the 6 h R WRF to the average amount of precipitation.
+
+It shows that the rain shadow strength for large events is less variable than for all rain events.
+
+Specifically, 6 h periods with average precipitation totals above 20 mm tend to cluster at R values between 0.5 and 1.0, indicating that higher values of 6 h R WRF are generally associated with lighter precipitation.
+
+We analyzed the time series of 6 h R WRF to examine the relationships between R magnitude and temperature, wind speed, and wind direction (as measured by atmospheric soundings; Fig. 3).
+
+The time series can be divided into groups of low (0.34-0.69), moderate (0.70-0.99), and high (1.0-2.5) R. High R values (greater than one) were commonly observed during colder weather conditions (Fig. 3a).
+
+On the other hand, lower R values were associated with higher temperatures.
+
+High R events had lower-magnitude precipitation compared to moderate R events, with rates of approximately 14 mm per 6 h interval and 26 mm per 6 h interval, respectively.
+
+The wind speed during cold, high R events was lower compared to low and moderate R events (Fig. 3b), while wind direction showed no significant pattern among the different R groups (Fig. 3c).
+
+In general, the temporal variability in R WRF suggests that colder conditions and slower winds lead to lower-magnitude and more uniform precipitation, while warmer and windier conditions are linked to R values close to the long-term average.
+
+Small-magnitude precipitation events with R values below 0.5 occurred during warm and windy conditions.
+
+We used discharge records to examine differences in rain shadow strength in different water years.
+
+The annual time series of R GAUGE has a mean value of 0.54, with a standard deviation of 0.14 (Table 1).
+
+We compared the time series of R GAUGE , E run , and Q run to climate indices to determine if the temporal variability in R is correlated with specific climate patterns, for example, La Niña vs. El Niño.
+
+Instead, we find that there is a remarkably consistent relationship between Q run and E run (r = 0.98), and the climate indices do not strongly correlate with E run , Q run , or R GAUGE (Fig. 4).
+
+Our analysis demonstrates that river discharge varies synchronously on the windward and leeward sides of the mountain range.
+
+This suggests that topography, and possibly dif-ferences in evapotranspiration, strongly influence the rain shadow strength at the timescale of entire wet seasons.
+
+Inferences For Reconstruction Of Past Climate
+
+Three independent datasets give us R of ∼ 0.5 to ∼ 0.7, with less variability in R at longer timescales.
+
+At the shortest timescales examined (6 h), the largest deviations in R are values larger than 1 occurring during periods of cold, slow wind speeds, and light precipitation.
+
+There is no example of a large precipitation event, with R being much less than 0.5 during the OLYMPEX campaign.
+
+At the timescale of water years, R is uncorrelated with regional climate indices, and the river discharge varies synchronously between the Quinault and Elwha basins.
+
+The lack of variability in R at the water year timescale, the lack of correlation of R with climate indices, and the small number and magnitude of low R events at the 6 h timescale all suggest that a conservative minimum estimate of R in the Olympic Mountains during the last glacial period is 0.5.
+
+The most likely difference between the modern and glacial climate suggested by our data would be an increase in R (i.e., a more uniform climate) due to cooler conditions (Fig. 3).
+
+We proceed, therefore, to explore how the current rain shadow strength would have impacted glacier dynamics on the Olympic Peninsula.
+
+Modeled Glacier Extent In The Quinault And Elwha Basins
+
+Glacier Flowline Model Methods
+
+Results Of Glacier Flowline Modeling
+
+Discussion Of Flowline Model Results
+
+Conclusions
+
+Figure 1.
+
+Panel (a) shows location of the study area in Washington state, USA.
+
+Panel (b) shows the topography of the Olympic Peninsula.
+
+Terminal moraines of the west side valleys are shown in black
+
+Figure 2.
+
+R WRF measured at 6 h intervals varies with the total precipitation averaged over the two basins.
+
+As the average precipitation increases, R WRF becomes less variable.
+
+Figure 3.
+
+The relationship between R WRF at 6 h resolution and atmospheric variables as measured by the KUIL radiosonde.
+
+Panel (a) shows the average temperature between 750 and 1750 m a.s.l.
+
+Panel (b) shows the average wind speed over the same elevation range.
+
+Panel (c) shows the average wind direction in the same elevation range.
+
+The size and color of the data points correspond to the average precipitation across both basins.
+
+Figure 4.
+
+A correlation heat map displaying the relationship between climate indices for the El Niño-Southern Oscillation (Niño 3.4, 2022), the Pacific Decadal Oscillation (PDO, 2022), the Pacific North American Pattern (PNA, 2022), and the tropical Northern Hemisphere Pattern (TNH, 2022) and E run , Q run , and R GAUGE .
+
+E run and Q run are highly correlated with each other, and R GAUGE is not correlated with climate indices.
+
+Figure 5.
+
+Panel (a) shows the Quinault and Elwha valleys, with the topography represented as a gray hillshade and the 30-year climatological annual precipitation (in mm yr -1 ) shown by the color bar.
+
+Blue lines trace the path of the flowlines modeled.
+
+Boxes with gray shading are regions where the valleys narrow.
+
+Modern glaciers are indicated by blue shading, and the past glacier extent moraines are in black.
+
+Panel (b) shows the elevation and precipitation along the flowlines, with the colored lines showing the data from the digital elevation model (DEM) and PRISM (2020) model and the black lines showing the approximate values used in our model.
+
+Measures of R from PRISM, river discharge, and WRF datasets.
+
+Note that ARW stands for Advanced Research WRF.
+
+Mean and standard deviation of R WRF at different time intervals for accumulated precipitation.
+
+Elwha and Quinault valley geometry parameterization for the one-dimensional flowline model.

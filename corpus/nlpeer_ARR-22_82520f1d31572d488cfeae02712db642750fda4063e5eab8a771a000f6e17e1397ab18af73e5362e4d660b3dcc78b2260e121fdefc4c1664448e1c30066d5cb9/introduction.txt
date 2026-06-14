@@ -1,0 +1,33 @@
+An essay is a piece of text that is written in response to a topic, called a prompt (Mathias and Bhattacharyya, 2020).
+
+Qualitative evaluation of the essay consumes a lot of time and resources.
+
+Hence, in 1966, Page proposed a method of automatically scoring essays using computers (Page, 1966), giving rise to the domain of Automatic Essay Grading.
+
+Essay traits are different aspects of the essay that can aid in explaining the score assigned to the essay.
+
+Examples of essay traits include content (how much information is present in the essay) (Page, 1966), organization (how well the essay is structured) (Persing et al., 2010), style (how well written the essay is) (Page, 1966), prompt adherence (how much the essay stays on topic for the essay prompt) (Persing and Ng, 2014), etc.
+
+Most of the research work done in the field of AEG is geared toward scoring the essay holistically, rather than studying the importance of essay traits in the overall essay score.
+
+In this paper, we ask the question:
+
+"Can we use information learnt from scoring essay traits to score an essay holistically?"
+
+In our paper, not only do we score essays holistically, but we also describe how to score essay traits simultaneously in a multi-task learning framework.
+
+Scoring essay traits is essential as it could help in explaining why the essay was scored the way it was, as well as providing valuable insights to the writer about what aspects of the essay were well-written and what the writer needs to improve.
+
+Multi-task learning is a machine learning technique where we use information from multiple auxiliary tasks to perform a primary task (Caruana, 1997).
+
+In our experiments, scoring the individual essay traits is the auxiliary task, and scoring the essay holistically is the primary task.
+
+In addition to this, we also study the impact of scoring an essay trait as the primary task while the other traits and overall essay score are auxiliary tasks.
+
+Contributions.
+
+In this paper, we describe a way to simultaneously score essay traits and the essay itself using multi-task learning.
+
+We evaluate our system against different types of essays and essay traits.
+
+We also share our code and the data for reproducibility and further research1 .

@@ -1,0 +1,573 @@
+Pre-Notification And Personalisation Of Text Messages To Increase Questionnaire Completion In A Smoking Cessation Pregnancy Rct: An Embedded Randomised Factorial Trial [Version 2; Peer Review: 2 Approved]
+
+Abstract
+
+Randomised controlled trials (RCTs) are the 'gold standard' for evaluating healthcare treatments.
+
+However, it is well documented that retaining participants can be difficult and low response rates to questionnaires can compromise the reliability and generalisability of the results 1,2 .
+
+A study within a trial (SWAT) can be used to test interventions to improve retention of participants, via increasing questionnaire completion 3 .
+
+There is research to support the concept that text messages are effective at improving questionnaire completion rates in trials [4][5][6][7] .
+
+There is insufficient evidence to determine if the timing of text messages improves questionnaire completion rates, and limited papers exploring if personalisation (inclusion of the participants name) impacts questionnaire completion rates [8][9][10][11] .
+
+This factorial SWAT aims to evaluate the effectiveness of the timing and personalisation of text messages within an RCT to add to the evidence base for both of these interventions.
+
+This two-by-two factorial study was embedded within the MiQuit-3 RCT.
+
+MiQuit-3 (ClinicalTrials.gov NCT03231553) is an RCT evaluating the effectiveness of a text-message, smoking cessation self-help support programme for pregnant smokers (MiQuit), and the protocol has been published previously 12 .
+
+This factorial SWAT was embedded at the 36-week gestational time point.
+
+The approval for this factorial SWAT and the MiQuit-3 trial was granted by East Midlands-Nottingham 1 Research Ethics Committee (NRES reference 13/EM/0427 and 17/EM/0327).
+
+As the SWAT was considered low risk, informed consent was not obtained from participants, and they were unaware of the SWAT.
+
+However, as part of the MiQuit-3 trial all participants consented to their anonymised data being used for further research and being published.
+
+The SWATs that form the factorial design are also registered with the Northern Ireland Hub for Trial Methodology Research SWAT Repository (SWATs 35 and 44; both registered December 2015).
+
+As with all SWATs, the sample size is limited by that of the host trial, and a formal power calculation has not been conducted.
+
+In total 1002 participants were randomised to the MiQuit-3 trial.
+
+As this SWAT was implemented mid-way through follow up for the host trial, all participants that had not yet had their 36-week gestational follow-up, approximately 200, were eligible to participate in the SWAT, and any that had already passed this follow-up time point were unable to be included in this SWAT.
+
+Participants in MiQuit-3 were unaware of their participation in this SWAT, however, they could not be blinded to the contents or timing of the text message.
+
+Participants were randomised 1:1:1:1 to each of the four groups (see Table 1).
+
+The
+
+-Throughout the manuscript and the title any reference to 'retention rate' or 'response rate' has been replaced with ' questionnaire completion', for consistency.
+
+-Figure 1 has been updated to ensure consistent terminology.
+
+-Additional text has been included around the various data collection methods, and why telephone was the main interest -Additional details were included around the money incentives.
+
+-Sentence structure was altered to allow for the manuscript to be grammatically correct.
+
+-The term 'text' was replaced with 'text message' throughout the manuscript.
+
+-The abstract was altered to be clearer that the significant results were only related to telephone collection.
+
+-Wording was altered for clarification around the sample size, and eligibility for the SWAT.
+
+Any further responses from the reviewers can be found at the end of the article randomisation was undertaken by a statistician independent of the host trial, and of the staff involved in sending the text messages.
+
+Block randomisation was used with varying block sizes of 4, 8, 12 and 16, which was stratified by host trial allocation, and whether they had completed the previous follow-up or not.
+
+The randomisation sequence was generated in Stata v.15 (RRID: SCR_012763) and implemented using a remote computer system, independent of the researchers.
+
+This SWAT explored two different interventions; personalisation and timing of text messages (early; one week before follow-up, or late; one day before follow-up).
+
+Details of the text message sent to participants can be found in Table one.
+
+As detailed in the MiQuit-3 protocol 12 , all participants were given a £5 voucher if they completed the 36-week follow-up.
+
+Those who provided a saliva sample to validate their smoking status were given an additional £30 voucher.
+
+This amount is more than is stated in the published protocol, but this change was made prior to the implementation of this SWAT, and as such all participants involved in this SWAT would have been eligible for this amount.
+
+These monetary incentives formed part of the host trial, and where not related to the factorial SWAT being undertaken.
+
+The primary outcome was completion rate; defined as the proportion of the questionnaires completed over the telephone within the follow-up window (14 days).
+
+The secondary outcome measures included:
+
+• Completion rate where the questionnaire was completed by any method (postal, telephone, email/web, or text message) within the follow-up window (14 days)
+
+• Time to completion, defined as the number of days between the due date of the 36-week gestation follow-up and the date the questionnaire was recorded as complete
+
+• Number of attempts to contact required before the questionnaire was complete, or the maximum number of attempts, six, is reached.
+
+Both time to completion and number of attempts to contact were not restricted by method of data collection, and thus included participants who completed (or were being contacted) via any method.
+
+The data were analysed in Stata v.15 (RRID:SCR_012763) on an intention-to-treat (ITT) basis, using two-sided tests at the 2.5% level.
+
+As this is a factorial design the Bonferroni correction was applied to allow for multiple testing 13,14 .
+
+Participants were excluded from the analysis if they had withdrawn prior to the time point.
+
+The primary outcome and completion for all methods were compared using a logistic regression model.
+
+Time to completion (days between questionnaire due and complete) was analysed using a Cox Proportional Hazards regression.
+
+Participants who completed the questionnaire early had their time set to 0.1, those who did not complete it were censored at either last contact date or 120 days if not contacted, and those who withdrew in the course of the SWAT were set to their withdrawal date.
+
+The assumptions for this model were assessed using Schoenfeld residuals 15 .
+
+The number of attempts to contact was analysed using a negative binomial regression model, due to evidence of overdispersion.
+
+All models were adjusted for host trial allocation, whether the participant had completed the previous follow-up, age, and both SWAT intervention allocations separately.
+
+All models were repeated with the inclusion of an interaction term to explore any possible interactions between the two SWAT interventions.
+
+This was done using two-sided tests at a significance level of 5%.
+
+Stata is proprietary software: a freely available alternative software that could be used to undertake this analysis is RStudio (RRID:SCR_000432) 16 .
+
+In total, 194 participants were randomised into the SWAT; 50 received the personalised text message and early notification, 47 received the personalised text message and late notification, 50 received the non-personalised text message and early notification, and 47 received the non-personalised text message and late notification 17 .
+
+Five participants withdrew prior to the implementation of the SWAT and are not included in the analysis.
+
+Participants were only included in a model if all relevant covariates for that model were present.
+
+The number included in each of the analysis, by arm, is shown in the flow diagram -Figure 1.
+
+Three participants were not contacted due to difficulties/adverse events associated with their pregnancy, but are still included in the analysis under ITT principles.
+
+The flow of participants can be seen in Figure 1.
+
+Baseline characteristics by SWAT arm and overall, can be found in Table 2.
+
+The main method of data collection for the MiQuit-3 trial was telephone collection.
+
+As such the primary outcome explores the completion rates where the data was collected via telephone calls only.
+
+The overall completion rate by telephone was 66.1% (125/189) within the follow-up window (14 days).
+
+There were similar completion rates of the questionnaire via telephone within three groups; 50.0% for personalised early (24/48), 52.3% (23/44) for personalised late, and 58.0% (29/50) of non-personalised early, and was slightly higher in the non-personalised late group, 66.0% (31/47).
+
+There was no evidence for a difference in completion rate for the timing of the text message where data was collected via telephone calls; adjusted odds ratio (OR) 0.86 (95% CI 0.44-1.67,p=0.65).
+
+There was evidence to suggest a difference in   completion rate (adjusted OR 0.44, 95%CI 0.22-0.87, p=0.02) which implies those who received the non-personalised text message were more likely to complete the questionnaire than those who received a personalised text message, when data was collected via the telephone.
+
+Full details can be found in Table 3.
+
+Full details for all secondary outcomes can be found in Table 4.
+
+Completion rates for all methods.
+
+Additional methods of data collection were used alongside telephone calls.
+
+For completion via any method the data could have been collected via post, telephone, email/web or text message.
+
+When looking at any method, there were similar completion rates of the questionnaire within each of the four groups; 64.6% for personalised early (31/48), 63.6% (28/44) for personalised late, 66.0% for early (33/50) and 70.2% (33/47) of non-personalised.
+
+There is no evidence to suggest that there is a difference in completion rate for personalised versus non-personalised text messages; adjusted OR 0.61 (95% CI 0.30-1.24, p=0.17).
+
+Additionally, there was no evidence to suggest there was a difference in completion rates in participants who received an early or late text message; adjusted OR 1.06 (95% CI 0.52-2.15, p=0.87).
+
+The average number of attempts to contact required was 3.0 for all participants, with the average similar for each group (3.3 for both personalised early, 3.2 for personalised late, 3.1 for non-personalised early and 2.7 for non-personalised late).
+
+Researchers attempted to contact a participant a maximum of six times.
+
+The maximum number of attempts to contact was reached for 55 of the 174 participants (31.3%) and was similar across three groups (38.6% for personalised and early, 31.7% for personalised and late, 31.1% for non-personalised early) and slightly lower in the non-personalised late group, 25%.
+
+There was no evidence of a difference in number attempts to contacts required between those who received an early text message or a late text message (p=0.45).
+
+There is also no evidence to suggest a difference between those who received a personalised or non-personalised text message (p=0.23); adjusted incidence rate ratio (IRR) 1.14.
+
+The average time to completion of the questionnaire was 6.2 days (ranging from 5 days early to 103 days late).
+
+The time to completion was similar between those who received an early or late personalised text message text message (8.2 days for early versus 7.1 days for late) and was similar for those who received an early or late non-personalised text message (4.9 days for early versus 4.7 days for late).
+
+However, there was a slight difference in time to completion between those who received personalised or non-personalised text message.
+
+There was no evidence of a difference in time to completion between those who received the text message early or late (p=0.99) or those who received a personalised or non-personalised text message (p=0.12).
+
+This suggest that neither timing nor personalisation of the text message reminder affect the time taken to complete the questionnaire.
+
+The assumptions for the model held when examined using Schoenfeld residuals (p=0.66).
+
+Interaction terms.
+
+All of the models were re-run with the inclusion of any interaction term between the two SWAT allocations.
+
+There was no evidence of an interaction for the completion rate, both by phone only (p=0.57) and all methods (p=0.54).
+
+There was also no evidence of an interaction for the number of contacts required (p=0.69), or the time to completion (p=0.88).
+
+There were 1002 participants who were randomised into the MiQuit-3 trial.
+
+Of the 777 who were not included in the SWAT, and were due a 36week follow-up, 499 completed the questionnaire (64.2%).
+
+This is similar to the completion rate for the participants in the SWAT (overall 66.1%).
+
+This factorial SWAT showed that the timing of the text message reminder had no effect on the questionnaire completion rate, the time to complete, or the number of attempts to contact required; these results mirror what Partha et al. reported in their work 8 . It also showed that personalised text messages have no effect on completion time, or number of attempts to contact required.
+
+However, it did show that there was some evidence that sending a non-personalised text message reminder would have a larger increase in response than sending personalised text messages did, but these finding were only significant when exploring telephone data collection.
+
+Replace the phrase "carried out" with conducted throughout. I know the phrase carried out is used all the time in literature but it is not correct unless you are describing physically carrying an object.
+
+○ I would use the word women rather than participants, given that it is a trial of pregnant women.
+
+The phrase "all participants that had not yet had their 36-week gestational follow-up were eligible to participate" suggests that some people were more than 36 weeks pregnant. Is this the case? Otherwise you could simplify it and say women who were 36 weeks pregnant.
+
+It's important to be clear on the timing of the intervention given that this is one of your outcomes.
+
+○ "Participants in MiQuit-3 were blind to their participation in this SWAT".
+
+Blinding is different to being unaware.
+
+Were they both blinded and unaware?
+
+○ "The randomisation was undertaken by a statistician independent of the host trial, and of the staff involved in sending the texts".
+
+Explain how the statistician did the randomisation, e.g. computer generated.
+
+Also, explain how he communicated that randomisation to the researcher assigning the women to each group.
+
+○ "Block randomisation, stratified by host trial allocation, and whether they had completed the previous follow-up; with varying block sizes of 4, 8, 12 and 16".
+
+This is not a sentence.
+
+○ "A £5 voucher was given to all participants who completed a follow-up…".
+
+Was this part of the host trial or the SWAT?
+
+○ "…additionally those who provided a saliva sample were given another £30 (£35 total)."
+
+Where does the saliva sample come into it? Is this part of the host trial?
+
+Explain in the paper.
+
+How did you decide on how many to include for the SWAT. I accept that a sample size calculation is not required but a line in the paper on why you decided on (it appears to be 200) would be useful.
+
+In the secondary outcome, explain what you mean by completed by any method.
+
+○ "Time to response, defined as the number of days between the due date of the 36-week gestation follow-up and the date the questionnaire was recorded as complete". Are you certain all follow-up calls were made in 24 hours? ○ Statistical Analysis "The primary outcome was completion rate; defined as the proportion of the questionnaires completed over the telephone within the follow-up window (14 days)".
+
+However, you then go on to say that you used logistic regression to analyse this.
+
+Logistic regression is not suitable for four categories.
+
+I suspect what you mean is that you compared the completion rates across the two personalised/not personalised and again early/late.
+
+I can see you did this from the table.
+
+However, you need to articulate that in the text because it is currently confusing.
+
+In statistical analysis, a full stop after level and a new sentence for "As this is a factorial..."
+
+Full stop required in this sentence too.
+
+Also, I suspect the word "compared" in this sentence should read completed.
+
+-"Time to response (days between questionnaire due and complete) was analysed using a Cox Proportional Hazards regression, those who compared the questionnaire early had their time set to 0.1, those did not complete were censored at either last contact date or 120 days if not contacted, and those who withdrew in the course of the SWAT were set to their withdrawal date".
+
+○ Again the following is not a sentence, "All models were repeated with the inclusion of an interaction term to explore any possible interactions between the two SWAT interventions; with a significance level of 5%."
+
+"Additional participants were excluded from the analysis, where the covariates required for the model were not provided". What additional participants?
+
+Quantify and explain please.
+
+Why were the covariates not 'provided'? Explain please.
+
+○ "Three participants were not contacted due to difficulties/adverse events associated with their pregnancy but are still included in the analysis under ITT principles".
+
+Commas are required to make sense of the sentence.
+
+In your flow chart, what does primary refer to, and proximity?
+
+Add an explanation or use a term that explains a little better.
+
+Also in the flow chart, you say response rate but provide the number of participants.
+
+This is not a rate.
+
+In the primary outcome, continue with your phraseology -the 14-day follow-up window rather than "within 14 days of the due date".
+
+○ I find the writing of the results very confusing.
+
+This sentence below suggests the outcome was completion rate via telephone versus completion rate via something else. "There was evidence to suggest a difference in completion rate via telephone adjusted OR 0.44 (0.22-0.87, p=0.02) which implies those who received the non-personalised text were more likely to complete the questionnaire when completing via the telephone".
+
+I'm wondering why you keep saying via telephone.
+
+It is particularly confusing when explaining the results.
+
+The last part above again says … those who received the non-personalised text were more likely to complete the questionnaire when completing via the telephone".
+
+It looks like the method of completion is the purpose of the study.
+
+When you use the phrase "were more likely to", you must give the details of the comparison, i.e., more likely than who? ○ It is implied, but not adequately explained, that some women completed the questionnaire by some other means.
+
+It is not clear how this was handled in terms of the numbers analysed throughout the study and this needs to be explained.
+
+For your tables 3 and 4, add the number of women.
+
+Why does the left column say "response rate for all methods" when the primary outcome is defined as the proportion of the questionnaires completed over the telephone…"
+
+The heading in the results section, "Response rates for all method", do you mean completion rates for all methods?
+
+A response rate is different.
+
+If you hang your hat on statistically significant evidence, by quoting CIs and p-values, to establish if your SWAT was effective, or not, then the following has no place in your paper. "There is some, non statistically significant, evidence to suggest that there may be a difference in response rate for personalised versus non-personalised text reminders; adjusted OR 0.61 (95% CI 0.30-1.24, p=0.17), in favour of the non-personalised text messages".
+
+You cannot say there is non-statistically significant evidence and then support that statement with statistics!
+
+Remove this please.
+
+The heading, "Number of attempts to contact required".
+
+Replace with, Number of attempts required to contact the women.
+
+What do you mean by the maximum number of calls, as stated here "The maximum number of calls was reached for 55 of the 174 participants…"?
+
+○
+
+Contacts required is a new term introduced here " There was no evidence of a difference in number of contacts required".
+
+What do you mean by it?
+
+○ "The average time to respond was 6.2 days (ranging from 5 days early to 103 days late)".
+
+Respond to what, the phone call or the text, or the questionnaire?
+
+○ "This was similar between those who received a personalised text (8.2 days for early versus 7.1 days for late) and those who received the non-personalised text (4.9 days for early versus 4.7 days for late), but there is a slight difference between those who received personalised or non-personalised texts".
+
+If it is similar, how can there be a slight difference? What point are you making here?
+
+○ Include the number of participants in the MiQuit Trial earlier in the paper when discussing the 200 randomised for the SWAT.
+
+"It did show that there was some evidence that sending a non-personalised text message reminder would have a larger increase in response than sending personalised text messages did".
+
+This is misleading because it was not the case when all methods of questionnaire were included.
+
+Please amend the statement.
+
+The final sentence of the discussion needs to be reviewed.
+
+What do you mean by overall effectiveness?
+
+○
+
+discussion are not supported by the data.
+
+Abstract "There was evidence that a personalised text would result in fewer completions via telephone compared with a non-personalised text (adjusted OR 0.44, 95% CI 0.22-0.87, p=0.02)".
+
+This statement is confusing.
+
+The research question is personalised text message versus non-personalised text message.
+
+If using via telephone, then it should be also say non-personalised text via telephone.
+
+Also, use text message, rather than text, throughout.
+
+"Personalisation of a text message may be detrimental to retention".
+
+I don't think your results support a statement this strong.
+
+Firstly, this is not a trial with an adequate sample size to make this claim.
+
+Secondly, when you included all methods of receiving the questionnaire (I think this is correct interpretation but it is challenging to establish in the current version of the paper as the detail on all methods is unclear) you did not find that personalised or non-personalised texts mattered.
+
+At best you can say, personalisation of a text message appears to affect questionnaire completion via telephone.
+
+Introduction I like the succinct introduction.
+
+Thank you for this comment.
+
+The methods says "The SWATs are also registered with the Northern Ireland Hub for Trial Methodology Research SWAT Repository (SWATs 35 and 44; both registered December 2015).
+
+It's a little confusing to the reader.
+
+It looks like you're conducting two SWATs.
+
+I understand what you have taken both of these SWATS and conducted the two in a 2 x 2 factorial design.
+
+However, make this clear to the reader.
+
+Replace the phrase "carried out" with conducted throughout. I know the phrase carried out is used all the time in literature but it is not correct unless you are describing physically carrying an object.
+
+I would use the word women rather than participants, given that it is a trial of pregnant women.
+
+We thank you for the suggestion -however, the authors have decided not to make this change.
+
+The protocol for the MiQuit-3 trial refers to those involved both as participants, and as women.
+
+The term participants is not incorrect, and as it is made clear that this work is being done in pregnant women in both the introduction and conclusions of this paper, we feel it does not need to be re-emphasised throughout the whole paper.
+
+The phrase "all participants that had not yet had their 36-week gestational follow-up were eligible to participate" suggests that some people were more than 36 weeks pregnant. Is this the case? Otherwise you could simplify it and say women who were 36 weeks pregnant.
+
+It's important to be clear on the timing of the intervention given that this is one of your outcomes.
+
+"Participants in MiQuit-3 were blind to their participation in this SWAT".
+
+Blinding is different to being unaware.
+
+Were they both blinded and unaware?
+
+A correction has been made in regards to the unawareness and blinding of participants.
+
+"The randomisation was undertaken by a statistician independent of the host trial, and of the staff involved in sending the texts".
+
+Explain how the statistician did the randomisation, e.g. computer generated.
+
+Also, explain how he communicated that randomisation to the researcher assigning the women to each group.
+
+"Block randomisation, stratified by host trial allocation, and whether they had completed the previous follow-up; with varying block sizes of 4, 8, 12 and 16".
+
+This is not a sentence.
+
+"A £5 voucher was given to all participants who completed a follow-up…".
+
+Was this part of the host trial or the SWAT?
+
+"…additionally those who provided a saliva sample were given another £30 (£35 total)."
+
+Where does the saliva sample come into it? Is this part of the host trial?
+
+Explain in the paper.
+
+How did you decide on how many to include for the SWAT. I accept that a sample size calculation is not required but a line in the paper on why you decided on (it appears to be 200) would be useful.
+
+In the secondary outcome, explain what you mean by completed by any method.
+
+"Time to response, defined as the number of days between the due date of the 36-week gestation follow-up and the date the questionnaire was recorded as complete". Are you certain all follow-up calls were made in 24 hours?
+
+The date of each attempt to contact was recorded.
+
+However this outcome captures completion by any follow-up method.
+
+Statistical Analysis "The primary outcome was completion rate; defined as the proportion of the questionnaires completed over the telephone within the follow-up window (14 days)".
+
+However, you then go on to say that you used logistic regression to analyse this.
+
+Logistic regression is not suitable for four categories.
+
+I suspect what you mean is that you compared the completion rates across the two personalised/not personalised and again early/late.
+
+I can see you did this from the table.
+
+However, you need to articulate that in the text because it is currently confusing.
+
+In statistical analysis, a full stop after level and a new sentence for "As this is a factorial..."
+
+Full stop required in this sentence too.
+
+Also, I suspect the word "compared" in this sentence should read completed.
+
+-"Time to response (days between questionnaire due and complete) was analysed using a Cox Proportional Hazards regression, those who compared the questionnaire early had their time set to 0.1, those did not complete were censored at either last contact date or 120 days if not contacted, and those who withdrew in the course of the SWAT were set to their withdrawal date".
+
+Again the following is not a sentence, "All models were repeated with the inclusion of an interaction term to explore any possible interactions between the two SWAT interventions; with a significance level of 5%." Additional words have been added.
+
+"Additional participants were excluded from the analysis, where the covariates required for the model were not provided". What additional participants?
+
+Quantify and explain please.
+
+Why were the covariates not 'provided'? Explain please.
+
+The text in this sentence has been altered to make this clearer.
+
+"Three participants were not contacted due to difficulties/adverse events associated with their pregnancy but are still included in the analysis under ITT principles".
+
+Commas are required to make sense of the sentence.
+
+In your flow chart, what does primary refer to, and proximity?
+
+Add an explanation or use a term that explains a little better.
+
+Also in the flow chart, you say response rate but provide the number of participants.
+
+This is not a rate.
+
+In the primary outcome, continue with your phraseology -the 14-day follow-up window rather than "within 14 days of the due date".
+
+This term has been made consistent throughout the paper.
+
+I find the writing of the results very confusing.
+
+This sentence below suggests the outcome was completion rate via telephone versus completion rate via something else. "There was evidence to suggest a difference in completion rate via telephone adjusted OR 0.44 (0.22-0.87, p=0.02) which implies those who received the non-personalised text were more likely to complete the questionnaire when completing via the telephone".
+
+I'm wondering why you keep saying via telephone.
+
+It is particularly confusing when explaining the results.
+
+The last part above again says … those who received the non-personalised text were more likely to complete the questionnaire when completing via the telephone".
+
+It looks like the method of completion is the purpose of the study.
+
+When you use the phrase "were more likely to", you must give the details of the comparison, i.e., more likely than who? Additional words have been added for clarification.
+
+It is implied, but not adequately explained, that some women completed the questionnaire by some other means.
+
+It is not clear how this was handled in terms of the numbers analysed throughout the study and this needs to be explained.
+
+collection.
+
+The completion method is only relevant to the primary outcome, where the trial team detailed that their main method of data collection was via the telephone, and thus the primary outcome explores this.
+
+However, to explore the effectiveness of the interventions on any data collection method (as is more typically done in RCTs where a number of methods are utilised) a secondary outcome was to explore this via any method.
+
+For your tables 3 and 4, add the number of women.
+
+Why does the left column say "response rate for all methods" when the primary outcome is defined as the proportion of the questionnaires completed over the telephone…" Response rate, completion rate and retention rate are all frequently used synonymously within the SWAT world.
+
+As such the terminology within this paper has switched between the terms.
+
+In response to this comment the terminology has been made consistent.
+
+The heading in the results section, "Response rates for all method", do you mean completion rates for all methods?
+
+A response rate is different.
+
+If you hang your hat on statistically significant evidence, by quoting CIs and p-values, to establish if your SWAT was effective, or not, then the following has no place in your paper. "There is some, non statistically significant, evidence to suggest that there may be a difference in response rate for personalised versus non-personalised text reminders; adjusted OR 0.61 (95% CI 0.30-1.24, p=0.17), in favour of the non-personalised text messages".
+
+You cannot say there is non-statistically significant evidence and then support that statement with statistics!
+
+Remove this please.
+
+This section has been reworded to reflect your suggestion.
+
+The heading, "Number of attempts to contact required".
+
+Replace with, Number of attempts required to contact the women.
+
+The authors have declined to make this change.
+
+In some instances the participant was not contacted, therefore it would be incorrect for the heading to referring the number required to contact them, when some were not contactable.
+
+Additionally, as explained in a previous comment we will not be changing participant to women.
+
+What do you mean by the maximum number of calls, as stated here "The maximum number of calls was reached for 55 of the 174 participants…"? This has been clarified both when describing the outcome, and in the results.
+
+The researcher tried to contact the participant a maximum of 6 times.
+
+Contacts required is a new term introduced here " There was no evidence of a difference in number of contacts required".
+
+What do you mean by it? This is referring the number of attempts to contact -a word had been omitted, and has been corrected.
+
+"The average time to respond was 6.2 days (ranging from 5 days early to 103 days late)".
+
+Respond to what, the phone call or the text, or the questionnaire?
+
+Terminology has been changed.
+
+The benefits of publishing with F1000Research:
+
+Your article is published within days, with no editorial bias • You can publish traditional articles, null/negative results, case reports, data notes and more •
+
+The peer review process is transparent and collaborative • Your article is indexed in PubMed after passing peer review • Dedicated customer support at every stage • For pre-submission enquiries, contact research@f1000.com
+
+Hi [name], Thank you for taking part in the MiQuit3 trial.
+
+A member of the MiQuit3 team will call next week to complete the final questionnaire.
+
+Once completed we will send you a £ 5 or £35 voucher. Whether you have quit smoking or not we would love to speak to you.
+
+Thanks, [Researchers name].
+
+MiQuit Trial: Thank you for taking part in the MiQuit3 trial.
+
+A member of the MiQuit3 team will call next week to complete the final questionnaire.
+
+Once completed we will send you a £ 5 or £35 voucher. Whether you have quit smoking or not we would love to speak to you.
+
+Thanks, [Researchers name].
+
+Control 2: Late notification MiQuit Trial: Hi [name], Thank you for taking part in the MiQuit3 trial.
+
+A member of the MiQuit3 team will call tomorrow to complete the final questionnaire.
+
+Once completed we will send you a £ 5 or £35 voucher. Whether you have quit smoking or not we would love to speak to you.
+
+Thanks, [Researchers name].
+
+Figure 1.
+
+Flow of participants through the SWAT.
+
+Cochrane et al. found no statistically significant difference in their study, but results favoured the non-personalised text messages

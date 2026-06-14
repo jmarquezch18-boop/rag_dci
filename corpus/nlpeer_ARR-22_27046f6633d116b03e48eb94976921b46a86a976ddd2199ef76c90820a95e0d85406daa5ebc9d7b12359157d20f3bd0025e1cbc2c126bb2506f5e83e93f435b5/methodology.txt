@@ -1,0 +1,11 @@
+Pre-trained models like BERT (Devlin et al., 2019) and GPT-3 (Brown et al., 2020) rely heavily on the use of plain text data to get human-like performance.
+
+Despite the remarkable achievements of pre-trained models, these state-of-the-art models can not directly answer some sensitive use cases, including the medical record (Christoph et al., 2015), search history (Shen et al., 2007) and other personally identifiable information (PII).
+
+To avoid the direct computation on plain-text data, recent works like TextHide (Huang et al., 2020) and DP-finetuning (Kerrigan et al., 2020) introduce the classical federated learning and differential privacy (DP) to protect the sensitive data.
+
+However, TextHide (Huang et al., 2020) can only be applied to sentence-level tasks.
+
+Due to the mixup operation, TextHide fails to model token-level tasks like named entity recognition or semantic role labelling.
+
+DP-finetuning would greatly sacrifice the performance of fine-tuned model by 20% perplexity for a generation model like GPT-2.

@@ -1,0 +1,7 @@
+This paper presents the first multi-objective transformer model for constructing open cloze tests that exploits generation and discrimination capabilities to improve performance.
+
+Our model is further enhanced by tweaking its loss function and applying a post-processing reranking algorithm that improves overall test structure.
+
+Experiments using automatic and human evaluation show that our approach can achieve up to 82% accuracy according to experts, outperforming previous work and baselines.
+
+We also release a collection of highquality open cloze tests along with sample system output and human annotations that can serve as a future benchmark.

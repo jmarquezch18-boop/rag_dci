@@ -1,0 +1,407 @@
+Carbon Fluxes In Spring Wheat Agroecosystem In India
+
+Abstract
+
+Introduction
+
+Methodology
+
+Modeling Approach
+
+Model Description
+
+Data For Model Evaluation
+
+Meteorological And Management Data
+
+All ISAM simulations need data for both environmental and anthropogenic drivers.
+
+We used annual atmospheric [CO 2 ] data from Le Quéré et al. (2018) and climate data from Viovy (2018) for both site-scale and country-scale simulations.
+
+The temporal resolution of the climate data is 6 h, and we interpolated the climate data to hourly values.
+
+The planting date, nitrogen, and irrigation data used for the site-scale runs are described in Sect.
+
+2.3.
+
+For the country-scale runs, we used nitrogen fertilizer data developed by Gahlot et al. (2020) by combining data from Ren et al. (2018) and Mueller et al. (2012).
+
+Data on the harvested wheat area in a gridded format are needed  for calculating fluxes at a country scale in units of teragrams of carbon per year (TgC yr -1 ).
+
+We used spring wheat harvested area data developed by Gahlot et al. (2020), combining harvested area from Monfreda et al. (2008) and MAFW (2017).
+
+2018), and airborne nitrogen deposition data (Dentener, 2006) until the soil parameters reached a steady state.
+
+The steady-state conditions used in the study are the same as those followed by Yang et al. (2005).
+
+Further details on the site-scale spin-up are available in Gahlot et al. (2020).
+
+We used ISAM dyn_wheat in the same configuration as Gahlot et al. (2020) to simulate carbon fluxes for the 2013-2014 growing season.
+
+Country-Wide Simulations Over Wheat-Growing Regions Of India
+
+The country-wide simulations were designed to understand the spatial variation of carbon fluxes across India's wheatgrowing regions using the ISAM dyn_wheat module.
+
+To simulate the carbon fluxes at a regional scale, ISAM was spun up for 1901 to maintain constant soil parameters such as temperature, moisture, and carbon and nitrogen pools.
+
+For the spin-up, we used the climate data from Viovy (2018) for the years 1901-1920, with airborne nitrogen deposition (Den-tener 2006) and [CO 2 ] (Quéré et al., 2018) held at levels of 1901 and neglecting nitrogen fertilizer and irrigation.
+
+We used ISAM dyn_wheat to conduct regional-scale simulations over wheat-growing regions of India to understand the variability of carbon fluxes across diverse climates (Ortiz et al., 2008) and management conditions.
+
+We ran the model for the period 1901-2016.
+
+First, we conducted a control run (S CON ) driven by the annual [CO 2 ], climate data, nitrogen fertilizer data, and full irrigation to meet crop water needs.
+
+Irrigation is a crucial factor in spring wheat cultivation, with 93.6 % of the wheat area equipped for irrigation (MOA 2016), and the Indo-Gangetic Plain significantly contributes to the total wheat area irrigated in India (Gahlot et al., 2020).
+
+Data on the exact volume of irrigation water were not available.
+
+Therefore, in the S CON simulation, each grid cell was considered 100 % irrigated (i.e., to field capacity), so there was no water stress on the crops (Gahlot et al., 2020).
+
+Our analysis focused on the years 1980-2016.
+
+We analyzed country-scale model results as inter-decadal changes from the 1980s to the 2010s.
+
+We calculated decadal averages for various fluxes by dividing the total period into the 1980s (1980-1989), 1990s (1990-1999), 2000s (2000-2009), and 2010s (2010-2016).
+
+The regional-scale simulations validate the crop phenology and yield of spring wheat.
+
+The crop dataset we compiled was compared with the 26 growing seasons of data.
+
+Experiments To Estimate The Effect Of External Drivers On Carbon Fluxes
+
+Results
+
+Evaluation Of Isam Site-Scale Simulations
+
+Validation Of Yield Simulated By Isam
+
+A major limitation of Gahlot et al. (2020) was validating ISAM against just one experimental site.
+
+To increase the confidence in model simulations, we compared the sowing date (Fig. S1), LAI (Fig. S2), and yield (Fig. 2) simulated by ISAM dyn_wheat against the crop dataset we compiled.
+
+The yield simulated by ISAM is compared against the gridded EarthStat dataset (Monfreda et al., 2008) and sitescale observations (Fig. 2).
+
+The EarthStat data are reported as a 5-year mean yield for 1995, 2000, and 2005.
+
+The ISAM simulations over a similar period are compared in Fig. 2.
+
+The comparison confirms that the ISAM simulation agrees with the EarthStat gridded data in most wheat-growing regions except for small parts of the eastern and northwestern regions.
+
+This bias is explained by the difference in the sowing date simulated by ISAM and the GGCMI dataset (Fig. S1).
+
+However, analyzing the LAI site-scale comparison (Fig. S2), the growing season simulated by ISAM in the northwestern region (Jobner site) has good agreement with the observations in three growing seasons (2013, 2014, and 2015).
+
+This gives us the confidence that the dynamic planting date module in ISAM performs reasonably well.
+
+Additionally, even in the site-scale data we have at the IARI site, the spring wheat is sown on 16 December, which aligns with our ISAM simulations for this region.
+
+The northeastern and eastern parts of the wheat-growing areas of India are mostly irrigated, have very fertile soil, and have high yields; one of the largest wheat producers in India is in this region.
+
+Therefore, we are confident about the yields simulated by ISAM in this region and believe that the EarthStat data used for this yield generation might be biased.
+
+This assumption is supported by the site-scale yield comparison in Fig. 2c, which shows that ISAM-simulated yield has good agreement with the observations (Pearson's r = 0.57).
+
+The yields are high in the western parts of Earth-Stat data, a semi-arid region with less rain and no irrigation.
+
+These regions often have lower yields, and we believe that the EarthStat data are biased in this region.
+
+Spatial-Temporal Variability Of Carbon Fluxes From Spring Wheat Agroecosystems In India
+
+The country-scale S CON run described in Sect.
+
+2.5.2 was designed to provide a quantitative understanding of the spatiotemporal variability of carbon fluxes across the wheatgrowing regions of India.
+
+Before evaluating the regionalscale ISAM runs, we compared the simulated NEP from the S CON run with the carbon flux data from Patel et al. (2011Patel et al. ( , 2021)).
+
+The monthly averaged carbon flux data were digitized from the figures.
+
+Patel et al. (2011)   (Patel et al., 2011) and Saharanpur (2014-2015) (Patel et al., 2021).
+
+The sowing dates simulated by ISAM are in the second week of December, while the spring wheat is sown in the last week of November in the observation data.
+
+Therefore, Fig. 3 shows the season-toseason comparison of the sites and ISAM simulations.
+
+The seasonality at Saharanpur is captured very well, although with a small bias.
+
+The R 2 value for the sites is high and significant at p<0.1, showing that the ISAM-simulated NEP captures the variation in observed NEP.
+
+The mean absolute bias between observed and simulated NEP at Saharanpur and Meerut is 30.96 and 43.69 gC m -2 month -1 , respectively.
+
+The bias may be because we compare site-scale observations with simulated values averaged over the 0.5 • × 0.5 • (∼ 2500 km 2 ) grid cell area.
+
+Nonetheless, the high correlations with site observations point to the ISAM simulations' robustness.
+
+Figure 4 shows the spatial maps of GPP, TER, and NEP for the growing season (December-March).
+
+The fluxes for each month of the growing season were averaged over 16 years (2000)(2001)(2002)(2003)(2004)(2005)(2006)(2007)(2008)(2009)(2010)(2011)(2012)(2013)(2014)(2015)(2016) for that specific month.
+
+Because the climatic conditions across wheat-growing regions of India are diverse, the wheat crops are sown on different dates, which was reflected in ISAM using the dynamic planting day criteria.
+
+Spring wheat is planted in late October in central India and in early November in eastern India.
+
+The northern and northwestern planting dates are late November to early December (Fig. S1).
+
+Consequently, there are regional variations in the seasonal flux dynamics.
+
+The wheat-growing regions' central and eastern parts show the maximum flux value in January and February, respectively, while the northern and western parts show the maxima in March.
+
+The spatial plots show very low values of GPP and NEP during December because the crops are still in early growth.
+
+The croplands show very low values of NEP during March in the central and eastern parts of wheat-growing regions.
+
+Even though the croplands are not active, heterotrophic respiration leads to moderate values of TER in March for the eastern and central parts of India.
+
+Figure 5 depicts the temporal pattern of annual and decadal fluxes.
+
+From 1980-2016, the GPP, NEP, NPP, R a , and R h over the spring wheat croplands increased at 1.272, 0.945, 0.579, 0.328, and 0.366 TgC yr -2 , respectively.
+
+The trends represent the slope of the linear trend line, and the trends are significant at p<0.01, calculated using a twotailed test.
+
+Figure 5b shows the box-whisker plots.
+
+The box represents the 25-75th percentile of the data, and the whisker shows 3 times the interquartile range (3IQR).
+
+The data out-  side this 3IQR whisker are extreme outliers.
+
+The median of all the fluxes showed a more significant increase from the 1980s to the 1990s compared to the 1990s to the 2000s.
+
+The rise was again steep from the 2000s to the 2010s.
+
+The spatial trends of the fluxes over 36 years were examined.
+
+Figure 6 depicts the difference in the linear trend of total carbon uptake by spring wheat between the 2010s and 1980s.
+
+The linear trend was calculated at each grid point using singular spectrum analysis (Golyandina et al., 2013).
+
+The difference between the calculated trend line at each grid between the 2010s and 1980s gives us the total change in carbon fluxes over the period.
+
+The stippling in the figure shows the grids with significant trend signals from 1980-2016, calculated at a significance level of 95 %.
+
+The results show that the Indo-Gangetic Plain (IGP) region of India saw a significant increase in GPP than all other regions over the 37-year period.
+
+We can also observe a slight decrease in GPP in the western region.
+
+A similar trend in TER is observed, but the magnitude is less than that of GPP.
+
+The total carbon taken up by the spring wheat during the growing season is given by NEP, and the figure shows no significant increase in carbon uptake in the southern and northwestern parts.
+
+However, the IGP, along with Punjab and Haryana, has a significant increase in carbon uptake.
+
+Figures 5 and6 highlight how the carbon uptake by spring wheat has changed over 3 decades and the spatial variation in this trend.
+
+The impact of climatic and management practices causing the above-observed trends is analyzed in the next section.
+
+Effects Of External Drivers On Carbon Fluxes
+
+We investigated the impact of two climate drivers, changing temperature and [CO 2 ], as well as two agricultural practices, nitrogen fertilizer and water availability due to irrigation, on carbon fluxes from spring wheat croplands.
+
+Figure S4 de-  picts the variation of these variables.
+
+Figure S4a shows the temperature anomaly between S CON and S Temp .
+
+The temperatures are always warmer in S CON compared to S Temp .
+
+During the study period, the temperature anomaly increased at 0.038 • C yr -1 (Fig. S4a).
+
+[CO 2 ] has also shown a consistent rise and increased at 1.743 ppm yr -1 (Fig. S4b).
+
+The nitrogen fertilizer added to the C 3 crops increased at 1.86 kg ha -1 yr -1 over 36 years from 1980-2016 (Fig. S4c) (Hurtt et al., 2011).
+
+Figure S4d displays the anomaly in water in the root zone during the growing season, estimated as the difference between S CON and S Water .
+
+Irrigation increases the water available to crops during the growing season in the S CON run.
+
+The S CON run provides ∼ 120 mm per season more water to the crop than the S Water run, which is ∼ 50 % of the wheat crop water requirement during the growing season.
+
+The effects of these factors are estimated by analyzing the difference in simulated carbon fluxes between the control and experimental simulation (Fig. 7 andTable 4).
+
+Results show that the increase in temperature has a negative effect on all the fluxes.
+
+The temperature anomaly rose at 0.038 • C yr -1 , and yearly GPP decreased at 0.597 TgC yr -12 during the study period.
+
+The mean temperature anomaly during the growing season in each decade is 0.25, 0.67, 1.43, and 0.9 • C. The temperature varied less between the 1980s and 1990s.
+
+Therefore, a slight difference in median GPP be-tween these two decades is observed (Fig. 7a).
+
+However, a higher spread in the box-whisker plot of GPP is observed in the 1990s, which reflects a few growing seasons with considerable high-temperature variation.
+
+The higher temperatures during the 2000s and 2010s caused a significant decrease in GPP.
+
+Since the temperatures varied considerably during the 2000s and 2010s, a large spread in simulated GPP can be observed.
+
+Similar trends in NPP and NEP can be observed with a decrease of 21.9 and 13.9 TgC yr -1 • C -1 rise in temperature.
+
+Due to a temperature rise, the growing period and the crop phenology shorten (Koehler et al., 2013;Sonkar et al., 2019), which is also simulated by ISAM (Figs. S5a andS6a).
+
+Hence a decrease in fluxes is observed.
+
+As the crop growth decreases, the TER and NEP also decrease.
+
+We analyzed the spatial variation in the impact of temperature on the GPP, TER, and NEP (Fig. 8).
+
+S4 shows the anomaly in growing season temperatures between the S CON and S Temp simulations.
+
+We observe that the higher temperatures in the S CON run caused a decrease in carbon taken up by the spring wheat compared to the lower Figure 7.
+
+The impact of various drivers (temperature and CO 2 , as well as agricultural practices: nitrogen fertilization and water added through irrigation) on wheat carbon fluxes.
+
+The impact of temperature is S CON -S Temp .
+
+Similarly, the impact of CO 2 is S CON -S CO 2 , nitrogen fertilization is S CON -S N_Fert , and water added through irrigation is S CON -S Water .
+
+The variation in the impact of each variable across each decade is shown in box-whisker plots.
+
+temperatures in the S Temp run.
+
+However, the carbon uptake decrease is inconsistent across the wheat-growing regions.
+
+The IGP, Punjab, Haryana, and a few parts of central India are primarily affected by the higher temperatures, while the impact is less in other regions.
+
+Interestingly, only some trend signals are significant at 95 %, especially in the eastern IGP, Punjab, and Haryana.
+
+The trend in the impact of the temperature of TER is consistent over most wheat-growing regions, although the magnitude is less.
+
+The impact on NEP due to higher temperatures is consistently negative across the wheat-growing regions but insignificant in the IGP, Punjab, and Haryana.
+
+This behavior in these regions might be because these areas are highly irrigated.
+
+Results showed that the increase in [CO 2 ] alone has led to a rise in annual GPP, NEP, R a , and R h of 0.805, 0.422, 0.201, and 0.175 TgC yr -12 , respectively (Table 4).
+
+During the study period, [CO 2 ] rose at 1.743 ppm yr -1 , causing an increase in GPP by 462 GgC yr -1 for a unit parts per million (ppm) rise in [CO 2 ].
+
+The GPP had a consistent rise each decade (Fig. 7).
+
+A large spread in GPP was observed in the 1980s.
+
+The [CO 2 ] has consistently increased (Fig. S4b), but the temperature anomaly in the 1980s was below zero for a few growing seasons (Fig. S4a).
+
+Therefore, significant variation in GPP and other fluxes was observed (Fig. 5a) in this decade.
+
+Similarly, due to higher CO 2 availability for the wheat crops, NPP, NEP, and TER increased by 202, 100, and 173 GgC yr -1 per part per million rise in [CO 2 ].
+
+As the [CO 2 ] level increases in the environment, more carbon is available for crop uptake by photosynthesis (Saha et al., 2020).
+
+Analyzing the spatial variation in the impact of [CO 2 ] (Fig. 8), we observe that the higher [CO 2 ] in S CON led to higher carbon uptake across all the wheat-growing regions, with a higher impact observed in the IGP, Punjab, and Haryana.
+
+The impact of [CO 2 ] is significant in all the wheat-growing regions.
+
+Similar trends in TER and NEP are observed, although with a lower magnitude.
+
+Nitrogen fertilization increased NEP, R a , and R h at 0.468, 0.231, and 0.197 TgC yr -2 , respectively.
+
+The impact of nitrogen fertilization on GPP at 0.897 TgC yr -2 was the highest among all the factors.
+
+Nitrogen fertilization caused an increase in GPP by ∼ 33 TgC on an annual basis.
+
+Similarly, NEP increased by ∼ 17 TgC yr -1 , and R a and R h increased by by ∼ 8 and ∼ 7 TgC yr -1 , respectively.
+
+Nitrogen fertilization is essential in India due to its tropical climate and multiple cropping systems (Gahlot et al., 2020).
+
+Studies have shown that nitrogen availability impacts carbon uptake through progressive nitrogen limitation (Jain et al., 2009).
+
+Though progressive nitrogen limitation is observed over longer timescales than the growing period of the crops, the decadal carbon flux simulations revealed some exciting results.
+
+Even under excess [CO 2 ], if nitrogen is limited, crop growth does not show a significant difference, but a decrease in carbon uptake is observed (Jain et al., 2009;Luo et al., 2006).
+
+Under excess [CO 2 ], if sufficient nitrogen is available, the ecosystem's carbon uptake increases; therefore, the maximum flux increase was observed in the nitrogen fertilization case (Table 4 and Fig. 8).
+
+The study by Lin et al. (2021) focusing on maize and soybean crops emphasized the importance of fertilization to improve crop growth, and our study proves that with adequate fertilization, even the spring wheat in the Indian region also grows well and the carbon uptake is higher.
+
+Nitrogen fertilization was consistent over the decades, leading to a constant rise in GPP.
+
+However, the variation in GPP in the 2000s was the least (Fig. 7) influenced by high temperatures during this decade (Fig. S4).
+
+A similar pattern of low variation was observed in NEP, R a , R h , and NEP during this period.
+
+The spatial variation across wheat-growing regions in the impact of nitrogen fertilization reveals the same pattern as seen in S CO 2 .
+
+However, the impact on carbon fluxes is more significant due to nitrogen fertilization than CO 2 .
+
+A higher impact was observed in the IGP and adjoining regions, which are highly cultivated and irrigated.
+
+The results show that using nitrogen fertilization improves the carbon uptake by spring wheat, in line with earlier studies (Jain et al., 2009;Luo et al., 2006).
+
+The impact of water added to the crop led to an annual increase of ∼ 9 TgC in GPP, ∼ 6.5 TgC in NPP, ∼ 2 TgC in R a , and ∼ 6 TgC in R h .
+
+The reason for the small trend was the fluxes increasing through the 1980s, 1990s, and 2000s but declining in the 2010s.
+
+The decline in the 2010s was due to less water availability for the crops during this period, as shown in Fig. S4d, hence affecting the trends in the fluxes (Table 4).
+
+The higher GPP, NPP, and NEE in the 2000s compared to the 1990s, even though the temperatures were  Hatfield and Prueger (2015) and Green et al. (2019) explored the impact of water availability in terrestrial ecosystems on carbon fluxes.
+
+They concluded that higher water availability improves the carbon uptake in terrestrial ecosystems.
+
+The spatial variation analysis (Fig. 8) shows that the higher water availability in the S CON run caused higher carbon uptake throughout the wheat-growing regions.
+
+The highest impact is observed in the northwestern regions of the country (Punjab and Haryana), which are highly irrigated, and most of the crop water requirements are met through irrigation.
+
+However, the stippling, which shows if a region has a significant trend over the 36 years, reveals that most wheat-growing regions do not have a significant increasing or decreasing trend.
+
+Nevertheless, the impact of adequate water causing higher carbon uptake by spring wheat is evident in Fig. 8.
+
+Discussion
+
+Conclusions
+
+Experimental design 2.5.1 Site-scale simulations at the IARI site Gahlot et al. (2020) calibrated and validated ISAM using phenology observations from the 2014-2015 and 2015-2016 growing seasons.
+
+We designed a site-scale carbon flux experiment to validate ISAM carbon fluxes against field observations for the growing season of 2013-2014.
+
+To simulate the carbon fluxes at a site scale, ISAM was spun up for the 2013-2014 growing season using climate data from Viovy (2018), annual atmospheric [CO 2 ] data from Le Quéré et al. (
+
+Figure 1.
+
+Comparison of observations and ISAM fluxes for (a) GPP, (b) TER, and (c) NEP.
+
+Figure 2.
+
+Comparison of (a) yield simulated by ISAM and (b) EarthStat gridded data.
+
+(c) Yield simulated by ISAM against yield observations from the spring wheat crop dataset.
+
+Figure 3.
+
+Comparison of the ISAM S CON with the observations from Saharanpur
+
+Figure 4.
+
+Spatial variation of (a) GPP, (b) TER, and (c) NEP over the wheat-growing regions of India averaged over the period 2000-2016.
+
+Figure 5.
+
+Carbon fluxes simulated by ISAM.
+
+(a) The time series of fluxes from 1980-2016. (b) Decadal averages of fluxes.
+
+Figure 6.
+
+The difference in carbon fluxes (the 1980s vs. 2010s).
+
+The stippled regions have a trend signal significant at 95 %.
+
+The figure shows the impact of temperature (S CON -S Temp ) averaged from 1980-2016.
+
+The stippling in the figure shows the grids with significant trend signals from 1980-2016, calculated at a significance level of 95 %.
+
+The temperatures in S Temp are the de-trended climatological values from 1900-1930.
+
+Figure
+
+Figure 8.
+
+Spatial variation in the impact of temperature, [CO 2 ], nitrogen fertilization, and water added to spring wheat on the GPP, TER, and NEP.
+
+Numerical experiments were conducted to evaluate the effect of external drivers on carbon fluxes using ISAM dynamic wheat crops for 1901-2016.
+
+Various crop parameters of ISAMdyn_wheat and ISAMC3_crop against site measurements.
+
+We compared field observations at the IARI experimental wheat farm site and ISAM crop varieties (the dynamic crop and C 3 generic crop) for the growing season of 2013-2014.
+
+Willmott index and RMSE (gC m -2 month -1 ) of monthly carbon fluxes (GPP, NEP, and TER).
+
+The impact of each driver (TgC yr -2 ) on various fluxes of the spring wheat crop in India.
+
+The values show the slope, giving the linear trend of individual fluxes.
+
+* The trend has a significance level of p<0.01.

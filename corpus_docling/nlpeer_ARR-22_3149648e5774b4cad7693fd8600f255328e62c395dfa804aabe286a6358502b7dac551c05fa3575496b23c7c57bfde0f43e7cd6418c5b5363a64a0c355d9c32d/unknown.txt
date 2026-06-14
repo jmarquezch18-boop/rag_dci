@@ -1,0 +1,143 @@
+A Robustly Optimized Bmrc For Aspect Sentiment Triplet Extraction
+
+Abstract
+
+Introduction
+
+Methodology
+
+Problem Formulation
+
+Given a sentence W = {w 1 , w 2 , ..., w M } with M tokens, ASTE task is to identify the collection of triplets
+
+T = {(a i , o i , s i )} |T |
+
+i=1 , where a i , o i , s i and |T | denote the aspect, the opinion expression, the sentiment, and the number of triplets, respectively.
+
+For the sentence shown in Figure 1, the collection T is {(portions, small, negative), (f ood, good, positive)}.
+
+Bmrc
+
+BMRC can put forward the corresponding query according to the context, and the model then outputs the desired answer.
+
+Forward Query BMRC will query all the aspects based on context; Then, according to the aspect of each prediction, all opinions describing it are queried from the context.
+
+Backward Query BMRC will query all the opinions based on context; Then, according to the opinion of each prediction, all aspects describing it are queried from the context.
+
+Sentiment Prediction Once the aspect-opinion pairs are obtained, the sentiment queries can be constructed to predict the sentiments of the corresponding pairs according to the context.
+
+After that, the sentiments and aspect-opinion pairs are combined into triplets.
+
+The whole process is illustrated in Figure 2.
+
+Word Segmentation
+
+We use the tokenizer based on wordpiece in BERT (Devlin et al., 2019) to segment words into subwords.
+
+Wordpiece is a common technique for word segmentation in NLP tasks.
+
+The role of word segmentation has been investigated.
+
+Suppose the word "walking" is fed into the model, unless it appears many times in the training corpus, the model may fail to handle the word well. When similar words like "walked", "walker" or "walks" show up, without word segmentation, they will be treated as completely different words.
+
+However, if they are subdivided into "walk ##ing", "walk ##ed", "walk ##er", and "walk ##s", their sub-word "walk" contains the same semantics which is quite common during training.
+
+In this sense, the model is able to learn more information through word segmentation.
+
+Exclusive Classifiers
+
+Bidirectional queries are performed in BMRC, and the model needs to perform multiple different types of queries based on context.
+
+For example, the aspect query in forward query is different from the opinion query in backward query.
+
+The former queries all the aspects in the context, while the latter queries all the opinions in the context, requiring different entities.
+
+Another example is the aspect query in the forward query and the aspect query in the backward query.
+
+Although the entities of the two queries are the same, the latter conveys opinion information and searches for all the aspects described by it, while the former does not carry any context information, namely, all the aspects in the context.
+
+In the original BMRC, all queries share one classifier.
+
+However, if different types of queries use the same classifier, it cannot serve any part very well.
+
+These different types of queries will interfere with each other and cause the query conflict.
+
+By adding exclusive classifiers, each different type of query can use a unique classifier, as shown in Figure 3, which can effectively avoid the problem of query conflict and greatly improve the performance of the model.
+
+Span Matching
+
+Recently, there is a lot of work to deal with ABSA tasks based on span extraction (Hu et al., 2019;Xu et al., 2021), so does BMRC.
+
+After obtaining the predicted value of each position as the start or end position of span through binary classifiers, the predicted value is converted into probability using softmax function (Chen et al., 2021).
+
+When predicting the span, many start and end positions may be predicted.
+
+The rule to match them is very important, which will seriously affect the
+
+The portions are small but being that the food was so good makes up for that.  performance of the model.
+
+The matching should consider the probability of start and end positions, as well as the relationship between the positions.
+
+The former represents the optimistic degree of the model for the position, and the latter is the judgment that the start and end positions of span are as close as possible; the priority of probability is higher.
+
+So, the overview of our span matching rule is: make each end position match the start position with the highest probability after the previous end position. If there is a start position with the same probability, select the one whose position is closest to the end position.
+
+Probability Generation
+
+Once the bidirectional queries and span matching are completed, the aspects, opinions and pairs with corresponding relationship are obtained.
+
+In BMRC, the probability product of the start and end positions is taken as the probability of the span, and the probability of pair is the probability product of aspect and opinion.
+
+In this way, the probability of pair decreases unilaterally and cannot well represent the prediction of the pair by the model.
+
+For example, the probability of the four positions of pair is 0.9, while the probability of pair is 0.9 4 = 0.6561, which seems not so reasonable.
+
+By probability generation, we can effectively solve the problem of unilateral decrease in the probability of span and pair, so that their probability can better reflect the expectation of the model.
+
+The operations are shown in Equation 1 and 2, where we balance the probability of span and pair so that their probability is within the interval of the two related probabilities.
+
+It enables us to avoid the unilateral decrease of probability, but keep more appropriate to the expectation of the model.
+
+P (span) = P (span start ) * P (span end ) (1) P (pair) = P (pair asp ) * P (pair opi )
+
+(2) In the above equations, P ( ) represents the prediction probability of .
+
+The span represents an aspect or opinion, span start and span end represent its start and end positions.
+
+The pair represents an aspect-opinion pair, pair asp and pair opi represent the aspect and opinion in the pair.
+
+For the convenience of comparison, the calculation method of P (span start ) and P (span end ) is consistent with BMRC (Chen et al., 2021).
+
+The effects of span matching and probability generation are shown in Figure 4.
+
+Experiment
+
+Datasets
+
+We evaluate the model performance on ASTE-Data-v1 (Peng et al., 2020) and ASTE-Data-v2 (Xu et al., 2020), which are popular benchmark datasets for ASTE task. They are derived from Laptop14, Rest14, Rest15, and Rest16 of SemEval shared challenges (Pontiki et al., 2014(Pontiki et al., , 2015(Pontiki et al., , 2016)).
+
+The ASTE-Data-v2 datasets are the refined data of the previous ASTE-Data-V1 datasets 2 .
+
+2 https://github.com/xuuuluuu/ SemEval-Triplet-data
+
+Evaluation Metrics
+
+Results
+
+Ablation Experiments
+
+Conclusion
+
+Figure 1: The illustration of ASTE task.
+
+Figure 3: Exclusive classifiers for different queries.
+
+What sentiment given the aspect portions and the opinion small ?
+
+Experiments on the ASTE-Data-v1 datasets.
+
+The best P, R and F1 scores are in bold.
+
+Experiments on the ASTE-Data-v2 datasets.
+
+.91 72.20 73.11 53.59 61.84 66.44 62.88 64.61 71.50 73.73 72.60 + Probability Generation 72.51 72.73 72.62 68.13 57.09 62.12 65.90 65.36 65.63 69.98 76.65 73.16

@@ -1,0 +1,57 @@
+Neural network models are quickly becoming the predominant approach to machine translation (MT).
+
+Training neural MT (NMT) models can be done in an end-to-end fashion, which is simpler and more elegant than traditional MT systems.
+
+Moreover, NMT systems have become competitive with, or better than, the previous state-of-the-art, especially since the introduction of sequence-to-sequence models and the attention mechanism (Bahdanau et al., 2014;Sutskever et al., 2014).
+
+The improved translation quality is often attributed to better handling of non-local dependencies and morphology generation (Luong and Manning, 2015;Bentivogli et al., 2016;Toral and Sánchez-Cartagena, 2017).
+
+However, little is known about what and how much these models learn about each language and its features.
+
+Recent work has started exploring the role of the NMT encoder in learning source syntax (Shi et al., 2016), but research studies are yet to answer important questions such as: (i) what do NMT models learn about word morphology? (ii) what is the effect on learning when translating into/from morphologically-rich languages? (iii) what impact do different representations (character vs. word) have on learning? and (iv) what do different modules learn about the syntactic and semantic structure of a language?
+
+Answering such questions is imperative for fully understanding the NMT architecture.
+
+In this paper, we strive towards exploring (i), (ii), and (iii) by providing quantitative, data-driven answers to the following specific questions:
+
+• Which parts of the NMT architecture capture word structure?
+
+• What is the division of labor between different components (e.g. different layers or encoder vs. decoder)?
+
+• How do different word representations help learn better morphology and modeling of infrequent words?
+
+• How does the target language affect the learning of word structure?
+
+To achieve this, we follow a simple but effective procedure with three steps: (i) train a neural MT system on a parallel corpus; (ii) use the trained model to extract feature representations for words in a language of interest; and (iii) train a classifier using extracted features to make predictions for another task.
+
+We then evaluate the quality of the trained classifier on the given task as a proxy to the quality of the extracted representations.
+
+In this way, we obtain a quantitative measure of how well the original MT system learns features that are relevant to the given task.
+
+We focus on the tasks of part-of-speech (POS) and full morphological tagging.
+
+We investigate how different neural MT systems capture POS and morphology through a series of experiments along several parameters.
+
+For instance, we contrast word-based and character-based representations, use different encoding layers, vary source and target languages, and compare extracting features from the encoder vs. the decoder.
+
+We experiment with several languages with varying degrees of morphological richness: French, German, Czech, Arabic, and Hebrew.
+
+Our analysis reveals interesting insights such as:
+
+• Character-based representations are much better for learning morphology, especially for low-frequency words.
+
+This improvement is correlated with better BLEU scores.
+
+On the other hand, word-based models are sufficient for learning the structure of common words.
+
+• Lower layers of the encoder are better at capturing word structure, while deeper networks improve translation quality, suggesting that higher layers focus more on word meaning.
+
+• The target language impacts the kind of information learned by the MT system.
+
+Translating into morphologically-poorer languages leads to better source-side word representations.
+
+This is partly, but not completely, correlated with BLEU scores.
+
+• The neural decoder learns very little about word structure.
+
+The attention mechanism removes much of the burden of learning word representations from the decoder.

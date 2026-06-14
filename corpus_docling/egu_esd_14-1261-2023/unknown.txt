@@ -1,0 +1,489 @@
+The Effect Of Strong Nonlinearity On Wave-Induced Vertical Mixing
+
+Abstract
+
+Introduction
+
+Materials And Methods
+
+Particle Kinematics Of Mechanically Generated Waves
+
+First, the problem of the generation of waves in a numerical wave flume is formulated and solved.
+
+In the present study, a potential flow wave theory is used to obtain the solution within the Eulerian frame of reference.
+
+Weakly nonlinear analytical and higher-order numerical methods are employed to determine the wave fields in the rectangular domain, in which the water elements are defined by the horizontal x and vertical z coordinates of the Cartesian system.
+
+The origin of the system is located at the intersection of the wavemaker zero position and free-surface level corresponding to the hydrostatic conditions.
+
+The mechanically driven oscillation of the free surface represented by elevation function η(x, t) is induced by the piston-like motion of the wavemaker paddle according to the displacement function χ(t).
+
+The flume bottom is assumed horizontal, and the water depth is h = const.
+
+The general presentation of the computational domain and the location of the coordinate system are depicted in Fig. 1.
+
+According to the potential flow assumptions, the motion of an inviscid and incompressible fluid is irrotational.
+
+More-over, the solid boundaries are impervious.
+
+The scalar velocity potential function φ(x, z, t) may be introduced to determine the velocity vector field v(x, z, t) such that v = ∇φ.
+
+The wavemaker boundary-value problem is then formulated as
+
+∇ 2 φ = 0, -h ≤ z ≤ η,
+
+(1)
+
+η t + φ x η x -φ z = 0, z = η,(2)
+
+φ t + 1 2 (φ 2 x + φ 2 z ) + gη = 0, z = η,(3)
+
+φ z = 0, z = -h, (4) χ t -φ x = 0, x = χ , (5
+
+)
+
+where g is the acceleration due to gravity.
+
+The first part of a pseudo-spectral solution involves expanding the kinematic free-surface boundary condition (2), the dynamic free-surface boundary condition (3) and the kinematic wavemaker boundary condition (5) in a Taylor series about a mean position corresponding to the still water level (z = 0) for Eqs. ( 2)-(3) and wavemaker paddle zero position (x = 0) for Eq. ( 5):
+
+m=0 η m m! ∂ m ∂z m (η t + φ x η x -φ z ) = 0, z = 0, (6
+
+) m=0 η m m! ∂ m ∂z m φ t + 1 2 (φ 2 x + φ 2 z ) + gη = 0, z = 0, (7
+
+) m=0 χ m m! ∂ m ∂z m (χ t -φ x ) = 0, x = 0.(8)
+
+In this way, a simple rectangular form of the computational domain is preserved, and the solution procedure is advanced further using either the perturbation or spectral approach.
+
+In the present study both weakly nonlinear (perturbation expansions) and fully nonlinear (spectral expansions) solutions are briefly presented and applied to calculate the velocity field for wave-induced mixing calculations.
+
+The order of nonlinearity depends on the order of nonlinear terms of Taylor series expansions of boundary conditions.
+
+Second-order terms are retained for weakly nonlinear solutions, while the fully nonlinear solution is provided with no upper limit (arbitrary order).
+
+Weakly Nonlinear Solution
+
+The perturbation expansion is first applied to solve the wavemaker problem defined by Eqs. (1)-( 5) according to the solution derived by Hudspeth and Sulisz (1991) and Sulisz and Hudspeth (1993).
+
+The monochromatic wavemaker paddle displacement of amplitude s is assumed to be
+
+χ(t) = s sin(σ t + ϕ),(9)
+
+which generates periodic waves of the first-order amplitude of a, the angular frequency of σ and the phase ϕ in the semiinfinite flume domain.
+
+Due to the fact that x goes to infinity, the radiation condition (outward propagating waves) is imposed at the far-end lateral boundary of the domain (Hudspeth and Sulisz, 1991).
+
+Using the expansions of the boundary conditions Eqs. ( 6)-( 8) and retaining the terms up to the second order, the weakly nonlinear boundary conditions become η t -φ z + φ x η x -ηφ zz = 0, z = 0, (10)
+
+φ t + 1 2 (φ 2 x + φ 2 z ) + ηφ zt + gη = 0, z = 0, (11
+
+)
+
+χ t -φ x -χ φ xx = 0, x = 0. (12
+
+)
+
+Additionally, the following small steepness parameter = ak (where k is the first-harmonic wave number) perturbation expansions of the angular frequency ω (σ = ω 0 ), the freesurface elevation and the velocity potential functions are used (Hudspeth and Sulisz, 1991):
+
+ω = n=0 n ω n ,(13)
+
+φ(x, z, t) = n=0 n φ n+1 ,(14)
+
+η(x, t) = n=0 n η n+1 . (15
+
+)
+
+Substituting the perturbation forms Eqs. ( 13)-( 15) into the boundary conditions correct up to the second order, Eqs. ( 10)-( 12), leads to the final weakly nonlinear solution to the velocity potential and free-surface elevation functions (Hudspeth and Sulisz, 1991).
+
+The formulas for the horizontal U (x, y) and vertical W (x, y) components of the timeindependent mass-transport velocity V(x, y) for the case of the piston-type wavemaker of full-depth draught are calculated from nondimensional forms reported as Eqs. ( 50a) and (50b) by Hudspeth and Sulisz (1991).
+
+In order to get dimensional values, the results calculated by Eqs. (50a) and (50b) in the work of Hudspeth and Sulisz (1991) are multiplied by a √ gk.
+
+Far away from the wavemaker paddle (x > 3h), the vertical component of the time-independent velocity vanishes, and the time-independent horizontal velocity profile along the water depth U L converges to the sum of the Stokes drift U S and return current U E velocities (Longuet-Higgins, 1953;Dean and Dalrymple, 1984), i.e.
+
+U L (z) = U S (z) + U E ,(16)
+
+where the Stokes drift profile is calculated as
+
+U S (z) = kσ a 2 cosh(2k(z + h)) 2sinh 2 (kh) ,(17)
+
+and the return current value takes the form
+
+U E = - kσ a 2 sinh(2kh) 4khsinh 2 (kh) = - a 2 kg 2σ h .(18)
+
+Fully Nonlinear Solution
+
+An alternative approach, which admits higher-order wave components, is based on the spectral method applied to the wavemaker problem (Paprota and Sulisz, 2018).
+
+Contrary to the presented perturbation approach, the waves are generated by an arbitrary function χ (t) in a finite domain of length b, which is sufficiently large to exclude the effect of wave reflection from the far-end wall of the flume.
+
+In this regard, only progressive waves are considered to facilitate the comparisons with the weakly nonlinear solution.
+
+The free-surface elevation function is expanded in a Fourier cosine series as
+
+η(x, t) = i=0 a i cos(λ i x),(19)
+
+while the corresponding expansion of the velocity potential function is coupled with an additional term satisfying the wavemaker boundary condition (5) to give
+
+φ(x, z, t) = i=0 A i cosh(λ i (z + h)) cosh(λ i h) cos(λ i x) + B 0 ((x -b) 2 -(z + h) 2 ) + j =1 B j cosh(µ j (x -b)) cosh(µ j b) cos(µ j (z + h)),(20)
+
+where λ i = iπ/b and µ j = j π/ h are the eigenvalues of the expansions, and the solution coefficients are the functions of time (a i (t), A i (t) and B j (t)).
+
+The B j coefficients are (Paprota and Sulisz, 2018)
+
+B 0 = χ t h + M m=1 χ m m! sin mπ 2 i=0 λ m i A i tanh(λ i h) 2h(χ -b) ,(21)
+
+B j = -2 cos(µ j h) M m=1 χ m m! sin( mπ 2 ) • i=0 λ m+2 i λ 2 i +µ 2 j A i tanh(λ i h) h M m=0 µ m+1 j χ m m! cos(mπ) tanh(µ j b) | cos mπ 2 | , j > 0. (22
+
+)
+
+The coefficients A i , B j and a i are determined in an iterative solution procedure from the kinematic free-surface boundary condition (6), the dynamic free-surface boundary condition (7) and the kinematic wavemaker boundary condition (8). For a given time t, the unknown coefficients a i and A i are calculated using a Fourier transform of η and φ as
+
+a i = 2 b b 0 η(x, t) cos (λ i x) dx, A i = 2 b b 0 φ(x, 0, t) cos (λ i x) dx,(23)
+
+while B j values are determined using Eqs. ( 21) and ( 22).
+
+The coefficients are then used to calculate free-surface and velocity potential values using inverse Fourier transforms to advance the solution in time.
+
+Hence, time stepping is applied in a physical domain to obtain values of φ and η at a new time level.
+
+A fourth-order Adams-Bashforth-Moulton predictor-corrector approach is preferred as a time-marching scheme (see e.g. Press et al., 1988), with initial values of φ(x, 0, 0) = 0 and η(x, 0) = 0.
+
+The wavemaker model used in the present study is reported in the work of Paprota and Sulisz (2018).
+
+The instantaneous wave velocity field is derived by expressing the horizontal u and vertical w velocity components in terms of the spatial derivatives of the velocity potential φ x and φ z , respectively, as
+
+u(x, z, t) = - i=0 λ i A i cosh(λ i (z + h)) cosh(λ i h) sin(λ i x) + 2B 0 (x -b) + j =1 µ j B j sinh(µ j (x -b)) cosh(µ j b) cos(µ j (z + h)), (24) w(x, z, t) = i=0 λ i A i sinh(λ i (z + h)) cosh(λ i h) cos(λ i x) -2B 0 (z + h) - j =1 µ j B j cosh(µ j (x -b)) cosh(µ j b) sin(µ j (z + h)). (25
+
+)
+
+After a fully developed wave motion is achieved, the timeindependent wave velocity field may be approximated by time averaging of the instantaneous wave velocity (see Hudspeth and Sulisz, 1991) within the range limited by two inphase states of regular wave motion (over one wave period, which is either given or calculated from the dispersion relation) as
+
+U (x, z) = u x udt + u z wdt + 0.5u xx udt 2 + 0.5u zz wdt 2 + u ,(26)
+
+W (x, z) = w x udt + w z wdt + 0.5w xx udt 2 + 0.5w zz wdt 2 + w (27)
+
+and
+
+is referred to here and after as the Eulerian-mean transport velocity (EMTV).
+
+The pair of triangle brackets denotes the operator of time averaging over one wave period.
+
+The velocities u and w are calculated using Eqs. ( 24) and (25), while their derivatives are evaluated analytically.
+
+The integrals of u and w are determined directly from Eqs. ( 24) and ( 25) upon replacing the time-dependent coefficients A i and B j with their integrals A i dt and B j dt.
+
+The integration is achieved by expanding A i and B j into a Fourier series with respect to time and integrating the resulting Fourier expansions analytically.
+
+An alternative approach, which leads to the timeindependent wave velocity field, is the procedure involving the Lagrangian particle tracking: Lagrangian-mean transport velocity (LMTV).
+
+The time-averaged velocity is calculated based on the displacement of a water particle moving between its two successive in-phase positions along the particle trajectory (Paprota et al., 2016).
+
+The trajectory of a water particle is determined by numerical integration of the system of differential equations,
+
+dx dt = u(x, z, t),(28)
+
+dz dt = w(x, z, t),(29)
+
+for the set of initial particle locations.
+
+In the present study, the improvements to the method of evaluation of mass-transport velocity based on the Lagrangian particle tracking (Paprota and Sulisz, 2018) are introduced.
+
+In the previous works (Paprota et al., 2016;Paprota and Sulisz, 2018;Paprota, 2020), the procedure relied on distributing artificial tracers in a water column under fully developed regular waves.
+
+Initially, the tracers are uniformly distributed along the water depth, and they coincide with the zero down-crossing phase of the wave for a given distance from the wavemaker.
+
+After one Lagrangian wave period (see e.g. Longuet-Higgins, 1986;Chen et al., 2009), the tracers move from their original position due to mass transport.
+
+The particle tracking procedure is employed to determine the mass-transport velocity profile.
+
+The procedure is repeated for subsequent longitudinal positions to cover the accepted region of interest.
+
+Here, in order to get the better estimation of the timeindependent velocity field, the two hydrodynamic states corresponding to both zero up-and down-crossings of the regular wave are used to start up the tracking procedurecontrary to the previous method based only on the zero down-crossings (e.g. Paprota et al., 2016;Paprota and Sulisz, 2018).
+
+The procedure is analogous but involves more tracers and covers two phase positions.
+
+The resulting LMTV is calculated as the mean of the time-independent velocity fields corresponding to both zero-crossing initial states.
+
+Wave-Induced Vertical Mixing Intensity
+
+The numerical solution to a two-dimensional advectiondiffusion equation with relevant boundary conditions is used to predict the evolution of the temperature field under mechanically generated regular waves in the flume.
+
+Assuming that the changes in temperature are solely due to waveinduced and diffusion processes, the following boundaryvalue problem is formulated as in the work of Sulisz and Paprota (2019):
+
+T t + U T x + W T z = ∂ x (κT x ) + ∂ z (κT z ), (30
+
+) T z = 0, z = 0, (31) T x = 0, x = 0, (32
+
+) T z = 0, z = -h,(33)
+
+T x = 0, x = b, (34
+
+)
+
+where T is the water temperature, and κ is the diffusion coefficient represented as a sum of the molecular (κ m ) and waveinduced (κ v ) diffusivities.
+
+κ = κ m + κ v (35
+
+)
+
+In the advection-diffusion equation ( 30) the velocities U an W are, in fact, Lagrangian velocities which describe the mean transport velocity field (the Stokes drift and a return current in this case).
+
+The inclusion of the Stokes drift (without return current) to the advection equation was discussed explicitly for the case of ocean waves by McWilliams and Sullivan (2000).
+
+The molecular diffusivity κ m = 1.4 × 10 -7 m s -2 , while the wave-induced diffusivity is calculated by the formula reported by Sulisz and Paprota (2015) as
+
+κ v (z) = αa 3 kσ sinh 2 (k(z + h)) cosh(k(z + h)) sinh 3 (kh) ,(36)
+
+where α = 0.002 is the dimensionless coefficient, which is evaluated based on measurements (Sulisz and Paprota, 2015).
+
+The derivation of κ v is based on the weakly nonlinear theory.
+
+More information is provided in the work of Sulisz and Paprota (2015), where the comparison between the weakly nonlinear and more general forms is provided.
+
+The parameter α was estimated based on the experiments only for the presented form of κ v .
+
+In order to use a more general formula, new values of α must be determined using experimental data from a wider range of wave conditions.
+
+The advection-diffusion equation (Eq. 30) holds in the entire fluid domain, while the heat radiation is assumed zero at the water surface (Eq. 31), the bottom (Eq. 33) and the lateral boundaries (Eqs. 32 and 34).
+
+The length b is sufficiently long in order to reduce the effect of the finite domain on the results in the area of interest, which is limited to the region of several water depths from the wavemaker paddle.
+
+The omitted procedure of incorporating the non-zero heat radiation at the water surface is discussed in the paper by Sulisz and Paprota (2019).
+
+The solution of the advection-diffusion equation (Eq. 30) is achieved by employing a similar methodology to that used to solve the wavemaker problem admitting higher-order nonlinearities presented in the previous section.
+
+Accordingly, the scalar temperature field function is expanded into a double Fourier series of the form (Sulisz and Paprota, 2019)
+
+T (x, z, t) = i=1 j =1 d ij cos(λ i (x -b)) cos(µ j (z + h)). (37)
+
+Again, the solution of Eq. ( 30) is achieved by a timestepping procedure, which, in this case, consists of an application of the spectral expansion method to describe T and the Runge-Kutta formulas to proceed in time (see e.g. Press et al., 1988).
+
+Accordingly, the wave-induced diffusivity is determined using Eq. ( 36), while the velocity field is calculated by means of either the weakly nonlinear solution (Hudspeth and Sulisz, 1991) or a higher-order approach (Paprota and Sulisz, 2018) for selected wave parameters.
+
+The initial condition of given vertical temperature distribution T 0 (z) is used to start up the time-stepping procedure.
+
+The time derivative of temperature T is calculated from Eq. ( 30) with the aid of the expansion Eq. ( 37) after the coefficients d ij are determined by applying a two-dimensional cosine fast Fourier transform.
+
+The implementation of this procedure is freely available in Paprota (2023).
+
+Results And Discussion
+
+Numerical Test Cases
+
+The waves are generated by a monochromatic wavemaker motion in a numerical flume.
+
+The transitional and shallow water wave cases are considered for three values of the depthrelative dimensionless parameter kh of 0.5, 1 and 2.
+
+The effect of wave height H is also studied and corresponds to the dimensionless steepness parameter H / h of 0.05, 0.1 and 0.2.
+
+In the case of the higher-order solution, the waves are generated starting from rest with the ramp function applied to the stroke of the wavemaker motion for the first five wave periods.
+
+As previously stated, the longitudinal size of the flume b is sufficiently large to exclude wave reflections from the analysis, and it corresponds to 10 wavelengths (L) for kh = 2 and 20L in the remaining longer wave cases.
+
+The selected progressive wave parameters are the same as in previous studies on the modelling of wave-induced mixing in wave flumes (Sulisz and Paprota, 2019).
+
+After the fully developed state is achieved, the time-independent wave velocity field is determined.
+
+The resulting horizontal and vertical velocity components U and W are then substituted in Eq. ( 30), and the temperature field evolution is predicted.
+
+A summary of wave parameters is provided in Table 1 together with wave-induced diffusivity values at the surface in relation to its molecular counterpart.
+
+It should be noted that the model may be applied to deepwater as well as shallow-water conditions, which are presented in the work of Sulisz and Paprota (2015).
+
+Here, the cases correspond to a limited range of kh from 0.5 to 2.0.
+
+In this way, the results from the previous work (Sulisz and Paprota, 2019) may be directly compared.
+
+Moreover, for deepwater conditions corresponding to kh > π , the mixing would completely sweep away the warmer water from the analysed part of the fluid domain for the selected time frame, and this case was omitted in the present study.
+
+Phase-Averaged Velocity Distribution
+
+The accurate assessment of the time-independent velocity field is of significant importance in the modelling of temperature changes under an undulating water surface.
+
+The increasing steepness of generated waves intensifies wave-induced mixing processes but also changes the structure of heat flux distribution in the region occupied by the fluid.
+
+The analysis of phase-averaged velocity distribution in the direct vicinity of the wavemaker paddle helps to identify the effect of advection terms of Eq. ( 30) on the temperature evolution driven by waves.
+
+In Figs. 2-4, time-independent velocity fields calculated by weakly nonlinear and higher-order methods are presented.
+
+The arrows represent the vectors of a phase-averaged velocity corresponding to mass transport induced by waves.
+
+Black arrows correspond to a weakly nonlinear solution, while green and blue arrows correspond to a higher-order solution and two methods of averaging -EMTV and LMTV, respectively (Figs. 234).
+
+The way the results are presented is in line with the expected velocity vector field pattern in the part of the fluid domain adjacent to the wavemaker (see Paprota and Sulisz, 2018, for a more detailed description).
+
+The fluid flow forms half of the circulation cell limited by the air-water interface (z/ h = 0), the wavemaker paddle (x/ h = 0) and the bottom (z/ h = -1).
+
+The water mass flows with the direction of wave propagation near the surface, while the adverse flow pushes the water to the wavemaker paddle in the lower part of the water column.
+
+At the wavemaker paddle, the water flows vertically, forming the lateral boundary of the general circulation in the flume.
+
+Far away from the paddle, the vertical velocity components vanish, and the typical mass-transport velocity profile over depth emerges as a sum of the Stokes drift Eq. ( 17) and the return current velocity Eq. ( 18).
+
+Thus, the figures are complemented by the weakly nonlinear hor-izontal mass-transport velocity profile U L (z) calculated outside the direct vicinity of the wavemaker paddle Eq. ( 16), where the effect of evanescent standing waves generated by the wavemaker (see e.g. Dean and Dalrymple, 1984) may be neglected (x > 3h).
+
+U L (z) is plotted at the right outer edge of the graph at x = 3h for convenience of comparison.
+
+Vector plots are complemented by bubble charts of relative differences between corresponding vector magnitudes as presented in Figs. 567, where black circles denote the differences between LMTV and weakly nonlinear results, while filled green circles refer to the differences between LMTV and EMTV.
+
+The results presented in Fig. 2 provide information on the time-independent velocity field predicted in the direct vicin- ity of the wavemaker paddle and the differences between the weakly nonlinear approach and the solution admitting higher-order terms in the most extreme nonlinear regime of shallow water (kh = 0.5).
+
+Due to the fact that the considered wave cases are characterized by the highest values of the Ursell number, the differences between the two wavemaker models immediately appear even for the lowest amplitude of free-surface oscillations of H / h = 0.05 (Fig. 2a).
+
+The highest differences in the range between 10 % and 20 % correspond to the velocities near the wavemaker paddle and the surface, respectively (Fig. 5a).
+
+By increasing the magnitude of the surface oscillations to H / h = 0.1 and H / h = 0.2 (Fig. 2b andc), the differences become higher in the larger area of the wavemaker paddle vicinity.
+
+The higher-order model predicts more intensive mass transport near the bot-tom and the surface.
+
+The increase in the subsurface velocity and the magnitude of the current near the bottom may even reach from 15 % to 30 % for H / h = 0.1 and from 20 % to 40 % for H / h = 0.2 (Fig. 5b andc, respectively).
+
+Some important information may also be acquired from the comparison between two methods of averaging corresponding to either Lagrangian particle tracking (LMTV) or Eulerian averaging (EMTV) based on Eqs. ( 26) and ( 27), respectively.
+
+Although both methods of averaging provide consistent results for lower wave heights of the generated waves, EMTV results are less reliable in the case of the highest waves H / h = 0.2 (Fig. 2c).
+
+It can be seen that the velocity vectors near the corner point determined by the intersection of the wavemaker paddle mean position and the surface (x/ h = 0, z/ h = 0) are unnaturally large as the velocity in this area (green arrows around the point (0, 0) in Figs. 2c and3c) is expected to vanish (see Grilli and Svendsen, 1990, for a comprehensive discussion on numerical methods' inaccuracy at corner points of a fluid domain with moving boundaries).
+
+The problem still persists when considering the subsurface velocity at some distance away from the wavemaker.
+
+The differences between the LMTV and EMTV may even reach 20 % in the velocity magnitude near the intersection between the wavemaker and the surface, while an even greater discrepancy is visible at corner points in most extreme longerwave cases (Fig. 5c).
+
+With increasing relative water depth (Figs. 3 and4), the differences between weakly nonlinear and higher-order timeindependent velocity are less pronounced but still significant for steeper waves.
+
+In the case characterized by kh = 1, the discrepancies are generally less then 10 % for H / h = 0.05 and 0.1, ranging from 10 % to 20 % for the highest waves (Fig. 6).
+
+Again the more intensive mass circulation is apparent when higher-order terms are taken into account for the case of kh = 1 and H / h = 0.2 (Fig. 3c).
+
+Similar conclusions may be drawn for the deeper water kh = 2 (Fig. 4).
+
+However, in the case of the mass-transport velocity profile relatively far away from the wavemaker paddle (x = 3h) the differences are twice as high as in the wave cases corresponding to kh = 1.
+
+It should be noted that, for higher kh (Fig. 7), the results corresponding to two methods of averaging are more consistent; however the highest difference may still reach 20 % as in the case of longer waves (Fig. 5c).
+
+Putting aside the problems with averaging of the velocity field, the general conclusion from the analysis of the results depicted in Figs. 2-7 is that admitting higher-order terms of the Taylor series expansions of the boundary conditions imposed at the moving boundaries leads to more accurate prediction of the time-independent velocity near the wavemaker as expected.
+
+This is of significant importance especially for the modelling of wave-induced mixing and the evolution of the water temperature field as the higher-order approach predicts enhanced streaming in layers adjacent to the bottom and the surface.
+
+This leads to more intense mixing processes and heat exchange.
+
+Evolution Of A Temperature Field
+
+The modelling of wave-induced vertical mixing in terms of the temperature redistribution in the water column relies on the solution to the two-dimensional boundary-value problem defined by Eqs. ( 30)-( 34).
+
+The input parameters being introduced to the governing advection-diffusion equation (Eq. 30) are the diffusion coefficient κ v calculated using Eqs. ( 35) and ( 36) and the time-independent wave velocity field (U , W ).
+
+The modelling procedure remains in accordance with previously published results (Sulisz and Paprota, 2019) with different velocity field input.
+
+The temperature T 0 (z) determines the initial thermal state of the fluid (Fig. 8).
+
+In Figs. 9-11, the temperature spatial distributions representing the thermal states of the undulating water body after 100 s is provided for the test cases listed in Table 1.
+
+The results in the plots correspond to a weakly nonlinear solution and higher-order model predictions of the time-independent wave velocity field.
+
+Both methods are compared in order to highlight the effects of nonlinearity on vertical mixing due to waves.
+
+In the direct vicinity of the wavemaker paddle, the initial state of the water temperature is uniformly stratified according to T 0 .
+
+The moving wavemaker paddle generates regular waves, and the layers of water of equal temperature are de-formed by the oscillatory motion of the water body according to the time-independent velocity field presented in Figs. 234.
+
+Advection plays an important role in wave-induced mixing processes as even small changes in the velocity strongly affect the evolution of the temperature field.
+
+This implies major differences between weakly nonlinear and higher-order predictions of the resultant temperature when the steepness of waves increases.
+
+This effect is clearly seen in Figs. 9-11.
+
+As previously stated, the discrepancy between weakly nonlinear velocities and the velocity predictions admitting higher-order terms in the free-surface boundary conditions grows with in-    creasing steepness and wave nonlinearity (Ursell number) and may even reach 40 % in the subsurface layer.
+
+Although the highest relative differences are relevant for the longest waves, the effect of including higher-order terms is most apparent for waves of the largest kh characterized by the highest time-independent velocities.
+
+It may be seen in Fig. 9 that after 100 s the colder water is moved to the surface close to the wavemaker only for the steepest waves (Fig. 9f) when predicted by the higher-order model, while for the corresponding weakly nonlinear temperature field this process is less intensive (Fig. 9e).
+
+Additionally, the higherorder results exhibit some variation in mixing along the flume (Fig. 9f).
+
+In the case of waves characterized by kh = 1, the waveinduced mixing is more intensive (see Table 1), and for the steepest waves (Fig. 10e,f) the warmer water is moved away from the wavemaker.
+
+It should be noted that the higherorder solution predicts enhanced streaming near the surface (Fig. 10f).
+
+In this way, the decreased water surface temperature affects regions located further away from the wavemaker when compared to weakly nonlinear results (Fig. 10).
+
+The similar temperature field modification affects the waves of kh = 2, but for the lower analysed height (cf.
+
+Figs. 10e, f and11c, d).
+
+In the case of the highest waves of kh = 2, the warmer water is almost completely swept away from the region of direct wavemaker action (Fig. 11e,f).
+
+Further Discussions
+
+Conclusions
+
+Figure 1.
+
+Schematic view of mechanically generated waves and the coordinate system.
+
+Figure 2.
+
+Time-independent velocity field under mechanically generated regular waves characterized by kh = 0.5, (a) H / h = 0.05, (b) H / h = 0.1 and (c) H / h = 0.2.
+
+Weakly nonlinear theory -black arrows and line, higher-order-theory EMTV -green arrows, LMTVblue arrows.
+
+Higher-order vectors are shifted upwards for convenience of comparison.
+
+Figure 3.
+
+Time-independent velocity field under mechanically generated regular waves characterized by kh = 1, (a) H / h = 0.05, (b) H / h = 0.1 and (c) H / h = 0.2.
+
+Weakly nonlinear theory -black arrows and line, higher-order-theory EMTV -green arrows, LMTV -blue arrows.
+
+Higher-order vectors are shifted upwards for convenience of comparison.
+
+Figure 4.
+
+Time-independent velocity field under mechanically generated regular waves characterized by kh = 2, (a) H / h = 0.05, (b) H / h = 0.1 and (c) H / h = 0.2.
+
+Weakly nonlinear theory -black arrows and line, higher-order-theory EMTV -green arrows, LMTV -blue arrows.
+
+Higher-order vectors are shifted upwards for convenience of comparison.
+
+Figure 5.
+
+Relative differences for time-independent velocity field under mechanically generated regular waves characterized by kh = 0.5, (a) H / h = 0.05, (b) H / h = 0.1 and (c) H / h = 0.2.
+
+LMTV vs. weakly nonlinear theory -black circles, LMTV vs. EMTV -filled green circles.
+
+Figure 6.
+
+Relative differences for time-independent velocity field under mechanically generated regular waves characterized by kh = 1, (a) H / h = 0.05, (b) H / h = 0.1 and (c) H / h = 0.2.
+
+LMTV vs. weakly nonlinear theory -black circles, LMTV vs. EMTV -filled green circles.
+
+Figure 7.
+
+Relative differences for time-independent velocity field under mechanically generated regular waves characterized by kh = 2, (a) H / h = 0.05, (b) H / h = 0.1 and (c) H / h = 0.2.
+
+LMTV vs. weakly nonlinear theory -black circles, LMTV vs. EMTV -filled green circles.
+
+Figure 8.
+
+Initial temperature in the fluid domain.
+
+(a) Spatial distribution, (b) vertical profile.
+
+Figure 9.
+
+Changes in the temperature field due to waves after 100 s for kh = 0.5, (a, b) H / h = 0.05, (c, d) H / h = 0.1 and (e, f) H / h = 0.2.
+
+Weakly nonlinear theory (a, c, e; left), higher-order theory (b, d, f; right).
+
+Figure 10.
+
+Changes in the temperature field due to waves after 100 s for kh = 1, (a, b) H / h = 0.05, (c, d) H / h = 0.1 and (e, f) H / h = 0.2.
+
+Weakly nonlinear theory (a, c, e; left), higher-order theory (b, d, f; right).
+
+Figure 11.
+
+Changes in the temperature field due to waves after 100 s for kh = 2, (a, b) H / h = 0.05, (c, d) H / h = 0.1 and (e, f) H / h = 0.2.
+
+Weakly nonlinear theory (a, c, e; left), higher-order theory (b, d, f; right).
+
+Basic dimensionless parameters of mechanically generated regular waves.

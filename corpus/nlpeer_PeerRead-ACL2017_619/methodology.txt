@@ -1,0 +1,41 @@
+To test the hypotheses, we will use both subjective and objective measures.
+
+Subjective measures are based on participant post-study survey answers.
+
+Ideally, objective measures should be based on an assessment of improvements in the revised drafts; since we do not have evaluative data at this time, we approximate the degree of improvement using the number of revisions, since these two quantities were demonstrated to be positively correlated (Zhang and Litman, 2015).
+
+The objective measures are computed from Tables 4 and5.
+
+To compare differences between specific subgroups on the subjective and objective measures, we conduct ANOVA tests with two factors.
+
+There are multiple factors that can influence the users' rewriting behaviors such as the user's native language, education level and previous revision behaviors, etc.
+
+In our study, we try to explore the difference between interface groups considering one of the most salient confounding factors: language.
+
+We use one factor as the participant's native language (whether the participant is native or L2) and the other factor as the interface used.
+
+To determine correlation between quantitative measures, we conduct Spearman (ρ) and Pearson (r) correlation tests.
+
+We followed the work of (Zhang and Litman, 2015), where unigram features (words) were used as the baseline and the SVM classifier was used.
+
+Besides unigrams, three groups of features used in revision analysis, argument mining and discourse analysis research were extracted (Location, Textual and Language) as in Table 6 (Bronner and Monz, 2012;Daxenberger and Gurevych, 2013;Burstein et al., 2001;Falakmasir et al., 2014).
+
+For H4, 10-fold (participant) cross-validation is conducted on all the essays in the corpus.
+
+Unweighted average F-score for each revision category is reported, using unigram features versus using all features.
+
+Zhang and Litman (2015) observed a significant improvement over the unigram baseline using all the features.
+
+If H4 is true, we should expect a similar improvement over the unigram baseline using our corpus.
+
+For H5, 10-fold cross-validation was conducted for the revisions from Draft1 to Draft2 and revisions from Draft2 to Draft3 separately.
+
+We compared the improvement ratio brought by the advanced features over the unigram baseline.
+
+For H6, we trained two classifiers separately with L2 and native essays with all the features.
+
+20 native participants were first randomly selected as the test data.
+
+Afterwards classifiers were trained separately using the 20 L2 participants' essays and the remaining 20 native participants' essays.
+
+We would expect that the performance of the two trained classifiers is different on the same test data.

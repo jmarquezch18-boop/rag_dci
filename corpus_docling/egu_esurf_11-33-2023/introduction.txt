@@ -1,0 +1,83 @@
+Permafrost is defined as ground that remains at or below 0 • C for 2 or more consecutive years (Van Everdingen, 1998).
+
+It is a common feature in the Arctic and high-mountain environments, where permafrost occurs even in mid-latitudes and low latitudes (Gorbunov, 1978).
+
+Different permafrost zones are classified based on the aerial extent of permafrost presence.
+
+These zones are continuous, discontinuous, sporadic and isolated, where the surface is underlain by permafrost in more than 90 %, 50 %-90 %, 10 %-50 % and less than 10 % of the land area, respectively (Smith and Riseborough, 2002).
+
+Snow is an important factor in governing ground temperatures and permafrost distribution within an area (e.g. Zhang et al., 2001;Zhang, 2005;Goodrich, 1982), especially in mountain areas where permafrost is often associated with a shallow snow cover (e.g. Gisnås et al., 2014;Luetschg et al., 2004).
+
+The influence of soil moisture is complicated as it has an impact on the surface energy balance (e.g. Liljedahl et al., 2011), the thermal characteristics of the soil (e.g. Göckede et al., 2017) and freezing/thawing dynamics (e.g. Hinkel et al., 2001;Hinkel and Outcalt, 1994), which can lead to both lower and higher ground temperatures.
+
+Finally, the thermal and hydrological properties of the subsurface material can strongly influence permafrost distribution.
+
+In discontinuous mountain permafrost terrain, the lowest-lying permafrost areas are frequently found in coarse, blocky terrain (Harris and Pedersen, 1998).
+
+In particular, rock glaciers are frequently found below the general elevation limit of mountain permafrost (Lilleøren and Etzelmüller, 2011).
+
+In southern Norway, the lower limit of mountain permafrost is estimated between 1600 m a.s.l. in the west to 1000 m a.s.l. in the east (Etzelmüller et al., 2003), while a similar west-east decrease from 800-1000 m a.s.l. to ca. 300 m a.s.l.
+
+in the east is observed in northern Norway (Gisnås et al., 2017).
+
+A first Norway-wide inventory of rock glaciers based on aerial imagery was published in 2011 (Lilleøren and Etzelmüller, 2011).
+
+The density of rock glaciers is lower than in other mountain permafrost areas, which was attributed to a lack of bedrock competence and debris availability as well as to the relative lack of steep topography above the permafrost limit.
+
+While this first inventory suggested that active rock glaciers occur only above 400 m a.s.l., Lilleøren et al. (2022) recently described rock glaciers near sea level in the area of Hopsfjorden, northern Norway, which feature a limited ice body and are in transition from active to relict.
+
+Furthermore, Nesje et al. (2021) presented new evidence for active rock glaciers in southern Norway well below the permafrost limits established in modelling studies (Westermann et al., 2013;Gisnås et al., 2017).
+
+Rock glaciers play an important role in the hydrological cycle, especially in arid regions like the Andes, where in some areas more water is stored in rock glaciers than in glaciers (Jones et al., 2019;Azócar and Brenning, 2010).
+
+The open debris structure can act as a trap for snow, and rock glaciers can store significant quantities of ice or liquid water.
+
+Rock glaciers studied in Argentina are an important water resource as they release water mainly during periods of drought (Croce and Milana, 2002).
+
+Sustained ground ice melt as a response to climate warming threatens this water source.
+
+Additionally, melting of ground ice can lead to slope instability (e.g. Gruber and Haeberli, 2007;Saemundsson et al., 2018;Nelson et al., 2001) and damage to infrastructure (e.g. Arenson et al., 2009).
+
+The occurrence of a negative temperature anomaly in coarse, blocky deposits has long been recognized (e.g. Liestøl, 1966).
+
+Harris and Pedersen (1998) found a negative temperature anomaly of 4 to 7 • C in blocky terrain relative to adjacent mineral sediment in mountains in Canada and China.
+
+They summarized four hypotheses that explain these anomalies: (a) the Balch effect, (b) chimney effect, (c) continuous air exchange with the atmosphere when no continuous winter snow cover is present, and (d) evaporation of water and sublimation of ice in the summer.
+
+The first three of these driving mechanisms relate to air movement in the blocks, while the last hypothesis links characteristics of the water-ice balance to lower ground temperatures in blocky terrain.
+
+In the Norwegian mountains, Juliussen and Humlum (2008) showed that blockfields featured a negative temperature anomaly of 1.3 to 2.0 • C. They state that convection in the blockfields is of low importance in creating the anomaly, while the effect was mainly attributed to rocks protruding into and through the snow cover, which leads to an increased heat transfer through the snow cover.
+
+Gruber and Hoelzle (2008) presented a simple model for the conductive effect of blocks protruding through the snow cover and showed that the mean annual ground temperature is reduced as a result of a lower thermal conductivity of a blocky layer.
+
+Additionally, Juliussen and Humlum (2008) argued that a low soil moisture content in permeable blocky debris (due to subsurface drainage in permeable blocky debris) accelerates active layer refreezing in autumn since less latent heat is liberated compared to soils with higher soil moisture content.
+
+Cold winter temperatures can therefore penetrate to deeper layers already in early fall/winter, which may lead to decreased overall winter temperatures.
+
+However, in spring, the opposite effect is observed when percolating meltwater refreezes at the bottom of the blocky surface layer, leading to rapid ground warming to 0 • C even in deeper layers (e.g. Juliussen and Humlum, 2008;Hanson and Hoelzle, 2004;Humlum, 1997).
+
+While many of the mechanisms and processes governing the ground thermal regime of blocky terrain are known, a comprehensive quantitative understanding is still lacking.
+
+This is particularly relevant for conceptualization in numerical models, which generally do not account for the thermal anomaly of blocky terrain.
+
+One-dimensional heat flow models have been used in studies to investigate the effect of climate change on permafrost (e.g. Etzelmüller et al., 2011;Hipp et al., 2012) or to model specific processes in mountain permafrost (e.g. Gruber and Hoelzle, 2008).
+
+Since permafrost presence is generally not visible at the surface, numerical models are often used to estimate the permafrost distribution (Harris et al., 2009).
+
+However, as most models neither include a transient representation of the subsurface water and ground ice balance (e.g. Westermann et al., 2013) nor reproduce the thermal anomaly in blockfields (e.g. Obu et al., 2019), the resulting permafrost maps likely show biased ground temperatures and permafrost extent in mountain areas.
+
+The CryoGrid community model (Westermann et al., 2022) is a simulation toolbox that can calculate ground temperatures and water/ice contents in permafrost environments.
+
+It largely builds on the well-established CryoGrid 3 model (Westermann et al., 2016), which has been used in, for example, peat plateaus and palsas (Martin et al., 2021), ice-wedge polygons (Nitzbon et al., 2019) and boreal forests (Stuenzi et al., 2021), and has a broad range of applications, including the representation of lateral drainage regimes (Martin et al., 2019), steep rock walls (Schmidt et al., 2021) and massive ice bodies.
+
+In the following, the CryoGrid community model is referred to as "CryoGrid" for simplicity.
+
+In this study, we present CryoGrid simulations of the coupled heat and water-ice balance for blocky terrain in Norway and evaluate the impact of the ground stratigraphy and the drainage regime on ground temperatures.
+
+The model is set up with forcing data for two Norwegian permafrost sites, namely a blockfield site in the high mountains in southern Norway and a rock glacier site near sea level in northern Norway.
+
+The employed model scheme does not account for air movement and rocks protruding the snow cover as the "classic" causes for the negative thermal anomaly of blocky terrain but is capable of simulating the seasonal dynamics of the ground ice table in blocky terrain.
+
+The goal of the study is to evaluate the extent to which the thermal anomaly in blocky terrain can be simulated by such a comparatively simple scheme which could in principle be integrated in larger-scale permafrost modelling and mapping efforts.
+
+In particular, we investigate the interplay with the seasonal snow cover and discuss the impact on the permafrost distribution in mountain environments.

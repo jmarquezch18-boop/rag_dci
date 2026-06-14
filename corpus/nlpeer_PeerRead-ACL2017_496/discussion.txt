@@ -1,0 +1,35 @@
+Recall that after training the NMT system we freeze its parameters and use it only to generate features for the POS/morphology classifier.
+
+Given a trained encoder ENC and a sentence s with POS/morphology annotation, we generate word features ENC i (s) for every word in the sentence.
+
+We then train a classifier that uses the features ENC i (s) to predict POS or morphological tags.
+
+So far we only looked at the encoder.
+
+However, the decoder DEC is a crucial part in an MT system with access to both source and target sentences.
+
+In order to examine what the decoder learns about morphology, we first train an NMT system on the parallel corpus.
+
+Then, we use the trained model to encode a source sentence and extract features for words in the target sentence.
+
+These features are used to train a classifier on POS or morphological tagging on the target side.5 Note that in this case the decoder is given the correct target words oneby-one, similar to the usual NMT training regime.
+
+Table 3 (1st row) shows the results of using representations extracted with ENC and DEC from the Arabic-English and English-Arabic models, respectively.
+
+There is clearly a huge drop in representation quality with the decoder.
+
+6 At first, this drop seems correlated with lower BLEU scores in English to Arabic vs. Arabic to English.
+
+However, we observed similar low POS tagging accuracy using decoder representations from high-quality NMT models.
+
+For instance, the French-to-English system obtains 37.8 BLEU, but its decoder representations give a mere 54.26% accuracy on English POS tagging.
+
+As an alternative explanation for the poor quality of the decoder representations, consider the fundamental tasks of the two NMT modules: encoder and decoder.
+
+The encoder's task is to create a generic, close to language-independent representation of the source sentence, as shown by recent evidence from multilingual NMT (Johnson et al., 2016).
+
+The decoder's task is to use this representation to generate the target sentence in a specific language.
+
+Presumably, it is sufficient for the decoder to learn a strong language model in order to produce morphologically-correct output, without learning much about morphology, while the encoder needs to learn quite a lot about source language morphology in order to create a good generic representation.
+
+In the following section we show that the attention mechanism also plays an important role in the division of labor between encoder and decoder.

@@ -1,0 +1,100 @@
+{
+  "query_id": "5e1848003c61e22bf4eebdf7db76bd3e4429b05c",
+  "query": "Why is the beam search algorithm incorrect?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "beam search incorrect"
+      },
+      "result_preview": "No matches found for 'beam search incorrect'",
+      "elapsed_s": 5.24
+    },
+    {
+      "iteration": 1,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "beam search limitations"
+      },
+      "result_preview": "No matches found for 'beam search limitations'",
+      "elapsed_s": 9.49
+    },
+    {
+      "iteration": 2,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "beam search correctness"
+      },
+      "result_preview": "No matches found for 'beam search correctness'",
+      "elapsed_s": 8.8
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "beam search reliability"
+      },
+      "result_preview": "No matches found for 'beam search reliability'",
+      "elapsed_s": 8.11
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "beam search theory"
+      },
+      "result_preview": "No matches found for 'beam search theory'",
+      "elapsed_s": 4.1
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/ARR-22/841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_43",
+    "nlpeer/ARR-22/841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_44",
+    "nlpeer/ARR-22/841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_45",
+    "nlpeer/ARR-22/841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_46",
+    "nlpeer/ARR-22/841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34_47"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [],
+    "approved_by_oracle": [],
+    "oracle_decisions": []
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.0303030303030303,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

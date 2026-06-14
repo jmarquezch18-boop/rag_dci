@@ -1,0 +1,55 @@
+Unlabeled data.
+
+TagLM was inspired by the widespread use of pre-trained word embeddings in supervised sequence tagging models.
+
+Besides pre-trained word embeddings, our method is most closely related to Li and McCallum (2005).
+
+Instead of using a LM, Li and McCallum (2005) uses a probabilistic generative model to infer contextsensitive latent variables for each token, which are then used as extra features in a supervised CRF tagger (Lafferty et al., 2001).
+
+Other semisupervised learning methods for structured prediction problems include co-training (Blum and Mitchell, 1998;Pierce and Cardie, 2001), expectation maximization (Nigam et al., 2000;Mohit and Hwa, 2005), structural learning (Ando and Zhang, 2005) and maximum discriminant functions (Suzuki et al., 2007;Suzuki and Isozaki, 2008).
+
+It is easy to combine TagLM with any of the above methods by including LM embeddings as additional features in the discriminative components of the model (except for expectation maximization).
+
+A detailed discussion of semisupervised learning methods in NLP can be found in (Søgaard, 2013).
+
+Melamud et al. (2016) learned a context encoder from unlabeled data with an objective function similar to a bi-directional LM and applied it to several NLP tasks closely related to the unlabeled objective function: sentence completion, lexical substitution and word sense disambiguation.
+
+LM embeddings are related to a class of methods (e.g., Le and Mikolov, 2014;Kiros et al., 2015;Hill et al., 2016) for learning sentence and document encoders from unlabeled data, which can be used for text classification and textual entailment among other tasks.
+
+Dai and Le (2015) pre-trained LSTMs using language models and sequence autoencoders then fine tuned the weights for classification tasks.
+
+In contrast to our method that uses unlabeled data to learn token-in-context embeddings, all of these methods use unlabeled data to learn an encoder for an entire text sequence (sentence or document).
+
+Neural language models.
+
+LMs have always been a critical component in statistical machine translation systems (Koehn, 2009).
+
+Recently, neural LMs (Bengio et al., 2003;Mikolov et al., 2010) have also been integrated in neural machine translation systems (e.g., Kalchbrenner and Blunsom, 2013;Devlin et al., 2014) to score candidate translations.
+
+In contrast, TagLM uses neural LMs to encode words in the input sequence.
+
+Unlike forward LMs, bidirectional LMs have received little prior attention.
+
+Most similar to our formulation, Peris and Casacuberta (2015) used a bidirectional neural LM in a statistical machine translation system for instance selection.
+
+They tied the input token embeddings and softmax weights in the forward and backward directions, unlike our approach which uses two distinct models without any shared parameters.
+
+Frinken et al. ( 2012) also used a bidirectional n-gram LM for handwriting recognition.
+
+Interpreting RNN states.
+
+Recently, there has been some interest in interpreting the activations of RNNs.
+
+Linzen et al. (2016) showed that single LSTM units can learn to predict singular-plural distinctions.
+
+Karpathy et al. (2015) visualized character level LSTM states and showed that individual cells capture long-range dependencies such as line lengths, quotes and brackets.
+
+Our work complements these studies by showing that LM states are useful for downstream tasks as a way of interpreting what they learn.
+
+Other sequence tagging models.
+
+Current state of the art results in sequence tagging problems are based on bidirectional RNN models.
+
+However, many other sequence tagging models have been proposed in the literature for this class of problems (e.g., Lafferty et al., 2001;Collins, 2002).
+
+LM embeddings could also be used as additional features in other models, although it is not clear whether the model complexity would be sufficient to effectively make use of them.

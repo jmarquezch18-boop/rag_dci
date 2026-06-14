@@ -1,0 +1,423 @@
+Refining Patterns Of Melt With Forward Stratigraphic Models Of Stable Pleistocene Coastlines
+
+Abstract
+
+Introduction
+
+Methods
+
+Study Area
+
+Lembetabe sits along the remote southwestern coast of Madagascar (Fig. 1a).
+
+Surrounding the small fishing village, semi-vegetated rolling dune fields back a well-preserved LIG reef sequence that sits several meters above a modern wide fringing reef (see Boyden et al., 2022, for stratigraphic and geomorphic description).
+
+Additionally, situated on a stable coastline since the Eocene, and in the far-field of Quaternary ice sheets, Lembetabe provides an excellent opportunity to examine more subtle changes in eustatic sea level (Du Puy and Moat, 1996).
+
+Topography And Bathymetry Generation
+
+Unlike subsiding coastlines like the Mururoa Island atoll investigated in Montaggioni et al. (2015), Lembetabe's emergent fringing coral reef has not been subject of extensive coring or seismic campaigns, and therefore no highresolution nearshore bathymetry or subsurface horizons exist.
+
+In order to address this, we derived a high-resolution (120 mm px -1 ) land digital elevation model (DEM) from aerial-based Structure from Motion/Multi-View Stereo (see Boyden et al., 2022, for methodology and processing description) that has been merged down to TanDEMx topography at 30 m resolution (© DLR 2021).
+
+In order to capture the fringing reef, we extracted the modern nearshore  2022) before being used for the absolute depth calibration step in the ENVI toolset.
+
+Topography, nearshore bathymetry, and the much coarser-resolution GEBCO database offshore bathymetry (https://download.
+
+gebco.net/, last access: 20 November 2021) were resampled with cubic convolution in Surfer (Golden Software,v. 21.2.192), where artifacts from the merging process were corrected and then the entire DEM was exported to the final 50 m × 50 m model grid resolution (Fig. 1b).
+
+Once exported, the decimated DEM was imported into the Dionisos environment where a 18 km × 5 km domain was centered at Lembetabe.
+
+This domain was then rotated 15 • from the horizontal so that the shoreline runs approximately horizontal through the gridded domain.
+
+By doing this, intra-grid incident angles during wave propagation calculations can be minimized (e.g., Roelvink et al., 2009).
+
+Final model domain patterns are summarized in Table 1.
+
+Sediment Classes
+
+In order to resolve complex reef environments, Dionisos utilizes user-defined sediment classes.
+
+Each sediment class is determined through four parameters: (1) type of sediment (carbonate, clastic, evaporate, etc.), (2) grain size, (3) solid density, and (4) burial compaction law (observed or mechanical).
+
+In this model, we classify the seven sediment contributors: five coral-specific classes that follow the same system  2).
+
+The initial sediment class distribution is defined by the substratum constituents.
+
+Here, the substratum, referred to as "Basement", is an equal distribution of the coral sediment classes and is set to a thickness of 20 m. This is an approximation for the region as no borehole data exist.
+
+Furthermore, to the east of Lembetabe is a 30 m high limestone escarpment of Eocene Epoch, suggesting the basement in the region is limestone as well (Battistini, 1964;Du Puy and Moat, 1996).
+
+As described by Boyden et al. (2022), sediment along the Lembetabe coast is dominated by carbonate with little siliciclastic component, and therefore no fluvial clastic component is included in the model.
+
+It should be noted that during glacial periods, increases in precipitation in the hinterland could occur and an influx of clastic sediment could enter the system, but these are ignored for the goals of this investigation.
+
+While de-watering of compacting sediments in siliciclastic systems can have large effects on the overall water budget (Revil et al., 2002), carbonate-dominated systems have much more varied porosity that is subject to significantly more alteration during the early stages of burial (i.e., diagenesis, Lee et al., 2021).
+
+The overall reef architecture and therefore ensuing framestone lessens the changes in pore space at shallower burial depths, and therefore we treat the reef "sediment" compaction as negligible.
+
+However, resulting sand and debris facies are governed by a simplified mechanical compaction that is linear to depth.
+
+Finally, while Dionisos has the ability to include fluvial input, this is also treated as negligible as the three rivers in the region, the Onilahy (140 km to the north), Linta (30 km to the southeast), and Menarandra (70 km to the southeast), flow sporadically throughout the year and are unlikely to have provided significant sediment loads to the system (Fig. 1b).
+
+Hydrodynamics
+
+Dominant wave direction and magnitude have significant influence on shoreline geometry as well as the ability of coral colonies to flourish (Gischler et al., 2019).
+
+Dionisos quantifies this impact by calculating wave energy and refraction based on Snell's law:
+
+sinβ d C d = sinβ s C s ,(1)
+
+where β d is the wave angle in deep water, β s is the wave angle in shallow water, C d is the wave velocity in deep water, and C s is the wave velocity in shallow water (Holthuijsen, 2007, e.g.,).
+
+In order to address this, the mean observed significant wave height (H s ) and direction were extracted from the Centre for Australian Weather and Climate Research (CAWCR) global hindcast raster (Durrant et al., 2013).
+
+This global wave hindcast was extracted from the WaveWatch III wave model over 1979-2010 in a 0.4 • × 0.4 • global grid.
+
+The resulting values from the grid cell overlaying Lembetabe were then extracted as hydrodynamic boundary conditions for the model.
+
+In addition to normal sea state conditions, storms play a crucial role in coral reef development and colony longterm stability (Gardner et al., 2005).
+
+While the southwesternfacing shoreline of Madagascar is generally sheltered from approaching tropical cyclones spawning in the Indian Ocean, category 3-equivalent Tropical Cyclone Haruna spawned in the Mozambique Channel and made landfall at Toliara, approximately 150 km north of the study site (Côté-Laurin et al., 2017).
+
+Therefore, to approximate for storm impacts, the maximum significant wave height from the CAWCR model was extracted and added to the model at a 10 % yearly occurrence rate.
+
+The wave parameters are summarized in Table 3.
+
+Carbonate Production And Facies Identification
+
+Carbonate production is naturally the largest variable in a carbonate forward stratigraphic model.
+
+Several factors directly control the dominate coral species and rate of growth: water temperature, turbidity, wave energy, and water depth (e.g., Montaggioni and Braithwaite, 2009).
+
+In order to address this, Dionisos classifies each carbonate producer under the four component sediment class definitions from Sect.
+
+2.3 and then adds a user-defined production-versus-depth value to each carbonate sediment class.
+
+This production-versusdepth curve represents the non-linear relationship between carbonate producer growth rate and depth.
+
+To streamline this process, Dionisos provides growth curves for several frequently used carbonate sediment classes as defined in the literature.
+
+For the purposes of this study, we utilize the growth curves described by Montaggioni et al. (2015) for our coral-based facies, the tabular coral growth curve from Lanteaume et al. (2018), the encrusting coral growth curve from Kolodka et al. (2016), and the carbonate sand and mud curves from Burgess and Pollitt (2012).
+
+In the model, production is controlled as either a constant or is linear per time interval.
+
+For example, Montaggioni et al. (2015) experimented with varying the growth rates through time and achieved significantly different results.
+
+However, because for Lembetabe we lack the seismic data and well logs available to Montaggioni et al. (2015), our simulations are run with constant maximum growth rates from the literature mentioned above, e.g., 2500 m Myr -1 for coral facies, 1500 m Myr -1 for encrusting carbonates, 2000 m Myr -1 for tabular corals, and 1000 m Myr -1 for carbonate sand and carbonate mud throughout the model run (Fig. 2).
+
+Sediment Weathering
+
+A significant limitation in the use of geological proxies to investigate intra-stadial sea level fluctuations is a reliance on the preservation of the target sequence.
+
+This becomes especially challenging when the target sequence is within the dynamic coastal zone.
+
+For example, Malatesta et al. (2022) demonstrates how overprinting can lead to ambiguities in erosional rates and inferred uplift rates of coastal terraces.
+
+Within the Dionisos environment, four forms of weathering are taken into account: (1) maximum subaerial weathering rate, (2) maximum weathering decay in the marine environment, (3) dissolution rate, and (4) transformation rate.
+
+Maximum weathering rates for exposed limestone are hard to quantify (Enos and Franseen, 1991).
+
+This is because the rate is heavily dependent on post-depositional environmental factors like precipitation, porosity, and groundwater chemistry.
+
+To approximate for this, Montaggioni et al. (2015) used a 250 m Myr -1 that was measured by Trudgill et al. (1979) using micro-erosion meters on Aldabra, the Seychelles.
+
+However, in the case of Lembetabe, mean annual precipitation is well below that seen on Aldabra or Mururoa (> 1000 mm vs. 62 mm) and subaerial exposure is more likely to be well below the one found in more tropical localities.
+
+Therefore, we utilize a maximum subaerial weathering of 100 m Myr -1 .
+
+To quantify the mechanical and biological erosion under marine conditions, we use a maximum 100 m Myr -1 weathering rate (between the lower and the average values, 0 and 1000 m Myr -1 , respectively, used by Paulay and McEdward, 1990).
+
+To simplify the computational load, the dissolution rate was incorporated within our maximum subaerial erosion rate.
+
+Finally, the transformation rate allows for the conversion of mass from deposited carbonate into carbonate sands and muds.
+
+Within Dionisos this is treated as a constant rate and was set to the standard value of 50 m Myr -1 for each sediment class, except for carbonate sand and carbonate mud.
+
+Glacial Isostatic Adjustment
+
+Accommodation space is the final governing factor in reef development and morphology (Woodroffe, 2002).
+
+As sea level rises and falls, the relatively habitable window for corals moves, sometimes drastically, shifting the area of reef growth either up or down the coastal profile (Camoin and Webster, 2015).
+
+As described before (Sect. 1), beyond ice sheet mass balance, post-depositional processes can significantly affect relative sea level (RSL) through glacial/interglacial cycles.
+
+Generally, this comprises GIA, dynamic topography, tectonics, and other vertical land motion processes.
+
+In southwestern Madagascar, the coastline is considered to have been tectonically stable since at least the Eocene; therefore GIA was treated as the primary postdepositional influence.
+
+To take this into account we utilize solutions from a coupled ANICE-SELEN model (Bintanja and van de Wal, 2008;de Boer et al., 2013de Boer et al., , 2014)).
+
+When coupled together, the ANICE model provides the 3D ice sheet extents for North America, Eurasia, Greenland, and Antarctica to the SELEN model at 1000-year time steps, which then calculates the redistribution of water mass and deformation of the solid Earth (de Boer et al., 2013;Spada and Stocchi, 2007).
+
+Once calculated, SELEN sends a new RSL and deformation back to ANICE in order to solve the next time step.
+
+The final output is an RSL curve that incorporates the GIA signal for a defined geographic location.
+
+Scenarios And Testing
+
+In order to test the two prominent GrIS and AIS melt patterns within Dionisos, we extracted three RSL scenarios from the ANICE-SELEN model for the last 410 ka: one baseline scenario and two scenarios where RSL changes over 130-115 ka (Fig. 3a).
+
+The initial Dionisos model run was driven by an RSL curve where ice sheets are held to modern geometries at the beginning of the LIG (Fig. 3b).
+
+By halting the melting of both GrIS and AIS, the resulting signal is the background GIA response.
+
+This background GIA scenario is referred to as "Baseline" and has a peak sea level of 2.11 m a.m.s.l.
+
+at 126 ka.
+
+The second scenario, "Full", represents an initial simultaneous collapse of GrIS and AIS, contributing 2 and 5 m, respectively (Fig. 3c).
+
+This second scenario produces an early peak of sea level of 8.33 m a.m.s.l.
+
+by 125 ka, followed by a relatively stable, gentle regression.
+
+An early peak, driven by continental levering and ocean syphoning, has often been seen as the classic LIG fingerprint in the far-field (e.g., Barlow et al., 2018).
+
+In the third scenario, "G2A5", the contributions from GrIS and AIS are separated, creating a two-peak LIG sea level history.
+
+Here, GrIS melts first and contributes 2 m to sea level rise over 126-124 ka that produces the initial peak of 3.55 m a.m.s.l.
+
+Following a stable period in sea level, AIS begins to melt at 118 ka and contributes 5 m to sea level rise late in the LIG, producing a second, higher peak sea level of 6.43 m a.m.s.l.
+
+(Fig. 3d).
+
+This scenario represents possible discrepancies in GrIS-AIS stability and variable hemispherespecific climate fluctuations (e.g., Govin et al., 2012;Stone et al., 2016), and it is consistent with the interpretation of fossil reef sequences from Western Australia described by O' Leary et al. (2013).
+
+The Dionisos model was first run under Baseline forcing.
+
+This was done in a three-segment process where the model was run at 10 kyr time intervals over 400-150 ka.
+
+At 150 ka, the time intervals were reduced to 1 kyr intervals until 80 ka.
+
+Then, over 80-0 ka, time intervals were increased to 5 kyr.
+
+This modulation of time intervals allowed for the reduction in computational demand while emphasizing the LIG.
+
+Following the completion of models for each mantle viscosity under Baseline conditions, the Full and G2A5 scenarios were run from the Baseline 150 ka time step.
+
+This iterative process is summarized in Fig. 4.
+
+Model Caveats
+
+Results
+
+Facies Deposition
+
+Within the post-processing model environment, seven facies were declared following the coral distribution scheme laid out by Montaggioni (2005) for reef-dominated coasts in the Indo-Pacific basin as well as model-specific environmental constraints from Seard et al. (2013).
+
+The relationships between sediments and environmental controls within the model output are summarized in Fig. 5.
+
+Each facies is a combination of one or more of the sediment classes described before (Sect. 2.3) and deposition depth.
+
+Further classification parameters are possible but are beyond the scope of this study and require significant fine-tuning.
+
+Moving from off-shore over the reef, we noted (1) forereef, (2) reef crest, (3) reef flat, (4) bypass, (5) beach, (6) basement, and (7) unclassified.
+
+Applying the declared facies to each scenario, the following depositional histories were obtained for each scenario at each well location.
+
+Baseline
+
+Well A, sitting near the edge of the platform, first registered transgression at 131 ka with the initiation of a 2 m thick reef crest.
+
+Sea level continued to rise with the back-stepping of the reef crest and subsequent deposition of a forereef sequence over 130-115 ka.
+
+Sea level began to fall and hydrodynamic conditions allowed for a second reef crest sequence, 4 m thick, to be deposited.
+
+By 110 ka, the sea level had regressed back beneath the platform edge, leaving the LIG exposed and subject to weathering.
+
+Burial analysis of the sequence shows that the upper 7.5 m of LIG limestone was eroded, leaving the 116 ka forereef unit as the highest remaining LIG unit in the resulting lithostratigraphy (Fig. 8a).
+
+At 15 ka there is again transgression of the platform and rapid deposition of a 13.9 m thick sequence of forereef by 5 ka.
+
+At Well B, midway on the platform, the Baseline model shows rapid flooding starting at 130 ka.
+
+Over 129-122 ka, a 23.3 m thick sequence of reef crest was deposited.
+
+This was followed by a 3 m sequence of an unclassified facies, most likely a reef flat-like sequence that did not match the previously defined parameters (Fig. 5).
+
+The unclassified sequence was capped off by a thin beach deposit by 120 ka.
+
+This beach deposit was a thin veneer that reached no more than 0.5 m thick and covered the LIG reef crest sequence over 120-88 ka.
+
+Subaerial erosion began taking place, eroding 3.5 m from the uppermost part of the LIG sequence by 10 ka.
+
+At that point, the sea level transgressed again, deposit- ing a 1.5 m-thick Holocene reef crest that was subsequently covered by an equally thin Holocene reef flat deposit.
+
+Well C occupies the modern intertidal.
+
+The baseline LIG sea level transgression reached the well at 127 ka.
+
+The relatively stable nature of the background GIA signal at Lembetabe created a prograding fringing reef.
+
+Here, a 1 m-thick sequence of reef crest was deposited over 127-126 ka.
+
+This reef crest sequence was followed by a reef flat sequence 2.5 m thick over 126-125 ka.
+
+As sea level continued to recede, a 1 m thick sequence of alternating beach and unclassified units were deposited.
+
+By 124 ka, the sequence was left exposed and the upper 2.5 m of the sequence was eroded away before the Holocene transgression at 10 ka.
+
+The Holocene transgression deposited further reef flat units on top of the LIG up to modern sea level.
+
+Full
+
+The platform edge under the combined GrIS and AIS "Full" scenario is initially flooded at 131 ka.
+
+A quick initial pulse of forereef deposition occurring over 130-125 ka resulted in a 9 m thick unit.
+
+Deposition slows up until peak sea level is reached at 120 ka, after which sedimentation rates increase as sea level falls again.
+
+This leaves behind a 3 m thick unit of forereef over 120-113 ka.
+
+As sea level continues to fall, a 3.5 m reef crest unit is deposited in the remaining accommodation space by 111 ka, before the platform becomes emerged and a thin 0.5 m beach unit is deposited on top.
+
+The uppermost 10 m of the LIG are then eroded away during the intervening subaerial exposure.
+
+At 15 ka, the Holocene transgression reoccupies the platform and 18 m of forereef is deposited on top of the remaining LIG over 15-5 ka.
+
+Following 5 ka, the sea level begins to slightly recede, allowing for the deposition of a 15 m thick reef crest unit.
+
+Similar to the platform edge, transgression during the LIG begins by 130 ka with an initial 0.5 m thick reef crest unit.
+
+This is then quickly covered by forereef units interbedded with unclassified sediments as sea level continues to rise until 125 ka.
+
+In total, 25.3 m of forereef and unclassified sediments accumulate before sea level begins to fall.
+
+Over 125-119 ka, an additional 1 m of forereef sediment accumulates before conditions are conducive for the deposition of 2.9 m of reef crest.
+
+Sea level drops yet further and a final phase of sedimentation sees 1.2 m of reef flat before a final veneer of beach is deposited by 116 ka.
+
+The section becomes emerged and undergoes subaerial erosion until 10 ka, eliminating the upper 8.5 m of the LIG sequence.
+
+The final Holocene sequence comprises 1.4 m of reef flat topped with a shallow-water unclassified sediment that reaches the present-day sea level.
+
+The LIG for Well C under the full scenario produces an initial inundation at 127 ka when a 10 cm thick unit of reef crest was deposited.
+
+This is followed by additional sea level rise and the deposition of a 3.5 m thick forereef unit by 125 ka.
+
+Following this, accommodation space is decreased and a 4.4 m thick reef crest unit is deposited.
+
+Further shallowing and progradation cause the deposition of a final 1.8 m thick sequence of reef flat and 0.8 m thick shallow-water unclassified sediment unit by 122 ka.
+
+This was left subaerially exposed and the uppermost 3.5 m of the LIG eroded, leaving the remaining LIG reef crest exposed at +3.5 m a.m.s.l. (Fig. 8c).
+
+G2A5
+
+Transgression over the platform edge begins at 132 ka under the G2A5 scenario with the deposition of a 1 m thick reef crest.
+
+Rapid sea level rise causes back-stepping of the reef made evident by the deposition of a 9 m thick reef crest occurring over 131-125 ka, coinciding with the GrIS melt contribution.
+
+At 125, RSL begins to decrease, eroding the upper 1.5 m of the earlier-deposited reef crest by 119 ka.
+
+AIS melting influence is then gradually felt, again slowly depositing a reef crest unit over 118-113 ka.
+
+By 113 ka, rapid increase in sea level is seen and 2.5 m of further forereef are deposited by 110 ka.
+
+As sea level regressed, a 5.6 m thick sequence of reef flat and unclassified units were deposited over 110-109 ka.
+
+Finally, the LIG sequence was covered by interbedded beach and unclassified deposits reaching a maximum of 8.8 m thick, as sea level fell back beyond the edge of the platform.
+
+At Well B the LIG sequence begins at 130 ka with the deposition of a 0.5 m thick reef crest unit.
+
+This is then covered by the rapid deposition of 33.3 m of reef flat over 127-116 ka, again coinciding with GrIS melt contributions.
+
+It should be noted that this peak deposition is greater than 5 m above modern sea level.
+
+Following the initial peak in sea level, Well B is left exposed and 17.1 m of previously deposited reef flat is eroded by 80 ka.
+
+Erosion continues until the onset of the Holocene, when 10.3 m of reef crest is deposited by 5 ka and a final 3 m thick unit of reef flat is deposited up until the present day.
+
+Finally, Well C records the initial LIG transgression at 126 ka.
+
+This comprises a 4.6 m deposit of reef flat by 124 ka.
+
+Above the reef flat, a 0.5 m thick beach unit is deposited by 123 ka but is subsequently partially eroded during the intrapeak regression.
+
+AIS-driven sea level rise re-inundates the intertidal and deposits a 2.8 m thick unit of reef flat over 119-117 ka.
+
+A final 0.8 m thick beach unit is deposited atop the LIG sequence by 116 ka.
+
+As at Well B, rapid regression occurs and the entirety of the LIG sequence is eroded away.
+
+Reoccupation of the platform at 10 ka, deposits a final 2 m thick unit of reef flat that is visible in the final litholog (Fig. 8c).
+
+Discussion
+
+Conclusions
+
+Figure 1. (a) Overview map of Madagascar, the study area at Lembetabe, and the three rivers in the southwest of the island.
+
+Map data from Natural Earth. (b) Overview of Dionisos model domain with combined topography/bathymetry detailed in Sect.
+
+2.2.
+
+Figure 2.
+
+Production rate (m Myr -1 ) as a function of water depth for each sediment class included in the Dionisos model.
+
+Figure 3.
+
+RSL sea level curves extracted from ANICE-SELEN for Lembetabe and used in Dionisos.
+
+(a) Overview of RSL over 400-0 ka.
+
+(b) Baseline curve with no further melting of GrIS or AIS beyond modern geometries at LIG. (c) Full RSL curve, with joint melting of GrIS (2 m) and AIS (5 m) at the onset of the LIG.
+
+(d) G2A5 RSL curve, with initial 2 m contribution from GrIS, followed by a later contribution of 5 m by AIS.
+
+Magnitude and timing of peak RSL in each scenario is included for reference.
+
+Figure 4.
+
+Outline of experimental design.
+
+MV 1 represents the mantle viscosity scheme used during the ANICE-SELEN model calculations."Full" represents an early LIG peak in sea level that is driven by simultaneous melting of GrIS and AIS, contributing 2 and 5 m, respectively. "Baseline" is the background GIA signal during the LIG, where ice sheets are kept to modern geometries throughout the LIG. "G2A5" is a two-step LIG scenario where GrIS melt adds 2 m to sea level at 125 ka followed by a brief plateau before AIS melt contributes 5 m at 118 ka.
+
+Figure 5.
+
+Identification pathways for determining facies within Dionisos.
+
+Adapted from Montaggioni (2005) and Seard et al. (2013).
+
+Figure 6.
+
+Dionisos model output for major event markers: 130 ka, 125 ka, 100 ka, and modern. (a) Baseline model driven by background GIA, (b) Full model incorporating simultaneous melting of GrIS and AIS, and (c) G2A5 model subjected to initial GrIS melting followed by AIS melting near the end of the LIG.
+
+Figure 7.
+
+Maximum inundation time step for each scenario. (a) Baseline model run with peak sea level at 2.11 m a.m.s.l.
+
+(b) Full scenario with peak sea level at 8.33 m a.m.s.l.
+
+(c) G2A5 scenario with peak sea level at 6.43 m a.m.s.l.
+
+Figure 8.
+
+Dionisos model well logs for (a) Well A, (b) Well B, and (c) Well C. Water depth is depth of original deposition, age is time of deposition, and the dotted white lines represent unconformities.
+
+Line color corresponds to scenario: orange = Base, blue = Full, and green = G2A5.
+
+Figure 9.
+
+Comparison between field observations made by Boyden et al. (2022), lithology extracted from Full scenario at Well C at the end of the model run, and the lithologies for the Base, Full, and G2A5 scenarios at their highest respective MIS 5e unit before erosion takes place.
+
+(a) Synthesized litholog based on mean maximum facies elevations reported in Boyden et al. (2022).
+
+According to Boyden et al. (2022), the reef flat correlates to the MIS 5e highstand, the intertidal facies represents the close of MIS 5e, and the eolianite closes out the sequence correlating to much younger deposition.
+
+(b) Lithology at Well C for Full scenario at end of simulation.
+
+(c) Lithology at Well C for Baseline scenario at 124 ka when regression begins. (d) Lithology at Well C for Full scenario at 122 ka.
+
+(e) Lithology at Well C for G2A5 scenario at 116 ka.
+
+Colors represent the declared lithologies within the model environment and major bioconstructors are included for cross-comparison purposes.
+
+Dionisos model domain grid parameters used.
+
+Sediment classes used within Dionisos.
+
+Coral-related class parameters are the same used in
+
+Model hydrodynamic boundary conditions.

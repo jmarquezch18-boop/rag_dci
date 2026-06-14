@@ -1,0 +1,3 @@
+This section first exhibits empirical studies on the Quality Estimation (QE) task, a primary application of confidence estimation.
+
+Then, we present experimental results of our confidence-based label smoothing, an extension of our confidence estimate to better smoothing in NMT.

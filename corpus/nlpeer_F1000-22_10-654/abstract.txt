@@ -1,0 +1,17 @@
+RNA sequencing (RNA-seq) is a widely adopted affordable method for large scale gene expression profiling.
+
+However, user-friendly and versatile tools for wet-lab biologists to analyse RNA-seq data beyond standard analyses such as differential expression, are rare.
+
+Especially, the analysis of time-series data is difficult for wet-lab biologists lacking advanced computational training.
+
+Furthermore, most meta-analysis tools are tailored for model organisms and not easily adaptable to other species.
+
+With RNfuzzyApp, we provide a user-friendly, web-based R shiny app for differential expression analysis, as well as time-series analysis of RNA-seq data.
+
+RNfuzzyApp offers several methods for normalization and differential expression analysis of RNA-seq data, providing easyto-use toolboxes, interactive plots and downloadable results.
+
+For timeseries analysis, RNfuzzyApp presents the first web-based, fully automated pipeline for soft clustering with the Mfuzz R package, including methods to aid in cluster number selection, cluster overlap analysis, Mfuzz loop computations, as well as cluster enrichments.
+
+RNfuzzyApp is an intuitive, easy to use and interactive R shiny app for RNA-seq differential expression and time-series analysis, offering a rich selection of interactive plots, providing a quick overview of raw data and generating rapid analysis results.
+
+Furthermore, its assignment of orthologs, enrichment analysis, as well as ID conversion functions are accessible to non-model organisms.

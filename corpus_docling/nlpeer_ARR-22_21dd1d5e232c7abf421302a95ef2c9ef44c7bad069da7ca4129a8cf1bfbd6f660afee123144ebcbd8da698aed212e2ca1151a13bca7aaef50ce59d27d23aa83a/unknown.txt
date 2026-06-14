@@ -1,0 +1,201 @@
+Crossaligner & Co: Zero-Shot Transfer Methods For Task-Oriented Cross-Lingual Natural Language Understanding
+
+Abstract
+
+Introduction
+
+Related Work
+
+Methodology
+
+Crossaligner
+
+Intuition We introduce CrossAligner, the most notable of our proposed cross-lingual alignment methods, outlined in Algorithm 1.
+
+CrossAligner enables effective zero-shot transfer by leveraging unlabelled parallel data for our new language-agnostic objective created through a transformation of the English entity labels.
+
+CrossAligner was borne out of early error analysis where we observed that the model incorrectly predicted entities that didn't occur in the input and failed to predict entities that did occur in the input.
+
+Using this insight as our main motivation, the essence of CrossAligner is being able to exploit information about the presence of entities/slots in the user utterance.
+
+Algorithm We have used a proprietary service (Huawei Translate) to translate the English user ut-terances X Eng into each target language X Tar , however, a publicly available translator can also be used.
+
+Note that we use the same translations for each of our alignment methods to compare them fairly.
+
+Our language-agnostic objective is created by transforming the English slot labels y ec into a fixed binary vector y ca indicating which entities are present in the input (lines 1-7 in Algorithm 1), irrespective of the frequency of their occurrence.
+
+The standard XNLU training (lines 15-20) features an Intent Classifier (IC) and an Entity Classifier (EC).
+
+Each computes a cross-entropy loss (ce_loss) with a softmax activation using English labelled data (multi-class classification).
+
+This yields the standard losses L ic and L ec .
+
+The CrossAligner (CA) classifier then pools the EC logits matrix by reshaping it into a long vector (lines 24 and 29) and predicts which entities are present in the user utterance (multi-label classification).
+
+We compute a Binary Cross-Entropy loss (bce_loss) with a sigmoid activation between the predicted labels pred eng and pred tar (for English and Target languages respectively) and our language-agnostic labels y ca (lines 26 and 31).
+
+This yields the CrossAligner losses L eng and L tar .
+
+The fact that these gradients are propagated through the EC to the XLM token embeddings ensures a good alignment for entity/slot recognition, as shown in the results section.
+
+Note that EC, IC and CA are shared between languages to aid zero-shot cross-lingual transfer.
+
+BIO versus IO Using the BIO sequence tagging format (Sang and De Meulder, 2003) can introduce easily avoidable model errors, e.g. predicting a B-tag after an I-tag, two B-tags in succession or skipping the B-tag altogether.
+
+We have therefore simplified the training process by making it agnostic w.r.t.
+
+the entity's BI order.
+
+The B-tags were removed in preprocessing, meaning the entity classifier predicts only IO-tags.
+
+At inference, the Btags get restored with a simple post-processing rule.
+
+Note that all our models use this IO-only training.
+
+Architecture We use a common task-oriented XNLU model that employs a pretrained XLM, e.g. JointBERT (Chen et al., 2019)  L tar ← bce_loss(pred tar , y ca ) 32:
+
+pred ic ← IC(cls eng ) 18: L ic ← ce_loss(pred ic , y ic ) 19: pred ec ← EC(tokens eng ) 20: L ec ← ce_loss(pred ec , y ec ) -CrossAligner
+
+L total ← L ic + L ec + L eng + L tar 33: end for
+
+Contrastive Alignment For Xnlu
+
+Our contrastive alignment is based on InfoNCE (Oord et al., 2018).
+
+Previous work has employed a contrastive loss for cross-lingual alignment (Pan et al., 2020), however, the datasets were out-ofdomain and orders of magnitude larger.
+
+We show that strong results can be obtained using only indomain (fine-tuning) data.
+
+Similar to (Wu et al., 2021), if given a randomly sampled batch of N English sentences X Eng and its parallel sentences X Tar in the target language, then the loss on the i th sentence pair x eng i ∈ X Eng and x tar i ∈ X Tar equals:
+
+ℓ(x eng i , x tar i ) = -log e sim(xeng i ,xtar i ) N k=1 e sim(xeng i ,xtar k ) (1) where sim(u, v) = u • v / ||u|| 2 • ||v|| 2 is
+
+the cosine similarity between two sentence embeddings.
+
+A sentence x eng i ∈ X Eng symmetrically forms a positive pair with its translation x tar i ∈ X Tar while the other N -1 sentence embeddings are treated as negative samples.
+
+The batch loss is calculated as the average of all positive pair losses.
+
+Algorithm 2 below shows the steps that replace/complement the CrossAligner block (lines 21-32 in Algorithm 1).
+
+Algorithm 2 The Contrastive Alignment loss.
+
+1: cls eng , tokens eng ← XLM(x eng ) 2: cls tar , tokens tar ← XLM(x tar ) 3: sim ← batch_cosine_sim(cls eng , cls tar ) 4: labels ← arange(batch_size) 5: L cl ← ce_loss(sim, labels) 6: L total ← L ic + L ec + L cl
+
+Translate-Intent
+
+The translate-train method is used in multilingual NLP as a competitive baseline (Liang et al., 2020;Hu et al., 2020).
+
+After machine translation, the sequence tagging tasks require an additional transformation, i.e. entity label projection and/or word alignment (Schuster et al., 2019;Li et al., 2021b;Xu et al., 2020).
+
+This is followed by supervised fine-tuning with the new pseudo-labels.
+
+However, both label projection and word alignment are sources of common errors.
+
+We therefore introduce a simpler baseline called Translate-Intent, which to the best of our knowledge, has not been featured in task-oriented XNLU.
+
+We omit the entity/slot recognition for the target language (given the unreliable pseudo-labels) and only use the IC, which Algorithm 3 The Translate-Intent loss.
+
+1: cls tar , tokens tar ← XLM(x tar ) 2: pred ic ← IC(cls tar ) 3: L ti ← ce_loss(pred ic , y ic ) 4: L total ← L ic + L ec + L ti is trained with the parallel data X Tar (labels copied from English).
+
+Algorithm 3 above shows the steps that either replace or complement (in case of a combination of multiple losses) the CrossAligner steps, shown in lines 21-32 in Algorithm 1.
+
+Adaptive Weighting Of Auxiliary Losses
+
+In order to evaluate the benefits of combinations of two or more alignments, we employ the Multi-Loss Weighting with Coefficient of Variations (Groenendijk et al., 2021) technique (CoV) to calculate a weighted sum of auxiliary losses (Aux) that we add to the main XNLU losses L ic and L ec as follows:
+
+L total = L ic + L ec + a∈Aux w a L a(2)
+
+The sole difference to CoV is that we opt to omit the loss weight normalisation step before application.
+
+The weights for an auxiliary loss L a,t for a ∈ Aux at training step t are calculated as follows:
+
+w a,t = σ ℓa,t µ ℓa,t ℓ a,t = L a,t µ L a,t-1 (3)
+
+where ℓ a,t is the loss ratio of loss a ∈ Aux at training step t, σ is the standard deviation over the history of loss ratios and µ ℓ a,t-1 is the mean of the loss ratio ℓ a up to and including step t -1.
+
+We also compare CoV to a simple sum of all losses i.e. equal weight for each loss, as shown in Algorithms 1, 2 and 3 (line beginning with L total ).
+
+Experimental Setup
+
+Results
+
+Individual Zero-Shot Transfer Methods
+
+Combinations Of Losses
+
+As our alignment methods have different strengths and weaknesses, we have also evaluated their combinations (see Table 2) as either a simple sum of losses (1+1) or a weighted sum of losses (CoV) using the Coefficient of Variation.
+
+The highest overall score was achieved by a CoV-weighted combination of XeroAlign IO and CrossAligner, which considerably improved on the previous SOTA (96.5 vs 96.1 Accuracy, 82.1 vs 79.8 F-Score, 89.3 vs 88.0 Overall).
+
+In total, three individual and almost a dozen combinations of losses improve over the best previously reported scores.
+
+In the following paragraphs, we analyse and explain why the combinations that include CrossAligner consistently produce higher scores and why adding more losses can result in diminishing returns.
+
+We propose a hypothesis that can further help us interpret the numbers in Table 2.
+
+It states that combining losses which use dissimilar sentence representations may be more beneficial than combining losses using similar sentence embeddings.
+
+In order to test that assumption, we clustered our alignment methods into two groups based on how their sentence representations are obtained: 1) XeroAlign IO , Translate-Intent and Contrastive Alignment, which all use the CLS embedding and 2) CrossAligner, which aligns through the token embeddings (used as the entity classifier input).
+
+In Figure 2, we note that for combinations of any two alignment losses using the CLS embedding (shown as blue squares), there is no difference in the overall scores when using CoV or 1+1.
+
+However, when combining losses with different sentence representations (orange with any blue square) using CoV weighting, we observe consistent increases over the 1+1 setup (on average 1+ point overall) as well as an increase over their highest individual score.
+
+Additionally, in a 3-loss combination, we note that adding CrossAligner to any two losses from the CLS-embedding group using CoV weighting yields an average improvement of 0.7 points compared to no improvement using 1+1.
+
+Oversaturation of Losses Another important observation harks back to our hypothesis stating that alignment methods with similar input embeddings do not lend themselves to being readily combined.
+
+We offer further evidence of this by testing combinations of CrossAligner with each of the CLS-embedding losses [XA IO , TI and CTR], however, we use mean-pooled embeddings.
+
+The Overall scores decline in line with our hypothesis (XA IO by -1.2, TI by -4.9, CTR by -0.6) with CoV-weighted losses and even more with the 1+1 weighted combinations (XA IO by -2.1, TI by -7.6, CTR by -1.4).
+
+Similarly, combining multiple CLSembedding losses leads to a gradually diminishing benefit relative to the individual scores.
+
+Once again, the CoV-weighted losses show a significantly lower decline than the 1+1 combinations (Table 2).
+
+Note that in our multi-loss scenario, intent classification remains unaffected by the choice of input embeddings as the accuracy remains stable at SOTA levels across experiments.
+
+We think this is due to the unequal task difficulty.
+
+In other words, sentence-level inference (intent recognition) is easier than tokenlevel inference (entity recognition).
+
+Error Analysis
+
+Error Analysis Summary
+
+Conclusions
+
+ca ← TRANSFORMLABELS(y ec )22:shape ← (seq_len × len(entity_classes)) 23: logits eng ← EC(tokens eng ) 24: logits eng .reshape_matrix_into(shape) 25: pred eng ← CA(logits eng ) 26: L eng ← bce_loss(pred eng , y ca ) 27: cls tar , tokens tar ← XLM(x tar ) 28: logits tar ← EC(tokens tar ) 29: logits tar .reshape_matrix_into(shape)) 30: pred tar ← CA(logits tar ) 31:
+
+Figure 1: The architecture of CrossAligner.
+
+The parameters of the XLM model and all classifiers are shared between languages to enable cross-lingual transfer.
+
+Figure 2: Overall scores for combinations of auxiliary losses weighted using either CoV or 1+1 (simple sum).
+
+Eng ← Standard training data in English 13: X Tar ← X Eng translated into Target language 14: for (x eng , y), (x tar , y) ∈ X Eng , X Tar do cls eng , tokens eng ← XLM(x eng )
+
+Accuracy/F-Score for MTOP, MTOD, M-ATIS (number of non-English languages in brackets), MEAN over all datasets.
+
+Translate-Train SOTA is(Li et al., 2021b)  for MTOP/MTOD and
+
+The Accuracy and F-Score for combinations of auxiliary losses with different weighting schemes.
+
+The number of non-English test languages is shown in brackets, MEAN is computed for all languages in the 3 XNLU datasets.
+
+More detailed breakdowns of each dataset and language are shown in Tables 4, 5 and 6 in Appendix A.2.
+
+The summary of our qualitative error analysis with native speakers (700 samples from 7 languages).
+
+These are problematic because such entities are neither native to Hindi nor are they written in Latin alphabet hence may not have been observed in this form during XLM pretraining.
+
+Results (5).
+
+/84.9 97.8/85.9 95.4/81.4 93.4/70.6 94.0/79.7 96.4/83.3 97.6/79.9 96.1/83.5 96.0/81.2 XeroAlign IO 97.4/84.1 97.4/86.2 97.9/83.3 93.6/76.0 95.1/80.1 96.0/83.7 98.0/81.6 95.6/83.7 96.4/82.3 CrossAligner 96.9/90.4 97.4/73.1 98.0/88.7 88.7/75.4 94.5/86.6 94.2/88.2 97.4/81.7 91.6/88.7 94.8/84.1 Contrastive 97.5/79.6 97.3/77.1 97.6/76.1 93.3/76.3 94.6/79.8 96.9/87.5 97.4/77.0 97.3/80.9 96.5/79.3 XA IO , CA (1+1) 97.3/89.7 97.5/72.3 97.8/82.1 94.0/69.1 95.3/79.1 95.9/89.6 97.4/80.1 94.0/91.1 96.2/81.6 XA IO , CA (CoV) 97.6/88.7 97.6/72.5 98.0/88.8 93.3/73.9 95.1/79.7 96.5/89.9 97.5/80.9 97.0/90.5 96.6/83.1
+
+Accuracy/F-Score for M-ATIS.
+
+Accuracy/F-Score for MTOP (left) and MTOD (right).Li et al. (2021b)  is previous translate-train SOTA.
+
+Accuracy and F-Score for combinations of auxiliary losses with different weighting schemes.

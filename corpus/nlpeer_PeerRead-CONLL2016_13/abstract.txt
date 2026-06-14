@@ -1,0 +1,13 @@
+Coreference resolution for event mentions enables extraction systems to process document-level information.
+
+Current systems in this area base their decisions on rich semantic features from various knowledge bases, thus restricting them to domains where such external sources are available.
+
+We propose a model for this task which does not rely on such features but instead utilizes sentential features coming from convolutional neural networks.
+
+Two such networks first process coreference candidates and their respective context, thereby generating latent-feature representations which are tuned towards event aspects relevant for a linking decision.
+
+These representations are augmented with lexicallevel and pairwise features, and serve as input to a trainable similarity function producing a coreference score.
+
+Our model achieves state-of-the-art performance on two datasets, one of which is publicly available.
+
+An error analysis points out directions for further research.

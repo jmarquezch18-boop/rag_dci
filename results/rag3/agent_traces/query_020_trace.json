@@ -1,0 +1,164 @@
+{
+  "query_id": "3a7b3eaa4aff6471a0a70e13b5d40387f6307416",
+  "query": "What factors led raters to select \"bad\" or \"appropriate\" when evaluating the classifier output?",
+  "agent_iterations": 5,
+  "think_blocks": [],
+  "tool_calls": [
+    {
+      "iteration": 0,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "factors"
+      },
+      "result_preview": "Search results for 'factors' (21 matches):\n[paper_id=nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5 | section=results | line=3] We also discuss several identified factors which greatly affect approximatio",
+      "elapsed_s": 6.06
+    },
+    {
+      "iteration": 1,
+      "tool": "read_file",
+      "args": {
+        "paper_id": "nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+        "section": "results"
+      },
+      "result_preview": "[nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5 / results]\nIn this section, we design both sequence-level and token-level tasks to evaluate the approximation performance of our THE-X solution.\n\nWe also di",
+      "elapsed_s": 7.85
+    },
+    {
+      "iteration": 2,
+      "tool": "read_lines",
+      "args": {
+        "paper_id": "egu_esd_14-915-2023",
+        "section": "methodology",
+        "start": 51,
+        "end": 69
+      },
+      "result_preview": "[egu_esd_14-915-2023 / methodology — líneas 46-74 de 123]\n\nThis allocation scheme aims to minimize the adverse effects of limited light, water, and nutrient stress on the crop (Gahlot, 2020).\n\nFor more details on the dynamic modules in ISAM dyn_wheat , please refer to Gahlot (2020).\n\nISAM dyn_wheat ",
+      "elapsed_s": 8.33
+    },
+    {
+      "iteration": 3,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "evaluation criteria"
+      },
+      "result_preview": "No matches found for 'evaluation criteria'",
+      "elapsed_s": 10.09
+    },
+    {
+      "iteration": 4,
+      "tool": "grep_corpus",
+      "args": {
+        "pattern": "criteria"
+      },
+      "result_preview": "Search results for 'criteria' (11 matches):\n[paper_id=nlpeer_ARR-22_841d64f4eb3d5e3d6ea89751ea19897bb8424acf856c9dd1574ef7d2803ff7d155df1b9cc201df8b4fc8c1984f6ca8bdfaf94036960348047e8da35b0003ae34 | section=discussion | line=71] In ZIP, we will merge node 3 and node 6. If we take a closer look at th",
+      "elapsed_s": 5.96
+    }
+  ],
+  "stopped_reason": "max_iterations",
+  "evidence_found": [
+    {
+      "text": "In this section, we design both sequence-level and token-level tasks to evaluate the approximation performance of our THE-X solution. We also discuss several identified factors which greatly affect approximation workflow. GLUE (Wang et al., 2019), the General Language Understanding Evaluation benchmark, is a collection of tools for evaluating the performance of models across a diverse set of existing NLU tasks. We choose a subset of GLUE 1 tasks, which include: MRPC (Dolan and Brockett, 2005), SST-2 (Socher et al., 2013), QQP 2 , STS-B (Cer et al., 2017), MNLI (Williams et al., 2018), QNLI (Rajpurkar et al., 2016), and RTE (Dagan et al., 2005;Haim et al., 2006;Giampiccolo et al., 2007;Bentivogli et al., 2009). Following previous work (Devlin et al., 2019;Turc et al., 2019), we exclude the WNLI task from the GLUE benchmark. We also use the famous CoNLL-2003 (Tjong Kim Sang andDe Meulder, 2003) named entity recognition task as our additional token-level evaluation. In conclusion, we include the most varieties of NLU tasks, covering both sequence-level and sentence-level tasks, in both regression and classification format. For computation efficiency and energy-saving consideration, we use the released BERT-tiny (Turc 1 CoLA task is not reported because of the limited capacity of BERT-tiny. 2 https://www.quora.com/profile/Ricky-Riche-2/First-Quora-Dataset-Release-Question-Pairs et al., 2019) as our demo model, which is a standard transformer-based language model with only 2 layers and a hidden size of 128. We provide four settings to evaluate different parts of our approximation components. • Baseline. In this setting, we make no replacement or approximation. We use the raw pretrained checkpoint to fine-tune on downstream tasks. • ReLU. We fine-tune the pre-trained model with all GELU activation replaced with ReLU. • ReLU-S. In addition to ReLU, we fine-tune the model with the softmax operation replaced by the softmax estimation model. • ReLU-S-L. We implement full approximation",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_results_0000",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "score": 1.0
+    },
+    {
+      "text": "use the raw pretrained checkpoint to fine-tune on downstream tasks. • ReLU. We fine-tune the pre-trained model with all GELU activation replaced with ReLU. • ReLU-S. In addition to ReLU, we fine-tune the model with the softmax operation replaced by the softmax estimation model. • ReLU-S-L. We implement full approximation including a layer normalization replacement. • HE. We convert the fine-tuned checkpoint with HE-transformer and power the inference with SEAL backend. Implementation. To reduce the variance of results under different settings, we choose hyperparameters from a fixed set during approximation fine-tuning and HE inference runtime. • For fine-tuning the approximation components, we choose a batch size from {4, 8, 16, 32, 128} and a learning rate from 1e-4, 3e-4, 3e-5, 5e-5 as mentioned in the initial bert code (Turc et al., 2019). We use an Adam optimizer with weight decay chosen from {0.05, 0.1, 0.2, 0.4, 0.5} • For HE evaluation, we use the HE-transformer backend, where two parameters are recommended searching by Intel, the poly modules and coeff-modules. We choose the poly modules degree from {1024, 2048, 4096, 8192, 16384} and choose the coeff-modules from {20, 30, 60}. Table 1 shows the results of the baseline and THE-X on the GLUE benchmark. The averaged performance reduction of THE-X is 1.48% when compared to the baseline model. We observe the most performance reduction comes from the approximation of layernorm, which incurs a reduction of 1.08%. The softmax estimation model contributes the least performance drop among the approximation components, for only 0.09% on average, indicating the softmax function could be well imitated by neural networks. We also find the average performance reduction of HE is quite negligible, where the slight drop may be due to the sequence truncation. The results of THE-X on token-level NER task are reported in Table 2.",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_results_0001",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "score": 1.0
+    },
+    {
+      "text": "0.09% on average, indicating the softmax function could be well imitated by neural networks. We also find the average performance reduction of HE is quite negligible, where the slight drop may be due to the sequence truncation. The results of THE-X on token-level NER task are reported in Table 2. The replacement of GELU with ReLU even improves the performance of the F1 score. We assume the slight improvement may come from unexpected bias. However, the layernorm approximation incurs the most performance reduction. We assume token-level tasks need a more detailed pattern in attention score. After all, THE-X still works well in the token-level task with a merely F1 reduction of 1.9%. Across different types of tasks, we find our THE-X yields the best performance on the classification tasks, including paraphrase, sentiment and NLI. Among the classification tasks, the performance of QNLI drops the least, for only 0.18%. We also find the performance drops most on the regression tasks, such as the similarity task STS-B, for 4.44% pearson correlation and 2.69% spearman correlation. We assume the regression task needs a higher numerical precision than the classification task.",
+      "section": "results",
+      "paper_id": "nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_results_0002",
+      "source_url": "https://arxiv.org/abs/nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5",
+      "score": 1.0
+    },
+    {
+      "text": "This allocation scheme aims to minimize the adverse effects of limited light, water, and nutrient stress on the crop (Gahlot, 2020).\n\nFor more details on the dynamic modules in ISAM dyn_wheat , please refer to Gahlot (2020).\n\nISAM dyn_wheat is equipped with dynamic planting date criteria and heat stress modules to simulate the effects of environmental factors on the spring wheat growing season and phenology (Gahlot et al., 2020).\n\nThe dynamic planting date is calculated in ISAM, as shown in Table S2 of Gahlot et al. (2020).\n\nThe wheat-growing regions are divided based on the 1901-1950 climatological minimum temperature.\n\nA specific criterion is assumed for each region depending on the region's characteristics (Table S2: Gahlot et al., 2020).\n\nYield is a proxy for the carbon uptake by the crops.\n\nThe initial reproductive stage in ISAM marks the onset of the storage organs.\n\nThe allocation of assimilated carbon to the storage organ begins, and the vegetative development of the plant stops.\n\nThe next stage, the post-reproductive stage, marks the solidification of grains and increased nutrient allocation to the grains while ensuring that capable roots support the plant.\n\nAfter the crop reaches maturity, the total grain allocation from the initial reproductive stage to maturity is converted to yield.\n\nVarious factors like light availability, temperature stress, and nitrogen availability act as limiting factors to crop growth, and nutrient allocation is promoted in the crop so that the impact of these factors is minimized (supplement of Gahlot et al., 2020).\n\nSince yield is a major part of the carbon taken up by the crop, its validation against observations is necessary and is shown in Sect.\n\n3.2.",
+      "section": "methodology",
+      "paper_id": "egu_esd_14-915-2023",
+      "chunk_id": "dci_egu_esd_14-915-2023_methodology_0003",
+      "source_url": "https://arxiv.org/abs/egu_esd_14-915-2023",
+      "score": 1.0
+    }
+  ],
+  "approved_chunks": [],
+  "ground_truth_evidence": [
+    "nlpeer/PeerRead-ACL2017/169_68",
+    "nlpeer/PeerRead-ACL2017/169_76"
+  ],
+  "point_a_pre_curation": {
+    "mrr": 0.0,
+    "recall_at_1": 0.0,
+    "recall_at_3": 0.0,
+    "recall_at_5": 0.0,
+    "recall_at_10": 0.0,
+    "recall_at_20": 0.0,
+    "precision_at_5": 0.0,
+    "ndcg_at_5": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "point_b_post_curation": {
+    "mrr": 0.0,
+    "recall_at_5": 0.0,
+    "coverage": 0.0,
+    "ndcg_at_5": 0.0,
+    "ragas_context_precision": 0.0,
+    "ragas_context_recall": 0.0,
+    "deepeval_contextual_relevancy": 0.0
+  },
+  "generated_response": "The provided context does not contain sufficient information to answer this question.",
+  "used_fallback": true,
+  "curation_trace": {
+    "presented_to_oracle": [
+      "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_results_0000",
+      "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_results_0001",
+      "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_results_0002",
+      "dci_egu_esd_14-915-2023_methodology_0003"
+    ],
+    "approved_by_oracle": [],
+    "oracle_decisions": [
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_results_0000",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_results_0001",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_nlpeer_ARR-22_27046f6633d116b03e48eb94976921b46a86a976ddd2199ef76c90820a95e0d85406daa5ebc9d7b12359157d20f3bd0025e1cbc2c126bb2506f5e83e93f435b5_results_0002",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      },
+      {
+        "chunk_id": "dci_egu_esd_14-915-2023_methodology_0003",
+        "approved": false,
+        "match_type": "none",
+        "rerank_score": 1.0
+      }
+    ]
+  },
+  "point_c_post_llm": {
+    "rouge_l": 0.05479452054794521,
+    "bert_score_f1": null,
+    "faithfulness": null,
+    "ragas_faithfulness": 0.0,
+    "ragas_answer_relevancy": 0.0,
+    "ragas_noise_sensitivity": 0.0,
+    "deepeval_hallucination": 0.0,
+    "deepeval_answer_relevancy": 0.0
+  }
+}

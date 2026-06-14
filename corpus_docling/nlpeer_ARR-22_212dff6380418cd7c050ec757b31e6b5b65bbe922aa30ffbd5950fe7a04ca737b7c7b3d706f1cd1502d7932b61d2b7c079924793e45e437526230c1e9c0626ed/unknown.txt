@@ -1,0 +1,331 @@
+Mm-Claims: A Dataset For Multimodal Claim Detection In Social Media
+
+Abstract
+
+Introduction
+
+Related Work
+
+Text-Based Approaches
+
+Multimodal Approaches
+
+Mm-Claims Tasks And Dataset
+
+This section describes the problem of multimodal claim detection (Section 3.1), the data collection (Section 3.2), the guidelines for annotating multimodal claims (Section 3.3), and the annotation process (Section 3.4) to obtain the new dataset.
+
+Task Description
+
+Given a tweet with a corresponding image, the task is to identify important factually-verifiable or check-worthy claims.
+
+In contrast to related work, we introduce a novel dataset for claim detection that is labeled based on both the tweet and the corresponding image, making the task truly multimodal.
+
+Our scope of claims is motivated by Alam et al. (2020) and Gupta et al. (2021), which have provided detailed annotation guidelines.
+
+We restrict our dataset to factually-verifiable claims (as in Alam et al. (2020)) since these are often the claims that need to be prioritized for fact-checking or verification to limit the spread of misinformation.
+
+On the other hand, we also include claims that are personal opinions, comments, or claims existing at sub-sentence or sub-clause level (as in Gupta et al. (2021)), with the condition that they are factuallyverifiable.
+
+Subsequently, we extend the definition of claims to images along with factually-verifiable and check-worthy claims.
+
+Data Collection
+
+In previous work on claim detection in tweets, most of the publicly available English language datasets (Alam et al., 2020;Barrón-Cedeno et al., 2020;Gupta et al., 2021;Nakov et al., 2021) are text-based and on a single topic such as COVID-19, or U.S. 2016 Elections.
+
+To make the problem interesting and broader, we have collected tweets on three topics, COVID-19, Climate Change and broadly Technology, that might be of interest to a wider research community.
+
+Next, we describe the steps for crawling and preprocessing the data.
+
+Data Crawling
+
+We have used an existing collection of tweet IDs, where some are topic-specific Twitter dumps, and extracted tweet text and the corresponding image to create a novel multimodal dataset.
+
+COVID-19: We combined tweets from three Twitter resources (Banda et al., 2020;Dimitrov et al., 2020;Lamsal, 2020)  Technology: For the broad topic of Technology, we used the TweetsKB (Fafalios et al., 2018) corpus.
+
+To avoid the extraction of all the tweets from 2019 to 2020 irrespective of the topic, we followed a two-step process to find tweets remotely related to technology.
+
+The corpus is available in form of RDF (Resource Description Framework) triples with attributes like tweet ID, hashtags, entities and emotion labels, but without tweet text or media content details.
+
+First, we selected tweet IDs based on hashtags and entities, and only kept those that contain keywords like technology, cryptocurrency, cybersecurity, machine learning, nano technology, artificial intelligence, IOT, 5G, robotics, blockchain, etc.
+
+The second step of filtering tweets based on a selected set of hashtags for each topic is described in the next subsection.
+
+From the above resources, we collected 214 715, 28 374 and 417 403 tweets for the topics COVID-19, Climate Change and Technology, respectively.
+
+Data Filtering
+
+We perform a number of filtering steps to remove inconsistent samples: 1) tweets that are not in English or without any text, 2) duplicated tweets based on tweet IDs, processed text and retweets, 3) tweets with corrupted or no images, 4) tweets with images of less than 200 × 200 pixels resolution, 5) tweets that have more than six hashtags, and finally, 6) we make a list of the top 300 hashtags in each topic based on count and manually select those related to the selected topics.
+
+We only keep those tweets where all hashtags are in the list of top selected hashtags.
+
+The hashtags are manually marked because some top hashtags are not relevant to the main topic of interest.
+
+The statistics of tweets after each filtering step are provided in the Appendix (see Table 8).
+
+In summary, we end up with 17 771, 4874, and 62 887 tweets with images for COVID-19, Climate Change and Technology, respectively.
+
+Annotation Guidelines
+
+In this section, we provide definitions for all investigated claim aspects, the questions asked to annotators, and the cues and explanations for the annotation questions.
+
+We define a claim as state or assert that something is the case, typically without providing evidence or proof using the definition in the Oxford dictionary (like Gupta et al. (2021)).
+
+The definition of a factually-verifiable claim is restricted to claims that can possibly be verified using external sources.
+
+These external sources can be reliable websites, books, scientific reports, scientific publications, credible fact-checked news reports, reports from credible organizations like World Health Organization or United Nations. Although we did not provide external links of reliable sources for the content in the tweet, we highlighted named entities that pop-up with the text and image description.
+
+External sources are not important at this stage because we are only interested in marking claims, which have possibly incorrect details and information.
+
+A list of identifiable cues (extended from Barrón-Cedeno et al. ( 2020)) for factually-verifiable claims is provided in the Appendix A.3.1.
+
+To define check-worthiness, we follow Barrón-Cedeno et al. (2020) and identify claims as checkworthy if the information in the tweet is, 1) harmful (attacks a person, organization, country, group, race, community, etc), or 2) urgent or breaking news (news-like statements about prominent people, organizations, countries and events), or 3) up-to-date (referring to recent official document with facts, definitions and figures).
+
+A detailed description of these cases is provided in the Appendix A.3.1.
+
+Given these key points, the answer to whether the claim is check-worthy is subjective since it depends on the person's (annotator's) background and knowledge.
+
+Annotation Questions: Based on the definitions above, we decided on the following annotation questions in order to identify factually-verifiable claims in multimodal data.
+
+Question 3 (Q3) intends to identify whether the visual content contributes to a tweet having factuallyverifiable claims.
+
+The question is answered "Yes" if one of the following cases hold true: 1) there exists a piece of evidence (e.g. an event, action, situation or a person's identity) or illustration of certain aspects in the claim text, or 2) the image contains overlay text that itself contains a claim in a text form.
+
+Please note that we asked the annotators to label tweets with respect to the time they were posted.
+
+During our annotation dry runs we observed that there were several false annotations for the tweets where the claims were false but already well known facts.
+
+This aspect intends to ignore the veracity of claims since some of the claims become facts over time.
+
+In addition, we ignore tweets that are questions and label them as not claims unless the corresponding image consists of a response to the question and is a factually-verifiable claim.
+
+Annotation Process
+
+Each annotator was asked to answer these questions by looking at both image and text in a given tweet.
+
+We distribute the data among nine external and four expert internal annotators for the annotation of training and evaluation splits, respectively.
+
+The nine annotators are graduate students with engineering or linguistics background.
+
+These annotators were paid 10 Euro per hour for their participation.
+
+The four expert annotators are doctoral and postdoctoral researchers of our group with a research focus on computer vision and multimodal analytics.
+
+Each annotator was shown a tweet text with its corresponding image and asked to answer the questions presented in Section 3.3.
+
+Exactly three annotators labeled each sample, and we used a majority vote to obtain the final label.
+
+Claim Categories
+
+We selected a total of 3400 tweets for manual annotation of training (annotated by external annotators) and evaluation (annotated by internal experts) splits.
+
+Each split contains an equal number of samples for the topics: COVID-19, Climate Change, and Technology.
+
+Labels for three types of claim1 annotations are derived:
+
+• binary claim classes: not a claim, and claim
+
+• tertiary claim classes: not a claim, claim but not check-worthy, and check-worthy claim
+
+• visual claim classes: not a claim, visuallyirrelevant claim, and visually-relevant claim
+
+Annotator Training
+
+The annotators were trained with detailed annotation guidelines, which included the definitions given in Section 3.3 and multiple examples.
+
+To ensure the quality, we performed two dry runs using a set of samples (30-40) to annotate.
+
+Afterwards, the annotations were discussed to check agreements among annotators and the guidelines were refined based on the feedback.
+
+Inter-Annotator Agreement
+
+We measured the agreements between two groups of annotators using Krippendorff's alpha (Krippendorff, 2011).
+
+The agreements were computed for the three types of annotations described in the previous section.
+
+For the training dataset group, we observe 0.53, 0.39, and 0.42 as agreement scores for the binary, tertiary, and visual claims, respectively.
+
+For the test dataset group, we observe the following agreement scores: 0.57, 0.47, and 0.52 for three classifications, respectively.
+
+The moderate agreement scores suggest that the problem of identifying check-worthy claims is partially a subjective task for both non-experts and experts.
+
+Conflict Resolution Strategy
+
+While a majority is always possible for the binary claim classification that allows us to derive unambiguous labels, entirely different labels could be chosen for the tertiary and visually-relevant claim classification task since the annotators assign three possible classes.
+
+Consequently, it is not possible to derive a label with majority voting when each annotator selects a different option.
+
+In such cases, we resolve the conflict by prioritizing the claim but not check-worthy class since check-worthiness is a stricter constraint and chosen by only one annotator, while two annotators agreed it is a claim.
+
+First row in Table 2 shows this case when two annotators indicated that the given sample is a claim (A-2 → Q1-Yes, A-3 → Q1-Yes).
+
+For visual claims, we select a visually-relevant claim since it is possible
+
+A-1 A-2 A-3 Derived Class Q1-No Q1-Yes Q2-No Q1-Yes Q2-Yes Claim but not check-worthy Q1-No Q1-Yes Q3-No Q1-Yes Q3-Yes
+
+Table 2: Conflict resolution strategies to derive class labels where a majority vote can not be reached among three annotators (A) for check-worthiness and visual relevance tasks.
+
+that image and text are related, even when one annotator marked "no" to the claim question.
+
+See row two in the table, where one annotator marked "no" to the claim question (A-1 → Q1-No), but at least one annotator indicated that the sample is a visually-relevant claim (A-3 → Q3-Yes).
+
+The Mm-Claims Dataset
+
+As a result of the annotation process, the Multimodal Claims (MM-Claims) dataset 2 consists of 2815 (T C (training)) and 585 (E C (evaluation)) samples (C in the subscript stands for "with resolved conflicts").
+
+However, as discussed above, there are conflicting examples for the tertiary and visual claim labels.
+
+To train and evaluate our models on unambiguous examples, we derive a subset of Multimodal Claim (MM-Claims) dataset that contains 2555 (T ) and 525 (E) samples "without conflicts" where a majority vote can be taken.
+
+We divided the training set (T C , T ) in each case further into training and validation in a 90:10 split for hyper-parameter tuning.
+
+We noticed that one-third of the images in the dataset contains a considerable amount of overlaid text (five or more words).
+
+As suggested by previous work (Cheema et al., 2021;Parcalabescu et al., 2021;Kirk et al., 2021), overlaid text in images should be considered in addition to tweet text and other image content.
+
+Specifically, the images with overlaid text not only act as related information to the tweet text but are sometimes the central message of the tweet.
+
+We used Tesseract-OCR (Fayez, 2021) to select images that contain five or more words in their overlay text.
+
+In an internal pre-test with 100 images, we observed that Tesseract-OCR produced more random (and incorrect) text from 2 Source code is available at: https://github.com/ TIBHannover/MM_Claims Dataset (Tweet IDs) and labels are available at: https:// data.uni-hannover.de/dataset/mm_claims For complete labeled data access (Images and Tweets), please contact at gullal.cheema@tib.eu or gullalcheema@gmail.com images than Google Vision API.
+
+To reduce the incorrect text, we ran Google Vision API on the selected images (avoiding unnecessary costs) in the second step that resulted in a better quality OCR detected text.
+
+Besides the labeled dataset, we will also provide the images, tweet text, and the overlay text (extracted using OCR methods as described above) of the unlabeled portion of the dataset.
+
+Experimental Setup And Evaluation
+
+Features
+
+Pre-processing: For images, we use the standard pre-processing of resizing and normalizing an image, whereas text is cleaned and normalized according to Cheema et al. (2020a) using the Ekphrasis (Baziotis et al., 2017) tool.
+
+Besides digits and alphabets, we also keep punctuation to reflect the syntax and style of a written claim.
+
+Image Features: For image encoding, we use a ResNet-152 (He et al., 2016) model trained on Im-ageNet (Russakovsky et al., 2015) and extract the 2048-dimensional feature vector from the last pooling layer.
+
+Text Features: For encoding tweet and OCR text, we test BERT (Devlin et al., 2019) uncased models to extract contextual word embeddings.
+
+For classification using Support Vector Machine (SVM, (Cortes and Vapnik, 1995)), we employ a pooling strategy by adding the last four layers' outputs and then average them to obtain the final 768dimensional vector.
+
+Multimodal Features: We use the following two pre-trained image-text representation learning architectures to extract multimodal features.
+
+The ALBEF (ALign BEfore Fuse) embedding (Li et al., 2021) results from a recent multimodal state-of-the-art model for vision-language downstream tasks.
+
+It is trained on a combination of several image captioning datasets (∼14 million image-text pairs) and uses BERT and a visual transformer (Dosovitskiy et al., 2021) for text and image encoding, respectively.
+
+It produces a multimodal embedding of 768 dimensions.
+
+The CLIP (Contrastive Language-Image Pretraining) model (Radford et al., 2021) is trained without any supervision on 400 million image-text pairs.
+
+We evaluate several image encoder backbones including ResNet and vision transformer (Dosovitskiy et al., 2021).
+
+The CLIP model outputs two embeddings of same size, i.e., the image (CLIP I ) and the text (CLIP T ) embedding, while CLIP I⊕T denotes the concatenation of two embeddings.
+
+Training Baselines
+
+In the following, we describe training details, hyper-parameters, input combinations, and different baseline models' details.
+
+Svm
+
+To obtain unimodal and multimodal embeddings for our experiments, we first use PCA (Principal Component Analysis) to reduce the feature size and train a SVM model with the RBF kernel.
+
+We perform grid search over PCA energy (%) conservation, regularization parameter C and RBF kernel's gamma.
+
+The parameter range for PCA varies from 100% (original features) to 95% with decrements of 1.
+
+The parameter range for C and gamma vary between -1 to 1 on a log-scale with 15 steps.
+
+For multimodal experiments, image and text embeddings are concatenated before passing them to PCA and SVM.
+
+We normalize the final embedding so that l2 norm of the vector is 1.
+
+Bert And Albef Fine-Tuning (Ft)
+
+We experiment with fine-tuning the last few layers of unimodal and multimodal transformer models to get a strong multimodal baseline and see whether introducing cross-modal interactions improves claim detection performance.
+
+We fine-tune the last layers of both the models and report the best ones in Table 3.
+
+Additional experimental results on fine-tuned layers are provided in Appendix A.2.5.
+
+For fine-tuning, we limit the tweet text to the maximum number of tokens (91) seen in a tweet in the training data and pad the shorter tweets with zeros.
+
+Hyper-parameter details for fine-tuning are provided in the Appendix A.1.
+
+Models With Ocr Text
+
+State-Of-The-Art Baselines
+
+We compare our models with two state-of-the-art approaches for multimodal fake news detection.
+
+MVAE (Khattar et al., 2019) is a multimodal variational auto-encoder model that uses a multi-task loss to minimize the reconstruction error of individual modalities and task-specific cross-entropy loss for classification.
+
+We use the publicly available source code and hyper-parameters for our task.
+
+SpotFake (Singhal et al., 2019) is a model built as a shallow multimodal neural network on top of VGG-19 image and BERT text embeddings using a cross-entropy loss.
+
+We re-implement the model in PyTorch and use the hyper-parameter settings given in the paper.
+
+Results
+
+Impact Of Annotation Disagreements
+
+As mentioned in Section 3, we observed disagreements in the annotated data that reflect the realworld difficulty and subjectivity of the problem.
+
+Therefore, we analyze the effect of keeping (T C , E C ) and removing (T , E) conflicting examples in training and evaluation data splits (Table 3,6).
+
+The findings are as follows: 1) multimodal models are more sensitive to the conflict resolution strategy as most have lower accuracy when trained on T C but relatively better F1 score.
+
+On the contrary, visual and textual models perform better on both metrics with training on T C , 2) overall, training on T C with conflict resolution is a better strategy with a higher F1 score, i.e., better on claim and check-worthiness (fewer samples) detection; and 3) when comparing all the cross-split experiments in Table 3 and Table 6, multimodal models perform the best in case of "without conflicts" T and E splits.
+
+The latter two observations also apply to retrieval of visuallyrelevant and visually-irrelevant claims in Table 4 and Table 7.
+
+The number of test samples is reported in brackets and the fraction, how many of them were retrieved, is given in percent [%].
+
+The underlying models are trained for binary claim detection (BCD).
+
+The labels for visual relevance are only used for retrieval evaluation.
+
+Data Splits → T → EC TC → EC Models ↓ V (
+
+Results For Unimodal Models
+
+Results For Multimodal Models
+
+Conclusions
+
+Photos Capture Loss and Hope in the Age of Climate Change a) Not a claim Worst yet to come? Experts say, 'Kerala rains match climate change forecasts' b) Claim but not checkworthy CDC tells travelers to avoid China in expanded travel warning as coronavirus spreads c) Checkworthy claim The world remains far off course to meet the Paris climate goals of 2°C warming and striving to reach a rise of just 1.5°C d) Checkworthy and visually relevant claim
+
+Figure 1: Examples for each of the four classes in the MM-Claims dataset: a) not a claim (both image and text together abstractly represent effects of climate change), b) claim but not checkworthy (claim in text, but lacks details like to which experts is referred to, while image is relevant), c) checkworthy but not visually relevant (claim in text targets CDC and China but the image is a stock photograph), and d) checkworthy and visually relevant (claim in text and in image with important details in both).
+
+Does the image-text pair contain a factually-verifiable claim?
+
+-Yes / No • Q2: If "Yes" to Q1, Does the claim contain harmful, up-to-date, urgent or breaking-news information? -Yes / No • Q3: If "Yes" to Q1, Does the image contain information about the claim or the claim itself (in the overlaid text)? -Yes / No
+
+Figure 2: Qualitative examples where our best multimodal model classifies correctly and unimodal models do not.
+
+F -false classification, T -true classification.
+
+Figure 3: Normalized (by row) Confusion Matrices for the Binary and Tertiary Claim Classification Tasks.
+
+NC: Not-Claim, NCW: Not-check-worthy-Claim, C: Claim, CW: check-worthy-Claim
+
+Figure 7: Top-20 manually selected hashtags for topic relevance filtering strategy.
+
+(a) COVID-19
+
+Figure 8: Additional examples for visually relevant claims for the topics COVID-19 (bottom row), Climate Change (middle row), and Technology (top row).
+
+Figure 9: Additional examples that are for the topics COVID-19 row), Climate Change (bottom row), and Technology (middle row).
+
+Comparison of social media based claim datasets.
+
+*Zlatkova et al. (2019) is a mix of actual news photographs (from Reuters) and possibly fake images (from Snopes), which went viral on social media sites like Reddit.
+
+† 1312 samples are in English and only on the topic of COVID-19.
+
+Labeled data characteristics in terms of type of labels and topic.
+
+Shown as Training/Validation/Evaluation splits.
+
+Second and third blocks are claims which are check-worthy (and not) and visual claims (and not) respectively.
+
+Red -"with resolved conflicts" and black -"without conflicts"

@@ -1,0 +1,251 @@
+Event Linking With Sentential Features From Convolutional Neural Networks
+
+Abstract
+
+Introduction
+
+Problem Definition
+
+We follow the notion of events from the ACE 2005 dataset (LDC, 2005;Walker et al., 2006).
+
+Consider the following example:
+
+British bank Barclays had agreed to buy Spanish rival Banco Zaragozano for 1.14 billion euros.
+
+The combination of the banking operations of Barclays Spain and Zaragozano will bring together two complementary businesses and will happen this year, in contrast to Barclays' postponed merger with Lloyds.
+
+1  Processing these sentences in a prototypical, ACE-style information extraction (IE) pipeline would involve (a) the recognition of entity mentions.
+
+In the example, mentions of entities are underlined.
+
+Next, (b) words in the text are processed as to whether they elicit an event reference, i.e., event triggers are identified and their semantic type is classified.
+
+The above sentences contain three event mentions with type Business.M
+
+Merge-Org, shown in boldface.
+
+The task of event extraction further requires that (c) participants of recognized events are determined among the entity mentions in the same sentence, i.e., an event's arguments are identified and their semantic role wrt.
+
+the event is classified.
+
+The three recognized event mentions are: E1: buy(British bank Barclays, Spanish rival Banco Zaragozano, 1.14 billion euros) E2: combination(Barclays Spain, Zaragozano, this year) E3: merger(Barclays, Lloyds)
+
+Often, an IE system involves (d) a disambiguation step of the entity mentions against one another in the same document.
+
+This allows to identify the three mentions of "Barclays" in the text as referring to the same real-world entity.
+
+The analogous task on the level of event mentions is called (e) event linking (or: event coreference resolution) and is the focus of this paper.
+
+Specifically, the task is 1 Based on an example in (Araki and Mitamura, 2015).
+
+to determine that E3 is a singleton reference in this example, while E1 and E2 are coreferential, with the consequence that a document-level event instance can be produced from E1 and E2, listing four arguments (two companies, buying price, and acquisition date).
+
+Model Design
+
+Learning Event Representations
+
+The architecture of the model (Figure 1) is split into two parts.
+
+The first one aims at adequately representing individual event mentions.
+
+As is common in literature, words of the whole sentence of an input event mention are represented as real-valued vectors v i w of a fixed size d w , with i being a word's position in the sentence.
+
+These word embeddings are updated during model training and are stored in a matrix W w ∈ R dw×|V | ; |V | being the vocabulary size of the dataset.
+
+Furthermore, we take the relative position of tokens with respect to the mention into account, as suggested by (Collobert et al., 2011;Zeng et al., 2014).
+
+The rationale is that while the absolute position of learned features in a sentence might not be relevant for an event-related decision, the position of them wrt.
+
+the event mention is.
+
+Embeddings v i p of size d p for relative positions of words are generated in a way similar to word embeddings, i.e., by table lookup from a matrix W p ∈ R dp×smax * 2-1 of trainable parameters.
+
+Again i denotes the location of a word in a sentence; s max is the maximum sentence length in the dataset.
+
+Embeddings for words and positions are concatenated into vectors v i t of size d t = d w + d p , this means that now every word in the vocabulary has a different representation for each distinct distance with which it occurs to an event trigger.
+
+A sentence with s words is represented by a matrix of dimensions s × d t .
+
+This matrix serves as input to a convolution layer.
+
+In order to compress the semantics of s words into a sentence-level feature vector with constant size, the convolution layer applies d c filters to each window of n consecutive words, thereby calculating d c features for each ngram of a sentence.
+
+For a single filter w c ∈ R n * dt and particular window of n words starting at position i, this operation is defined as
+
+v i c = relu(w c • v i:i+n-1 t + b c ),(1)
+
+where
+
+v i:i+n-1 t is the flattened concatenation of vectors v (•)
+
+t for the words in the window, b c is a bias, and relu is the activation function of a rectified linear unit.
+
+In Figure 1, d c = 3 and n = 2.
+
+In order to identify the most indicative features in the sentence and to introduce invariance for the absolute position of these, we feed the n-gram representations to a max-pooling layer, which identifies the maximum value for each filter.
+
+We treat n-grams on each side of the trigger word separately during pooling, which allows the model to handle multiple event mentions per sentence, similar in spirit to (Chen et al., 2015;Zeng et al., 2015).
+
+The pooling step for a particular convolution fil-
+
+ter j ∈ [1, d c ] and sentence part k ∈ {← , →} is defined as v j,k m = max (v i c ),(2)
+
+where i runs through the convolution windows of k. The output of this step are sentential features v sent ∈ R 2 * dc of the input event mention:
+
+v sent = (v 1,← m , . . . , v dc,← m , v 1, → m , . . . , v dc, → m )(3)
+
+Additionally, we provide the network with trigger-local, lexical-level features by concatenating v sent with the word embeddings v (•) w of the trigger word and its left and right neighbor, resulting in v sent+lex ∈ R 2 * dc+3 * dw .
+
+This encourages the model to take the lexical semantics of the trigger into account, as these can be a strong indicator for coreference.
+
+The result is processed by an additional hidden layer, generating the final event-mention representation v e with size d e used for the subsequent event-linking decision:
+
+v e = tanh(W e v sent+lex + b e ).
+
+(4)
+
+Learning Coreference Decisions
+
+The second part of the model (Figure 1b) processes the representations for two event mentions v 1 e , v 2 e , and augments these with pairwise comparison features v pairw to determine the compatibility of the event mentions.
+
+The following features are used, in parentheses we give the feature value for the pair E1, E2 from the example in Section 1:
+
+• Coarse-grained and/or fine-grained event type agreement (yes, yes) • Antecedent event is in first sentence (yes) • Bagged distance between event mentions in #sentences/#intermediate event mentions
+
+(1, 0) • Agreement in event modality (yes) • Overlap in arguments (two shared arguments)
+
+The concatenation of these vectors
+
+v sent+lex+pairw = (v 1 e , v 2 e , v pairw ) (5)
+
+is processed by a single-layer neural network which calculates a distributed similarity of size d sim for the two event mentions:
+
+v sim = square(W sim v sent+lex+pairw + b sim ). (6)
+
+The use of the square function as the network's non-linearity is backed by the intuition that for measuring similarity, an invariance under polarity changes is desirable.
+
+Having d sim similarity dimensions allows the model to learn multiple similarity facets in parallel; in our experiments, this setup outperformed model variants with different activation functions as well as a cosine-similarity based comparison.
+
+To calculate the final output of the model, v sim is fed to a logistic regression classifier, whose output serves as the coreference score:
+
+score = σ(W out v sim + b out )(7)
+
+We train the model parameters
+
+θ = {W w , W p , {w c }, {b c }, W e , b e , W sim , b sim , W out , b out } (8)
+
+by minimizing the logistic loss over shuffled minibatches with gradient descent using Adam (Kingma and Ba, 2014).
+
+Example Generation And Clustering
+
+We investigated two alternatives for the generation of examples from documents with recognized event mentions.
+
+Figure 2 shows the strategy we found to perform best, which iterates over the event mentions of a document and pairs each mention (the "anaphors") with all preceding ones (the "antecedent" candidates).
+
+This strategy applies to both training and inference time.
+
+strategy performed worse than the less elaborate algorithm in Figure 2.
+
+: P d → [0, 1] 4: C d ← {(mi, mj) ∈ P d : score(mi, mj) > 0.5} 5: while ∃(mi, m k ), (m k , mj) ∈ C d : (mi, mj) ∈ C d do 6: C d ← C d ∪ {(mi, mj)} 7: return C d
+
+The pairwise coreference decisions of our model induce a clustering of a document's event mentions.
+
+In order to force the model to output a consistent view on a given document, a strategy for resolving conflicting decisions is needed.
+
+We followed the strategy detailed in Figure 3, which builds the transitive closure of all positive links.
+
+Additionally, we experimented with Ng and Gardent (2002)'s "BestLink" strategy, which discards all but the highest-scoring antecedent of an anaphoric event mention.
+
+Liu et al. (2014) reported that for event linking, BestLink outperforms naive transitive closure, however, in our experiments (Section 5) we come to a different conclusion.
+
+Experimental Setting, Model Training
+
+Evaluation
+
+Comparison To State-Of-The-Art On Ace
+
+Table 3 depicts the performance of our model, trained on ACE train , on ACE test , along with the performance of state-of-the-art systems from the literature.
+
+From the wide range of proposed metrics for the evaluation of coreference resolution, we believe BLANC (Recasens and Hovy, 2011) has the highest validity, as it balances the impact of positive and negative event-mention links in a document.
+
+Negative links and consequently singleton event mentions are more common in this dataset (more than 90 % of links are negative).
+
+As Recasens and Hovy (2011) point out, the informativeness of metrics like MUC (Vilain et al., 1995), B-CUBED (Bagga and Baldwin, 1998), and the naive positivelink metric suffers from such imbalance.
+
+We still add these metrics for completeness, and because BLANC scores are not available for all systems.
+
+Unfortunately, there are two caveats to this comparison.
+
+First, while a 9:1 train/test split is the commonly accepted way of using ACE, the exact documents in the partitions vary from system to system.
+
+We are not aware of any publicized split from previous work on event linking, which is why we create our own and announce the list of documents in ACE valid /ACE test at https://git.io/vwEEP.
+
+Second, published methods follow different strategies regarding preprocessing components.
+
+While all systems in Table 3 use gold-annotated eventmention triggers, Bejan and Harabagiu (2010) and Liu et al. (2014) use a semantic-role labeler and other tools instead of gold-argument information.
+
+We argue that using full gold-annotated event men-tions is reasonable in order to mitigate error propagation along the extraction pipeline and make performance values for the task at hand more informative.
+
+We beat Liu et al. (2014)'s system in terms of F1 score on BLANC, MUC, and positive-links, while their system performs better in terms of B-CUBED.
+
+Even when taking into account the caveats mentioned above, it seems justified to assess that our model performs in general on-par with their stateof-the-art system.
+
+Their approach involves randomforest classification with best-link clustering and propagation of attributes between event mentions, and is grounded on a manifold of external feature sources, i.e., it uses a "rich set of 105 semantic features".
+
+Thus, their approach is strongly tied to domains where these semantic features are available and is potentially hard to port to other text kinds.
+
+In contrast, our approach does not depend on resources with restricted domain availability.
+
+Bejan and Harabagiu (2010) propose a nonparametric Bayesian model with standard lexicallevel features and WordNet-based similarity between event elements.
+
+We outperform their system in terms of B-CUBED and positive-links, which indicates that their system tends to over-merge event mentions, i.e., has a bias against singletons.
+
+They use a slightly bigger variant of ACE with 46 additional documents in their experiments.
+
+Sangeetha and Arock (2012) hand-craft a similarity metric for event mentions based on the number of shared entities in the respective sentences, lexical terms, synsets in WordNet, which serves as input to a mincut-based cluster identification.
+
+Their system performs well in terms of B-CUBED F1, however their paper provides few details about the exact experimental setup.
+
+Another approach with results on ACE was presented by Chen et al. (2009), who employ a maximum-entropy classifier with agglomerative clustering and lexical, discourse, and semantic features, e.g., also a WordNet-based similarity mea- Table 5: Impact of feature classes; "Pw" is short for pairwise features, "Loc" refers to trigger-local lexical features, "Sen" corresponds to sentential features.
+
+sure.
+
+However, they report performance using a threshold optimized on the test set, thus we decided to not include the performance here.
+
+Further Evaluation On Ace And Ace ++
+
+Related Work
+
+Conclusion
+
+Figure 1: The two parts of the model.
+
+The first part computes a representation for a single event mention.
+
+The second part is fed with two such event-mention representations plus a number of pairwise features for the input event-mention pair, and calculates a coreference score.
+
+Figure 2: Generation of examples P d for a document d with a sequence of event mentions M d .
+
+1: procedure GENERATECLUSTERS(P d , score): 2: P d = {(mi, mj)}i,j 3: score : P d → [0, 1] 4: C d ← {(mi, mj) ∈ P d : score(mi, mj) > 0.5} 5: while ∃(mi, m k ), (m k , mj) ∈ C d : (mi, mj) ∈ C d do 6: C d ← C d ∪ {(mi, mj)} 7: return C d
+
+Figure 3: Generation of event clusters C d for a document d based on the coreference scores from the model.
+
+P d is the set of all event-mention pairs from a document, as implemented in Figure 2.
+
+Dataset properties.
+
+Hyperparameter settings.
+
+There are a number of architectural alternatives in the model as well as hyperparameters to optimize.
+
+Besides varying the size of intermediate representations in the model (d w , d p , d c , d e , d sim ),
+
+2 , the embedding matrix for relative positions (W p ) and all other model parameters are randomly initialized.
+
+Model training is run for 2000 epochs, after which the best model on the respective valid partition is selected.
+
+Event-linking performance of our model & competitors on ACE.
+
+Best value per metric in bold.
+
+ACE ++ 73.22 83.21 76.90 4) Sec. 3 + BestLink ACE ++ 74.24 68.86 71.09 Impact of data amount and clustering.

@@ -1,0 +1,55 @@
+While masked language models build contextualized word representations, they are pre-trained with losses that minimize distance to uncontextualized word embeddings (Peters et al., 2018;Devlin et al., 2019;Liu et al., 2019).
+
+This objective yields a good initialization for downstream fine-tuning, but the pre-trained representations themselves are not optimized for being immediately useful without fine-tuning.
+
+In this paper, we introduce Question Answering Infused Pre-training (QUIP), a new pretraining loss based on question answering (QA) that depends much more directly on context.
+
+QUIP learns improved token-level representations that are useful in zero-shot and few-shot settings, where extensive fine-tuning is not possible.
+
+Our intuition for QUIP is that the contextualized representation for a phrase in a passage should contain enough information to identify all the questions
+
+The Violin Concerto in D major, Op. 77, was composed by Johannes Brahms in 1878 and dedicated to his friend, the violinist Joseph Joachim.
+
+What was dedicated to Joachim?
+
+Who was friends with Joachim?
+
+Who played the violin?
+
+Who wrote the violin concerto? and for synthesized questions (bottom).
+
+Our objective encourages the vector for each phrase to have high similarity with the vectors for all questions it answers.
+
+that the phrase could answer in context.
+
+For example, in Figure 1, the representation for Johannes Brahms should be similar to the representation of all questions it can answer, such as "Who wrote the violin concerto?" We anticipate that optimizing passage representations for QA should benefit many downstream tasks, as question-answer pairs have been used as broad-coverage meaning representations (He et al., 2015;Michael et al., 2018), and a wide range of NLP tasks can be cast as QA problems (Levy et al., 2017;McCann et al., 2018;Gardner et al., 2019).
+
+For instance, our learned representations should encode whether a phrase answers a question like "Why was the movie considered good?", which corresponds to identifying rationales for sentiment analysis.
+
+We train QUIP with a bi-encoder extractive QA objective.
+
+The model independently encodes passages and questions such that the representation of each phrase in a passage is similar to the representation of reading comprehension questions answered by that phrase.
+
+We use a question generation model to synthesize 80 million QA examples, then train the bi-encoder to match the predictions of a crossencoder QA model, which processes the passage and question together, on these examples.
+
+Bi-encoder QA has been used before for efficient open-domain QA via phrase retrieval (Seo et al., 2018(Seo et al., , 2019;;Lee et al., 2020Lee et al., , 2021)), but its lower accuracy compared to cross-encoder QA has previously been viewed as a drawback.
+
+We instead view the relative weakness of bi-encoder QA as an opportunity to improve contextual representations via knowledge distillation, as self-training can be effective when the student model must solve a harder problem than the teacher (Xie et al., 2020).
+
+In particular, since the bi-encoder does not know the question when encoding the passage, it must produce a single passage representation that simultaneously encodes the answers to all possible questions.
+
+In contrast, while cross-encoder QA models are more accurate, they depend on a specific question when encoding a passage; thus, they are less suited to downstream use cases that require contextualized representations of passages in isolation.
+
+We show that QUIP token-level representations are useful in a variety of zero-shot and few-shot learning settings, both because the representations directly encode useful contextual information, and because we can often reduce downstream tasks to QA.
+
+For few-shot paraphrase detection, QUIP with BERTScore-based features (Zhang et al., 2020) outperforms prior work by 9 F1 points across four datasets.
+
+For few-shot named entity recognition (NER), QUIP combined with an initialization scheme that uses question embeddings improves over RoBERTa-large by 14 F1 across two datasets.
+
+Finally, for zero-shot sentiment analysis, QUIP with question prompts improves over RoBERTa-large with MLM-style prompts by 5 accuracy points across three datasets, and extracts interpretable rationales as a side effect.
+
+Through ablations, we show that using real questions, a strong teacher model, and the bi-encoder architecture are all crucial to the success of QUIP.
+
+Other design decisions (e.g., question generation decoding strategies) do not qualitatively affect our main findings, pointing to the stability of the QUIP approach.
+
+1 1 Code to reproduce all results can be found at https: //github.com/facebookresearch/quip.

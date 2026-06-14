@@ -1,0 +1,37 @@
+In this section, we introduce information about the experiments, including datasets, evaluation metrics, baselines, experimental results, and ablation study.
+
+We use precision (P), recall (R) and F1 scores as evaluation metrics to gauge the performance.
+
+A triplet prediction is correct only if the aspect, opinion and sentiment are predicted correctly.
+
+We focus on the ASTE task.
+
+The experimental results on ASTE-Data-v1 and ASTE-Data-v2 datasets are shown in Tables 1 and2, respectively.
+
+In order to make a fair comparison with baselines, our F1 scores appear at least three times in the experiments.
+
+It is worth noting that we have achieved state-ofthe-art performances on both ASTE-Data datasets, indicating that our improvements further advance the performance of BMRC in dealing with ASTE task.
+
+On the Laptop14, Rest14, Rest15, and Rest16 datasets of ASTE-Data-v1, the F1 scores of our model are increased by 2.97, 4.20, 5.61 and 5.52 respectively, compared with the original BMRC.
+
+As for ASTE-Data-v2, we also increase the F1 scores of the Strong baseline Span-ASTE (Xu et al., 2021) by 2.74, 0.77, 2.36 and 2.90, respectively.
+
+This indicates that our improvement is very significant.
+
+Table 3: The performance of our four improvements on the ASTE-Data-v2 datasets.
+
+Firstly, we experiment the model without improvement on the ASTE-Data-v2.
+
+The model is a reproduction based on BMRC, and then gradually superimposes the four improvements of word segmentation, exclusive classifiers, span matching and probability generation to conduct ablation experiment.
+
+This arrangement corresponds to the sequence before and after they contact the data, that is, the data will first pass through word segmentation and enter the model, the prediction value is obtained from the exclusive classifiers, and then span matching is carried out according to it.
+
+Finally, the probability generation is used to generate probabilistic representations of aspects, opinions and pairs.
+
+The datasets and various parameters of the five experiments are the same.
+
+In order to make a fair comparison with baselines, our F1 scores appear at least three times in the experiments.
+
+The ablation experimental results are shown in Table 3.
+
+Each improvement advances the performance of the model, demonstrating their advantages and effectiveness.
