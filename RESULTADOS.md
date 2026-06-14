@@ -406,10 +406,10 @@ El BERTScore de RAG 3.1 es 0.434, anormalmente bajo (los otros sistemas están e
 
 3. **Docling desbloquea la curación oracle en DCI**: sin Docling, B.cov=0 por incompatibilidad Jaccard; con Docling y containment recall, B.cov=0.149 (35/136 queries cubiertas).
 
-4. **El modelo de razonamiento importa más que el corpus para DCI**: DeepSeek-R1 14B supera a Granite 3.1 8B en +101% MRR bajo las mismas condiciones de corpus.
+4. **El modelo de razonamiento importa más que el corpus para DCI**: DeepSeek-R1 14B supera a Granite 3.1 8B en +101% MRR bajo las mismas condiciones de corpus. Lo que deja una tendencia de que un modelo más capaz quizá obtenga mejroes resultados de rendimiento.
 
 5. **Faithfulness es el talón de Aquiles de los sistemas DCI**: la evidencia fragmentada del agente no permite al LLM anclar su respuesta, resultando en generación paramétrica. RAG 2.3 (reranker) tiene faithfulness 49× superior a RAG 3.2.
 
 ---
 
-*Generado para el proyecto SAIL-RAG Comparative Study. Dataset: PeerQA (MTEB). Hardware: RTX 3050 4GB VRAM + Groq cloud API.*
+*Proyecto SAIL-RAG Comparative Study. Dataset: PeerQA (MTEB). Hardware: RTX 3050 4GB VRAM + Groq cloud API.*
