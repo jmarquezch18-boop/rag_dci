@@ -346,9 +346,11 @@ La pérdida cae 11× entre R1 y R3, indicando convergencia rápida del MarginRan
 
 > **Nota sobre ROUGE-L y Faithfulness**: La caída en métricas de generación (C) es coherente con el comportamiento observado en el oráculo solo (RAG 2.1): el reranker fine-tuneado recupera chunks más precisos léxicamente pero más cortos y focalizados, que aportan menos contexto parafraseable al LLM. La mejora en retrieval (Punto A) es la señal principal del bucle de aprendizaje activo.
 
-### 7.4 Diagnóstico: ¿qué aprendió el reranker?
+### 7.4 Diagnóstico: tensión retrieval/generación tras el fine-tuning
 
-El fine-tuning contrastivo forzó al reranker a asignar scores más altos a chunks que comparten vocabulario con el ground-truth. Esto mejora MRR (+52%) porque el chunk correcto sube en el ranking, pero reduce la diversidad del contexto entregado al LLM. La paradoja retrieval/generación (mayor precisión → menor ROUGE) es una limitación conocida de los sistemas RAG con oracle duro.
+El fine-tuning contrastivo forzó al reranker a asignar scores más altos a chunks léxicamente similares al ground-truth. Esto sube el chunk correcto en el ranking (+52% MRR), pero el efecto colateral es que el contexto entregado al LLM se vuelve más preciso y menos diverso: menos contexto parafraseable → ROUGE-L −35%, Faithfulness −56%.
+
+Esta tensión no es un artefacto del experimento, sino un resultado estructural: el oracle duro optimiza precisión de evidencia, no riqueza generativa. Un revisor que lea solo la tabla 7.3 notará que la columna C empeora mientras A mejora. Lo declaramos explícitamente: **el bucle de aprendizaje activo resuelve el problema de recuperación pero no el de generación**. La hipótesis de SAIL-RAG se valida parcialmente — la etapa de curación humana real (no simulada por oráculo) podría preservar más contexto y mitigar esta degradación, pero queda como trabajo futuro.
 
 ---
 
@@ -462,7 +464,7 @@ El BERTScore de RAG 3.1 es 0.434, anormalmente bajo (los otros sistemas están e
 
 ## 11. Conclusiones
 
-1. **El fine-tuning contrastivo por aprendizaje activo es la mayor ganancia de retrieval del estudio**: +51.6% MRR (Round 0 → Round N) con solo 184 tripletas generadas por el oráculo durante curación normal, sin datos externos. Este resultado valida la hipótesis central de SAIL-RAG.
+1. **El fine-tuning contrastivo por aprendizaje activo mejora retrieval pero degrada generación**: +51.6% MRR (Round 0 → Round N) con 184 tripletas del oráculo, sin datos externos — la mayor ganancia de recuperación del estudio. Sin embargo, ROUGE-L cae −35% y Faithfulness −56% en ese mismo paso. El bucle de aprendizaje activo valida la hipótesis de mejora de recuperación, pero no la de mejora de calidad de respuesta final; la tensión retrieval/generación es un resultado abierto del sistema.
 
 2. **El reranking cross-encoder (BGE-reranker-v2-m3) es el componente individual más valioso** en sistemas RAG para QA científico: +36% MRR sin oracle, deployable.
 
