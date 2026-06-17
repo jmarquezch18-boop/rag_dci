@@ -145,30 +145,47 @@ python main.py --pipeline rag2_3 --mode evaluate
 
 **Salida**: `results/rag2_3/metrics_post_llm.json`
 
-### 3.4 RAG 2.2 — SAIL-RAG Completo (Oracle + Reranker)
+### 3.4 RAG 2.2 — SAIL-RAG Completo (Oracle + Reranker + Fine-tuning AL)
 
-RAG 2.2 usa un proceso de dos rondas (activo learning):
+RAG 2.2 tiene cuatro pasos obligatorios: ingest → Round 0 → train → Round N.
 
 ```bash
-# Paso 1: Ingestar y crear chunks vectoriales
+# Paso 1: Ingestar chunks con etiquetas de sección (requiere checkpoints de RAG 1)
 python main.py --pipeline rag2 --mode ingest
+```
+**Salida**: `checkpoints/rag2_embeddings.npy`, `checkpoints/rag2_chunks.json`  
+**Tiempo**: ~20 min
 
-# Paso 2: Evaluación ronda 0 (sin entrenamiento previo)
+```bash
+# Paso 2: Round 0 — reranker base sin fine-tuning + oráculo Jaccard
 python main.py --pipeline rag2 --mode evaluate_r0
+```
+**Qué hace**: Embedding de queries → reranking con BGE-reranker-v2-m3 base → curación por oráculo → generación Groq → métricas A/B/C.  
+**Salida**: `results/rag2/round_0/metrics_post_llm.json` (A.MRR esperado: ~0.301)  
+**Tiempo**: ~30 min
 
-# Paso 3: Entrenar el modelo de curación con feedback
+```bash
+# Paso 3: Train — bucle de aprendizaje activo (fine-tuning contrastivo del reranker)
 python main.py --pipeline rag2 --mode train
+```
+**Qué hace**: Por cada query, el oráculo genera tripletas `(query, chunk_positivo, chunk_negativo)`. Cuando se acumulan 50 tripletas, se ejecuta fine-tuning con `MarginRankingLoss` en CPU usando Adafactor. Con 136 queries se completan ~4 rondas. Cada ronda guarda un checkpoint.  
+**Salida**: `checkpoints/reranker/reranker_round_N.pt`, `checkpoints/reranker/active_learning_curve.json`  
+**Tiempo**: ~2-3 horas (fine-tuning de 560M params en CPU, 3 épocas por ronda)
 
-# Paso 4: Evaluación ronda N (con modelo entrenado)
+```bash
+# Paso 4: Round N — evalúa con el checkpoint fine-tuneado más reciente
 python main.py --pipeline rag2 --mode evaluate_rn
+```
+**Qué hace**: Carga automáticamente el checkpoint `reranker_round_N.pt` más reciente. Nunca reentrena. Si no hay checkpoint, lanza error indicando que hay que correr `--mode train` primero.  
+**Salida**: `results/rag2/round_n/metrics_post_llm.json` (A.MRR esperado: ~0.456, +51% vs R0)  
+**Tiempo**: ~30 min
 
-# Paso 5 (opcional): Visualizar curva de aprendizaje
+```bash
+# Paso 5 (opcional): Visualizar curva de aprendizaje activo y comparación R0 vs RN
 python main.py --pipeline rag2 --mode visualize
 ```
 
-**Tiempo estimado**: ~45 min total
-
-**Salida**: `results/rag2/round_0/` y `results/rag2/round_n/`
+> **Nota**: El fine-tuning corre en CPU por diseño (evita OOM en GPUs de 4 GB VRAM). El modelo se mueve a CPU antes del entrenamiento y vuelve a GPU/fp16 para inferencia posterior.
 
 ### 3.5 RAG 3 — Agente DCI + Corpus Plano
 
@@ -423,17 +440,19 @@ python main.py --pipeline rag1 --mode ingest --force-reindex
 
 Para verificar que los resultados son correctos, los valores esperados de los experimentos completos son:
 
-| Sistema | A.MRR esperado | Tolerancia |
-|---|---|---|
-| RAG 1 | 0.2211 | ±0.005 |
-| RAG 2.1 | 0.2135 | ±0.005 |
-| RAG 2.3 | 0.3008 | ±0.005 |
-| RAG 2.2 | 0.4559 | ±0.010 |
-| RAG 3 | 0.2819 | ±0.020 |
-| RAG 3.1 | 0.1544 | ±0.030 |
-| RAG 3.2 | 0.3100 | ±0.020 |
+| Sistema | Comando | A.MRR esperado | Tolerancia |
+|---|---|---|---|
+| RAG 1 | `--pipeline rag1 --mode evaluate` | 0.2211 | ±0.005 |
+| RAG 2.1 | `--pipeline rag2_1 --mode evaluate` | 0.2135 | ±0.005 |
+| RAG 2.3 | `--pipeline rag2_3 --mode evaluate` | 0.3008 | ±0.005 |
+| RAG 2.2 — R0 | `--pipeline rag2 --mode evaluate_r0` | 0.3008 | ±0.005 |
+| RAG 2.2 — RN | `--pipeline rag2 --mode evaluate_rn` | 0.4559 | ±0.015 |
+| RAG 3 | `--pipeline rag3 --mode evaluate` | 0.2819 | ±0.020 |
+| RAG 3.1 | `--pipeline rag3_1 --mode evaluate` | 0.1544 | ±0.030 |
+| RAG 3.2 | `--pipeline rag3_2 --mode evaluate` | 0.3100 | ±0.020 |
 
-> Variaciones mayores pueden deberse a diferencias en la versión de los modelos Ollama o en el orden de rotación de claves Groq.
+> RAG 2.2 RN tiene mayor tolerancia (±0.015) porque el resultado depende del orden de acumulación de tripletas, que puede variar ligeramente con distintas semillas o versiones del modelo.  
+> Variaciones mayores en RAG 3.x pueden deberse a diferencias en la versión de los modelos Ollama o en el orden de rotación de claves Groq.
 
 Para verificar rápidamente los resultados existentes:
 
