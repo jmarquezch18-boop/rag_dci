@@ -11,12 +11,14 @@ Estudio comparativo de siete variantes de sistemas **RAG (Retrieval-Augmented Ge
 | **RAG 1** | Baseline: BGE-M3 + ANN + Llama-3.3-70B | 0.221 | — | 0.102 |
 | **RAG 2.1** | + Oráculo Jaccard (sin reranker) | 0.214 | 0.247 | 0.069 |
 | **RAG 2.3** | + Reranker cross-encoder (sin oráculo) | 0.301 | — | 0.121 |
-| **RAG 2.2** | + Oráculo + Reranker (SAIL-RAG completo) | **0.456** | **0.305** | 0.119 |
+| **RAG 2.2 — R0** | + Oráculo + Reranker, sin fine-tuning | 0.301 | 0.287 | 0.183 |
+| **RAG 2.2 — RN** | + Oráculo + Reranker + fine-tuning AL ×4 | **0.456** | **0.305** | 0.119 |
 | **RAG 3** | Agente DCI (DeepSeek-R1 14B) + corpus plano | 0.282 | 0.000 | 0.069 |
 | **RAG 3.1** | Agente DCI (Granite 3.1 8B) + corpus Docling | 0.154 | 0.109 | 0.034 |
 | **RAG 3.2** | Agente DCI (DeepSeek-R1 14B) + corpus Docling | 0.310 | 0.149 | 0.077 |
 
-> **A** = pre-curación (retrieval puro) · **B** = post-curación (oracle coverage) · **C** = post-LLM (generación)
+> **A** = pre-curación (retrieval puro) · **B** = post-curación (oracle coverage) · **C** = post-LLM (generación)  
+> **R0** = reranker base sin fine-tuning · **RN** = reranker fine-tuneado 4 rondas por aprendizaje activo (+51.6% MRR vs R0)
 
 ---
 
@@ -32,7 +34,8 @@ Pregunta ──► Embedding (BGE-M3) ──► Qdrant ANN ──► Reranker / 
 
 ### Hallazgos principales
 
-- **El reranker cross-encoder es el componente individual más valioso**: +36% MRR sobre baseline, sin necesitar ground-truth (deployable).
+- **El fine-tuning contrastivo por aprendizaje activo es la mayor ganancia de retrieval del estudio**: +51.6% MRR (Round 0 → Round N) con solo 184 tripletas generadas por el oráculo, sin datos externos. Valida la hipótesis central de SAIL-RAG.
+- **El reranker cross-encoder es el componente deployable más valioso**: +36% MRR sobre baseline sin necesitar ground-truth.
 - **Docling desbloquea la curación oracle en DCI**: sin Docling, B.cov=0 por incompatibilidad Jaccard; con Docling, B.cov=0.149.
 - **DeepSeek-R1 14B supera a Granite 3.1 8B en +101% MRR** para la tarea DCI bajo las mismas condiciones de corpus.
 - **RAG 3.2 (DCI+Docling) alcanza MRR comparable al reranker** (0.310 vs 0.301) sin embedding vectorial previo.
@@ -69,11 +72,16 @@ echo "GROQ_API_KEY=gsk_..." > .env
 python main.py --pipeline rag1 --mode ingest
 python main.py --pipeline rag1 --mode evaluate
 
-# 4. Ejecutar con reranker (mejor sistema deployable)
-python main.py --pipeline rag2_3 --mode evaluate
+# 4. Ejecutar SAIL-RAG con reranker base (Round 0)
+python main.py --pipeline rag2 --mode ingest
+python main.py --pipeline rag2 --mode evaluate_r0
 
-# 5. Comparación visual
-python -m src.evaluation.visualizer_rag3_dci
+# 5. Fine-tuning por aprendizaje activo (Round N)
+python main.py --pipeline rag2 --mode train
+python main.py --pipeline rag2 --mode evaluate_rn
+
+# 6. Comparación visual
+python main.py --pipeline rag2 --mode visualize
 ```
 
 Para RAG 3.x (agente DCI) se necesita **Ollama** con `deepseek-r1:14b`. Ver [REPRODUCIBILIDAD.md](REPRODUCIBILIDAD.md) para instrucciones completas.
