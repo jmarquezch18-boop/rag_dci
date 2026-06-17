@@ -362,9 +362,14 @@ RAG 2.3 (reranker, sin oráculo) mejora MRR en **+36% sobre RAG 1** sin necesita
 
 RAG 2.1 tiene B.cov=0.247 (recupera el 24.7% de la evidencia correcta) pero ROUGE-L baja de 0.1022 a 0.0694. Paradoja: los chunks curados son más precisos como evidencia pero el LLM genera respuestas con menos overlap léxico. Hipótesis: el oráculo filtra chunks con contexto adicional que enriquece la generación.
 
-### 8.3 La sinergia Oracle+Reranker (RAG 2.2) duplica el MRR
+### 8.3 El +106% de MRR en RAG 2.2 RN es reranker + fine-tuning, no sinergia con el oráculo
 
-RAG 2.2 alcanza MRR=0.456 (+106% vs RAG 1). La combinación no es aditiva: el reranker ordena mejor → el oráculo trabaja sobre un pool ya filtrado → la curación es más efectiva. Este es el upper bound del sistema.
+RAG 2.2 RN alcanza A.MRR=0.456 (+106% vs RAG 1). Esta ganancia se descompone en dos pasos independientes sobre el Punto A:
+
+1. **Reranker** (RAG 1 → RAG 2.2 R0): 0.221 → 0.301 (+36%) — el cross-encoder reordena los candidatos ANN.
+2. **Fine-tuning AL** (RAG 2.2 R0 → RN): 0.301 → 0.456 (+52%) — el reranker ajustado por aprendizaje activo recupera el chunk correcto más arriba en el ranking.
+
+El oráculo no contribuye al Punto A porque opera en el Punto B (curación post-reranking). El Punto A se mide antes de que el oráculo intervenga, por lo que RAG 2.2 R0 y RAG 2.3 tienen A.MRR idéntico (0.301). La mejora de cobertura que aporta el oráculo aparece únicamente en B.cov (0.287 en R0, 0.305 en RN).
 
 ### 8.4 El aprendizaje activo es el mayor contribuyente individual en retrieval
 
